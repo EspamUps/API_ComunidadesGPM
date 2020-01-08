@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ComunidadesGPMModelStoreContainer" CdmEntityContainer="ComunidadesGPMEntities">
+    <FunctionImportMapping FunctionImportName="Sp_TokenConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_TokenConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_TokenConsultar_Result">
+          <ScalarProperty Name="TOKEN_IdToken" ColumnName="TOKEN_IdToken" />
+          <ScalarProperty Name="TOKEN_IdClave" ColumnName="TOKEN_IdClave" />
+          <ScalarProperty Name="TOKEN_Identificador" ColumnName="TOKEN_Identificador" />
+          <ScalarProperty Name="TOKEN_Estado" ColumnName="TOKEN_Estado" />
+          <ScalarProperty Name="CLAVE_IdClave" ColumnName="CLAVE_IdClave" />
+          <ScalarProperty Name="CLAVE_Descripcion" ColumnName="CLAVE_Descripcion" />
+          <ScalarProperty Name="CLAVE_Estado" ColumnName="CLAVE_Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_AsignarModuloPrivilegioCambiarEstado" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarModuloPrivilegioCambiarEstado" />
+    <FunctionImportMapping FunctionImportName="Sp_AsignarModuloPrivilegioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarModuloPrivilegioConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarModuloPrivilegioConsultar_Result">
+          <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
+          <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdModulo" ColumnName="ASIGNARMODULOPRIVILEGIO_IdModulo" />
+          <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" />
+          <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARMODULOPRIVILEGIO_Estado" />
+          <ScalarProperty Name="MODULO_IdModulo" ColumnName="MODULO_IdModulo" />
+          <ScalarProperty Name="MODULO_Identificador" ColumnName="MODULO_Identificador" />
+          <ScalarProperty Name="MODULO_Descripcion" ColumnName="MODULO_Descripcion" />
+          <ScalarProperty Name="MODULO_Estado" ColumnName="MODULO_Estado" />
+          <ScalarProperty Name="PRIVILEGIO_IdPrivilegio" ColumnName="PRIVILEGIO_IdPrivilegio" />
+          <ScalarProperty Name="PRIVILEGIO_Identificador" ColumnName="PRIVILEGIO_Identificador" />
+          <ScalarProperty Name="PRIVILEGIO_Descripcion" ColumnName="PRIVILEGIO_Descripcion" />
+          <ScalarProperty Name="PRIVILEGIO_Estado" ColumnName="PRIVILEGIO_Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_AsignarModuloPrivilegioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarModuloPrivilegioInsertar" />
+    <FunctionImportMapping FunctionImportName="Sp_AsignarTipoUsuarioModuloPrivilegioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarTipoUsuarioModuloPrivilegioInsertar" />
+    <FunctionImportMapping FunctionImportName="Sp_AsignarUsuarioTipoUsuario_insertar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarUsuarioTipoUsuario_insertar" />
+    <FunctionImportMapping FunctionImportName="Sp_AsignarUsuarioTipoUsuarioCambiarEstado" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarUsuarioTipoUsuarioCambiarEstado" />
+    <FunctionImportMapping FunctionImportName="Sp_ModuloConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ModuloConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ModuloConsultar_Result">
+          <ScalarProperty Name="IdModulo" ColumnName="IdModulo" />
+          <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_PersonaCambiarEstado" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaCambiarEstado" />
+    <FunctionImportMapping FunctionImportName="Sp_PersonaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PersonaConsultar_Result">
+          <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+          <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+          <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+          <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+          <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+          <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+          <ScalarProperty Name="PERSONA_IdTipoIdentificacion" ColumnName="PERSONA_IdTipoIdentificacion" />
+          <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+          <ScalarProperty Name="PERSONA_IdSexo" ColumnName="PERSONA_IdSexo" />
+          <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+          <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+          <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+          <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+          <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+          <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+          <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_PersonaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaInsertar" />
+    <FunctionImportMapping FunctionImportName="Sp_PersonaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaModificar" />
+    <FunctionImportMapping FunctionImportName="Sp_PrivilegioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PrivilegioConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PrivilegioConsultar_Result">
+          <ScalarProperty Name="IdPrivilegio" ColumnName="IdPrivilegio" />
+          <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_SexoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_SexoConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_SexoConsultar_Result">
+          <ScalarProperty Name="IdSexo" ColumnName="IdSexo" />
+          <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_TipoIdentificacionConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_TipoIdentificacionConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_TipoIdentificacionConsultar_Result">
+          <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+          <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_TipoUsuarioCambiarEstado" FunctionName="ComunidadesGPMModel.Store.Sp_TipoUsuarioCambiarEstado" />
+    <FunctionImportMapping FunctionImportName="Sp_TipoUsuarioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_TipoUsuarioConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_TipoUsuarioConsultar_Result">
+          <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
+          <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_TipoUsuarioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_TipoUsuarioInsertar" />
+    <FunctionImportMapping FunctionImportName="Sp_TipoUsuarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_TipoUsuarioModificar" />
+    <FunctionImportMapping FunctionImportName="Sp_UsuarioBuscar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioBuscar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_UsuarioBuscar_Result">
+          <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
+          <ScalarProperty Name="USUARIO_IdPersona" ColumnName="USUARIO_IdPersona" />
+          <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
+          <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
+          <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
+          <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+          <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+          <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+          <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+          <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+          <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+          <ScalarProperty Name="PERSONA_IdTipoIdentificacion" ColumnName="PERSONA_IdTipoIdentificacion" />
+          <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+          <ScalarProperty Name="PERSONA_IdSexo" ColumnName="PERSONA_IdSexo" />
+          <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+          <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+          <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+          <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+          <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+          <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+          <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+          <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
+          <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdUsuario" />
+          <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdTipoUsuario" />
+          <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
+          <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
+          <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
+          <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
+          <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
+          <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" />
+          <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" />
+          <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
+          <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" />
+          <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
+          <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdModulo" ColumnName="ASIGNARMODULOPRIVILEGIO_IdModulo" />
+          <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" />
+          <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARMODULOPRIVILEGIO_Estado" />
+          <ScalarProperty Name="MODULO_IdModulo" ColumnName="MODULO_IdModulo" />
+          <ScalarProperty Name="MODULO_Identificador" ColumnName="MODULO_Identificador" />
+          <ScalarProperty Name="MODULO_Descripcion" ColumnName="MODULO_Descripcion" />
+          <ScalarProperty Name="MODULO_Estado" ColumnName="MODULO_Estado" />
+          <ScalarProperty Name="PRIVILEGIO_IdPrivilegio" ColumnName="PRIVILEGIO_IdPrivilegio" />
+          <ScalarProperty Name="PRIVILEGIO_Identificador" ColumnName="PRIVILEGIO_Identificador" />
+          <ScalarProperty Name="PRIVILEGIO_Descripcion" ColumnName="PRIVILEGIO_Descripcion" />
+          <ScalarProperty Name="PRIVILEGIO_Estado" ColumnName="PRIVILEGIO_Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_UsuarioCambiarEstado" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioCambiarEstado" />
+    <FunctionImportMapping FunctionImportName="Sp_UsuarioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_UsuarioConsultar_Result">
+          <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
+          <ScalarProperty Name="USUARIO_IdPersona" ColumnName="USUARIO_IdPersona" />
+          <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
+          <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
+          <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
+          <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+          <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+          <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+          <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+          <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+          <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+          <ScalarProperty Name="PERSONA_IdTipoIdentificacion" ColumnName="PERSONA_IdTipoIdentificacion" />
+          <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+          <ScalarProperty Name="PERSONA_IdSexo" ColumnName="PERSONA_IdSexo" />
+          <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+          <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+          <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+          <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+          <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+          <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+          <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+          <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
+          <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdUsuario" />
+          <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdTipoUsuario" />
+          <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
+          <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
+          <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
+          <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
+          <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
+          <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" />
+          <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" />
+          <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
+          <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" />
+          <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
+          <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdModulo" ColumnName="ASIGNARMODULOPRIVILEGIO_IdModulo" />
+          <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" />
+          <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARMODULOPRIVILEGIO_Estado" />
+          <ScalarProperty Name="MODULO_IdModulo" ColumnName="MODULO_IdModulo" />
+          <ScalarProperty Name="MODULO_Identificador" ColumnName="MODULO_Identificador" />
+          <ScalarProperty Name="MODULO_Descripcion" ColumnName="MODULO_Descripcion" />
+          <ScalarProperty Name="MODULO_Estado" ColumnName="MODULO_Estado" />
+          <ScalarProperty Name="PRIVILEGIO_IdPrivilegio" ColumnName="PRIVILEGIO_IdPrivilegio" />
+          <ScalarProperty Name="PRIVILEGIO_Identificador" ColumnName="PRIVILEGIO_Identificador" />
+          <ScalarProperty Name="PRIVILEGIO_Descripcion" ColumnName="PRIVILEGIO_Descripcion" />
+          <ScalarProperty Name="PRIVILEGIO_Estado" ColumnName="PRIVILEGIO_Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_UsuarioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioInsertar" />
+    <FunctionImportMapping FunctionImportName="Sp_UsuarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioModificar" />
+  </EntityContainerMapping>
+</Mapping>
