@@ -28,11 +28,6 @@ namespace API.Conexion
         }
     
     
-        public virtual ObjectResult<Sp_TokenConsultar_Result> Sp_TokenConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TokenConsultar_Result>("Sp_TokenConsultar");
-        }
-    
         public virtual int Sp_AsignarModuloPrivilegioCambiarEstado(Nullable<int> idAsinarModuloPrivilegio, Nullable<bool> nuevoEstado)
         {
             var idAsinarModuloPrivilegioParameter = idAsinarModuloPrivilegio.HasValue ?
@@ -370,6 +365,11 @@ namespace API.Conexion
                 new ObjectParameter("Clave", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_UsuarioModificar", idUsuarioParameter, idPersonaParameter, correoParameter, claveParameter);
+        }
+    
+        public virtual ObjectResult<Sp_TokenConsultar_Result1> Sp_TokenConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TokenConsultar_Result1>("Sp_TokenConsultar");
         }
     }
 }

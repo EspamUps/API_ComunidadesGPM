@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ComunidadesGPMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="ComunidadesGPMEntities" annotation:LazyLoadingEnabled="true">
-    <FunctionImport Name="Sp_TokenConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_TokenConsultar_Result)" />
     <FunctionImport Name="Sp_AsignarModuloPrivilegioCambiarEstado">
       <Parameter Name="IdAsinarModuloPrivilegio" Mode="In" Type="Int32" />
       <Parameter Name="NuevoEstado" Mode="In" Type="Boolean" />
@@ -96,6 +95,7 @@
       <Parameter Name="Correo" Mode="In" Type="String" />
       <Parameter Name="Clave" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="Sp_TokenConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_TokenConsultar_Result1)" />
   </EntityContainer>
   <ComplexType Name="Sp_TokenConsultar_Result">
     <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -273,5 +273,15 @@
     <Property Type="Int32" Name="PRIVILEGIO_Identificador" Nullable="false" />
     <Property Type="String" Name="PRIVILEGIO_Descripcion" Nullable="false" MaxLength="50" />
     <Property Type="Boolean" Name="PRIVILEGIO_Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Sp_TokenConsultar_Result1">
+    <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
+    <Property Type="Int32" Name="TOKEN_IdClave" Nullable="false" />
+    <Property Type="Int32" Name="TOKEN_Identificador" Nullable="false" />
+    <Property Type="String" Name="TOKEN_Estado" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="CLAVE_IdClave" Nullable="false" />
+    <Property Type="Int32" Name="CLAVE_Identificador" Nullable="false" />
+    <Property Type="String" Name="CLAVE_Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="CLAVE_Estado" Nullable="false" />
   </ComplexType>
 </Schema>

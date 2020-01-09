@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ComunidadesGPMModelStoreContainer" CdmEntityContainer="ComunidadesGPMEntities">
-    <FunctionImportMapping FunctionImportName="Sp_TokenConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_TokenConsultar">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_TokenConsultar_Result">
-          <ScalarProperty Name="TOKEN_IdToken" ColumnName="TOKEN_IdToken" />
-          <ScalarProperty Name="TOKEN_IdClave" ColumnName="TOKEN_IdClave" />
-          <ScalarProperty Name="TOKEN_Identificador" ColumnName="TOKEN_Identificador" />
-          <ScalarProperty Name="TOKEN_Estado" ColumnName="TOKEN_Estado" />
-          <ScalarProperty Name="CLAVE_IdClave" ColumnName="CLAVE_IdClave" />
-          <ScalarProperty Name="CLAVE_Descripcion" ColumnName="CLAVE_Descripcion" />
-          <ScalarProperty Name="CLAVE_Estado" ColumnName="CLAVE_Estado" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Sp_AsignarModuloPrivilegioCambiarEstado" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarModuloPrivilegioCambiarEstado" />
     <FunctionImportMapping FunctionImportName="Sp_AsignarModuloPrivilegioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarModuloPrivilegioConsultar">
       <ResultMapping>
@@ -232,5 +219,19 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Sp_UsuarioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioInsertar" />
     <FunctionImportMapping FunctionImportName="Sp_UsuarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioModificar" />
+    <FunctionImportMapping FunctionImportName="Sp_TokenConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_TokenConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_TokenConsultar_Result1">
+          <ScalarProperty Name="TOKEN_IdToken" ColumnName="TOKEN_IdToken" />
+          <ScalarProperty Name="TOKEN_IdClave" ColumnName="TOKEN_IdClave" />
+          <ScalarProperty Name="TOKEN_Identificador" ColumnName="TOKEN_Identificador" />
+          <ScalarProperty Name="TOKEN_Estado" ColumnName="TOKEN_Estado" />
+          <ScalarProperty Name="CLAVE_IdClave" ColumnName="CLAVE_IdClave" />
+          <ScalarProperty Name="CLAVE_Identificador" ColumnName="CLAVE_Identificador" />
+          <ScalarProperty Name="CLAVE_Descripcion" ColumnName="CLAVE_Descripcion" />
+          <ScalarProperty Name="CLAVE_Estado" ColumnName="CLAVE_Estado" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
