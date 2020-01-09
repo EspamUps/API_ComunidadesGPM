@@ -46,7 +46,31 @@ namespace API.Controllers
         public object ValidarCorreo(Usuario _item) {
             //string hola = "hola";
             //object respuesta = new { hola };
-            return new { id = 1234 };
+            object objeto       = new object();
+            object respuesta    = new object();
+            object mensaje      = new object();
+            object codigo       = new object();
+
+            try
+            {
+                object validar = catUsuarios.Consultar().Where(x => x.Correo == _item.Correo).FirstOrDefault();
+                if (validar != null)
+                {
+                    return new { respuesta = true, mensaje = "OK", codigo = "200" };
+                }
+                else {
+                    return new { respuesta, mensaje = "No Content", codigo = "204" };
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+                return new { respuesta, mensaje= "No Content", codigo= "204" };
+            }
+            
+            //return new { id = 1234 };
         }
         [HttpPost]
         [Route("api/Login")]
@@ -58,6 +82,7 @@ namespace API.Controllers
         [Route("api/usuarios")]
         public object getusuarios()
         {
+            //return db.Sp_UsuarioConsultar();
             return catUsuarios.Consultar();
             //return new { id = "dsdsd" };
         }

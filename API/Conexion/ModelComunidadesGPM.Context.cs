@@ -367,9 +367,9 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_UsuarioModificar", idUsuarioParameter, idPersonaParameter, correoParameter, claveParameter);
         }
     
-        public virtual ObjectResult<Sp_TokenConsultar_Result1> Sp_TokenConsultar()
+        public virtual ObjectResult<Sp_TokenConsultar_Result2> Sp_TokenConsultar()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TokenConsultar_Result1>("Sp_TokenConsultar");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TokenConsultar_Result2>("Sp_TokenConsultar");
         }
     }
 }

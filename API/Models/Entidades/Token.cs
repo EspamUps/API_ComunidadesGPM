@@ -12,5 +12,7 @@ namespace API.Models
         public int Identificador { get; set; }
         public string Descripcion { get; set; }
         public bool Estado { get; set; }
+
+        public Clave objClave { get; set; }
     }
 }

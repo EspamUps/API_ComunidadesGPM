@@ -13,6 +13,6 @@ namespace API.Models.Entidades
         public bool Estado { get; set; }
 
         public TipoUsuario objTipoUsuario { get; set; }
-        public AsignarModuloPrivilegio objIdAsignarModuloPrivilegio { get; set; }
+        public AsignarModuloPrivilegio objAsignarModuloPrivilegio { get; set; }
     }
 }

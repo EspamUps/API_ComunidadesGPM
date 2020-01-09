@@ -39,16 +39,17 @@ namespace API.Models.Catalogos
             dbConsultar();
             foreach (var item in consulta)
             {
-                //int existemcias = consulta.Where(x => x.USUARIO_IdUsuario == item.USUARIO_IdUsuario).Count();
+                int existemcias = consulta.Where(x => x.USUARIO_IdUsuario == item.USUARIO_IdUsuario).Count();
                 try
                 {
                     listaUsuarios.Remove(listaUsuarios.Find(x => x.IdUsuario == item.USUARIO_IdUsuario));
                 }
                 catch (Exception)
                 {
-                    
+
                 }
                 listaUsuarios.Add(new Usuario()
+
                 {
                     IdUsuario = item.USUARIO_IdUsuario,
                     IdPersona = item.USUARIO_IdPersona,
@@ -114,7 +115,7 @@ namespace API.Models.Catalogos
                         Descripcion = item.TIPOUSUARIO_Descripcion,
                         Estado = item.TIPOUSUARIO_Estado,
 
-                        List_AsignarTipoUsuarioModuloPrivilegio = get_AsignarTipoUsuarioModuloPrivilegio(_idUsuario),
+                        List_AsignarTipoUsuarioModuloPrivilegio = get_AsignarTipoUsuarioModuloPrivilegio(_idUsuario,item.TIPOUSUARIO_IdTipoUsuario),
                     }
 
                 });
@@ -122,9 +123,9 @@ namespace API.Models.Catalogos
             return listita;
         }
 
-        private List<AsignarTipoUsuarioModuloPrivilegio> get_AsignarTipoUsuarioModuloPrivilegio(int _idUsuario) {
+        private List<AsignarTipoUsuarioModuloPrivilegio> get_AsignarTipoUsuarioModuloPrivilegio(int _IdUsuario,int _IdTipoUsuario) {
             List<AsignarTipoUsuarioModuloPrivilegio> listita = new List<AsignarTipoUsuarioModuloPrivilegio>();
-            foreach (var item in consulta.Where(x => x.USUARIO_IdUsuario == _idUsuario))
+            foreach (var item in consulta.Where(x => x.USUARIO_IdUsuario == _IdUsuario && x.TIPOUSUARIO_IdTipoUsuario==_IdTipoUsuario))
             {
                 listita.Add(new AsignarTipoUsuarioModuloPrivilegio() {
                     IdAsignarTipoUsuarioModuloPrivilegio    = item.ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio,
@@ -132,7 +133,7 @@ namespace API.Models.Catalogos
                     IdAsignarModuloPrivilegio               = item.ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio,
                     Estado                                  = item.ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado,
 
-                    objIdAsignarModuloPrivilegio    = new AsignarModuloPrivilegio() {
+                    objAsignarModuloPrivilegio    = new AsignarModuloPrivilegio() {
                         IdAsignarModuloPrivilegio   = item.ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio,
                         IdModulo                    = item.ASIGNARMODULOPRIVILEGIO_IdModulo,
                         IdPrivilegio                = item.ASIGNARMODULOPRIVILEGIO_IdPrivilegio,

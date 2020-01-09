@@ -226,6 +226,9 @@
     <Compile Include="Conexion\Sp_TokenConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_TokenConsultar_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_UsuarioBuscar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -238,6 +241,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Catalogos\CatalogoTokens.cs" />
     <Compile Include="Models\Catalogos\CatalogoUsuarios.cs" />
     <Compile Include="Models\Entidades\AsignarModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarTipoUsuarioModuloPrivilegio.cs" />
@@ -246,6 +250,7 @@
     <Compile Include="Models\Entidades\Modulo.cs" />
     <Compile Include="Models\Entidades\Persona.cs" />
     <Compile Include="Models\Entidades\Privilegio.cs" />
+    <Compile Include="Models\Entidades\Seguridad.cs" />
     <Compile Include="Models\Entidades\Sexo.cs" />
     <Compile Include="Models\Entidades\TipoIdentificacion.cs" />
     <Compile Include="Models\Entidades\TipoUsuario.cs" />
