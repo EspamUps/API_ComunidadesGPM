@@ -54,6 +54,7 @@ namespace API.Models.Catalogos
                     IdUsuario = item.USUARIO_IdUsuario,
                     IdPersona = item.USUARIO_IdPersona,
                     Correo = item.USUARIO_Correo,
+                    Clave = item.USUARIO_Clave,
                     Estado = item.USUARIO_Estado,
 
                     objPersona = new Persona()
@@ -158,5 +159,80 @@ namespace API.Models.Catalogos
             }
             return listita;
         }
+
+        public List<Usuario> ConsultarIndividual() {
+            dbConsultar();
+            foreach (var item in consulta)
+            {
+                int existemcias = consulta.Where(x => x.USUARIO_IdUsuario == item.USUARIO_IdUsuario).Count();
+                try
+                {
+                    listaUsuarios.Remove(listaUsuarios.Find(x => x.IdUsuario == item.USUARIO_IdUsuario));
+                }
+                catch (Exception)
+                {
+
+                }
+                listaUsuarios.Add(new Usuario()
+
+                {
+                    IdUsuario = item.USUARIO_IdUsuario,
+                    IdPersona = item.USUARIO_IdPersona,
+                    Correo = item.USUARIO_Correo,
+                    Estado = item.USUARIO_Estado,
+
+                });
+
+
+            }
+            return listaUsuarios.Distinct().ToList();
+        }
+
+        //ingresar Usuario
+        public int Ingresar(Usuario _item) {
+            try
+            {
+                return int.Parse( db.Sp_UsuarioInsertar(
+                    _item.IdPersona,
+                    _item.Correo,
+                    _item.Clave,
+                    _item.Estado
+                ).Select(x=>x.Value.ToString()).FirstOrDefault());
+            }
+            catch (Exception)
+            {
+
+                return 0;
+            }
+        }
+
+        //modificar usuario
+        public int Modificar(Usuario _item) {
+            try
+            {
+                db.Sp_UsuarioModificar(_item.IdUsuario, _item.IdPersona, _item.Correo, _item.Clave);
+                return _item.IdUsuario;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+                
+        }
+        //eliminar usuario
+        public int Eliminar(Usuario _item)
+        {
+            try
+            {
+                db.Sp_UsuarioCambiarEstado(_item.IdUsuario, _item.Estado);
+                return _item.IdUsuario;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+
     }
 }
