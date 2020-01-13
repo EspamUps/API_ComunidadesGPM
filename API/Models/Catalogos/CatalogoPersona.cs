@@ -58,6 +58,56 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
+        public int EliminarPersona(Persona objPersona)
+        {
+            try
+            {
+                db.Sp_PersonaCambiarEstado(
+                        objPersona.IdPersona,
+                        objPersona.Estado
+                 );
+                return objPersona.IdPersona;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public List<Persona> ConsultarPersona() {
+            List<Persona> lista = new List<Persona>();
+            foreach (var item in db.Sp_PersonaConsultar())
+            {
+                lista.Add(new Persona() {
+
+                        IdPersona = item.PERSONA_IdPersona,
+                        PrimerNombre = item.PERSONA_PrimerNombre,
+                        SegundoNombre = item.PERSONA_SegundoNombre,
+                        PrimerApellido = item.PERSONA_PrimerApellido,
+                        SegundoApellido = item.PERSONA_SegundoApellido,
+                        NumeroIdentificacion = item.PERSONA_NumeroIdentificacion,
+                        Telefono = item.PERSONA_Telefono,
+                        Direccion = item.PERSONA_Direccion,
+                        Estado = item.PERSONA_Estado,
+                        Sexo = new Sexo()
+                        {
+                            IdSexo = item.SEXO_IdSexo,
+                            Identificador = item.SEXO_Identificador,
+                            Descripcion = item.SEXO_Descripcion,
+                            Estado = item.SEXO_Estado,
+                        },
+                        TipoIdentificacion = new TipoIdentificacion()
+                        {
+                            IdTipoIdentificacion = item.TIPOIDENTIFICACION_IdTipoIdentificacion,
+                            Identificador = item.TIPOIDENTIFICACION_Identificador,
+                            Descripcion = item.TIPOIDENTIFICACION_Descripcion,
+                            Estado = item.TIPOIDENTIFICACION_Estado,
+                        }
+
+                });
+            }
+            return lista;
+        }
 
     }
 }
