@@ -18,6 +18,7 @@ namespace API.Models.Entidades
         public bool Estado { get; set; }
 
         public Sexo Sexo { get; set; }
+        public Parroquia Parroquia { get; set; }
         public TipoIdentificacion TipoIdentificacion { get; set; }
     }
 }

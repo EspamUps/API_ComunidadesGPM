@@ -208,10 +208,19 @@
     <Compile Include="Conexion\Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarUsuarioTipoUsuarioConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ModuloConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PersonaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PersonaConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PrivilegioConsultar_Result.cs">
@@ -248,6 +257,7 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\TipoUsuarioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -258,6 +268,7 @@
     <Compile Include="Models\Catalogos\CatalogoAsignarTipoUsuarioModuloPrivilegio.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarUsuarioTipoUsuario.cs" />
     <Compile Include="Models\Catalogos\CatalogoModulo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPersona.cs" />
     <Compile Include="Models\Catalogos\CatalogoPrivilegio.cs" />
     <Compile Include="Models\Catalogos\CatalogoSexo.cs" />
     <Compile Include="Models\Catalogos\CatalogoTipoUsuarios.cs" />
