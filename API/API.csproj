@@ -202,6 +202,12 @@
     <Compile Include="Conexion\Sp_AsignarModuloPrivilegioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_AsignarModuloPrivilegioConsultar_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ModuloConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -235,22 +241,40 @@
     <Compile Include="Conexion\Sp_UsuarioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_UsuarioValidar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_UsuarioValidar_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TipoUsuarioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Catalogos\CatalogoAsignarModuloPrivilegio.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarTipoUsuarioModuloPrivilegio.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarUsuarioTipoUsuario.cs" />
+    <Compile Include="Models\Catalogos\CatalogoModulo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPrivilegio.cs" />
+    <Compile Include="Models\Catalogos\CatalogoSexo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoTipoUsuarios.cs" />
     <Compile Include="Models\Catalogos\CatalogoTokens.cs" />
-    <Compile Include="Models\Catalogos\CatalogoUsuarios.cs" />
+    <Compile Include="Models\Catalogos\CatalogoUsuario.cs" />
     <Compile Include="Models\Catalogos\TokenController.cs" />
     <Compile Include="Models\Entidades\AsignarModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarTipoUsuarioModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarUsuarioTipoUsuario.cs" />
+    <Compile Include="Models\Entidades\Canton.cs" />
+    <Compile Include="Models\Entidades\CatalogoTipoIdentificacion.cs" />
     <Compile Include="Models\Entidades\Clave.cs" />
     <Compile Include="Models\Entidades\Modulo.cs" />
+    <Compile Include="Models\Entidades\Parroquia.cs" />
     <Compile Include="Models\Entidades\Persona.cs" />
     <Compile Include="Models\Entidades\Privilegio.cs" />
+    <Compile Include="Models\Entidades\Provincia.cs" />
     <Compile Include="Models\Entidades\Seguridad.cs" />
     <Compile Include="Models\Entidades\Sexo.cs" />
     <Compile Include="Models\Entidades\TipoIdentificacion.cs" />

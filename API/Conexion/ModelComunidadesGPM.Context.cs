@@ -41,11 +41,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_AsignarModuloPrivilegioCambiarEstado", idAsinarModuloPrivilegioParameter, nuevoEstadoParameter);
         }
     
-        public virtual ObjectResult<Sp_AsignarModuloPrivilegioConsultar_Result> Sp_AsignarModuloPrivilegioConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarModuloPrivilegioConsultar_Result>("Sp_AsignarModuloPrivilegioConsultar");
-        }
-    
         public virtual ObjectResult<Nullable<decimal>> Sp_AsignarModuloPrivilegioInsertar(Nullable<int> idModulo, Nullable<int> idPrivilegio, Nullable<bool> estado)
         {
             var idModuloParameter = idModulo.HasValue ?
@@ -370,6 +365,25 @@ namespace API.Conexion
         public virtual ObjectResult<Sp_TokenConsultar_Result2> Sp_TokenConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TokenConsultar_Result2>("Sp_TokenConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result> Sp_AsignarTipoUsuarioModuloPrivilegioConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result>("Sp_AsignarTipoUsuarioModuloPrivilegioConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_AsignarModuloPrivilegioConsultar_Result1> Sp_AsignarModuloPrivilegioConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarModuloPrivilegioConsultar_Result1>("Sp_AsignarModuloPrivilegioConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_UsuarioValidar_Result1> Sp_UsuarioValidar(string correo)
+        {
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioValidar_Result1>("Sp_UsuarioValidar", correoParameter);
         }
     }
 }
