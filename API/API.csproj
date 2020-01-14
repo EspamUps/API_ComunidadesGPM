@@ -270,6 +270,7 @@
     <Compile Include="Models\Catalogos\CatalogoModulo.cs" />
     <Compile Include="Models\Catalogos\CatalogoPersona.cs" />
     <Compile Include="Models\Catalogos\CatalogoPrivilegio.cs" />
+    <Compile Include="Models\Catalogos\CatalogoRespuestasHTTP.cs" />
     <Compile Include="Models\Catalogos\CatalogoSexo.cs" />
     <Compile Include="Models\Catalogos\CatalogoTipoUsuarios.cs" />
     <Compile Include="Models\Catalogos\CatalogoTokens.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="Models\Entidades\Canton.cs" />
     <Compile Include="Models\Entidades\CatalogoTipoIdentificacion.cs" />
     <Compile Include="Models\Entidades\Clave.cs" />
+    <Compile Include="Models\Entidades\RespuestaHTTP.cs" />
     <Compile Include="Models\Entidades\Modulo.cs" />
     <Compile Include="Models\Entidades\Parroquia.cs" />
     <Compile Include="Models\Entidades\Persona.cs" />

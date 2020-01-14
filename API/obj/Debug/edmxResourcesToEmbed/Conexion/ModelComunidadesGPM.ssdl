@@ -26,6 +26,7 @@
     <Parameter Name="IdAsignarUsuarioTipoUsuario" Type="int" Mode="In" />
     <Parameter Name="NuevoEstado" Type="bit" Mode="In" />
   </Function>
+  <Function Name="Sp_AsignarUsuarioTipoUsuarioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
   <Function Name="Sp_ModuloConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
   <Function Name="Sp_PersonaCambiarEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
     <Parameter Name="IdPersona" Type="int" Mode="In" />

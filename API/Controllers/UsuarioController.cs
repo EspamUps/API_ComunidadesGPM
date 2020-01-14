@@ -16,6 +16,7 @@ namespace API.Controllers
         //ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         // GET: api/Usuario
         CatalogoUsuario catUsuarios = new CatalogoUsuario();
+        CatalogoRespuestasHTTP catRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoAsignarUsuarioTipoUsuario catAsignarUsuarioTipoUsuario = new CatalogoAsignarUsuarioTipoUsuario();
 
         CatalogoTokens catTokens = new CatalogoTokens();
@@ -32,69 +33,104 @@ namespace API.Controllers
                3	ELIMINAR
                4	CONSULTAR
             */
-            object objeto = new object();
+           
             object respuesta = new object();
-            object mensaje = new object();
-            object codigo = new object();
+
 
             // calida el token de la peticion, este es una ruta para insertar asi que el identificador del token debe ser 1
-            Token _token = catTokens.Consultar().Where(x => x.Identificador == 1).FirstOrDefault();
-            string _clave_desencriptada = _seguridad.DecryptStringAES(_item.Token, _token.objClave.Descripcion);
-
-            if (_clave_desencriptada == _token.Descripcion)
+            try
             {
-                if (catUsuarios.ValidarCorreo(_item).Clave == null)
+                Token _token = catTokens.Consultar().Where(x => x.Identificador == 1).FirstOrDefault();
+                string _clave_desencriptada = _seguridad.DecryptStringAES(_item.Token, _token.objClave.Descripcion);
+
+                if (_clave_desencriptada == _token.Descripcion)
                 {
-                    respuesta = catUsuarios.InsertarUsuario(_item);
-                    if ((int)respuesta != 0)
+                    if (catUsuarios.ValidarCorreo(_item).Clave == null)
                     {
-                        respuesta = _item;
-                        return new { respuesta, mensaje = "OK", codigo = "200" };
+                        respuesta = catUsuarios.InsertarUsuario(_item);
+                        if ((int)respuesta != 0)
+                        {
+                            respuesta = _item;
+                            return new {
+                                respuesta,
+                                http = catRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
+                            };
+                        }
+                        
+                        return new {
+                            respuesta,
+                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
+                        };
+                        
                     }
-                    else
-                    {
-                        return new { respuesta, mensaje = "Bad Request", codigo = "400" };
-                    }
+
                 }
-               
+                return new {
+                    respuesta,
+                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
+                };
             }
-            
-            return new { respuesta, mensaje = "Forbidden", codigo = "403" };
-           
-
-            //return new { respuesta, mensaje = "Bad Request", codigo = "400" };
-
+            catch (Exception)
+            {
+                return new {
+                    respuesta,
+                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                };
+            }
         }
 
         [HttpPost]
         [Route("api/usuario_modificar")]
         public object usuario_modificar(Usuario _item) {
 
-            object objeto = new object();
+           
             object respuesta = new object();
-            object mensaje = new object();
-            object codigo = new object();
 
-            // calida el token de la peticion, este es una ruta para insertar asi que el identificador del token debe ser 2
-            Token _token = catTokens.Consultar().Where(x => x.Identificador == 2).FirstOrDefault();
-            string _clave_desencriptada = _seguridad.DecryptStringAES(_item.Token, _token.objClave.Descripcion);
 
-            if (_clave_desencriptada == _token.Descripcion)
+            try
             {
-                respuesta = catUsuarios.ModificarUsuario(_item);
-                if ((int)respuesta != 0)
-                {
-                    respuesta = _item;
-                    return new { respuesta, mensaje = "OK", codigo = "200" };
-                }
-                else
-                {
-                    return new { respuesta, mensaje = "Bad Request", codigo = "400" };
-                }
-                
-            }
+                // calida el token de la peticion, este es una ruta para insertar asi que el identificador del token debe ser 2
+                Token _token = catTokens.Consultar().Where(x => x.Identificador == 2).FirstOrDefault();
+                string _clave_desencriptada = _seguridad.DecryptStringAES(_item.Token, _token.objClave.Descripcion);
 
-            return new { respuesta, mensaje = "Forbidden", codigo = "403" };
+                if (_clave_desencriptada == _token.Descripcion)
+                {
+                    respuesta = catUsuarios.ModificarUsuario(_item);
+                    if ((int)respuesta != 0)
+                    {
+                        respuesta = _item;
+                        return new
+                        {
+                            respuesta,
+                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
+                        };
+                    }
+
+                    return new
+                    {
+                        respuesta,
+                        http = catRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
+                    };
+
+
+                }
+                return new
+                {
+                    respuesta,
+                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
+                };
+            }
+            catch (Exception)
+            {
+                return new
+                {
+                    respuesta,
+                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                };
+            }
+            
+
+            
 
         }
 
@@ -103,31 +139,51 @@ namespace API.Controllers
         public object usuario_eliminar(Usuario _item)
         {
 
-            object objeto = new object();
+           
             object respuesta = new object();
-            object mensaje = new object();
-            object codigo = new object();
 
-            // calida el token de la peticion, este es una ruta para insertar asi que el identificador del token debe ser 3
-            Token _token = catTokens.Consultar().Where(x => x.Identificador == 3).FirstOrDefault();
-            string _clave_desencriptada = _seguridad.DecryptStringAES(_item.Token, _token.objClave.Descripcion);
-
-            if (_clave_desencriptada == _token.Descripcion)
+            try
             {
-                respuesta = catUsuarios.EliminarUsuario(_item);
-                if ((int)respuesta != 0)
-                {
-                    respuesta = _item;
-                    return new { respuesta, mensaje = "OK", codigo = "200" };
-                }
-                else
-                {
-                    return new { respuesta, mensaje = "Bad Request", codigo = "400" };
-                }
+                // calida el token de la peticion, este es una ruta para insertar asi que el identificador del token debe ser 3
+                Token _token = catTokens.Consultar().Where(x => x.Identificador == 3).FirstOrDefault();
+                string _clave_desencriptada = _seguridad.DecryptStringAES(_item.Token, _token.objClave.Descripcion);
 
+                if (_clave_desencriptada == _token.Descripcion)
+                {
+                    respuesta = catUsuarios.EliminarUsuario(_item);
+                    if ((int)respuesta != 0)
+                    {
+                        respuesta = _item;
+                        return new
+                        {
+                            respuesta,
+                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
+                        };
+                    }
+                    else
+                    {
+                        return new
+                        {
+                            respuesta,
+                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
+                        };
+                    }
+
+                }
+                return new
+                {
+                    respuesta,
+                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
+                };
             }
-
-            return new { respuesta, mensaje = "Forbidden", codigo = "403" };
+            catch (Exception)
+            {
+                return new
+                {
+                    respuesta,
+                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                };
+            }
 
         }
 
@@ -135,29 +191,48 @@ namespace API.Controllers
         [Route("api/usuario_consultar")]
         public object usuario_consultar(Usuario _item)
         {
-            object objeto = new object();
+           
             object respuesta = new object();
-            object mensaje = new object();
-            object codigo = new object();
-            // calida el token de la peticion, este es una ruta para consultar asi que el identificador del token debe ser 4
-            Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
-            string _clave_desencriptada = _seguridad.DecryptStringAES(_item.Token, _token.objClave.Descripcion);
 
-            if (_clave_desencriptada == _token.Descripcion)
+            try
             {
-                //respuesta = catUsuarios.Consultar();
-                if (respuesta != null)
-                {
-                    return new { respuesta, mensaje = "OK", codigo = "200" };
-                }
-                else
-                {
-                    return new { respuesta, mensaje = "Bad Request", codigo = "400" };
-                }
-                
-            }
+                // calida el token de la peticion, este es una ruta para consultar asi que el identificador del token debe ser 4
+                Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
+                string _clave_desencriptada = _seguridad.DecryptStringAES(_item.Token, _token.objClave.Descripcion);
 
-            return new { respuesta, mensaje = "Forbidden", codigo = "403" };
+                if (_clave_desencriptada == _token.Descripcion)
+                {
+                    respuesta = catAsignarUsuarioTipoUsuario.ConsultarUsuarios();
+                    if (respuesta != null)
+                    {
+                        return new
+                        {
+                            respuesta,
+                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
+                        };
+                    }
+                    return new
+                    {
+                        respuesta,
+                        http = catRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
+                    };
+
+                }
+                return new
+                {
+                    respuesta,
+                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
+                };
+            }
+            catch (Exception)
+            {
+                return new
+                {
+                    respuesta,
+                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                };
+            }
+            
 
         }
 
@@ -168,10 +243,10 @@ namespace API.Controllers
         {
             //string hola = "hola";
             //object respuesta = new { hola };
-            object objeto = new object();
+           
             object respuesta = new object();
-            object mensaje = new object();
-            object codigo = new object();
+           
+            
 
             try
             {
@@ -183,26 +258,36 @@ namespace API.Controllers
                 {
 
                     Usuario validar = catUsuarios.ValidarCorreo(_item);
-                    if (validar != null)
+                    if (validar.Correo != null)
                     {
-                        return new { respuesta = validar.Correo, mensaje = "OK", codigo = "200" };
+                        respuesta = validar.Correo;
+                        return new
+                        {
+                            respuesta,
+                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
+                        };
                     }
-                    else
+                    return new
                     {
-                        return new { respuesta, mensaje = "No Content", codigo = "204" };
-                    }
+                        respuesta,
+                        http = catRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
+                    };
 
                 }
-                else
+                return new
                 {
-                    return new { respuesta, mensaje = "Forbidden", codigo = "404" };
-                }
+                    respuesta,
+                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
+                };
 
             }
             catch (Exception)
             {
-
-                return new { respuesta, mensaje = "No Content", codigo = "204" };
+                return new
+                {
+                    respuesta,
+                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                };
             }
 
             //return new { id = 1234 };
@@ -213,40 +298,71 @@ namespace API.Controllers
         public object Login(Usuario _item)
         {
 
-            object objeto = new object();
+           
             object respuesta = new object();
-            object mensaje = new object();
-            object codigo = new object();
 
-            // calida el token de la peticion, este es una ruta para consultar asi que el identificador del token debe ser 4
-            Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
-            string _clave_desencriptada = _seguridad.DecryptStringAES(_item.Token, _token.objClave.Descripcion);
-
-            if (_clave_desencriptada == _token.Descripcion)
+            try
             {
-                //AsignarUsuarioTipoUsuario validar = catAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(x => x.Usuario.Correo == _item.Correo).FirstOrDefault(); //&& catUsuarios.DesenciptarClaveUsuario(x.Usuario.Clave) ==_item.Clave
-                //return _item;
-                //return catUsuarios.ValidarCorreo(_item);
-                Usuario validar = catUsuarios.ValidarCorreo(_item);
+                // calida el token de la peticion, este es una ruta para consultar asi que el identificador del token debe ser 4
+                Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
+                string _clave_desencriptada = _seguridad.DecryptStringAES(_item.Token, _token.objClave.Descripcion);
 
-                if (validar.Correo != null)
+                if (_clave_desencriptada == _token.Descripcion)
                 {
-                    string desencriptar_clave_usuario = catUsuarios.DesenciptarClaveUsuario(validar.Clave);
-                    if (_item.Clave == desencriptar_clave_usuario)
+                    //AsignarUsuarioTipoUsuario validar = catAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(x => x.Usuario.Correo == _item.Correo).FirstOrDefault(); //&& catUsuarios.DesenciptarClaveUsuario(x.Usuario.Clave) ==_item.Clave
+                    //return _item;
+                    //return catUsuarios.ValidarCorreo(_item);
+                    Usuario validar = catUsuarios.ValidarCorreo(_item);
+
+                    if (validar.Correo != null)
                     {
-                        respuesta =  catAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(x => x.Usuario.IdUsuario == validar.IdUsuario);
-                        return new { respuesta, mensaje = "OK", codigo = "200" };
+                        string desencriptar_clave_usuario = catUsuarios.DesenciptarClaveUsuario(validar.Clave);
+                        if (_item.Clave == desencriptar_clave_usuario)
+                        {
+                             respuesta = catAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(x => x.Usuario.IdUsuario == validar.IdUsuario);
+                            if (respuesta !=null)
+                            {
+                                return new
+                                {
+                                    respuesta,
+                                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
+                                };
+                            }
+                            return new
+                            {
+                                respuesta,
+                                http = catRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
+                            };
+
+                        }
+                        return new
+                        {
+                            respuesta,
+                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "002").FirstOrDefault()
+                        };
                     }
-                    else
+                    return new
                     {
-                        return new { respuesta, mensaje = "clave incorrecta", codigo = "418" };
-                    }
+                        respuesta,
+                        http = catRespuestasHTTP.consultar().Where(x => x.codigo == "002").FirstOrDefault()
+                    };
+
                 }
-
-
+                return new
+                {
+                    respuesta,
+                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
+                };
+            }
+            catch (Exception)
+            {
+                return new
+                {
+                    respuesta,
+                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                };
             }
 
-            return new { respuesta, mensaje = "Forbidden", codigo = "404" };
         }
 
 

@@ -65,5 +65,6 @@ namespace API.Models.Catalogos
             return listaAsignarUsuarioTipoUsuario;
         }
 
+
     }
 }
