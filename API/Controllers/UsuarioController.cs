@@ -23,7 +23,7 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/usuario_insertar")]
-        public object usuario_insertar(Usuario _item)
+        public object usuario_insertar(Usuario _objUsuario)
         {
            
             /*
@@ -32,23 +32,27 @@ namespace API.Controllers
                3	ELIMINAR
                4	CONSULTAR
             */
-            object objeto = new object();
             object respuesta = new object();
-            object mensaje = new object();
-            object codigo = new object();
+            string mensaje = "Ocurrió un error insperado";
+            string codigo = "500";
 
-            // calida el token de la peticion, este es una ruta para insertar asi que el identificador del token debe ser 1
+            // valida el token de la peticion, este es una ruta para insertar asi que el identificador del token debe ser 1
             Token _token = catTokens.Consultar().Where(x => x.Identificador == 1).FirstOrDefault();
-            string _clave_desencriptada = _seguridad.DecryptStringAES(_item.Token, _token.objClave.Descripcion);
+            if (_token == null)
+            {
+               mensaje = "No tiene los permisos adecuados para realizar esta acción";
+               codigo = "403";
+            }
+            string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
 
             if (_clave_desencriptada == _token.Descripcion)
             {
-                if (catUsuarios.ValidarCorreo(_item).Clave == null)
+                if (catUsuarios.ValidarCorreo(_objUsuario).Clave == null)
                 {
-                    respuesta = catUsuarios.InsertarUsuario(_item);
+                    respuesta = catUsuarios.InsertarUsuario(_objUsuario);
                     if ((int)respuesta != 0)
                     {
-                        respuesta = _item;
+                        respuesta = _objUsuario;
                         return new { respuesta, mensaje = "OK", codigo = "200" };
                     }
                     else
@@ -58,11 +62,11 @@ namespace API.Controllers
                 }
                
             }
+
             
             return new { respuesta, mensaje = "Forbidden", codigo = "403" };
            
-
-            //return new { respuesta, mensaje = "Bad Request", codigo = "400" };
+            
 
         }
 
