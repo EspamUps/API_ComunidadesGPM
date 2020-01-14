@@ -15,7 +15,7 @@ namespace API.Controllers
         [Route("api/persona_consultar")]
         public object  persona_consultar(Persona _item)
         {
-            
+            return new object();
         }
         
     }

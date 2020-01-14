@@ -1,4 +1,3 @@
-C:\Users\UZZER\documents\visual studio 2017\Projects\API_ComunidadesGPM\API\obj\Debug\API.csprojResolveAssemblyReference.cache
 C:\Users\UZZER\documents\visual studio 2017\Projects\API_ComunidadesGPM\API\bin\ApplicationInsights.config
 C:\Users\UZZER\documents\visual studio 2017\Projects\API_ComunidadesGPM\API\bin\roslyn\csc.exe
 C:\Users\UZZER\documents\visual studio 2017\Projects\API_ComunidadesGPM\API\bin\roslyn\csc.exe.config
