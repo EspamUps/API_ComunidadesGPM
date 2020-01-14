@@ -280,15 +280,14 @@
     <Compile Include="Models\Catalogos\CatalogoPrivilegio.cs" />
     <Compile Include="Models\Catalogos\CatalogoRespuestasHTTP.cs" />
     <Compile Include="Models\Catalogos\CatalogoSexo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoTipoIdentificacion.cs" />
     <Compile Include="Models\Catalogos\CatalogoTipoUsuarios.cs" />
     <Compile Include="Models\Catalogos\CatalogoTokens.cs" />
     <Compile Include="Models\Catalogos\CatalogoUsuario.cs" />
-    <Compile Include="Models\Catalogos\TokenController.cs" />
     <Compile Include="Models\Entidades\AsignarModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarTipoUsuarioModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarUsuarioTipoUsuario.cs" />
     <Compile Include="Models\Entidades\Canton.cs" />
-    <Compile Include="Models\Entidades\CatalogoTipoIdentificacion.cs" />
     <Compile Include="Models\Entidades\Clave.cs" />
     <Compile Include="Models\Entidades\RespuestaHTTP.cs" />
     <Compile Include="Models\Entidades\Modulo.cs" />
