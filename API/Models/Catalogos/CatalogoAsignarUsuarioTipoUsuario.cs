@@ -24,6 +24,7 @@ namespace API.Models.Catalogos
                     Usuario = new Usuario()
                     {
                         IdUsuarioEncriptado = _seguridad.Encriptar(item.USUARIO_IdUsuario.ToString()),
+                        IdUsuario = item.USUARIO_IdUsuario,
                         Correo = item.USUARIO_Correo,
                         //Clave = item.USUARIO_Clave,
                         ClaveEncriptada = _seguridad.Encriptar(item.USUARIO_Clave.ToString()),
@@ -31,6 +32,7 @@ namespace API.Models.Catalogos
                         Persona = new Persona()
                         {
                             IdPersonaEncriptado = _seguridad.Encriptar(item.PERSONA_IdPersona.ToString()),
+                            IdPersona = item.PERSONA_IdPersona,
                             PrimerNombre = item.PERSONA_PrimerNombre,
                             SegundoNombre = item.PERSONA_SegundoNombre,
                             PrimerApellido = item.PERSONA_PrimerApellido,
@@ -42,6 +44,7 @@ namespace API.Models.Catalogos
                             Sexo = new Sexo()
                             {
                                 IdSexoEncriptado = _seguridad.Encriptar(item.SEXO_IdSexo.ToString()),
+                                IdSexo = item.SEXO_IdSexo,
                                 Identificador = item.SEXO_Identificador,
                                 Descripcion = item.SEXO_Descripcion,
                                 Estado = item.SEXO_Estado,
@@ -49,6 +52,7 @@ namespace API.Models.Catalogos
                             TipoIdentificacion = new TipoIdentificacion()
                             {
                                 IdTipoIdentificacionEncriptado = _seguridad.Encriptar(item.TIPOIDENTIFICACION_IdTipoIdentificacion.ToString()),
+                                IdTipoIdentificacion = item.TIPOIDENTIFICACION_IdTipoIdentificacion,
                                 Identificador = item.TIPOIDENTIFICACION_Identificador,
                                 Descripcion = item.TIPOIDENTIFICACION_Descripcion,
                                 Estado = item.TIPOIDENTIFICACION_Estado,
@@ -59,6 +63,7 @@ namespace API.Models.Catalogos
                     TipoUsuario = new TipoUsuario()
                     {
                         IdTipoUsuarioEncriptado = _seguridad.Encriptar( item.TIPOUSUARIO_IdTipoUsuario.ToString()),
+                        IdTipoUsuario = item.TIPOUSUARIO_IdTipoUsuario,
                         Identificador = item.TIPOUSUARIO_Identificador,
                         Descripcion = item.TIPOUSUARIO_Descripcion,
                         Estado = item.TIPOUSUARIO_Estado
