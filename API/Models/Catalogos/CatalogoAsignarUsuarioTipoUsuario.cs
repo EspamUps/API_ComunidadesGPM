@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using API.Conexion;
 using API.Models.Entidades;
+using API.Models.Metodos;
 
 namespace API.Models.Catalogos
 {
     public class CatalogoAsignarUsuarioTipoUsuario
     {
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
+        Seguridad _seguridad = new Seguridad();
         public List<AsignarUsuarioTipoUsuario> ConsultarAsignarUsuarioTipoUsuario()
         {
             List<AsignarUsuarioTipoUsuario> listaAsignarUsuarioTipoUsuario = new List<AsignarUsuarioTipoUsuario>();
@@ -17,17 +19,17 @@ namespace API.Models.Catalogos
             {
                 listaAsignarUsuarioTipoUsuario.Add(new AsignarUsuarioTipoUsuario()
                 {
-                    IdAsignarUsuarioTipoUsuario = item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario,
+                    IdAsignarUsuarioTipoUsuarioEncriptado = _seguridad.Encriptar(item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario.ToString()),
                     Estado = item.ASIGNARUSUARIOTIPOUSUARIO_Estado,
                     Usuario = new Usuario()
                     {
-                        IdUsuario = item.USUARIO_IdUsuario,
+                        IdUsuarioEncriptado = _seguridad.Encriptar( item.USUARIO_IdUsuario.ToString()),
                         Correo = item.USUARIO_Correo,
                         Clave = item.USUARIO_Clave,
                         Estado = item.USUARIO_Estado,
                         Persona = new Persona()
                         {
-                            IdPersona = item.PERSONA_IdPersona,
+                            IdPersonaEncriptado = _seguridad.Encriptar(item.PERSONA_IdPersona.ToString()),
                             PrimerNombre = item.PERSONA_PrimerNombre,
                             SegundoNombre = item.PERSONA_SegundoNombre,
                             PrimerApellido = item.PERSONA_PrimerApellido,
@@ -38,14 +40,14 @@ namespace API.Models.Catalogos
                             Estado = item.PERSONA_Estado,
                             Sexo = new Sexo()
                             {
-                                IdSexo = item.SEXO_IdSexo,
+                                IdSexoEncriptado = _seguridad.Encriptar(item.SEXO_IdSexo.ToString()),
                                 Identificador = item.SEXO_Identificador,
                                 Descripcion = item.SEXO_Descripcion,
                                 Estado = item.SEXO_Estado,
                             },
                             TipoIdentificacion = new TipoIdentificacion()
                             {
-                                IdTipoIdentificacion = item.TIPOIDENTIFICACION_IdTipoIdentificacion,
+                                IdTipoIdentificacionEncriptado = _seguridad.Encriptar(item.TIPOIDENTIFICACION_IdTipoIdentificacion.ToString()),
                                 Identificador = item.TIPOIDENTIFICACION_Identificador,
                                 Descripcion = item.TIPOIDENTIFICACION_Descripcion,
                                 Estado = item.TIPOIDENTIFICACION_Estado,
@@ -55,7 +57,7 @@ namespace API.Models.Catalogos
                     },
                     TipoUsuario = new TipoUsuario()
                     {
-                        IdTipoUsuario = item.TIPOUSUARIO_IdTipoUsuario,
+                        IdTipoUsuarioEncriptado = _seguridad.Encriptar( item.TIPOUSUARIO_IdTipoUsuario.ToString()),
                         Identificador = item.TIPOUSUARIO_Identificador,
                         Descripcion = item.TIPOUSUARIO_Descripcion,
                         Estado = item.TIPOUSUARIO_Estado

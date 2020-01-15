@@ -131,7 +131,15 @@ namespace API.Controllers
                 {
                     int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
                     var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona && c.Estado == true).FirstOrDefault();
+
+                    int _idUsuarioDesenciptado = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.IdUsuarioEncriptado));
+                    //var _objU = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Usuario.IdUsuario == _idUsuarioDesenciptado ).FirstOrDefault().Usuario;
+
+
                     bool _validarPersona = true;
+
+
+
                     if (_objPersona == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
@@ -140,6 +148,7 @@ namespace API.Controllers
                     if (_validarPersona == true)
                     {
                         _objUsuario.Estado = true;
+                        _objUsuario.IdUsuario = _idUsuarioDesenciptado; //  se asigna el id del usuario que ha sido desenciptado para su posterior modificacion
                         int _idUsuarioModificado = _objCatalogoUsuarios.ModificarUsuario(_objUsuario);
                         if (_idUsuarioModificado == 0)
                         {
@@ -148,8 +157,8 @@ namespace API.Controllers
                         }
                         else
                         {
-                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                             _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Usuario.IdUsuario == _idUsuarioModificado && c.Estado == true).FirstOrDefault();
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                         }
                     }
 
@@ -208,6 +217,9 @@ namespace API.Controllers
                 {
                     int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
                     var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona && c.Estado == true).FirstOrDefault();
+
+                    int _idUsuarioDesenciptado = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.IdUsuarioEncriptado));
+
                     bool _validarPersona = true;
                     if (_objPersona == null)
                     {
@@ -217,6 +229,8 @@ namespace API.Controllers
                     if (_validarPersona == true)
                     {
                         _objUsuario.Estado = false;
+                        _objUsuario.IdUsuario = _idUsuarioDesenciptado; // id del usuario desenciptado para su posterior eliminacion
+
                         int _idUsuarioEliminado = _objCatalogoUsuarios.EliminarUsuario(_objUsuario);
                         if (_idUsuarioEliminado == 0)
                         {
@@ -383,7 +397,8 @@ namespace API.Controllers
                 }
                 else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
                 {
-                    string _claveUsuario = _seguridad.DesEncriptar(_objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault().Clave);
+                    //string _claveUsuario = _seguridad.DesEncriptar(_objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault().Clave);
+                    string _claveUsuario = _objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault().Clave;
                     if ( _claveUsuario != _objUsuario.Clave )
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();

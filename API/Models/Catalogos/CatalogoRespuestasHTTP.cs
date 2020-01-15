@@ -85,6 +85,12 @@ namespace API.Models.Catalogos
             });
             lista.Add(new RespuestaHTTP()
             {
+                codigo = "500",
+                titulo = "Internal Server Error",
+                mensaje = "aplicaciones empotradas en servidores web, mismas que generan contenido dinámicamente, por ejemplo aplicaciones montadas en IIS o Tomcat, cuando se encuentran con situaciones de error ajenas a la naturaleza del servidor web."
+            });
+            lista.Add(new RespuestaHTTP()
+            {
                 codigo = "503",
                 titulo = "Service Unavailable",
                 mensaje = "El servidor no puede responder a la petición del navegador porque está congestionado o está realizando tareas de mantenimiento."
