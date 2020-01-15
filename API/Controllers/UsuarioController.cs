@@ -50,7 +50,7 @@ namespace API.Controllers
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                 }
-                else if(string.IsNullOrEmpty(_objUsuario.Correo.Trim()) || string.IsNullOrEmpty(_objUsuario.Clave.Trim()))
+                else if(string.IsNullOrEmpty(_objUsuario.Correo.Trim())) //|| string.IsNullOrEmpty(_objUsuario.Clave.Trim())
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                 }
@@ -81,14 +81,15 @@ namespace API.Controllers
                         else
                         {
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                            _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(c => c.Usuario.IdUsuario == _idUsuarioIngresado && c.Estado == true).FirstOrDefault();
+                            _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Usuario.IdUsuario == _idUsuarioIngresado && c.Estado == true).FirstOrDefault();
                         }
                     }
                    
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
                 return new
                 {
                    respuesta = _respuesta, http = _http
@@ -104,54 +105,74 @@ namespace API.Controllers
         [Route("api/usuario_modificar")]
         public object usuario_modificar(Usuario _objUsuario) {
 
-           
-            object respuesta = new object();
 
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
             try
             {
                 // calida el token de la peticion, este es una ruta para insertar asi que el identificador del token debe ser 2
-                Token _token = catTokens.Consultar().Where(x => x.Identificador == 2).FirstOrDefault();
-                string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
-
-                if (_clave_desencriptada == _token.Descripcion)
+                //Token _token = catTokens.Consultar().Where(x => x.Identificador == 2).FirstOrDefault();
+                //string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
+                if (string.IsNullOrEmpty(_objUsuario.Persona.IdPersonaEncriptado.Trim()))
                 {
-                    respuesta = _objCatalogoUsuarios.ModificarUsuario(_objUsuario);
-                    if ((int)respuesta != 0)
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                }
+                else if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()) ) // al modificar el usuario tiene  la oportunidad de ingrasar una clave con espacios
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                }
+                else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
+                }
+                else
+                {
+                    int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
+                    var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona && c.Estado == true).FirstOrDefault();
+                    bool _validarPersona = true;
+                    if (_objPersona == null)
                     {
-                        respuesta = _objUsuario;
-                        return new
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _validarPersona = false;
+                    }
+                    if (_validarPersona == true)
+                    {
+                        _objUsuario.Estado = true;
+                        int _idUsuarioModificado = _objCatalogoUsuarios.ModificarUsuario(_objUsuario);
+                        if (_idUsuarioModificado == 0)
                         {
-                            respuesta,
-                            http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
-                        };
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "Ocurrió un error al intentar modificar al usuario, intente nuevamente.";
+                        }
+                        else
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                            _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Usuario.IdUsuario == _idUsuarioModificado && c.Estado == true).FirstOrDefault();
+                        }
                     }
 
-                    return new
-                    {
-                        respuesta,
-                        http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
-                    };
-
-
                 }
-                return new
-                {
-                    respuesta,
-                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
-                };
-            }
-            catch (Exception)
-            {
-                return new
-                {
-                    respuesta,
-                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
-                };
-            }
-            
 
-            
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+                return new
+                {
+                    respuesta = _respuesta,
+                    http = _http
+                };
+            }
+            return new
+            {
+                respuesta = _respuesta,
+                http = _http
+            };
+
+
+
 
         }
 
@@ -160,51 +181,71 @@ namespace API.Controllers
         public object usuario_eliminar(Usuario _objUsuario)
         {
 
-           
-            object respuesta = new object();
+
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
             try
             {
                 // calida el token de la peticion, este es una ruta para insertar asi que el identificador del token debe ser 3
-                Token _token = catTokens.Consultar().Where(x => x.Identificador == 3).FirstOrDefault();
-                string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
+               // Token _token = catTokens.Consultar().Where(x => x.Identificador == 3).FirstOrDefault();
+               // string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
 
-                if (_clave_desencriptada == _token.Descripcion)
+                if (string.IsNullOrEmpty(_objUsuario.Persona.IdPersonaEncriptado.Trim()))
                 {
-                    respuesta = _objCatalogoUsuarios.EliminarUsuario(_objUsuario);
-                    if ((int)respuesta != 0)
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                }
+                else if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()) || string.IsNullOrEmpty(_objUsuario.Clave.Trim()))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                }
+                else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
+                }
+                else
+                {
+                    int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
+                    var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona && c.Estado == true).FirstOrDefault();
+                    bool _validarPersona = true;
+                    if (_objPersona == null)
                     {
-                        respuesta = _objUsuario;
-                        return new
-                        {
-                            respuesta,
-                            http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
-                        };
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _validarPersona = false;
                     }
-                    else
+                    if (_validarPersona == true)
                     {
-                        return new
+                        _objUsuario.Estado = false;
+                        int _idUsuarioEliminado = _objCatalogoUsuarios.EliminarUsuario(_objUsuario);
+                        if (_idUsuarioEliminado == 0)
                         {
-                            respuesta,
-                            http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
-                        };
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "Ocurrió un error al intentar eliminar al usuario, intente nuevamente.";
+                        }
+                        else
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                            _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Usuario.IdUsuario == _idUsuarioEliminado && c.Estado == true).FirstOrDefault();
+                        }
                     }
 
                 }
-                return new
-                {
-                    respuesta,
-                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
-                };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
                 return new
                 {
-                    respuesta,
-                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                    respuesta = _respuesta,
+                    http = _http
                 };
             }
+            return new
+            {
+                respuesta = _respuesta,
+                http = _http
+            };
 
         }
 
@@ -212,48 +253,68 @@ namespace API.Controllers
         [Route("api/usuario_consultar")]
         public object usuario_consultar(Usuario _objUsuario)
         {
-           
-            object respuesta = new object();
+
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
             try
             {
-                // calida el token de la peticion, este es una ruta para consultar asi que el identificador del token debe ser 4
-                Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
-                string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
-
-                if (_clave_desencriptada == _token.Descripcion)
+                if (string.IsNullOrEmpty(_objUsuario.Persona.IdPersonaEncriptado.Trim()))
                 {
-                    respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios();
-                    if (respuesta != null)
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                }
+                else if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()) || string.IsNullOrEmpty(_objUsuario.Clave.Trim()))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                }
+                else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
+                }
+                else
+                {
+                    int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
+                    var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona && c.Estado == true).FirstOrDefault();
+                    bool _validarPersona = true;
+                    if (_objPersona == null)
                     {
-                        return new
-                        {
-                            respuesta,
-                            http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
-                        };
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _validarPersona = false;
                     }
-                    return new
+                    if (_validarPersona == true)
                     {
-                        respuesta,
-                        http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
-                    };
+                        //_objUsuario.Estado = false;
+                        //int _cantidadUsuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios().Count;
+                        //if (_cantidadUsuarios == 0)
+                        //{
+                        //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        //    _http.mensaje = "No se ingresado ningun usuario Ingresado";
+                        //}
+                        //else
+                        //{
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                            _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true);
+                        //}
+                    }
 
                 }
-                return new
-                {
-                    respuesta,
-                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
-                };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
                 return new
                 {
-                    respuesta,
-                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                    respuesta = _respuesta,
+                    http = _http
                 };
             }
-            
+            return new
+            {
+                respuesta = _respuesta,
+                http = _http
+            };
+
 
         }
 
@@ -264,54 +325,41 @@ namespace API.Controllers
         {
             //string hola = "hola";
             //object respuesta = new { hola };
-           
-            object respuesta = new object();
-           
-            
+
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
             try
             {
                 // calida el token de la peticion, este es una ruta para consultar asi que el identificador del token debe ser 4
-                Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
-                string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
+                //Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
+                //string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
 
-                if (_clave_desencriptada == _token.Descripcion)
+                if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()))
                 {
-
-                    Usuario validar = _objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault();
-                    if (validar.Correo != null)
-                    {
-                        respuesta = validar.Correo;
-                        return new
-                        {
-                            respuesta,
-                            http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
-                        };
-                    }
-                    return new
-                    {
-                        respuesta,
-                        http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
-                    };
-
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                 }
-                return new
+                else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
                 {
-                    respuesta,
-                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
-                };
+                    _respuesta = _objUsuario.Correo.Trim();
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
                 return new
                 {
-                    respuesta,
-                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                    respuesta = _respuesta,
+                    http = _http
                 };
             }
-
-            //return new { id = 1234 };
+            return new
+            {
+                respuesta = _respuesta,
+                http = _http
+            };
         }
 
         [HttpPost]
@@ -320,69 +368,53 @@ namespace API.Controllers
         {
 
            
-            object respuesta = new object();
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
             try
             {
                 // calida el token de la peticion, este es una ruta para consultar asi que el identificador del token debe ser 4
-                Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
-                string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
+                //Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
+                //string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
 
-                if (_clave_desencriptada == _token.Descripcion)
+                if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()))
                 {
-                    //AsignarUsuarioTipoUsuario validar = catAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(x => x.Usuario.Correo == _item.Correo).FirstOrDefault(); //&& catUsuarios.DesenciptarClaveUsuario(x.Usuario.Clave) ==_item.Clave
-                    //return _item;
-                    //return catUsuarios.ValidarCorreo(_item);
-                    Usuario validar = _objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault();
-
-                    if (validar.Correo != null)
-                    {
-                        string desencriptar_clave_usuario = _objCatalogoUsuarios.DesenciptarClaveUsuario(validar.Clave);
-                        if (_objUsuario.Clave == desencriptar_clave_usuario)
-                        {
-                             respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(x => x.Usuario.IdUsuario == validar.IdUsuario);
-                            if (respuesta !=null)
-                            {
-                                return new
-                                {
-                                    respuesta,
-                                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
-                                };
-                            }
-                            return new
-                            {
-                                respuesta,
-                                http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
-                            };
-
-                        }
-                        return new
-                        {
-                            respuesta,
-                            http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "002").FirstOrDefault()
-                        };
-                    }
-                    return new
-                    {
-                        respuesta,
-                        http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "002").FirstOrDefault()
-                    };
-
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                 }
-                return new
+                else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
                 {
-                    respuesta,
-                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
-                };
+                    string _claveUsuario = _seguridad.DesEncriptar(_objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault().Clave);
+                    if ( _claveUsuario != _objUsuario.Clave )
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "La contraceña es incorrecta";
+                    }
+                    else
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true);
+                    }
+                    
+                }
+
+                
+
+           
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
                 return new
                 {
-                    respuesta,
-                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                    respuesta = _respuesta,
+                    http = _http
                 };
             }
+            return new
+            {
+                respuesta = _respuesta,
+                http = _http
+            };
 
         }
 

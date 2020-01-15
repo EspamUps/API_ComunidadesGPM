@@ -37,7 +37,7 @@ namespace API.Models.Catalogos
         public int InsertarUsuario(Usuario _objUsuario) {
             try
             {
-                _objUsuario.Clave = _seguridad.EncryptStringAES(_objUsuario.Clave, _llave);
+                _objUsuario.Clave = _seguridad.Encriptar(_objUsuario.Clave);
                 return int.Parse( db.Sp_UsuarioInsertar(
                     _objUsuario.Persona.IdPersona,
                     _objUsuario.Correo,
@@ -55,7 +55,7 @@ namespace API.Models.Catalogos
         public int ModificarUsuario(Usuario _objUsuario) {
             try
             {
-                _objUsuario.Clave = _seguridad.EncryptStringAES(_objUsuario.Clave, _llave);
+                _objUsuario.Clave = _seguridad.Encriptar(_objUsuario.Clave);
                 db.Sp_UsuarioModificar(_objUsuario.IdUsuario, _objUsuario.Persona.IdPersona, _objUsuario.Correo, _objUsuario.Clave);
                 return _objUsuario.IdUsuario;
             }

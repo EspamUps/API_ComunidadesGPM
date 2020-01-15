@@ -10,7 +10,7 @@ namespace API.Models.Catalogos
     public class CatalogoAsignarUsuarioTipoUsuario
     {
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
-        public List<AsignarUsuarioTipoUsuario> ConsultarUsuarios()
+        public List<AsignarUsuarioTipoUsuario> ConsultarAsignarUsuarioTipoUsuario()
         {
             List<AsignarUsuarioTipoUsuario> listaAsignarUsuarioTipoUsuario = new List<AsignarUsuarioTipoUsuario>();
             foreach (var item in db.Sp_UsuarioConsultar())
