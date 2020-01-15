@@ -87,6 +87,19 @@ namespace API.Models.Catalogos
             return _idAsignarUsuarioTipoUsuarioIngresado;
         }
 
+        public int CambiarEstadoAsignarUsuarioTipoUsuario(AsignarUsuarioTipoUsuario _objAsignarUsuarioTipoUsuario)
+        {
+            try
+            {
+                db.Sp_AsignarUsuarioTipoUsuarioCambiarEstado(_objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario, _objAsignarUsuarioTipoUsuario.Estado);
+                return _objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
 
-    }
+
+        }
 }
