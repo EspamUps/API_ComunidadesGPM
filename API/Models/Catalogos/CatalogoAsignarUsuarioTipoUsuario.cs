@@ -68,6 +68,20 @@ namespace API.Models.Catalogos
             return listaAsignarUsuarioTipoUsuario;
         }
 
+        public int InsertarAsignarUsuarioTipoUsuario(AsignarUsuarioTipoUsuario _objAsignarUsuarioTipoUsuario)
+        {
+            int _idAsignarUsuarioTipoUsuarioIngresado = 0;
+            try
+            {
+                _idAsignarUsuarioTipoUsuarioIngresado = int.Parse(db.Sp_AsignarUsuarioTipoUsuario_insertar(_objAsignarUsuarioTipoUsuario.Usuario.IdUsuario, _objAsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario, _objAsignarUsuarioTipoUsuario.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
+            }
+            catch (Exception)
+            {
+                return _idAsignarUsuarioTipoUsuarioIngresado;
+            }
+            return _idAsignarUsuarioTipoUsuarioIngresado;
+        }
+
 
     }
 }
