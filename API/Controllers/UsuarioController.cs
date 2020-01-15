@@ -81,7 +81,7 @@ namespace API.Controllers
                         else
                         {
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                            _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(c => c.Usuario.IdUsuario == _idUsuarioIngresado && c.Estado == true).FirstOrDefault();
+                            _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Usuario.IdUsuario == _idUsuarioIngresado && c.Estado == true).FirstOrDefault();
                         }
                     }
                    
@@ -223,7 +223,7 @@ namespace API.Controllers
 
                 if (_clave_desencriptada == _token.Descripcion)
                 {
-                    respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios();
+                    respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
                     if (respuesta != null)
                     {
                         return new
@@ -340,7 +340,7 @@ namespace API.Controllers
                         string desencriptar_clave_usuario = _objCatalogoUsuarios.DesenciptarClaveUsuario(validar.Clave);
                         if (_objUsuario.Clave == desencriptar_clave_usuario)
                         {
-                             respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(x => x.Usuario.IdUsuario == validar.IdUsuario);
+                             respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(x => x.Usuario.IdUsuario == validar.IdUsuario);
                             if (respuesta !=null)
                             {
                                 return new
