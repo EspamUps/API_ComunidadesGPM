@@ -26,7 +26,12 @@ namespace API.Controllers
 
             try
             {
-                _respuesta = _objCatalogoTipoUsuarios.ConsultarTipoUsuarios().Where(c=>c.Estado==true).ToList();
+                var _listaTiposUsuarios = _objCatalogoTipoUsuarios.ConsultarTipoUsuarios().Where(c=>c.Estado==true).ToList();
+                foreach (var item in _listaTiposUsuarios)
+                {
+                    item.IdTipoUsuario = 0;
+                }
+                _respuesta = _listaTiposUsuarios;
                 _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
             }
             catch (Exception ex)

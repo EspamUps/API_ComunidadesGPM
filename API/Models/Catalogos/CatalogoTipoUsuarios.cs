@@ -25,6 +25,7 @@ namespace API.Models.Catalogos
                 ListaTipoUsuarios.Add(new TipoUsuario()
                 {
                     IdTipoUsuarioEncriptado = _seguridad.Encriptar(item.IdTipoUsuario.ToString()),
+                    IdTipoUsuario = item.IdTipoUsuario,
                     Identificador = item.Identificador,
                     Descripcion = item.Descripcion,
                     Estado = item.Estado
