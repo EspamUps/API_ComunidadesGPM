@@ -25,6 +25,7 @@ namespace API.Models.Catalogos
                     Usuario = new Usuario()
                     {
                         IdUsuarioEncriptado = _seguridad.Encriptar(item.USUARIO_IdUsuario.ToString()),
+<<<<<<< HEAD
                         Correo              = item.USUARIO_Correo,
                         Clave               = item.USUARIO_Clave,
                         ClaveEncriptada     = _seguridad.Encriptar(item.USUARIO_Clave.ToString()),
@@ -56,6 +57,40 @@ namespace API.Models.Catalogos
                                 Identificador                   = item.TIPOIDENTIFICACION_Identificador,
                                 Descripcion                     = item.TIPOIDENTIFICACION_Descripcion,
                                 Estado                          = item.TIPOIDENTIFICACION_Estado,
+=======
+                        IdUsuario = item.USUARIO_IdUsuario,
+                        Correo = item.USUARIO_Correo,
+                        //Clave = item.USUARIO_Clave,
+                        ClaveEncriptada = _seguridad.Encriptar(item.USUARIO_Clave.ToString()),
+                        Estado = item.USUARIO_Estado,
+                        Persona = new Persona()
+                        {
+                            IdPersonaEncriptado = _seguridad.Encriptar(item.PERSONA_IdPersona.ToString()),
+                            IdPersona = item.PERSONA_IdPersona,
+                            PrimerNombre = item.PERSONA_PrimerNombre,
+                            SegundoNombre = item.PERSONA_SegundoNombre,
+                            PrimerApellido = item.PERSONA_PrimerApellido,
+                            SegundoApellido = item.PERSONA_SegundoApellido,
+                            NumeroIdentificacion = item.PERSONA_NumeroIdentificacion,
+                            Telefono = item.PERSONA_Telefono,
+                            Direccion = item.PERSONA_Direccion,
+                            Estado = item.PERSONA_Estado,
+                            Sexo = new Sexo()
+                            {
+                                IdSexoEncriptado = _seguridad.Encriptar(item.SEXO_IdSexo.ToString()),
+                                IdSexo = item.SEXO_IdSexo,
+                                Identificador = item.SEXO_Identificador,
+                                Descripcion = item.SEXO_Descripcion,
+                                Estado = item.SEXO_Estado,
+                            },
+                            TipoIdentificacion = new TipoIdentificacion()
+                            {
+                                IdTipoIdentificacionEncriptado = _seguridad.Encriptar(item.TIPOIDENTIFICACION_IdTipoIdentificacion.ToString()),
+                                IdTipoIdentificacion = item.TIPOIDENTIFICACION_IdTipoIdentificacion,
+                                Identificador = item.TIPOIDENTIFICACION_Identificador,
+                                Descripcion = item.TIPOIDENTIFICACION_Descripcion,
+                                Estado = item.TIPOIDENTIFICACION_Estado,
+>>>>>>> e07a297495944d65284629a1d83800d3245a878d
                             }
 
                         }
@@ -64,15 +99,49 @@ namespace API.Models.Catalogos
                     {
                         IdTipoUsuario           = item.TIPOUSUARIO_IdTipoUsuario,
                         IdTipoUsuarioEncriptado = _seguridad.Encriptar( item.TIPOUSUARIO_IdTipoUsuario.ToString()),
+<<<<<<< HEAD
                         Identificador           = item.TIPOUSUARIO_Identificador,
                         Descripcion             = item.TIPOUSUARIO_Descripcion,
                         Estado                  = item.TIPOUSUARIO_Estado
+=======
+                        IdTipoUsuario = item.TIPOUSUARIO_IdTipoUsuario,
+                        Identificador = item.TIPOUSUARIO_Identificador,
+                        Descripcion = item.TIPOUSUARIO_Descripcion,
+                        Estado = item.TIPOUSUARIO_Estado
+>>>>>>> e07a297495944d65284629a1d83800d3245a878d
                     }
                 });
             }
             return listaAsignarUsuarioTipoUsuario;
         }
 
+        public int InsertarAsignarUsuarioTipoUsuario(AsignarUsuarioTipoUsuario _objAsignarUsuarioTipoUsuario)
+        {
+            int _idAsignarUsuarioTipoUsuarioIngresado = 0;
+            try
+            {
+                _idAsignarUsuarioTipoUsuarioIngresado = int.Parse(db.Sp_AsignarUsuarioTipoUsuario_insertar(_objAsignarUsuarioTipoUsuario.Usuario.IdUsuario, _objAsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario, _objAsignarUsuarioTipoUsuario.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
+            }
+            catch (Exception)
+            {
+                return _idAsignarUsuarioTipoUsuarioIngresado;
+            }
+            return _idAsignarUsuarioTipoUsuarioIngresado;
+        }
 
-    }
+        public int CambiarEstadoAsignarUsuarioTipoUsuario(AsignarUsuarioTipoUsuario _objAsignarUsuarioTipoUsuario)
+        {
+            try
+            {
+                db.Sp_AsignarUsuarioTipoUsuarioCambiarEstado(_objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario, _objAsignarUsuarioTipoUsuario.Estado);
+                return _objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+
+        }
 }
