@@ -386,14 +386,14 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PersonaConsultar_Result1>("Sp_PersonaConsultar");
         }
     
-        public virtual ObjectResult<Sp_UsuarioConsultar_Result1> Sp_UsuarioConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioConsultar_Result1>("Sp_UsuarioConsultar");
-        }
-    
         public virtual ObjectResult<Sp_UsuarioInformacionGeneral_Result> Sp_UsuarioInformacionGeneral()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioInformacionGeneral_Result>("Sp_UsuarioInformacionGeneral");
+        }
+    
+        public virtual ObjectResult<Sp_UsuarioConsultar_Result3> Sp_UsuarioConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioConsultar_Result3>("Sp_UsuarioConsultar");
         }
     }
 }
