@@ -310,11 +310,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_UsuarioCambiarEstado", idUsuarioParameter, nuevoEstadoParameter);
         }
     
-        public virtual ObjectResult<Sp_UsuarioConsultar_Result> Sp_UsuarioConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioConsultar_Result>("Sp_UsuarioConsultar");
-        }
-    
         public virtual ObjectResult<Nullable<decimal>> Sp_UsuarioInsertar(Nullable<int> idPersona, string correo, string clave, Nullable<bool> estado)
         {
             var idPersonaParameter = idPersona.HasValue ?
@@ -389,6 +384,16 @@ namespace API.Conexion
         public virtual ObjectResult<Sp_PersonaConsultar_Result1> Sp_PersonaConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PersonaConsultar_Result1>("Sp_PersonaConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_UsuarioConsultar_Result1> Sp_UsuarioConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioConsultar_Result1>("Sp_UsuarioConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_UsuarioInformacionGeneral_Result> Sp_UsuarioInformacionGeneral()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioInformacionGeneral_Result>("Sp_UsuarioInformacionGeneral");
         }
     }
 }

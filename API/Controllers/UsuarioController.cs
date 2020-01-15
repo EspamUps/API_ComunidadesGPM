@@ -407,7 +407,10 @@ namespace API.Controllers
                     else
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                        _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true);
+                        var listaUsuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true);
+
+                        _respuesta = listaUsuarios;
+
                     }
                     
                 }
