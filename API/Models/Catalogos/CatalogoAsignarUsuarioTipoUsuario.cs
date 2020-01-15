@@ -23,9 +23,10 @@ namespace API.Models.Catalogos
                     Estado = item.ASIGNARUSUARIOTIPOUSUARIO_Estado,
                     Usuario = new Usuario()
                     {
-                        IdUsuarioEncriptado = _seguridad.Encriptar( item.USUARIO_IdUsuario.ToString()),
+                        IdUsuarioEncriptado = _seguridad.Encriptar(item.USUARIO_IdUsuario.ToString()),
                         Correo = item.USUARIO_Correo,
-                        Clave = item.USUARIO_Clave,
+                        //Clave = item.USUARIO_Clave,
+                        ClaveEncriptada = _seguridad.Encriptar(item.USUARIO_Clave.ToString()),
                         Estado = item.USUARIO_Estado,
                         Persona = new Persona()
                         {

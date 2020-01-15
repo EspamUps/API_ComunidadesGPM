@@ -87,3 +87,4 @@ C:\Users\UZZER\documents\visual studio 2017\Projects\API_ComunidadesGPM\API\bin\
 C:\Users\UZZER\documents\visual studio 2017\Projects\API_ComunidadesGPM\API\bin\es\System.Web.WebPages.Razor.resources.dll
 C:\Users\UZZER\documents\visual studio 2017\Projects\API_ComunidadesGPM\API\obj\Debug\API.dll
 C:\Users\UZZER\documents\visual studio 2017\Projects\API_ComunidadesGPM\API\obj\Debug\API.pdb
+C:\Users\UZZER\documents\visual studio 2017\Projects\API_ComunidadesGPM\API\obj\Debug\API.csprojResolveAssemblyReference.cache
