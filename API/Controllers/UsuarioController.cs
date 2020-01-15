@@ -35,7 +35,7 @@ namespace API.Controllers
             */
            
             object respuesta = new object();
-
+            RespuestaHTTP _http = catRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault()
 
             // calida el token de la peticion, este es una ruta para insertar asi que el identificador del token debe ser 1
             try
