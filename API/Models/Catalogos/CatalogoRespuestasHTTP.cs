@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using API.Models.Entidades;
+using API.Models.Metodos;
 
 namespace API.Models.Catalogos
 {
@@ -70,18 +71,17 @@ namespace API.Models.Catalogos
                 titulo = "Not Found",
                 mensaje = "Recurso no encontrado. Se utiliza cuando el servidor web no encuentra la página o recurso solicitado"
             });
-
+            lista.Add(new RespuestaHTTP()
+            {
+                codigo = "406",
+                titulo = "Not acceptable",
+                mensaje = "El servidor, despues de aplicar una negociación de contenido servidor-impulsado, no encuentra ningún contenido seguido por la criteria dada por el usuario."
+            });
             lista.Add(new RespuestaHTTP()
             {
                 codigo = "418",
                 titulo = "I'm a teapot",
                 mensaje = "'Soy una tetera'. Este código fue definido en 1998 como una inocentada, en el Protocolo de Transmisión de Hipertexto de Cafeteras (RFC-2324). No se espera que los servidores web implementen realmente este código de error, pero es posible encontrar sitios que devuelvan este código HTTP."
-            });
-            lista.Add(new RespuestaHTTP()
-            {
-                codigo = "500",
-                titulo = "Internal Server Error",
-                mensaje = "Es un código comúnmente emitido por aplicaciones empotradas en servidores web, mismas que generan contenido dinámicamente, por ejemplo aplicaciones montadas en IIS o Tomcat, cuando se encuentran con situaciones de error ajenas a la naturaleza del servidor web."
             });
             lista.Add(new RespuestaHTTP()
             {
