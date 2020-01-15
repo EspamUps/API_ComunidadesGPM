@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using API.Conexion;
 using API.Models.Entidades;
+using API.Models.Metodos;
 namespace API.Models.Catalogos
 {
     public class CatalogoTokens

@@ -7,6 +7,8 @@ using System.Web.Http;
 //using API.Conexion;
 using API.Models.Entidades;
 using API.Models.Catalogos;
+using API.Models.Metodos;
+
 
 
 namespace API.Controllers
@@ -15,9 +17,10 @@ namespace API.Controllers
     {
         //ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         // GET: api/Usuario
-        CatalogoUsuario catUsuarios = new CatalogoUsuario();
-        CatalogoRespuestasHTTP catRespuestasHTTP = new CatalogoRespuestasHTTP();
-        CatalogoAsignarUsuarioTipoUsuario catAsignarUsuarioTipoUsuario = new CatalogoAsignarUsuarioTipoUsuario();
+        CatalogoPersona _objCatalogoPersona = new CatalogoPersona();
+        CatalogoUsuario _objCatalogoUsuarios = new CatalogoUsuario();
+        CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
+        CatalogoAsignarUsuarioTipoUsuario _objCatalogoAsignarUsuarioTipoUsuario = new CatalogoAsignarUsuarioTipoUsuario();
 
         CatalogoTokens catTokens = new CatalogoTokens();
         Seguridad _seguridad = new Seguridad();
@@ -34,49 +37,67 @@ namespace API.Controllers
                4	CONSULTAR
             */
            
-            object respuesta = new object();
-            RespuestaHTTP _http = catRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault()
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
-            // calida el token de la peticion, este es una ruta para insertar asi que el identificador del token debe ser 1
+            // valida el token de la peticion, este es una ruta para insertar asi que el identificador del token debe ser 1
             try
             {
-                Token _token = catTokens.Consultar().Where(x => x.Identificador == 1).FirstOrDefault();
-                string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
+                // Token _token = catTokens.Consultar().Where(x => x.Identificador == 1).FirstOrDefault();
+                // string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
 
-                if (_clave_desencriptada == _token.Descripcion)
+                if(string.IsNullOrEmpty(_objUsuario.Persona.IdPersonaEncriptado.Trim()))
                 {
-                    if (catUsuarios.ValidarCorreo(_objUsuario).Clave == null)
-                    {
-                        respuesta = catUsuarios.InsertarUsuario(_objUsuario);
-                        if ((int)respuesta != 0)
-                        {
-                            respuesta = _objUsuario;
-                            return new {
-                                respuesta,
-                                http = catRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
-                            };
-                        }
-                        
-                        return new {
-                            respuesta,
-                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
-                        };
-                        
-                    }
-
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                 }
-                return new {
-                    respuesta,
-                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
-                };
+                else if(string.IsNullOrEmpty(_objUsuario.Correo.Trim()) || string.IsNullOrEmpty(_objUsuario.Clave.Trim()))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                }
+                else if(_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
+                }
+                else
+                {
+                    int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
+                    var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona && c.Estado == true).FirstOrDefault();
+                    bool _validarPersona = true;
+                    if(_objPersona == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _validarPersona = false;
+                    }
+                    if(_validarPersona == true)
+                    {
+                        _objUsuario.Estado = true;
+                        int _idUsuarioIngresado = _objCatalogoUsuarios.InsertarUsuario(_objUsuario);
+                        if(_idUsuarioIngresado == 0)
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "Ocurrió un error al intentar ingresar al usuario, intente nuevamente.";
+                        }
+                        else
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                            _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(c => c.Usuario.IdUsuario == _idUsuarioIngresado && c.Estado == true).FirstOrDefault();
+                        }
+                    }
+                   
+                }
             }
             catch (Exception)
             {
-                return new {
-                    respuesta,
-                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                return new
+                {
+                   respuesta = _respuesta, http = _http
                 };
             }
+            return new
+            {
+                respuesta = _respuesta, http = _http
+            };
         }
 
         [HttpPost]
@@ -95,21 +116,21 @@ namespace API.Controllers
 
                 if (_clave_desencriptada == _token.Descripcion)
                 {
-                    respuesta = catUsuarios.ModificarUsuario(_objUsuario);
+                    respuesta = _objCatalogoUsuarios.ModificarUsuario(_objUsuario);
                     if ((int)respuesta != 0)
                     {
                         respuesta = _objUsuario;
                         return new
                         {
                             respuesta,
-                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
+                            http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
                         };
                     }
 
                     return new
                     {
                         respuesta,
-                        http = catRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
+                        http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
                     };
 
 
@@ -117,7 +138,7 @@ namespace API.Controllers
                 return new
                 {
                     respuesta,
-                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
+                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
                 };
             }
             catch (Exception)
@@ -125,7 +146,7 @@ namespace API.Controllers
                 return new
                 {
                     respuesta,
-                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
                 };
             }
             
@@ -150,14 +171,14 @@ namespace API.Controllers
 
                 if (_clave_desencriptada == _token.Descripcion)
                 {
-                    respuesta = catUsuarios.EliminarUsuario(_objUsuario);
+                    respuesta = _objCatalogoUsuarios.EliminarUsuario(_objUsuario);
                     if ((int)respuesta != 0)
                     {
                         respuesta = _objUsuario;
                         return new
                         {
                             respuesta,
-                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
+                            http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
                         };
                     }
                     else
@@ -165,7 +186,7 @@ namespace API.Controllers
                         return new
                         {
                             respuesta,
-                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
+                            http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
                         };
                     }
 
@@ -173,7 +194,7 @@ namespace API.Controllers
                 return new
                 {
                     respuesta,
-                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
+                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
                 };
             }
             catch (Exception)
@@ -181,7 +202,7 @@ namespace API.Controllers
                 return new
                 {
                     respuesta,
-                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
                 };
             }
 
@@ -202,26 +223,26 @@ namespace API.Controllers
 
                 if (_clave_desencriptada == _token.Descripcion)
                 {
-                    respuesta = catAsignarUsuarioTipoUsuario.ConsultarUsuarios();
+                    respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios();
                     if (respuesta != null)
                     {
                         return new
                         {
                             respuesta,
-                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
+                            http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
                         };
                     }
                     return new
                     {
                         respuesta,
-                        http = catRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
+                        http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
                     };
 
                 }
                 return new
                 {
                     respuesta,
-                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
+                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
                 };
             }
             catch (Exception)
@@ -229,7 +250,7 @@ namespace API.Controllers
                 return new
                 {
                     respuesta,
-                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
                 };
             }
             
@@ -257,27 +278,27 @@ namespace API.Controllers
                 if (_clave_desencriptada == _token.Descripcion)
                 {
 
-                    Usuario validar = catUsuarios.ValidarCorreo(_objUsuario);
+                    Usuario validar = _objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault();
                     if (validar.Correo != null)
                     {
                         respuesta = validar.Correo;
                         return new
                         {
                             respuesta,
-                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
+                            http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
                         };
                     }
                     return new
                     {
                         respuesta,
-                        http = catRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
+                        http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
                     };
 
                 }
                 return new
                 {
                     respuesta,
-                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
+                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
                 };
 
             }
@@ -286,7 +307,7 @@ namespace API.Controllers
                 return new
                 {
                     respuesta,
-                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
                 };
             }
 
@@ -312,46 +333,46 @@ namespace API.Controllers
                     //AsignarUsuarioTipoUsuario validar = catAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(x => x.Usuario.Correo == _item.Correo).FirstOrDefault(); //&& catUsuarios.DesenciptarClaveUsuario(x.Usuario.Clave) ==_item.Clave
                     //return _item;
                     //return catUsuarios.ValidarCorreo(_item);
-                    Usuario validar = catUsuarios.ValidarCorreo(_objUsuario);
+                    Usuario validar = _objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault();
 
                     if (validar.Correo != null)
                     {
-                        string desencriptar_clave_usuario = catUsuarios.DesenciptarClaveUsuario(validar.Clave);
+                        string desencriptar_clave_usuario = _objCatalogoUsuarios.DesenciptarClaveUsuario(validar.Clave);
                         if (_objUsuario.Clave == desencriptar_clave_usuario)
                         {
-                             respuesta = catAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(x => x.Usuario.IdUsuario == validar.IdUsuario);
+                             respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios().Where(x => x.Usuario.IdUsuario == validar.IdUsuario);
                             if (respuesta !=null)
                             {
                                 return new
                                 {
                                     respuesta,
-                                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
+                                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault()
                                 };
                             }
                             return new
                             {
                                 respuesta,
-                                http = catRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
+                                http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault()
                             };
 
                         }
                         return new
                         {
                             respuesta,
-                            http = catRespuestasHTTP.consultar().Where(x => x.codigo == "002").FirstOrDefault()
+                            http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "002").FirstOrDefault()
                         };
                     }
                     return new
                     {
                         respuesta,
-                        http = catRespuestasHTTP.consultar().Where(x => x.codigo == "002").FirstOrDefault()
+                        http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "002").FirstOrDefault()
                     };
 
                 }
                 return new
                 {
                     respuesta,
-                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
+                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "403").FirstOrDefault()
                 };
             }
             catch (Exception)
@@ -359,7 +380,7 @@ namespace API.Controllers
                 return new
                 {
                     respuesta,
-                    http = catRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
+                    http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault()
                 };
             }
 

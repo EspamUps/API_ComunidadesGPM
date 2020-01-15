@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using API.Conexion;
 using API.Models.Entidades;
+using API.Models.Metodos;
 namespace API.Models.Catalogos
 {
 
@@ -15,24 +16,21 @@ namespace API.Models.Catalogos
         Seguridad _seguridad = new Seguridad();
         string _llave = "GobiernoProvincialManabi";
      
-        public Usuario ValidarCorreo(Usuario _item)
+        public List<Usuario> ValidarCorreo(Usuario _item)
         {
-            //Usuario _objUsuario = new Usuario();
+            List<Usuario> _listaUsuario = new List<Usuario>();
             foreach (var item in db.Sp_UsuarioValidar(_item.Correo))
             {
-                Usuario _objUsuario = new Usuario()
+                _listaUsuario.Add(new Usuario()
                 {
                     IdUsuario = item.IdUsuario,
                     Persona = new Persona() { IdPersona = item.IdPersona },
                     Correo = item.Correo,
                     Clave = item.Clave,
                     Estado = item.Estado
-                };
-                return _objUsuario;
-                
-
+                });
             }
-            return new Usuario() { Correo = null };                      
+            return _listaUsuario;                   
         }
 
         //ingresar Usuario

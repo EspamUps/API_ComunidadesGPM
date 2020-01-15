@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using API.Models.Entidades;
+using API.Models.Metodos;
 
 namespace API.Models.Catalogos
 {
@@ -70,7 +71,12 @@ namespace API.Models.Catalogos
                 titulo = "Not Found",
                 mensaje = "Recurso no encontrado. Se utiliza cuando el servidor web no encuentra la página o recurso solicitado"
             });
-
+            lista.Add(new RespuestaHTTP()
+            {
+                codigo = "406",
+                titulo = "Not acceptable",
+                mensaje = "El servidor, despues de aplicar una negociación de contenido servidor-impulsado, no encuentra ningún contenido seguido por la criteria dada por el usuario."
+            });
             lista.Add(new RespuestaHTTP()
             {
                 codigo = "418",

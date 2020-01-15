@@ -8,11 +8,28 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace API.Models.Entidades
+namespace API.Models.Metodos
 {
     public class Seguridad
     {
         private static byte[] _salt = System.Text.Encoding.ASCII.GetBytes("nothackingll");
+
+
+        public string Encriptar(string _cadenaAencriptar)
+        {
+            string result = string.Empty;
+            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(_cadenaAencriptar);
+            result = Convert.ToBase64String(encryted);
+            return result;
+        }
+        public string DesEncriptar(string _cadenaAdesencriptar)
+        {
+            string result = string.Empty;
+            byte[] decryted = Convert.FromBase64String(_cadenaAdesencriptar);
+            result = System.Text.Encoding.Unicode.GetString(decryted);
+            return result;
+        }
+
 
         /// <summary>
         /// Encrypt the given string using AES.  The string can be decrypted using 
@@ -133,20 +150,11 @@ namespace API.Models.Entidades
 
             return plaintext;
         }
-        /*public string Encriptar(string _cadenaAencriptar)
-        {
-            string result = string.Empty;
-            byte[] encryted = System.Text.Encoding.Unicode.GetBytes(_cadenaAencriptar);
-            result = Convert.ToBase64String(encryted);
-            return result;
-        }
-        public string DesEncriptar(string _cadenaAdesencriptar)
-        {
-            string result = string.Empty;
-            byte[] decryted = Convert.FromBase64String(_cadenaAdesencriptar);
-            result = System.Text.Encoding.Unicode.GetString(decryted);
-            return result;
-        }*/
+
+
+     
+
+
         private byte[] ReadByteArray(Stream s)
         {
             byte[] rawLength = new byte[sizeof(int)];

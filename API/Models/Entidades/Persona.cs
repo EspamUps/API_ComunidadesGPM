@@ -8,6 +8,7 @@ namespace API.Models.Entidades
     public class Persona
     {
         public int IdPersona { get; set; }
+        public string IdPersonaEncriptado { get; set; }
         public string PrimerNombre { get; set; }
         public string SegundoNombre { get; set; }
         public string PrimerApellido { get; set; }

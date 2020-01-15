@@ -289,13 +289,13 @@
     <Compile Include="Models\Entidades\AsignarUsuarioTipoUsuario.cs" />
     <Compile Include="Models\Entidades\Canton.cs" />
     <Compile Include="Models\Entidades\Clave.cs" />
-    <Compile Include="Models\Entidades\RespuestaHTTP.cs" />
+    <Compile Include="Models\Metodos\RespuestaHTTP.cs" />
     <Compile Include="Models\Entidades\Modulo.cs" />
     <Compile Include="Models\Entidades\Parroquia.cs" />
     <Compile Include="Models\Entidades\Persona.cs" />
     <Compile Include="Models\Entidades\Privilegio.cs" />
     <Compile Include="Models\Entidades\Provincia.cs" />
-    <Compile Include="Models\Entidades\Seguridad.cs" />
+    <Compile Include="Models\Metodos\Seguridad.cs" />
     <Compile Include="Models\Entidades\Sexo.cs" />
     <Compile Include="Models\Entidades\TipoIdentificacion.cs" />
     <Compile Include="Models\Entidades\TipoUsuario.cs" />
