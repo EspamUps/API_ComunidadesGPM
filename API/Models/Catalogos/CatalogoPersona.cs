@@ -80,29 +80,31 @@ namespace API.Models.Catalogos
             foreach (var item in db.Sp_PersonaConsultar())
             {
                 lista.Add(new Persona() {
-
-                        IdPersonaEncriptado = _seguridad.Encriptar( item.PERSONA_IdPersona.ToString()),
-                        PrimerNombre = item.PERSONA_PrimerNombre,
-                        SegundoNombre = item.PERSONA_SegundoNombre,
-                        PrimerApellido = item.PERSONA_PrimerApellido,
-                        SegundoApellido = item.PERSONA_SegundoApellido,
-                        NumeroIdentificacion = item.PERSONA_NumeroIdentificacion,
-                        Telefono = item.PERSONA_Telefono,
-                        Direccion = item.PERSONA_Direccion,
-                        Estado = item.PERSONA_Estado,
+                        IdPersona               = item.PERSONA_IdPersona,
+                        IdPersonaEncriptado     = _seguridad.Encriptar( item.PERSONA_IdPersona.ToString()),
+                        PrimerNombre            = item.PERSONA_PrimerNombre,
+                        SegundoNombre           = item.PERSONA_SegundoNombre,
+                        PrimerApellido          = item.PERSONA_PrimerApellido,
+                        SegundoApellido         = item.PERSONA_SegundoApellido,
+                        NumeroIdentificacion    = item.PERSONA_NumeroIdentificacion,
+                        Telefono                = item.PERSONA_Telefono,
+                        Direccion               = item.PERSONA_Direccion,
+                        Estado                  = item.PERSONA_Estado,
                         Sexo = new Sexo()
                         {
-                            IdSexoEncriptado = _seguridad.Encriptar( item.SEXO_IdSexo.ToString()),
-                            Identificador = item.SEXO_Identificador,
-                            Descripcion = item.SEXO_Descripcion,
-                            Estado = item.SEXO_Estado,
+                            IdSexo              = item.SEXO_IdSexo,
+                            IdSexoEncriptado    = _seguridad.Encriptar( item.SEXO_IdSexo.ToString()),
+                            Identificador       = item.SEXO_Identificador,
+                            Descripcion         = item.SEXO_Descripcion,
+                            Estado              = item.SEXO_Estado,
                         },
                         TipoIdentificacion = new TipoIdentificacion()
                         {
-                            IdTipoIdentificacionEncriptado = _seguridad.Encriptar( item.TIPOIDENTIFICACION_IdTipoIdentificacion.ToString()),
-                            Identificador = item.TIPOIDENTIFICACION_Identificador,
-                            Descripcion = item.TIPOIDENTIFICACION_Descripcion,
-                            Estado = item.TIPOIDENTIFICACION_Estado,
+                            IdTipoIdentificacion            = item.TIPOIDENTIFICACION_IdTipoIdentificacion,
+                            IdTipoIdentificacionEncriptado  = _seguridad.Encriptar( item.TIPOIDENTIFICACION_IdTipoIdentificacion.ToString()),
+                            Identificador                   = item.TIPOIDENTIFICACION_Identificador,
+                            Descripcion                     = item.TIPOIDENTIFICACION_Descripcion,
+                            Estado                          = item.TIPOIDENTIFICACION_Estado,
                         }
 
                 });

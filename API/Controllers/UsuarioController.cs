@@ -281,11 +281,11 @@ namespace API.Controllers
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                 }
-                else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
-                }
+                //else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
+                //{
+                //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                //    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
+                //}
                 else
                 {
                     int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
@@ -307,8 +307,18 @@ namespace API.Controllers
                         //}
                         //else
                         //{
-                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                            _respuesta = _objCatalogoUsuarios.ConsultarUsuario().Where(c => c.Estado == true);
+                        
+                        var listaUsuarios  = _objCatalogoUsuarios.ConsultarUsuario().Where(c => c.Estado == true);
+
+                        foreach (var item in listaUsuarios)
+                        {
+                            item.IdUsuario                                          = 0;
+                            item.Persona.IdPersona                                  = 0;
+                            item.Persona.Sexo.IdSexo                                = 0;
+                            item.Persona.TipoIdentificacion.IdTipoIdentificacion    = 0;
+                        }
+                        _respuesta = listaUsuarios;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                         //}
                     }
 
@@ -477,7 +487,16 @@ namespace API.Controllers
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                         var listaUsuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true);
-
+                        foreach (var item in listaUsuarios)
+                        {
+                            item.IdAsignarUsuarioTipoUsuario                                = 0;
+                            item.Usuario.IdUsuario                                          = 0;
+                            item.Usuario.Persona.IdPersona                                  = 0;
+                            item.Usuario.Persona.Sexo.IdSexo                                = 0;
+                            item.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion    = 0;
+                            item.TipoUsuario.IdTipoUsuario                                  = 0;
+                            
+                        }
                         _respuesta = listaUsuarios;
 
                     }
