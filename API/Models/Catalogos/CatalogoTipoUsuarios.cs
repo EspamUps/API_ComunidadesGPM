@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using API.Conexion;
 using API.Models.Entidades;
+using API.Models.Metodos;
 
 namespace API.Models.Catalogos
 {
@@ -13,8 +14,24 @@ namespace API.Models.Catalogos
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
 
         List<TipoUsuario> ListaTipoUsuarios = new List<TipoUsuario>();
+        Seguridad _seguridad = new Seguridad();
 
         CatalogoAsignarTipoUsuarioModuloPrivilegio catAsignarTipoUsuarioModuloPrivilegio = new CatalogoAsignarTipoUsuarioModuloPrivilegio();
+
+        public List<TipoUsuario> ConsultarTipoUsuarios()
+        {
+            foreach (var item in db.Sp_TipoUsuarioConsultar())
+            {
+                ListaTipoUsuarios.Add(new TipoUsuario()
+                {
+                    IdTipoUsuarioEncriptado = _seguridad.Encriptar(item.IdTipoUsuario.ToString()),
+                    Identificador = item.Identificador,
+                    Descripcion = item.Descripcion,
+                    Estado = item.Estado
+                });
+            }
+            return ListaTipoUsuarios;
+        }
 
         public int Insertar(TipoUsuario _item)
         {
@@ -54,18 +71,7 @@ namespace API.Models.Catalogos
             }
         }
 
-        public List<TipoUsuario> Consultar() {
-            foreach (var item in db.Sp_TipoUsuarioConsultar())
-            {
-                ListaTipoUsuarios.Add( new TipoUsuario() {
-                    IdTipoUsuario   = item.IdTipoUsuario,
-                    Identificador   = item.Identificador,
-                    Descripcion     = item.Descripcion,
-                    Estado          = item.Estado
-                });
-            }
-            return ListaTipoUsuarios;
-        }
+      
 
       
 
