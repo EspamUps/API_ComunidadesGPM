@@ -273,31 +273,31 @@ namespace API.Controllers
 
             try
             {
-                if (string.IsNullOrEmpty(_objUsuario.Persona.IdPersonaEncriptado.Trim()))
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                }
-                else if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()) || string.IsNullOrEmpty(_objUsuario.Clave.Trim()))
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                }
-                //else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
+                //if (string.IsNullOrEmpty(_objUsuario.Persona.IdPersonaEncriptado.Trim()))
+                //{
+                //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                //}
+                //else if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()) || string.IsNullOrEmpty(_objUsuario.Clave.Trim()))
                 //{
                 //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                //    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
                 //}
-                else
-                {
-                    int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
-                    var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona && c.Estado == true).FirstOrDefault();
-                    bool _validarPersona = true;
-                    if (_objPersona == null)
-                    {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
-                        _validarPersona = false;
-                    }
-                    if (_validarPersona == true)
-                    {
+                ////else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
+                ////{
+                ////    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                ////    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
+                ////}
+                //else
+                //{
+                //    int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
+                //    var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona && c.Estado == true).FirstOrDefault();
+                //    bool _validarPersona = true;
+                //    if (_objPersona == null)
+                //    {
+                //        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                //        _validarPersona = false;
+                //    }
+                //    if (_validarPersona == true)
+                //    {
                         //_objUsuario.Estado = false;
                         //int _cantidadUsuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios().Count;
                         //if (_cantidadUsuarios == 0)
@@ -320,9 +320,9 @@ namespace API.Controllers
                         _respuesta = listaUsuarios;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                         //}
-                    }
+                //    }
 
-                }
+                //}
             }
             catch (Exception ex)
             {
@@ -486,7 +486,7 @@ namespace API.Controllers
                     else
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                        var listaUsuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true);
+                        var listaUsuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true).ToList();
                         foreach (var item in listaUsuarios)
                         {
                             item.IdAsignarUsuarioTipoUsuario                                = 0;

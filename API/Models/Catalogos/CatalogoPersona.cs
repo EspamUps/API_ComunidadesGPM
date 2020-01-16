@@ -27,7 +27,7 @@ namespace API.Models.Catalogos
                         objPersona.Parroquia.IdParroquia,
                         objPersona.Direccion,
                         objPersona.Estado
-                    ).Select(x=>x.Value).ToString());
+                    ).Select(x=>x.Value.ToString()).FirstOrDefault());
             }
             catch (Exception)
             {

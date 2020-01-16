@@ -38,7 +38,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                return int.Parse( db.Sp_TipoUsuarioInsertar(_item.Identificador, _item.Descripcion, _item.Estado).Select(x=>x.Value).ToString());
+                return int.Parse( db.Sp_TipoUsuarioInsertar(_item.Identificador, _item.Descripcion, _item.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
             }
             catch (Exception)
             {

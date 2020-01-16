@@ -18,6 +18,7 @@ namespace API.Models.Catalogos
             foreach (var item in db.Sp_TipoIdentificacionConsultar())
             {
                 lista.Add(new TipoIdentificacion() {
+                    IdTipoIdentificacion = item.IdTipoIdentificacion,
                     IdTipoIdentificacionEncriptado = _seguridad.Encriptar(item.IdTipoIdentificacion.ToString()),
                     Identificador = item.Identificador,
                     Descripcion = item.Descripcion,
