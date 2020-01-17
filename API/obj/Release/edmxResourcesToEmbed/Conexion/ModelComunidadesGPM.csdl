@@ -80,7 +80,6 @@
       <Parameter Name="idUsuario" Mode="In" Type="Int32" />
       <Parameter Name="NuevoEstado" Mode="In" Type="Boolean" />
     </FunctionImport>
-    <FunctionImport Name="Sp_UsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioConsultar_Result)" />
     <FunctionImport Name="Sp_UsuarioInsertar" ReturnType="Collection(Decimal)">
       <Parameter Name="IdPersona" Mode="In" Type="Int32" />
       <Parameter Name="Correo" Mode="In" Type="String" />
@@ -101,6 +100,8 @@
     <FunctionImport Name="Sp_AsignarTipoUsuarioModuloPrivilegioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result1)" />
     <FunctionImport Name="Sp_AsignarUsuarioTipoUsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarUsuarioTipoUsuarioConsultar_Result)" />
     <FunctionImport Name="Sp_PersonaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultar_Result1)" />
+    <FunctionImport Name="Sp_UsuarioInformacionGeneral" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioInformacionGeneral_Result)" />
+    <FunctionImport Name="Sp_UsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioConsultar_Result3)" />
   </EntityContainer>
   <ComplexType Name="Sp_TokenConsultar_Result">
     <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -400,6 +401,118 @@
     <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
     <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
     <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+    <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+    <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+    <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+    <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+    <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+    <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Sp_UsuarioConsultar_Result1">
+    <Property Type="Int32" Name="IdUsuario" Nullable="false" />
+    <Property Type="Int32" Name="IdPersona" Nullable="false" />
+    <Property Type="String" Name="Correo" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="Clave" Nullable="false" MaxLength="500" />
+    <Property Type="Boolean" Name="Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Sp_UsuarioInformacionGeneral_Result">
+    <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+    <Property Type="Int32" Name="USUARIO_IdPersona" Nullable="false" />
+    <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+    <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+    <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+    <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+    <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+    <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+    <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="PERSONA_IdTipoIdentificacion" Nullable="false" />
+    <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
+    <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+    <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+    <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+    <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+    <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+    <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+    <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+    <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+    <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" Nullable="false" />
+    <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIO_IdUsuario" Nullable="false" />
+    <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIO_IdTipoUsuario" Nullable="false" />
+    <Property Type="Boolean" Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="TIPOUSUARIO_IdTipoUsuario" Nullable="false" />
+    <Property Type="Int32" Name="TIPOUSUARIO_Identificador" Nullable="false" />
+    <Property Type="String" Name="TIPOUSUARIO_Descripcion" Nullable="false" MaxLength="200" />
+    <Property Type="Boolean" Name="TIPOUSUARIO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" Nullable="false" />
+    <Property Type="Int32" Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" Nullable="false" />
+    <Property Type="Int32" Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" Nullable="false" />
+    <Property Type="Boolean" Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" Nullable="false" />
+    <Property Type="Int32" Name="ASIGNARMODULOPRIVILEGIO_IdModulo" Nullable="false" />
+    <Property Type="Int32" Name="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" Nullable="false" />
+    <Property Type="Boolean" Name="ASIGNARMODULOPRIVILEGIO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="MODULO_IdModulo" Nullable="false" />
+    <Property Type="Int32" Name="MODULO_Identificador" Nullable="false" />
+    <Property Type="String" Name="MODULO_Descripcion" Nullable="false" MaxLength="200" />
+    <Property Type="Boolean" Name="MODULO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="PRIVILEGIO_IdPrivilegio" Nullable="false" />
+    <Property Type="Int32" Name="PRIVILEGIO_Identificador" Nullable="false" />
+    <Property Type="String" Name="PRIVILEGIO_Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="PRIVILEGIO_Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Sp_UsuarioConsultar_Result2">
+    <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+    <Property Type="Int32" Name="USUARIO_IdPersona" Nullable="false" />
+    <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+    <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+    <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="true" />
+    <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+    <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="true" />
+    <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="true" />
+    <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="PERSONA_IdTipoIdentificacion" Nullable="false" />
+    <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
+    <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+    <Property Type="String" Name="PERSONA_Direccion" Nullable="true" />
+    <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+    <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+    <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+    <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+    <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+    <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Sp_UsuarioConsultar_Result3">
+    <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+    <Property Type="Int32" Name="USUARIO_IdPersona" Nullable="false" />
+    <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+    <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+    <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="true" />
+    <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+    <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="true" />
+    <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="true" />
+    <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="PERSONA_IdTipoIdentificacion" Nullable="false" />
+    <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
+    <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+    <Property Type="String" Name="PERSONA_Direccion" Nullable="true" />
     <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
     <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
     <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />

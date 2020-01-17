@@ -78,7 +78,11 @@ namespace API.Controllers
                         }
                         else
                         {
-                            _respuesta = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersonaIngresado && c.Estado == true).FirstOrDefault();
+                            var _personaIngresada = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersonaIngresado && c.Estado == true).FirstOrDefault();
+                            _personaIngresada.IdPersona = 0;
+                            _personaIngresada.Sexo.IdSexo = 0;
+                            _personaIngresada.TipoIdentificacion.IdTipoIdentificacion = 0;
+                            _respuesta = _personaIngresada;
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                         }
                     }
@@ -130,6 +134,7 @@ namespace API.Controllers
                     item.TipoIdentificacion.IdTipoIdentificacion    = 0;
                 }
                 _respuesta = listaPersona;
+                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
             }
             catch (Exception ex)
             {
