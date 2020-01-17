@@ -15,7 +15,7 @@ namespace API.Models.Catalogos
         CatalogoAsignarModuloPrivilegio catAsignarModulosPrivilegios = new CatalogoAsignarModuloPrivilegio(); 
 
         public List<AsignarTipoUsuarioModuloPrivilegio> ConsultarUsuarios() {
-            foreach (var item in db.Sp_UsuarioConsultar())
+            foreach (var item in db.Sp_UsuarioInformacionGeneral())
             {
                 ListAsignarTipoUsuarioModuloPrivilegio.Add(new AsignarTipoUsuarioModuloPrivilegio()
                 {

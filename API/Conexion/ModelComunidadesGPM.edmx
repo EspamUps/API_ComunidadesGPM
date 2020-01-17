@@ -90,6 +90,7 @@
           <Parameter Name="NuevoEstado" Type="bit" Mode="In" />
         </Function>
         <Function Name="Sp_UsuarioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
+        <Function Name="Sp_UsuarioInformacionGeneral" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
         <Function Name="Sp_UsuarioInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
           <Parameter Name="IdPersona" Type="int" Mode="In" />
           <Parameter Name="Correo" Type="nvarchar" Mode="In" />
@@ -190,7 +191,6 @@
             <Parameter Name="idUsuario" Mode="In" Type="Int32" />
             <Parameter Name="NuevoEstado" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Sp_UsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioConsultar_Result)" />
           <FunctionImport Name="Sp_UsuarioInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdPersona" Mode="In" Type="Int32" />
             <Parameter Name="Correo" Mode="In" Type="String" />
@@ -210,7 +210,9 @@
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarTipoUsuarioModuloPrivilegioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result1)" />
           <FunctionImport Name="Sp_AsignarUsuarioTipoUsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarUsuarioTipoUsuarioConsultar_Result)" />
-          <FunctionImport Name="Sp_PersonaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultar_Result1)" />
+          <FunctionImport Name="Sp_UsuarioInformacionGeneral" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioInformacionGeneral_Result)" />
+          <FunctionImport Name="Sp_UsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioConsultar_Result3)" />
+          <FunctionImport Name="Sp_PersonaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultar_Result2)" />
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -520,6 +522,140 @@
           <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_UsuarioConsultar_Result1">
+          <Property Type="Int32" Name="IdUsuario" Nullable="false" />
+          <Property Type="Int32" Name="IdPersona" Nullable="false" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="Clave" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_UsuarioInformacionGeneral_Result">
+          <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+          <Property Type="Int32" Name="USUARIO_IdPersona" Nullable="false" />
+          <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIO_IdUsuario" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIO_IdTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOUSUARIO_Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="TIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" Nullable="false" />
+          <Property Type="Boolean" Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARMODULOPRIVILEGIO_IdModulo" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" Nullable="false" />
+          <Property Type="Boolean" Name="ASIGNARMODULOPRIVILEGIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="MODULO_IdModulo" Nullable="false" />
+          <Property Type="Int32" Name="MODULO_Identificador" Nullable="false" />
+          <Property Type="String" Name="MODULO_Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="MODULO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PRIVILEGIO_IdPrivilegio" Nullable="false" />
+          <Property Type="Int32" Name="PRIVILEGIO_Identificador" Nullable="false" />
+          <Property Type="String" Name="PRIVILEGIO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="PRIVILEGIO_Estado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_UsuarioConsultar_Result2">
+          <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+          <Property Type="Int32" Name="USUARIO_IdPersona" Nullable="false" />
+          <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="true" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="true" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="true" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_UsuarioConsultar_Result3">
+          <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+          <Property Type="Int32" Name="USUARIO_IdPersona" Nullable="false" />
+          <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="true" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="true" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="true" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_PersonaConsultar_Result2">
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -643,61 +779,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_UsuarioCambiarEstado" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioCambiarEstado" />
-          <FunctionImportMapping FunctionImportName="Sp_UsuarioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_UsuarioConsultar_Result">
-                <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
-                <ScalarProperty Name="USUARIO_IdPersona" ColumnName="USUARIO_IdPersona" />
-                <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
-                <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
-                <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
-                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
-                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
-                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
-                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
-                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
-                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
-                <ScalarProperty Name="PERSONA_IdTipoIdentificacion" ColumnName="PERSONA_IdTipoIdentificacion" />
-                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
-                <ScalarProperty Name="PERSONA_IdSexo" ColumnName="PERSONA_IdSexo" />
-                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
-                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
-                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
-                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
-                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
-                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
-                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdUsuario" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdTipoUsuario" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
-                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
-                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
-                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
-                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
-                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" />
-                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" />
-                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
-                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" />
-                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
-                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdModulo" ColumnName="ASIGNARMODULOPRIVILEGIO_IdModulo" />
-                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" />
-                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARMODULOPRIVILEGIO_Estado" />
-                <ScalarProperty Name="MODULO_IdModulo" ColumnName="MODULO_IdModulo" />
-                <ScalarProperty Name="MODULO_Identificador" ColumnName="MODULO_Identificador" />
-                <ScalarProperty Name="MODULO_Descripcion" ColumnName="MODULO_Descripcion" />
-                <ScalarProperty Name="MODULO_Estado" ColumnName="MODULO_Estado" />
-                <ScalarProperty Name="PRIVILEGIO_IdPrivilegio" ColumnName="PRIVILEGIO_IdPrivilegio" />
-                <ScalarProperty Name="PRIVILEGIO_Identificador" ColumnName="PRIVILEGIO_Identificador" />
-                <ScalarProperty Name="PRIVILEGIO_Descripcion" ColumnName="PRIVILEGIO_Descripcion" />
-                <ScalarProperty Name="PRIVILEGIO_Estado" ColumnName="PRIVILEGIO_Estado" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_UsuarioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_UsuarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioModificar" />
           <FunctionImportMapping FunctionImportName="Sp_TokenConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_TokenConsultar">
@@ -801,14 +882,95 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_PersonaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaConsultar">
+          <FunctionImportMapping FunctionImportName="Sp_UsuarioInformacionGeneral" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioInformacionGeneral">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PersonaConsultar_Result1">
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_UsuarioInformacionGeneral_Result">
                 <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
                 <ScalarProperty Name="USUARIO_IdPersona" ColumnName="USUARIO_IdPersona" />
                 <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
                 <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
                 <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
+                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+                <ScalarProperty Name="PERSONA_IdTipoIdentificacion" ColumnName="PERSONA_IdTipoIdentificacion" />
+                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+                <ScalarProperty Name="PERSONA_IdSexo" ColumnName="PERSONA_IdSexo" />
+                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdUsuario" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdTipoUsuario" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
+                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
+                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
+                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
+                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
+                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" />
+                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" />
+                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
+                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" />
+                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
+                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdModulo" ColumnName="ASIGNARMODULOPRIVILEGIO_IdModulo" />
+                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" />
+                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARMODULOPRIVILEGIO_Estado" />
+                <ScalarProperty Name="MODULO_IdModulo" ColumnName="MODULO_IdModulo" />
+                <ScalarProperty Name="MODULO_Identificador" ColumnName="MODULO_Identificador" />
+                <ScalarProperty Name="MODULO_Descripcion" ColumnName="MODULO_Descripcion" />
+                <ScalarProperty Name="MODULO_Estado" ColumnName="MODULO_Estado" />
+                <ScalarProperty Name="PRIVILEGIO_IdPrivilegio" ColumnName="PRIVILEGIO_IdPrivilegio" />
+                <ScalarProperty Name="PRIVILEGIO_Identificador" ColumnName="PRIVILEGIO_Identificador" />
+                <ScalarProperty Name="PRIVILEGIO_Descripcion" ColumnName="PRIVILEGIO_Descripcion" />
+                <ScalarProperty Name="PRIVILEGIO_Estado" ColumnName="PRIVILEGIO_Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_UsuarioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_UsuarioConsultar_Result3">
+                <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
+                <ScalarProperty Name="USUARIO_IdPersona" ColumnName="USUARIO_IdPersona" />
+                <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
+                <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
+                <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
+                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+                <ScalarProperty Name="PERSONA_IdTipoIdentificacion" ColumnName="PERSONA_IdTipoIdentificacion" />
+                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+                <ScalarProperty Name="PERSONA_IdSexo" ColumnName="PERSONA_IdSexo" />
+                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_PersonaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PersonaConsultar_Result2">
                 <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
                 <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
                 <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />

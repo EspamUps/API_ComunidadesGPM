@@ -273,6 +273,85 @@ namespace API.Controllers
 
             try
             {
+                //if (string.IsNullOrEmpty(_objUsuario.Persona.IdPersonaEncriptado.Trim()))
+                //{
+                //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                //}
+                //else if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()) || string.IsNullOrEmpty(_objUsuario.Clave.Trim()))
+                //{
+                //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                //}
+                ////else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
+                ////{
+                ////    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                ////    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
+                ////}
+                //else
+                //{
+                //    int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
+                //    var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona && c.Estado == true).FirstOrDefault();
+                //    bool _validarPersona = true;
+                //    if (_objPersona == null)
+                //    {
+                //        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                //        _validarPersona = false;
+                //    }
+                //    if (_validarPersona == true)
+                //    {
+                        //_objUsuario.Estado = false;
+                        //int _cantidadUsuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios().Count;
+                        //if (_cantidadUsuarios == 0)
+                        //{
+                        //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        //    _http.mensaje = "No se ingresado ningun usuario Ingresado";
+                        //}
+                        //else
+                        //{
+                        
+                        var listaUsuarios  = _objCatalogoUsuarios.ConsultarUsuario().Where(c => c.Estado == true);
+
+                        foreach (var item in listaUsuarios)
+                        {
+                            item.IdUsuario                                          = 0;
+                            item.Persona.IdPersona                                  = 0;
+                            item.Persona.Sexo.IdSexo                                = 0;
+                            item.Persona.TipoIdentificacion.IdTipoIdentificacion    = 0;
+                        }
+                        _respuesta = listaUsuarios;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        //}
+                //    }
+
+                //}
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+                return new
+                {
+                    respuesta = _respuesta,
+                    http = _http
+                };
+            }
+            return new
+            {
+                respuesta = _respuesta,
+                http = _http
+            };
+
+
+        }
+
+        [HttpPost]
+        [Route("api/usuario_informacionGeneral")]
+        public object usuario_informacionGeneral(Usuario _objUsuario)
+        {
+
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+
+            try
+            {
                 if (string.IsNullOrEmpty(_objUsuario.Persona.IdPersonaEncriptado.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
@@ -307,8 +386,8 @@ namespace API.Controllers
                         //}
                         //else
                         //{
-                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                            _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true);
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true);
                         //}
                     }
 
@@ -407,7 +486,19 @@ namespace API.Controllers
                     else
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                        _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true);
+                        var listaUsuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true).ToList();
+                        foreach (var item in listaUsuarios)
+                        {
+                            item.IdAsignarUsuarioTipoUsuario                                = 0;
+                            item.Usuario.IdUsuario                                          = 0;
+                            item.Usuario.Persona.IdPersona                                  = 0;
+                            item.Usuario.Persona.Sexo.IdSexo                                = 0;
+                            item.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion    = 0;
+                            item.TipoUsuario.IdTipoUsuario                                  = 0;
+                            
+                        }
+                        _respuesta = listaUsuarios;
+
                     }
                     
                 }

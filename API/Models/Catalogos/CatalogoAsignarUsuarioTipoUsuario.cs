@@ -15,12 +15,13 @@ namespace API.Models.Catalogos
         public List<AsignarUsuarioTipoUsuario> ConsultarAsignarUsuarioTipoUsuario()
         {
             List<AsignarUsuarioTipoUsuario> listaAsignarUsuarioTipoUsuario = new List<AsignarUsuarioTipoUsuario>();
-            foreach (var item in db.Sp_UsuarioConsultar())
+            foreach (var item in db.Sp_UsuarioInformacionGeneral())
             {
                 listaAsignarUsuarioTipoUsuario.Add(new AsignarUsuarioTipoUsuario()
                 {
-                    IdAsignarUsuarioTipoUsuarioEncriptado = _seguridad.Encriptar(item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario.ToString()),
-                    Estado = item.ASIGNARUSUARIOTIPOUSUARIO_Estado,
+                    IdAsignarUsuarioTipoUsuario             = item.ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio,
+                    IdAsignarUsuarioTipoUsuarioEncriptado   = _seguridad.Encriptar(item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario.ToString()),
+                    Estado                                  = item.ASIGNARUSUARIOTIPOUSUARIO_Estado,
                     Usuario = new Usuario()
                     {
                         IdUsuarioEncriptado = _seguridad.Encriptar(item.USUARIO_IdUsuario.ToString()),
@@ -62,11 +63,11 @@ namespace API.Models.Catalogos
                     },
                     TipoUsuario = new TipoUsuario()
                     {
+                        IdTipoUsuario           = item.TIPOUSUARIO_IdTipoUsuario,
                         IdTipoUsuarioEncriptado = _seguridad.Encriptar( item.TIPOUSUARIO_IdTipoUsuario.ToString()),
-                        IdTipoUsuario = item.TIPOUSUARIO_IdTipoUsuario,
-                        Identificador = item.TIPOUSUARIO_Identificador,
-                        Descripcion = item.TIPOUSUARIO_Descripcion,
-                        Estado = item.TIPOUSUARIO_Estado
+                        Identificador           = item.TIPOUSUARIO_Identificador,
+                        Descripcion             = item.TIPOUSUARIO_Descripcion,
+                        Estado                  = item.TIPOUSUARIO_Estado
                     }
                 });
             }
