@@ -381,11 +381,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarUsuarioTipoUsuarioConsultar_Result>("Sp_AsignarUsuarioTipoUsuarioConsultar");
         }
     
-        public virtual ObjectResult<Sp_PersonaConsultar_Result1> Sp_PersonaConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PersonaConsultar_Result1>("Sp_PersonaConsultar");
-        }
-    
         public virtual ObjectResult<Sp_UsuarioInformacionGeneral_Result> Sp_UsuarioInformacionGeneral()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioInformacionGeneral_Result>("Sp_UsuarioInformacionGeneral");
@@ -394,6 +389,11 @@ namespace API.Conexion
         public virtual ObjectResult<Sp_UsuarioConsultar_Result3> Sp_UsuarioConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioConsultar_Result3>("Sp_UsuarioConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_PersonaConsultar_Result2> Sp_PersonaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PersonaConsultar_Result2>("Sp_PersonaConsultar");
         }
     }
 }

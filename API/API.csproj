@@ -230,6 +230,9 @@
     <Compile Include="Conexion\Sp_PersonaConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_PersonaConsultar_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_PrivilegioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
