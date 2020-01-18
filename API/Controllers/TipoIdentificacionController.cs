@@ -19,7 +19,7 @@ namespace API.Controllers
         CatalogoTipoIdentificacion _objCatalogoTipoIdentificacion = new CatalogoTipoIdentificacion();
 
         [HttpPost]
-        [Route("api/tipoIdentificacion_consultar")]
+        [Route("api/tipoidentificacion_consultar")]
         public object sexo_consultar(Sexo _objSexo)
         {
             object _respuesta = new object();

@@ -24,7 +24,7 @@ namespace API.Controllers
         [Route("api/persona_insertar")]
         public object persona_insertar(Persona _objPersona)
         {
-            
+            //return _objPersona;
             object _respuesta = new object();
            
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
@@ -51,8 +51,9 @@ namespace API.Controllers
                 else
                 {
 
-                    int _idSexoDesencriptado = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.Sexo.IdSexoEncriptado));
-                    int _idTipoIdentificacionDesencriptado = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.TipoIdentificacion.IdTipoIdentificacionEncriptado));
+                    int _idSexoDesencriptado                = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.Sexo.IdSexoEncriptado));
+                    int _idTipoIdentificacionDesencriptado  = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.TipoIdentificacion.IdTipoIdentificacionEncriptado));
+                    int _idParroquiaDesencriptado           = Convert.ToInt32(_objPersona.Parroquia.IdParroquiaEncriptado); // aun no existe esta tabla por eso paso un valor string y lo convierto;
 
                     var _objSexo = _objCatalogoSexo.ConsultarSexos().Where(c => c.IdSexo == _idSexoDesencriptado && c.Estado == true).FirstOrDefault();
                     var _objTipoIdentificacion = _objCatalogoTipoIdentificacion.ConsultarTipoIdentificacion().Where(c => c.IdTipoIdentificacion == _idTipoIdentificacionDesencriptado && c.Estado == true).FirstOrDefault();
@@ -65,10 +66,10 @@ namespace API.Controllers
                     }
                     if (_validarPersona == true)
                     {
-                        _objPersona.Estado = true;
-                        _objPersona.Sexo.IdSexo = _idSexoDesencriptado;
+                        _objPersona.Estado                                  = true;
+                        _objPersona.Sexo.IdSexo                             = _idSexoDesencriptado;
                         _objPersona.TipoIdentificacion.IdTipoIdentificacion = _idTipoIdentificacionDesencriptado;
-                        
+                        _objPersona.Parroquia.IdParroquia                   = _idParroquiaDesencriptado;
 
                         int _idPersonaIngresado = _objCatalogoPersona.InsertarPersona(_objPersona);
                         if (_idPersonaIngresado == 0)
