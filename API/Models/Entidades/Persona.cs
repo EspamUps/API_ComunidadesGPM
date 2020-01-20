@@ -21,5 +21,7 @@ namespace API.Models.Entidades
         public Sexo Sexo { get; set; }
         public Parroquia Parroquia { get; set; }
         public TipoIdentificacion TipoIdentificacion { get; set; }
+        //campos adicionales
+        public string Utilizado { get; set; }
     }
 }

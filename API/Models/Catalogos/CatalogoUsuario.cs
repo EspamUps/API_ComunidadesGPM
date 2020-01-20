@@ -38,7 +38,6 @@ namespace API.Models.Catalogos
         public int InsertarUsuario(Usuario _objUsuario) {
             try
             {
-                //_objUsuario.Clave = _seguridad.Encriptar(_objUsuario.Clave);
                 return int.Parse( db.Sp_UsuarioInsertar(
                     _objUsuario.Persona.IdPersona,
                     _objUsuario.Correo,
@@ -57,7 +56,7 @@ namespace API.Models.Catalogos
             try
             {
                 //_objUsuario.Clave = _seguridad.Encriptar(_objUsuario.Clave);
-                db.Sp_UsuarioModificar(_objUsuario.IdUsuario, _objUsuario.Persona.IdPersona, _objUsuario.Correo, _objUsuario.Clave);
+                db.Sp_UsuarioModificar(_objUsuario.IdUsuario, _objUsuario.Persona.IdPersona, _objUsuario.Correo, _objUsuario.Clave, _objUsuario.Estado);
                 return _objUsuario.IdUsuario;
             }
             catch (Exception)
@@ -71,7 +70,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                db.Sp_UsuarioCambiarEstado(_objUsuario.IdUsuario, _objUsuario.Estado);
+                db.Sp_UsuarioEliminar(_objUsuario.IdUsuario);
                 return _objUsuario.IdUsuario;
             }
             catch (Exception)
@@ -93,9 +92,9 @@ namespace API.Models.Catalogos
                     IdUsuarioEncriptado = _seguridad.Encriptar(item.USUARIO_IdUsuario.ToString()),
                     IdUsuario           = item.USUARIO_IdUsuario,
                     Correo              = item.USUARIO_Correo,
-                    //Clave = item.USUARIO_Clave,
                     ClaveEncriptada     = _seguridad.Encriptar(item.USUARIO_Clave.ToString()),
                     Estado              = item.USUARIO_Estado,
+                    Utilizado           = item.USUARIO_Utilizado,
                     Persona = new Persona()
                     {
                         IdPersonaEncriptado     = _seguridad.Encriptar(item.PERSONA_IdPersona.ToString()),

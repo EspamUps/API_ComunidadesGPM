@@ -118,6 +118,8 @@ namespace API.Controllers
                 http = _http
             };
         }
+
+
         [HttpPost]
         [Route("api/persona_modificar")]
         public object persona_modificar(Persona _objPersona)
@@ -179,6 +181,7 @@ namespace API.Controllers
                 }
                 else
                 {
+                    _objPersona.Estado = true;
                     int _idPersonaModificada = _objCatalogoPersona.ModificarPersona(_objPersona);
                     if (_idPersonaModificada == 0)
                     {
@@ -204,6 +207,56 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http};
         }
+
+
+        [HttpPost]
+        [Route("api/persona_cambiarestado")]
+        public object persona_cambiarestado(Persona _objPersona)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.IdPersonaEncriptado));
+                var _objPersonaModificar = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona).FirstOrDefault();
+                if (_objPersonaModificar == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "La persona que intenta modificar no es válida.";
+                }
+                else
+                {
+                    bool _nuevoEstado = false;
+                    if (_objPersonaModificar.Estado == false)
+                        _nuevoEstado = true;
+                    _objPersonaModificar.Estado = _nuevoEstado;
+                    int _idPersonaModificada = _objCatalogoPersona.ModificarPersona(_objPersonaModificar);
+                    if (_idPersonaModificada == 0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Ocurrió un error al intentar modificar el estado de la persona, intente nuevamente.";
+                    }
+                    else
+                    {
+                        var _objPersonaModificada = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona).FirstOrDefault();
+                        _objPersonaModificada.IdPersona = 0;
+                        _objPersonaModificada.TipoIdentificacion.IdTipoIdentificacion = 0;
+                        _objPersonaModificada.Sexo.IdSexo = 0;
+                        _respuesta = _objPersonaModificada;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+                return new { respuesta = _respuesta, http = _http };
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+
         [HttpPost]
         [Route("api/persona_eliminar")]
         public object persona_eliminar(Persona _objPersona)
@@ -213,14 +266,29 @@ namespace API.Controllers
             try
             {
                 int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.IdPersonaEncriptado));
-                if (_objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona).FirstOrDefault() == null)
+                var _objPersonaConsultada = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona).FirstOrDefault();
+                if (_objPersonaConsultada == null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "La persona que intenta eliminar no es válida.";
                 }
+                else if (_objPersonaConsultada.Utilizado=="1")
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "La persona no puede ser eliminada porque tiene un usuario asignado.";
+                }
                 else
                 {
-
+                    int _idPersonaEliminado = _objCatalogoPersona.EliminarPersona(_objPersonaConsultada);
+                    if (_idPersonaEliminado == 0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Ocurrió un error al intentar eliminar a la persona, intente nuevamente.";
+                    }
+                    else
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
                 }
             }
             catch (Exception ex)

@@ -42,19 +42,6 @@
       <Parameter Name="Direccion" Mode="In" Type="String" />
       <Parameter Name="Estado" Mode="In" Type="Boolean" />
     </FunctionImport>
-    <FunctionImport Name="Sp_PersonaModificar">
-      <Parameter Name="IdPersona" Mode="In" Type="Int32" />
-      <Parameter Name="PrimerNombre" Mode="In" Type="String" />
-      <Parameter Name="SegundoNombre" Mode="In" Type="String" />
-      <Parameter Name="PrimerApellido" Mode="In" Type="String" />
-      <Parameter Name="SegundoApellido" Mode="In" Type="String" />
-      <Parameter Name="NumeroIdentificacion" Mode="In" Type="String" />
-      <Parameter Name="IdTipoIdentificacion" Mode="In" Type="Int32" />
-      <Parameter Name="Telefono" Mode="In" Type="String" />
-      <Parameter Name="IdSexo" Mode="In" Type="Int32" />
-      <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
-      <Parameter Name="Direccion" Mode="In" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="Sp_PrivilegioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PrivilegioConsultar_Result)" />
     <FunctionImport Name="Sp_SexoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_SexoConsultar_Result)" />
     <FunctionImport Name="Sp_TipoIdentificacionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_TipoIdentificacionConsultar_Result)" />
@@ -76,21 +63,11 @@
     <FunctionImport Name="Sp_UsuarioBuscar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioBuscar_Result)">
       <Parameter Name="Correo" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="Sp_UsuarioCambiarEstado">
-      <Parameter Name="idUsuario" Mode="In" Type="Int32" />
-      <Parameter Name="NuevoEstado" Mode="In" Type="Boolean" />
-    </FunctionImport>
     <FunctionImport Name="Sp_UsuarioInsertar" ReturnType="Collection(Decimal)">
       <Parameter Name="IdPersona" Mode="In" Type="Int32" />
       <Parameter Name="Correo" Mode="In" Type="String" />
       <Parameter Name="Clave" Mode="In" Type="String" />
       <Parameter Name="Estado" Mode="In" Type="Boolean" />
-    </FunctionImport>
-    <FunctionImport Name="Sp_UsuarioModificar">
-      <Parameter Name="idUsuario" Mode="In" Type="Int32" />
-      <Parameter Name="IdPersona" Mode="In" Type="Int32" />
-      <Parameter Name="Correo" Mode="In" Type="String" />
-      <Parameter Name="Clave" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="Sp_TokenConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_TokenConsultar_Result2)" />
     <FunctionImport Name="Sp_AsignarModuloPrivilegioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarModuloPrivilegioConsultar_Result1)" />
@@ -100,8 +77,35 @@
     <FunctionImport Name="Sp_AsignarTipoUsuarioModuloPrivilegioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result1)" />
     <FunctionImport Name="Sp_AsignarUsuarioTipoUsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarUsuarioTipoUsuarioConsultar_Result)" />
     <FunctionImport Name="Sp_UsuarioInformacionGeneral" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioInformacionGeneral_Result)" />
-    <FunctionImport Name="Sp_UsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioConsultar_Result3)" />
-    <FunctionImport Name="Sp_PersonaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultar_Result2)" />
+    <FunctionImport Name="Sp_PersonaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultar_Result3)" />
+    <FunctionImport Name="Sp_PersonaEliminar">
+      <Parameter Name="IdPersona" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_PersonaModificar">
+      <Parameter Name="IdPersona" Mode="In" Type="Int32" />
+      <Parameter Name="PrimerNombre" Mode="In" Type="String" />
+      <Parameter Name="SegundoNombre" Mode="In" Type="String" />
+      <Parameter Name="PrimerApellido" Mode="In" Type="String" />
+      <Parameter Name="SegundoApellido" Mode="In" Type="String" />
+      <Parameter Name="NumeroIdentificacion" Mode="In" Type="String" />
+      <Parameter Name="IdTipoIdentificacion" Mode="In" Type="Int32" />
+      <Parameter Name="Telefono" Mode="In" Type="String" />
+      <Parameter Name="IdSexo" Mode="In" Type="Int32" />
+      <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+      <Parameter Name="Direccion" Mode="In" Type="String" />
+      <Parameter Name="Estado" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_UsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioConsultar_Result4)" />
+    <FunctionImport Name="Sp_UsuarioEliminar">
+      <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_UsuarioModificar">
+      <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+      <Parameter Name="IdPersona" Mode="In" Type="Int32" />
+      <Parameter Name="Correo" Mode="In" Type="String" />
+      <Parameter Name="Clave" Mode="In" Type="String" />
+      <Parameter Name="Estado" Mode="In" Type="Boolean" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Sp_TokenConsultar_Result">
     <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -524,6 +528,57 @@
     <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
   </ComplexType>
   <ComplexType Name="Sp_PersonaConsultar_Result2">
+    <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+    <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+    <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+    <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+    <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+    <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="PERSONA_IdTipoIdentificacion" Nullable="false" />
+    <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
+    <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+    <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+    <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+    <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+    <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+    <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+    <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+    <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Sp_PersonaConsultar_Result3">
+    <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+    <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+    <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+    <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+    <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+    <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="PERSONA_IdTipoIdentificacion" Nullable="false" />
+    <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+    <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
+    <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+    <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+    <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+    <Property Type="String" Name="PERSONA_Utilizado" Nullable="false" MaxLength="1" />
+    <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+    <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+    <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+    <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+    <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+    <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="Sp_UsuarioConsultar_Result4">
+    <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+    <Property Type="Int32" Name="USUARIO_IdPersona" Nullable="false" />
+    <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+    <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+    <Property Type="String" Name="USUARIO_Utilizado" Nullable="false" MaxLength="1" />
     <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
     <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
     <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />

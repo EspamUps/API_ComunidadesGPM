@@ -50,7 +50,8 @@ namespace API.Models.Catalogos
                         objPersona.Telefono,
                         objPersona.Sexo.IdSexo,
                         objPersona.Parroquia.IdParroquia,
-                        objPersona.Direccion
+                        objPersona.Direccion,
+                        objPersona.Estado
                  );
                 return objPersona.IdPersona;
             }
@@ -63,9 +64,8 @@ namespace API.Models.Catalogos
         {
             try
             {
-                db.Sp_PersonaCambiarEstado(
-                        objPersona.IdPersona,
-                        objPersona.Estado
+                db.Sp_PersonaEliminar(
+                        objPersona.IdPersona
                  );
                 return objPersona.IdPersona;
             }
@@ -90,6 +90,7 @@ namespace API.Models.Catalogos
                         Telefono                = item.PERSONA_Telefono,
                         Direccion               = item.PERSONA_Direccion,
                         Estado                  = item.PERSONA_Estado,
+                        Utilizado               = item.PERSONA_Utilizado,
                         Sexo = new Sexo()
                         {
                             IdSexo              = item.SEXO_IdSexo,
