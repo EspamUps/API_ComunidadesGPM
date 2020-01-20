@@ -50,7 +50,8 @@ namespace API.Models.Catalogos
                         objPersona.Telefono,
                         objPersona.Sexo.IdSexo,
                         objPersona.Parroquia.IdParroquia,
-                        objPersona.Direccion
+                        objPersona.Direccion,
+                        objPersona.Estado
                  );
                 return objPersona.IdPersona;
             }
@@ -63,9 +64,8 @@ namespace API.Models.Catalogos
         {
             try
             {
-                db.Sp_PersonaCambiarEstado(
-                        objPersona.IdPersona,
-                        objPersona.Estado
+                db.Sp_PersonaEliminar(
+                        objPersona.IdPersona
                  );
                 return objPersona.IdPersona;
             }

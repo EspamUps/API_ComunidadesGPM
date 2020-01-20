@@ -33,11 +33,10 @@
         </Function>
         <Function Name="Sp_AsignarUsuarioTipoUsuarioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
         <Function Name="Sp_ModuloConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
-        <Function Name="Sp_PersonaCambiarEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
-          <Parameter Name="IdPersona" Type="int" Mode="In" />
-          <Parameter Name="NuevoEstado" Type="bit" Mode="In" />
-        </Function>
         <Function Name="Sp_PersonaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
+        <Function Name="Sp_PersonaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
+          <Parameter Name="IdPersona" Type="int" Mode="In" />
+        </Function>
         <Function Name="Sp_PersonaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
           <Parameter Name="PrimerNombre" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="SegundoNombre" Type="nvarchar(max)" Mode="In" />
@@ -63,6 +62,7 @@
           <Parameter Name="IdSexo" Type="int" Mode="In" />
           <Parameter Name="IdParroquia" Type="int" Mode="In" />
           <Parameter Name="Direccion" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
         </Function>
         <Function Name="Sp_PrivilegioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
         <Function Name="Sp_SexoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
@@ -85,11 +85,10 @@
         <Function Name="Sp_UsuarioBuscar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
           <Parameter Name="Correo" Type="nvarchar" Mode="In" />
         </Function>
-        <Function Name="Sp_UsuarioCambiarEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
-          <Parameter Name="idUsuario" Type="int" Mode="In" />
-          <Parameter Name="NuevoEstado" Type="bit" Mode="In" />
-        </Function>
         <Function Name="Sp_UsuarioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
+        <Function Name="Sp_UsuarioEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
+          <Parameter Name="idUsuario" Type="int" Mode="In" />
+        </Function>
         <Function Name="Sp_UsuarioInformacionGeneral" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
         <Function Name="Sp_UsuarioInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
           <Parameter Name="IdPersona" Type="int" Mode="In" />
@@ -102,6 +101,7 @@
           <Parameter Name="IdPersona" Type="int" Mode="In" />
           <Parameter Name="Correo" Type="nvarchar" Mode="In" />
           <Parameter Name="Clave" Type="nvarchar" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
         </Function>
         <Function Name="Sp_UsuarioValidar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
           <Parameter Name="Correo" Type="nvarchar" Mode="In" />
@@ -153,19 +153,6 @@
             <Parameter Name="Direccion" Mode="In" Type="String" />
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Sp_PersonaModificar">
-            <Parameter Name="IdPersona" Mode="In" Type="Int32" />
-            <Parameter Name="PrimerNombre" Mode="In" Type="String" />
-            <Parameter Name="SegundoNombre" Mode="In" Type="String" />
-            <Parameter Name="PrimerApellido" Mode="In" Type="String" />
-            <Parameter Name="SegundoApellido" Mode="In" Type="String" />
-            <Parameter Name="NumeroIdentificacion" Mode="In" Type="String" />
-            <Parameter Name="IdTipoIdentificacion" Mode="In" Type="Int32" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="IdSexo" Mode="In" Type="Int32" />
-            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="Sp_PrivilegioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PrivilegioConsultar_Result)" />
           <FunctionImport Name="Sp_SexoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_SexoConsultar_Result)" />
           <FunctionImport Name="Sp_TipoIdentificacionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_TipoIdentificacionConsultar_Result)" />
@@ -187,21 +174,11 @@
           <FunctionImport Name="Sp_UsuarioBuscar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioBuscar_Result)">
           <Parameter Name="Correo" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Sp_UsuarioCambiarEstado">
-            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
-            <Parameter Name="NuevoEstado" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="Sp_UsuarioInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdPersona" Mode="In" Type="Int32" />
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Clave" Mode="In" Type="String" />
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_UsuarioModificar">
-            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
-            <Parameter Name="IdPersona" Mode="In" Type="Int32" />
-            <Parameter Name="Correo" Mode="In" Type="String" />
-            <Parameter Name="Clave" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Sp_TokenConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_TokenConsultar_Result2)" />
           <FunctionImport Name="Sp_AsignarModuloPrivilegioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarModuloPrivilegioConsultar_Result1)" />
@@ -211,8 +188,35 @@
           <FunctionImport Name="Sp_AsignarTipoUsuarioModuloPrivilegioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result1)" />
           <FunctionImport Name="Sp_AsignarUsuarioTipoUsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarUsuarioTipoUsuarioConsultar_Result)" />
           <FunctionImport Name="Sp_UsuarioInformacionGeneral" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioInformacionGeneral_Result)" />
-          <FunctionImport Name="Sp_UsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioConsultar_Result3)" />
-          <FunctionImport Name="Sp_PersonaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultar_Result2)" />
+          <FunctionImport Name="Sp_PersonaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultar_Result3)" />
+          <FunctionImport Name="Sp_PersonaEliminar">
+          <Parameter Name="IdPersona" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_PersonaModificar">
+            <Parameter Name="IdPersona" Mode="In" Type="Int32" />
+            <Parameter Name="PrimerNombre" Mode="In" Type="String" />
+            <Parameter Name="SegundoNombre" Mode="In" Type="String" />
+            <Parameter Name="PrimerApellido" Mode="In" Type="String" />
+            <Parameter Name="SegundoApellido" Mode="In" Type="String" />
+            <Parameter Name="NumeroIdentificacion" Mode="In" Type="String" />
+            <Parameter Name="IdTipoIdentificacion" Mode="In" Type="Int32" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="IdSexo" Mode="In" Type="Int32" />
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_UsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioConsultar_Result4)" />
+          <FunctionImport Name="Sp_UsuarioEliminar">
+            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_UsuarioModificar">
+            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="IdPersona" Mode="In" Type="Int32" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Clave" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -656,6 +660,57 @@
           <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_PersonaConsultar_Result3">
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Utilizado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_UsuarioConsultar_Result4">
+          <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+          <Property Type="Int32" Name="USUARIO_IdPersona" Nullable="false" />
+          <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+          <Property Type="String" Name="USUARIO_Utilizado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -677,9 +732,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_PersonaCambiarEstado" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaCambiarEstado" />
           <FunctionImportMapping FunctionImportName="Sp_PersonaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_PersonaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaModificar" />
           <FunctionImportMapping FunctionImportName="Sp_PrivilegioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PrivilegioConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PrivilegioConsultar_Result">
@@ -778,9 +831,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_UsuarioCambiarEstado" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioCambiarEstado" />
           <FunctionImportMapping FunctionImportName="Sp_UsuarioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_UsuarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioModificar" />
           <FunctionImportMapping FunctionImportName="Sp_TokenConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_TokenConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_TokenConsultar_Result2">
@@ -937,14 +988,44 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_PersonaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PersonaConsultar_Result3">
+                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+                <ScalarProperty Name="PERSONA_IdTipoIdentificacion" ColumnName="PERSONA_IdTipoIdentificacion" />
+                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+                <ScalarProperty Name="PERSONA_IdSexo" ColumnName="PERSONA_IdSexo" />
+                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+                <ScalarProperty Name="PERSONA_Utilizado" ColumnName="PERSONA_Utilizado" />
+                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_PersonaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_PersonaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaModificar" />
           <FunctionImportMapping FunctionImportName="Sp_UsuarioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioConsultar">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_UsuarioConsultar_Result3">
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_UsuarioConsultar_Result4">
                 <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
                 <ScalarProperty Name="USUARIO_IdPersona" ColumnName="USUARIO_IdPersona" />
                 <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
                 <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
                 <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
+                <ScalarProperty Name="USUARIO_Utilizado" ColumnName="USUARIO_Utilizado" />
                 <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
                 <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
                 <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
@@ -968,32 +1049,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_PersonaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PersonaConsultar_Result2">
-                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
-                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
-                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
-                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
-                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
-                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
-                <ScalarProperty Name="PERSONA_IdTipoIdentificacion" ColumnName="PERSONA_IdTipoIdentificacion" />
-                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
-                <ScalarProperty Name="PERSONA_IdSexo" ColumnName="PERSONA_IdSexo" />
-                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
-                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
-                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
-                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
-                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
-                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
-                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_UsuarioEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_UsuarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioModificar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

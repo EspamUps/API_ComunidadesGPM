@@ -181,6 +181,7 @@ namespace API.Controllers
                 }
                 else
                 {
+
                     int _idPersonaModificada = _objCatalogoPersona.ModificarPersona(_objPersona);
                     if (_idPersonaModificada == 0)
                     {
