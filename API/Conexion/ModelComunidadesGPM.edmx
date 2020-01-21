@@ -5,6 +5,85 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ComunidadesGPMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="Sp_CantonConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
+        <Function Name="Sp_CantonEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="idCanton" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_CantonInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdCanton" Type="int" Mode="In" />
+          <Parameter Name="CodigoCanton" Type="nvarchar" Mode="In" />
+          <Parameter Name="NombreCanton" Type="nvarchar" Mode="In" />
+          <Parameter Name="DescripcionCanton" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="RutaLogoCanton" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EstadoCanton" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_CantonModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdCanton" Type="int" Mode="In" />
+          <Parameter Name="CodigoCanton" Type="nvarchar" Mode="In" />
+          <Parameter Name="NombreCanton" Type="nvarchar" Mode="In" />
+          <Parameter Name="DescripcionCanton" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="RutaLogoCanton" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EstadoCanton" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_ComunidadConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
+        <Function Name="Sp_ComunidadEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdComunidad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_ComunidadInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdComunidad" Type="int" Mode="In" />
+          <Parameter Name="CodigoComunidad" Type="nvarchar" Mode="In" />
+          <Parameter Name="NombreComunidad" Type="nvarchar" Mode="In" />
+          <Parameter Name="DescripcionComunidad" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="RutaLogoComunidad" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EstadoComunidad" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_ComunidadModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdComunidad" Type="int" Mode="In" />
+          <Parameter Name="CodigoComunidad" Type="nvarchar" Mode="In" />
+          <Parameter Name="NombreComunidad" Type="nvarchar" Mode="In" />
+          <Parameter Name="DescripcionComunidad" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="RutaLogoComunidad" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EstadoComunidad" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_ParroquiaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
+        <Function Name="Sp_ParroquiaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdParroquia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_ParroquiaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdParroquia" Type="int" Mode="In" />
+          <Parameter Name="CodigoParroquia" Type="nvarchar" Mode="In" />
+          <Parameter Name="NombreParroquia" Type="nvarchar" Mode="In" />
+          <Parameter Name="DescripcionParroquia" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="RutaLogoParroquia" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EstadoParroquia" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_ParroquiaModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdParroquia" Type="int" Mode="In" />
+          <Parameter Name="CodigoParroquia" Type="nvarchar" Mode="In" />
+          <Parameter Name="NombreParroquia" Type="nvarchar" Mode="In" />
+          <Parameter Name="DescripcionParroquia" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="RutaLogoParroquia" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EstadoParroquia" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_ProvinciaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
+        <Function Name="Sp_ProvinciaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdProvincia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_ProvinciaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="CodigoProvincia" Type="nvarchar" Mode="In" />
+          <Parameter Name="NombreProvincia" Type="nvarchar" Mode="In" />
+          <Parameter Name="DescripcionProvincia" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="RutaLogoProvincia" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EstadoProvincia" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_ProvinciaModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdProvincia" Type="int" Mode="In" />
+          <Parameter Name="CodigoProvincia" Type="nvarchar" Mode="In" />
+          <Parameter Name="NombreProvincia" Type="nvarchar" Mode="In" />
+          <Parameter Name="DescripcionProvincia" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="RutaLogoProvincia" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="EstadoProvincia" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_TokenConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="seguridad" />
         <Function Name="Sp_AsignarModuloPrivilegioCambiarEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
           <Parameter Name="IdAsinarModuloPrivilegio" Type="int" Mode="In" />
@@ -208,7 +287,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_UsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioConsultar_Result4)" />
           <FunctionImport Name="Sp_UsuarioEliminar">
-            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="idUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_UsuarioModificar">
             <Parameter Name="idUsuario" Mode="In" Type="Int32" />
@@ -217,6 +296,85 @@
             <Parameter Name="Clave" Mode="In" Type="String" />
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="Sp_CantonEliminar">
+          <Parameter Name="idCanton" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CantonInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdCanton" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoCanton" Mode="In" Type="String" />
+            <Parameter Name="NombreCanton" Mode="In" Type="String" />
+            <Parameter Name="DescripcionCanton" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoCanton" Mode="In" Type="String" />
+            <Parameter Name="EstadoCanton" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CantonModificar">
+            <Parameter Name="IdCanton" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoCanton" Mode="In" Type="String" />
+            <Parameter Name="NombreCanton" Mode="In" Type="String" />
+            <Parameter Name="DescripcionCanton" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoCanton" Mode="In" Type="String" />
+            <Parameter Name="EstadoCanton" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ComunidadEliminar">
+          <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ComunidadInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoComunidad" Mode="In" Type="String" />
+            <Parameter Name="NombreComunidad" Mode="In" Type="String" />
+            <Parameter Name="DescripcionComunidad" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoComunidad" Mode="In" Type="String" />
+            <Parameter Name="EstadoComunidad" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ComunidadModificar">
+            <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoComunidad" Mode="In" Type="String" />
+            <Parameter Name="NombreComunidad" Mode="In" Type="String" />
+            <Parameter Name="DescripcionComunidad" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoComunidad" Mode="In" Type="String" />
+            <Parameter Name="EstadoComunidad" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ParroquiaEliminar">
+          <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ParroquiaInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoParroquia" Mode="In" Type="String" />
+            <Parameter Name="NombreParroquia" Mode="In" Type="String" />
+            <Parameter Name="DescripcionParroquia" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoParroquia" Mode="In" Type="String" />
+            <Parameter Name="EstadoParroquia" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ParroquiaModificar">
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoParroquia" Mode="In" Type="String" />
+            <Parameter Name="NombreParroquia" Mode="In" Type="String" />
+            <Parameter Name="DescripcionParroquia" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoParroquia" Mode="In" Type="String" />
+            <Parameter Name="EstadoParroquia" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ProvinciaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ProvinciaConsultar_Result)" />
+          <FunctionImport Name="Sp_ProvinciaEliminar">
+          <Parameter Name="IdProvincia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ProvinciaInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="CodigoProvincia" Mode="In" Type="String" />
+            <Parameter Name="NombreProvincia" Mode="In" Type="String" />
+            <Parameter Name="DescripcionProvincia" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoProvincia" Mode="In" Type="String" />
+            <Parameter Name="EstadoProvincia" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ProvinciaModificar">
+            <Parameter Name="IdProvincia" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoProvincia" Mode="In" Type="String" />
+            <Parameter Name="NombreProvincia" Mode="In" Type="String" />
+            <Parameter Name="DescripcionProvincia" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoProvincia" Mode="In" Type="String" />
+            <Parameter Name="EstadoProvincia" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CantonConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CantonConsultar_Result)" />
+          <FunctionImport Name="Sp_ComunidadConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ComunidadConsultar_Result)" />
+          <FunctionImport Name="Sp_ParroquiaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ParroquiaConsultar_Result)" />
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -711,6 +869,78 @@
           <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_ProvinciaConsultar_Result">
+          <Property Type="Int32" Name="IdProvincia" Nullable="false" />
+          <Property Type="String" Name="CodigoProvincia" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionProvincia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
+          <Property Type="String" Name="UtilizadoProvincia" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="Sp_CantonConsultar_Result">
+          <Property Type="Int32" Name="IdCanton" Nullable="false" />
+          <Property Type="String" Name="CodigoCanton" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreCanton" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionCanton" Nullable="true" />
+          <Property Type="String" Name="RutaLogoCanton" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoCanton" Nullable="false" />
+          <Property Type="String" Name="UtilizadoCanton" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdProvincia" Nullable="false" />
+          <Property Type="String" Name="CodigoProvincia" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionProvincia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_ComunidadConsultar_Result">
+          <Property Type="Int32" Name="IdComunidad" Nullable="false" />
+          <Property Type="String" Name="CodigoComunidad" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreComunidad" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionComunidad" Nullable="true" />
+          <Property Type="String" Name="RutaLogoComunidad" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoComunidad" Nullable="false" />
+          <Property Type="String" Name="UtilizadoComunidad" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdParroquia" Nullable="false" />
+          <Property Type="String" Name="CodigoParroquia" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreParroquia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionParroquia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoParroquia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoParroquia" Nullable="false" />
+          <Property Type="Int32" Name="IdCanton" Nullable="false" />
+          <Property Type="String" Name="CodigoCanton" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreCanton" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionCanton" Nullable="true" />
+          <Property Type="String" Name="RutaLogoCanton" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoCanton" Nullable="false" />
+          <Property Type="Int32" Name="IdProvincia" Nullable="false" />
+          <Property Type="String" Name="CodigoProvincia" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionProvincia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_ParroquiaConsultar_Result">
+          <Property Type="Int32" Name="IdParroquia" Nullable="false" />
+          <Property Type="String" Name="CodigoParroquia" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreParroquia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionParroquia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoParroquia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoParroquia" Nullable="false" />
+          <Property Type="String" Name="UtilizadoParroquia" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdCanton" Nullable="false" />
+          <Property Type="String" Name="CodigoCanton" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreCanton" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionCanton" Nullable="true" />
+          <Property Type="String" Name="RutaLogoCanton" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoCanton" Nullable="false" />
+          <Property Type="Int32" Name="IdProvincia" Nullable="false" />
+          <Property Type="String" Name="CodigoProvincia" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionProvincia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1051,6 +1281,106 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_UsuarioEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_UsuarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_CantonEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_CantonInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_CantonModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_ComunidadEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_ComunidadInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_ComunidadModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_ParroquiaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_ParroquiaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_ParroquiaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_ProvinciaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ProvinciaConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ProvinciaConsultar_Result">
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+                <ScalarProperty Name="UtilizadoProvincia" ColumnName="UtilizadoProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ProvinciaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ProvinciaEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_ProvinciaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ProvinciaInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_ProvinciaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ProvinciaModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_CantonConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CantonConsultar_Result">
+                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
+                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
+                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
+                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
+                <ScalarProperty Name="UtilizadoCanton" ColumnName="UtilizadoCanton" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ComunidadConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ComunidadConsultar_Result">
+                <ScalarProperty Name="IdComunidad" ColumnName="IdComunidad" />
+                <ScalarProperty Name="CodigoComunidad" ColumnName="CodigoComunidad" />
+                <ScalarProperty Name="NombreComunidad" ColumnName="NombreComunidad" />
+                <ScalarProperty Name="DescripcionComunidad" ColumnName="DescripcionComunidad" />
+                <ScalarProperty Name="RutaLogoComunidad" ColumnName="RutaLogoComunidad" />
+                <ScalarProperty Name="EstadoComunidad" ColumnName="EstadoComunidad" />
+                <ScalarProperty Name="UtilizadoComunidad" ColumnName="UtilizadoComunidad" />
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+                <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
+                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
+                <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
+                <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
+                <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
+                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
+                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
+                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
+                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ParroquiaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ParroquiaConsultar_Result">
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+                <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
+                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
+                <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
+                <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
+                <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
+                <ScalarProperty Name="UtilizadoParroquia" ColumnName="UtilizadoParroquia" />
+                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
+                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
+                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
+                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

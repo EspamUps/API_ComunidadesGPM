@@ -8,9 +8,12 @@ namespace API.Models.Entidades
     public class Canton
     {
         public int IdCanton { get; set; }
-        public string Codigo { get; set; }
-        public string Descripcion { get; set; }
-        public bool Estado { get; set; }
+        public string IdCantonEncriptado { get; set; }
+        public string CodigoCanton { get; set; }
+        public string NombreCanton { get; set; }
+        public string DescripcionCanton { get; set; }
+        public string RutaLogoCanton { get; set; }
+        public bool EstadoCanton { get; set; }
         public  Provincia Provincia { get; set; }
     }
 }
