@@ -107,6 +107,7 @@ namespace API.Models.Catalogos
                         Estado = item.TIPOIDENTIFICACION_Estado,
                     },
                     Parroquia = new Parroquia() {
+                        IdParroquia = item.PERSONA_IdParroquia,
                         IdParroquiaEncriptado = _seguridad.Encriptar(item.PERSONA_IdParroquia.ToString())
                         }
 
