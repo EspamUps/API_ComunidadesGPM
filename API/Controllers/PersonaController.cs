@@ -220,7 +220,7 @@ namespace API.Controllers
         }
         [HttpPost]
         [Route("api/persona_eliminar")]
-        public object persona_eliminar(Persona _objPersona)
+        public object persona_eliminar(string _idPersonaEncriptado)
         {
             CatalogoAsignarUsuarioTipoUsuario _objCatalogoAsignarUsuarioTipoUsuario = new CatalogoAsignarUsuarioTipoUsuario();
 
@@ -228,24 +228,23 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.IdPersonaEncriptado));
-
-                int tiene_usuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(x => x.Usuario.Persona.IdPersona == _idPersona).ToList().Count();
-
-                if (tiene_usuarios > 0)
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "La persona tiene usuarios";
-                }
-                if (_objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona).FirstOrDefault() == null)
+                int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_idPersonaEncriptado));
+                var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona).FirstOrDefault();
+                                
+                if (_objPersona == null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "La persona que intenta eliminar no es válida.";
                 }
+                else if (_objPersona.Utilizado=="1")
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "La persona ya tiene un usuario asignado, no se puede eliminar.";
+                }
                 else
                 {
-                    _objCatalogoPersona.EliminarPersona(new Persona() { IdPersona = _idPersona });
-                    _respuesta = _objPersona;
+                    _objCatalogoPersona.EliminarPersona(_idPersona);
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -259,7 +258,7 @@ namespace API.Controllers
         // GET: api/Persona
         [HttpPost]
         [Route("api/persona_consultar")]
-        public object persona_consultar(Persona _objPersona)
+        public object persona_consultar()
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();

@@ -15,11 +15,11 @@ namespace API.Models.Catalogos
         public List<AsignarUsuarioTipoUsuario> ConsultarAsignarUsuarioTipoUsuario()
         {
             List<AsignarUsuarioTipoUsuario> listaAsignarUsuarioTipoUsuario = new List<AsignarUsuarioTipoUsuario>();
-            foreach (var item in db.Sp_UsuarioInformacionGeneral())
+            foreach (var item in db.Sp_AsignarUsuarioTipoUsuarioConsultar())
             {
                 listaAsignarUsuarioTipoUsuario.Add(new AsignarUsuarioTipoUsuario()
                 {
-                    IdAsignarUsuarioTipoUsuario             = item.ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio,
+                    IdAsignarUsuarioTipoUsuario             = item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario,
                     IdAsignarUsuarioTipoUsuarioEncriptado   = _seguridad.Encriptar(item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario.ToString()),
                     Estado                                  = item.ASIGNARUSUARIOTIPOUSUARIO_Estado,
                     Usuario = new Usuario()

@@ -26,7 +26,17 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true).ToList();
+                var lista = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true).ToList();
+                foreach (var item in lista)
+                {
+                    item.IdAsignarUsuarioTipoUsuario                             = 0;
+                    item.Usuario.IdUsuario                                       = 0;
+                    item.TipoUsuario.IdTipoUsuario                               = 0;
+                    item.Usuario.Persona.IdPersona                               = 0;
+                    item.Usuario.Persona.Sexo.IdSexo                             = 0;
+                    item.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                }
+                _respuesta = lista;
                 _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
             }
             catch (Exception ex)
@@ -37,7 +47,46 @@ namespace API.Controllers
 
             return new { respuesta = _respuesta, http = _http };
         }
+        
+        [HttpPost]
+        [Route("api/asignarusuariotipousuario_consultar")]
+        public object asignarusuariotipousuario_consultar( string _idUsuarioEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (string.IsNullOrEmpty(_idUsuarioEncriptado.Trim()))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                }
+                else
+                {
+                    int _idUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_idUsuarioEncriptado));
+                    CatalogoUsuario _objCatalogoUsuarios = new CatalogoUsuario();
+                    var _objUsuario = _objCatalogoUsuarios.ConsultarUsuario().Where(c => c.IdUsuario == _idUsuario).FirstOrDefault();
+                    var lista = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true && c.Usuario.IdUsuario == _objUsuario.IdUsuario).ToList();
+                    foreach (var item in lista)
+                    {
+                        item.IdAsignarUsuarioTipoUsuario = 0;
+                        item.Usuario.IdUsuario = 0;
+                        item.TipoUsuario.IdTipoUsuario = 0;
+                        item.Usuario.Persona.IdPersona = 0;
+                        item.Usuario.Persona.Sexo.IdSexo = 0;
+                        item.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                    }
+                    _respuesta = lista;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
 
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+                return new { respuesta = _respuesta, http = _http };
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
         [HttpPost]
         [Route("api/asignarusuariotipousuario_insertar")]
         public object asignarusuariotipousuario_insertar(AsignarUsuarioTipoUsuario _objAsignarUsuarioTipoUsuario)

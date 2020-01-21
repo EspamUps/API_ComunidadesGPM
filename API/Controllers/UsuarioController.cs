@@ -105,7 +105,6 @@ namespace API.Controllers
         [Route("api/usuario_modificar")]
         public object usuario_modificar(Usuario _objUsuario) {
 
-            return _objUsuario;
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
@@ -151,7 +150,12 @@ namespace API.Controllers
                         }
                         else
                         {
-                            _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Usuario.IdUsuario == _idUsuarioModificado && c.Estado == true).FirstOrDefault();
+                            var _objUsuarioModificado = _objCatalogoUsuarios.ConsultarUsuario().Where(c => c.IdUsuario == _idUsuarioDesencriptado).FirstOrDefault();
+                            _objUsuarioModificado.IdUsuario = 0;
+                            _objUsuarioModificado.Persona.IdPersona = 0;
+                            _objUsuarioModificado.Persona.Sexo.IdSexo = 0;
+                            _objUsuarioModificado.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                            _respuesta = _objUsuarioModificado;
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                         }
                     }
@@ -181,10 +185,8 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/usuario_eliminar")]
-        public object usuario_eliminar(Usuario _objUsuario)
+        public object usuario_eliminar(string _idUsuarioEncriptado)
         {
-
-
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
@@ -194,38 +196,27 @@ namespace API.Controllers
                // Token _token = catTokens.Consultar().Where(x => x.Identificador == 3).FirstOrDefault();
                // string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
 
-                if (string.IsNullOrEmpty(_objUsuario.Persona.IdPersonaEncriptado.Trim()))
+                if (string.IsNullOrEmpty(_idUsuarioEncriptado.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                 }
-                else if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()) || string.IsNullOrEmpty(_objUsuario.Clave.Trim()))
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                }
-                else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
-                }
                 else
                 {
-                    int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
-                    var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona && c.Estado == true).FirstOrDefault();
+                    int _idUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_idUsuarioEncriptado));
+                    var _objUsuario = _objCatalogoUsuarios.ConsultarUsuario().Where(c => c.IdUsuario == _idUsuario).FirstOrDefault();
 
-                    int _idUsuarioDesenciptado = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.IdUsuarioEncriptado));
-
-                    bool _validarPersona = true;
-                    if (_objPersona == null)
+                    if (_objUsuario == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
-                        _validarPersona = false;
                     }
-                    if (_validarPersona == true)
+                    else if (_objUsuario.Utilizado == "1")
                     {
-                        _objUsuario.Estado = false;
-                        _objUsuario.IdUsuario = _idUsuarioDesenciptado; // id del usuario desenciptado para su posterior eliminacion
-
-                        int _idUsuarioEliminado = _objCatalogoUsuarios.EliminarUsuario(_objUsuario);
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Este usuario ya ha sido utilizado, por lo tanto no lo puede eliminar.";
+                    }
+                    else
+                    {
+                        int _idUsuarioEliminado = _objCatalogoUsuarios.EliminarUsuario(_idUsuario);
                         if (_idUsuarioEliminado == 0)
                         {
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
@@ -234,7 +225,6 @@ namespace API.Controllers
                         else
                         {
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                            _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Usuario.IdUsuario == _idUsuarioEliminado && c.Estado == true).FirstOrDefault();
                         }
                     }
 
@@ -259,64 +249,25 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/usuario_consultar")]
-        public object usuario_consultar(Usuario _objUsuario)
+        public object usuario_consultar()
         {
 
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
             try
-            {
-                //if (string.IsNullOrEmpty(_objUsuario.Persona.IdPersonaEncriptado.Trim()))
-                //{
-                //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                //}
-                //else if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()) || string.IsNullOrEmpty(_objUsuario.Clave.Trim()))
-                //{
-                //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                //}
-                ////else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
-                ////{
-                ////    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                ////    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
-                ////}
-                //else
-                //{
-                //    int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
-                //    var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona && c.Estado == true).FirstOrDefault();
-                //    bool _validarPersona = true;
-                //    if (_objPersona == null)
-                //    {
-                //        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
-                //        _validarPersona = false;
-                //    }
-                //    if (_validarPersona == true)
-                //    {
-                        //_objUsuario.Estado = false;
-                        //int _cantidadUsuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios().Count;
-                        //if (_cantidadUsuarios == 0)
-                        //{
-                        //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        //    _http.mensaje = "No se ingresado ningun usuario Ingresado";
-                        //}
-                        //else
-                        //{
-                        
-                        var listaUsuarios  = _objCatalogoUsuarios.ConsultarUsuario().Where(c => c.Estado == true);
+            {                        
+                var listaUsuarios  = _objCatalogoUsuarios.ConsultarUsuario();
 
-                        foreach (var item in listaUsuarios)
-                        {
-                            item.IdUsuario                                          = 0;
-                            item.Persona.IdPersona                                  = 0;
-                            item.Persona.Sexo.IdSexo                                = 0;
-                            item.Persona.TipoIdentificacion.IdTipoIdentificacion    = 0;
-                        }
-                        _respuesta = listaUsuarios;
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                        //}
-                //    }
-
-                //}
+                foreach (var item in listaUsuarios)
+                {
+                    item.IdUsuario                                          = 0;
+                    item.Persona.IdPersona                                  = 0;
+                    item.Persona.Sexo.IdSexo                                = 0;
+                    item.Persona.TipoIdentificacion.IdTipoIdentificacion    = 0;
+                }
+                _respuesta = listaUsuarios;
+                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -336,9 +287,10 @@ namespace API.Controllers
 
         }
 
+
         [HttpPost]
-        [Route("api/usuario_informacionGeneral")]
-        public object usuario_informacionGeneral(Usuario _objUsuario)
+        [Route("api/usuario_consultar")]
+        public object usuario_consultar(string _idUsuarioEncriptado)
         {
 
             object _respuesta = new object();
@@ -346,45 +298,28 @@ namespace API.Controllers
 
             try
             {
-                if (string.IsNullOrEmpty(_objUsuario.Persona.IdPersonaEncriptado.Trim()))
+                if (string.IsNullOrEmpty(_idUsuarioEncriptado.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                 }
-                else if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()) || string.IsNullOrEmpty(_objUsuario.Clave.Trim()))
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                }
-                else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
-                }
                 else
                 {
-                    int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
-                    var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona && c.Estado == true).FirstOrDefault();
-                    bool _validarPersona = true;
-                    if (_objPersona == null)
+                    int _idUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_idUsuarioEncriptado));
+                    var _objUsuario = _objCatalogoUsuarios.ConsultarUsuario().Where(c => c.IdUsuario == _idUsuario).FirstOrDefault();
+
+                    if (_objUsuario == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
-                        _validarPersona = false;
                     }
-                    if (_validarPersona == true)
+                    else
                     {
-                        //_objUsuario.Estado = false;
-                        //int _cantidadUsuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarUsuarios().Count;
-                        //if (_cantidadUsuarios == 0)
-                        //{
-                        //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        //    _http.mensaje = "No se ingresado ningun usuario Ingresado";
-                        //}
-                        //else
-                        //{
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                        _respuesta = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true);
-                        //}
+                        _objUsuario.IdUsuario = 0;
+                        _objUsuario.Persona.IdPersona = 0;
+                        _objUsuario.Persona.Sexo.IdSexo = 0;
+                        _objUsuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
                     }
-
+                    _respuesta = _objUsuario;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -404,27 +339,23 @@ namespace API.Controllers
 
 
         }
-
 
         [HttpPost]
         [Route("api/ValidarCorreo")]
         public object ValidarCorreo(Usuario _objUsuario)
         {
-            //string hola = "hola";
-            //object respuesta = new { hola };
-
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
             try
             {
-                // calida el token de la peticion, este es una ruta para consultar asi que el identificador del token debe ser 4
-                //Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
-                //string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
-
                 if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                }
+                else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count == 0)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                 }
                 else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
                 {
@@ -468,38 +399,48 @@ namespace API.Controllers
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                 }
-                else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
+                else
                 {
-                    //string _claveUsuario = _seguridad.DesEncriptar(_objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault().Clave);
-                    string _claveUsuario = _objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault().Clave;
-                    if ( _claveUsuario != _objUsuario.Clave )
+                    var _objUsuarioBuscado = _objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault();
+                    if (_objUsuarioBuscado == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el correo";
+                    }
+                    else if (_objUsuarioBuscado.Estado == false)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "La contraceña es incorrecta";
+                        _http.mensaje = "Este usuario ha sido deshabilitado. Comuníquese con el administrador del sistema.";
+                    }
+                    else if (_objUsuarioBuscado.Clave != _objUsuario.Clave)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "La contraseña es incorrecta";
                     }
                     else
                     {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                        var listaUsuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true).ToList();
-                        foreach (var item in listaUsuarios)
+                        var _listaAsignarUsuarioTipoUsuario = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Usuario.IdUsuario == _objUsuarioBuscado.IdUsuario && c.Estado == true && c.TipoUsuario.Estado == true).ToList();
+                        var _listaRolesAsignados = _listaAsignarUsuarioTipoUsuario
+                              .Select(y => new TipoUsuario() { IdTipoUsuario = y.TipoUsuario.IdTipoUsuario, Descripcion = y.TipoUsuario.Descripcion })
+                              .GroupBy(c => c.IdTipoUsuario).Select(x => new TipoUsuario() { IdTipoUsuario = x.Key, Descripcion = x.Select(w => w.Descripcion).FirstOrDefault() })
+                              .ToList();
+                        if(_listaRolesAsignados.Count==0)
                         {
-                            item.IdAsignarUsuarioTipoUsuario                                = 0;
-                            item.Usuario.IdUsuario                                          = 0;
-                            item.Usuario.Persona.IdPersona                                  = 0;
-                            item.Usuario.Persona.Sexo.IdSexo                                = 0;
-                            item.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion    = 0;
-                            item.TipoUsuario.IdTipoUsuario                                  = 0;
-                            
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault();
+                            _http.mensaje = "No se encontraron roles asignados a este usuario";
                         }
-                        _respuesta = listaUsuarios;
+                        else
+                        {
+                            foreach (var item in _listaRolesAsignados)
+                            {
+                                item.IdTipoUsuario = 0;
+                            }
+                            _respuesta = _listaRolesAsignados;
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
 
+                        }
                     }
-                    
                 }
-
-                
-
-           
             }
             catch (Exception ex)
             {
