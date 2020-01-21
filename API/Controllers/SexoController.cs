@@ -18,7 +18,7 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/sexo_consultar")]
-        public object sexo_consultar(Sexo _objSexo)
+        public object sexo_consultar()
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
