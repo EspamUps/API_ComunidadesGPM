@@ -75,8 +75,10 @@ namespace API.Controllers
                 }
                 else
                 {
-                    int _idSexoDesencriptado = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.Sexo.IdSexoEncriptado));
-                    int _idTipoIdentificacionDesencriptado = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.TipoIdentificacion.IdTipoIdentificacionEncriptado));
+
+                    int _idSexoDesencriptado                = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.Sexo.IdSexoEncriptado));
+                    int _idTipoIdentificacionDesencriptado  = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.TipoIdentificacion.IdTipoIdentificacionEncriptado));
+                    int _idParroquiaDesencriptado           = Convert.ToInt32(_objPersona.Parroquia.IdParroquiaEncriptado); // aun no existe esta tabla por eso paso un valor string y lo convierto;
 
                     var _objSexo = _objCatalogoSexo.ConsultarSexos().Where(c => c.IdSexo == _idSexoDesencriptado && c.Estado == true).FirstOrDefault();
                     var _objTipoIdentificacion = _objCatalogoTipoIdentificacion.ConsultarTipoIdentificacion().Where(c => c.IdTipoIdentificacion == _idTipoIdentificacionDesencriptado && c.Estado == true).FirstOrDefault();
@@ -118,8 +120,6 @@ namespace API.Controllers
                 http = _http
             };
         }
-
-
         [HttpPost]
         [Route("api/persona_modificar")]
         public object persona_modificar(Persona _objPersona)
@@ -181,7 +181,18 @@ namespace API.Controllers
                 }
                 else
                 {
+                    int _idSexoDesencriptado = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.Sexo.IdSexoEncriptado));
+                    int _idTipoIdentificacionDesencriptado = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.TipoIdentificacion.IdTipoIdentificacionEncriptado));
+                    int _idParroquiaDesencriptado = Convert.ToInt32(_objPersona.Parroquia.IdParroquiaEncriptado); // aun no existe esta tabla por eso paso un valor string y lo convierto;
+
+                    var _objSexo = _objCatalogoSexo.ConsultarSexos().Where(c => c.IdSexo == _idSexoDesencriptado && c.Estado == true).FirstOrDefault();
+                    var _objTipoIdentificacion = _objCatalogoTipoIdentificacion.ConsultarTipoIdentificacion().Where(c => c.IdTipoIdentificacion == _idTipoIdentificacionDesencriptado && c.Estado == true).FirstOrDefault();
+
                     _objPersona.Estado = true;
+                    _objPersona.Sexo.IdSexo = _idSexoDesencriptado;
+                    _objPersona.TipoIdentificacion.IdTipoIdentificacion = _idTipoIdentificacionDesencriptado;
+                    _objPersona.IdPersona = _idParroquiaDesencriptado;
+
                     int _idPersonaModificada = _objCatalogoPersona.ModificarPersona(_objPersona);
                     if (_idPersonaModificada == 0)
                     {
@@ -207,88 +218,34 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http};
         }
-
-
-        [HttpPost]
-        [Route("api/persona_cambiarestado")]
-        public object persona_cambiarestado(Persona _objPersona)
-        {
-            object _respuesta = new object();
-            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
-            try
-            {
-                int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.IdPersonaEncriptado));
-                var _objPersonaModificar = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona).FirstOrDefault();
-                if (_objPersonaModificar == null)
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "La persona que intenta modificar no es válida.";
-                }
-                else
-                {
-                    bool _nuevoEstado = false;
-                    if (_objPersonaModificar.Estado == false)
-                        _nuevoEstado = true;
-                    _objPersonaModificar.Estado = _nuevoEstado;
-                    int _idPersonaModificada = _objCatalogoPersona.ModificarPersona(_objPersonaModificar);
-                    if (_idPersonaModificada == 0)
-                    {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ocurrió un error al intentar modificar el estado de la persona, intente nuevamente.";
-                    }
-                    else
-                    {
-                        var _objPersonaModificada = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona).FirstOrDefault();
-                        _objPersonaModificada.IdPersona = 0;
-                        _objPersonaModificada.TipoIdentificacion.IdTipoIdentificacion = 0;
-                        _objPersonaModificada.Sexo.IdSexo = 0;
-                        _respuesta = _objPersonaModificada;
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                    }
-
-                }
-            }
-            catch (Exception ex)
-            {
-                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-                return new { respuesta = _respuesta, http = _http };
-            }
-            return new { respuesta = _respuesta, http = _http };
-        }
-
-
         [HttpPost]
         [Route("api/persona_eliminar")]
         public object persona_eliminar(Persona _objPersona)
         {
+            CatalogoAsignarUsuarioTipoUsuario _objCatalogoAsignarUsuarioTipoUsuario = new CatalogoAsignarUsuarioTipoUsuario();
+
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
                 int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objPersona.IdPersonaEncriptado));
-                var _objPersonaConsultada = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona).FirstOrDefault();
-                if (_objPersonaConsultada == null)
+
+                int tiene_usuarios = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(x => x.Usuario.Persona.IdPersona == _idPersona).ToList().Count();
+
+                if (tiene_usuarios > 0)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "La persona tiene usuarios";
+                }
+                if (_objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona).FirstOrDefault() == null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "La persona que intenta eliminar no es válida.";
                 }
-                else if (_objPersonaConsultada.Utilizado=="1")
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "La persona no puede ser eliminada porque tiene un usuario asignado.";
-                }
                 else
                 {
-                    int _idPersonaEliminado = _objCatalogoPersona.EliminarPersona(_objPersonaConsultada);
-                    if (_idPersonaEliminado == 0)
-                    {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ocurrió un error al intentar eliminar a la persona, intente nuevamente.";
-                    }
-                    else
-                    {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                    }
+                    _objCatalogoPersona.EliminarPersona(new Persona() { IdPersona = _idPersona });
+                    _respuesta = _objPersona;
                 }
             }
             catch (Exception ex)

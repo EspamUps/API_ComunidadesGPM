@@ -105,7 +105,7 @@ namespace API.Controllers
         [Route("api/usuario_modificar")]
         public object usuario_modificar(Usuario _objUsuario) {
 
-
+            return _objUsuario;
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
