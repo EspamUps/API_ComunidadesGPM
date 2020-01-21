@@ -60,14 +60,14 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
-        public int EliminarPersona(Persona objPersona)
+        public int EliminarPersona(int _idPersona)
         {
             try
             {
                 db.Sp_PersonaEliminar(
-                        objPersona.IdPersona
+                        _idPersona
                  );
-                return objPersona.IdPersona;
+                return _idPersona;
             }
             catch (Exception)
             {

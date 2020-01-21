@@ -66,12 +66,12 @@ namespace API.Models.Catalogos
                 
         }
         //eliminar usuario
-        public int EliminarUsuario(Usuario _objUsuario)
+        public int EliminarUsuario(int _idUsuario)
         {
             try
             {
-                db.Sp_UsuarioEliminar(_objUsuario.IdUsuario);
-                return _objUsuario.IdUsuario;
+                db.Sp_UsuarioEliminar(_idUsuario);
+                return _idUsuario;
             }
             catch (Exception)
             {
