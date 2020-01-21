@@ -9,9 +9,11 @@ namespace API.Models.Entidades
     {
         public int IdParroquia { get; set; }
         public string IdParroquiaEncriptado { get; set; }
-        public string Codigo { get; set; }
-        public string Descripcion { get; set; }
-        public bool Estado { get; set; }
+        public string CodigoParroquia { get; set; }
+        public string NombreParroquia { get; set; }
+        public string DescripcionParroquia { get; set; }
+        public string RutaLogoParroquia { get; set; }
+        public bool EstadoParroquia { get; set; }
         public  Canton Canton { get; set; }
 
     }

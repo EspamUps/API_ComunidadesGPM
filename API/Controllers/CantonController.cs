@@ -1,51 +1,49 @@
-﻿using System;
+﻿using API.Models.Catalogos;
+using API.Models.Metodos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-using API.Models.Catalogos;
-using API.Models.Entidades;
-using API.Models.Metodos;
-
 namespace API.Controllers
 {
-    public class SexoController : ApiController
+    public class CantonController : ApiController
     {
-        CatalogoSexo _objCatalogoSexo = new CatalogoSexo();
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
+        CatalogoCanton _objCatalogoCanton = new CatalogoCanton();
+        Seguridad _seguridad = new Seguridad();
 
         [HttpPost]
-        [Route("api/sexo_consultar")]
-        public object sexo_consultar()
+        [Route("api/canton_consultar")]
+        public object canton_consultar()
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                var listaSexo = _objCatalogoSexo.ConsultarSexos().Where(x => x.Estado == true).ToList();
-                foreach (var item in listaSexo)
+                var _listaCantones = _objCatalogoCanton.ConsultarCanton().Where(c => c.EstadoCanton == true && c.Provincia.EstadoProvincia == true).ToList(); ;
+                foreach (var item in _listaCantones)
                 {
-                    item.IdSexo = 0;
+                    item.IdCanton = 0;
+                    item.Provincia.IdProvincia = 0;
                 }
-                _respuesta = listaSexo;
+                _respuesta = _listaCantones;
                 _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
             }
             catch (Exception ex)
             {
+
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
                 return new
                 {
                     respuesta = _respuesta,
                     http = _http
                 };
+
             }
-            return new
-            {
-                respuesta = _respuesta,
-                http = _http
-            };
+            return new { respuesta = _respuesta, http = _http };
         }
     }
 }

@@ -26,18 +26,18 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                var lista = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true).ToList();
-                foreach (var item in lista)
+                var _listaAsignarUsuarioTipoUsuario = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true).ToList();
+                foreach (var item in _listaAsignarUsuarioTipoUsuario)
                 {
-                    item.IdAsignarUsuarioTipoUsuario                             = 0;
-                    item.Usuario.IdUsuario                                       = 0;
-                    item.TipoUsuario.IdTipoUsuario                               = 0;
-                    item.Usuario.Persona.IdPersona                               = 0;
-                    item.Usuario.Persona.Sexo.IdSexo                             = 0;
+                    item.IdAsignarUsuarioTipoUsuario = 0;
+                    item.Usuario.Persona.IdPersona = 0;
+                    item.Usuario.IdUsuario = 0;
+                    item.Usuario.Persona.Sexo.IdSexo = 0;
                     item.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                    item.TipoUsuario.IdTipoUsuario = 0;
                 }
-                _respuesta = lista;
-                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                _respuesta = _listaAsignarUsuarioTipoUsuario;
+               _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -118,6 +118,13 @@ namespace API.Controllers
                     }
                     else
                     {
+                        var _objAsignarUsuarioTipoUsuarioIngresado = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.IdAsignarUsuarioTipoUsuario == _idAsignarUsuarioTipoUsuarioIngresado).FirstOrDefault();
+                        _objAsignarUsuarioTipoUsuarioIngresado.IdAsignarUsuarioTipoUsuario = 0;
+                        _objAsignarUsuarioTipoUsuarioIngresado.Usuario.Persona.IdPersona = 0;
+                        _objAsignarUsuarioTipoUsuarioIngresado.Usuario.IdUsuario = 0;
+                        _objAsignarUsuarioTipoUsuarioIngresado.Usuario.Persona.Sexo.IdSexo = 0;
+                        _objAsignarUsuarioTipoUsuarioIngresado.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                        _respuesta = _objAsignarUsuarioTipoUsuarioIngresado;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "200").FirstOrDefault();
                     }
                 }

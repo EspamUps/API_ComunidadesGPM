@@ -60,19 +60,9 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
-        public int EliminarPersona(int _idPersona)
+        public void EliminarPersona(int _idPersona)
         {
-            try
-            {
-                db.Sp_PersonaEliminar(
-                        _idPersona
-                 );
-                return _idPersona;
-            }
-            catch (Exception)
-            {
-                return 0;
-            }
+            db.Sp_PersonaEliminar(_idPersona);
         }
 
         public List<Persona> ConsultarPersona() {
