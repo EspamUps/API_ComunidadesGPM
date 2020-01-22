@@ -175,22 +175,22 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/asignarusuariotipousuario_eliminar")]
-        public object asignarusuariotipousuario_eliminar(string _IdAsignarUsuarioTipoUsuario)
+        public object asignarusuariotipousuario_eliminar(string _IdAsignarUsuarioTipoUsuarioEncriptado)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "500").FirstOrDefault();
             try
             {
-                if (string.IsNullOrEmpty(_objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuarioEncriptado.Trim()))
+                if (string.IsNullOrEmpty(_IdAsignarUsuarioTipoUsuarioEncriptado.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
                     _http.mensaje = "No se encontró el id encriptado del asignar usuario tipo usuario";
                 }
                 else
                 {
-                    _objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuarioEncriptado));
-                    _objAsignarUsuarioTipoUsuario.Estado=false;
-                    int _idAsignarUsuarioTipoUsuarioModificado = _objCatalogoAsignarUsuarioTipoUsuario.CambiarEstadoAsignarUsuarioTipoUsuario(_objAsignarUsuarioTipoUsuario);
+                    int _IdAsignarUsuarioTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_IdAsignarUsuarioTipoUsuarioEncriptado).ToString());
+                    bool _Estado=false;
+                    int _idAsignarUsuarioTipoUsuarioModificado = _objCatalogoAsignarUsuarioTipoUsuario.CambiarEstadoAsignarUsuarioTipoUsuario(new AsignarUsuarioTipoUsuario() { IdAsignarUsuarioTipoUsuario= _IdAsignarUsuarioTipoUsuario,Estado= _Estado });
                     if (_idAsignarUsuarioTipoUsuarioModificado == 0)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
