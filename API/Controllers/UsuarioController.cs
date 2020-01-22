@@ -367,9 +367,7 @@ namespace API.Controllers
         [HttpPost]
         [Route("api/Login")]
         public object Login(Usuario _objUsuario)
-        {
-
-           
+        {           
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
@@ -405,8 +403,8 @@ namespace API.Controllers
                     {
                         var _listaAsignarUsuarioTipoUsuario = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Usuario.IdUsuario == _objUsuarioBuscado.IdUsuario && c.Estado == true && c.TipoUsuario.Estado == true).ToList();
                         var _listaRolesAsignados = _listaAsignarUsuarioTipoUsuario
-                              .Select(y => new TipoUsuario() { IdTipoUsuario = y.TipoUsuario.IdTipoUsuario, Descripcion = y.TipoUsuario.Descripcion })
-                              .GroupBy(c => c.IdTipoUsuario).Select(x => new TipoUsuario() { IdTipoUsuario = x.Key, Descripcion = x.Select(w => w.Descripcion).FirstOrDefault() })
+                              .Select(y => new TipoUsuario() { IdTipoUsuario = y.TipoUsuario.IdTipoUsuario, Descripcion = y.TipoUsuario.Descripcion, IdTipoUsuarioEncriptado = y.TipoUsuario.IdTipoUsuarioEncriptado })
+                              .GroupBy(c => c.IdTipoUsuario).Select(x => new TipoUsuario() { IdTipoUsuario = x.Key, Descripcion = x.Select(w => w.Descripcion).FirstOrDefault(), IdTipoUsuarioEncriptado = x.Select(w=>w.IdTipoUsuarioEncriptado).FirstOrDefault() })
                               .ToList();
                         if(_listaRolesAsignados.Count==0)
                         {
