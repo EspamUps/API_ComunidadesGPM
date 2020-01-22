@@ -228,23 +228,31 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_idPersonaEncriptado));
-                var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona).FirstOrDefault();
-                                
-                if (_objPersona == null)
+                if (string.IsNullOrWhiteSpace(_idPersonaEncriptado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "La persona que intenta eliminar no es válida.";
-                }
-                else if (_objPersona.Utilizado=="1")
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "La persona ya tiene un usuario asignado, no se puede eliminar.";
+                    _http.mensaje = "Ingrese el identificador de la persona que intenta eliminar.";
                 }
                 else
                 {
-                    _objCatalogoPersona.EliminarPersona(_idPersona);
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_idPersonaEncriptado));
+                    var _objPersona = _objCatalogoPersona.ConsultarPersona().Where(c => c.IdPersona == _idPersona).FirstOrDefault();
+
+                    if (_objPersona == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró a la persona que intenta eliminar.";
+                    }
+                    else if (_objPersona.Utilizado == "1")
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "La persona ya tiene un usuario asignado, no se puede eliminar.";
+                    }
+                    else
+                    {
+                        _objCatalogoPersona.EliminarPersona(_idPersona);
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
                 }
             }
             catch (Exception ex)
