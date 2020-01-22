@@ -28,7 +28,12 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                if (_objPersona.PrimerNombre == null || string.IsNullOrWhiteSpace(_objPersona.PrimerNombre))
+                if(_objPersona == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "No se encontró nada para insertar";
+                }
+                else if (_objPersona.PrimerNombre == null || string.IsNullOrWhiteSpace(_objPersona.PrimerNombre))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el primer nombre de la persona.";
@@ -180,8 +185,7 @@ namespace API.Controllers
                         _http.mensaje = "Seleccione la parroquia de la persona.";
                     }
                     else if (_objCatalogoPersona.ConsultarPersona().Where(x => x.NumeroIdentificacion == _objPersona.NumeroIdentificacion && x.IdPersona != _idPersona).ToList().Count > 0)
-                    {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                    { _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                         _http.mensaje = "El número de identificación ya ha sido utilizado por otra persona.";
                     }
                     else if (_objPersona.Telefono==null || string.IsNullOrEmpty(_objPersona.Telefono.Trim()))
@@ -234,7 +238,6 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-                return new { respuesta = _respuesta, http = _http };
             }
             return new { respuesta = _respuesta, http = _http};
         }
@@ -278,7 +281,6 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-                return new { respuesta = _respuesta, http = _http };
             }
             return new { respuesta = _respuesta, http = _http };
         }
@@ -309,17 +311,8 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-                return new
-                {
-                    respuesta = _respuesta,
-                    http = _http
-                };
             }
-            return new
-            {
-                respuesta = _respuesta,
-                http = _http
-            };
+            return new { respuesta = _respuesta, http = _http};
         }
 
         // GET: api/Persona
@@ -362,17 +355,8 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-                return new
-                {
-                    respuesta = _respuesta,
-                    http = _http
-                };
             }
-            return new
-            {
-                respuesta = _respuesta,
-                http = _http
-            };
+            return new {respuesta = _respuesta,http = _http};
         }
 
     }
