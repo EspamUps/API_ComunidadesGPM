@@ -110,23 +110,36 @@ namespace API.Controllers
                     _objAsignarUsuarioTipoUsuario.Usuario.IdUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_objAsignarUsuarioTipoUsuario.Usuario.IdUsuarioEncriptado));
                     _objAsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_objAsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuarioEncriptado));
                     _objAsignarUsuarioTipoUsuario.Estado = true;
-                    int _idAsignarUsuarioTipoUsuarioIngresado = _objCatalogoAsignarUsuarioTipoUsuario.InsertarAsignarUsuarioTipoUsuario(_objAsignarUsuarioTipoUsuario);
-                    if(_idAsignarUsuarioTipoUsuarioIngresado == 0)
+
+                    int yaExiteEstaAsignacionValida= _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(x => x.TipoUsuario.IdTipoUsuario == _objAsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario && x.Usuario.IdUsuario== _objAsignarUsuarioTipoUsuario.Usuario.IdUsuario && x.Estado==true).ToList().Count();
+
+                    if (yaExiteEstaAsignacionValida>0)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ocurrió un error al intentar asignar el usuario con el tipo de usuario seleccionado, intente nuevamente.";
+                        _http.mensaje = "Ya existe una asignacion valida para este usuario y este tipo de usuario ";
                     }
                     else
                     {
-                        var _objAsignarUsuarioTipoUsuarioIngresado = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.IdAsignarUsuarioTipoUsuario == _idAsignarUsuarioTipoUsuarioIngresado).FirstOrDefault();
-                        _objAsignarUsuarioTipoUsuarioIngresado.IdAsignarUsuarioTipoUsuario = 0;
-                        _objAsignarUsuarioTipoUsuarioIngresado.Usuario.Persona.IdPersona = 0;
-                        _objAsignarUsuarioTipoUsuarioIngresado.Usuario.IdUsuario = 0;
-                        _objAsignarUsuarioTipoUsuarioIngresado.Usuario.Persona.Sexo.IdSexo = 0;
-                        _objAsignarUsuarioTipoUsuarioIngresado.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
-                        _respuesta = _objAsignarUsuarioTipoUsuarioIngresado;
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "200").FirstOrDefault();
+                        int _idAsignarUsuarioTipoUsuarioIngresado = _objCatalogoAsignarUsuarioTipoUsuario.InsertarAsignarUsuarioTipoUsuario(_objAsignarUsuarioTipoUsuario);
+                        if (_idAsignarUsuarioTipoUsuarioIngresado == 0)
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "Ocurrió un error al intentar asignar el usuario con el tipo de usuario seleccionado, intente nuevamente.";
+                        }
+                        else
+                        {
+                            var _objAsignarUsuarioTipoUsuarioIngresado = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.IdAsignarUsuarioTipoUsuario == _idAsignarUsuarioTipoUsuarioIngresado).FirstOrDefault();
+                            _objAsignarUsuarioTipoUsuarioIngresado.IdAsignarUsuarioTipoUsuario = 0;
+                            _objAsignarUsuarioTipoUsuarioIngresado.Usuario.Persona.IdPersona = 0;
+                            _objAsignarUsuarioTipoUsuarioIngresado.Usuario.IdUsuario = 0;
+                            _objAsignarUsuarioTipoUsuarioIngresado.Usuario.Persona.Sexo.IdSexo = 0;
+                            _objAsignarUsuarioTipoUsuarioIngresado.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                            _respuesta = _objAsignarUsuarioTipoUsuarioIngresado;
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "200").FirstOrDefault();
+                        }
                     }
+
+                   
                 }
             }
             catch (Exception ex)

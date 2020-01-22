@@ -72,6 +72,9 @@ namespace API.Controllers
                     if(_validarPersona == true)
                     {
                         _objUsuario.Estado = true;
+
+                        _objUsuario.Persona = _objPersona;
+
                         int _idUsuarioIngresado = _objCatalogoUsuarios.InsertarUsuario(_objUsuario);
                         if(_idUsuarioIngresado == 0)
                         {
@@ -121,11 +124,11 @@ namespace API.Controllers
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                 }
-                else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
-                }
+                //else if (_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
+                //{
+                //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                //    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
+                //}
                 else
                 {
                     int _idPersona = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.Persona.IdPersonaEncriptado));
@@ -142,6 +145,9 @@ namespace API.Controllers
                         int _idUsuarioDesencriptado = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.IdUsuarioEncriptado));
                         _objUsuario.IdUsuario = _idUsuarioDesencriptado; //  se asigna el id del usuario que ha sido desencriptado para su posterior modificacion
                         _objUsuario.Estado = true;
+
+                        _objUsuario.Persona = _objPersona;
+
                         int _idUsuarioModificado = _objCatalogoUsuarios.ModificarUsuario(_objUsuario);
                         if (_idUsuarioModificado == 0)
                         {
