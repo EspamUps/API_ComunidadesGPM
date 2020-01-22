@@ -71,5 +71,52 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+
+
+
+
+        [HttpPost]
+        [Route("api/provincia_insertar")]
+        public object provincia_insertar(Provincia _objProvincia)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objProvincia == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                }
+                else if (string.IsNullOrWhiteSpace(_objProvincia.NombreProvincia))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el nombre de la provincia.";
+                }
+                else
+                {
+                    _objProvincia.EstadoProvincia = true;
+                    int _idProvincia = _objCatalogoProvincia.InsertarProvincia(_objProvincia);
+                    if(_idProvincia==0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    }
+                    else
+                    {
+                        var _objProvinciaInsertado = _objCatalogoProvincia.ConsultarProvinciaPorId(_idProvincia).Where(c=>c.EstadoProvincia==true).FirstOrDefault();
+                        _objProvinciaInsertado.IdProvincia = 0;
+                        _respuesta = _objProvinciaInsertado;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+                return new { respuesta = _respuesta, http = _http };
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+      
     }
 }

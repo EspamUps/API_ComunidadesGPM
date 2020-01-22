@@ -303,11 +303,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioInformacionGeneral_Result>("Sp_UsuarioInformacionGeneral");
         }
     
-        public virtual ObjectResult<Sp_PersonaConsultar_Result3> Sp_PersonaConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PersonaConsultar_Result3>("Sp_PersonaConsultar");
-        }
-    
         public virtual int Sp_PersonaEliminar(Nullable<int> idPersona)
         {
             var idPersonaParameter = idPersona.HasValue ?
@@ -691,6 +686,11 @@ namespace API.Conexion
         public virtual ObjectResult<Sp_ParroquiaConsultar_Result> Sp_ParroquiaConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ParroquiaConsultar_Result>("Sp_ParroquiaConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_PersonaConsultar_Result4> Sp_PersonaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PersonaConsultar_Result4>("Sp_PersonaConsultar");
         }
     }
 }

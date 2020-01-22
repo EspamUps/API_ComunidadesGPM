@@ -80,6 +80,7 @@ namespace API.Models.Catalogos
                     Telefono = item.PERSONA_Telefono,
                     Direccion = item.PERSONA_Direccion,
                     Estado = item.PERSONA_Estado,
+                    Utilizado = item.PERSONA_Utilizado,
                     Sexo = new Sexo()
                     {
                         IdSexo = item.SEXO_IdSexo,
