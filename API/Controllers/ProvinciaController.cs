@@ -83,11 +83,7 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                if (_objProvincia == null)
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                }
-                else if (string.IsNullOrWhiteSpace(_objProvincia.NombreProvincia))
+                if (string.IsNullOrWhiteSpace(_objProvincia.NombreProvincia))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el nombre de la provincia.";

@@ -54,8 +54,11 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                //int _IdProvinciaEncriptado
-                var _listaCantones = _objCatalogoCanton.ConsultarCanton().Where(c => c.EstadoCanton == true && c.Provincia.EstadoProvincia == true).ToList(); ;
+                //CatalogoProvincia _objCatalogoProvincia = new CatalogoProvincia();
+
+                int _IdProvinciaDesEncriptado = Convert.ToInt32(_seguridad.DesEncriptar(_IdProvinciaEncriptado).ToString());
+                //var _objProvincia = _objCatalogoProvincia.
+                var _listaCantones = _objCatalogoCanton.ConsultarCanton().Where(c => c.EstadoCanton == true && c.Provincia.EstadoProvincia == true && c.Provincia.IdProvincia==_IdProvinciaDesEncriptado).ToList(); ;
                 foreach (var item in _listaCantones)
                 {
                     item.IdCanton = 0;

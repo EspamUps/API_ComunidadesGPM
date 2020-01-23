@@ -272,33 +272,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Sp_PersonaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaConsultar">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PersonaConsultar_Result3">
-          <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
-          <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
-          <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
-          <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
-          <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
-          <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
-          <ScalarProperty Name="PERSONA_IdTipoIdentificacion" ColumnName="PERSONA_IdTipoIdentificacion" />
-          <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
-          <ScalarProperty Name="PERSONA_IdSexo" ColumnName="PERSONA_IdSexo" />
-          <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
-          <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
-          <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
-          <ScalarProperty Name="PERSONA_Utilizado" ColumnName="PERSONA_Utilizado" />
-          <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
-          <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
-          <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
-          <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
-          <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
-          <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
-          <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
-          <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Sp_PersonaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaEliminar" />
     <FunctionImportMapping FunctionImportName="Sp_PersonaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaModificar" />
     <FunctionImportMapping FunctionImportName="Sp_UsuarioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioConsultar">
@@ -335,5 +308,150 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="Sp_UsuarioEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioEliminar" />
     <FunctionImportMapping FunctionImportName="Sp_UsuarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioModificar" />
+    <FunctionImportMapping FunctionImportName="Sp_CantonEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonEliminar" />
+    <FunctionImportMapping FunctionImportName="Sp_CantonInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonInsertar" />
+    <FunctionImportMapping FunctionImportName="Sp_CantonModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonModificar" />
+    <FunctionImportMapping FunctionImportName="Sp_ComunidadEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadEliminar" />
+    <FunctionImportMapping FunctionImportName="Sp_ComunidadInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadInsertar" />
+    <FunctionImportMapping FunctionImportName="Sp_ComunidadModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadModificar" />
+    <FunctionImportMapping FunctionImportName="Sp_ParroquiaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaEliminar" />
+    <FunctionImportMapping FunctionImportName="Sp_ParroquiaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaInsertar" />
+    <FunctionImportMapping FunctionImportName="Sp_ParroquiaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaModificar" />
+    <FunctionImportMapping FunctionImportName="Sp_ProvinciaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ProvinciaConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ProvinciaConsultar_Result">
+          <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+          <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+          <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+          <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+          <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+          <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+          <ScalarProperty Name="UtilizadoProvincia" ColumnName="UtilizadoProvincia" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_ProvinciaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ProvinciaEliminar" />
+    <FunctionImportMapping FunctionImportName="Sp_ProvinciaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ProvinciaInsertar" />
+    <FunctionImportMapping FunctionImportName="Sp_ProvinciaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ProvinciaModificar" />
+    <FunctionImportMapping FunctionImportName="Sp_CantonConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CantonConsultar_Result">
+          <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
+          <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
+          <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+          <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+          <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
+          <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
+          <ScalarProperty Name="UtilizadoCanton" ColumnName="UtilizadoCanton" />
+          <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+          <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+          <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+          <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+          <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+          <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_ComunidadConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ComunidadConsultar_Result">
+          <ScalarProperty Name="IdComunidad" ColumnName="IdComunidad" />
+          <ScalarProperty Name="CodigoComunidad" ColumnName="CodigoComunidad" />
+          <ScalarProperty Name="NombreComunidad" ColumnName="NombreComunidad" />
+          <ScalarProperty Name="DescripcionComunidad" ColumnName="DescripcionComunidad" />
+          <ScalarProperty Name="RutaLogoComunidad" ColumnName="RutaLogoComunidad" />
+          <ScalarProperty Name="EstadoComunidad" ColumnName="EstadoComunidad" />
+          <ScalarProperty Name="UtilizadoComunidad" ColumnName="UtilizadoComunidad" />
+          <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+          <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
+          <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
+          <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
+          <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
+          <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
+          <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
+          <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
+          <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+          <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+          <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
+          <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
+          <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+          <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+          <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+          <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+          <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+          <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_ParroquiaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ParroquiaConsultar_Result">
+          <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+          <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
+          <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
+          <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
+          <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
+          <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
+          <ScalarProperty Name="UtilizadoParroquia" ColumnName="UtilizadoParroquia" />
+          <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
+          <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
+          <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+          <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+          <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
+          <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
+          <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+          <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+          <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+          <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+          <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+          <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Sp_PersonaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaConsultar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PersonaConsultar_Result4">
+          <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+          <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+          <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+          <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+          <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+          <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+          <ScalarProperty Name="PERSONA_IdTipoIdentificacion" ColumnName="PERSONA_IdTipoIdentificacion" />
+          <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+          <ScalarProperty Name="PERSONA_IdSexo" ColumnName="PERSONA_IdSexo" />
+          <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+          <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+          <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+          <ScalarProperty Name="PERSONA_Utilizado" ColumnName="PERSONA_Utilizado" />
+          <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+          <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+          <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+          <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+          <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+          <ScalarProperty Name="PARROQUIA_IdParroquia" ColumnName="PARROQUIA_IdParroquia" />
+          <ScalarProperty Name="PARROQUIA_CodigoParroquia" ColumnName="PARROQUIA_CodigoParroquia" />
+          <ScalarProperty Name="PARROQUIA_NombreParroquia" ColumnName="PARROQUIA_NombreParroquia" />
+          <ScalarProperty Name="PARROQUIA_DescripcionParroquia" ColumnName="PARROQUIA_DescripcionParroquia" />
+          <ScalarProperty Name="PARROQUIA_RutaLogoParroquia" ColumnName="PARROQUIA_RutaLogoParroquia" />
+          <ScalarProperty Name="PARROQUIA_EstadoParroquia" ColumnName="PARROQUIA_EstadoParroquia" />
+          <ScalarProperty Name="CANTON_IdCanton" ColumnName="CANTON_IdCanton" />
+          <ScalarProperty Name="CANTON_CodigoCanton" ColumnName="CANTON_CodigoCanton" />
+          <ScalarProperty Name="CANTON_NombreCanton" ColumnName="CANTON_NombreCanton" />
+          <ScalarProperty Name="CANTON_DescripcionCanton" ColumnName="CANTON_DescripcionCanton" />
+          <ScalarProperty Name="CANTON_RutaLogoCanton" ColumnName="CANTON_RutaLogoCanton" />
+          <ScalarProperty Name="CANTON_EstadoCanton" ColumnName="CANTON_EstadoCanton" />
+          <ScalarProperty Name="PROVINCIA_IdProvincia" ColumnName="PROVINCIA_IdProvincia" />
+          <ScalarProperty Name="PROVINCIA_CodigoProvincia" ColumnName="PROVINCIA_CodigoProvincia" />
+          <ScalarProperty Name="PROVINCIA_NombreProvincia" ColumnName="PROVINCIA_NombreProvincia" />
+          <ScalarProperty Name="PROVINCIA_DescripcionProvincia" ColumnName="PROVINCIA_DescripcionProvincia" />
+          <ScalarProperty Name="PROVINCIA_RutaLogoProvincia" ColumnName="PROVINCIA_RutaLogoProvincia" />
+          <ScalarProperty Name="PROVINCIA_EstadoProvincia" ColumnName="PROVINCIA_EstadoProvincia" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

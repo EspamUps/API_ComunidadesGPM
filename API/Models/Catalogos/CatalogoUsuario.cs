@@ -79,11 +79,6 @@ namespace API.Models.Catalogos
             }
         }
 
-        public string DesenciptarClaveUsuario(string _clave) {
-            string clave = _seguridad.DecryptStringAES(_clave, _llave);
-            return clave;
-        }
-
         public List<Usuario> ConsultarUsuario() {
             List<Usuario> lista = new List<Usuario>();
             foreach (var item in db.Sp_UsuarioConsultar())
@@ -131,5 +126,57 @@ namespace API.Models.Catalogos
         }
 
 
+        public List<Usuario> ConsultarUsuarioPorId(int _idUsuario)
+        {
+            List<Usuario> lista = new List<Usuario>();
+            foreach (var item in db.Sp_UsuarioConsultar().Where(c=>c.USUARIO_IdUsuario==_idUsuario).ToList())
+            {
+                lista.Add(new Usuario()
+                {
+                    IdUsuarioEncriptado = _seguridad.Encriptar(item.USUARIO_IdUsuario.ToString()),
+                    IdUsuario = item.USUARIO_IdUsuario,
+                    Correo = item.USUARIO_Correo,
+                    ClaveEncriptada = _seguridad.Encriptar(item.USUARIO_Clave.ToString()),
+                    Estado = item.USUARIO_Estado,
+                    Utilizado = item.USUARIO_Utilizado,
+                    Persona = new Persona()
+                    {
+                        IdPersonaEncriptado = _seguridad.Encriptar(item.PERSONA_IdPersona.ToString()),
+                        IdPersona = item.PERSONA_IdPersona,
+                        PrimerNombre = item.PERSONA_PrimerNombre,
+                        SegundoNombre = item.PERSONA_SegundoNombre,
+                        PrimerApellido = item.PERSONA_PrimerApellido,
+                        SegundoApellido = item.PERSONA_SegundoApellido,
+                        NumeroIdentificacion = item.PERSONA_NumeroIdentificacion,
+                        Telefono = item.PERSONA_Telefono,
+                        Direccion = item.PERSONA_Direccion,
+                        Estado = item.PERSONA_Estado,
+                        Sexo = new Sexo()
+                        {
+                            IdSexoEncriptado = _seguridad.Encriptar(item.SEXO_IdSexo.ToString()),
+                            IdSexo = item.SEXO_IdSexo,
+                            Identificador = item.SEXO_Identificador,
+                            Descripcion = item.SEXO_Descripcion,
+                            Estado = item.SEXO_Estado,
+                        },
+                        TipoIdentificacion = new TipoIdentificacion()
+                        {
+                            IdTipoIdentificacionEncriptado = _seguridad.Encriptar(item.TIPOIDENTIFICACION_IdTipoIdentificacion.ToString()),
+                            IdTipoIdentificacion = item.TIPOIDENTIFICACION_IdTipoIdentificacion,
+                            Identificador = item.TIPOIDENTIFICACION_Identificador,
+                            Descripcion = item.TIPOIDENTIFICACION_Descripcion,
+                            Estado = item.TIPOIDENTIFICACION_Estado,
+                        }
+                    }
+                });
+            }
+            return lista;
+        }
+
+        public string DesenciptarClaveUsuario(string _clave)
+        {
+            string clave = _seguridad.DecryptStringAES(_clave, _llave);
+            return clave;
+        }
     }
 }

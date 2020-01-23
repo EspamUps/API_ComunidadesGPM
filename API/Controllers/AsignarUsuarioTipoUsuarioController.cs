@@ -42,7 +42,6 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-                return new { respuesta = _respuesta, http = _http };
             }
 
             return new { respuesta = _respuesta, http = _http };
@@ -50,21 +49,21 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/asignarusuariotipousuario_consultar")]
-        public object asignarusuariotipousuario_consultar( string _IdUsuarioEncriptado)
+        public object asignarusuariotipousuario_consultar(string _idUsuarioEncriptado)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                if (string.IsNullOrEmpty(_IdUsuarioEncriptado.Trim()))
+                if (_idUsuarioEncriptado==null || string.IsNullOrEmpty(_idUsuarioEncriptado.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el usuario que intenta consultar";
                 }
                 else
                 {
-                    int _idUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_IdUsuarioEncriptado));
-                    CatalogoUsuario _objCatalogoUsuarios = new CatalogoUsuario();
-                    var _objUsuario = _objCatalogoUsuarios.ConsultarUsuario().Where(c => c.IdUsuario == _idUsuario).FirstOrDefault();
+                    int _idUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_idUsuarioEncriptado));
+                    var _objUsuario = _objCatalogoUsuario.ConsultarUsuarioPorId(_idUsuario).FirstOrDefault();
                     var lista = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Estado == true && c.Usuario.IdUsuario == _objUsuario.IdUsuario).ToList();
                     foreach (var item in lista)
                     {
@@ -83,7 +82,6 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-                return new { respuesta = _respuesta, http = _http };
             }
             return new { respuesta = _respuesta, http = _http };
         }
@@ -145,7 +143,6 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-                return new { respuesta = _respuesta, http = _http };
             }
             return new { respuesta = _respuesta, http = _http };
         }
@@ -181,7 +178,6 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-                return new { respuesta = _respuesta, http = _http };
             }
             return new { respuesta = _respuesta, http = _http };
         }
@@ -218,7 +214,6 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-                return new { respuesta = _respuesta, http = _http };
             }
             return new { respuesta = _respuesta, http = _http };
         }

@@ -1,5 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ComunidadesGPMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <Function Name="Sp_CantonConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
+  <Function Name="Sp_CantonEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+    <Parameter Name="idCanton" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_CantonInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+    <Parameter Name="IdCanton" Type="int" Mode="In" />
+    <Parameter Name="CodigoCanton" Type="nvarchar" Mode="In" />
+    <Parameter Name="NombreCanton" Type="nvarchar" Mode="In" />
+    <Parameter Name="DescripcionCanton" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RutaLogoCanton" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EstadoCanton" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_CantonModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+    <Parameter Name="IdCanton" Type="int" Mode="In" />
+    <Parameter Name="CodigoCanton" Type="nvarchar" Mode="In" />
+    <Parameter Name="NombreCanton" Type="nvarchar" Mode="In" />
+    <Parameter Name="DescripcionCanton" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RutaLogoCanton" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EstadoCanton" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_ComunidadConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
+  <Function Name="Sp_ComunidadEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+    <Parameter Name="IdComunidad" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_ComunidadInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+    <Parameter Name="IdComunidad" Type="int" Mode="In" />
+    <Parameter Name="CodigoComunidad" Type="nvarchar" Mode="In" />
+    <Parameter Name="NombreComunidad" Type="nvarchar" Mode="In" />
+    <Parameter Name="DescripcionComunidad" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RutaLogoComunidad" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EstadoComunidad" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_ComunidadModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+    <Parameter Name="IdComunidad" Type="int" Mode="In" />
+    <Parameter Name="CodigoComunidad" Type="nvarchar" Mode="In" />
+    <Parameter Name="NombreComunidad" Type="nvarchar" Mode="In" />
+    <Parameter Name="DescripcionComunidad" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RutaLogoComunidad" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EstadoComunidad" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_ParroquiaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
+  <Function Name="Sp_ParroquiaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+    <Parameter Name="IdParroquia" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_ParroquiaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+    <Parameter Name="IdParroquia" Type="int" Mode="In" />
+    <Parameter Name="CodigoParroquia" Type="nvarchar" Mode="In" />
+    <Parameter Name="NombreParroquia" Type="nvarchar" Mode="In" />
+    <Parameter Name="DescripcionParroquia" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RutaLogoParroquia" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EstadoParroquia" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_ParroquiaModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+    <Parameter Name="IdParroquia" Type="int" Mode="In" />
+    <Parameter Name="CodigoParroquia" Type="nvarchar" Mode="In" />
+    <Parameter Name="NombreParroquia" Type="nvarchar" Mode="In" />
+    <Parameter Name="DescripcionParroquia" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RutaLogoParroquia" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EstadoParroquia" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_ProvinciaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
+  <Function Name="Sp_ProvinciaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+    <Parameter Name="IdProvincia" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Sp_ProvinciaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+    <Parameter Name="CodigoProvincia" Type="nvarchar" Mode="In" />
+    <Parameter Name="NombreProvincia" Type="nvarchar" Mode="In" />
+    <Parameter Name="DescripcionProvincia" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RutaLogoProvincia" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EstadoProvincia" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="Sp_ProvinciaModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+    <Parameter Name="IdProvincia" Type="int" Mode="In" />
+    <Parameter Name="CodigoProvincia" Type="nvarchar" Mode="In" />
+    <Parameter Name="NombreProvincia" Type="nvarchar" Mode="In" />
+    <Parameter Name="DescripcionProvincia" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="RutaLogoProvincia" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="EstadoProvincia" Type="bit" Mode="In" />
+  </Function>
   <Function Name="Sp_TokenConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="seguridad" />
   <Function Name="Sp_AsignarModuloPrivilegioCambiarEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
     <Parameter Name="IdAsinarModuloPrivilegio" Type="int" Mode="In" />
