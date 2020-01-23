@@ -25,7 +25,7 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                var _listaCantones = _objCatalogoCanton.ConsultarCanton();
+                var _listaCantones = _objCatalogoCanton.ConsultarCanton().Where(c=>c.EstadoCanton==true).ToList();
                 foreach (var item in _listaCantones)
                 {
                     item.IdCanton = 0;

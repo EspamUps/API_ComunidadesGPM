@@ -25,7 +25,7 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                var _listaProvincias = _objCatalogoProvincia.ConsultarProvincia();
+                var _listaProvincias = _objCatalogoProvincia.ConsultarProvincia().Where(c=>c.EstadoProvincia==true).ToList();
                 foreach (var item in _listaProvincias)
                 {
                     item.IdProvincia = 0;
