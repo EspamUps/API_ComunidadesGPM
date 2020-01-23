@@ -46,5 +46,39 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+
+        [HttpPost]
+        [Route("api/parroquia_consultar")]
+        public object parroquia_consultar(string _IdCantonEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                int _IdCantonDesEncriptado = Convert.ToInt32 (_seguridad.DesEncriptar(_IdCantonEncriptado).ToString());
+                var _listaParroquias = _objCatalogoParroquia.ConsultarParroquia().Where(c => c.EstadoParroquia == true && c.Canton.EstadoCanton == true && c.Canton.Provincia.EstadoProvincia == true && c.Canton.IdCanton == _IdCantonDesEncriptado).ToList();
+                foreach (var item in _listaParroquias)
+                {
+                    item.IdParroquia = 0;
+                    item.Canton.IdCanton = 0;
+                    item.Canton.Provincia.IdProvincia = 0;
+                }
+                _respuesta = _listaParroquias;
+                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+                return new
+                {
+                    respuesta = _respuesta,
+                    http = _http
+                };
+
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
     }
 }
