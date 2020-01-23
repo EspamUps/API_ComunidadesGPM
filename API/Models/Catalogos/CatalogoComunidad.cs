@@ -26,6 +26,7 @@ namespace API.Models.Catalogos
                     EstadoComunidad = item.EstadoComunidad,
                     NombreComunidad = item.NombreComunidad,
                     RutaLogoComunidad = item.RutaLogoComunidad,
+                    Utilizado = item.UtilizadoComunidad,
                     Parroquia = new Parroquia()
                     {
                         IdParroquia = item.IdParroquia,

@@ -26,6 +26,7 @@ namespace API.Models.Catalogos
                     NombreCanton = item.NombreCanton,
                     RutaLogoCanton = item.RutaLogoCanton,
                     EstadoCanton = item.EstadoCanton,
+                    Utilizado = item.UtilizadoCanton,
                     Provincia= new Provincia()
                     {
                         IdProvincia = item.IdProvincia,
