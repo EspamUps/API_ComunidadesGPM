@@ -10,7 +10,7 @@
           <Parameter Name="idCanton" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_CantonInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
-          <Parameter Name="IdCanton" Type="int" Mode="In" />
+          <Parameter Name="IdProvincia" Type="int" Mode="In" />
           <Parameter Name="CodigoCanton" Type="nvarchar" Mode="In" />
           <Parameter Name="NombreCanton" Type="nvarchar" Mode="In" />
           <Parameter Name="DescripcionCanton" Type="nvarchar(max)" Mode="In" />
@@ -19,6 +19,7 @@
         </Function>
         <Function Name="Sp_CantonModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
           <Parameter Name="IdCanton" Type="int" Mode="In" />
+          <Parameter Name="IdProvincia" Type="int" Mode="In" />
           <Parameter Name="CodigoCanton" Type="nvarchar" Mode="In" />
           <Parameter Name="NombreCanton" Type="nvarchar" Mode="In" />
           <Parameter Name="DescripcionCanton" Type="nvarchar(max)" Mode="In" />
@@ -30,7 +31,7 @@
           <Parameter Name="IdComunidad" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_ComunidadInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
-          <Parameter Name="IdComunidad" Type="int" Mode="In" />
+          <Parameter Name="IdParroquia" Type="int" Mode="In" />
           <Parameter Name="CodigoComunidad" Type="nvarchar" Mode="In" />
           <Parameter Name="NombreComunidad" Type="nvarchar" Mode="In" />
           <Parameter Name="DescripcionComunidad" Type="nvarchar(max)" Mode="In" />
@@ -39,6 +40,7 @@
         </Function>
         <Function Name="Sp_ComunidadModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
           <Parameter Name="IdComunidad" Type="int" Mode="In" />
+          <Parameter Name="IdParroquia" Type="int" Mode="In" />
           <Parameter Name="CodigoComunidad" Type="nvarchar" Mode="In" />
           <Parameter Name="NombreComunidad" Type="nvarchar" Mode="In" />
           <Parameter Name="DescripcionComunidad" Type="nvarchar(max)" Mode="In" />
@@ -50,7 +52,7 @@
           <Parameter Name="IdParroquia" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_ParroquiaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
-          <Parameter Name="IdParroquia" Type="int" Mode="In" />
+          <Parameter Name="IdCanton" Type="int" Mode="In" />
           <Parameter Name="CodigoParroquia" Type="nvarchar" Mode="In" />
           <Parameter Name="NombreParroquia" Type="nvarchar" Mode="In" />
           <Parameter Name="DescripcionParroquia" Type="nvarchar(max)" Mode="In" />
@@ -59,6 +61,7 @@
         </Function>
         <Function Name="Sp_ParroquiaModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
           <Parameter Name="IdParroquia" Type="int" Mode="In" />
+          <Parameter Name="IdCanton" Type="int" Mode="In" />
           <Parameter Name="CodigoParroquia" Type="nvarchar" Mode="In" />
           <Parameter Name="NombreParroquia" Type="nvarchar" Mode="In" />
           <Parameter Name="DescripcionParroquia" Type="nvarchar(max)" Mode="In" />
@@ -225,19 +228,6 @@
             <Parameter Name="IdPersona" Mode="In" Type="Int32" />
             <Parameter Name="NuevoEstado" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Sp_PersonaInsertar" ReturnType="Collection(Decimal)">
-            <Parameter Name="PrimerNombre" Mode="In" Type="String" />
-            <Parameter Name="SegundoNombre" Mode="In" Type="String" />
-            <Parameter Name="PrimerApellido" Mode="In" Type="String" />
-            <Parameter Name="SegundoApellido" Mode="In" Type="String" />
-            <Parameter Name="NumeroIdentificacion" Mode="In" Type="String" />
-            <Parameter Name="IdTipoIdentificacion" Mode="In" Type="Int32" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="IdSexo" Mode="In" Type="Int32" />
-            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
-            <Parameter Name="Estado" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="Sp_PrivilegioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PrivilegioConsultar_Result)" />
           <FunctionImport Name="Sp_SexoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_SexoConsultar_Result)" />
           <FunctionImport Name="Sp_TipoIdentificacionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_TipoIdentificacionConsultar_Result)" />
@@ -276,20 +266,6 @@
           <FunctionImport Name="Sp_PersonaEliminar">
           <Parameter Name="IdPersona" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Sp_PersonaModificar">
-            <Parameter Name="IdPersona" Mode="In" Type="Int32" />
-            <Parameter Name="PrimerNombre" Mode="In" Type="String" />
-            <Parameter Name="SegundoNombre" Mode="In" Type="String" />
-            <Parameter Name="PrimerApellido" Mode="In" Type="String" />
-            <Parameter Name="SegundoApellido" Mode="In" Type="String" />
-            <Parameter Name="NumeroIdentificacion" Mode="In" Type="String" />
-            <Parameter Name="IdTipoIdentificacion" Mode="In" Type="Int32" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="IdSexo" Mode="In" Type="Int32" />
-            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
-            <Parameter Name="Direccion" Mode="In" Type="String" />
-            <Parameter Name="Estado" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="Sp_UsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioConsultar_Result4)" />
           <FunctionImport Name="Sp_UsuarioEliminar">
           <Parameter Name="idUsuario" Mode="In" Type="Int32" />
@@ -304,59 +280,11 @@
           <FunctionImport Name="Sp_CantonEliminar">
           <Parameter Name="idCanton" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Sp_CantonInsertar" ReturnType="Collection(Decimal)">
-            <Parameter Name="IdCanton" Mode="In" Type="Int32" />
-            <Parameter Name="CodigoCanton" Mode="In" Type="String" />
-            <Parameter Name="NombreCanton" Mode="In" Type="String" />
-            <Parameter Name="DescripcionCanton" Mode="In" Type="String" />
-            <Parameter Name="RutaLogoCanton" Mode="In" Type="String" />
-            <Parameter Name="EstadoCanton" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_CantonModificar">
-            <Parameter Name="IdCanton" Mode="In" Type="Int32" />
-            <Parameter Name="CodigoCanton" Mode="In" Type="String" />
-            <Parameter Name="NombreCanton" Mode="In" Type="String" />
-            <Parameter Name="DescripcionCanton" Mode="In" Type="String" />
-            <Parameter Name="RutaLogoCanton" Mode="In" Type="String" />
-            <Parameter Name="EstadoCanton" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="Sp_ComunidadEliminar">
           <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Sp_ComunidadInsertar" ReturnType="Collection(Decimal)">
-            <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
-            <Parameter Name="CodigoComunidad" Mode="In" Type="String" />
-            <Parameter Name="NombreComunidad" Mode="In" Type="String" />
-            <Parameter Name="DescripcionComunidad" Mode="In" Type="String" />
-            <Parameter Name="RutaLogoComunidad" Mode="In" Type="String" />
-            <Parameter Name="EstadoComunidad" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_ComunidadModificar">
-            <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
-            <Parameter Name="CodigoComunidad" Mode="In" Type="String" />
-            <Parameter Name="NombreComunidad" Mode="In" Type="String" />
-            <Parameter Name="DescripcionComunidad" Mode="In" Type="String" />
-            <Parameter Name="RutaLogoComunidad" Mode="In" Type="String" />
-            <Parameter Name="EstadoComunidad" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="Sp_ParroquiaEliminar">
           <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_ParroquiaInsertar" ReturnType="Collection(Decimal)">
-            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
-            <Parameter Name="CodigoParroquia" Mode="In" Type="String" />
-            <Parameter Name="NombreParroquia" Mode="In" Type="String" />
-            <Parameter Name="DescripcionParroquia" Mode="In" Type="String" />
-            <Parameter Name="RutaLogoParroquia" Mode="In" Type="String" />
-            <Parameter Name="EstadoParroquia" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_ParroquiaModificar">
-            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
-            <Parameter Name="CodigoParroquia" Mode="In" Type="String" />
-            <Parameter Name="NombreParroquia" Mode="In" Type="String" />
-            <Parameter Name="DescripcionParroquia" Mode="In" Type="String" />
-            <Parameter Name="RutaLogoParroquia" Mode="In" Type="String" />
-            <Parameter Name="EstadoParroquia" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_ProvinciaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ProvinciaConsultar_Result)" />
           <FunctionImport Name="Sp_ProvinciaEliminar">
@@ -382,10 +310,88 @@
           <FunctionImport Name="Sp_ParroquiaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ParroquiaConsultar_Result)" />
           <FunctionImport Name="Sp_PersonaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultar_Result4)" />
           <FunctionImport Name="Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados_Result)">
-            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="idUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_TipoUsuarioConsultarNoAsignadosPorUsuario" ReturnType="Collection(ComunidadesGPMModel.Sp_TipoUsuarioConsultarNoAsignadosPorUsuario_Result)">
-            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CantonInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdProvincia" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoCanton" Mode="In" Type="String" />
+            <Parameter Name="NombreCanton" Mode="In" Type="String" />
+            <Parameter Name="DescripcionCanton" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoCanton" Mode="In" Type="String" />
+            <Parameter Name="EstadoCanton" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CantonModificar">
+            <Parameter Name="IdCanton" Mode="In" Type="Int32" />
+            <Parameter Name="IdProvincia" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoCanton" Mode="In" Type="String" />
+            <Parameter Name="NombreCanton" Mode="In" Type="String" />
+            <Parameter Name="DescripcionCanton" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoCanton" Mode="In" Type="String" />
+            <Parameter Name="EstadoCanton" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ComunidadInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoComunidad" Mode="In" Type="String" />
+            <Parameter Name="NombreComunidad" Mode="In" Type="String" />
+            <Parameter Name="DescripcionComunidad" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoComunidad" Mode="In" Type="String" />
+            <Parameter Name="EstadoComunidad" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ComunidadModificar">
+            <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoComunidad" Mode="In" Type="String" />
+            <Parameter Name="NombreComunidad" Mode="In" Type="String" />
+            <Parameter Name="DescripcionComunidad" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoComunidad" Mode="In" Type="String" />
+            <Parameter Name="EstadoComunidad" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ParroquiaInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdCanton" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoParroquia" Mode="In" Type="String" />
+            <Parameter Name="NombreParroquia" Mode="In" Type="String" />
+            <Parameter Name="DescripcionParroquia" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoParroquia" Mode="In" Type="String" />
+            <Parameter Name="EstadoParroquia" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ParroquiaModificar">
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+            <Parameter Name="IdCanton" Mode="In" Type="Int32" />
+            <Parameter Name="CodigoParroquia" Mode="In" Type="String" />
+            <Parameter Name="NombreParroquia" Mode="In" Type="String" />
+            <Parameter Name="DescripcionParroquia" Mode="In" Type="String" />
+            <Parameter Name="RutaLogoParroquia" Mode="In" Type="String" />
+            <Parameter Name="EstadoParroquia" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_PersonaInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="PrimerNombre" Mode="In" Type="String" />
+            <Parameter Name="SegundoNombre" Mode="In" Type="String" />
+            <Parameter Name="PrimerApellido" Mode="In" Type="String" />
+            <Parameter Name="SegundoApellido" Mode="In" Type="String" />
+            <Parameter Name="NumeroIdentificacion" Mode="In" Type="String" />
+            <Parameter Name="IdTipoIdentificacion" Mode="In" Type="Int32" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="IdSexo" Mode="In" Type="Int32" />
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_PersonaModificar">
+            <Parameter Name="IdPersona" Mode="In" Type="Int32" />
+            <Parameter Name="PrimerNombre" Mode="In" Type="String" />
+            <Parameter Name="SegundoNombre" Mode="In" Type="String" />
+            <Parameter Name="PrimerApellido" Mode="In" Type="String" />
+            <Parameter Name="SegundoApellido" Mode="In" Type="String" />
+            <Parameter Name="NumeroIdentificacion" Mode="In" Type="String" />
+            <Parameter Name="IdTipoIdentificacion" Mode="In" Type="Int32" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="IdSexo" Mode="In" Type="Int32" />
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
@@ -1027,7 +1033,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_PersonaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_PrivilegioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PrivilegioConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PrivilegioConsultar_Result">
@@ -1284,7 +1289,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_PersonaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaEliminar" />
-          <FunctionImportMapping FunctionImportName="Sp_PersonaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaModificar" />
           <FunctionImportMapping FunctionImportName="Sp_UsuarioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_UsuarioConsultar_Result4">
@@ -1320,14 +1324,8 @@
           <FunctionImportMapping FunctionImportName="Sp_UsuarioEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_UsuarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_UsuarioModificar" />
           <FunctionImportMapping FunctionImportName="Sp_CantonEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonEliminar" />
-          <FunctionImportMapping FunctionImportName="Sp_CantonInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_CantonModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonModificar" />
           <FunctionImportMapping FunctionImportName="Sp_ComunidadEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadEliminar" />
-          <FunctionImportMapping FunctionImportName="Sp_ComunidadInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_ComunidadModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadModificar" />
           <FunctionImportMapping FunctionImportName="Sp_ParroquiaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaEliminar" />
-          <FunctionImportMapping FunctionImportName="Sp_ParroquiaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_ParroquiaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaModificar" />
           <FunctionImportMapping FunctionImportName="Sp_ProvinciaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ProvinciaConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ProvinciaConsultar_Result">
@@ -1484,6 +1482,14 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_CantonInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_CantonModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CantonModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_ComunidadInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_ComunidadModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ComunidadModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_ParroquiaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_ParroquiaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ParroquiaModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_PersonaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_PersonaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaModificar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

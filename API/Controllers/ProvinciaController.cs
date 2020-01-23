@@ -25,7 +25,7 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                var _listaProvincias = _objCatalogoProvincia.ConsultarProvincia().Where(c => c.EstadoProvincia == true).ToList();
+                var _listaProvincias = _objCatalogoProvincia.ConsultarProvincia();
                 foreach (var item in _listaProvincias)
                 {
                     item.IdProvincia = 0;
@@ -53,6 +53,7 @@ namespace API.Controllers
                 if (string.IsNullOrEmpty(_idProvinciaEncriptado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la pronvicia.";
                 }
                 else
                 {
@@ -224,24 +225,32 @@ namespace API.Controllers
                 {
                     int _idProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_objProvincia.IdProvinciaEncriptado));
                     var _objProvinciaConsultado= _objCatalogoProvincia.ConsultarProvinciaPorId(_idProvincia).FirstOrDefault();
-                    bool _nuevoEstado = false;
-                    if(_objProvinciaConsultado.EstadoProvincia==false)
+                    if (_objProvinciaConsultado == null)
                     {
-                        _nuevoEstado = true;
-                    }
-                    _objProvinciaConsultado.EstadoProvincia = _nuevoEstado;
-                    int _idProvinciaModficado = _objCatalogoProvincia.ModificarProvincia(_objProvinciaConsultado);
-                    if (_idProvinciaModficado == 0)
-                    {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ocurrió un error al intentar cambiar el estado de la provincia.";
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "La provincia que intenta modfiicar no existe";
                     }
                     else
                     {
-                        var _objProvinciaModificado = _objCatalogoProvincia.ConsultarProvinciaPorId(_idProvincia).FirstOrDefault();
-                        _objProvinciaModificado.IdProvincia = 0;
-                        _respuesta = _objProvinciaModificado;
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        bool _nuevoEstado = false;
+                        if (_objProvinciaConsultado.EstadoProvincia == false)
+                        {
+                            _nuevoEstado = true;
+                        }
+                        _objProvinciaConsultado.EstadoProvincia = _nuevoEstado;
+                        int _idProvinciaModficado = _objCatalogoProvincia.ModificarProvincia(_objProvinciaConsultado);
+                        if (_idProvinciaModficado == 0)
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "Ocurrió un error al intentar cambiar el estado de la provincia.";
+                        }
+                        else
+                        {
+                            var _objProvinciaModificado = _objCatalogoProvincia.ConsultarProvinciaPorId(_idProvincia).FirstOrDefault();
+                            _objProvinciaModificado.IdProvincia = 0;
+                            _respuesta = _objProvinciaModificado;
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        }
                     }
                 }
             }
@@ -275,23 +284,15 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No se encontró la provincia que intenta eliminar.";
                     }
-                    else if (_objProvinciaConsultado.Utilizado=="1")
+                    else if (_objProvinciaConsultado.Utilizado == "1")
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                         _http.mensaje = "La provincia ya es utilizada, por la tanto no puede ser eliminada.";
                     }
                     else
                     {
-                        int _idProvinciaEliminada = _objCatalogoProvincia.EliminarProvincia(_idProvincia);
-                        if (_idProvinciaEliminada == 0)
-                        {
-                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                            _http.mensaje = "Ocurrió un error al intentar eliminar la provincia.";
-                        }
-                        else
-                        {
-                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                        }
+                        _objCatalogoProvincia.EliminarProvincia(_idProvincia);
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
                 }
             }

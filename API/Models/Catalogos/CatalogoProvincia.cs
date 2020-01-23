@@ -77,10 +77,9 @@ namespace API.Models.Catalogos
             }
         }
 
-        public int EliminarProvincia(int _idProvincia)
+        public void EliminarProvincia(int _idProvincia)
         {
             db.Sp_ProvinciaEliminar(_idProvincia);
-            return _idProvincia;
         }
     }
 }
