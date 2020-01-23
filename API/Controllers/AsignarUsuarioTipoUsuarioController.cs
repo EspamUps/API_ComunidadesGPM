@@ -93,12 +93,17 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "500").FirstOrDefault();
             try
             {
-                if(string.IsNullOrEmpty(_objAsignarUsuarioTipoUsuario.Usuario.IdUsuarioEncriptado.Trim()))
+                if (_objAsignarUsuarioTipoUsuario == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "No se encontró el objeto";
+                }
+                else if (_objAsignarUsuarioTipoUsuario.Usuario.IdUsuarioEncriptado == null || string.IsNullOrEmpty(_objAsignarUsuarioTipoUsuario.Usuario.IdUsuarioEncriptado.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
                     _http.mensaje = "No se encontró el id encriptado del usuario";
                 }
-                else if(string.IsNullOrEmpty(_objAsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuarioEncriptado.Trim()))
+                else if (_objAsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuarioEncriptado == null || string.IsNullOrEmpty(_objAsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuarioEncriptado.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
                     _http.mensaje = "No se encontró el id encriptado del tipo de usuario";
@@ -109,12 +114,35 @@ namespace API.Controllers
                     _objAsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_objAsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuarioEncriptado));
                     _objAsignarUsuarioTipoUsuario.Estado = true;
 
-                    int yaExiteEstaAsignacionValida= _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(x => x.TipoUsuario.IdTipoUsuario == _objAsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario && x.Usuario.IdUsuario== _objAsignarUsuarioTipoUsuario.Usuario.IdUsuario && x.Estado==true).ToList().Count();
+                    var _objAsignarUsuarioTipoUsuarioExistente = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(x => x.TipoUsuario.IdTipoUsuario == _objAsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario && x.Usuario.IdUsuario == _objAsignarUsuarioTipoUsuario.Usuario.IdUsuario).FirstOrDefault();
 
-                    if (yaExiteEstaAsignacionValida>0)
+                    if (_objAsignarUsuarioTipoUsuarioExistente != null)
                     {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ya existe una asignacion valida para este usuario y este tipo de usuario ";
+                        if (_objAsignarUsuarioTipoUsuarioExistente.Estado == true)
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "Ya existe una asignación válida para este usuario y este tipo de usuario ";
+                        }
+                        else
+                        {
+                            int _idAsignarUsuarioTipoUsuarioModificado =_objCatalogoAsignarUsuarioTipoUsuario.CambiarEstadoAsignarUsuarioTipoUsuario(_objAsignarUsuarioTipoUsuarioExistente.IdAsignarUsuarioTipoUsuario, true);
+                            if (_idAsignarUsuarioTipoUsuarioModificado == 0)
+                            {
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
+                                _http.mensaje = "Ocurrió un error al intentar asignar el usuario con el tipo de usuario seleccionado, intente nuevamente.";
+                            }
+                            else
+                            {
+                                var _objAsignarUsuarioTipoUsuarioActualizado = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.IdAsignarUsuarioTipoUsuario == _objAsignarUsuarioTipoUsuarioExistente.IdAsignarUsuarioTipoUsuario).FirstOrDefault();
+                                _objAsignarUsuarioTipoUsuarioActualizado.IdAsignarUsuarioTipoUsuario = 0;
+                                _objAsignarUsuarioTipoUsuarioActualizado.Usuario.Persona.IdPersona = 0;
+                                _objAsignarUsuarioTipoUsuarioActualizado.Usuario.IdUsuario = 0;
+                                _objAsignarUsuarioTipoUsuarioActualizado.Usuario.Persona.Sexo.IdSexo = 0;
+                                _objAsignarUsuarioTipoUsuarioActualizado.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                                _respuesta = _objAsignarUsuarioTipoUsuarioActualizado;
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "200").FirstOrDefault();
+                            }
+                        }
                     }
                     else
                     {
@@ -135,8 +163,7 @@ namespace API.Controllers
                             _respuesta = _objAsignarUsuarioTipoUsuarioIngresado;
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "200").FirstOrDefault();
                         }
-                    }
-
+                    }                
                    
                 }
             }
@@ -155,15 +182,21 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "500").FirstOrDefault();
             try
             {
-                if (string.IsNullOrEmpty(_objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuarioEncriptado.Trim()))
+                if (_objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuarioEncriptado == null || string.IsNullOrEmpty(_objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuarioEncriptado.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
                     _http.mensaje = "No se encontró el id encriptado del asignar usuario tipo usuario";
                 }
                 else
                 {
-                    _objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuarioEncriptado));
-                    int _idAsignarUsuarioTipoUsuarioModificado = _objCatalogoAsignarUsuarioTipoUsuario.CambiarEstadoAsignarUsuarioTipoUsuario(_objAsignarUsuarioTipoUsuario);
+                    int _idAsignarUsuarioTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuarioEncriptado));
+                    var _objAsignarUsuarioTipoUsuarioConsultado = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuarioPorId(_idAsignarUsuarioTipoUsuario).FirstOrDefault();
+                    bool _nuevoEstado = false;
+                    if(_objAsignarUsuarioTipoUsuarioConsultado.Estado==false)
+                    {
+                        _nuevoEstado = true;
+                    }
+                    int _idAsignarUsuarioTipoUsuarioModificado = _objCatalogoAsignarUsuarioTipoUsuario.CambiarEstadoAsignarUsuarioTipoUsuario(_objAsignarUsuarioTipoUsuarioConsultado.IdAsignarUsuarioTipoUsuario,_nuevoEstado);
                     if (_idAsignarUsuarioTipoUsuarioModificado == 0)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
@@ -171,6 +204,13 @@ namespace API.Controllers
                     }
                     else
                     {
+                        var _objAsignarUsuarioTipoUsuarioModificado = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.IdAsignarUsuarioTipoUsuario == _idAsignarUsuarioTipoUsuarioModificado).FirstOrDefault();
+                        _objAsignarUsuarioTipoUsuarioModificado.IdAsignarUsuarioTipoUsuario = 0;
+                        _objAsignarUsuarioTipoUsuarioModificado.Usuario.Persona.IdPersona = 0;
+                        _objAsignarUsuarioTipoUsuarioModificado.Usuario.IdUsuario = 0;
+                        _objAsignarUsuarioTipoUsuarioModificado.Usuario.Persona.Sexo.IdSexo = 0;
+                        _objAsignarUsuarioTipoUsuarioModificado.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                        _respuesta = _objAsignarUsuarioTipoUsuarioModificado;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "200").FirstOrDefault();
                     }
                 }
@@ -184,22 +224,25 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/asignarusuariotipousuario_eliminar")]
-        public object asignarusuariotipousuario_eliminar(string _IdAsignarUsuarioTipoUsuarioEncriptado)
+        public object asignarusuariotipousuario_eliminar(string _idAsignarUsuarioTipoUsuarioEncriptado)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "500").FirstOrDefault();
             try
             {
-                if (string.IsNullOrEmpty(_IdAsignarUsuarioTipoUsuarioEncriptado.Trim()))
+                if (_idAsignarUsuarioTipoUsuarioEncriptado== null || string.IsNullOrEmpty(_idAsignarUsuarioTipoUsuarioEncriptado.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
                     _http.mensaje = "No se encontró el id encriptado del asignar usuario tipo usuario";
                 }
                 else
                 {
-                    int _IdAsignarUsuarioTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_IdAsignarUsuarioTipoUsuarioEncriptado).ToString());
-                    bool _Estado=false;
-                    int _idAsignarUsuarioTipoUsuarioModificado = _objCatalogoAsignarUsuarioTipoUsuario.CambiarEstadoAsignarUsuarioTipoUsuario(new AsignarUsuarioTipoUsuario() { IdAsignarUsuarioTipoUsuario= _IdAsignarUsuarioTipoUsuario,Estado= _Estado });
+                    int _idAsignarUsuarioTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_idAsignarUsuarioTipoUsuarioEncriptado).ToString());
+                    var _objAsignarUsuarioTipoUsuario = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuarioPorId(_idAsignarUsuarioTipoUsuario).FirstOrDefault();
+                    bool _nuevoEstado= false;
+                    if (_objAsignarUsuarioTipoUsuario.Estado == false)
+                        _nuevoEstado = true;
+                    int _idAsignarUsuarioTipoUsuarioModificado = _objCatalogoAsignarUsuarioTipoUsuario.CambiarEstadoAsignarUsuarioTipoUsuario(_idAsignarUsuarioTipoUsuario, _nuevoEstado);
                     if (_idAsignarUsuarioTipoUsuarioModificado == 0)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(c => c.codigo == "400").FirstOrDefault();
