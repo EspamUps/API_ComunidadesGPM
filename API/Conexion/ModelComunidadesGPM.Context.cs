@@ -692,5 +692,23 @@ namespace API.Conexion
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PersonaConsultar_Result4>("Sp_PersonaConsultar");
         }
+    
+        public virtual ObjectResult<Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados_Result> Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados(Nullable<int> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("idUsuario", idUsuario) :
+                new ObjectParameter("idUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados_Result>("Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados", idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<Sp_TipoUsuarioConsultarNoAsignadosPorUsuario_Result> Sp_TipoUsuarioConsultarNoAsignadosPorUsuario(Nullable<int> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("idUsuario", idUsuario) :
+                new ObjectParameter("idUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TipoUsuarioConsultarNoAsignadosPorUsuario_Result>("Sp_TipoUsuarioConsultarNoAsignadosPorUsuario", idUsuarioParameter);
+        }
     }
 }

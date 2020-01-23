@@ -111,6 +111,9 @@
           <Parameter Name="NuevoEstado" Type="bit" Mode="In" />
         </Function>
         <Function Name="Sp_AsignarUsuarioTipoUsuarioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
+        <Function Name="Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
+          <Parameter Name="idUsuario" Type="int" Mode="In" />
+        </Function>
         <Function Name="Sp_ModuloConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
         <Function Name="Sp_PersonaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
         <Function Name="Sp_PersonaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
@@ -151,6 +154,9 @@
           <Parameter Name="NuevoEstado" Type="bit" Mode="In" />
         </Function>
         <Function Name="Sp_TipoUsuarioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
+        <Function Name="Sp_TipoUsuarioConsultarNoAsignadosPorUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
+          <Parameter Name="idUsuario" Type="int" Mode="In" />
+        </Function>
         <Function Name="Sp_TipoUsuarioInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
           <Parameter Name="Identificador" Type="int" Mode="In" />
           <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
@@ -375,6 +381,12 @@
           <FunctionImport Name="Sp_ComunidadConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ComunidadConsultar_Result)" />
           <FunctionImport Name="Sp_ParroquiaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ParroquiaConsultar_Result)" />
           <FunctionImport Name="Sp_PersonaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultar_Result4)" />
+          <FunctionImport Name="Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados_Result)">
+            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_TipoUsuarioConsultarNoAsignadosPorUsuario" ReturnType="Collection(ComunidadesGPMModel.Sp_TipoUsuarioConsultarNoAsignadosPorUsuario_Result)">
+            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -982,6 +994,18 @@
           <Property Type="String" Name="PROVINCIA_RutaLogoProvincia" Nullable="false" />
           <Property Type="Boolean" Name="PROVINCIA_EstadoProvincia" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados_Result">
+          <Property Type="Int32" Name="IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="Identificador" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_TipoUsuarioConsultarNoAsignadosPorUsuario_Result">
+          <Property Type="Int32" Name="IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="Identificador" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1437,6 +1461,26 @@
                 <ScalarProperty Name="PROVINCIA_DescripcionProvincia" ColumnName="PROVINCIA_DescripcionProvincia" />
                 <ScalarProperty Name="PROVINCIA_RutaLogoProvincia" ColumnName="PROVINCIA_RutaLogoProvincia" />
                 <ScalarProperty Name="PROVINCIA_EstadoProvincia" ColumnName="PROVINCIA_EstadoProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados_Result">
+                <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
+                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_TipoUsuarioConsultarNoAsignadosPorUsuario" FunctionName="ComunidadesGPMModel.Store.Sp_TipoUsuarioConsultarNoAsignadosPorUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_TipoUsuarioConsultarNoAsignadosPorUsuario_Result">
+                <ScalarProperty Name="IdTipoUsuario" ColumnName="IdTipoUsuario" />
+                <ScalarProperty Name="Identificador" ColumnName="Identificador" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
