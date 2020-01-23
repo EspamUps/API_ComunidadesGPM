@@ -25,7 +25,8 @@ namespace API.Models.Catalogos
                     DescripcionProvincia = item.DescripcionProvincia,
                     NombreProvincia = item.NombreProvincia,
                     RutaLogoProvincia = item.RutaLogoProvincia,
-                    EstadoProvincia = item.EstadoProvincia
+                    EstadoProvincia = item.EstadoProvincia,
+                    Utilizado=item.UtilizadoProvincia
                 });
             }
             return _lista;
@@ -44,7 +45,8 @@ namespace API.Models.Catalogos
                     DescripcionProvincia = item.DescripcionProvincia,
                     NombreProvincia = item.NombreProvincia,
                     RutaLogoProvincia = item.RutaLogoProvincia,
-                    EstadoProvincia = item.EstadoProvincia
+                    EstadoProvincia = item.EstadoProvincia,
+                    Utilizado = item.UtilizadoProvincia
                 });
             }
             return _lista;
@@ -75,10 +77,9 @@ namespace API.Models.Catalogos
             }
         }
 
-        public int EliminarProvincia(int _idProvincia)
+        public void EliminarProvincia(int _idProvincia)
         {
             db.Sp_ProvinciaEliminar(_idProvincia);
-            return _idProvincia;
         }
     }
 }

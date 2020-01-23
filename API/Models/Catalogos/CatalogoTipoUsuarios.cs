@@ -72,6 +72,23 @@ namespace API.Models.Catalogos
             }
         }
 
+        public List<TipoUsuario> ConsultarTipoUsuarioNoAsignadosPorUsuario(int _idUsuario)
+        {
+            List<TipoUsuario> _lista = new List<TipoUsuario>();
+            foreach (var item in db.Sp_TipoUsuarioConsultarNoAsignadosPorUsuario(_idUsuario))
+            {
+                _lista.Add(new TipoUsuario()
+                {
+                    IdTipoUsuarioEncriptado = _seguridad.Encriptar(item.IdTipoUsuario.ToString()),
+                    IdTipoUsuario = item.IdTipoUsuario,
+                    Identificador = item.Identificador,
+                    Descripcion = item.Descripcion,
+                    Estado = item.Estado
+                });
+            }
+            return _lista;
+        }
+
       
 
       

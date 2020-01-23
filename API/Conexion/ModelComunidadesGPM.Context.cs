@@ -123,55 +123,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PersonaCambiarEstado", idPersonaParameter, nuevoEstadoParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> Sp_PersonaInsertar(string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string numeroIdentificacion, Nullable<int> idTipoIdentificacion, string telefono, Nullable<int> idSexo, Nullable<int> idParroquia, string direccion, Nullable<bool> estado)
-        {
-            var primerNombreParameter = primerNombre != null ?
-                new ObjectParameter("PrimerNombre", primerNombre) :
-                new ObjectParameter("PrimerNombre", typeof(string));
-    
-            var segundoNombreParameter = segundoNombre != null ?
-                new ObjectParameter("SegundoNombre", segundoNombre) :
-                new ObjectParameter("SegundoNombre", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("PrimerApellido", primerApellido) :
-                new ObjectParameter("PrimerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("SegundoApellido", segundoApellido) :
-                new ObjectParameter("SegundoApellido", typeof(string));
-    
-            var numeroIdentificacionParameter = numeroIdentificacion != null ?
-                new ObjectParameter("NumeroIdentificacion", numeroIdentificacion) :
-                new ObjectParameter("NumeroIdentificacion", typeof(string));
-    
-            var idTipoIdentificacionParameter = idTipoIdentificacion.HasValue ?
-                new ObjectParameter("IdTipoIdentificacion", idTipoIdentificacion) :
-                new ObjectParameter("IdTipoIdentificacion", typeof(int));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var idSexoParameter = idSexo.HasValue ?
-                new ObjectParameter("IdSexo", idSexo) :
-                new ObjectParameter("IdSexo", typeof(int));
-    
-            var idParroquiaParameter = idParroquia.HasValue ?
-                new ObjectParameter("IdParroquia", idParroquia) :
-                new ObjectParameter("IdParroquia", typeof(int));
-    
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
-            var estadoParameter = estado.HasValue ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_PersonaInsertar", primerNombreParameter, segundoNombreParameter, primerApellidoParameter, segundoApellidoParameter, numeroIdentificacionParameter, idTipoIdentificacionParameter, telefonoParameter, idSexoParameter, idParroquiaParameter, direccionParameter, estadoParameter);
-        }
-    
         public virtual ObjectResult<Sp_PrivilegioConsultar_Result> Sp_PrivilegioConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PrivilegioConsultar_Result>("Sp_PrivilegioConsultar");
@@ -312,59 +263,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PersonaEliminar", idPersonaParameter);
         }
     
-        public virtual int Sp_PersonaModificar(Nullable<int> idPersona, string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string numeroIdentificacion, Nullable<int> idTipoIdentificacion, string telefono, Nullable<int> idSexo, Nullable<int> idParroquia, string direccion, Nullable<bool> estado)
-        {
-            var idPersonaParameter = idPersona.HasValue ?
-                new ObjectParameter("IdPersona", idPersona) :
-                new ObjectParameter("IdPersona", typeof(int));
-    
-            var primerNombreParameter = primerNombre != null ?
-                new ObjectParameter("PrimerNombre", primerNombre) :
-                new ObjectParameter("PrimerNombre", typeof(string));
-    
-            var segundoNombreParameter = segundoNombre != null ?
-                new ObjectParameter("SegundoNombre", segundoNombre) :
-                new ObjectParameter("SegundoNombre", typeof(string));
-    
-            var primerApellidoParameter = primerApellido != null ?
-                new ObjectParameter("PrimerApellido", primerApellido) :
-                new ObjectParameter("PrimerApellido", typeof(string));
-    
-            var segundoApellidoParameter = segundoApellido != null ?
-                new ObjectParameter("SegundoApellido", segundoApellido) :
-                new ObjectParameter("SegundoApellido", typeof(string));
-    
-            var numeroIdentificacionParameter = numeroIdentificacion != null ?
-                new ObjectParameter("NumeroIdentificacion", numeroIdentificacion) :
-                new ObjectParameter("NumeroIdentificacion", typeof(string));
-    
-            var idTipoIdentificacionParameter = idTipoIdentificacion.HasValue ?
-                new ObjectParameter("IdTipoIdentificacion", idTipoIdentificacion) :
-                new ObjectParameter("IdTipoIdentificacion", typeof(int));
-    
-            var telefonoParameter = telefono != null ?
-                new ObjectParameter("Telefono", telefono) :
-                new ObjectParameter("Telefono", typeof(string));
-    
-            var idSexoParameter = idSexo.HasValue ?
-                new ObjectParameter("IdSexo", idSexo) :
-                new ObjectParameter("IdSexo", typeof(int));
-    
-            var idParroquiaParameter = idParroquia.HasValue ?
-                new ObjectParameter("IdParroquia", idParroquia) :
-                new ObjectParameter("IdParroquia", typeof(int));
-    
-            var direccionParameter = direccion != null ?
-                new ObjectParameter("Direccion", direccion) :
-                new ObjectParameter("Direccion", typeof(string));
-    
-            var estadoParameter = estado.HasValue ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PersonaModificar", idPersonaParameter, primerNombreParameter, segundoNombreParameter, primerApellidoParameter, segundoApellidoParameter, numeroIdentificacionParameter, idTipoIdentificacionParameter, telefonoParameter, idSexoParameter, idParroquiaParameter, direccionParameter, estadoParameter);
-        }
-    
         public virtual ObjectResult<Sp_UsuarioConsultar_Result4> Sp_UsuarioConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioConsultar_Result4>("Sp_UsuarioConsultar");
@@ -413,64 +311,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CantonEliminar", idCantonParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> Sp_CantonInsertar(Nullable<int> idCanton, string codigoCanton, string nombreCanton, string descripcionCanton, string rutaLogoCanton, Nullable<bool> estadoCanton)
-        {
-            var idCantonParameter = idCanton.HasValue ?
-                new ObjectParameter("IdCanton", idCanton) :
-                new ObjectParameter("IdCanton", typeof(int));
-    
-            var codigoCantonParameter = codigoCanton != null ?
-                new ObjectParameter("CodigoCanton", codigoCanton) :
-                new ObjectParameter("CodigoCanton", typeof(string));
-    
-            var nombreCantonParameter = nombreCanton != null ?
-                new ObjectParameter("NombreCanton", nombreCanton) :
-                new ObjectParameter("NombreCanton", typeof(string));
-    
-            var descripcionCantonParameter = descripcionCanton != null ?
-                new ObjectParameter("DescripcionCanton", descripcionCanton) :
-                new ObjectParameter("DescripcionCanton", typeof(string));
-    
-            var rutaLogoCantonParameter = rutaLogoCanton != null ?
-                new ObjectParameter("RutaLogoCanton", rutaLogoCanton) :
-                new ObjectParameter("RutaLogoCanton", typeof(string));
-    
-            var estadoCantonParameter = estadoCanton.HasValue ?
-                new ObjectParameter("EstadoCanton", estadoCanton) :
-                new ObjectParameter("EstadoCanton", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CantonInsertar", idCantonParameter, codigoCantonParameter, nombreCantonParameter, descripcionCantonParameter, rutaLogoCantonParameter, estadoCantonParameter);
-        }
-    
-        public virtual int Sp_CantonModificar(Nullable<int> idCanton, string codigoCanton, string nombreCanton, string descripcionCanton, string rutaLogoCanton, Nullable<bool> estadoCanton)
-        {
-            var idCantonParameter = idCanton.HasValue ?
-                new ObjectParameter("IdCanton", idCanton) :
-                new ObjectParameter("IdCanton", typeof(int));
-    
-            var codigoCantonParameter = codigoCanton != null ?
-                new ObjectParameter("CodigoCanton", codigoCanton) :
-                new ObjectParameter("CodigoCanton", typeof(string));
-    
-            var nombreCantonParameter = nombreCanton != null ?
-                new ObjectParameter("NombreCanton", nombreCanton) :
-                new ObjectParameter("NombreCanton", typeof(string));
-    
-            var descripcionCantonParameter = descripcionCanton != null ?
-                new ObjectParameter("DescripcionCanton", descripcionCanton) :
-                new ObjectParameter("DescripcionCanton", typeof(string));
-    
-            var rutaLogoCantonParameter = rutaLogoCanton != null ?
-                new ObjectParameter("RutaLogoCanton", rutaLogoCanton) :
-                new ObjectParameter("RutaLogoCanton", typeof(string));
-    
-            var estadoCantonParameter = estadoCanton.HasValue ?
-                new ObjectParameter("EstadoCanton", estadoCanton) :
-                new ObjectParameter("EstadoCanton", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CantonModificar", idCantonParameter, codigoCantonParameter, nombreCantonParameter, descripcionCantonParameter, rutaLogoCantonParameter, estadoCantonParameter);
-        }
-    
         public virtual int Sp_ComunidadEliminar(Nullable<int> idComunidad)
         {
             var idComunidadParameter = idComunidad.HasValue ?
@@ -480,64 +320,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ComunidadEliminar", idComunidadParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> Sp_ComunidadInsertar(Nullable<int> idComunidad, string codigoComunidad, string nombreComunidad, string descripcionComunidad, string rutaLogoComunidad, Nullable<bool> estadoComunidad)
-        {
-            var idComunidadParameter = idComunidad.HasValue ?
-                new ObjectParameter("IdComunidad", idComunidad) :
-                new ObjectParameter("IdComunidad", typeof(int));
-    
-            var codigoComunidadParameter = codigoComunidad != null ?
-                new ObjectParameter("CodigoComunidad", codigoComunidad) :
-                new ObjectParameter("CodigoComunidad", typeof(string));
-    
-            var nombreComunidadParameter = nombreComunidad != null ?
-                new ObjectParameter("NombreComunidad", nombreComunidad) :
-                new ObjectParameter("NombreComunidad", typeof(string));
-    
-            var descripcionComunidadParameter = descripcionComunidad != null ?
-                new ObjectParameter("DescripcionComunidad", descripcionComunidad) :
-                new ObjectParameter("DescripcionComunidad", typeof(string));
-    
-            var rutaLogoComunidadParameter = rutaLogoComunidad != null ?
-                new ObjectParameter("RutaLogoComunidad", rutaLogoComunidad) :
-                new ObjectParameter("RutaLogoComunidad", typeof(string));
-    
-            var estadoComunidadParameter = estadoComunidad.HasValue ?
-                new ObjectParameter("EstadoComunidad", estadoComunidad) :
-                new ObjectParameter("EstadoComunidad", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_ComunidadInsertar", idComunidadParameter, codigoComunidadParameter, nombreComunidadParameter, descripcionComunidadParameter, rutaLogoComunidadParameter, estadoComunidadParameter);
-        }
-    
-        public virtual int Sp_ComunidadModificar(Nullable<int> idComunidad, string codigoComunidad, string nombreComunidad, string descripcionComunidad, string rutaLogoComunidad, Nullable<bool> estadoComunidad)
-        {
-            var idComunidadParameter = idComunidad.HasValue ?
-                new ObjectParameter("IdComunidad", idComunidad) :
-                new ObjectParameter("IdComunidad", typeof(int));
-    
-            var codigoComunidadParameter = codigoComunidad != null ?
-                new ObjectParameter("CodigoComunidad", codigoComunidad) :
-                new ObjectParameter("CodigoComunidad", typeof(string));
-    
-            var nombreComunidadParameter = nombreComunidad != null ?
-                new ObjectParameter("NombreComunidad", nombreComunidad) :
-                new ObjectParameter("NombreComunidad", typeof(string));
-    
-            var descripcionComunidadParameter = descripcionComunidad != null ?
-                new ObjectParameter("DescripcionComunidad", descripcionComunidad) :
-                new ObjectParameter("DescripcionComunidad", typeof(string));
-    
-            var rutaLogoComunidadParameter = rutaLogoComunidad != null ?
-                new ObjectParameter("RutaLogoComunidad", rutaLogoComunidad) :
-                new ObjectParameter("RutaLogoComunidad", typeof(string));
-    
-            var estadoComunidadParameter = estadoComunidad.HasValue ?
-                new ObjectParameter("EstadoComunidad", estadoComunidad) :
-                new ObjectParameter("EstadoComunidad", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ComunidadModificar", idComunidadParameter, codigoComunidadParameter, nombreComunidadParameter, descripcionComunidadParameter, rutaLogoComunidadParameter, estadoComunidadParameter);
-        }
-    
         public virtual int Sp_ParroquiaEliminar(Nullable<int> idParroquia)
         {
             var idParroquiaParameter = idParroquia.HasValue ?
@@ -545,64 +327,6 @@ namespace API.Conexion
                 new ObjectParameter("IdParroquia", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ParroquiaEliminar", idParroquiaParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<decimal>> Sp_ParroquiaInsertar(Nullable<int> idParroquia, string codigoParroquia, string nombreParroquia, string descripcionParroquia, string rutaLogoParroquia, Nullable<bool> estadoParroquia)
-        {
-            var idParroquiaParameter = idParroquia.HasValue ?
-                new ObjectParameter("IdParroquia", idParroquia) :
-                new ObjectParameter("IdParroquia", typeof(int));
-    
-            var codigoParroquiaParameter = codigoParroquia != null ?
-                new ObjectParameter("CodigoParroquia", codigoParroquia) :
-                new ObjectParameter("CodigoParroquia", typeof(string));
-    
-            var nombreParroquiaParameter = nombreParroquia != null ?
-                new ObjectParameter("NombreParroquia", nombreParroquia) :
-                new ObjectParameter("NombreParroquia", typeof(string));
-    
-            var descripcionParroquiaParameter = descripcionParroquia != null ?
-                new ObjectParameter("DescripcionParroquia", descripcionParroquia) :
-                new ObjectParameter("DescripcionParroquia", typeof(string));
-    
-            var rutaLogoParroquiaParameter = rutaLogoParroquia != null ?
-                new ObjectParameter("RutaLogoParroquia", rutaLogoParroquia) :
-                new ObjectParameter("RutaLogoParroquia", typeof(string));
-    
-            var estadoParroquiaParameter = estadoParroquia.HasValue ?
-                new ObjectParameter("EstadoParroquia", estadoParroquia) :
-                new ObjectParameter("EstadoParroquia", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_ParroquiaInsertar", idParroquiaParameter, codigoParroquiaParameter, nombreParroquiaParameter, descripcionParroquiaParameter, rutaLogoParroquiaParameter, estadoParroquiaParameter);
-        }
-    
-        public virtual int Sp_ParroquiaModificar(Nullable<int> idParroquia, string codigoParroquia, string nombreParroquia, string descripcionParroquia, string rutaLogoParroquia, Nullable<bool> estadoParroquia)
-        {
-            var idParroquiaParameter = idParroquia.HasValue ?
-                new ObjectParameter("IdParroquia", idParroquia) :
-                new ObjectParameter("IdParroquia", typeof(int));
-    
-            var codigoParroquiaParameter = codigoParroquia != null ?
-                new ObjectParameter("CodigoParroquia", codigoParroquia) :
-                new ObjectParameter("CodigoParroquia", typeof(string));
-    
-            var nombreParroquiaParameter = nombreParroquia != null ?
-                new ObjectParameter("NombreParroquia", nombreParroquia) :
-                new ObjectParameter("NombreParroquia", typeof(string));
-    
-            var descripcionParroquiaParameter = descripcionParroquia != null ?
-                new ObjectParameter("DescripcionParroquia", descripcionParroquia) :
-                new ObjectParameter("DescripcionParroquia", typeof(string));
-    
-            var rutaLogoParroquiaParameter = rutaLogoParroquia != null ?
-                new ObjectParameter("RutaLogoParroquia", rutaLogoParroquia) :
-                new ObjectParameter("RutaLogoParroquia", typeof(string));
-    
-            var estadoParroquiaParameter = estadoParroquia.HasValue ?
-                new ObjectParameter("EstadoParroquia", estadoParroquia) :
-                new ObjectParameter("EstadoParroquia", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ParroquiaModificar", idParroquiaParameter, codigoParroquiaParameter, nombreParroquiaParameter, descripcionParroquiaParameter, rutaLogoParroquiaParameter, estadoParroquiaParameter);
         }
     
         public virtual ObjectResult<Sp_ProvinciaConsultar_Result> Sp_ProvinciaConsultar()
@@ -691,6 +415,312 @@ namespace API.Conexion
         public virtual ObjectResult<Sp_PersonaConsultar_Result4> Sp_PersonaConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PersonaConsultar_Result4>("Sp_PersonaConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados_Result> Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados(Nullable<int> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("idUsuario", idUsuario) :
+                new ObjectParameter("idUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados_Result>("Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados", idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<Sp_TipoUsuarioConsultarNoAsignadosPorUsuario_Result> Sp_TipoUsuarioConsultarNoAsignadosPorUsuario(Nullable<int> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("idUsuario", idUsuario) :
+                new ObjectParameter("idUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TipoUsuarioConsultarNoAsignadosPorUsuario_Result>("Sp_TipoUsuarioConsultarNoAsignadosPorUsuario", idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_CantonInsertar(Nullable<int> idProvincia, string codigoCanton, string nombreCanton, string descripcionCanton, string rutaLogoCanton, Nullable<bool> estadoCanton)
+        {
+            var idProvinciaParameter = idProvincia.HasValue ?
+                new ObjectParameter("IdProvincia", idProvincia) :
+                new ObjectParameter("IdProvincia", typeof(int));
+    
+            var codigoCantonParameter = codigoCanton != null ?
+                new ObjectParameter("CodigoCanton", codigoCanton) :
+                new ObjectParameter("CodigoCanton", typeof(string));
+    
+            var nombreCantonParameter = nombreCanton != null ?
+                new ObjectParameter("NombreCanton", nombreCanton) :
+                new ObjectParameter("NombreCanton", typeof(string));
+    
+            var descripcionCantonParameter = descripcionCanton != null ?
+                new ObjectParameter("DescripcionCanton", descripcionCanton) :
+                new ObjectParameter("DescripcionCanton", typeof(string));
+    
+            var rutaLogoCantonParameter = rutaLogoCanton != null ?
+                new ObjectParameter("RutaLogoCanton", rutaLogoCanton) :
+                new ObjectParameter("RutaLogoCanton", typeof(string));
+    
+            var estadoCantonParameter = estadoCanton.HasValue ?
+                new ObjectParameter("EstadoCanton", estadoCanton) :
+                new ObjectParameter("EstadoCanton", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CantonInsertar", idProvinciaParameter, codigoCantonParameter, nombreCantonParameter, descripcionCantonParameter, rutaLogoCantonParameter, estadoCantonParameter);
+        }
+    
+        public virtual int Sp_CantonModificar(Nullable<int> idCanton, Nullable<int> idProvincia, string codigoCanton, string nombreCanton, string descripcionCanton, string rutaLogoCanton, Nullable<bool> estadoCanton)
+        {
+            var idCantonParameter = idCanton.HasValue ?
+                new ObjectParameter("IdCanton", idCanton) :
+                new ObjectParameter("IdCanton", typeof(int));
+    
+            var idProvinciaParameter = idProvincia.HasValue ?
+                new ObjectParameter("IdProvincia", idProvincia) :
+                new ObjectParameter("IdProvincia", typeof(int));
+    
+            var codigoCantonParameter = codigoCanton != null ?
+                new ObjectParameter("CodigoCanton", codigoCanton) :
+                new ObjectParameter("CodigoCanton", typeof(string));
+    
+            var nombreCantonParameter = nombreCanton != null ?
+                new ObjectParameter("NombreCanton", nombreCanton) :
+                new ObjectParameter("NombreCanton", typeof(string));
+    
+            var descripcionCantonParameter = descripcionCanton != null ?
+                new ObjectParameter("DescripcionCanton", descripcionCanton) :
+                new ObjectParameter("DescripcionCanton", typeof(string));
+    
+            var rutaLogoCantonParameter = rutaLogoCanton != null ?
+                new ObjectParameter("RutaLogoCanton", rutaLogoCanton) :
+                new ObjectParameter("RutaLogoCanton", typeof(string));
+    
+            var estadoCantonParameter = estadoCanton.HasValue ?
+                new ObjectParameter("EstadoCanton", estadoCanton) :
+                new ObjectParameter("EstadoCanton", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CantonModificar", idCantonParameter, idProvinciaParameter, codigoCantonParameter, nombreCantonParameter, descripcionCantonParameter, rutaLogoCantonParameter, estadoCantonParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_ComunidadInsertar(Nullable<int> idParroquia, string codigoComunidad, string nombreComunidad, string descripcionComunidad, string rutaLogoComunidad, Nullable<bool> estadoComunidad)
+        {
+            var idParroquiaParameter = idParroquia.HasValue ?
+                new ObjectParameter("IdParroquia", idParroquia) :
+                new ObjectParameter("IdParroquia", typeof(int));
+    
+            var codigoComunidadParameter = codigoComunidad != null ?
+                new ObjectParameter("CodigoComunidad", codigoComunidad) :
+                new ObjectParameter("CodigoComunidad", typeof(string));
+    
+            var nombreComunidadParameter = nombreComunidad != null ?
+                new ObjectParameter("NombreComunidad", nombreComunidad) :
+                new ObjectParameter("NombreComunidad", typeof(string));
+    
+            var descripcionComunidadParameter = descripcionComunidad != null ?
+                new ObjectParameter("DescripcionComunidad", descripcionComunidad) :
+                new ObjectParameter("DescripcionComunidad", typeof(string));
+    
+            var rutaLogoComunidadParameter = rutaLogoComunidad != null ?
+                new ObjectParameter("RutaLogoComunidad", rutaLogoComunidad) :
+                new ObjectParameter("RutaLogoComunidad", typeof(string));
+    
+            var estadoComunidadParameter = estadoComunidad.HasValue ?
+                new ObjectParameter("EstadoComunidad", estadoComunidad) :
+                new ObjectParameter("EstadoComunidad", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_ComunidadInsertar", idParroquiaParameter, codigoComunidadParameter, nombreComunidadParameter, descripcionComunidadParameter, rutaLogoComunidadParameter, estadoComunidadParameter);
+        }
+    
+        public virtual int Sp_ComunidadModificar(Nullable<int> idComunidad, Nullable<int> idParroquia, string codigoComunidad, string nombreComunidad, string descripcionComunidad, string rutaLogoComunidad, Nullable<bool> estadoComunidad)
+        {
+            var idComunidadParameter = idComunidad.HasValue ?
+                new ObjectParameter("IdComunidad", idComunidad) :
+                new ObjectParameter("IdComunidad", typeof(int));
+    
+            var idParroquiaParameter = idParroquia.HasValue ?
+                new ObjectParameter("IdParroquia", idParroquia) :
+                new ObjectParameter("IdParroquia", typeof(int));
+    
+            var codigoComunidadParameter = codigoComunidad != null ?
+                new ObjectParameter("CodigoComunidad", codigoComunidad) :
+                new ObjectParameter("CodigoComunidad", typeof(string));
+    
+            var nombreComunidadParameter = nombreComunidad != null ?
+                new ObjectParameter("NombreComunidad", nombreComunidad) :
+                new ObjectParameter("NombreComunidad", typeof(string));
+    
+            var descripcionComunidadParameter = descripcionComunidad != null ?
+                new ObjectParameter("DescripcionComunidad", descripcionComunidad) :
+                new ObjectParameter("DescripcionComunidad", typeof(string));
+    
+            var rutaLogoComunidadParameter = rutaLogoComunidad != null ?
+                new ObjectParameter("RutaLogoComunidad", rutaLogoComunidad) :
+                new ObjectParameter("RutaLogoComunidad", typeof(string));
+    
+            var estadoComunidadParameter = estadoComunidad.HasValue ?
+                new ObjectParameter("EstadoComunidad", estadoComunidad) :
+                new ObjectParameter("EstadoComunidad", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ComunidadModificar", idComunidadParameter, idParroquiaParameter, codigoComunidadParameter, nombreComunidadParameter, descripcionComunidadParameter, rutaLogoComunidadParameter, estadoComunidadParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_ParroquiaInsertar(Nullable<int> idCanton, string codigoParroquia, string nombreParroquia, string descripcionParroquia, string rutaLogoParroquia, Nullable<bool> estadoParroquia)
+        {
+            var idCantonParameter = idCanton.HasValue ?
+                new ObjectParameter("IdCanton", idCanton) :
+                new ObjectParameter("IdCanton", typeof(int));
+    
+            var codigoParroquiaParameter = codigoParroquia != null ?
+                new ObjectParameter("CodigoParroquia", codigoParroquia) :
+                new ObjectParameter("CodigoParroquia", typeof(string));
+    
+            var nombreParroquiaParameter = nombreParroquia != null ?
+                new ObjectParameter("NombreParroquia", nombreParroquia) :
+                new ObjectParameter("NombreParroquia", typeof(string));
+    
+            var descripcionParroquiaParameter = descripcionParroquia != null ?
+                new ObjectParameter("DescripcionParroquia", descripcionParroquia) :
+                new ObjectParameter("DescripcionParroquia", typeof(string));
+    
+            var rutaLogoParroquiaParameter = rutaLogoParroquia != null ?
+                new ObjectParameter("RutaLogoParroquia", rutaLogoParroquia) :
+                new ObjectParameter("RutaLogoParroquia", typeof(string));
+    
+            var estadoParroquiaParameter = estadoParroquia.HasValue ?
+                new ObjectParameter("EstadoParroquia", estadoParroquia) :
+                new ObjectParameter("EstadoParroquia", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_ParroquiaInsertar", idCantonParameter, codigoParroquiaParameter, nombreParroquiaParameter, descripcionParroquiaParameter, rutaLogoParroquiaParameter, estadoParroquiaParameter);
+        }
+    
+        public virtual int Sp_ParroquiaModificar(Nullable<int> idParroquia, Nullable<int> idCanton, string codigoParroquia, string nombreParroquia, string descripcionParroquia, string rutaLogoParroquia, Nullable<bool> estadoParroquia)
+        {
+            var idParroquiaParameter = idParroquia.HasValue ?
+                new ObjectParameter("IdParroquia", idParroquia) :
+                new ObjectParameter("IdParroquia", typeof(int));
+    
+            var idCantonParameter = idCanton.HasValue ?
+                new ObjectParameter("IdCanton", idCanton) :
+                new ObjectParameter("IdCanton", typeof(int));
+    
+            var codigoParroquiaParameter = codigoParroquia != null ?
+                new ObjectParameter("CodigoParroquia", codigoParroquia) :
+                new ObjectParameter("CodigoParroquia", typeof(string));
+    
+            var nombreParroquiaParameter = nombreParroquia != null ?
+                new ObjectParameter("NombreParroquia", nombreParroquia) :
+                new ObjectParameter("NombreParroquia", typeof(string));
+    
+            var descripcionParroquiaParameter = descripcionParroquia != null ?
+                new ObjectParameter("DescripcionParroquia", descripcionParroquia) :
+                new ObjectParameter("DescripcionParroquia", typeof(string));
+    
+            var rutaLogoParroquiaParameter = rutaLogoParroquia != null ?
+                new ObjectParameter("RutaLogoParroquia", rutaLogoParroquia) :
+                new ObjectParameter("RutaLogoParroquia", typeof(string));
+    
+            var estadoParroquiaParameter = estadoParroquia.HasValue ?
+                new ObjectParameter("EstadoParroquia", estadoParroquia) :
+                new ObjectParameter("EstadoParroquia", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ParroquiaModificar", idParroquiaParameter, idCantonParameter, codigoParroquiaParameter, nombreParroquiaParameter, descripcionParroquiaParameter, rutaLogoParroquiaParameter, estadoParroquiaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_PersonaInsertar(string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string numeroIdentificacion, Nullable<int> idTipoIdentificacion, string telefono, Nullable<int> idSexo, Nullable<int> idParroquia, string direccion, Nullable<bool> estado)
+        {
+            var primerNombreParameter = primerNombre != null ?
+                new ObjectParameter("PrimerNombre", primerNombre) :
+                new ObjectParameter("PrimerNombre", typeof(string));
+    
+            var segundoNombreParameter = segundoNombre != null ?
+                new ObjectParameter("SegundoNombre", segundoNombre) :
+                new ObjectParameter("SegundoNombre", typeof(string));
+    
+            var primerApellidoParameter = primerApellido != null ?
+                new ObjectParameter("PrimerApellido", primerApellido) :
+                new ObjectParameter("PrimerApellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("SegundoApellido", segundoApellido) :
+                new ObjectParameter("SegundoApellido", typeof(string));
+    
+            var numeroIdentificacionParameter = numeroIdentificacion != null ?
+                new ObjectParameter("NumeroIdentificacion", numeroIdentificacion) :
+                new ObjectParameter("NumeroIdentificacion", typeof(string));
+    
+            var idTipoIdentificacionParameter = idTipoIdentificacion.HasValue ?
+                new ObjectParameter("IdTipoIdentificacion", idTipoIdentificacion) :
+                new ObjectParameter("IdTipoIdentificacion", typeof(int));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var idSexoParameter = idSexo.HasValue ?
+                new ObjectParameter("IdSexo", idSexo) :
+                new ObjectParameter("IdSexo", typeof(int));
+    
+            var idParroquiaParameter = idParroquia.HasValue ?
+                new ObjectParameter("IdParroquia", idParroquia) :
+                new ObjectParameter("IdParroquia", typeof(int));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_PersonaInsertar", primerNombreParameter, segundoNombreParameter, primerApellidoParameter, segundoApellidoParameter, numeroIdentificacionParameter, idTipoIdentificacionParameter, telefonoParameter, idSexoParameter, idParroquiaParameter, direccionParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_PersonaModificar(Nullable<int> idPersona, string primerNombre, string segundoNombre, string primerApellido, string segundoApellido, string numeroIdentificacion, Nullable<int> idTipoIdentificacion, string telefono, Nullable<int> idSexo, Nullable<int> idParroquia, string direccion, Nullable<bool> estado)
+        {
+            var idPersonaParameter = idPersona.HasValue ?
+                new ObjectParameter("IdPersona", idPersona) :
+                new ObjectParameter("IdPersona", typeof(int));
+    
+            var primerNombreParameter = primerNombre != null ?
+                new ObjectParameter("PrimerNombre", primerNombre) :
+                new ObjectParameter("PrimerNombre", typeof(string));
+    
+            var segundoNombreParameter = segundoNombre != null ?
+                new ObjectParameter("SegundoNombre", segundoNombre) :
+                new ObjectParameter("SegundoNombre", typeof(string));
+    
+            var primerApellidoParameter = primerApellido != null ?
+                new ObjectParameter("PrimerApellido", primerApellido) :
+                new ObjectParameter("PrimerApellido", typeof(string));
+    
+            var segundoApellidoParameter = segundoApellido != null ?
+                new ObjectParameter("SegundoApellido", segundoApellido) :
+                new ObjectParameter("SegundoApellido", typeof(string));
+    
+            var numeroIdentificacionParameter = numeroIdentificacion != null ?
+                new ObjectParameter("NumeroIdentificacion", numeroIdentificacion) :
+                new ObjectParameter("NumeroIdentificacion", typeof(string));
+    
+            var idTipoIdentificacionParameter = idTipoIdentificacion.HasValue ?
+                new ObjectParameter("IdTipoIdentificacion", idTipoIdentificacion) :
+                new ObjectParameter("IdTipoIdentificacion", typeof(int));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var idSexoParameter = idSexo.HasValue ?
+                new ObjectParameter("IdSexo", idSexo) :
+                new ObjectParameter("IdSexo", typeof(int));
+    
+            var idParroquiaParameter = idParroquia.HasValue ?
+                new ObjectParameter("IdParroquia", idParroquia) :
+                new ObjectParameter("IdParroquia", typeof(int));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PersonaModificar", idPersonaParameter, primerNombreParameter, segundoNombreParameter, primerApellidoParameter, segundoApellidoParameter, numeroIdentificacionParameter, idTipoIdentificacionParameter, telefonoParameter, idSexoParameter, idParroquiaParameter, direccionParameter, estadoParameter);
         }
     }
 }
