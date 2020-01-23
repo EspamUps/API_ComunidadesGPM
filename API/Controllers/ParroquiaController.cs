@@ -1,4 +1,5 @@
 ﻿using API.Models.Catalogos;
+using API.Models.Entidades;
 using API.Models.Metodos;
 using System;
 using System.Collections.Generic;
@@ -49,14 +50,14 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/parroquia_consultar")]
-        public object parroquia_consultar(string _IdCantonEncriptado)
+        public object parroquia_consultar(string _IdParroquiaEncriptado)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                int _IdCantonDesEncriptado = Convert.ToInt32 (_seguridad.DesEncriptar(_IdCantonEncriptado).ToString());
-                var _listaParroquias = _objCatalogoParroquia.ConsultarParroquia().Where(c => c.EstadoParroquia == true && c.Canton.EstadoCanton == true && c.Canton.Provincia.EstadoProvincia == true && c.Canton.IdCanton == _IdCantonDesEncriptado).ToList();
+                int _idParroquia = Convert.ToInt32 (_seguridad.DesEncriptar(_IdParroquiaEncriptado).ToString());
+                var _listaParroquias = _objCatalogoParroquia.ConsultarParroquiaPorId(_idParroquia).Where(c => c.EstadoParroquia == true && c.Canton.EstadoCanton == true && c.Canton.Provincia.EstadoProvincia).ToList();
                 foreach (var item in _listaParroquias)
                 {
                     item.IdParroquia = 0;
@@ -70,12 +71,210 @@ namespace API.Controllers
             {
 
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-                return new
-                {
-                    respuesta = _respuesta,
-                    http = _http
-                };
 
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/parroquia_insertar")]
+        public object parroquia_insertar(Parroquia _objParroquia)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objParroquia == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "No se encontró el objeto parroquia.";
+                }
+                else if (_objParroquia.Canton.IdCantonEncriptado == null || string.IsNullOrEmpty(_objParroquia.Canton.IdCantonEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cantón al que pertenece la parroquia.";
+                }
+                else if (_objParroquia.Canton.Provincia.IdProvinciaEncriptado == null || string.IsNullOrEmpty(_objParroquia.Canton.Provincia.IdProvinciaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la provincia.";
+                }
+                else if (_objParroquia.NombreParroquia == null || string.IsNullOrEmpty(_objParroquia.NombreParroquia))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el nombre de la parroquia.";
+                }
+                else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.NombreParroquia == _objParroquia.NombreParroquia).FirstOrDefault() != null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                    _http.mensaje = "Ya existe una parroquia con el mismo nombre, por favor verifique en la lista.";
+                }
+                else if (_objParroquia.CodigoParroquia == null || string.IsNullOrEmpty(_objParroquia.CodigoParroquia))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el codigo de la parroquia.";
+                }
+                else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.CodigoParroquia == _objParroquia.CodigoParroquia).FirstOrDefault() != null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                    _http.mensaje = "Ya existe una parroquia con el mismo código, por favor verifique en la lista.";
+                }
+                else
+                {
+                    _objParroquia.EstadoParroquia = true;
+                    _objParroquia.Canton.IdCanton = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.IdCantonEncriptado));
+                    _objParroquia.Canton.Provincia.IdProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.Provincia.IdProvinciaEncriptado));
+                    int _idParroquia = _objCatalogoParroquia.InsertarParroquia(_objParroquia);
+                    if (_idParroquia == 0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Ocurrió un error al intentar ingresar la parroquia.";
+                    }
+                    else
+                    {
+                        var _objParroquiaInsertada = _objCatalogoParroquia.ConsultarParroquiaPorId(_idParroquia).Where(c => c.EstadoParroquia == true).FirstOrDefault();
+                        _objParroquiaInsertada.IdParroquia = 0;
+                        _objParroquiaInsertada.Canton.IdCanton = 0;
+                        _objParroquiaInsertada.Canton.Provincia.IdProvincia = 0;
+                        _respuesta = _objParroquiaInsertada;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/parroquia_modificar")]
+        public object parroquia_modificar(Parroquia _objParroquia)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objParroquia == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "No se encontró el objeto parroquia.";
+                }
+                else if (_objParroquia.IdParroquiaEncriptado == null || string.IsNullOrEmpty(_objParroquia.IdParroquiaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la parroquia.";
+                }
+                else if (_objParroquia.Canton.IdCantonEncriptado == null || string.IsNullOrEmpty(_objParroquia.Canton.IdCantonEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cantón.";
+                }
+                else if (_objParroquia.Canton.Provincia.IdProvinciaEncriptado == null || string.IsNullOrEmpty(_objParroquia.Canton.Provincia.IdProvinciaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la provincia.";
+                }
+                else if (_objParroquia.NombreParroquia == null || string.IsNullOrEmpty(_objParroquia.NombreParroquia))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el nombre de la parroquia.";
+                }
+                else if (_objParroquia.CodigoParroquia == null || string.IsNullOrEmpty(_objParroquia.CodigoParroquia))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el codigo de la parroquia.";
+                }
+                else
+                {
+                    int _idParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.IdParroquiaEncriptado));
+                    var _objParroquiaConsultada = _objCatalogoParroquia.ConsultarParroquiaPorId(_idParroquia).FirstOrDefault();
+                    if (_objParroquiaConsultada == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "La parroquia que intenta modificar no existe.";
+                    }
+                    else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.NombreParroquia == _objParroquia.NombreParroquia && c.IdParroquia != _idParroquia).FirstOrDefault() != null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                        _http.mensaje = "Ya existe una parroquia con el mismo nombre, por favor verifique en la lista.";
+                    }
+                    else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.CodigoParroquia == _objParroquia.CodigoParroquia && c.IdParroquia != _idParroquia).FirstOrDefault() != null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                        _http.mensaje = "Ya existe una parroquia con el mismo código, por favor verifique en la lista.";
+                    }
+                    else
+                    {
+                        _objParroquia.IdParroquia = _idParroquia;
+                        _objParroquia.Canton.IdCanton = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.IdCantonEncriptado));
+                        _objParroquia.Canton.Provincia.IdProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.Provincia.IdProvinciaEncriptado));
+                        _objParroquia.EstadoParroquia = true;
+                        int _idParroquiaModificado = _objCatalogoParroquia.ModificarParroquia(_objParroquia);
+                        if (_idParroquiaModificado == 0)
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "Ocurrió un error al intentar modificar la parroquia.";
+                        }
+                        else
+                        {
+                            var _objParroquiaModificaa = _objCatalogoParroquia.ConsultarParroquiaPorId(_idParroquia).FirstOrDefault();
+                            _objParroquiaModificaa.IdParroquia = 0;
+                            _objParroquiaModificaa.Canton.IdCanton = 0;
+                            _objParroquiaModificaa.Canton.Provincia.IdProvincia = 0;
+                            _respuesta = _objParroquiaModificaa;
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+
+        [HttpPost]
+        [Route("api/parroquia_eliminar")]
+        public object parroquia_eliminar(string _idParroquiaEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idParroquiaEncriptado == null || string.IsNullOrEmpty(_idParroquiaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la parroquia que va a eliminar.";
+                }
+                else
+                {
+                    int _idParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_idParroquiaEncriptado));
+                    var _objParroquiaConsultada = _objCatalogoParroquia.ConsultarParroquiaPorId(_idParroquia).FirstOrDefault();
+                    if (_objParroquiaConsultada == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "La parroquia que intenta eliminar no existe.";
+                    }
+                    else if (_objParroquiaConsultada.Utilizado == "1")
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "La parroquia ya ha sido utilizada, por la tanto no puede ser eliminado.";
+                    }
+                    else
+                    {
+                        _objCatalogoParroquia.EliminarParroquia(_idParroquia);
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
             }
             return new { respuesta = _respuesta, http = _http };
         }
