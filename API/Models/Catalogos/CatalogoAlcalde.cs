@@ -26,7 +26,8 @@ namespace API.Models.Catalogos
                     FechaIngreso = item.FechaIngreso,
                     FechaSalida = Convert.ToDateTime(item.FechaSalida),
                     Estado = item.EstadoAlcalde,
-                    Canton=new Canton()
+                    Utilizado = item.UtilizadoAlcalde,
+                    Canton =new Canton()
                     {
                         IdCanton = item.IdCanton,
                         IdCantonEncriptado = _seguridad.Encriptar(item.IdCanton.ToString()),
@@ -65,6 +66,7 @@ namespace API.Models.Catalogos
                     FechaIngreso = item.FechaIngreso,
                     FechaSalida = Convert.ToDateTime(item.FechaSalida),
                     Estado = item.EstadoAlcalde,
+                    Utilizado = item.UtilizadoAlcalde,
                     Canton = new Canton()
                     {
                         IdCanton = item.IdCanton,

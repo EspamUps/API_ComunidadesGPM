@@ -14,8 +14,7 @@ namespace API.Models.Entidades
         public string DescripcionParroquia { get; set; }
         public string RutaLogoParroquia { get; set; }
         public bool EstadoParroquia { get; set; }
-        public  Canton Canton { get; set; }  
-        //otros campos
+        public  Canton Canton { get; set; }
         public string Utilizado { get; set; }
 
     }

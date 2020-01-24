@@ -400,7 +400,7 @@
           <FunctionImport Name="Sp_AlcaldeConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AlcaldeConsultar_Result)" />
           <FunctionImport Name="Sp_LiderComunitarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_LiderComunitarioConsultar_Result)" />
           <FunctionImport Name="Sp_PrefectoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PrefectoConsultar_Result)" />
-          <FunctionImport Name="Sp_PresidenteJuntaParroquialConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PresidenteJuntaParroquialConsultar_Result)" />
+          <FunctionImport Name="Sp_PresidenteJuntaParroquialConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PresidenteJuntaParroquialConsultar_Result1)" />
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -1112,6 +1112,32 @@
           <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
           <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_PresidenteJuntaParroquialConsultar_Result1">
+          <Property Type="Int32" Name="IdPresidenteJuntaParroquial" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquia" Nullable="false" />
+          <Property Type="String" Name="Representante" Nullable="false" MaxLength="500" />
+          <Property Type="DateTime" Name="FechaIngreso" Nullable="false" />
+          <Property Type="DateTime" Name="FechaSalida" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoPresidenteJuntaParroquial" Nullable="false" />
+          <Property Type="String" Name="UtilizadoPresidenteJuntaParroquial" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="CodigoParroquia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreParroquia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionParroquia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoParroquia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoParroquia" Nullable="false" />
+          <Property Type="Int32" Name="IdCanton" Nullable="false" />
+          <Property Type="String" Name="CodigoCanton" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreCanton" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionCanton" Nullable="true" />
+          <Property Type="String" Name="RutaLogoCanton" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoCanton" Nullable="false" />
+          <Property Type="Int32" Name="IdProvincia" Nullable="false" />
+          <Property Type="String" Name="CodigoProvincia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionProvincia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1670,10 +1696,10 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_PresidenteJuntaParroquialConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PresidenteJuntaParroquialConsultar">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PresidenteJuntaParroquialConsultar_Result">
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PresidenteJuntaParroquialConsultar_Result1">
                 <ScalarProperty Name="IdPresidenteJuntaParroquial" ColumnName="IdPresidenteJuntaParroquial" />
                 <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
-                <ScalarProperty Name="Representate" ColumnName="Representate" />
+                <ScalarProperty Name="Representante" ColumnName="Representante" />
                 <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
                 <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
                 <ScalarProperty Name="EstadoPresidenteJuntaParroquial" ColumnName="EstadoPresidenteJuntaParroquial" />

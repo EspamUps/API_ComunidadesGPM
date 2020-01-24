@@ -15,7 +15,6 @@ namespace API.Models.Entidades
         public string RutaLogoComunidad { get; set; }
         public bool EstadoComunidad { get; set; }
         public Parroquia Parroquia { get; set; }
-        //otros campos
         public string Utilizado { get; set; }
     }
 }

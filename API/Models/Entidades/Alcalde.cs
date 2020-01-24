@@ -14,5 +14,6 @@ namespace API.Models.Entidades
         public DateTime FechaIngreso { get; set; }
         public DateTime FechaSalida { get; set; }
         public bool Estado { get; set; }
+        public string Utilizado { get; set; }
     }
 }

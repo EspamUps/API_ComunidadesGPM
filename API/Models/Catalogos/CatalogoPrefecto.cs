@@ -26,6 +26,7 @@ namespace API.Models.Catalogos
                     FechaIngreso = item.FechaIngreso,
                     FechaSalida = Convert.ToDateTime(item.FechaSalida),
                     Estado = item.EstadoPrefecto,
+                    Utilizado = item.UtilizadoPrefecto,
                     Provincia = new Provincia()
                     {
                         IdProvincia = item.IdProvincia,
@@ -54,6 +55,7 @@ namespace API.Models.Catalogos
                     FechaIngreso = item.FechaIngreso,
                     FechaSalida = Convert.ToDateTime(item.FechaSalida),
                     Estado = item.EstadoPrefecto,
+                    Utilizado = item.UtilizadoPrefecto,
                     Provincia = new Provincia()
                     {
                         IdProvincia = item.IdProvincia,

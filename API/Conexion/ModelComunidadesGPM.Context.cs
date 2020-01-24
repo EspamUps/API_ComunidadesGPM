@@ -738,9 +738,9 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PrefectoConsultar_Result>("Sp_PrefectoConsultar");
         }
     
-        public virtual ObjectResult<Sp_PresidenteJuntaParroquialConsultar_Result> Sp_PresidenteJuntaParroquialConsultar()
+        public virtual ObjectResult<Sp_PresidenteJuntaParroquialConsultar_Result1> Sp_PresidenteJuntaParroquialConsultar()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PresidenteJuntaParroquialConsultar_Result>("Sp_PresidenteJuntaParroquialConsultar");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PresidenteJuntaParroquialConsultar_Result1>("Sp_PresidenteJuntaParroquialConsultar");
         }
     }
 }
