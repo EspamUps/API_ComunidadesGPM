@@ -50,22 +50,30 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/parroquia_consultar")]
-        public object parroquia_consultar(string _IdParroquiaEncriptado)
+        public object parroquia_consultar(string _idParroquiaEncriptado)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                int _idParroquia = Convert.ToInt32 (_seguridad.DesEncriptar(_IdParroquiaEncriptado).ToString());
-                var _listaParroquias = _objCatalogoParroquia.ConsultarParroquiaPorId(_idParroquia).Where(c => c.EstadoParroquia == true && c.Canton.EstadoCanton == true && c.Canton.Provincia.EstadoProvincia).ToList();
-                foreach (var item in _listaParroquias)
+                if (string.IsNullOrEmpty(_idParroquiaEncriptado) || _idParroquiaEncriptado == null)
                 {
-                    item.IdParroquia = 0;
-                    item.Canton.IdCanton = 0;
-                    item.Canton.Provincia.IdProvincia = 0;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la parroquia.";
                 }
-                _respuesta = _listaParroquias;
-                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                else
+                {
+                    int _idParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_idParroquiaEncriptado).ToString());
+                    var _listaParroquias = _objCatalogoParroquia.ConsultarParroquiaPorId(_idParroquia).Where(c => c.EstadoParroquia == true && c.Canton.EstadoCanton == true && c.Canton.Provincia.EstadoProvincia).ToList();
+                    foreach (var item in _listaParroquias)
+                    {
+                        item.IdParroquia = 0;
+                        item.Canton.IdCanton = 0;
+                        item.Canton.Provincia.IdProvincia = 0;
+                    }
+                    _respuesta = _listaParroquias;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
             }
             catch (Exception ex)
             {
