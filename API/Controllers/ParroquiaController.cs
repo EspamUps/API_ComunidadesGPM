@@ -112,7 +112,7 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el nombre de la parroquia.";
                 }
-                else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.NombreParroquia == _objParroquia.NombreParroquia).FirstOrDefault() != null)
+                else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.NombreParroquia == _objParroquia.NombreParroquia && c.Canton.IdCanton == Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.IdCantonEncriptado))).FirstOrDefault() != null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                     _http.mensaje = "Ya existe una parroquia con el mismo nombre, por favor verifique en la lista.";
@@ -204,7 +204,7 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "La parroquia que intenta modificar no existe.";
                     }
-                    else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.NombreParroquia == _objParroquia.NombreParroquia && c.IdParroquia != _idParroquia).FirstOrDefault() != null)
+                    else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.NombreParroquia == _objParroquia.NombreParroquia && c.IdParroquia != _idParroquia && c.Canton.IdCanton == Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.IdCantonEncriptado))).FirstOrDefault() != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                         _http.mensaje = "Ya existe una parroquia con el mismo nombre, por favor verifique en la lista.";

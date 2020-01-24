@@ -15,7 +15,6 @@ namespace API.Controllers
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoCanton _objCatalogoCanton = new CatalogoCanton();
         Seguridad _seguridad = new Seguridad();
-        private object _objCatalogoProvincia;
 
         [HttpPost]
         [Route("api/canton_consultar")]
@@ -101,7 +100,7 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el nombre del cantón.";
                 }
-                else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.NombreCanton == _objCanton.NombreCanton).FirstOrDefault() != null)
+                else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.NombreCanton == _objCanton.NombreCanton && c.Provincia.IdProvincia == Convert.ToInt32(_seguridad.DesEncriptar(_objCanton.Provincia.IdProvinciaEncriptado))).FirstOrDefault() != null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                     _http.mensaje = "Ya existe un cantón con el mismo nombre, por favor verifique en la lista.";
@@ -187,7 +186,7 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "El cantón que intenta modificar no existe.";
                     }
-                    else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.NombreCanton == _objCanton.NombreCanton && c.IdCanton!=_idCanton).FirstOrDefault() != null)
+                    else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.NombreCanton == _objCanton.NombreCanton && c.IdCanton!=_idCanton && c.Provincia.IdProvincia == Convert.ToInt32(_seguridad.DesEncriptar(_objCanton.Provincia.IdProvinciaEncriptado))).FirstOrDefault() != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                         _http.mensaje = "Ya existe un cantón con el mismo nombre, por favor verifique en la lista.";
