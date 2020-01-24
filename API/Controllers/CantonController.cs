@@ -37,11 +37,6 @@ namespace API.Controllers
             {
 
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-                return new
-                {
-                    respuesta = _respuesta,
-                    http = _http
-                };
 
             }
             return new { respuesta = _respuesta, http = _http };
