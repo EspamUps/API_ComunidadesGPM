@@ -56,7 +56,7 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                if (string.IsNullOrEmpty(_idCantonEncriptado))
+                if (string.IsNullOrEmpty(_idCantonEncriptado) || _idCantonEncriptado==null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador del cantón";
