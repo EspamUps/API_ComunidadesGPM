@@ -110,5 +110,36 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+
+
+        public int InsertarPresidenteJuntaParroquial(PresidenteJuntaParroquial _objPresidenteJuntaParroquial)
+        {
+            try
+            {
+                return int.Parse(db.Sp_PresidenteJuntaParroquialInsertar(_objPresidenteJuntaParroquial.Parroquia.IdParroquia,_objPresidenteJuntaParroquial.Representante,_objPresidenteJuntaParroquial.FechaIngreso,_objPresidenteJuntaParroquial.FechaSalida, _objPresidenteJuntaParroquial.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public int ModificarPresidenteJuntaParroquial(PresidenteJuntaParroquial _objPresidenteJuntaParroquial)
+        {
+            try
+            {
+                db.Sp_PresidenteJuntaParroquialModificar(_objPresidenteJuntaParroquial.IdPresidenteJuntaParroquial ,_objPresidenteJuntaParroquial.Parroquia.IdParroquia, _objPresidenteJuntaParroquial.Representante, _objPresidenteJuntaParroquial.FechaIngreso, _objPresidenteJuntaParroquial.FechaSalida, _objPresidenteJuntaParroquial.Estado);
+                return _objPresidenteJuntaParroquial.IdPresidenteJuntaParroquial;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public void EliminarPresidenteJuntaParroquial(int _idPresidenteJuntaParroquial)
+        {
+            db.Sp_PresidenteJuntaParroquialEliminar(_idPresidenteJuntaParroquial);
+        }
     }
 }

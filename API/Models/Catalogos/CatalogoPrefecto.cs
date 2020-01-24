@@ -70,5 +70,35 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+
+        public int InsertarPrefecto(Prefecto _objPrefecto)
+        {
+            try
+            {
+                return int.Parse(db.Sp_PrefectoInsertar(_objPrefecto.Provincia.IdProvincia, _objPrefecto.Representante, _objPrefecto.FechaIngreso, _objPrefecto.FechaSalida, _objPrefecto.Estado).Select(x => x.Value.ToString()).FirstOrDefault());
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public int ModificarPrefecto(Prefecto _objPrefecto)
+        {
+            try
+            {
+                db.Sp_PrefectoModificar(_objPrefecto.IdPrefecto,_objPrefecto.Provincia.IdProvincia, _objPrefecto.Representante, _objPrefecto.FechaIngreso, _objPrefecto.FechaSalida, _objPrefecto.Estado);
+                return _objPrefecto.IdPrefecto;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public void EliminarPrefecto(int _idPrefecto)
+        {
+            db.Sp_PrefectoEliminar(_idPrefecto);
+        }
     }
 }

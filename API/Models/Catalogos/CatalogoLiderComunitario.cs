@@ -131,5 +131,33 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+        public int InsertarLiderComunitario(LiderComunitario _objLiderComunitario)
+        {
+            try
+            {
+                return int.Parse(db.Sp_LiderComunitarioInsertar(_objLiderComunitario.Comunidad.IdComunidad, _objLiderComunitario.Representante, _objLiderComunitario.FechaIngreso, _objLiderComunitario.FechaSalida, _objLiderComunitario.Estado).Select(x => x.Value.ToString()).FirstOrDefault());
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+        public int ModificarLiderComunitario(LiderComunitario _objLiderComunitario)
+        {
+            try
+            {
+                db.Sp_LiderComunitarioModificar(_objLiderComunitario.IdLiderComunitario, _objLiderComunitario.Comunidad.IdComunidad, _objLiderComunitario.Representante, _objLiderComunitario.FechaIngreso, _objLiderComunitario.FechaSalida, _objLiderComunitario.Estado);
+                return _objLiderComunitario.IdLiderComunitario;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+        public void EliminarLiderComunitario(int _idLiderComunitario)
+        {
+            db.Sp_LiderComunitarioEliminar(_idLiderComunitario);
+        }
+
     }
 }
