@@ -6,6 +6,24 @@
     <edmx:StorageModels>
     <Schema Namespace="ComunidadesGPMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <Function Name="Sp_AlcaldeConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
+        <Function Name="Sp_AlcaldeEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdAlcalde" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_AlcaldeInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdCanton" Type="int" Mode="In" />
+          <Parameter Name="Representante" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaIngreso" Type="datetime" Mode="In" />
+          <Parameter Name="FechaSalida" Type="datetime" Mode="In" />
+          <Parameter Name="EstadoAlcalde" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_AlcaldeModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdAlcalde" Type="int" Mode="In" />
+          <Parameter Name="IdCanton" Type="int" Mode="In" />
+          <Parameter Name="Representante" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaIngreso" Type="datetime" Mode="In" />
+          <Parameter Name="FechaSalida" Type="datetime" Mode="In" />
+          <Parameter Name="EstadoAlcalde" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_CantonConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
         <Function Name="Sp_CantonEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
           <Parameter Name="idCanton" Type="int" Mode="In" />
@@ -49,6 +67,24 @@
           <Parameter Name="EstadoComunidad" Type="bit" Mode="In" />
         </Function>
         <Function Name="Sp_LiderComunitarioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
+        <Function Name="Sp_LiderComunitarioEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdLiderComunitario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_LiderComunitarioInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdComunidad" Type="int" Mode="In" />
+          <Parameter Name="Representante" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaIngreso" Type="datetime" Mode="In" />
+          <Parameter Name="FechaSalida" Type="datetime" Mode="In" />
+          <Parameter Name="EstadoLiderComunitario" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_LiderComunitarioModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdLiderComunitario" Type="int" Mode="In" />
+          <Parameter Name="IdComunidad" Type="int" Mode="In" />
+          <Parameter Name="Representante" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaIngreso" Type="datetime" Mode="In" />
+          <Parameter Name="FechaSalida" Type="datetime" Mode="In" />
+          <Parameter Name="EstadoPresidenteJuntaParroquial" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_ParroquiaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
         <Function Name="Sp_ParroquiaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
           <Parameter Name="IdParroquia" Type="int" Mode="In" />
@@ -71,7 +107,43 @@
           <Parameter Name="EstadoParroquia" Type="bit" Mode="In" />
         </Function>
         <Function Name="Sp_PrefectoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
+        <Function Name="Sp_PrefectoEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdPrefecto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_PrefectoInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdProvincia" Type="int" Mode="In" />
+          <Parameter Name="Representante" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaIngreso" Type="datetime" Mode="In" />
+          <Parameter Name="FechaSalida" Type="datetime" Mode="In" />
+          <Parameter Name="EstadoPrefecto" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_PrefectoModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdPrefecto" Type="int" Mode="In" />
+          <Parameter Name="IdProvincia" Type="int" Mode="In" />
+          <Parameter Name="Representante" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaIngreso" Type="datetime" Mode="In" />
+          <Parameter Name="FechaSalida" Type="datetime" Mode="In" />
+          <Parameter Name="EstadoPrefecto" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_PresidenteJuntaParroquialConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
+        <Function Name="Sp_PresidenteJuntaParroquialEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdPresidenteJuntaParroquial" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_PresidenteJuntaParroquialInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdParroquia" Type="int" Mode="In" />
+          <Parameter Name="Representante" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaIngreso" Type="datetime" Mode="In" />
+          <Parameter Name="FechaSalida" Type="datetime" Mode="In" />
+          <Parameter Name="EstadoPresidenteJuntaParroquial" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_PresidenteJuntaParroquialModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
+          <Parameter Name="IdPresidenteJuntaParroquial" Type="int" Mode="In" />
+          <Parameter Name="IdParroquia" Type="int" Mode="In" />
+          <Parameter Name="Representante" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaIngreso" Type="datetime" Mode="In" />
+          <Parameter Name="FechaSalida" Type="datetime" Mode="In" />
+          <Parameter Name="EstadoPresidenteJuntaParroquial" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_ProvinciaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
         <Function Name="Sp_ProvinciaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
           <Parameter Name="IdProvincia" Type="int" Mode="In" />
@@ -401,6 +473,78 @@
           <FunctionImport Name="Sp_LiderComunitarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_LiderComunitarioConsultar_Result)" />
           <FunctionImport Name="Sp_PrefectoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PrefectoConsultar_Result)" />
           <FunctionImport Name="Sp_PresidenteJuntaParroquialConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PresidenteJuntaParroquialConsultar_Result1)" />
+          <FunctionImport Name="Sp_AlcaldeEliminar">
+            <Parameter Name="IdAlcalde" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_AlcaldeInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdCanton" Mode="In" Type="Int32" />
+            <Parameter Name="Representante" Mode="In" Type="String" />
+            <Parameter Name="FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaSalida" Mode="In" Type="DateTime" />
+            <Parameter Name="EstadoAlcalde" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_AlcaldeModificar">
+            <Parameter Name="IdAlcalde" Mode="In" Type="Int32" />
+            <Parameter Name="IdCanton" Mode="In" Type="Int32" />
+            <Parameter Name="Representante" Mode="In" Type="String" />
+            <Parameter Name="FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaSalida" Mode="In" Type="DateTime" />
+            <Parameter Name="EstadoAlcalde" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_LiderComunitarioEliminar">
+            <Parameter Name="IdLiderComunitario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_LiderComunitarioInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
+            <Parameter Name="Representante" Mode="In" Type="String" />
+            <Parameter Name="FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaSalida" Mode="In" Type="DateTime" />
+            <Parameter Name="EstadoLiderComunitario" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_LiderComunitarioModificar">
+            <Parameter Name="IdLiderComunitario" Mode="In" Type="Int32" />
+            <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
+            <Parameter Name="Representante" Mode="In" Type="String" />
+            <Parameter Name="FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaSalida" Mode="In" Type="DateTime" />
+            <Parameter Name="EstadoPresidenteJuntaParroquial" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_PrefectoEliminar">
+            <Parameter Name="IdPrefecto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_PrefectoInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdProvincia" Mode="In" Type="Int32" />
+            <Parameter Name="Representante" Mode="In" Type="String" />
+            <Parameter Name="FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaSalida" Mode="In" Type="DateTime" />
+            <Parameter Name="EstadoPrefecto" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_PrefectoModificar">
+            <Parameter Name="IdPrefecto" Mode="In" Type="Int32" />
+            <Parameter Name="IdProvincia" Mode="In" Type="Int32" />
+            <Parameter Name="Representante" Mode="In" Type="String" />
+            <Parameter Name="FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaSalida" Mode="In" Type="DateTime" />
+            <Parameter Name="EstadoPrefecto" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_PresidenteJuntaParroquialEliminar">
+            <Parameter Name="IdPresidenteJuntaParroquial" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_PresidenteJuntaParroquialInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+            <Parameter Name="Representante" Mode="In" Type="String" />
+            <Parameter Name="FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaSalida" Mode="In" Type="DateTime" />
+            <Parameter Name="EstadoPresidenteJuntaParroquial" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_PresidenteJuntaParroquialModificar">
+            <Parameter Name="IdPresidenteJuntaParroquial" Mode="In" Type="Int32" />
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+            <Parameter Name="Representante" Mode="In" Type="String" />
+            <Parameter Name="FechaIngreso" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaSalida" Mode="In" Type="DateTime" />
+            <Parameter Name="EstadoPresidenteJuntaParroquial" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -1724,6 +1868,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_AlcaldeEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_AlcaldeEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_AlcaldeInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_AlcaldeInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_AlcaldeModificar" FunctionName="ComunidadesGPMModel.Store.Sp_AlcaldeModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_LiderComunitarioEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_LiderComunitarioEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_LiderComunitarioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_LiderComunitarioInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_LiderComunitarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_LiderComunitarioModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_PrefectoEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_PrefectoEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_PrefectoInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_PrefectoInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_PrefectoModificar" FunctionName="ComunidadesGPMModel.Store.Sp_PrefectoModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_PresidenteJuntaParroquialEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_PresidenteJuntaParroquialEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_PresidenteJuntaParroquialInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_PresidenteJuntaParroquialInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_PresidenteJuntaParroquialModificar" FunctionName="ComunidadesGPMModel.Store.Sp_PresidenteJuntaParroquialModificar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

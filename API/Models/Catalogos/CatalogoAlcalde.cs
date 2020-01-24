@@ -91,5 +91,34 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+        public int InsertarAlcalde(Alcalde _objAlcalde)
+        {
+            try
+            {
+                return int.Parse(db.Sp_AlcaldeInsertar(_objAlcalde.Canton.IdCanton, _objAlcalde.Representante, _objAlcalde.FechaIngreso, _objAlcalde.FechaSalida, _objAlcalde.Estado).Select(x => x.Value.ToString()).FirstOrDefault());
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+        public int ModificarAlcalde(Alcalde _objAlcalde)
+        {
+            try
+            {
+                db.Sp_AlcaldeModificar(_objAlcalde.IdAlcalde, _objAlcalde.Canton.IdCanton, _objAlcalde.Representante, _objAlcalde.FechaIngreso, _objAlcalde.FechaSalida, _objAlcalde.Estado);
+                return _objAlcalde.IdAlcalde;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public void EliminarAlcalde (int _idAlcalde)
+        {
+            db.Sp_AlcaldeEliminar(_idAlcalde);
+        }
     }
+
 }

@@ -742,5 +742,257 @@ namespace API.Conexion
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PresidenteJuntaParroquialConsultar_Result1>("Sp_PresidenteJuntaParroquialConsultar");
         }
+    
+        public virtual int Sp_AlcaldeEliminar(Nullable<int> idAlcalde)
+        {
+            var idAlcaldeParameter = idAlcalde.HasValue ?
+                new ObjectParameter("IdAlcalde", idAlcalde) :
+                new ObjectParameter("IdAlcalde", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_AlcaldeEliminar", idAlcaldeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_AlcaldeInsertar(Nullable<int> idCanton, string representante, Nullable<System.DateTime> fechaIngreso, Nullable<System.DateTime> fechaSalida, Nullable<bool> estadoAlcalde)
+        {
+            var idCantonParameter = idCanton.HasValue ?
+                new ObjectParameter("IdCanton", idCanton) :
+                new ObjectParameter("IdCanton", typeof(int));
+    
+            var representanteParameter = representante != null ?
+                new ObjectParameter("Representante", representante) :
+                new ObjectParameter("Representante", typeof(string));
+    
+            var fechaIngresoParameter = fechaIngreso.HasValue ?
+                new ObjectParameter("FechaIngreso", fechaIngreso) :
+                new ObjectParameter("FechaIngreso", typeof(System.DateTime));
+    
+            var fechaSalidaParameter = fechaSalida.HasValue ?
+                new ObjectParameter("FechaSalida", fechaSalida) :
+                new ObjectParameter("FechaSalida", typeof(System.DateTime));
+    
+            var estadoAlcaldeParameter = estadoAlcalde.HasValue ?
+                new ObjectParameter("EstadoAlcalde", estadoAlcalde) :
+                new ObjectParameter("EstadoAlcalde", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_AlcaldeInsertar", idCantonParameter, representanteParameter, fechaIngresoParameter, fechaSalidaParameter, estadoAlcaldeParameter);
+        }
+    
+        public virtual int Sp_AlcaldeModificar(Nullable<int> idAlcalde, Nullable<int> idCanton, string representante, Nullable<System.DateTime> fechaIngreso, Nullable<System.DateTime> fechaSalida, Nullable<bool> estadoAlcalde)
+        {
+            var idAlcaldeParameter = idAlcalde.HasValue ?
+                new ObjectParameter("IdAlcalde", idAlcalde) :
+                new ObjectParameter("IdAlcalde", typeof(int));
+    
+            var idCantonParameter = idCanton.HasValue ?
+                new ObjectParameter("IdCanton", idCanton) :
+                new ObjectParameter("IdCanton", typeof(int));
+    
+            var representanteParameter = representante != null ?
+                new ObjectParameter("Representante", representante) :
+                new ObjectParameter("Representante", typeof(string));
+    
+            var fechaIngresoParameter = fechaIngreso.HasValue ?
+                new ObjectParameter("FechaIngreso", fechaIngreso) :
+                new ObjectParameter("FechaIngreso", typeof(System.DateTime));
+    
+            var fechaSalidaParameter = fechaSalida.HasValue ?
+                new ObjectParameter("FechaSalida", fechaSalida) :
+                new ObjectParameter("FechaSalida", typeof(System.DateTime));
+    
+            var estadoAlcaldeParameter = estadoAlcalde.HasValue ?
+                new ObjectParameter("EstadoAlcalde", estadoAlcalde) :
+                new ObjectParameter("EstadoAlcalde", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_AlcaldeModificar", idAlcaldeParameter, idCantonParameter, representanteParameter, fechaIngresoParameter, fechaSalidaParameter, estadoAlcaldeParameter);
+        }
+    
+        public virtual int Sp_LiderComunitarioEliminar(Nullable<int> idLiderComunitario)
+        {
+            var idLiderComunitarioParameter = idLiderComunitario.HasValue ?
+                new ObjectParameter("IdLiderComunitario", idLiderComunitario) :
+                new ObjectParameter("IdLiderComunitario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_LiderComunitarioEliminar", idLiderComunitarioParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_LiderComunitarioInsertar(Nullable<int> idComunidad, string representante, Nullable<System.DateTime> fechaIngreso, Nullable<System.DateTime> fechaSalida, Nullable<bool> estadoLiderComunitario)
+        {
+            var idComunidadParameter = idComunidad.HasValue ?
+                new ObjectParameter("IdComunidad", idComunidad) :
+                new ObjectParameter("IdComunidad", typeof(int));
+    
+            var representanteParameter = representante != null ?
+                new ObjectParameter("Representante", representante) :
+                new ObjectParameter("Representante", typeof(string));
+    
+            var fechaIngresoParameter = fechaIngreso.HasValue ?
+                new ObjectParameter("FechaIngreso", fechaIngreso) :
+                new ObjectParameter("FechaIngreso", typeof(System.DateTime));
+    
+            var fechaSalidaParameter = fechaSalida.HasValue ?
+                new ObjectParameter("FechaSalida", fechaSalida) :
+                new ObjectParameter("FechaSalida", typeof(System.DateTime));
+    
+            var estadoLiderComunitarioParameter = estadoLiderComunitario.HasValue ?
+                new ObjectParameter("EstadoLiderComunitario", estadoLiderComunitario) :
+                new ObjectParameter("EstadoLiderComunitario", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_LiderComunitarioInsertar", idComunidadParameter, representanteParameter, fechaIngresoParameter, fechaSalidaParameter, estadoLiderComunitarioParameter);
+        }
+    
+        public virtual int Sp_LiderComunitarioModificar(Nullable<int> idLiderComunitario, Nullable<int> idComunidad, string representante, Nullable<System.DateTime> fechaIngreso, Nullable<System.DateTime> fechaSalida, Nullable<bool> estadoPresidenteJuntaParroquial)
+        {
+            var idLiderComunitarioParameter = idLiderComunitario.HasValue ?
+                new ObjectParameter("IdLiderComunitario", idLiderComunitario) :
+                new ObjectParameter("IdLiderComunitario", typeof(int));
+    
+            var idComunidadParameter = idComunidad.HasValue ?
+                new ObjectParameter("IdComunidad", idComunidad) :
+                new ObjectParameter("IdComunidad", typeof(int));
+    
+            var representanteParameter = representante != null ?
+                new ObjectParameter("Representante", representante) :
+                new ObjectParameter("Representante", typeof(string));
+    
+            var fechaIngresoParameter = fechaIngreso.HasValue ?
+                new ObjectParameter("FechaIngreso", fechaIngreso) :
+                new ObjectParameter("FechaIngreso", typeof(System.DateTime));
+    
+            var fechaSalidaParameter = fechaSalida.HasValue ?
+                new ObjectParameter("FechaSalida", fechaSalida) :
+                new ObjectParameter("FechaSalida", typeof(System.DateTime));
+    
+            var estadoPresidenteJuntaParroquialParameter = estadoPresidenteJuntaParroquial.HasValue ?
+                new ObjectParameter("EstadoPresidenteJuntaParroquial", estadoPresidenteJuntaParroquial) :
+                new ObjectParameter("EstadoPresidenteJuntaParroquial", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_LiderComunitarioModificar", idLiderComunitarioParameter, idComunidadParameter, representanteParameter, fechaIngresoParameter, fechaSalidaParameter, estadoPresidenteJuntaParroquialParameter);
+        }
+    
+        public virtual int Sp_PrefectoEliminar(Nullable<int> idPrefecto)
+        {
+            var idPrefectoParameter = idPrefecto.HasValue ?
+                new ObjectParameter("IdPrefecto", idPrefecto) :
+                new ObjectParameter("IdPrefecto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PrefectoEliminar", idPrefectoParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_PrefectoInsertar(Nullable<int> idProvincia, string representante, Nullable<System.DateTime> fechaIngreso, Nullable<System.DateTime> fechaSalida, Nullable<bool> estadoPrefecto)
+        {
+            var idProvinciaParameter = idProvincia.HasValue ?
+                new ObjectParameter("IdProvincia", idProvincia) :
+                new ObjectParameter("IdProvincia", typeof(int));
+    
+            var representanteParameter = representante != null ?
+                new ObjectParameter("Representante", representante) :
+                new ObjectParameter("Representante", typeof(string));
+    
+            var fechaIngresoParameter = fechaIngreso.HasValue ?
+                new ObjectParameter("FechaIngreso", fechaIngreso) :
+                new ObjectParameter("FechaIngreso", typeof(System.DateTime));
+    
+            var fechaSalidaParameter = fechaSalida.HasValue ?
+                new ObjectParameter("FechaSalida", fechaSalida) :
+                new ObjectParameter("FechaSalida", typeof(System.DateTime));
+    
+            var estadoPrefectoParameter = estadoPrefecto.HasValue ?
+                new ObjectParameter("EstadoPrefecto", estadoPrefecto) :
+                new ObjectParameter("EstadoPrefecto", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_PrefectoInsertar", idProvinciaParameter, representanteParameter, fechaIngresoParameter, fechaSalidaParameter, estadoPrefectoParameter);
+        }
+    
+        public virtual int Sp_PrefectoModificar(Nullable<int> idPrefecto, Nullable<int> idProvincia, string representante, Nullable<System.DateTime> fechaIngreso, Nullable<System.DateTime> fechaSalida, Nullable<bool> estadoPrefecto)
+        {
+            var idPrefectoParameter = idPrefecto.HasValue ?
+                new ObjectParameter("IdPrefecto", idPrefecto) :
+                new ObjectParameter("IdPrefecto", typeof(int));
+    
+            var idProvinciaParameter = idProvincia.HasValue ?
+                new ObjectParameter("IdProvincia", idProvincia) :
+                new ObjectParameter("IdProvincia", typeof(int));
+    
+            var representanteParameter = representante != null ?
+                new ObjectParameter("Representante", representante) :
+                new ObjectParameter("Representante", typeof(string));
+    
+            var fechaIngresoParameter = fechaIngreso.HasValue ?
+                new ObjectParameter("FechaIngreso", fechaIngreso) :
+                new ObjectParameter("FechaIngreso", typeof(System.DateTime));
+    
+            var fechaSalidaParameter = fechaSalida.HasValue ?
+                new ObjectParameter("FechaSalida", fechaSalida) :
+                new ObjectParameter("FechaSalida", typeof(System.DateTime));
+    
+            var estadoPrefectoParameter = estadoPrefecto.HasValue ?
+                new ObjectParameter("EstadoPrefecto", estadoPrefecto) :
+                new ObjectParameter("EstadoPrefecto", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PrefectoModificar", idPrefectoParameter, idProvinciaParameter, representanteParameter, fechaIngresoParameter, fechaSalidaParameter, estadoPrefectoParameter);
+        }
+    
+        public virtual int Sp_PresidenteJuntaParroquialEliminar(Nullable<int> idPresidenteJuntaParroquial)
+        {
+            var idPresidenteJuntaParroquialParameter = idPresidenteJuntaParroquial.HasValue ?
+                new ObjectParameter("IdPresidenteJuntaParroquial", idPresidenteJuntaParroquial) :
+                new ObjectParameter("IdPresidenteJuntaParroquial", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PresidenteJuntaParroquialEliminar", idPresidenteJuntaParroquialParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_PresidenteJuntaParroquialInsertar(Nullable<int> idParroquia, string representante, Nullable<System.DateTime> fechaIngreso, Nullable<System.DateTime> fechaSalida, Nullable<bool> estadoPresidenteJuntaParroquial)
+        {
+            var idParroquiaParameter = idParroquia.HasValue ?
+                new ObjectParameter("IdParroquia", idParroquia) :
+                new ObjectParameter("IdParroquia", typeof(int));
+    
+            var representanteParameter = representante != null ?
+                new ObjectParameter("Representante", representante) :
+                new ObjectParameter("Representante", typeof(string));
+    
+            var fechaIngresoParameter = fechaIngreso.HasValue ?
+                new ObjectParameter("FechaIngreso", fechaIngreso) :
+                new ObjectParameter("FechaIngreso", typeof(System.DateTime));
+    
+            var fechaSalidaParameter = fechaSalida.HasValue ?
+                new ObjectParameter("FechaSalida", fechaSalida) :
+                new ObjectParameter("FechaSalida", typeof(System.DateTime));
+    
+            var estadoPresidenteJuntaParroquialParameter = estadoPresidenteJuntaParroquial.HasValue ?
+                new ObjectParameter("EstadoPresidenteJuntaParroquial", estadoPresidenteJuntaParroquial) :
+                new ObjectParameter("EstadoPresidenteJuntaParroquial", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_PresidenteJuntaParroquialInsertar", idParroquiaParameter, representanteParameter, fechaIngresoParameter, fechaSalidaParameter, estadoPresidenteJuntaParroquialParameter);
+        }
+    
+        public virtual int Sp_PresidenteJuntaParroquialModificar(Nullable<int> idPresidenteJuntaParroquial, Nullable<int> idParroquia, string representante, Nullable<System.DateTime> fechaIngreso, Nullable<System.DateTime> fechaSalida, Nullable<bool> estadoPresidenteJuntaParroquial)
+        {
+            var idPresidenteJuntaParroquialParameter = idPresidenteJuntaParroquial.HasValue ?
+                new ObjectParameter("IdPresidenteJuntaParroquial", idPresidenteJuntaParroquial) :
+                new ObjectParameter("IdPresidenteJuntaParroquial", typeof(int));
+    
+            var idParroquiaParameter = idParroquia.HasValue ?
+                new ObjectParameter("IdParroquia", idParroquia) :
+                new ObjectParameter("IdParroquia", typeof(int));
+    
+            var representanteParameter = representante != null ?
+                new ObjectParameter("Representante", representante) :
+                new ObjectParameter("Representante", typeof(string));
+    
+            var fechaIngresoParameter = fechaIngreso.HasValue ?
+                new ObjectParameter("FechaIngreso", fechaIngreso) :
+                new ObjectParameter("FechaIngreso", typeof(System.DateTime));
+    
+            var fechaSalidaParameter = fechaSalida.HasValue ?
+                new ObjectParameter("FechaSalida", fechaSalida) :
+                new ObjectParameter("FechaSalida", typeof(System.DateTime));
+    
+            var estadoPresidenteJuntaParroquialParameter = estadoPresidenteJuntaParroquial.HasValue ?
+                new ObjectParameter("EstadoPresidenteJuntaParroquial", estadoPresidenteJuntaParroquial) :
+                new ObjectParameter("EstadoPresidenteJuntaParroquial", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PresidenteJuntaParroquialModificar", idPresidenteJuntaParroquialParameter, idParroquiaParameter, representanteParameter, fechaIngresoParameter, fechaSalidaParameter, estadoPresidenteJuntaParroquialParameter);
+        }
     }
 }

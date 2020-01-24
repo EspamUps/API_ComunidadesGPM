@@ -13,7 +13,6 @@ namespace API.Models.Entidades
         public string Clave { get; set; }
         public string ClaveEncriptada { get; set; }
         public bool Estado { get; set; }
-
         public Persona Persona { get; set; }
         public string Token { get; set; }
         public string Utilizado { get; set; }
