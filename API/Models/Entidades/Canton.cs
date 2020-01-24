@@ -15,7 +15,6 @@ namespace API.Models.Entidades
         public string RutaLogoCanton { get; set; }
         public bool EstadoCanton { get; set; }
         public  Provincia Provincia { get; set; }
-        //otros campos
         public string Utilizado { get; set; }
     }
 }

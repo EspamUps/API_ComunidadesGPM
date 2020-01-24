@@ -722,5 +722,25 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PersonaModificar", idPersonaParameter, primerNombreParameter, segundoNombreParameter, primerApellidoParameter, segundoApellidoParameter, numeroIdentificacionParameter, idTipoIdentificacionParameter, telefonoParameter, idSexoParameter, idParroquiaParameter, direccionParameter, estadoParameter);
         }
+    
+        public virtual ObjectResult<Sp_AlcaldeConsultar_Result> Sp_AlcaldeConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AlcaldeConsultar_Result>("Sp_AlcaldeConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_LiderComunitarioConsultar_Result> Sp_LiderComunitarioConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_LiderComunitarioConsultar_Result>("Sp_LiderComunitarioConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_PrefectoConsultar_Result> Sp_PrefectoConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PrefectoConsultar_Result>("Sp_PrefectoConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_PresidenteJuntaParroquialConsultar_Result1> Sp_PresidenteJuntaParroquialConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PresidenteJuntaParroquialConsultar_Result1>("Sp_PresidenteJuntaParroquialConsultar");
+        }
     }
 }

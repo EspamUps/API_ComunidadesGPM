@@ -16,7 +16,6 @@ namespace API.Models.Entidades
 
         public Persona Persona { get; set; }
         public string Token { get; set; }
-        //campos adicionales
         public string Utilizado { get; set; }
     }
 }

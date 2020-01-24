@@ -14,7 +14,6 @@ namespace API.Models.Entidades
         public string DescripcionProvincia { get; set; }
         public string RutaLogoProvincia { get; set; }
         public bool EstadoProvincia { get; set; }
-        //otros campos
         public string  Utilizado { get; set; }
     }
 }

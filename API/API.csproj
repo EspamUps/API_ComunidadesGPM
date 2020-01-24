@@ -206,6 +206,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelComunidadesGPM.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_AlcaldeConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_AsignarModuloPrivilegioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -230,6 +233,9 @@
     <Compile Include="Conexion\Sp_ComunidadConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_LiderComunitarioConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ModuloConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -249,6 +255,15 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PersonaConsultar_Result4.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PrefectoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PresidenteJuntaParroquialConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PresidenteJuntaParroquialConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PrivilegioConsultar_Result.cs">
@@ -305,12 +320,16 @@
     <Compile Include="Conexion\Sp_UsuarioValidar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AlcaldeController.cs" />
     <Compile Include="Controllers\AsignarUsuarioTipoUsuarioController.cs" />
     <Compile Include="Controllers\CantonController.cs" />
     <Compile Include="Controllers\ComunidadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LiderComunitarioController.cs" />
     <Compile Include="Controllers\ParroquiaController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
+    <Compile Include="Controllers\PrefectoController.cs" />
+    <Compile Include="Controllers\PresidenteJuntaParroquialController.cs" />
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\SexoController.cs" />
     <Compile Include="Controllers\TipoIdentificacionController.cs" />
@@ -321,14 +340,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Catalogos\CatalogoAlcalde.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarModuloPrivilegio.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarTipoUsuarioModuloPrivilegio.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarUsuarioTipoUsuario.cs" />
     <Compile Include="Models\Catalogos\CatalogoCanton.cs" />
     <Compile Include="Models\Catalogos\CatalogoComunidad.cs" />
+    <Compile Include="Models\Catalogos\CatalogoLiderComunitario.cs" />
     <Compile Include="Models\Catalogos\CatalogoModulo.cs" />
     <Compile Include="Models\Catalogos\CatalogoParroquia.cs" />
     <Compile Include="Models\Catalogos\CatalogoPersona.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPrefecto.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPresidenteJuntaParroquial.cs" />
     <Compile Include="Models\Catalogos\CatalogoPrivilegio.cs" />
     <Compile Include="Models\Catalogos\CatalogoProvincia.cs" />
     <Compile Include="Models\Catalogos\CatalogoRespuestasHTTP.cs" />
@@ -337,12 +360,16 @@
     <Compile Include="Models\Catalogos\CatalogoTipoUsuarios.cs" />
     <Compile Include="Models\Catalogos\CatalogoTokens.cs" />
     <Compile Include="Models\Catalogos\CatalogoUsuario.cs" />
+    <Compile Include="Models\Entidades\Alcalde.cs" />
     <Compile Include="Models\Entidades\AsignarModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarTipoUsuarioModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarUsuarioTipoUsuario.cs" />
     <Compile Include="Models\Entidades\Canton.cs" />
     <Compile Include="Models\Entidades\Clave.cs" />
     <Compile Include="Models\Entidades\Comunidad.cs" />
+    <Compile Include="Models\Entidades\LiderComunitario.cs" />
+    <Compile Include="Models\Entidades\Prefecto.cs" />
+    <Compile Include="Models\Entidades\PresidenteJuntaParroquial.cs" />
     <Compile Include="Models\Metodos\RespuestaHTTP.cs" />
     <Compile Include="Models\Entidades\Modulo.cs" />
     <Compile Include="Models\Entidades\Parroquia.cs" />
