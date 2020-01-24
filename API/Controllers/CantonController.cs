@@ -185,21 +185,23 @@ namespace API.Controllers
                     if (_objCantonConsultado == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
-                        _http.mensaje = "El cantón que intenta consultar no existe.";
+                        _http.mensaje = "El cantón que intenta modificar no existe.";
                     }
-                    else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.NombreCanton == _objCanton.NombreCanton && _objCanton.IdCanton!=_idCanton).FirstOrDefault() != null)
+                    else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.NombreCanton == _objCanton.NombreCanton && c.IdCanton!=_idCanton).FirstOrDefault() != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                         _http.mensaje = "Ya existe un cantón con el mismo nombre, por favor verifique en la lista.";
                     }
-                    else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.CodigoCanton == _objCanton.CodigoCanton && _objCanton.IdCanton != _idCanton).FirstOrDefault() != null)
+                    else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.CodigoCanton == _objCanton.CodigoCanton && c.IdCanton != _idCanton).FirstOrDefault() != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                         _http.mensaje = "Ya existe un cantón con el mismo código, por favor verifique en la lista.";
                     }
                     else
                     {
+                        _objCanton.IdCanton = _idCanton;
                         _objCanton.Provincia.IdProvincia= Convert.ToInt32(_seguridad.DesEncriptar(_objCanton.Provincia.IdProvinciaEncriptado));
+                        _objCanton.EstadoCanton = true;
                         int _idCantonModificado = _objCatalogoCanton.ModificarCanton(_objCanton);
                         if (_idCantonModificado == 0)
                         {
