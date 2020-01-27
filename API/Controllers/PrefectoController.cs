@@ -14,6 +14,7 @@ namespace API.Controllers
     {
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoPrefecto _objCatalogoPrefecto = new CatalogoPrefecto();
+        CatalogoProvincia _objCatalogoProvincia = new CatalogoProvincia();
         Seguridad _seguridad = new Seguridad();
 
         [HttpPost]
@@ -67,6 +68,48 @@ namespace API.Controllers
                         _objPrefecto.IdPrefecto = 0;
                         _objPrefecto.Provincia.IdProvincia = 0;
                         _respuesta = _objPrefecto;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/prefecto_consultarporidprovincia")]
+        public object prefecto_consultarporidprovincia(string _idProvinciaEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idProvinciaEncriptado == null || string.IsNullOrEmpty(_idProvinciaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la provincia.";
+                }
+                else
+                {
+                    int _idProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_idProvinciaEncriptado));
+                    var _objProvincia = _objCatalogoProvincia.ConsultarProvinciaPorId(_idProvincia).Where(c => c.EstadoProvincia == true).FirstOrDefault();
+                    if (_objProvincia == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró la provincia.";
+                    }
+                    else
+                    {
+                        var _listaPrefectos = _objCatalogoPrefecto.ConsultarPrefectoPorIdProvincia(_idProvincia).Where(c => c.Estado == true && c.Provincia.EstadoProvincia == true).ToList();
+                        foreach (var item in _listaPrefectos)
+                        {
+                            item.IdPrefecto = 0;
+                            item.Provincia.IdProvincia = 0;
+                        }
+                        _respuesta = _listaPrefectos;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
                 }

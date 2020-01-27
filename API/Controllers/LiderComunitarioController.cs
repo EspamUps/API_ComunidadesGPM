@@ -14,6 +14,7 @@ namespace API.Controllers
     {
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoLiderComunitario _objCatalogoLiderComunitario = new CatalogoLiderComunitario();
+        CatalogoComunidad _objCatalogoComunidad = new CatalogoComunidad();
         Seguridad _seguridad = new Seguridad();
 
         [HttpPost]
@@ -73,6 +74,50 @@ namespace API.Controllers
                         _objLiderComunitario.Comunidad.Parroquia.Canton.IdCanton = 0;
                         _objLiderComunitario.Comunidad.Parroquia.Canton.Provincia.IdProvincia = 0;
                         _respuesta = _objLiderComunitario;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/lidercomunitario_consultarporidcomunidad")]
+        public object lidercomunitario_consultarporidcomunidad(string _idComunidadEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idComunidadEncriptado == null || string.IsNullOrEmpty(_idComunidadEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la comunidad.";
+                }
+                else
+                {
+                    int _idComunidad = Convert.ToInt32(_seguridad.DesEncriptar(_idComunidadEncriptado));
+                    var _objComunidad = _objCatalogoComunidad.ConsultarComunidadPorId(_idComunidad).Where(c => c.EstadoComunidad == true).FirstOrDefault();
+                    if (_objComunidad == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró la comunidad.";
+                    }
+                    else
+                    {
+                        var _listaLideresComunitarios = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorIdComunidad(_idComunidad).Where(c => c.Estado==true && c.Comunidad.EstadoComunidad==true).ToList();
+                        foreach (var _objLiderComunitario in _listaLideresComunitarios)
+                        {
+                            _objLiderComunitario.IdLiderComunitario = 0;
+                            _objLiderComunitario.Comunidad.IdComunidad = 0;
+                            _objLiderComunitario.Comunidad.Parroquia.IdParroquia = 0;
+                            _objLiderComunitario.Comunidad.Parroquia.Canton.IdCanton = 0;
+                            _objLiderComunitario.Comunidad.Parroquia.Canton.Provincia.IdProvincia = 0;
+                        }
+                        _respuesta = _listaLideresComunitarios;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
                 }
