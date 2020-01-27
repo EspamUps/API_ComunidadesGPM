@@ -14,6 +14,7 @@ namespace API.Controllers
     {
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoPresidenteJuntaParroquial _objCatalogoPresidenteJuntaParroquial = new CatalogoPresidenteJuntaParroquial();
+        CatalogoParroquia _objCatalogoParroquia = new CatalogoParroquia();
         Seguridad _seguridad = new Seguridad();
 
         [HttpPost]
@@ -41,7 +42,6 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
-
         [HttpPost]
         [Route("api/presidentejuntaparroquial_consultar")]
         public object presidentejuntaparroquial_consultar(string _idPresidenteJuntaParroquialEncriptado)
@@ -71,6 +71,49 @@ namespace API.Controllers
                         _objPresidenteJuntaParroquial.Parroquia.Canton.IdCanton = 0;
                         _objPresidenteJuntaParroquial.Parroquia.Canton.Provincia.IdProvincia = 0;
                         _respuesta = _objPresidenteJuntaParroquial;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/presidentejuntaparroquial_consultarporidparroquia")]
+        public object presidentejuntaparroquial_consultarporidparroquia(string _idParroquiaEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idParroquiaEncriptado == null || string.IsNullOrEmpty(_idParroquiaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la parroquia";
+                }
+                else
+                {
+                    int _idParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_idParroquiaEncriptado));
+                    var _objParroquia = _objCatalogoParroquia.ConsultarParroquiaPorId(_idParroquia).Where(c => c.EstadoParroquia == true).FirstOrDefault();
+                    if (_objParroquia == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró la parroquia en el sistema.";
+                    }
+                    else
+                    {
+                        var _listaPresidentesJuntasParroquiales = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorIdParroquia(_idParroquia).Where(c => c.Estado == true && c.Parroquia.EstadoParroquia == true).ToList();
+                        foreach (var _objPresidenteJuntaParroquial in _listaPresidentesJuntasParroquiales)
+                        {
+                            _objPresidenteJuntaParroquial.IdPresidenteJuntaParroquial = 0;
+                            _objPresidenteJuntaParroquial.Parroquia.IdParroquia = 0;
+                            _objPresidenteJuntaParroquial.Parroquia.Canton.IdCanton = 0;
+                            _objPresidenteJuntaParroquial.Parroquia.Canton.Provincia.IdProvincia = 0;
+                        }
+                        _respuesta = _listaPresidentesJuntasParroquiales;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
                 }
