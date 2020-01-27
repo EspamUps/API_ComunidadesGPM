@@ -103,7 +103,7 @@ namespace API.Controllers
                     }
                     else
                     {
-                        var _listaPrefectos = _objCatalogoPrefecto.ConsultarPrefectoPorIdProvincia(_idProvincia).Where(c => c.Estado == true && c.Provincia.EstadoProvincia == true).ToList();
+                        var _listaPrefectos = _objCatalogoPrefecto.ConsultarPrefectoPorIdProvincia(_idProvincia).Where(c => c.Estado == true && c.Provincia.EstadoProvincia == true).OrderBy(c=>c.FechaIngreso).ToList();
                         foreach (var item in _listaPrefectos)
                         {
                             item.IdPrefecto = 0;
