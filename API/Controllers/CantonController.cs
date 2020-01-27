@@ -140,8 +140,8 @@ namespace API.Controllers
 
 
         [HttpPost]
-        [Route("api/canton_modficiar")]
-        public object canton_modficiar(Canton _objCanton)
+        [Route("api/canton_modificar")]
+        public object canton_modificiar(Canton _objCanton)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
