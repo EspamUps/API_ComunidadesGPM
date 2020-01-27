@@ -14,6 +14,7 @@ namespace API.Controllers
     {
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoAlcalde _objCatalogoAlcalde = new CatalogoAlcalde();
+        CatalogoCanton _objCatalogoCanton = new CatalogoCanton();
         Seguridad _seguridad = new Seguridad();
 
         [HttpPost]
@@ -69,6 +70,49 @@ namespace API.Controllers
                         _objAlcalde.Canton.IdCanton = 0;
                         _objAlcalde.Canton.Provincia.IdProvincia = 0;
                         _respuesta = _objAlcalde;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/alcalde_consultarporidcanton")]
+        public object alcalde_consultarporidalcalde(string _idCantonEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idCantonEncriptado == null || string.IsNullOrEmpty(_idCantonEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cantón";
+                }
+                else
+                {
+                    int _idCanton = Convert.ToInt32(_seguridad.DesEncriptar(_idCantonEncriptado));
+                    var _objCanton = _objCatalogoCanton.ConsultarCantonPorId(_idCanton).Where(c => c.EstadoCanton == true).FirstOrDefault();
+                    if (_objCanton == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el cantón registrado.";
+                    }
+                    else
+                    {
+                        var _listaAlcaldes = _objCatalogoAlcalde.ConsultarAlcaldePorIdCanton(_idCanton).Where(c => c.Estado == true && c.Canton.EstadoCanton == true).ToList();
+                        foreach (var _objAlcalde in _listaAlcaldes)
+                        {
+                            _objAlcalde.IdAlcalde = 0;
+                            _objAlcalde.Canton.IdCanton = 0;
+                            _objAlcalde.Canton.Provincia.IdProvincia = 0;
+                        }                     
+                        _respuesta = _listaAlcaldes;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
                 }

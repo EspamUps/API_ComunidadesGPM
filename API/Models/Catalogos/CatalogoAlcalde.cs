@@ -91,6 +91,44 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+        public List<Alcalde> ConsultarAlcaldePorIdCanton(int _idCanton)
+        {
+            List<Alcalde> _lista = new List<Alcalde>();
+            foreach (var item in db.Sp_AlcaldeConsultar().Where(c => c.IdCanton == _idCanton))
+            {
+                _lista.Add(new Alcalde()
+                {
+                    IdAlcalde = item.IdAlcalde,
+                    IdAlcaldeEncriptado = _seguridad.Encriptar(item.IdAlcalde.ToString()),
+                    Representante = item.Representante,
+                    FechaIngreso = item.FechaIngreso,
+                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    Estado = item.EstadoAlcalde,
+                    Utilizado = item.UtilizadoAlcalde,
+                    Canton = new Canton()
+                    {
+                        IdCanton = item.IdCanton,
+                        IdCantonEncriptado = _seguridad.Encriptar(item.IdCanton.ToString()),
+                        CodigoCanton = item.CodigoCanton,
+                        DescripcionCanton = item.DescripcionCanton,
+                        NombreCanton = item.NombreCanton,
+                        RutaLogoCanton = item.RutaLogoCanton,
+                        EstadoCanton = item.EstadoCanton,
+                        Provincia = new Provincia()
+                        {
+                            IdProvincia = item.IdProvincia,
+                            IdProvinciaEncriptado = _seguridad.Encriptar(item.IdProvincia.ToString()),
+                            CodigoProvincia = item.CodigoProvincia,
+                            DescripcionProvincia = item.DescripcionProvincia,
+                            NombreProvincia = item.NombreProvincia,
+                            RutaLogoProvincia = item.RutaLogoProvincia,
+                            EstadoProvincia = item.EstadoProvincia
+                        }
+                    }
+                });
+            }
+            return _lista;
+        }
         public int InsertarAlcalde(Alcalde _objAlcalde)
         {
             try
