@@ -239,22 +239,42 @@ namespace API.Controllers
                 }
                 else
                 {
-                    _objPrefecto.Estado = true;
-                    _objPrefecto.IdPrefecto = Convert.ToInt32(_seguridad.DesEncriptar(_objPrefecto.IdPrefectoEncriptado));
-                    _objPrefecto.Provincia.IdProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_objPrefecto.Provincia.IdProvinciaEncriptado));
-                    int _idPrefecto = _objCatalogoPrefecto.ModificarPrefecto(_objPrefecto);
-                    if (_idPrefecto == 0)
+                    int _idProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_objPrefecto.Provincia.IdProvinciaEncriptado));
+                    int _idPrefecto = Convert.ToInt32(_seguridad.DesEncriptar(_objPrefecto.IdPrefectoEncriptado));
+                    var _objUltimoPrefectoSinSalida = _objCatalogoPrefecto.ConsultarPrefectoPorIdProvincia(_idProvincia).Where(c => c.Estado == true && c.FechaSalida.ToString() == "01/01/0001 0:00:00" && c.IdPrefecto!=_idPrefecto).FirstOrDefault();
+                    if (_objUltimoPrefectoSinSalida != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ocurrió un error al tratar de modificar al prefecto";
+                        _http.mensaje = "No puede modificar el nuevo prefecto, mientras no haya registrado la fecha de salida de " + _objUltimoPrefectoSinSalida.Representante.ToUpper();
                     }
                     else
                     {
-                        var _objPrefectoModificado = _objCatalogoPrefecto.ConsultarPrefectoPorId(_idPrefecto).FirstOrDefault();
-                        _objPrefectoModificado.IdPrefecto = 0;
-                        _objPrefectoModificado.Provincia.IdProvincia = 0;
-                        _respuesta = _objPrefectoModificado;
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        var _objUltimoPrefectoConSalida = _objCatalogoPrefecto.ConsultarPrefectoPorIdProvincia(_idProvincia).Where(c => c.Estado == true && c.IdPrefecto!=_idPrefecto).OrderByDescending(c => c.FechaSalida).FirstOrDefault();
+                        if (_objUltimoPrefectoConSalida != null && (DateTime.Compare(Convert.ToDateTime(_objUltimoPrefectoConSalida.FechaSalida), _objPrefecto.FechaIngreso) > 0))
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "La fecha de ingreso del prefecto debe ser mayor a la fecha de salida de " + _objUltimoPrefectoConSalida.Representante.ToUpper();
+                        }
+                        else
+                        {
+                            _objPrefecto.Estado = true;
+                            _objPrefecto.IdPrefecto = _idPrefecto;
+                            _objPrefecto.Provincia.IdProvincia = _idProvincia;
+                            _idPrefecto = _objCatalogoPrefecto.ModificarPrefecto(_objPrefecto);
+                            if (_idPrefecto == 0)
+                            {
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                                _http.mensaje = "Ocurrió un error al tratar de modificar al prefecto";
+                            }
+                            else
+                            {
+                                var _objPrefectoModificado = _objCatalogoPrefecto.ConsultarPrefectoPorId(_idPrefecto).FirstOrDefault();
+                                _objPrefectoModificado.IdPrefecto = 0;
+                                _objPrefectoModificado.Provincia.IdProvincia = 0;
+                                _respuesta = _objPrefectoModificado;
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                            }
+                        }
                     }
                 }
             }
