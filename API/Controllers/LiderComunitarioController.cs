@@ -1,4 +1,5 @@
 ﻿using API.Models.Catalogos;
+using API.Models.Entidades;
 using API.Models.Metodos;
 using System;
 using System.Collections.Generic;
@@ -72,6 +73,170 @@ namespace API.Controllers
                         _objLiderComunitario.Comunidad.Parroquia.Canton.IdCanton = 0;
                         _objLiderComunitario.Comunidad.Parroquia.Canton.Provincia.IdProvincia = 0;
                         _respuesta = _objLiderComunitario;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/lidercomunitario_insertar")]
+        public object lidercomunitario_insertar(LiderComunitario _objLiderComunitario)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objLiderComunitario == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "No se encontró el objeto líder comunitario";
+                }
+                else if (_objLiderComunitario.Comunidad.IdComunidadEncriptado == null || string.IsNullOrEmpty(_objLiderComunitario.Comunidad.IdComunidadEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la comunidad";
+                }
+                else if (_objLiderComunitario.Representante == null || string.IsNullOrEmpty(_objLiderComunitario.Representante))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el nombre del representante";
+                }
+                else if (_objLiderComunitario.FechaIngreso.ToShortDateString() == "01/01/0001")
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la fecha de ingreso";
+                }
+                else if (_objLiderComunitario.FechaSalida != null && (DateTime.Compare(_objLiderComunitario.FechaIngreso, Convert.ToDateTime(_objLiderComunitario.FechaSalida)) == 1 || DateTime.Compare(_objLiderComunitario.FechaIngreso, Convert.ToDateTime(_objLiderComunitario.FechaSalida)) == 0))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "La fecha de ingreso debe ser menor a la fecha de salida";
+                }
+                else
+                {
+                    _objLiderComunitario.Estado = true;
+                    _objLiderComunitario.Comunidad.IdComunidad = Convert.ToInt32(_seguridad.DesEncriptar(_objLiderComunitario.Comunidad.IdComunidadEncriptado));
+                    int _idLiderComunitario = _objCatalogoLiderComunitario.InsertarLiderComunitario(_objLiderComunitario);
+                    if (_idLiderComunitario == 0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Ocurrió un error al tratar de ingresar al presidente de la junta parroquial";
+                    }
+                    else
+                    {
+                        var _objLiderComunitarioIngresado = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorId(_idLiderComunitario).FirstOrDefault();
+                        _objLiderComunitarioIngresado.IdLiderComunitario = 0;
+                        _objLiderComunitarioIngresado.Comunidad.IdComunidad = 0;
+                        _objLiderComunitarioIngresado.Comunidad.Parroquia.IdParroquia = 0;
+                        _objLiderComunitarioIngresado.Comunidad.Parroquia.Canton.IdCanton = 0;
+                        _objLiderComunitarioIngresado.Comunidad.Parroquia.Canton.Provincia.IdProvincia = 0;
+                        _respuesta = _objLiderComunitarioIngresado;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [Route("api/lidercomunitario_modificar")]
+        public object lidercomunitario_modificar(LiderComunitario _objLiderComunitario)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objLiderComunitario == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "No se encontró el objeto líder comunitario";
+                }
+                else if (_objLiderComunitario.IdLiderComunitarioEncriptado == null || string.IsNullOrEmpty(_objLiderComunitario.IdLiderComunitarioEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la comunidad";
+                }
+                else if (_objLiderComunitario.Comunidad.IdComunidadEncriptado == null || string.IsNullOrEmpty(_objLiderComunitario.Comunidad.IdComunidadEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la comunidad";
+                }
+                else if (_objLiderComunitario.Representante == null || string.IsNullOrEmpty(_objLiderComunitario.Representante))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el nombre del representante";
+                }
+                else if (_objLiderComunitario.FechaIngreso.ToShortDateString() == "01/01/0001")
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la fecha de ingreso";
+                }
+                else if (_objLiderComunitario.FechaSalida != null && (DateTime.Compare(_objLiderComunitario.FechaIngreso, Convert.ToDateTime(_objLiderComunitario.FechaSalida)) == 1 || DateTime.Compare(_objLiderComunitario.FechaIngreso, Convert.ToDateTime(_objLiderComunitario.FechaSalida)) == 0))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "La fecha de ingreso debe ser menor a la fecha de salida";
+                }
+                else
+                {
+                    _objLiderComunitario.Estado = true;
+                    _objLiderComunitario.Comunidad.IdComunidad = Convert.ToInt32(_seguridad.DesEncriptar(_objLiderComunitario.Comunidad.IdComunidadEncriptado));
+                    _objLiderComunitario.IdLiderComunitario = Convert.ToInt32(_seguridad.DesEncriptar(_objLiderComunitario.IdLiderComunitarioEncriptado));
+                    int _idLiderComunitario = _objCatalogoLiderComunitario.ModificarLiderComunitario(_objLiderComunitario);
+                    if (_idLiderComunitario == 0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Ocurrió un error al tratar de ingresar al lider Comunitario";
+                    }
+                    else
+                    {
+                        var _objLiderComunitarioModificado = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorId(_idLiderComunitario).FirstOrDefault();
+                        _objLiderComunitarioModificado.IdLiderComunitario = 0;
+                        _objLiderComunitarioModificado.Comunidad.IdComunidad = 0;
+                        _objLiderComunitarioModificado.Comunidad.Parroquia.IdParroquia = 0;
+                        _objLiderComunitarioModificado.Comunidad.Parroquia.Canton.IdCanton = 0;
+                        _objLiderComunitarioModificado.Comunidad.Parroquia.Canton.Provincia.IdProvincia = 0;
+                        _respuesta = _objLiderComunitarioModificado;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/lidercomunitario_eliminar")]
+        public object lidercomunitario_eliminar(string _idLiderComunitarioEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idLiderComunitarioEncriptado == null || string.IsNullOrEmpty(_idLiderComunitarioEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del líder comunitario";
+                }
+                else
+                {
+                    int _idLiderComunitario = Convert.ToInt32(_seguridad.DesEncriptar(_idLiderComunitarioEncriptado));
+                    var _objPresidenteJuntaParroquial = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorId(_idLiderComunitario).FirstOrDefault();
+                    if (_objPresidenteJuntaParroquial.Utilizado == "1")
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Este líder comunitario ya ha sido utilizado, por lo tanto no lo puede eliminar.";
+                    }
+                    else
+                    {
+                        _objCatalogoLiderComunitario.EliminarLiderComunitario(_idLiderComunitario);
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
                 }
