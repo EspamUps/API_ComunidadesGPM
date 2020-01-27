@@ -71,6 +71,35 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
+        public List<Prefecto> ConsultarPrefectoPorIdProvincia(int _idProvincia)
+        {
+            List<Prefecto> _lista = new List<Prefecto>();
+            foreach (var item in db.Sp_PrefectoConsultar().Where(c => c.IdProvincia == _idProvincia).ToList())
+            {
+                _lista.Add(new Prefecto()
+                {
+                    IdPrefecto = item.IdPrefecto,
+                    IdPrefectoEncriptado = _seguridad.Encriptar(item.IdPrefecto.ToString()),
+                    Representante = item.Representante,
+                    FechaIngreso = item.FechaIngreso,
+                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    Estado = item.EstadoPrefecto,
+                    Utilizado = item.UtilizadoPrefecto,
+                    Provincia = new Provincia()
+                    {
+                        IdProvincia = item.IdProvincia,
+                        IdProvinciaEncriptado = _seguridad.Encriptar(item.IdProvincia.ToString()),
+                        CodigoProvincia = item.CodigoProvincia,
+                        DescripcionProvincia = item.DescripcionProvincia,
+                        NombreProvincia = item.NombreProvincia,
+                        RutaLogoProvincia = item.RutaLogoProvincia,
+                        EstadoProvincia = item.EstadoProvincia
+                    }
+                });
+            }
+            return _lista;
+        }
+
         public int InsertarPrefecto(Prefecto _objPrefecto)
         {
             try
