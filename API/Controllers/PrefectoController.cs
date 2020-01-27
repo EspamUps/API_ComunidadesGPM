@@ -188,10 +188,10 @@ namespace API.Controllers
                     }
                     else
                     {
-                        var _objProfectoModificado = _objCatalogoPrefecto.ConsultarPrefectoPorId(_idPrefecto).FirstOrDefault();
-                        _objProfectoModificado.IdPrefecto = 0;
-                        _objProfectoModificado.Provincia.IdProvincia = 0;
-                        _respuesta = _objProfectoModificado;
+                        var _objPrefectoModificado = _objCatalogoPrefecto.ConsultarPrefectoPorId(_idPrefecto).FirstOrDefault();
+                        _objPrefectoModificado.IdPrefecto = 0;
+                        _objPrefectoModificado.Provincia.IdProvincia = 0;
+                        _respuesta = _objPrefectoModificado;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
                 }
