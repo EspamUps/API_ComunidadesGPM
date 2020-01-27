@@ -1,4 +1,5 @@
 ﻿using API.Models.Catalogos;
+using API.Models.Entidades;
 using API.Models.Metodos;
 using System;
 using System.Collections.Generic;
@@ -80,5 +81,167 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+        [HttpPost]
+        [Route("api/presidentejuntaparroquial_insertar")]
+        public object presidentejuntaparroquial_insertar(PresidenteJuntaParroquial _objPresidenteJuntaParroquial)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objPresidenteJuntaParroquial == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "No se encontró el objeto presidente de la junta parroquial";
+                }
+                else if (_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado== null || string.IsNullOrEmpty(_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la parroquia";
+                }
+                else if (_objPresidenteJuntaParroquial.Representante == null || string.IsNullOrEmpty(_objPresidenteJuntaParroquial.Representante))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el nombre del representante";
+                }
+                else if (_objPresidenteJuntaParroquial.FechaIngreso.ToShortDateString() == "01/01/0001")
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la fecha de ingreso";
+                }
+                else if (_objPresidenteJuntaParroquial.FechaSalida != null && (DateTime.Compare(_objPresidenteJuntaParroquial.FechaIngreso, Convert.ToDateTime(_objPresidenteJuntaParroquial.FechaSalida)) == 1 || DateTime.Compare(_objPresidenteJuntaParroquial.FechaIngreso, Convert.ToDateTime(_objPresidenteJuntaParroquial.FechaSalida)) == 0))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "La fecha de ingreso debe ser menor a la fecha de salida";
+                }
+                else
+                {
+                    _objPresidenteJuntaParroquial.Estado = true;
+                    _objPresidenteJuntaParroquial.Parroquia.IdParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado));
+                    int _idPresidenteJuntaParroquial = _objCatalogoPresidenteJuntaParroquial.InsertarPresidenteJuntaParroquial(_objPresidenteJuntaParroquial);
+                    if (_idPresidenteJuntaParroquial == 0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Ocurrió un error al tratar de ingresar al presidente de la junta parroquial";
+                    }
+                    else
+                    {
+                        var _objPresidenteJuntaParroquialIngresado = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorId(_idPresidenteJuntaParroquial).FirstOrDefault();
+                        _objPresidenteJuntaParroquialIngresado.IdPresidenteJuntaParroquial = 0;
+                        _objPresidenteJuntaParroquialIngresado.Parroquia.IdParroquia = 0;
+                        _objPresidenteJuntaParroquialIngresado.Parroquia.Canton.IdCanton = 0;
+                        _objPresidenteJuntaParroquialIngresado.Parroquia.Canton.Provincia.IdProvincia = 0;
+                        _respuesta = _objPresidenteJuntaParroquialIngresado;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/presidentejuntaparroquial_modificar")]
+        public object presidentejuntaparroquial_modificar(PresidenteJuntaParroquial _objPresidenteJuntaParroquial)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objPresidenteJuntaParroquial == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "No se encontró el objeto presidente de la junta parroquial";
+                }
+                else if (_objPresidenteJuntaParroquial.IdPresidenteJuntaParroquialEncriptado == null || string.IsNullOrEmpty(_objPresidenteJuntaParroquial.IdPresidenteJuntaParroquialEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del presidente de la junta parroquial";
+                }else if (_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado == null || string.IsNullOrEmpty(_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la parroquia";
+                }
+                else if (_objPresidenteJuntaParroquial.Representante == null || string.IsNullOrEmpty(_objPresidenteJuntaParroquial.Representante))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el nombre del representante";
+                }
+                else if (_objPresidenteJuntaParroquial.FechaIngreso.ToShortDateString() == "01/01/0001")
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la fecha de ingreso";
+                }
+                else if (_objPresidenteJuntaParroquial.FechaSalida != null && (DateTime.Compare(_objPresidenteJuntaParroquial.FechaIngreso, Convert.ToDateTime(_objPresidenteJuntaParroquial.FechaSalida)) == 1 || DateTime.Compare(_objPresidenteJuntaParroquial.FechaIngreso, Convert.ToDateTime(_objPresidenteJuntaParroquial.FechaSalida)) == 0))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "La fecha de ingreso debe ser menor a la fecha de salida";
+                }
+                else
+                {
+                    _objPresidenteJuntaParroquial.Estado = true;
+                    _objPresidenteJuntaParroquial.IdPresidenteJuntaParroquial = Convert.ToInt32(_seguridad.DesEncriptar(_objPresidenteJuntaParroquial.IdPresidenteJuntaParroquialEncriptado));
+                    _objPresidenteJuntaParroquial.Parroquia.IdParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado));
+                    int _idPresidenteJuntaParroquial = _objCatalogoPresidenteJuntaParroquial.ModificarPresidenteJuntaParroquial(_objPresidenteJuntaParroquial);
+                    if (_idPresidenteJuntaParroquial == 0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Ocurrió un error al tratar de modificar al presidente de la junta parroquial";
+                    }
+                    else
+                    {
+                        var _objPresidenteJuntaParroquialModificado = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorId(_idPresidenteJuntaParroquial).FirstOrDefault();
+                        _objPresidenteJuntaParroquialModificado.IdPresidenteJuntaParroquial = 0;
+                        _objPresidenteJuntaParroquialModificado.Parroquia.IdParroquia = 0;
+                        _objPresidenteJuntaParroquialModificado.Parroquia.Canton.IdCanton = 0;
+                        _objPresidenteJuntaParroquialModificado.Parroquia.Canton.Provincia.IdProvincia = 0;
+                        _respuesta = _objPresidenteJuntaParroquialModificado;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/presidentejuntaparroquial_eliminar")]
+        public object presidentejuntaparroquial_eliminar(string _idPresidenteJuntaParroquialEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idPresidenteJuntaParroquialEncriptado == null || string.IsNullOrEmpty(_idPresidenteJuntaParroquialEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del presidente de junta parroquial";
+                }
+                else
+                {
+                    int _idPresidenteJuntaParroquial = Convert.ToInt32(_seguridad.DesEncriptar(_idPresidenteJuntaParroquialEncriptado));
+                    var _objPresidenteJuntaParroquial = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorId(_idPresidenteJuntaParroquial).FirstOrDefault();
+                    if (_objPresidenteJuntaParroquial.Utilizado == "1")
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Este presidente de junta parroquial ya ha sido utilizado, por lo tanto no lo puede eliminar.";
+                    }
+                    else
+                    {
+                        _objCatalogoPresidenteJuntaParroquial.EliminarPresidenteJuntaParroquial(_idPresidenteJuntaParroquial);
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }      
     }
 }
