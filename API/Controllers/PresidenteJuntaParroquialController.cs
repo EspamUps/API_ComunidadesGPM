@@ -159,23 +159,42 @@ namespace API.Controllers
                 }
                 else
                 {
-                    _objPresidenteJuntaParroquial.Estado = true;
-                    _objPresidenteJuntaParroquial.Parroquia.IdParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado));
-                    int _idPresidenteJuntaParroquial = _objCatalogoPresidenteJuntaParroquial.InsertarPresidenteJuntaParroquial(_objPresidenteJuntaParroquial);
-                    if (_idPresidenteJuntaParroquial == 0)
+                    int _idParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado));
+                    var _objUltimoPresidenteSinSalida = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorIdParroquia(_idParroquia).Where(c => c.Estado == true && c.FechaSalida.ToString() == "01/01/0001 0:00:00").FirstOrDefault();
+                    if (_objUltimoPresidenteSinSalida != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ocurrió un error al tratar de ingresar al presidente de la junta parroquial";
+                        _http.mensaje = "No puede ingresar un nuevo presidente, mientras no haya registrado la fecha de salida de " + _objUltimoPresidenteSinSalida.Representante.ToUpper();
                     }
                     else
                     {
-                        var _objPresidenteJuntaParroquialIngresado = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorId(_idPresidenteJuntaParroquial).FirstOrDefault();
-                        _objPresidenteJuntaParroquialIngresado.IdPresidenteJuntaParroquial = 0;
-                        _objPresidenteJuntaParroquialIngresado.Parroquia.IdParroquia = 0;
-                        _objPresidenteJuntaParroquialIngresado.Parroquia.Canton.IdCanton = 0;
-                        _objPresidenteJuntaParroquialIngresado.Parroquia.Canton.Provincia.IdProvincia = 0;
-                        _respuesta = _objPresidenteJuntaParroquialIngresado;
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        var _objUltimoPresidenteConSalida = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorIdParroquia(_idParroquia).Where(c => c.Estado == true).OrderByDescending(c => c.FechaSalida).FirstOrDefault();
+                        if (_objUltimoPresidenteConSalida != null && (DateTime.Compare(Convert.ToDateTime(_objUltimoPresidenteConSalida.FechaSalida), _objPresidenteJuntaParroquial.FechaIngreso) > 0))
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "La fecha de ingreso del nuevo presidente debe ser mayor a la fecha de salida de " + _objUltimoPresidenteConSalida.Representante.ToUpper();
+                        }
+                        else
+                        {
+                            _objPresidenteJuntaParroquial.Estado = true;
+                            _objPresidenteJuntaParroquial.Parroquia.IdParroquia = _idParroquia;
+                            int _idPresidenteJuntaParroquial = _objCatalogoPresidenteJuntaParroquial.InsertarPresidenteJuntaParroquial(_objPresidenteJuntaParroquial);
+                            if (_idPresidenteJuntaParroquial == 0)
+                            {
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                                _http.mensaje = "Ocurrió un error al tratar de ingresar al presidente de la junta parroquial";
+                            }
+                            else
+                            {
+                                var _objPresidenteJuntaParroquialIngresado = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorId(_idPresidenteJuntaParroquial).FirstOrDefault();
+                                _objPresidenteJuntaParroquialIngresado.IdPresidenteJuntaParroquial = 0;
+                                _objPresidenteJuntaParroquialIngresado.Parroquia.IdParroquia = 0;
+                                _objPresidenteJuntaParroquialIngresado.Parroquia.Canton.IdCanton = 0;
+                                _objPresidenteJuntaParroquialIngresado.Parroquia.Canton.Provincia.IdProvincia = 0;
+                                _respuesta = _objPresidenteJuntaParroquialIngresado;
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                            }
+                        }
                     }
                 }
             }
@@ -202,7 +221,8 @@ namespace API.Controllers
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador del presidente de la junta parroquial";
-                }else if (_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado == null || string.IsNullOrEmpty(_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado))
+                }
+                else if (_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado == null || string.IsNullOrEmpty(_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese la parroquia";
@@ -224,24 +244,44 @@ namespace API.Controllers
                 }
                 else
                 {
-                    _objPresidenteJuntaParroquial.Estado = true;
-                    _objPresidenteJuntaParroquial.IdPresidenteJuntaParroquial = Convert.ToInt32(_seguridad.DesEncriptar(_objPresidenteJuntaParroquial.IdPresidenteJuntaParroquialEncriptado));
-                    _objPresidenteJuntaParroquial.Parroquia.IdParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado));
-                    int _idPresidenteJuntaParroquial = _objCatalogoPresidenteJuntaParroquial.ModificarPresidenteJuntaParroquial(_objPresidenteJuntaParroquial);
-                    if (_idPresidenteJuntaParroquial == 0)
+                    int _idParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado));
+                    int _idPresidenteJuntaParroquial = Convert.ToInt32(_seguridad.DesEncriptar(_objPresidenteJuntaParroquial.IdPresidenteJuntaParroquialEncriptado));
+                    var _objUltimoPresidenteSinSalida = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorIdParroquia(_idParroquia).Where(c => c.Estado == true && c.FechaSalida.ToString() == "01/01/0001 0:00:00" && c.IdPresidenteJuntaParroquial!=_idPresidenteJuntaParroquial).FirstOrDefault();
+                    if (_objUltimoPresidenteSinSalida != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ocurrió un error al tratar de modificar al presidente de la junta parroquial";
+                        _http.mensaje = "No puede ingresar un nuevo presidente, mientras no haya registrado la fecha de salida de " + _objUltimoPresidenteSinSalida.Representante.ToUpper();
                     }
                     else
                     {
-                        var _objPresidenteJuntaParroquialModificado = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorId(_idPresidenteJuntaParroquial).FirstOrDefault();
-                        _objPresidenteJuntaParroquialModificado.IdPresidenteJuntaParroquial = 0;
-                        _objPresidenteJuntaParroquialModificado.Parroquia.IdParroquia = 0;
-                        _objPresidenteJuntaParroquialModificado.Parroquia.Canton.IdCanton = 0;
-                        _objPresidenteJuntaParroquialModificado.Parroquia.Canton.Provincia.IdProvincia = 0;
-                        _respuesta = _objPresidenteJuntaParroquialModificado;
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        var _objUltimoPresidenteConSalida = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorIdParroquia(_idParroquia).Where(c => c.Estado == true && c.IdPresidenteJuntaParroquial!=_idPresidenteJuntaParroquial).OrderByDescending(c => c.FechaSalida).FirstOrDefault();
+                        if (_objUltimoPresidenteConSalida != null && (DateTime.Compare(Convert.ToDateTime(_objUltimoPresidenteConSalida.FechaSalida), _objPresidenteJuntaParroquial.FechaIngreso) > 0))
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "La fecha de ingreso del nuevo presidente debe ser mayor a la fecha de salida de " + _objUltimoPresidenteConSalida.Representante.ToUpper();
+                        }
+                        else
+                        {
+                            _objPresidenteJuntaParroquial.Estado = true;
+                            _objPresidenteJuntaParroquial.IdPresidenteJuntaParroquial = _idPresidenteJuntaParroquial;
+                            _objPresidenteJuntaParroquial.Parroquia.IdParroquia = _idParroquia;
+                            _idPresidenteJuntaParroquial = _objCatalogoPresidenteJuntaParroquial.ModificarPresidenteJuntaParroquial(_objPresidenteJuntaParroquial);
+                            if (_idPresidenteJuntaParroquial == 0)
+                            {
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                                _http.mensaje = "Ocurrió un error al tratar de modificar al presidente de la junta parroquial";
+                            }
+                            else
+                            {
+                                var _objPresidenteJuntaParroquialModificado = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorId(_idPresidenteJuntaParroquial).FirstOrDefault();
+                                _objPresidenteJuntaParroquialModificado.IdPresidenteJuntaParroquial = 0;
+                                _objPresidenteJuntaParroquialModificado.Parroquia.IdParroquia = 0;
+                                _objPresidenteJuntaParroquialModificado.Parroquia.Canton.IdCanton = 0;
+                                _objPresidenteJuntaParroquialModificado.Parroquia.Canton.Provincia.IdProvincia = 0;
+                                _respuesta = _objPresidenteJuntaParroquialModificado;
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                            }
+                        }
                     }
                 }
             }
