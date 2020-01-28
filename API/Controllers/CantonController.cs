@@ -58,7 +58,7 @@ namespace API.Controllers
                 else
                 {
                     int _idCanton = Convert.ToInt32(_seguridad.DesEncriptar(_idCantonEncriptado));
-                    var _objCanton = _objCatalogoCanton.ConsultarCantonPorId(_idCanton).Where(c => c.EstadoCanton == true).FirstOrDefault();
+                    var _objCanton = _objCatalogoCanton.ConsultarCantonPorId(_idCanton).Where(c => c.EstadoCanton == true && c.Provincia.EstadoProvincia==true).FirstOrDefault();
                     _objCanton.IdCanton = 0;
                     _objCanton.Provincia.IdProvincia = 0;
                     _respuesta = _objCanton;

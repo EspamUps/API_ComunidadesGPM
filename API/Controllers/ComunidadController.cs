@@ -66,7 +66,47 @@ namespace API.Controllers
                 {
                     int _idComunidad = Convert.ToInt32(_seguridad.DesEncriptar(_idComunidadEncriptado).ToString());
 
-                    var _listaComunidades = _objCatalogoComunidad.ConsultarComunidadPorId(_idComunidad).Where(c => c.EstadoComunidad == true && c.Parroquia.EstadoParroquia == true && c.Parroquia.Canton.EstadoCanton == true && c.Parroquia.Canton.Provincia.EstadoProvincia == true).ToList();
+                    var _objComunidad = _objCatalogoComunidad.ConsultarComunidadPorId(_idComunidad).Where(c => c.EstadoComunidad == true && c.Parroquia.EstadoParroquia == true && c.Parroquia.Canton.EstadoCanton == true && c.Parroquia.Canton.Provincia.EstadoProvincia == true).FirstOrDefault();
+
+                    _objComunidad.IdComunidad = 0;
+                    _objComunidad.Parroquia.IdParroquia = 0;
+                    _objComunidad.Parroquia.Canton.IdCanton = 0;
+                    _objComunidad.Parroquia.Canton.Provincia.IdProvincia = 0;
+                    _respuesta = _objComunidad;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+                return new
+                {
+                    respuesta = _respuesta,
+                    http = _http
+                };
+
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/comunidad_consultarporidparroquia")]
+        public object comunidad_consultarporidparroquia(string _idParroquiaEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (string.IsNullOrEmpty(_idParroquiaEncriptado) || _idParroquiaEncriptado == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la parroquia.";
+                }
+                else
+                {
+                    int _idParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_idParroquiaEncriptado).ToString());
+                    var _listaComunidades = _objCatalogoComunidad.ConsultarComunidadPorIdParroquia(_idParroquia).Where(c => c.EstadoComunidad == true && c.Parroquia.EstadoParroquia == true && c.Parroquia.Canton.EstadoCanton == true && c.Parroquia.Canton.Provincia.EstadoProvincia == true).ToList();
                     foreach (var item in _listaComunidades)
                     {
                         item.IdComunidad = 0;
