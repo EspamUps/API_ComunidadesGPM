@@ -16,7 +16,6 @@ namespace API.Models.Catalogos
         List<TipoUsuario> ListaTipoUsuarios = new List<TipoUsuario>();
         Seguridad _seguridad = new Seguridad();
 
-        CatalogoAsignarTipoUsuarioModuloPrivilegio catAsignarTipoUsuarioModuloPrivilegio = new CatalogoAsignarTipoUsuarioModuloPrivilegio();
 
         public List<TipoUsuario> ConsultarTipoUsuarios()
         {
