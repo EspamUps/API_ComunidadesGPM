@@ -221,6 +221,9 @@
     <Compile Include="Conexion\Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -324,6 +327,7 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AlcaldeController.cs" />
+    <Compile Include="Controllers\AsignarTipoUsuarioModuloPrivilegioController.cs" />
     <Compile Include="Controllers\AsignarUsuarioTipoUsuarioController.cs" />
     <Compile Include="Controllers\CantonController.cs" />
     <Compile Include="Controllers\ComunidadController.cs" />

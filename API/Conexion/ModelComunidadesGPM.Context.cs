@@ -239,11 +239,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioValidar_Result1>("Sp_UsuarioValidar", correoParameter);
         }
     
-        public virtual ObjectResult<Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result1> Sp_AsignarTipoUsuarioModuloPrivilegioConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result1>("Sp_AsignarTipoUsuarioModuloPrivilegioConsultar");
-        }
-    
         public virtual ObjectResult<Sp_AsignarUsuarioTipoUsuarioConsultar_Result> Sp_AsignarUsuarioTipoUsuarioConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarUsuarioTipoUsuarioConsultar_Result>("Sp_AsignarUsuarioTipoUsuarioConsultar");
@@ -998,6 +993,11 @@ namespace API.Conexion
         public virtual ObjectResult<Sp_PersonaConsultarSinUsuario_Result> Sp_PersonaConsultarSinUsuario()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PersonaConsultarSinUsuario_Result>("Sp_PersonaConsultarSinUsuario");
+        }
+    
+        public virtual ObjectResult<Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result2> Sp_AsignarTipoUsuarioModuloPrivilegioConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result2>("Sp_AsignarTipoUsuarioModuloPrivilegioConsultar");
         }
     }
 }
