@@ -163,24 +163,43 @@ namespace API.Controllers
                 }
                 else
                 {
-                    _objLiderComunitario.Estado = true;
-                    _objLiderComunitario.Comunidad.IdComunidad = Convert.ToInt32(_seguridad.DesEncriptar(_objLiderComunitario.Comunidad.IdComunidadEncriptado));
-                    int _idLiderComunitario = _objCatalogoLiderComunitario.InsertarLiderComunitario(_objLiderComunitario);
-                    if (_idLiderComunitario == 0)
+                    int _idComunidad = Convert.ToInt32(_seguridad.DesEncriptar(_objLiderComunitario.Comunidad.IdComunidadEncriptado));
+                    var _objUltimoLiderComunitarioSinSalida = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorIdComunidad(_idComunidad).Where(c => c.Estado == true && c.FechaSalida.ToString() == "01/01/0001 0:00:00").FirstOrDefault();
+                    if (_objUltimoLiderComunitarioSinSalida != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ocurrió un error al tratar de ingresar al presidente de la junta parroquial";
+                        _http.mensaje = "No puede ingresar un nuevo líder comunitario, mientras no haya registrado la fecha de salida de " + _objUltimoLiderComunitarioSinSalida.Representante.ToUpper();
                     }
                     else
                     {
-                        var _objLiderComunitarioIngresado = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorId(_idLiderComunitario).FirstOrDefault();
-                        _objLiderComunitarioIngresado.IdLiderComunitario = 0;
-                        _objLiderComunitarioIngresado.Comunidad.IdComunidad = 0;
-                        _objLiderComunitarioIngresado.Comunidad.Parroquia.IdParroquia = 0;
-                        _objLiderComunitarioIngresado.Comunidad.Parroquia.Canton.IdCanton = 0;
-                        _objLiderComunitarioIngresado.Comunidad.Parroquia.Canton.Provincia.IdProvincia = 0;
-                        _respuesta = _objLiderComunitarioIngresado;
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        var _objUltimoLiderComunitarioConSalida = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorIdComunidad(_idComunidad).Where(c => c.Estado == true).OrderByDescending(c => c.FechaSalida).FirstOrDefault();
+                        if (_objUltimoLiderComunitarioConSalida != null && (DateTime.Compare(Convert.ToDateTime(_objUltimoLiderComunitarioConSalida.FechaSalida), _objLiderComunitario.FechaIngreso) > 0))
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "La fecha de ingreso del nuevo líder comunitario debe ser mayor a la fecha de salida de " + _objUltimoLiderComunitarioConSalida.Representante.ToUpper();
+                        }
+                        else
+                        {
+                            _objLiderComunitario.Estado = true;
+                            _objLiderComunitario.Comunidad.IdComunidad = _idComunidad;
+                            int _idLiderComunitario = _objCatalogoLiderComunitario.InsertarLiderComunitario(_objLiderComunitario);
+                            if (_idLiderComunitario == 0)
+                            {
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                                _http.mensaje = "Ocurrió un error al tratar de ingresar al presidente de la junta parroquial";
+                            }
+                            else
+                            {
+                                var _objLiderComunitarioIngresado = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorId(_idLiderComunitario).FirstOrDefault();
+                                _objLiderComunitarioIngresado.IdLiderComunitario = 0;
+                                _objLiderComunitarioIngresado.Comunidad.IdComunidad = 0;
+                                _objLiderComunitarioIngresado.Comunidad.Parroquia.IdParroquia = 0;
+                                _objLiderComunitarioIngresado.Comunidad.Parroquia.Canton.IdCanton = 0;
+                                _objLiderComunitarioIngresado.Comunidad.Parroquia.Canton.Provincia.IdProvincia = 0;
+                                _respuesta = _objLiderComunitarioIngresado;
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                            }
+                        }
                     }
                 }
             }
@@ -229,25 +248,45 @@ namespace API.Controllers
                 }
                 else
                 {
-                    _objLiderComunitario.Estado = true;
-                    _objLiderComunitario.Comunidad.IdComunidad = Convert.ToInt32(_seguridad.DesEncriptar(_objLiderComunitario.Comunidad.IdComunidadEncriptado));
-                    _objLiderComunitario.IdLiderComunitario = Convert.ToInt32(_seguridad.DesEncriptar(_objLiderComunitario.IdLiderComunitarioEncriptado));
-                    int _idLiderComunitario = _objCatalogoLiderComunitario.ModificarLiderComunitario(_objLiderComunitario);
-                    if (_idLiderComunitario == 0)
+                    int _idComunidad = Convert.ToInt32(_seguridad.DesEncriptar(_objLiderComunitario.Comunidad.IdComunidadEncriptado));
+                    int _idLiderComunitario = Convert.ToInt32(_seguridad.DesEncriptar(_objLiderComunitario.IdLiderComunitarioEncriptado));
+                    var _objUltimoLiderComunitarioSinSalida = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorIdComunidad(_idComunidad).Where(c => c.Estado == true && c.FechaSalida.ToString() == "01/01/0001 0:00:00").FirstOrDefault();
+                    if (_objUltimoLiderComunitarioSinSalida != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ocurrió un error al tratar de ingresar al lider Comunitario";
+                        _http.mensaje = "No puede modificar al líder comunitario, mientras no haya registrado la fecha de salida de " + _objUltimoLiderComunitarioSinSalida.Representante.ToUpper();
                     }
                     else
                     {
-                        var _objLiderComunitarioModificado = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorId(_idLiderComunitario).FirstOrDefault();
-                        _objLiderComunitarioModificado.IdLiderComunitario = 0;
-                        _objLiderComunitarioModificado.Comunidad.IdComunidad = 0;
-                        _objLiderComunitarioModificado.Comunidad.Parroquia.IdParroquia = 0;
-                        _objLiderComunitarioModificado.Comunidad.Parroquia.Canton.IdCanton = 0;
-                        _objLiderComunitarioModificado.Comunidad.Parroquia.Canton.Provincia.IdProvincia = 0;
-                        _respuesta = _objLiderComunitarioModificado;
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        var _objUltimoLiderComunitarioConSalida = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorIdComunidad(_idComunidad).Where(c => c.Estado == true).OrderByDescending(c => c.FechaSalida).FirstOrDefault();
+                        if (_objUltimoLiderComunitarioConSalida != null && (DateTime.Compare(Convert.ToDateTime(_objUltimoLiderComunitarioConSalida.FechaSalida), _objLiderComunitario.FechaIngreso) > 0))
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "La fecha de ingreso del líder comunitario debe ser mayor a la fecha de salida de " + _objUltimoLiderComunitarioConSalida.Representante.ToUpper();
+                        }
+                        else
+                        {
+                            _objLiderComunitario.Estado = true;
+                            _objLiderComunitario.Comunidad.IdComunidad = _idComunidad;
+                            _objLiderComunitario.IdLiderComunitario = _idLiderComunitario;
+                            _idLiderComunitario = _objCatalogoLiderComunitario.ModificarLiderComunitario(_objLiderComunitario);
+                            if (_idLiderComunitario == 0)
+                            {
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                                _http.mensaje = "Ocurrió un error al tratar de modificar al lider Comunitario";
+                            }
+                            else
+                            {
+                                var _objLiderComunitarioModificado = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorId(_idLiderComunitario).FirstOrDefault();
+                                _objLiderComunitarioModificado.IdLiderComunitario = 0;
+                                _objLiderComunitarioModificado.Comunidad.IdComunidad = 0;
+                                _objLiderComunitarioModificado.Comunidad.Parroquia.IdParroquia = 0;
+                                _objLiderComunitarioModificado.Comunidad.Parroquia.Canton.IdCanton = 0;
+                                _objLiderComunitarioModificado.Comunidad.Parroquia.Canton.Provincia.IdProvincia = 0;
+                                _respuesta = _objLiderComunitarioModificado;
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                            }
+                        }
                     }
                 }
             }

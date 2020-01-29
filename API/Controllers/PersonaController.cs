@@ -285,7 +285,6 @@ namespace API.Controllers
             return new { respuesta = _respuesta, http = _http };
         }
 
-        // GET: api/Persona
         [HttpPost]
         [Route("api/persona_consultar")]
         public object persona_consultar()
@@ -315,7 +314,6 @@ namespace API.Controllers
             return new { respuesta = _respuesta, http = _http};
         }
 
-        // GET: api/Persona
         [HttpPost]
         [Route("api/persona_consultar")]
         public object persona_consultar(string _idPersonaEncriptado)
@@ -358,6 +356,33 @@ namespace API.Controllers
             }
             return new {respuesta = _respuesta,http = _http};
         }
+        [HttpPost]
+        [Route("api/persona_consultarsinusuario")]
+        public object persona_consultarsinusuario()
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
 
+            try
+            {
+                var listaPersona = _objCatalogoPersona.ConsultarPersonaSinUsuario().Where(x => x.Estado == true).ToList();
+                foreach (var item in listaPersona)
+                {
+                    item.IdPersona = 0;
+                    item.Sexo.IdSexo = 0;
+                    item.TipoIdentificacion.IdTipoIdentificacion = 0;
+                    item.Parroquia.IdParroquia = 0;
+                    item.Parroquia.Canton.IdCanton = 0;
+                    item.Parroquia.Canton.Provincia.IdProvincia = 0;
+                }
+                _respuesta = listaPersona;
+                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
     }
 }

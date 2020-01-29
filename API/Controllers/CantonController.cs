@@ -58,10 +58,43 @@ namespace API.Controllers
                 else
                 {
                     int _idCanton = Convert.ToInt32(_seguridad.DesEncriptar(_idCantonEncriptado));
-                    var _objCanton = _objCatalogoCanton.ConsultarCantonPorId(_idCanton).Where(c => c.EstadoCanton == true).FirstOrDefault();
+                    var _objCanton = _objCatalogoCanton.ConsultarCantonPorId(_idCanton).Where(c => c.EstadoCanton == true && c.Provincia.EstadoProvincia==true).FirstOrDefault();
                     _objCanton.IdCanton = 0;
                     _objCanton.Provincia.IdProvincia = 0;
                     _respuesta = _objCanton;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/canton_consultarporidprovincia")]
+        public object canton_consultarporidprovincia(string _idProvinciaEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (string.IsNullOrEmpty(_idProvinciaEncriptado) || _idProvinciaEncriptado == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la provincia";
+                }
+                else
+                {
+                    int _idProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_idProvinciaEncriptado));
+                    var _listaCantones = _objCatalogoCanton.ConsultarCantonPorIdProvincia(_idProvincia).Where(c => c.EstadoCanton == true).ToList();
+                    foreach (var _objCanton in _listaCantones)
+                    {
+                        _objCanton.IdCanton = 0;
+                        _objCanton.Provincia.IdProvincia = 0;
+                    }
+                    _respuesta = _listaCantones;
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                 }
             }

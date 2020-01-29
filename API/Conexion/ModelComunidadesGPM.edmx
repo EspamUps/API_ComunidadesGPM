@@ -195,6 +195,7 @@
         </Function>
         <Function Name="Sp_ModuloConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
         <Function Name="Sp_PersonaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
+        <Function Name="Sp_PersonaConsultarSinUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios" />
         <Function Name="Sp_PersonaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="usuarios">
           <Parameter Name="IdPersona" Type="int" Mode="In" />
         </Function>
@@ -474,7 +475,7 @@
           <FunctionImport Name="Sp_PrefectoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PrefectoConsultar_Result)" />
           <FunctionImport Name="Sp_PresidenteJuntaParroquialConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PresidenteJuntaParroquialConsultar_Result1)" />
           <FunctionImport Name="Sp_AlcaldeEliminar">
-            <Parameter Name="IdAlcalde" Mode="In" Type="Int32" />
+          <Parameter Name="IdAlcalde" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AlcaldeInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCanton" Mode="In" Type="Int32" />
@@ -492,7 +493,7 @@
             <Parameter Name="EstadoAlcalde" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_LiderComunitarioEliminar">
-            <Parameter Name="IdLiderComunitario" Mode="In" Type="Int32" />
+          <Parameter Name="IdLiderComunitario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_LiderComunitarioInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
@@ -510,7 +511,7 @@
             <Parameter Name="EstadoPresidenteJuntaParroquial" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_PrefectoEliminar">
-            <Parameter Name="IdPrefecto" Mode="In" Type="Int32" />
+          <Parameter Name="IdPrefecto" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_PrefectoInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdProvincia" Mode="In" Type="Int32" />
@@ -528,7 +529,7 @@
             <Parameter Name="EstadoPrefecto" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_PresidenteJuntaParroquialEliminar">
-            <Parameter Name="IdPresidenteJuntaParroquial" Mode="In" Type="Int32" />
+          <Parameter Name="IdPresidenteJuntaParroquial" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_PresidenteJuntaParroquialInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
@@ -545,6 +546,7 @@
             <Parameter Name="FechaSalida" Mode="In" Type="DateTime" />
             <Parameter Name="EstadoPresidenteJuntaParroquial" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="Sp_PersonaConsultarSinUsuario" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultarSinUsuario_Result)" />
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -1282,6 +1284,47 @@
           <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
           <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_PersonaConsultarSinUsuario_Result">
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Utilizado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PARROQUIA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PARROQUIA_CodigoParroquia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PARROQUIA_NombreParroquia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="PARROQUIA_DescripcionParroquia" Nullable="false" />
+          <Property Type="String" Name="PARROQUIA_RutaLogoParroquia" Nullable="false" />
+          <Property Type="Boolean" Name="PARROQUIA_EstadoParroquia" Nullable="false" />
+          <Property Type="Int32" Name="CANTON_IdCanton" Nullable="false" />
+          <Property Type="String" Name="CANTON_CodigoCanton" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CANTON_NombreCanton" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="CANTON_DescripcionCanton" Nullable="false" />
+          <Property Type="String" Name="CANTON_RutaLogoCanton" Nullable="false" />
+          <Property Type="Boolean" Name="CANTON_EstadoCanton" Nullable="false" />
+          <Property Type="Int32" Name="PROVINCIA_IdProvincia" Nullable="false" />
+          <Property Type="String" Name="PROVINCIA_CodigoProvincia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PROVINCIA_NombreProvincia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="PROVINCIA_DescripcionProvincia" Nullable="false" />
+          <Property Type="String" Name="PROVINCIA_RutaLogoProvincia" Nullable="false" />
+          <Property Type="Boolean" Name="PROVINCIA_EstadoProvincia" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1880,6 +1923,51 @@
           <FunctionImportMapping FunctionImportName="Sp_PresidenteJuntaParroquialEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_PresidenteJuntaParroquialEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_PresidenteJuntaParroquialInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_PresidenteJuntaParroquialInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_PresidenteJuntaParroquialModificar" FunctionName="ComunidadesGPMModel.Store.Sp_PresidenteJuntaParroquialModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_PersonaConsultarSinUsuario" FunctionName="ComunidadesGPMModel.Store.Sp_PersonaConsultarSinUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PersonaConsultarSinUsuario_Result">
+                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+                <ScalarProperty Name="PERSONA_IdTipoIdentificacion" ColumnName="PERSONA_IdTipoIdentificacion" />
+                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+                <ScalarProperty Name="PERSONA_IdSexo" ColumnName="PERSONA_IdSexo" />
+                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+                <ScalarProperty Name="PERSONA_Utilizado" ColumnName="PERSONA_Utilizado" />
+                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+                <ScalarProperty Name="PARROQUIA_IdParroquia" ColumnName="PARROQUIA_IdParroquia" />
+                <ScalarProperty Name="PARROQUIA_CodigoParroquia" ColumnName="PARROQUIA_CodigoParroquia" />
+                <ScalarProperty Name="PARROQUIA_NombreParroquia" ColumnName="PARROQUIA_NombreParroquia" />
+                <ScalarProperty Name="PARROQUIA_DescripcionParroquia" ColumnName="PARROQUIA_DescripcionParroquia" />
+                <ScalarProperty Name="PARROQUIA_RutaLogoParroquia" ColumnName="PARROQUIA_RutaLogoParroquia" />
+                <ScalarProperty Name="PARROQUIA_EstadoParroquia" ColumnName="PARROQUIA_EstadoParroquia" />
+                <ScalarProperty Name="CANTON_IdCanton" ColumnName="CANTON_IdCanton" />
+                <ScalarProperty Name="CANTON_CodigoCanton" ColumnName="CANTON_CodigoCanton" />
+                <ScalarProperty Name="CANTON_NombreCanton" ColumnName="CANTON_NombreCanton" />
+                <ScalarProperty Name="CANTON_DescripcionCanton" ColumnName="CANTON_DescripcionCanton" />
+                <ScalarProperty Name="CANTON_RutaLogoCanton" ColumnName="CANTON_RutaLogoCanton" />
+                <ScalarProperty Name="CANTON_EstadoCanton" ColumnName="CANTON_EstadoCanton" />
+                <ScalarProperty Name="PROVINCIA_IdProvincia" ColumnName="PROVINCIA_IdProvincia" />
+                <ScalarProperty Name="PROVINCIA_CodigoProvincia" ColumnName="PROVINCIA_CodigoProvincia" />
+                <ScalarProperty Name="PROVINCIA_NombreProvincia" ColumnName="PROVINCIA_NombreProvincia" />
+                <ScalarProperty Name="PROVINCIA_DescripcionProvincia" ColumnName="PROVINCIA_DescripcionProvincia" />
+                <ScalarProperty Name="PROVINCIA_RutaLogoProvincia" ColumnName="PROVINCIA_RutaLogoProvincia" />
+                <ScalarProperty Name="PROVINCIA_EstadoProvincia" ColumnName="PROVINCIA_EstadoProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

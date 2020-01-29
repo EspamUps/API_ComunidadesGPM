@@ -72,6 +72,36 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
+        public List<Canton> ConsultarCantonPorIdProvincia(int _idProvincia)
+        {
+            List<Canton> _lista = new List<Canton>();
+            foreach (var item in db.Sp_CantonConsultar().Where(c => c.IdProvincia == _idProvincia).ToList())
+            {
+                _lista.Add(new Canton()
+                {
+                    IdCanton = item.IdCanton,
+                    IdCantonEncriptado = _seguridad.Encriptar(item.IdCanton.ToString()),
+                    CodigoCanton = item.CodigoCanton,
+                    DescripcionCanton = item.DescripcionCanton,
+                    NombreCanton = item.NombreCanton,
+                    RutaLogoCanton = item.RutaLogoCanton,
+                    EstadoCanton = item.EstadoCanton,
+                    Utilizado = item.UtilizadoCanton,
+                    Provincia = new Provincia()
+                    {
+                        IdProvincia = item.IdProvincia,
+                        IdProvinciaEncriptado = _seguridad.Encriptar(item.IdProvincia.ToString()),
+                        CodigoProvincia = item.CodigoProvincia,
+                        DescripcionProvincia = item.DescripcionProvincia,
+                        NombreProvincia = item.NombreProvincia,
+                        RutaLogoProvincia = item.RutaLogoProvincia,
+                        EstadoProvincia = item.EstadoProvincia
+                    }
+                });
+            }
+            return _lista;
+        }
+
         public int InsertarCanton(Canton _objCanton)
         {
             try

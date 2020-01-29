@@ -64,7 +64,41 @@ namespace API.Controllers
                 else
                 {
                     int _idParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_idParroquiaEncriptado).ToString());
-                    var _listaParroquias = _objCatalogoParroquia.ConsultarParroquiaPorId(_idParroquia).Where(c => c.EstadoParroquia == true && c.Canton.EstadoCanton == true && c.Canton.Provincia.EstadoProvincia).ToList();
+                    var _objParroquia = _objCatalogoParroquia.ConsultarParroquiaPorId(_idParroquia).Where(c => c.EstadoParroquia == true && c.Canton.EstadoCanton == true && c.Canton.Provincia.EstadoProvincia).FirstOrDefault();
+
+                    _objParroquia.IdParroquia = 0;
+                    _objParroquia.Canton.IdCanton = 0;
+                    _objParroquia.Canton.Provincia.IdProvincia = 0;
+                    _respuesta = _objParroquia;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/parroquia_consultarporidcanton")]
+        public object parroquia_consultarporidcanton(string _idCantonEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (string.IsNullOrEmpty(_idCantonEncriptado) || _idCantonEncriptado == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cantón.";
+                }
+                else
+                {
+                    int _idCanton = Convert.ToInt32(_seguridad.DesEncriptar(_idCantonEncriptado).ToString());
+                    var _listaParroquias = _objCatalogoParroquia.ConsultarParroquiaPorIdCanton(_idCanton).Where(c => c.EstadoParroquia == true && c.Canton.EstadoCanton == true && c.Canton.Provincia.EstadoProvincia).ToList();
                     foreach (var item in _listaParroquias)
                     {
                         item.IdParroquia = 0;
@@ -83,6 +117,7 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+
 
         [HttpPost]
         [Route("api/parroquia_insertar")]

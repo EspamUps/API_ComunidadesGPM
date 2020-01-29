@@ -994,5 +994,10 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PresidenteJuntaParroquialModificar", idPresidenteJuntaParroquialParameter, idParroquiaParameter, representanteParameter, fechaIngresoParameter, fechaSalidaParameter, estadoPresidenteJuntaParroquialParameter);
         }
+    
+        public virtual ObjectResult<Sp_PersonaConsultarSinUsuario_Result> Sp_PersonaConsultarSinUsuario()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PersonaConsultarSinUsuario_Result>("Sp_PersonaConsultarSinUsuario");
+        }
     }
 }
