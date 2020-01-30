@@ -35,9 +35,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
-
             }
             return new { respuesta = _respuesta, http = _http };
         }
@@ -128,7 +126,7 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el nombre del cantón.";
                 }
-                else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.NombreCanton == _objCanton.NombreCanton && c.Provincia.IdProvincia == Convert.ToInt32(_seguridad.DesEncriptar(_objCanton.Provincia.IdProvinciaEncriptado))).FirstOrDefault() != null)
+                else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.NombreCanton == _objCanton.NombreCanton.Trim() && c.Provincia.IdProvincia == Convert.ToInt32(_seguridad.DesEncriptar(_objCanton.Provincia.IdProvinciaEncriptado))).FirstOrDefault() != null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                     _http.mensaje = "Ya existe un cantón con el mismo nombre, por favor verifique en la lista.";
@@ -138,13 +136,15 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el codigo del cantón.";
                 }
-                else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.CodigoCanton == _objCanton.CodigoCanton).FirstOrDefault() != null)
+                else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.CodigoCanton == _objCanton.CodigoCanton.Trim()).FirstOrDefault() != null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                     _http.mensaje = "Ya existe un cantón con el mismo código, por favor verifique en la lista.";
                 }
                 else
                 {
+                    _objCanton.NombreCanton = _objCanton.NombreCanton.Trim();
+                    _objCanton.CodigoCanton = _objCanton.CodigoCanton.Trim();
                     _objCanton.EstadoCanton = true;
                     _objCanton.Provincia.IdProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_objCanton.Provincia.IdProvinciaEncriptado));
                     int _idCanton = _objCatalogoCanton.InsertarCanton(_objCanton);
@@ -214,18 +214,20 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "El cantón que intenta modificar no existe.";
                     }
-                    else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.NombreCanton == _objCanton.NombreCanton && c.IdCanton!=_idCanton && c.Provincia.IdProvincia == Convert.ToInt32(_seguridad.DesEncriptar(_objCanton.Provincia.IdProvinciaEncriptado))).FirstOrDefault() != null)
+                    else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.NombreCanton == _objCanton.NombreCanton.Trim() && c.IdCanton!=_idCanton && c.Provincia.IdProvincia == Convert.ToInt32(_seguridad.DesEncriptar(_objCanton.Provincia.IdProvinciaEncriptado))).FirstOrDefault() != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                         _http.mensaje = "Ya existe un cantón con el mismo nombre, por favor verifique en la lista.";
                     }
-                    else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.CodigoCanton == _objCanton.CodigoCanton && c.IdCanton != _idCanton).FirstOrDefault() != null)
+                    else if (_objCatalogoCanton.ConsultarCanton().Where(c => c.CodigoCanton == _objCanton.CodigoCanton.Trim() && c.IdCanton != _idCanton).FirstOrDefault() != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                         _http.mensaje = "Ya existe un cantón con el mismo código, por favor verifique en la lista.";
                     }
                     else
                     {
+                        _objCanton.NombreCanton = _objCanton.NombreCanton.Trim();
+                        _objCanton.CodigoCanton = _objCanton.CodigoCanton.Trim();
                         _objCanton.IdCanton = _idCanton;
                         _objCanton.Provincia.IdProvincia= Convert.ToInt32(_seguridad.DesEncriptar(_objCanton.Provincia.IdProvinciaEncriptado));
                         _objCanton.EstadoCanton = true;

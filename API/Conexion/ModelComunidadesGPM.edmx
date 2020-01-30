@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ComunidadesGPMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="Sp_CuestionarioGenericoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
+        <Function Name="Sp_CuestionarioGenericoEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdCuestionarioGenerico" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_CuestionarioGenericoInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="Nombre" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_CuestionarioGenericoModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdCuestionarioGenerico" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_AlcaldeConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
         <Function Name="Sp_AlcaldeEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
           <Parameter Name="IdAlcalde" Type="int" Mode="In" />
@@ -337,7 +352,6 @@
           <FunctionImport Name="Sp_UsuarioValidar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioValidar_Result1)">
           <Parameter Name="Correo" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Sp_AsignarTipoUsuarioModuloPrivilegioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result1)" />
           <FunctionImport Name="Sp_AsignarUsuarioTipoUsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarUsuarioTipoUsuarioConsultar_Result)" />
           <FunctionImport Name="Sp_UsuarioInformacionGeneral" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioInformacionGeneral_Result)" />
           <FunctionImport Name="Sp_PersonaEliminar">
@@ -547,6 +561,22 @@
             <Parameter Name="EstadoPresidenteJuntaParroquial" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_PersonaConsultarSinUsuario" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultarSinUsuario_Result)" />
+          <FunctionImport Name="Sp_AsignarTipoUsuarioModuloPrivilegioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result2)" />
+          <FunctionImport Name="Sp_CuestionarioGenericoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CuestionarioGenericoConsultar_Result)" />
+          <FunctionImport Name="Sp_CuestionarioGenericoEliminar">
+            <Parameter Name="IdCuestionarioGenerico" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CuestionarioGenericoInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CuestionarioGenericoModificar">
+            <Parameter Name="IdCuestionarioGenerico" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -1325,6 +1355,35 @@
           <Property Type="String" Name="PROVINCIA_RutaLogoProvincia" Nullable="false" />
           <Property Type="Boolean" Name="PROVINCIA_EstadoProvincia" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result2">
+          <Property Type="Int32" Name="TIPOUSUARIO_IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOUSUARIO_Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="TIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" Nullable="false" />
+          <Property Type="Boolean" Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARMODULOPRIVILEGIO_IdModulo" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" Nullable="false" />
+          <Property Type="Boolean" Name="ASIGNARMODULOPRIVILEGIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="MODULO_IdModulo" Nullable="false" />
+          <Property Type="Int32" Name="MODULO_Identificador" Nullable="false" />
+          <Property Type="String" Name="MODULO_Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="MODULO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PRIVILEGIO_IdPrivilegio" Nullable="false" />
+          <Property Type="Int32" Name="PRIVILEGIO_Identificador" Nullable="false" />
+          <Property Type="String" Name="PRIVILEGIO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="PRIVILEGIO_Estado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_CuestionarioGenericoConsultar_Result">
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="UtilizadoCuestionarioGenerico" Nullable="false" MaxLength="1" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1478,32 +1537,6 @@
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Clave" ColumnName="Clave" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_AsignarTipoUsuarioModuloPrivilegioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarTipoUsuarioModuloPrivilegioConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result1">
-                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
-                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
-                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
-                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
-                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" />
-                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" />
-                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
-                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" />
-                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
-                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdModulo" ColumnName="ASIGNARMODULOPRIVILEGIO_IdModulo" />
-                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" />
-                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARMODULOPRIVILEGIO_Estado" />
-                <ScalarProperty Name="MODULO_IdModulo" ColumnName="MODULO_IdModulo" />
-                <ScalarProperty Name="MODULO_Identificador" ColumnName="MODULO_Identificador" />
-                <ScalarProperty Name="MODULO_Descripcion" ColumnName="MODULO_Descripcion" />
-                <ScalarProperty Name="MODULO_Estado" ColumnName="MODULO_Estado" />
-                <ScalarProperty Name="PRIVILEGIO_IdPrivilegio" ColumnName="PRIVILEGIO_IdPrivilegio" />
-                <ScalarProperty Name="PRIVILEGIO_Identificador" ColumnName="PRIVILEGIO_Identificador" />
-                <ScalarProperty Name="PRIVILEGIO_Descripcion" ColumnName="PRIVILEGIO_Descripcion" />
-                <ScalarProperty Name="PRIVILEGIO_Estado" ColumnName="PRIVILEGIO_Estado" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1968,6 +2001,46 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_AsignarTipoUsuarioModuloPrivilegioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarTipoUsuarioModuloPrivilegioConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result2">
+                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
+                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
+                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
+                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
+                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio" />
+                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario" />
+                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
+                <ScalarProperty Name="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado" />
+                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio" />
+                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdModulo" ColumnName="ASIGNARMODULOPRIVILEGIO_IdModulo" />
+                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" ColumnName="ASIGNARMODULOPRIVILEGIO_IdPrivilegio" />
+                <ScalarProperty Name="ASIGNARMODULOPRIVILEGIO_Estado" ColumnName="ASIGNARMODULOPRIVILEGIO_Estado" />
+                <ScalarProperty Name="MODULO_IdModulo" ColumnName="MODULO_IdModulo" />
+                <ScalarProperty Name="MODULO_Identificador" ColumnName="MODULO_Identificador" />
+                <ScalarProperty Name="MODULO_Descripcion" ColumnName="MODULO_Descripcion" />
+                <ScalarProperty Name="MODULO_Estado" ColumnName="MODULO_Estado" />
+                <ScalarProperty Name="PRIVILEGIO_IdPrivilegio" ColumnName="PRIVILEGIO_IdPrivilegio" />
+                <ScalarProperty Name="PRIVILEGIO_Identificador" ColumnName="PRIVILEGIO_Identificador" />
+                <ScalarProperty Name="PRIVILEGIO_Descripcion" ColumnName="PRIVILEGIO_Descripcion" />
+                <ScalarProperty Name="PRIVILEGIO_Estado" ColumnName="PRIVILEGIO_Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_CuestionarioGenericoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioGenericoConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CuestionarioGenericoConsultar_Result">
+                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="UtilizadoCuestionarioGenerico" ColumnName="UtilizadoCuestionarioGenerico" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_CuestionarioGenericoEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioGenericoEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_CuestionarioGenericoInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioGenericoInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_CuestionarioGenericoModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioGenericoModificar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
