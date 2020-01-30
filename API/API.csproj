@@ -236,6 +236,9 @@
     <Compile Include="Conexion\Sp_ComunidadConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_CuestionarioGenericoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_LiderComunitarioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -331,6 +334,7 @@
     <Compile Include="Controllers\AsignarUsuarioTipoUsuarioController.cs" />
     <Compile Include="Controllers\CantonController.cs" />
     <Compile Include="Controllers\ComunidadController.cs" />
+    <Compile Include="Controllers\CuestionarioGenericoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiderComunitarioController.cs" />
     <Compile Include="Controllers\ParroquiaController.cs" />
@@ -353,6 +357,7 @@
     <Compile Include="Models\Catalogos\CatalogoAsignarUsuarioTipoUsuario.cs" />
     <Compile Include="Models\Catalogos\CatalogoCanton.cs" />
     <Compile Include="Models\Catalogos\CatalogoComunidad.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCuestionarioGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoLiderComunitario.cs" />
     <Compile Include="Models\Catalogos\CatalogoModulo.cs" />
     <Compile Include="Models\Catalogos\CatalogoParroquia.cs" />
@@ -374,6 +379,7 @@
     <Compile Include="Models\Entidades\Canton.cs" />
     <Compile Include="Models\Entidades\Clave.cs" />
     <Compile Include="Models\Entidades\Comunidad.cs" />
+    <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
     <Compile Include="Models\Entidades\LiderComunitario.cs" />
     <Compile Include="Models\Entidades\Prefecto.cs" />
     <Compile Include="Models\Entidades\PresidenteJuntaParroquial.cs" />

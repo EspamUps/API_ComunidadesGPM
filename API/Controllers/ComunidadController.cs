@@ -165,7 +165,7 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el nombre de la comunidad.";
                 }
-                else if (_objCatalogoComunidad.ConsultarComunidad().Where(c => c.NombreComunidad == _objComunidad.NombreComunidad && c.Parroquia.IdParroquia == Convert.ToInt32(_seguridad.DesEncriptar(_objComunidad.Parroquia.IdParroquiaEncriptado))).FirstOrDefault() != null)
+                else if (_objCatalogoComunidad.ConsultarComunidad().Where(c => c.NombreComunidad == _objComunidad.NombreComunidad.Trim() && c.Parroquia.IdParroquia == Convert.ToInt32(_seguridad.DesEncriptar(_objComunidad.Parroquia.IdParroquiaEncriptado))).FirstOrDefault() != null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                     _http.mensaje = "Ya existe una comunidad con el mismo nombre, por favor verifique en la lista.";
@@ -175,13 +175,15 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el codigo de la comunidad.";
                 }
-                else if (_objCatalogoComunidad.ConsultarComunidad().Where(c => c.CodigoComunidad == _objComunidad.CodigoComunidad).FirstOrDefault() != null)
+                else if (_objCatalogoComunidad.ConsultarComunidad().Where(c => c.CodigoComunidad == _objComunidad.CodigoComunidad.Trim()).FirstOrDefault() != null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                     _http.mensaje = "Ya existe una comunidad con el mismo código, por favor verifique en la lista.";
                 }
                 else
                 {
+                    _objComunidad.CodigoComunidad = _objComunidad.CodigoComunidad.Trim();
+                    _objComunidad.NombreComunidad = _objComunidad.NombreComunidad.Trim();
                     _objComunidad.EstadoComunidad = true;
                     _objComunidad.Parroquia.IdParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_objComunidad.Parroquia.IdParroquiaEncriptado));
                     _objComunidad.Parroquia.Canton.IdCanton = Convert.ToInt32(_seguridad.DesEncriptar(_objComunidad.Parroquia.Canton.IdCantonEncriptado));
@@ -265,18 +267,20 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "La comunidad que intenta modificar no existe.";
                     }
-                    else if (_objCatalogoComunidad.ConsultarComunidad().Where(c => c.NombreComunidad == _objComunidad.NombreComunidad && c.IdComunidad != _idComunidad).FirstOrDefault() != null)
+                    else if (_objCatalogoComunidad.ConsultarComunidad().Where(c => c.NombreComunidad == _objComunidad.NombreComunidad.Trim() && c.IdComunidad != _idComunidad).FirstOrDefault() != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                         _http.mensaje = "Ya existe una comunidad con el mismo nombre, por favor verifique en la lista.";
                     }
-                    else if (_objCatalogoComunidad.ConsultarComunidad().Where(c => c.CodigoComunidad == _objComunidad.CodigoComunidad && c.IdComunidad != _idComunidad).FirstOrDefault() != null)
+                    else if (_objCatalogoComunidad.ConsultarComunidad().Where(c => c.CodigoComunidad == _objComunidad.CodigoComunidad.Trim() && c.IdComunidad != _idComunidad).FirstOrDefault() != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                         _http.mensaje = "Ya existe una comunidad con el mismo código, por favor verifique en la lista.";
                     }
                     else
                     {
+                        _objComunidad.CodigoComunidad = _objComunidad.CodigoComunidad.Trim();
+                        _objComunidad.NombreComunidad = _objComunidad.NombreComunidad.Trim();
                         _objComunidad.IdComunidad = _idComunidad;
                         _objComunidad.Parroquia.IdParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_objComunidad.Parroquia.IdParroquiaEncriptado));
                         _objComunidad.Parroquia.Canton.IdCanton = Convert.ToInt32(_seguridad.DesEncriptar(_objComunidad.Parroquia.Canton.IdCantonEncriptado));

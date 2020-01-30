@@ -999,5 +999,57 @@ namespace API.Conexion
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result2>("Sp_AsignarTipoUsuarioModuloPrivilegioConsultar");
         }
+    
+        public virtual ObjectResult<Sp_CuestionarioGenericoConsultar_Result> Sp_CuestionarioGenericoConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CuestionarioGenericoConsultar_Result>("Sp_CuestionarioGenericoConsultar");
+        }
+    
+        public virtual int Sp_CuestionarioGenericoEliminar(Nullable<int> idCuestionarioGenerico)
+        {
+            var idCuestionarioGenericoParameter = idCuestionarioGenerico.HasValue ?
+                new ObjectParameter("IdCuestionarioGenerico", idCuestionarioGenerico) :
+                new ObjectParameter("IdCuestionarioGenerico", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CuestionarioGenericoEliminar", idCuestionarioGenericoParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_CuestionarioGenericoInsertar(string nombre, string descripcion, Nullable<bool> estado)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CuestionarioGenericoInsertar", nombreParameter, descripcionParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_CuestionarioGenericoModificar(Nullable<int> idCuestionarioGenerico, string nombre, string descripcion, Nullable<bool> estado)
+        {
+            var idCuestionarioGenericoParameter = idCuestionarioGenerico.HasValue ?
+                new ObjectParameter("IdCuestionarioGenerico", idCuestionarioGenerico) :
+                new ObjectParameter("IdCuestionarioGenerico", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CuestionarioGenericoModificar", idCuestionarioGenericoParameter, nombreParameter, descripcionParameter, estadoParameter);
+        }
     }
 }

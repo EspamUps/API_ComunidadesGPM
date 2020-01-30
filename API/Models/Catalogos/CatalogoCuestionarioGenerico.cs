@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using API.Models.Entidades;
+using API.Conexion;
+using API.Models.Metodos;
+
+namespace API.Models.Catalogos
+{
+    public class CatalogoCuestionarioGenerico
+    {
+        ComunidadesGPMEntities db = new ComunidadesGPMEntities();
+        Seguridad _seguridad = new Seguridad();
+
+        public int InsertarCuestionarioGenerico(CuestionarioGenerico _objCuestionarioGenerico)
+        {
+            try
+            {
+                return int.Parse(db.Sp_CuestionarioGenericoInsertar(_objCuestionarioGenerico.Nombre, _objCuestionarioGenerico.Descripcion, _objCuestionarioGenerico.Estado).Select(x => x.Value.ToString()).FirstOrDefault());
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+        public int ModificarCuestionarioGenerico(CuestionarioGenerico _objCuestionarioGenerico)
+        {
+            try
+            {
+                db.Sp_CuestionarioGenericoModificar(_objCuestionarioGenerico.IdCuestionarioGenerico, _objCuestionarioGenerico.Nombre, _objCuestionarioGenerico.Descripcion, _objCuestionarioGenerico.Estado);
+                return _objCuestionarioGenerico.IdCuestionarioGenerico;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+        public void EliminarCuestionarioGenerico(int _idCuestionarioGenerico)
+        {
+            db.Sp_CuestionarioGenericoEliminar(_idCuestionarioGenerico);
+        }
+        public List<CuestionarioGenerico> ConsultarCuestionarioGenerico()
+        {
+            List<CuestionarioGenerico> _lista = new List<CuestionarioGenerico>();
+            foreach (var item in db.Sp_CuestionarioGenericoConsultar())
+            {
+                _lista.Add(new CuestionarioGenerico()
+                {
+                    IdCuestionarioGenerico=item.IdCuestionarioGenerico,
+                    IdCuestionarioGenericoEncriptado=_seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
+                    Nombre=item.Nombre,
+                    Descripcion=item.Descripcion,
+                    Estado=item.Estado,
+                    Utilizado=item.UtilizadoCuestionarioGenerico
+                });
+            }
+            return _lista;
+        }
+    }
+}

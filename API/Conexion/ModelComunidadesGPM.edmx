@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ComunidadesGPMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="Sp_CuestionarioGenericoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
+        <Function Name="Sp_CuestionarioGenericoEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdCuestionarioGenerico" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_CuestionarioGenericoInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="Nombre" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_CuestionarioGenericoModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdCuestionarioGenerico" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_AlcaldeConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
         <Function Name="Sp_AlcaldeEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
           <Parameter Name="IdAlcalde" Type="int" Mode="In" />
@@ -547,6 +562,21 @@
           </FunctionImport>
           <FunctionImport Name="Sp_PersonaConsultarSinUsuario" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultarSinUsuario_Result)" />
           <FunctionImport Name="Sp_AsignarTipoUsuarioModuloPrivilegioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result2)" />
+          <FunctionImport Name="Sp_CuestionarioGenericoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CuestionarioGenericoConsultar_Result)" />
+          <FunctionImport Name="Sp_CuestionarioGenericoEliminar">
+            <Parameter Name="IdCuestionarioGenerico" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CuestionarioGenericoInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CuestionarioGenericoModificar">
+            <Parameter Name="IdCuestionarioGenerico" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -1347,6 +1377,13 @@
           <Property Type="String" Name="PRIVILEGIO_Descripcion" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="PRIVILEGIO_Estado" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_CuestionarioGenericoConsultar_Result">
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="UtilizadoCuestionarioGenerico" Nullable="false" MaxLength="1" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1990,6 +2027,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_CuestionarioGenericoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioGenericoConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CuestionarioGenericoConsultar_Result">
+                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="UtilizadoCuestionarioGenerico" ColumnName="UtilizadoCuestionarioGenerico" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_CuestionarioGenericoEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioGenericoEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_CuestionarioGenericoInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioGenericoInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_CuestionarioGenericoModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioGenericoModificar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

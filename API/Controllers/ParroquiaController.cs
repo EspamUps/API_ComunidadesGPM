@@ -147,7 +147,7 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el nombre de la parroquia.";
                 }
-                else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.NombreParroquia == _objParroquia.NombreParroquia && c.Canton.IdCanton == Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.IdCantonEncriptado))).FirstOrDefault() != null)
+                else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.NombreParroquia == _objParroquia.NombreParroquia.Trim() && c.Canton.IdCanton == Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.IdCantonEncriptado))).FirstOrDefault() != null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                     _http.mensaje = "Ya existe una parroquia con el mismo nombre, por favor verifique en la lista.";
@@ -157,13 +157,15 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el codigo de la parroquia.";
                 }
-                else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.CodigoParroquia == _objParroquia.CodigoParroquia).FirstOrDefault() != null)
+                else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.CodigoParroquia == _objParroquia.CodigoParroquia.Trim()).FirstOrDefault() != null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                     _http.mensaje = "Ya existe una parroquia con el mismo código, por favor verifique en la lista.";
                 }
                 else
                 {
+                    _objParroquia.NombreParroquia = _objParroquia.NombreParroquia.Trim();
+                    _objParroquia.CodigoParroquia = _objParroquia.CodigoParroquia.Trim(); ;
                     _objParroquia.EstadoParroquia = true;
                     _objParroquia.Canton.IdCanton = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.IdCantonEncriptado));
                     _objParroquia.Canton.Provincia.IdProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.Provincia.IdProvinciaEncriptado));
@@ -239,18 +241,20 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "La parroquia que intenta modificar no existe.";
                     }
-                    else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.NombreParroquia == _objParroquia.NombreParroquia && c.IdParroquia != _idParroquia && c.Canton.IdCanton == Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.IdCantonEncriptado))).FirstOrDefault() != null)
+                    else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.NombreParroquia == _objParroquia.NombreParroquia.Trim() && c.IdParroquia != _idParroquia && c.Canton.IdCanton == Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.IdCantonEncriptado))).FirstOrDefault() != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                         _http.mensaje = "Ya existe una parroquia con el mismo nombre, por favor verifique en la lista.";
                     }
-                    else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.CodigoParroquia == _objParroquia.CodigoParroquia && c.IdParroquia != _idParroquia).FirstOrDefault() != null)
+                    else if (_objCatalogoParroquia.ConsultarParroquia().Where(c => c.CodigoParroquia == _objParroquia.CodigoParroquia.Trim() && c.IdParroquia != _idParroquia).FirstOrDefault() != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                         _http.mensaje = "Ya existe una parroquia con el mismo código, por favor verifique en la lista.";
                     }
                     else
                     {
+                        _objParroquia.NombreParroquia = _objParroquia.NombreParroquia.Trim();
+                        _objParroquia.CodigoParroquia = _objParroquia.CodigoParroquia.Trim();
                         _objParroquia.IdParroquia = _idParroquia;
                         _objParroquia.Canton.IdCanton = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.IdCantonEncriptado));
                         _objParroquia.Canton.Provincia.IdProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.Provincia.IdProvinciaEncriptado));
