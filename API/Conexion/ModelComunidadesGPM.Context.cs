@@ -75,23 +75,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_AsignarTipoUsuarioModuloPrivilegioInsertar", idTipoUsuarioParameter, idAsignarModuloPrivilegioParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> Sp_AsignarUsuarioTipoUsuario_insertar(Nullable<int> idUsuario, Nullable<int> idTipoUsuario, Nullable<bool> estado)
-        {
-            var idUsuarioParameter = idUsuario.HasValue ?
-                new ObjectParameter("IdUsuario", idUsuario) :
-                new ObjectParameter("IdUsuario", typeof(int));
-    
-            var idTipoUsuarioParameter = idTipoUsuario.HasValue ?
-                new ObjectParameter("IdTipoUsuario", idTipoUsuario) :
-                new ObjectParameter("IdTipoUsuario", typeof(int));
-    
-            var estadoParameter = estado.HasValue ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_AsignarUsuarioTipoUsuario_insertar", idUsuarioParameter, idTipoUsuarioParameter, estadoParameter);
-        }
-    
         public virtual int Sp_AsignarUsuarioTipoUsuarioCambiarEstado(Nullable<int> idAsignarUsuarioTipoUsuario, Nullable<bool> nuevoEstado)
         {
             var idAsignarUsuarioTipoUsuarioParameter = idAsignarUsuarioTipoUsuario.HasValue ?
@@ -1050,6 +1033,80 @@ namespace API.Conexion
                 new ObjectParameter("Estado", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CuestionarioGenericoModificar", idCuestionarioGenericoParameter, nombreParameter, descripcionParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_AsignarResponsableCambiarEstado(Nullable<int> idAsignarResponsable, Nullable<bool> nuevoEstado)
+        {
+            var idAsignarResponsableParameter = idAsignarResponsable.HasValue ?
+                new ObjectParameter("IdAsignarResponsable", idAsignarResponsable) :
+                new ObjectParameter("IdAsignarResponsable", typeof(int));
+    
+            var nuevoEstadoParameter = nuevoEstado.HasValue ?
+                new ObjectParameter("NuevoEstado", nuevoEstado) :
+                new ObjectParameter("NuevoEstado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_AsignarResponsableCambiarEstado", idAsignarResponsableParameter, nuevoEstadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_AsignarResponsableConsultar_Result> Sp_AsignarResponsableConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarResponsableConsultar_Result>("Sp_AsignarResponsableConsultar");
+        }
+    
+        public virtual int Sp_AsignarResponsableEliminar(Nullable<int> idAsignarResponsable)
+        {
+            var idAsignarResponsableParameter = idAsignarResponsable.HasValue ?
+                new ObjectParameter("IdAsignarResponsable", idAsignarResponsable) :
+                new ObjectParameter("IdAsignarResponsable", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_AsignarResponsableEliminar", idAsignarResponsableParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_AsignarResponsableInsertar(Nullable<int> idAsignarUsuarioTipoUsuario, Nullable<int> idCuestionarioGenerico, Nullable<bool> estado)
+        {
+            var idAsignarUsuarioTipoUsuarioParameter = idAsignarUsuarioTipoUsuario.HasValue ?
+                new ObjectParameter("IdAsignarUsuarioTipoUsuario", idAsignarUsuarioTipoUsuario) :
+                new ObjectParameter("IdAsignarUsuarioTipoUsuario", typeof(int));
+    
+            var idCuestionarioGenericoParameter = idCuestionarioGenerico.HasValue ?
+                new ObjectParameter("IdCuestionarioGenerico", idCuestionarioGenerico) :
+                new ObjectParameter("IdCuestionarioGenerico", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_AsignarResponsableInsertar", idAsignarUsuarioTipoUsuarioParameter, idCuestionarioGenericoParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignadosResponsablePorCuestionarioGenericoPorIdentificadorTipoUsuario_Result> Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignadosResponsablePorCuestionarioGenericoPorIdentificadorTipoUsuario(Nullable<int> idCuestionarioGenerico, Nullable<int> identificadorTipoUsuario)
+        {
+            var idCuestionarioGenericoParameter = idCuestionarioGenerico.HasValue ?
+                new ObjectParameter("IdCuestionarioGenerico", idCuestionarioGenerico) :
+                new ObjectParameter("IdCuestionarioGenerico", typeof(int));
+    
+            var identificadorTipoUsuarioParameter = identificadorTipoUsuario.HasValue ?
+                new ObjectParameter("identificadorTipoUsuario", identificadorTipoUsuario) :
+                new ObjectParameter("identificadorTipoUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignadosResponsablePorCuestionarioGenericoPorIdentificadorTipoUsuario_Result>("Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignadosResponsablePorCuestionarioGenericoPorIdentificadorTipoUsuario", idCuestionarioGenericoParameter, identificadorTipoUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_AsignarUsuarioTipoUsuarioInsertar(Nullable<int> idUsuario, Nullable<int> idTipoUsuario, Nullable<bool> estado)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            var idTipoUsuarioParameter = idTipoUsuario.HasValue ?
+                new ObjectParameter("IdTipoUsuario", idTipoUsuario) :
+                new ObjectParameter("IdTipoUsuario", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_AsignarUsuarioTipoUsuarioInsertar", idUsuarioParameter, idTipoUsuarioParameter, estadoParameter);
         }
     }
 }
