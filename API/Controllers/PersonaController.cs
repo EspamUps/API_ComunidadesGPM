@@ -210,7 +210,7 @@ namespace API.Controllers
                         _objPersona.Estado = true;
                         _objPersona.Sexo.IdSexo = _idSexoDesencriptado;
                         _objPersona.TipoIdentificacion.IdTipoIdentificacion = _idTipoIdentificacionDesencriptado;
-                        _objPersona.IdPersona = _idParroquiaDesencriptado;
+                        _objPersona.IdPersona = _idPersona;////estaba idParroquiaDesencriptado
                         _objPersona.Parroquia.IdParroquia = _idParroquiaDesencriptado;
 
                         int _idPersonaModificada = _objCatalogoPersona.ModificarPersona(_objPersona);
