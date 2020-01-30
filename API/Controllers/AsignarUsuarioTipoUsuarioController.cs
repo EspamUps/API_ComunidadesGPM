@@ -107,12 +107,11 @@ namespace API.Controllers
                 else
                 {
                     int _idCuestionarioGenerico = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioGenericoEncriptado));
-                    var lista = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuarioNoAsignadosResponsablePorCuestionarioGenericoPorIdentificadorTipoUsuario(_idCuestionarioGenerico,_identificadorTipoUsuario).Where(c => c.Estado == true && c.TipoUsuario.Estado==true && c.Usuario.Estado==true).ToList();
+                    var lista = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuarioNoAsignadosResponsablePorCuestionarioGenericoPorIdentificadorTipoUsuario(_idCuestionarioGenerico,_identificadorTipoUsuario).Where(c => c.Estado == true && c.Usuario.Estado==true).ToList();
                     foreach (var item in lista)
                     {
                         item.IdAsignarUsuarioTipoUsuario = 0;
                         item.Usuario.IdUsuario = 0;
-                        item.TipoUsuario.IdTipoUsuario = 0;
                         item.Usuario.Persona.IdPersona = 0;
                         item.Usuario.Persona.Sexo.IdSexo = 0;
                         item.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;

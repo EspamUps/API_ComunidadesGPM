@@ -336,6 +336,7 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AlcaldeController.cs" />
+    <Compile Include="Controllers\AsignarResponsableController.cs" />
     <Compile Include="Controllers\AsignarTipoUsuarioModuloPrivilegioController.cs" />
     <Compile Include="Controllers\AsignarUsuarioTipoUsuarioController.cs" />
     <Compile Include="Controllers\CantonController.cs" />
@@ -359,6 +360,7 @@
     </Compile>
     <Compile Include="Models\Catalogos\CatalogoAlcalde.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarModuloPrivilegio.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarResponsable.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarTipoUsuarioModuloPrivilegio.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarUsuarioTipoUsuario.cs" />
     <Compile Include="Models\Catalogos\CatalogoCanton.cs" />
@@ -380,6 +382,7 @@
     <Compile Include="Models\Catalogos\CatalogoUsuario.cs" />
     <Compile Include="Models\Entidades\Alcalde.cs" />
     <Compile Include="Models\Entidades\AsignarModuloPrivilegio.cs" />
+    <Compile Include="Models\Entidades\AsignarResponsable.cs" />
     <Compile Include="Models\Entidades\AsignarTipoUsuarioModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarUsuarioTipoUsuario.cs" />
     <Compile Include="Models\Entidades\Canton.cs" />

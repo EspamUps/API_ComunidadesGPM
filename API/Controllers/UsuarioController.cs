@@ -15,8 +15,6 @@ namespace API.Controllers
 {
     public class UsuarioController : ApiController
     {
-        //ComunidadesGPMEntities db = new ComunidadesGPMEntities();
-        // GET: api/Usuario
         CatalogoPersona _objCatalogoPersona = new CatalogoPersona();
         CatalogoUsuario _objCatalogoUsuarios = new CatalogoUsuario();
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
