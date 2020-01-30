@@ -56,7 +56,7 @@ namespace API.Controllers
                     }
                     else
                     {
-                        var _objCuestionarioGenericoIngresado = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenerico().Where(C => C.IdCuestionarioGenerico == _idCuestionarioGenerico && C.Estado == true).FirstOrDefault();
+                        var _objCuestionarioGenericoIngresado = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenericoPorId(_idCuestionarioGenerico).Where(C => C.Estado == true).FirstOrDefault();
                         _objCuestionarioGenericoIngresado.IdCuestionarioGenerico = 0;
                         _respuesta = _objCuestionarioGenericoIngresado;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
@@ -120,7 +120,7 @@ namespace API.Controllers
                         }
                         else
                         {
-                            var _objCuestionarioGenericoModificado = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenerico().Where(C => C.IdCuestionarioGenerico == _idCuestionarioGenerico && C.Estado == true).FirstOrDefault();
+                            var _objCuestionarioGenericoModificado = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenericoPorId(_idCuestionarioGenerico).Where(C => C.Estado == true).FirstOrDefault();
                             _objCuestionarioGenericoModificado.IdCuestionarioGenerico = 0;
                             _respuesta = _objCuestionarioGenericoModificado;
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
