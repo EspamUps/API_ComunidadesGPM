@@ -400,22 +400,23 @@ namespace API.Controllers
                     else
                     {
                         var _listaAsignarUsuarioTipoUsuario = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario().Where(c => c.Usuario.IdUsuario == _objUsuarioBuscado.IdUsuario && c.Estado == true && c.TipoUsuario.Estado == true).ToList();
-                        var _listaRolesAsignados = _listaAsignarUsuarioTipoUsuario
-                              .Select(y => new TipoUsuario() { IdTipoUsuario = y.TipoUsuario.IdTipoUsuario, Descripcion = y.TipoUsuario.Descripcion, IdTipoUsuarioEncriptado = y.TipoUsuario.IdTipoUsuarioEncriptado })
-                              .GroupBy(c => c.IdTipoUsuario).Select(x => new TipoUsuario() { IdTipoUsuario = x.Key, Descripcion = x.Select(w => w.Descripcion).FirstOrDefault(), IdTipoUsuarioEncriptado = x.Select(w=>w.IdTipoUsuarioEncriptado).FirstOrDefault() })
-                              .ToList();
-                        if(_listaRolesAsignados.Count==0)
+                        if(_listaAsignarUsuarioTipoUsuario.Count==0)
                         {
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault();
                             _http.mensaje = "No se encontraron roles asignados a este usuario";
                         }
                         else
                         {
-                            foreach (var item in _listaRolesAsignados)
+                            foreach (var item in _listaAsignarUsuarioTipoUsuario)
                             {
-                                item.IdTipoUsuario = 0;
+                                item.IdAsignarUsuarioTipoUsuario = 0;
+                                item.TipoUsuario.IdTipoUsuario = 0;
+                                item.Usuario.IdUsuario = 0;
+                                item.Usuario.Persona.IdPersona = 0;
+                                item.Usuario.Persona.Sexo.IdSexo = 0;
+                                item.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
                             }
-                            _respuesta = _listaRolesAsignados;
+                            _respuesta = _listaAsignarUsuarioTipoUsuario;
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
 
                         }
