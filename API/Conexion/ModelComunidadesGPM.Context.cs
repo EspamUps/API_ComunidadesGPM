@@ -1108,5 +1108,65 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_AsignarUsuarioTipoUsuarioInsertar", idUsuarioParameter, idTipoUsuarioParameter, estadoParameter);
         }
+    
+        public virtual ObjectResult<Sp_ComponenteConsultar_Result> Sp_ComponenteConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponenteConsultar_Result>("Sp_ComponenteConsultar");
+        }
+    
+        public virtual int Sp_ComponenteEliminar(Nullable<int> idComponente)
+        {
+            var idComponenteParameter = idComponente.HasValue ?
+                new ObjectParameter("IdComponente", idComponente) :
+                new ObjectParameter("IdComponente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ComponenteEliminar", idComponenteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_ComponenteInsertar(Nullable<int> idCuestionarioGenerico, string descripcion, Nullable<int> orden, Nullable<bool> estado)
+        {
+            var idCuestionarioGenericoParameter = idCuestionarioGenerico.HasValue ?
+                new ObjectParameter("IdCuestionarioGenerico", idCuestionarioGenerico) :
+                new ObjectParameter("IdCuestionarioGenerico", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("Orden", orden) :
+                new ObjectParameter("Orden", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_ComponenteInsertar", idCuestionarioGenericoParameter, descripcionParameter, ordenParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_ComponenteModificar(Nullable<int> idComponente, Nullable<int> idCuestionarioGenerico, string descripcion, Nullable<int> orden, Nullable<bool> estado)
+        {
+            var idComponenteParameter = idComponente.HasValue ?
+                new ObjectParameter("IdComponente", idComponente) :
+                new ObjectParameter("IdComponente", typeof(int));
+    
+            var idCuestionarioGenericoParameter = idCuestionarioGenerico.HasValue ?
+                new ObjectParameter("IdCuestionarioGenerico", idCuestionarioGenerico) :
+                new ObjectParameter("IdCuestionarioGenerico", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("Orden", orden) :
+                new ObjectParameter("Orden", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ComponenteModificar", idComponenteParameter, idCuestionarioGenericoParameter, descripcionParameter, ordenParameter, estadoParameter);
+        }
     }
 }
