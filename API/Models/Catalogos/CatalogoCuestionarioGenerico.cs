@@ -57,5 +57,23 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+
+        public List<CuestionarioGenerico> ConsultarCuestionarioGenericoPorId(int _idCuestionarioGenerico)
+        {
+            List<CuestionarioGenerico> _lista = new List<CuestionarioGenerico>();
+            foreach (var item in db.Sp_CuestionarioGenericoConsultar().Where(c=>c.IdCuestionarioGenerico== _idCuestionarioGenerico).ToList())
+            {
+                _lista.Add(new CuestionarioGenerico()
+                {
+                    IdCuestionarioGenerico = item.IdCuestionarioGenerico,
+                    IdCuestionarioGenericoEncriptado = _seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
+                    Nombre = item.Nombre,
+                    Descripcion = item.Descripcion,
+                    Estado = item.Estado,
+                    Utilizado = item.UtilizadoCuestionarioGenerico
+                });
+            }
+            return _lista;
+        }
     }
 }
