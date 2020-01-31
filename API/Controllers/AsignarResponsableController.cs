@@ -63,6 +63,7 @@ namespace API.Controllers
                             _objAsignarResponsable.CuestionarioGenerico.IdCuestionarioGenerico = _idCuestionarioGenerico;
                             _objAsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = _idAsignarUsuarioTipoUsuario;
                             _objAsignarResponsable.Estado = true;
+                            _objAsignarResponsable.FechaAsignacion = DateTime.Now;
                             int _idAsignarResponsable = _objCatalogoAsignarResponsable.InsertarAsignarResponsable(_objAsignarResponsable);
                             if (_idAsignarResponsable == 0)
                             {
@@ -116,8 +117,8 @@ namespace API.Controllers
                         _http.mensaje = "No se encontró el cuestionario genérico.";
                     }
                     else
-                    {
-                        var _lista = _objCatalogoAsignarResponsable.ConsultarAsignarResponsablePorIdCuestionarioGenerico(_idCuestionarioGenerico).Where(c => c.Estado == true && c.AsignarUsuarioTipoUsuario.Estado == true && c.AsignarUsuarioTipoUsuario.Usuario.Estado == true).ToList();
+                    {                                                                                                                                       // c.Estado == true &&
+                        var _lista = _objCatalogoAsignarResponsable.ConsultarAsignarResponsablePorIdCuestionarioGenerico(_idCuestionarioGenerico).Where(c => c.AsignarUsuarioTipoUsuario.Estado == true && c.AsignarUsuarioTipoUsuario.Usuario.Estado == true).ToList();
                         foreach (var _objAsignarResponsable in _lista)
                         {
                             _objAsignarResponsable.IdAsignarResponsable = 0;
