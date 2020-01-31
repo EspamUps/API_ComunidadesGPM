@@ -63,7 +63,7 @@ namespace API.Controllers
                             _objAsignarResponsable.CuestionarioGenerico.IdCuestionarioGenerico = _idCuestionarioGenerico;
                             _objAsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = _idAsignarUsuarioTipoUsuario;
                             _objAsignarResponsable.Estado = true;
-                            _objAsignarResponsable.FechaAsignacion = DateTime.Now;
+                            //_objAsignarResponsable.FechaAsignacion = DateTime.Now;
                             int _idAsignarResponsable = _objCatalogoAsignarResponsable.InsertarAsignarResponsable(_objAsignarResponsable);
                             if (_idAsignarResponsable == 0)
                             {
