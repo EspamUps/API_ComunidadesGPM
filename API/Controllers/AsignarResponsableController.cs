@@ -141,6 +141,53 @@ namespace API.Controllers
             return new { respuesta = _respuesta, http = _http };
         }
         [HttpPost]
+        [Route("api/asignarresponsable_consultarporidasignarusuariotipousuario")]
+        public object asignarresponsable_consultarporidasignarusuariotipousuario(string _idAsignarUsuarioTipoUsuarioEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idAsignarUsuarioTipoUsuarioEncriptado == null || string.IsNullOrEmpty(_idAsignarUsuarioTipoUsuarioEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del asignar usuario tipo usuario.";
+                }
+                else
+                {
+                    int _idAsignarUsuarioTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_idAsignarUsuarioTipoUsuarioEncriptado));
+                    var _objAsignarUsuarioTipoUsuario = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuarioPorId(_idAsignarUsuarioTipoUsuario).FirstOrDefault();
+                    if (_objAsignarUsuarioTipoUsuario == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el objeto asignar usuario tipo usuario.";
+                    }
+                    else
+                    {
+                        var _lista = _objCatalogoAsignarResponsable.ConsultarAsignarResponsablePorIdAsignarUsuarioTipoUsuario(_idAsignarUsuarioTipoUsuario).Where(c => c.Estado == true && c.AsignarUsuarioTipoUsuario.Estado == true && c.AsignarUsuarioTipoUsuario.Usuario.Estado == true).ToList();
+                        foreach (var _objAsignarResponsable in _lista)
+                        {
+                            _objAsignarResponsable.IdAsignarResponsable = 0;
+                            _objAsignarResponsable.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                            _objAsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
+                            _objAsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
+                            _objAsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
+                            _objAsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
+                            _objAsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                            _objAsignarResponsable.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
+                        }
+                        _respuesta = _lista;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
         [Route("api/asignarresponsable_cambiarestado")]
         public object asignarresponsable_cambiarestado(string _idAsignarResponsableEncriptado)
         {
