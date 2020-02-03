@@ -239,6 +239,9 @@
     <Compile Include="Conexion\Sp_CantonConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ComponenteConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ComunidadConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -340,6 +343,7 @@
     <Compile Include="Controllers\AsignarTipoUsuarioModuloPrivilegioController.cs" />
     <Compile Include="Controllers\AsignarUsuarioTipoUsuarioController.cs" />
     <Compile Include="Controllers\CantonController.cs" />
+    <Compile Include="Controllers\ComponenteController.cs" />
     <Compile Include="Controllers\ComunidadController.cs" />
     <Compile Include="Controllers\CuestionarioGenericoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -364,6 +368,7 @@
     <Compile Include="Models\Catalogos\CatalogoAsignarTipoUsuarioModuloPrivilegio.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarUsuarioTipoUsuario.cs" />
     <Compile Include="Models\Catalogos\CatalogoCanton.cs" />
+    <Compile Include="Models\Catalogos\CatalogoComponente.cs" />
     <Compile Include="Models\Catalogos\CatalogoComunidad.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoLiderComunitario.cs" />
@@ -387,6 +392,7 @@
     <Compile Include="Models\Entidades\AsignarUsuarioTipoUsuario.cs" />
     <Compile Include="Models\Entidades\Canton.cs" />
     <Compile Include="Models\Entidades\Clave.cs" />
+    <Compile Include="Models\Entidades\Componente.cs" />
     <Compile Include="Models\Entidades\Comunidad.cs" />
     <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
     <Compile Include="Models\Entidades\LiderComunitario.cs" />
