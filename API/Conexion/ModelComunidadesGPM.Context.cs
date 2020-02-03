@@ -1228,5 +1228,86 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_SeccionModificar", idSeccionParameter, idComponenteParameter, descripcionParameter, ordenParameter, estadoParameter);
         }
+    
+        public virtual ObjectResult<Sp_PreguntaConsultar_Result> Sp_PreguntaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultar_Result>("Sp_PreguntaConsultar");
+        }
+    
+        public virtual int Sp_PreguntaEliminar(Nullable<int> idPregunta)
+        {
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PreguntaEliminar", idPreguntaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_PreguntaInsertar(Nullable<int> idTipoPregunta, Nullable<int> idSeccion, string descripcion, Nullable<int> orden, Nullable<bool> obligatorio, Nullable<bool> estado)
+        {
+            var idTipoPreguntaParameter = idTipoPregunta.HasValue ?
+                new ObjectParameter("IdTipoPregunta", idTipoPregunta) :
+                new ObjectParameter("IdTipoPregunta", typeof(int));
+    
+            var idSeccionParameter = idSeccion.HasValue ?
+                new ObjectParameter("IdSeccion", idSeccion) :
+                new ObjectParameter("IdSeccion", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("Orden", orden) :
+                new ObjectParameter("Orden", typeof(int));
+    
+            var obligatorioParameter = obligatorio.HasValue ?
+                new ObjectParameter("Obligatorio", obligatorio) :
+                new ObjectParameter("Obligatorio", typeof(bool));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_PreguntaInsertar", idTipoPreguntaParameter, idSeccionParameter, descripcionParameter, ordenParameter, obligatorioParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_PreguntaModificar(Nullable<int> idPregunta, Nullable<int> idTipoPregunta, Nullable<int> idSeccion, string descripcion, Nullable<int> orden, Nullable<bool> obligatorio, Nullable<bool> estado)
+        {
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            var idTipoPreguntaParameter = idTipoPregunta.HasValue ?
+                new ObjectParameter("IdTipoPregunta", idTipoPregunta) :
+                new ObjectParameter("IdTipoPregunta", typeof(int));
+    
+            var idSeccionParameter = idSeccion.HasValue ?
+                new ObjectParameter("IdSeccion", idSeccion) :
+                new ObjectParameter("IdSeccion", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("Orden", orden) :
+                new ObjectParameter("Orden", typeof(int));
+    
+            var obligatorioParameter = obligatorio.HasValue ?
+                new ObjectParameter("Obligatorio", obligatorio) :
+                new ObjectParameter("Obligatorio", typeof(bool));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PreguntaModificar", idPreguntaParameter, idTipoPreguntaParameter, idSeccionParameter, descripcionParameter, ordenParameter, obligatorioParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_TipoPreguntaConsultar_Result> Sp_TipoPreguntaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TipoPreguntaConsultar_Result>("Sp_TipoPreguntaConsultar");
+        }
     }
 }

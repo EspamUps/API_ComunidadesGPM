@@ -278,6 +278,9 @@
     <Compile Include="Conexion\Sp_PrefectoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_PresidenteJuntaParroquialConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -297,6 +300,9 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_TipoIdentificacionConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_TipoPreguntaConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_TipoUsuarioConsultarNoAsignadosPorUsuario_Result.cs">
@@ -354,11 +360,13 @@
     <Compile Include="Controllers\ParroquiaController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\PrefectoController.cs" />
+    <Compile Include="Controllers\PreguntaController.cs" />
     <Compile Include="Controllers\PresidenteJuntaParroquialController.cs" />
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\SeccionController.cs" />
     <Compile Include="Controllers\SexoController.cs" />
     <Compile Include="Controllers\TipoIdentificacionController.cs" />
+    <Compile Include="Controllers\TipoPreguntaController.cs" />
     <Compile Include="Controllers\TipoUsuarioController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -380,6 +388,7 @@
     <Compile Include="Models\Catalogos\CatalogoParroquia.cs" />
     <Compile Include="Models\Catalogos\CatalogoPersona.cs" />
     <Compile Include="Models\Catalogos\CatalogoPrefecto.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPregunta.cs" />
     <Compile Include="Models\Catalogos\CatalogoPresidenteJuntaParroquial.cs" />
     <Compile Include="Models\Catalogos\CatalogoPrivilegio.cs" />
     <Compile Include="Models\Catalogos\CatalogoProvincia.cs" />
@@ -387,6 +396,7 @@
     <Compile Include="Models\Catalogos\CatalogoSeccion.cs" />
     <Compile Include="Models\Catalogos\CatalogoSexo.cs" />
     <Compile Include="Models\Catalogos\CatalogoTipoIdentificacion.cs" />
+    <Compile Include="Models\Catalogos\CatalogoTipoPregunta.cs" />
     <Compile Include="Models\Catalogos\CatalogoTipoUsuarios.cs" />
     <Compile Include="Models\Catalogos\CatalogoTokens.cs" />
     <Compile Include="Models\Catalogos\CatalogoUsuario.cs" />
@@ -402,8 +412,10 @@
     <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
     <Compile Include="Models\Entidades\LiderComunitario.cs" />
     <Compile Include="Models\Entidades\Prefecto.cs" />
+    <Compile Include="Models\Entidades\Pregunta.cs" />
     <Compile Include="Models\Entidades\PresidenteJuntaParroquial.cs" />
     <Compile Include="Models\Entidades\Seccion.cs" />
+    <Compile Include="Models\Entidades\TipoPregunta.cs" />
     <Compile Include="Models\Metodos\RespuestaHTTP.cs" />
     <Compile Include="Models\Entidades\Modulo.cs" />
     <Compile Include="Models\Entidades\Parroquia.cs" />
