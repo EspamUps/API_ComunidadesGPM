@@ -54,6 +54,23 @@
           <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Estado" Type="bit" Mode="In" />
         </Function>
+        <Function Name="Sp_SeccionConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
+        <Function Name="Sp_SeccionEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdSeccion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_SeccionInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdComponente" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Orden" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_SeccionModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdSeccion" Type="int" Mode="In" />
+          <Parameter Name="IdComponente" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Orden" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_AlcaldeConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
         <Function Name="Sp_AlcaldeEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
           <Parameter Name="IdAlcalde" Type="int" Mode="In" />
@@ -630,7 +647,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_ComponenteConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ComponenteConsultar_Result)" />
           <FunctionImport Name="Sp_ComponenteEliminar">
-            <Parameter Name="IdComponente" Mode="In" Type="Int32" />
+          <Parameter Name="IdComponente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ComponenteInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCuestionarioGenerico" Mode="In" Type="Int32" />
@@ -641,6 +658,23 @@
           <FunctionImport Name="Sp_ComponenteModificar">
             <Parameter Name="IdComponente" Mode="In" Type="Int32" />
             <Parameter Name="IdCuestionarioGenerico" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Orden" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_SeccionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_SeccionConsultar_Result)" />
+          <FunctionImport Name="Sp_SeccionEliminar">
+            <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_SeccionInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdComponente" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Orden" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_SeccionModificar">
+            <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
+            <Parameter Name="IdComponente" Mode="In" Type="Int32" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
             <Parameter Name="Orden" Mode="In" Type="Int32" />
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
@@ -1529,6 +1563,21 @@
           <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
           <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_SeccionConsultar_Result">
+          <Property Type="Int32" Name="IdSeccion" Nullable="false" />
+          <Property Type="String" Name="DescripcionSeccion" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoSeccion" Nullable="false" />
+          <Property Type="Int32" Name="OrdenSeccion" Nullable="false" />
+          <Property Type="String" Name="UtilizadoSeccion" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdComponente" Nullable="false" />
+          <Property Type="String" Name="DescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2281,6 +2330,28 @@
           <FunctionImportMapping FunctionImportName="Sp_ComponenteEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ComponenteEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_ComponenteInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ComponenteInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_ComponenteModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ComponenteModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_SeccionConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_SeccionConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_SeccionConsultar_Result">
+                <ScalarProperty Name="IdSeccion" ColumnName="IdSeccion" />
+                <ScalarProperty Name="DescripcionSeccion" ColumnName="DescripcionSeccion" />
+                <ScalarProperty Name="EstadoSeccion" ColumnName="EstadoSeccion" />
+                <ScalarProperty Name="OrdenSeccion" ColumnName="OrdenSeccion" />
+                <ScalarProperty Name="UtilizadoSeccion" ColumnName="UtilizadoSeccion" />
+                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
+                <ScalarProperty Name="DescripcionComponente" ColumnName="DescripcionComponente" />
+                <ScalarProperty Name="OrdenComponente" ColumnName="OrdenComponente" />
+                <ScalarProperty Name="EstadoComponente" ColumnName="EstadoComponente" />
+                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
+                <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
+                <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
+                <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_SeccionEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_SeccionEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_SeccionInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_SeccionInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_SeccionModificar" FunctionName="ComunidadesGPMModel.Store.Sp_SeccionModificar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -1168,5 +1168,65 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ComponenteModificar", idComponenteParameter, idCuestionarioGenericoParameter, descripcionParameter, ordenParameter, estadoParameter);
         }
+    
+        public virtual ObjectResult<Sp_SeccionConsultar_Result> Sp_SeccionConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_SeccionConsultar_Result>("Sp_SeccionConsultar");
+        }
+    
+        public virtual int Sp_SeccionEliminar(Nullable<int> idSeccion)
+        {
+            var idSeccionParameter = idSeccion.HasValue ?
+                new ObjectParameter("IdSeccion", idSeccion) :
+                new ObjectParameter("IdSeccion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_SeccionEliminar", idSeccionParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_SeccionInsertar(Nullable<int> idComponente, string descripcion, Nullable<int> orden, Nullable<bool> estado)
+        {
+            var idComponenteParameter = idComponente.HasValue ?
+                new ObjectParameter("IdComponente", idComponente) :
+                new ObjectParameter("IdComponente", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("Orden", orden) :
+                new ObjectParameter("Orden", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_SeccionInsertar", idComponenteParameter, descripcionParameter, ordenParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_SeccionModificar(Nullable<int> idSeccion, Nullable<int> idComponente, string descripcion, Nullable<int> orden, Nullable<bool> estado)
+        {
+            var idSeccionParameter = idSeccion.HasValue ?
+                new ObjectParameter("IdSeccion", idSeccion) :
+                new ObjectParameter("IdSeccion", typeof(int));
+    
+            var idComponenteParameter = idComponente.HasValue ?
+                new ObjectParameter("IdComponente", idComponente) :
+                new ObjectParameter("IdComponente", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("Orden", orden) :
+                new ObjectParameter("Orden", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_SeccionModificar", idSeccionParameter, idComponenteParameter, descripcionParameter, ordenParameter, estadoParameter);
+        }
     }
 }
