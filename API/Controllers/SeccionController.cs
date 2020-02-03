@@ -284,6 +284,11 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No se encontró la sección en el sistema";
                     }
+                    else if(_objSeccion.Utilizado=="1")
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "No se puede eliminar la sección porque ya ha sido utilizada";
+                    }
                     else
                     {
                         _objCatalogoSeccion.EliminarSeccion(_idSeccion);

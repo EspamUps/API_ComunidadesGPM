@@ -280,6 +280,11 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No se encontró el componente en el sistema";
                     }
+                    else if(_objComponente.Utilizado=="1")
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "No se puede eliminar el componente porque ya ha sido utilizado";
+                    }
                     else
                     {
                         _objCatalogoComponente.EliminarComponente(_idComponente);
