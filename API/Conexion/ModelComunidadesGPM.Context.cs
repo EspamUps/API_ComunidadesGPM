@@ -1309,5 +1309,69 @@ namespace API.Conexion
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TipoPreguntaConsultar_Result>("Sp_TipoPreguntaConsultar");
         }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_OpcionPreguntaSeleccionInsertar(Nullable<int> idPregunta, string descripcion, Nullable<bool> estado)
+        {
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_OpcionPreguntaSeleccionInsertar", idPreguntaParameter, descripcionParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_PreguntaAbiertaInsertar(Nullable<int> idPregunta, Nullable<int> idTipoDato, Nullable<bool> especificaRango, string valorMinimo, string valorMaximo, Nullable<bool> estado)
+        {
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            var idTipoDatoParameter = idTipoDato.HasValue ?
+                new ObjectParameter("IdTipoDato", idTipoDato) :
+                new ObjectParameter("IdTipoDato", typeof(int));
+    
+            var especificaRangoParameter = especificaRango.HasValue ?
+                new ObjectParameter("EspecificaRango", especificaRango) :
+                new ObjectParameter("EspecificaRango", typeof(bool));
+    
+            var valorMinimoParameter = valorMinimo != null ?
+                new ObjectParameter("ValorMinimo", valorMinimo) :
+                new ObjectParameter("ValorMinimo", typeof(string));
+    
+            var valorMaximoParameter = valorMaximo != null ?
+                new ObjectParameter("ValorMaximo", valorMaximo) :
+                new ObjectParameter("ValorMaximo", typeof(string));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_PreguntaAbiertaInsertar", idPreguntaParameter, idTipoDatoParameter, especificaRangoParameter, valorMinimoParameter, valorMaximoParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_OpcionPreguntaSeleccionCambiarEstado(Nullable<int> idOpcionPreguntaSeleccion, Nullable<bool> nuevoEstado)
+        {
+            var idOpcionPreguntaSeleccionParameter = idOpcionPreguntaSeleccion.HasValue ?
+                new ObjectParameter("IdOpcionPreguntaSeleccion", idOpcionPreguntaSeleccion) :
+                new ObjectParameter("IdOpcionPreguntaSeleccion", typeof(int));
+    
+            var nuevoEstadoParameter = nuevoEstado.HasValue ?
+                new ObjectParameter("NuevoEstado", nuevoEstado) :
+                new ObjectParameter("NuevoEstado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_OpcionPreguntaSeleccionCambiarEstado", idOpcionPreguntaSeleccionParameter, nuevoEstadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_OpcionPreguntaSeleccionConsultar_Result> Sp_OpcionPreguntaSeleccionConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionPreguntaSeleccionConsultar_Result>("Sp_OpcionPreguntaSeleccionConsultar");
+        }
     }
 }
