@@ -171,8 +171,23 @@ namespace API.Controllers
                     _http.mensaje = "Ingrese el identificador del cuestionario genérico";
                 }
                 int _idCuestionarioGenerico = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioGenericoEncriptado));
-                _objCatalogoCuestionarioGenerico.EliminarCuestionarioGenerico(_idCuestionarioGenerico);
-                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                var _objCuestionarioGenerico = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenericoPorId(_idCuestionarioGenerico).Where(C => C.Estado == true).FirstOrDefault();
+                if (_objCuestionarioGenerico == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                    _http.mensaje = "No se encontró el cuestionario que intenta eliminar";
+
+                }
+                else if (_objCuestionarioGenerico.Utilizado == "1")
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "No se puede eliminar el cuestionario porque ya ha sido utilizado";
+                }
+                else
+                {
+                    _objCatalogoCuestionarioGenerico.EliminarCuestionarioGenerico(_idCuestionarioGenerico);
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
             }
             catch (Exception ex)
             {
