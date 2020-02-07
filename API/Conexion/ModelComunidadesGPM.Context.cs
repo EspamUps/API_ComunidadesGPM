@@ -1369,5 +1369,24 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_OpcionPreguntaSeleccionEliminar", idOpcionPreguntaSeleccionParameter);
         }
+    
+        public virtual int Sp_PreguntaAbiertaEliminar(Nullable<int> idPreguntaAbierta)
+        {
+            var idPreguntaAbiertaParameter = idPreguntaAbierta.HasValue ?
+                new ObjectParameter("IdPreguntaAbierta", idPreguntaAbierta) :
+                new ObjectParameter("IdPreguntaAbierta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PreguntaAbiertaEliminar", idPreguntaAbiertaParameter);
+        }
+    
+        public virtual ObjectResult<Sp_PreguntaAbiertaConsultar_Result> Sp_PreguntaAbiertaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaAbiertaConsultar_Result>("Sp_PreguntaAbiertaConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_TipoDatoConsultar_Result> Sp_TipoDatoConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TipoDatoConsultar_Result>("Sp_TipoDatoConsultar");
+        }
     }
 }
