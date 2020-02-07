@@ -128,8 +128,8 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [Route("api/opcionpreguntaseleccion_cambiarestado")]
-        public object opcionpreguntaseleccion_cambiarestado(string _idOpcionPreguntaSeleccionEncriptado)
+        [Route("api/opcionpreguntaseleccion_eliminar")]
+        public object opcionpreguntaseleccion_eliminar(string _idOpcionPreguntaSeleccionEncriptado)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
@@ -149,14 +149,15 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No se encontró la opción en el sistema";
                     }
+                    else if(_objOpcionPreguntaSelecccion.Utilizado=="1")
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Esta opción ya tiene encajonada una pregunta, por lo tanto no puede ser eliminada.";
+                    }
                     else
                     {
-                        bool _nuevoEstado = false;
-                        if (_objOpcionPreguntaSelecccion.Estado == false)
-                        {
-                            _nuevoEstado = true;
-                        }
-                        _objCatalogoOpcionPreguntaSeleccion.CambiarEstadoOpcionPreguntaSeleccion(_idOpcionPreguntaSeleccion, _nuevoEstado);
+                        
+                        _objCatalogoOpcionPreguntaSeleccion.EliminarOpcionPreguntaSeleccion(_idOpcionPreguntaSeleccion);
                         _objOpcionPreguntaSelecccion = _objCatalogoOpcionPreguntaSeleccion.ConsultarOpcionPreguntaSeleccionPorId(_idOpcionPreguntaSeleccion).FirstOrDefault();
                         _objOpcionPreguntaSelecccion.IdOpcionPreguntaSeleccion = 0;
                         _objOpcionPreguntaSelecccion.Pregunta.IdPregunta = 0;

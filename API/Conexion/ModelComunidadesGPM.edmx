@@ -54,11 +54,10 @@
           <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Estado" Type="bit" Mode="In" />
         </Function>
-        <Function Name="Sp_OpcionPreguntaSeleccionCambiarEstado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
-          <Parameter Name="IdOpcionPreguntaSeleccion" Type="int" Mode="In" />
-          <Parameter Name="NuevoEstado" Type="bit" Mode="In" />
-        </Function>
         <Function Name="Sp_OpcionPreguntaSeleccionConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
+        <Function Name="Sp_OpcionPreguntaSeleccionEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdOpcionPreguntaSeleccion" Type="int" Mode="In" />
+        </Function>
         <Function Name="Sp_OpcionPreguntaSeleccionInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdPregunta" Type="int" Mode="In" />
           <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
@@ -754,11 +753,10 @@
             <Parameter Name="ValorMaximo" Mode="In" Type="String" />
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Sp_OpcionPreguntaSeleccionCambiarEstado">
+          <FunctionImport Name="Sp_OpcionPreguntaSeleccionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_OpcionPreguntaSeleccionConsultar_Result1)" />
+          <FunctionImport Name="Sp_OpcionPreguntaSeleccionEliminar">
             <Parameter Name="IdOpcionPreguntaSeleccion" Mode="In" Type="Int32" />
-            <Parameter Name="NuevoEstado" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Sp_OpcionPreguntaSeleccionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_OpcionPreguntaSeleccionConsultar_Result)" />
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -1714,6 +1712,33 @@
           <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
           <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_OpcionPreguntaSeleccionConsultar_Result1">
+          <Property Type="Int32" Name="IdOpcionPreguntaSeleccion" Nullable="false" />
+          <Property Type="String" Name="DescripcionOpcionPreguntaSeleccion" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoOpcionPreguntaSeleccion" Nullable="false" />
+          <Property Type="String" Name="UtilizadoOpcionPreguntaSeleccion" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionPregunta" Nullable="false" />
+          <Property Type="Int32" Name="OrdenPregunta" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioPregunta" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdentificadorTipoPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionTipoPregunta" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdSeccion" Nullable="false" />
+          <Property Type="String" Name="DescripcionSeccion" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoSeccion" Nullable="false" />
+          <Property Type="Int32" Name="OrdenSeccion" Nullable="false" />
+          <Property Type="Int32" Name="IdComponente" Nullable="false" />
+          <Property Type="String" Name="DescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2531,13 +2556,13 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_OpcionPreguntaSeleccionInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_OpcionPreguntaSeleccionInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_PreguntaAbiertaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_PreguntaAbiertaInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_OpcionPreguntaSeleccionCambiarEstado" FunctionName="ComunidadesGPMModel.Store.Sp_OpcionPreguntaSeleccionCambiarEstado" />
           <FunctionImportMapping FunctionImportName="Sp_OpcionPreguntaSeleccionConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_OpcionPreguntaSeleccionConsultar">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_OpcionPreguntaSeleccionConsultar_Result">
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_OpcionPreguntaSeleccionConsultar_Result1">
                 <ScalarProperty Name="IdOpcionPreguntaSeleccion" ColumnName="IdOpcionPreguntaSeleccion" />
                 <ScalarProperty Name="DescripcionOpcionPreguntaSeleccion" ColumnName="DescripcionOpcionPreguntaSeleccion" />
                 <ScalarProperty Name="EstadoOpcionPreguntaSeleccion" ColumnName="EstadoOpcionPreguntaSeleccion" />
+                <ScalarProperty Name="UtilizadoOpcionPreguntaSeleccion" ColumnName="UtilizadoOpcionPreguntaSeleccion" />
                 <ScalarProperty Name="IdPregunta" ColumnName="IdPregunta" />
                 <ScalarProperty Name="DescripcionPregunta" ColumnName="DescripcionPregunta" />
                 <ScalarProperty Name="OrdenPregunta" ColumnName="OrdenPregunta" />
@@ -2562,6 +2587,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_OpcionPreguntaSeleccionEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_OpcionPreguntaSeleccionEliminar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
