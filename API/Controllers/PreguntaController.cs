@@ -129,7 +129,7 @@ namespace API.Controllers
                     _objPregunta.Seccion.IdSeccion = _idSeccion;
                     _objPregunta.TipoPregunta.IdTipoPregunta = _idTipoPregunta;
                     _objPregunta.Estado = true;
-                    _idPregunta = _objCatalogoPregunta.InsertarPregunta(_objPregunta);
+                    _idPregunta = _objCatalogoPregunta.ModificarPregunta(_objPregunta);
                     if (_idPregunta == 0)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
