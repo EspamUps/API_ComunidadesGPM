@@ -1388,5 +1388,89 @@ namespace API.Conexion
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TipoDatoConsultar_Result>("Sp_TipoDatoConsultar");
         }
+    
+        public virtual int Sp_ConfigurarMatrizEliminar(Nullable<int> idConfigurarMatriz)
+        {
+            var idConfigurarMatrizParameter = idConfigurarMatriz.HasValue ?
+                new ObjectParameter("IdConfigurarMatriz", idConfigurarMatriz) :
+                new ObjectParameter("IdConfigurarMatriz", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ConfigurarMatrizEliminar", idConfigurarMatrizParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_ConfigurarMatrizInsertar(Nullable<int> idOpcionUnoMatriz, Nullable<int> idOpcionDosMatriz, Nullable<bool> estado)
+        {
+            var idOpcionUnoMatrizParameter = idOpcionUnoMatriz.HasValue ?
+                new ObjectParameter("IdOpcionUnoMatriz", idOpcionUnoMatriz) :
+                new ObjectParameter("IdOpcionUnoMatriz", typeof(int));
+    
+            var idOpcionDosMatrizParameter = idOpcionDosMatriz.HasValue ?
+                new ObjectParameter("IdOpcionDosMatriz", idOpcionDosMatriz) :
+                new ObjectParameter("IdOpcionDosMatriz", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_ConfigurarMatrizInsertar", idOpcionUnoMatrizParameter, idOpcionDosMatrizParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_OpcionDosMatrizConsultar_Result> Sp_OpcionDosMatrizConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionDosMatrizConsultar_Result>("Sp_OpcionDosMatrizConsultar");
+        }
+    
+        public virtual int Sp_OpcionDosMatrizEliminar(Nullable<int> idOpcionDosMatriz)
+        {
+            var idOpcionDosMatrizParameter = idOpcionDosMatriz.HasValue ?
+                new ObjectParameter("IdOpcionDosMatriz", idOpcionDosMatriz) :
+                new ObjectParameter("IdOpcionDosMatriz", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_OpcionDosMatrizEliminar", idOpcionDosMatrizParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_OpcionDosMatrizInsertar(string descripcion, Nullable<bool> estado)
+        {
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_OpcionDosMatrizInsertar", descripcionParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_OpcionUnoMatrizConsultar_Result> Sp_OpcionUnoMatrizConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionUnoMatrizConsultar_Result>("Sp_OpcionUnoMatrizConsultar");
+        }
+    
+        public virtual int Sp_OpcionUnoMatrizEliminar(Nullable<int> idOpcionUnoMatriz)
+        {
+            var idOpcionUnoMatrizParameter = idOpcionUnoMatriz.HasValue ?
+                new ObjectParameter("IdOpcionUnoMatriz", idOpcionUnoMatriz) :
+                new ObjectParameter("IdOpcionUnoMatriz", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_OpcionUnoMatrizEliminar", idOpcionUnoMatrizParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_OpcionUnoMatrizInsertar(Nullable<int> idPregunta, string descripcion, Nullable<bool> estado)
+        {
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_OpcionUnoMatrizInsertar", idPreguntaParameter, descripcionParameter, estadoParameter);
+        }
     }
 }
