@@ -1356,22 +1356,18 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_PreguntaAbiertaInsertar", idPreguntaParameter, idTipoDatoParameter, especificaRangoParameter, valorMinimoParameter, valorMaximoParameter, estadoParameter);
         }
     
-        public virtual int Sp_OpcionPreguntaSeleccionCambiarEstado(Nullable<int> idOpcionPreguntaSeleccion, Nullable<bool> nuevoEstado)
+        public virtual ObjectResult<Sp_OpcionPreguntaSeleccionConsultar_Result1> Sp_OpcionPreguntaSeleccionConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionPreguntaSeleccionConsultar_Result1>("Sp_OpcionPreguntaSeleccionConsultar");
+        }
+    
+        public virtual int Sp_OpcionPreguntaSeleccionEliminar(Nullable<int> idOpcionPreguntaSeleccion)
         {
             var idOpcionPreguntaSeleccionParameter = idOpcionPreguntaSeleccion.HasValue ?
                 new ObjectParameter("IdOpcionPreguntaSeleccion", idOpcionPreguntaSeleccion) :
                 new ObjectParameter("IdOpcionPreguntaSeleccion", typeof(int));
     
-            var nuevoEstadoParameter = nuevoEstado.HasValue ?
-                new ObjectParameter("NuevoEstado", nuevoEstado) :
-                new ObjectParameter("NuevoEstado", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_OpcionPreguntaSeleccionCambiarEstado", idOpcionPreguntaSeleccionParameter, nuevoEstadoParameter);
-        }
-    
-        public virtual ObjectResult<Sp_OpcionPreguntaSeleccionConsultar_Result> Sp_OpcionPreguntaSeleccionConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionPreguntaSeleccionConsultar_Result>("Sp_OpcionPreguntaSeleccionConsultar");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_OpcionPreguntaSeleccionEliminar", idOpcionPreguntaSeleccionParameter);
         }
     }
 }

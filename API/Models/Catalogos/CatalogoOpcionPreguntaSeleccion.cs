@@ -24,9 +24,9 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
-        public void CambiarEstadoOpcionPreguntaSeleccion(int _idOpcionPreguntaSeleccion, bool _nuevoEstado)
+        public void EliminarOpcionPreguntaSeleccion(int _idOpcionPreguntaSeleccion)
         {
-            db.Sp_OpcionPreguntaSeleccionCambiarEstado(_idOpcionPreguntaSeleccion, _nuevoEstado);
+            db.Sp_OpcionPreguntaSeleccionEliminar(_idOpcionPreguntaSeleccion);
         }
         public List<OpcionPreguntaSeleccion> ConsultarOpcionPreguntaSeleccion()
         {
@@ -39,6 +39,7 @@ namespace API.Models.Catalogos
                     IdOpcionPreguntaSeleccionEncriptado = _seguridad.Encriptar(item.IdOpcionPreguntaSeleccion.ToString()),
                     Descripcion=item.DescripcionOpcionPreguntaSeleccion,
                     Estado=item.EstadoOpcionPreguntaSeleccion,
+                    Utilizado=item.UtilizadoOpcionPreguntaSeleccion,
                     Pregunta = new Pregunta()
                     {
                         IdPregunta = item.IdPregunta,
@@ -95,6 +96,7 @@ namespace API.Models.Catalogos
                     IdOpcionPreguntaSeleccionEncriptado = _seguridad.Encriptar(item.IdOpcionPreguntaSeleccion.ToString()),
                     Descripcion = item.DescripcionOpcionPreguntaSeleccion,
                     Estado = item.EstadoOpcionPreguntaSeleccion,
+                    Utilizado = item.UtilizadoOpcionPreguntaSeleccion,
                     Pregunta = new Pregunta()
                     {
                         IdPregunta = item.IdPregunta,
@@ -151,6 +153,7 @@ namespace API.Models.Catalogos
                     IdOpcionPreguntaSeleccionEncriptado = _seguridad.Encriptar(item.IdOpcionPreguntaSeleccion.ToString()),
                     Descripcion = item.DescripcionOpcionPreguntaSeleccion,
                     Estado = item.EstadoOpcionPreguntaSeleccion,
+                    Utilizado = item.UtilizadoOpcionPreguntaSeleccion,
                     Pregunta = new Pregunta()
                     {
                         IdPregunta = item.IdPregunta,

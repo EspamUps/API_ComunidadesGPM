@@ -126,5 +126,55 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+
+        [HttpPost]
+        [Route("api/opcionpreguntaseleccion_eliminar")]
+        public object opcionpreguntaseleccion_eliminar(string _idOpcionPreguntaSeleccionEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idOpcionPreguntaSeleccionEncriptado == null || string.IsNullOrEmpty(_idOpcionPreguntaSeleccionEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la opción";
+                }
+                else
+                {
+                    int _idOpcionPreguntaSeleccion = Convert.ToInt32(_seguridad.DesEncriptar(_idOpcionPreguntaSeleccionEncriptado));
+                    var _objOpcionPreguntaSelecccion = _objCatalogoOpcionPreguntaSeleccion.ConsultarOpcionPreguntaSeleccionPorId(_idOpcionPreguntaSeleccion).FirstOrDefault();
+                    if (_objOpcionPreguntaSelecccion == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró la opción en el sistema";
+                    }
+                    else if(_objOpcionPreguntaSelecccion.Utilizado=="1")
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Esta opción ya tiene encajonada una pregunta, por lo tanto no puede ser eliminada.";
+                    }
+                    else
+                    {
+                        
+                        _objCatalogoOpcionPreguntaSeleccion.EliminarOpcionPreguntaSeleccion(_idOpcionPreguntaSeleccion);
+                        _objOpcionPreguntaSelecccion = _objCatalogoOpcionPreguntaSeleccion.ConsultarOpcionPreguntaSeleccionPorId(_idOpcionPreguntaSeleccion).FirstOrDefault();
+                        _objOpcionPreguntaSelecccion.IdOpcionPreguntaSeleccion = 0;
+                        _objOpcionPreguntaSelecccion.Pregunta.IdPregunta = 0;
+                        _objOpcionPreguntaSelecccion.Pregunta.TipoPregunta.IdTipoPregunta = 0;
+                        _objOpcionPreguntaSelecccion.Pregunta.Seccion.IdSeccion = 0;
+                        _objOpcionPreguntaSelecccion.Pregunta.Seccion.Componente.IdComponente = 0;
+                        _objOpcionPreguntaSelecccion.Pregunta.Seccion.Componente.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                        _respuesta = _objOpcionPreguntaSelecccion;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
     }
 }
