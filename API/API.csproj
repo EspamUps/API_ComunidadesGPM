@@ -284,6 +284,9 @@
     <Compile Include="Conexion\Sp_PrefectoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_PreguntaAbiertaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_PreguntaConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -303,6 +306,9 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_SexoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_TipoDatoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_TipoIdentificacionConsultar_Result.cs">
@@ -367,11 +373,13 @@
     <Compile Include="Controllers\ParroquiaController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\PrefectoController.cs" />
+    <Compile Include="Controllers\PreguntaAbiertaController.cs" />
     <Compile Include="Controllers\PreguntaController.cs" />
     <Compile Include="Controllers\PresidenteJuntaParroquialController.cs" />
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\SeccionController.cs" />
     <Compile Include="Controllers\SexoController.cs" />
+    <Compile Include="Controllers\TipoDatoController.cs" />
     <Compile Include="Controllers\TipoIdentificacionController.cs" />
     <Compile Include="Controllers\TipoPreguntaController.cs" />
     <Compile Include="Controllers\TipoUsuarioController.cs" />
@@ -397,12 +405,14 @@
     <Compile Include="Models\Catalogos\CatalogoPersona.cs" />
     <Compile Include="Models\Catalogos\CatalogoPrefecto.cs" />
     <Compile Include="Models\Catalogos\CatalogoPregunta.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPreguntaAbierta.cs" />
     <Compile Include="Models\Catalogos\CatalogoPresidenteJuntaParroquial.cs" />
     <Compile Include="Models\Catalogos\CatalogoPrivilegio.cs" />
     <Compile Include="Models\Catalogos\CatalogoProvincia.cs" />
     <Compile Include="Models\Catalogos\CatalogoRespuestasHTTP.cs" />
     <Compile Include="Models\Catalogos\CatalogoSeccion.cs" />
     <Compile Include="Models\Catalogos\CatalogoSexo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoTipoDato.cs" />
     <Compile Include="Models\Catalogos\CatalogoTipoIdentificacion.cs" />
     <Compile Include="Models\Catalogos\CatalogoTipoPregunta.cs" />
     <Compile Include="Models\Catalogos\CatalogoTipoUsuarios.cs" />

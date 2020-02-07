@@ -158,14 +158,6 @@ namespace API.Controllers
                     {
                         
                         _objCatalogoOpcionPreguntaSeleccion.EliminarOpcionPreguntaSeleccion(_idOpcionPreguntaSeleccion);
-                        _objOpcionPreguntaSelecccion = _objCatalogoOpcionPreguntaSeleccion.ConsultarOpcionPreguntaSeleccionPorId(_idOpcionPreguntaSeleccion).FirstOrDefault();
-                        _objOpcionPreguntaSelecccion.IdOpcionPreguntaSeleccion = 0;
-                        _objOpcionPreguntaSelecccion.Pregunta.IdPregunta = 0;
-                        _objOpcionPreguntaSelecccion.Pregunta.TipoPregunta.IdTipoPregunta = 0;
-                        _objOpcionPreguntaSelecccion.Pregunta.Seccion.IdSeccion = 0;
-                        _objOpcionPreguntaSelecccion.Pregunta.Seccion.Componente.IdComponente = 0;
-                        _objOpcionPreguntaSelecccion.Pregunta.Seccion.Componente.CuestionarioGenerico.IdCuestionarioGenerico = 0;
-                        _respuesta = _objOpcionPreguntaSelecccion;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
                 }
