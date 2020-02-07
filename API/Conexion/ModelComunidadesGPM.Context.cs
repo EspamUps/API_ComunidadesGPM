@@ -1415,11 +1415,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_ConfigurarMatrizInsertar", idOpcionUnoMatrizParameter, idOpcionDosMatrizParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Sp_OpcionDosMatrizConsultar_Result> Sp_OpcionDosMatrizConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionDosMatrizConsultar_Result>("Sp_OpcionDosMatrizConsultar");
-        }
-    
         public virtual int Sp_OpcionDosMatrizEliminar(Nullable<int> idOpcionDosMatriz)
         {
             var idOpcionDosMatrizParameter = idOpcionDosMatriz.HasValue ?
@@ -1471,6 +1466,11 @@ namespace API.Conexion
                 new ObjectParameter("Estado", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_OpcionUnoMatrizInsertar", idPreguntaParameter, descripcionParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ConfigurarMatrizConsultar_Result> Sp_ConfigurarMatrizConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ConfigurarMatrizConsultar_Result>("Sp_ConfigurarMatrizConsultar");
         }
     }
 }
