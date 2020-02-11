@@ -379,6 +379,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiderComunitarioController.cs" />
     <Compile Include="Controllers\ConfigurarMatrizController.cs" />
+    <Compile Include="Controllers\OpcionDosMatrizController.cs" />
     <Compile Include="Controllers\OpcionPreguntaSeleccionController.cs" />
     <Compile Include="Controllers\OpcionUnoMatrizController.cs" />
     <Compile Include="Controllers\ParroquiaController.cs" />

@@ -105,5 +105,57 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+
+
+        [HttpPost]
+        [Route("api/configurarmatriz_consultarporidpregunta")]
+        public object configurarmatriz_consultarporidpregunta(string _idPreguntaEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idPreguntaEncriptado == null || string.IsNullOrEmpty(_idPreguntaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la pregunta";
+                }
+                else
+                {
+                    int _idPregunta = Convert.ToInt32(_seguridad.DesEncriptar(_idPreguntaEncriptado));
+                    var _objPregunta = _objCatalogoPregunta.ConsultarPreguntaPorId(_idPregunta).Where(c => c.Estado == true).FirstOrDefault();
+                    if (_objPregunta == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró la pregunta en el sistema";
+                    }
+                    else
+                    {
+                        var _listaConfigurarMatriz = _objCatalogoConfigurarMatriz.ConsultarConfigurarMatrizPorIdPregunta(_idPregunta).Where(c => c.Estado == true).ToList();
+                        foreach (var _objConfMatriz in _listaConfigurarMatriz)
+                        {
+                            _objConfMatriz.IdConfigurarMatriz = 0;
+                            _objConfMatriz.OpcionDosMatriz.IdOpcionDosMatriz = 0;
+                            _objConfMatriz.OpcionUnoMatriz.IdOpcionUnoMatriz = 0;
+                            _objConfMatriz.OpcionUnoMatriz.Pregunta.IdPregunta = 0;
+                            _objConfMatriz.OpcionUnoMatriz.Pregunta.TipoPregunta.IdTipoPregunta = 0;
+                            _objConfMatriz.OpcionUnoMatriz.Pregunta.Seccion.IdSeccion = 0;
+                            _objConfMatriz.OpcionUnoMatriz.Pregunta.Seccion.Componente.IdComponente = 0;
+                            _objConfMatriz.OpcionUnoMatriz.Pregunta.Seccion.Componente.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                        }
+
+                        _respuesta = _listaConfigurarMatriz;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
     }
 }
