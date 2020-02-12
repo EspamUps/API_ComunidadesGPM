@@ -245,6 +245,9 @@
     <Compile Include="Conexion\Sp_ComunidadConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_CuestionarioGenericoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -375,6 +378,7 @@
     <Compile Include="Controllers\CuestionarioGenericoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiderComunitarioController.cs" />
+    <Compile Include="Controllers\ConfigurarMatrizController.cs" />
     <Compile Include="Controllers\OpcionDosMatrizController.cs" />
     <Compile Include="Controllers\OpcionPreguntaSeleccionController.cs" />
     <Compile Include="Controllers\OpcionUnoMatrizController.cs" />
@@ -397,6 +401,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Catalogos\CatalogoConfigurarMatriz.cs" />
     <Compile Include="Models\Catalogos\CatalogoAlcalde.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarModuloPrivilegio.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarResponsable.cs" />
@@ -408,6 +413,7 @@
     <Compile Include="Models\Catalogos\CatalogoCuestionarioGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoLiderComunitario.cs" />
     <Compile Include="Models\Catalogos\CatalogoModulo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoOpcionDosMatriz.cs" />
     <Compile Include="Models\Catalogos\CatalogoOpcionPreguntaSeleccion.cs" />
     <Compile Include="Models\Catalogos\CatalogoOpcionUnoMatriz.cs" />
     <Compile Include="Models\Catalogos\CatalogoParroquia.cs" />
