@@ -254,10 +254,16 @@
     <Compile Include="Conexion\Sp_ModuloConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_OpcionDosMatrizConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_OpcionUnoMatrizConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ParroquiaConsultar_Result.cs">
@@ -369,7 +375,9 @@
     <Compile Include="Controllers\CuestionarioGenericoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiderComunitarioController.cs" />
+    <Compile Include="Controllers\OpcionDosMatrizController.cs" />
     <Compile Include="Controllers\OpcionPreguntaSeleccionController.cs" />
+    <Compile Include="Controllers\OpcionUnoMatrizController.cs" />
     <Compile Include="Controllers\ParroquiaController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\PrefectoController.cs" />
@@ -401,6 +409,7 @@
     <Compile Include="Models\Catalogos\CatalogoLiderComunitario.cs" />
     <Compile Include="Models\Catalogos\CatalogoModulo.cs" />
     <Compile Include="Models\Catalogos\CatalogoOpcionPreguntaSeleccion.cs" />
+    <Compile Include="Models\Catalogos\CatalogoOpcionUnoMatriz.cs" />
     <Compile Include="Models\Catalogos\CatalogoParroquia.cs" />
     <Compile Include="Models\Catalogos\CatalogoPersona.cs" />
     <Compile Include="Models\Catalogos\CatalogoPrefecto.cs" />
@@ -427,9 +436,12 @@
     <Compile Include="Models\Entidades\Clave.cs" />
     <Compile Include="Models\Entidades\Componente.cs" />
     <Compile Include="Models\Entidades\Comunidad.cs" />
+    <Compile Include="Models\Entidades\ConfigurarMatriz.cs" />
     <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
     <Compile Include="Models\Entidades\LiderComunitario.cs" />
+    <Compile Include="Models\Entidades\OpcionDosMatriz.cs" />
     <Compile Include="Models\Entidades\OpcionPreguntaSeleccion.cs" />
+    <Compile Include="Models\Entidades\OpcionUnoMatriz.cs" />
     <Compile Include="Models\Entidades\Prefecto.cs" />
     <Compile Include="Models\Entidades\Pregunta.cs" />
     <Compile Include="Models\Entidades\PreguntaAbierta.cs" />

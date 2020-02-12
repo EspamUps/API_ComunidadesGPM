@@ -39,6 +39,14 @@
           <Parameter Name="Orden" Type="int" Mode="In" />
           <Parameter Name="Estado" Type="bit" Mode="In" />
         </Function>
+        <Function Name="Sp_ConfigurarMatrizEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdConfigurarMatriz" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_ConfigurarMatrizInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdOpcionUnoMatriz" Type="int" Mode="In" />
+          <Parameter Name="IdOpcionDosMatriz" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_CuestionarioGenericoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
         <Function Name="Sp_CuestionarioGenericoEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdCuestionarioGenerico" Type="int" Mode="In" />
@@ -54,11 +62,28 @@
           <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Estado" Type="bit" Mode="In" />
         </Function>
+        <Function Name="Sp_OpcionDosMatrizConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
+        <Function Name="Sp_OpcionDosMatrizEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdOpcionDosMatriz" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_OpcionDosMatrizInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_OpcionPreguntaSeleccionConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
         <Function Name="Sp_OpcionPreguntaSeleccionEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdOpcionPreguntaSeleccion" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_OpcionPreguntaSeleccionInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdPregunta" Type="int" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_OpcionUnoMatrizConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
+        <Function Name="Sp_OpcionUnoMatrizEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdOpcionUnoMatriz" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_OpcionUnoMatrizInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdPregunta" Type="int" Mode="In" />
           <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Estado" Type="bit" Mode="In" />
@@ -767,6 +792,31 @@
           </FunctionImport>
           <FunctionImport Name="Sp_PreguntaAbiertaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PreguntaAbiertaConsultar_Result)" />
           <FunctionImport Name="Sp_TipoDatoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_TipoDatoConsultar_Result)" />
+          <FunctionImport Name="Sp_ConfigurarMatrizEliminar">
+            <Parameter Name="IdConfigurarMatriz" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ConfigurarMatrizInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdOpcionUnoMatriz" Mode="In" Type="Int32" />
+            <Parameter Name="IdOpcionDosMatriz" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_OpcionDosMatrizConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_OpcionDosMatrizConsultar_Result)" />
+          <FunctionImport Name="Sp_OpcionDosMatrizEliminar">
+            <Parameter Name="IdOpcionDosMatriz" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_OpcionDosMatrizInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_OpcionUnoMatrizConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_OpcionUnoMatrizConsultar_Result)" />
+          <FunctionImport Name="Sp_OpcionUnoMatrizEliminar">
+            <Parameter Name="IdOpcionUnoMatriz" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_OpcionUnoMatrizInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -1789,6 +1839,64 @@
           <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="500" />
           <Property Type="Boolean" Name="Estado" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_OpcionDosMatrizConsultar_Result">
+          <Property Type="Int32" Name="IdOpcionDosMatriz" Nullable="false" />
+          <Property Type="String" Name="DescripcionOpcionDosMatriz" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoOpcionOpcionDosMatriz" Nullable="false" />
+          <Property Type="Int32" Name="IdConfigurarMatriz" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoConfigurarMatriz" Nullable="false" />
+          <Property Type="Int32" Name="IdOpcionUnoMatriz" Nullable="false" />
+          <Property Type="String" Name="DescripcionOpcionUnoMatriz" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoOpcionOpcionUnoMatriz" Nullable="false" />
+          <Property Type="Int32" Name="IdPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionPregunta" Nullable="false" />
+          <Property Type="Int32" Name="OrdenPregunta" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioPregunta" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdentificadorTipoPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionTipoPregunta" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdSeccion" Nullable="false" />
+          <Property Type="String" Name="DescripcionSeccion" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoSeccion" Nullable="false" />
+          <Property Type="Int32" Name="OrdenSeccion" Nullable="false" />
+          <Property Type="Int32" Name="IdComponente" Nullable="false" />
+          <Property Type="String" Name="DescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_OpcionUnoMatrizConsultar_Result">
+          <Property Type="Int32" Name="IdOpcionUnoMatriz" Nullable="false" />
+          <Property Type="String" Name="DescripcionOpcionUnoMatriz" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoOpcionOpcionUnoMatriz" Nullable="false" />
+          <Property Type="String" Name="UtilizadoOpcionUnoMatriz" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionPregunta" Nullable="false" />
+          <Property Type="Int32" Name="OrdenPregunta" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioPregunta" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdentificadorTipoPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionTipoPregunta" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdSeccion" Nullable="false" />
+          <Property Type="String" Name="DescripcionSeccion" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoSeccion" Nullable="false" />
+          <Property Type="Int32" Name="OrdenSeccion" Nullable="false" />
+          <Property Type="Int32" Name="IdComponente" Nullable="false" />
+          <Property Type="String" Name="DescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2687,6 +2795,78 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ConfigurarMatrizEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ConfigurarMatrizEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_ConfigurarMatrizInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ConfigurarMatrizInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_OpcionDosMatrizConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_OpcionDosMatrizConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_OpcionDosMatrizConsultar_Result">
+                <ScalarProperty Name="IdOpcionDosMatriz" ColumnName="IdOpcionDosMatriz" />
+                <ScalarProperty Name="DescripcionOpcionDosMatriz" ColumnName="DescripcionOpcionDosMatriz" />
+                <ScalarProperty Name="EstadoOpcionOpcionDosMatriz" ColumnName="EstadoOpcionOpcionDosMatriz" />
+                <ScalarProperty Name="IdConfigurarMatriz" ColumnName="IdConfigurarMatriz" />
+                <ScalarProperty Name="EstadoConfigurarMatriz" ColumnName="EstadoConfigurarMatriz" />
+                <ScalarProperty Name="IdOpcionUnoMatriz" ColumnName="IdOpcionUnoMatriz" />
+                <ScalarProperty Name="DescripcionOpcionUnoMatriz" ColumnName="DescripcionOpcionUnoMatriz" />
+                <ScalarProperty Name="EstadoOpcionOpcionUnoMatriz" ColumnName="EstadoOpcionOpcionUnoMatriz" />
+                <ScalarProperty Name="IdPregunta" ColumnName="IdPregunta" />
+                <ScalarProperty Name="DescripcionPregunta" ColumnName="DescripcionPregunta" />
+                <ScalarProperty Name="OrdenPregunta" ColumnName="OrdenPregunta" />
+                <ScalarProperty Name="ObligatorioPregunta" ColumnName="ObligatorioPregunta" />
+                <ScalarProperty Name="EstadoPregunta" ColumnName="EstadoPregunta" />
+                <ScalarProperty Name="IdTipoPregunta" ColumnName="IdTipoPregunta" />
+                <ScalarProperty Name="IdentificadorTipoPregunta" ColumnName="IdentificadorTipoPregunta" />
+                <ScalarProperty Name="DescripcionTipoPregunta" ColumnName="DescripcionTipoPregunta" />
+                <ScalarProperty Name="EstadoTipoPregunta" ColumnName="EstadoTipoPregunta" />
+                <ScalarProperty Name="IdSeccion" ColumnName="IdSeccion" />
+                <ScalarProperty Name="DescripcionSeccion" ColumnName="DescripcionSeccion" />
+                <ScalarProperty Name="EstadoSeccion" ColumnName="EstadoSeccion" />
+                <ScalarProperty Name="OrdenSeccion" ColumnName="OrdenSeccion" />
+                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
+                <ScalarProperty Name="DescripcionComponente" ColumnName="DescripcionComponente" />
+                <ScalarProperty Name="OrdenComponente" ColumnName="OrdenComponente" />
+                <ScalarProperty Name="EstadoComponente" ColumnName="EstadoComponente" />
+                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
+                <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
+                <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
+                <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_OpcionDosMatrizEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_OpcionDosMatrizEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_OpcionDosMatrizInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_OpcionDosMatrizInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_OpcionUnoMatrizConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_OpcionUnoMatrizConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_OpcionUnoMatrizConsultar_Result">
+                <ScalarProperty Name="IdOpcionUnoMatriz" ColumnName="IdOpcionUnoMatriz" />
+                <ScalarProperty Name="DescripcionOpcionUnoMatriz" ColumnName="DescripcionOpcionUnoMatriz" />
+                <ScalarProperty Name="EstadoOpcionOpcionUnoMatriz" ColumnName="EstadoOpcionOpcionUnoMatriz" />
+                <ScalarProperty Name="UtilizadoOpcionUnoMatriz" ColumnName="UtilizadoOpcionUnoMatriz" />
+                <ScalarProperty Name="IdPregunta" ColumnName="IdPregunta" />
+                <ScalarProperty Name="DescripcionPregunta" ColumnName="DescripcionPregunta" />
+                <ScalarProperty Name="OrdenPregunta" ColumnName="OrdenPregunta" />
+                <ScalarProperty Name="ObligatorioPregunta" ColumnName="ObligatorioPregunta" />
+                <ScalarProperty Name="EstadoPregunta" ColumnName="EstadoPregunta" />
+                <ScalarProperty Name="IdTipoPregunta" ColumnName="IdTipoPregunta" />
+                <ScalarProperty Name="IdentificadorTipoPregunta" ColumnName="IdentificadorTipoPregunta" />
+                <ScalarProperty Name="DescripcionTipoPregunta" ColumnName="DescripcionTipoPregunta" />
+                <ScalarProperty Name="EstadoTipoPregunta" ColumnName="EstadoTipoPregunta" />
+                <ScalarProperty Name="IdSeccion" ColumnName="IdSeccion" />
+                <ScalarProperty Name="DescripcionSeccion" ColumnName="DescripcionSeccion" />
+                <ScalarProperty Name="EstadoSeccion" ColumnName="EstadoSeccion" />
+                <ScalarProperty Name="OrdenSeccion" ColumnName="OrdenSeccion" />
+                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
+                <ScalarProperty Name="DescripcionComponente" ColumnName="DescripcionComponente" />
+                <ScalarProperty Name="OrdenComponente" ColumnName="OrdenComponente" />
+                <ScalarProperty Name="EstadoComponente" ColumnName="EstadoComponente" />
+                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
+                <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
+                <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
+                <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_OpcionUnoMatrizEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_OpcionUnoMatrizEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_OpcionUnoMatrizInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_OpcionUnoMatrizInsertar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
