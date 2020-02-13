@@ -1472,5 +1472,36 @@ namespace API.Conexion
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ConfigurarMatrizConsultar_Result>("Sp_ConfigurarMatrizConsultar");
         }
+    
+        public virtual int Sp_PreguntaEncajonadaEliminar(Nullable<int> idPreguntaEncajonada)
+        {
+            var idPreguntaEncajonadaParameter = idPreguntaEncajonada.HasValue ?
+                new ObjectParameter("IdPreguntaEncajonada", idPreguntaEncajonada) :
+                new ObjectParameter("IdPreguntaEncajonada", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PreguntaEncajonadaEliminar", idPreguntaEncajonadaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_PreguntaEncajonadaInsertar(Nullable<int> idPregunta, Nullable<int> idOpcionPreguntaSeleccion, Nullable<bool> estado)
+        {
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            var idOpcionPreguntaSeleccionParameter = idOpcionPreguntaSeleccion.HasValue ?
+                new ObjectParameter("IdOpcionPreguntaSeleccion", idOpcionPreguntaSeleccion) :
+                new ObjectParameter("IdOpcionPreguntaSeleccion", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_PreguntaEncajonadaInsertar", idPreguntaParameter, idOpcionPreguntaSeleccionParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_PreguntaEncajonadaConsultar_Result> Sp_PreguntaEncajonadaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaEncajonadaConsultar_Result>("Sp_PreguntaEncajonadaConsultar");
+        }
     }
 }

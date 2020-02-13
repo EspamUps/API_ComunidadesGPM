@@ -277,8 +277,8 @@ namespace API.Controllers
             return new { respuesta = _respuesta, http = _http };
         }
         [HttpPost]
-        [Route("api/pregunta_consultaridseccion")]
-        public object pregunta_consultaridseccion(string _idSeccionEncriptado)
+        [Route("api/pregunta_consultarporidseccion")]
+        public object pregunta_consultarporidseccion(string _idSeccionEncriptado)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
@@ -300,7 +300,7 @@ namespace API.Controllers
                     }
                     else
                     {
-                        var _lista = _objCatalogoPregunta.ConsultarPreguntaPorIdSeccion(_idSeccion).Where(c => c.Estado == true).ToList();
+                        var _lista = _objCatalogoPregunta.ConsultarPreguntaPorIdSeccion(_idSeccion).Where(c => c.Estado == true).OrderBy(c => c.Orden).ToList();
                         foreach (var _objPregunta in _lista)
                         {
                             _objPregunta.IdPregunta = 0;
