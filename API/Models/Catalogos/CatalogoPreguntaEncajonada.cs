@@ -44,7 +44,8 @@ namespace API.Models.Catalogos
                     OpcionPreguntaSeleccion=new OpcionPreguntaSeleccion()
                     {
                         IdOpcionPreguntaSeleccion=item.IdOpcionPreguntaSeleccion,
-                        Descripcion=item.DescripcionOpcionPreguntaSeleccion,
+                        IdOpcionPreguntaSeleccionEncriptado = _seguridad.Encriptar(item.IdOpcionPreguntaSeleccion.ToString()),
+                        Descripcion =item.DescripcionOpcionPreguntaSeleccion,
                         Estado=item.EstadoOpcionPreguntaSeleccion,
                         Pregunta = new Pregunta()
                         {
@@ -112,6 +113,7 @@ namespace API.Models.Catalogos
                     OpcionPreguntaSeleccion = new OpcionPreguntaSeleccion()
                     {
                         IdOpcionPreguntaSeleccion = item.IdOpcionPreguntaSeleccion,
+                        IdOpcionPreguntaSeleccionEncriptado = _seguridad.Encriptar(item.IdOpcionPreguntaSeleccion.ToString()),
                         Descripcion = item.DescripcionOpcionPreguntaSeleccion,
                         Estado = item.EstadoOpcionPreguntaSeleccion,
                         Pregunta = new Pregunta()
@@ -180,6 +182,7 @@ namespace API.Models.Catalogos
                     OpcionPreguntaSeleccion = new OpcionPreguntaSeleccion()
                     {
                         IdOpcionPreguntaSeleccion = item.IdOpcionPreguntaSeleccion,
+                        IdOpcionPreguntaSeleccionEncriptado = _seguridad.Encriptar(item.IdOpcionPreguntaSeleccion.ToString()),
                         Descripcion = item.DescripcionOpcionPreguntaSeleccion,
                         Estado = item.EstadoOpcionPreguntaSeleccion,
                         Pregunta = new Pregunta()

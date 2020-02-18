@@ -57,6 +57,7 @@ namespace API.Controllers
                         _objPreguntaEncajonada = _objCatalogoPreguntaEncajonada.ConsultarPreguntaEncajonadaPorId(_idPreguntaEncajonada).Where(c => c.Estado == true).FirstOrDefault();
                         _objPreguntaEncajonada.IdPreguntaEncajonada = 0;
                         _objPreguntaEncajonada.OpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion = 0;
+                        _objPreguntaEncajonada.Pregunta.IdPregunta = 0;
                         _objPreguntaEncajonada.Pregunta.TipoPregunta.IdTipoPregunta = 0;
                         _objPreguntaEncajonada.Pregunta.Seccion.IdSeccion = 0;
                         _objPreguntaEncajonada.Pregunta.Seccion.Componente.IdComponente = 0;
@@ -103,6 +104,7 @@ namespace API.Controllers
                         {
                             _objPreguntaEncajonada.IdPreguntaEncajonada = 0;
                             _objPreguntaEncajonada.OpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion = 0;
+                            _objPreguntaEncajonada.Pregunta.IdPregunta = 0;
                             _objPreguntaEncajonada.Pregunta.TipoPregunta.IdTipoPregunta = 0;
                             _objPreguntaEncajonada.Pregunta.Seccion.IdSeccion = 0;
                             _objPreguntaEncajonada.Pregunta.Seccion.Componente.IdComponente = 0;
