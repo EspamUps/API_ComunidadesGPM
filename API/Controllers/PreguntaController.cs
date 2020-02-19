@@ -234,8 +234,22 @@ namespace API.Controllers
                     }
                     else if (_objPregunta.Utilizado == "1")
                     {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Esta pregunta ya ha sido utilizada, por lo tanto no puede ser eliminada.";
+                        bool _nuevoEstado = false;
+                        if (_objPregunta.Estado == false)
+                        {
+                            _nuevoEstado = true;
+                        }
+                        _objPregunta.Estado = _nuevoEstado;
+                        _idPregunta = _objCatalogoPregunta.ModificarPregunta(_objPregunta);
+                        if (_idPregunta == 0)
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "Ocurrió un problema al intentar cambiar el estado de la pregunta";
+                        }
+                        else
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        }
                     }
                     else
                     {
