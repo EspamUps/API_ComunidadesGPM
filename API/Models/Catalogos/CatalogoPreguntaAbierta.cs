@@ -43,6 +43,7 @@ namespace API.Models.Catalogos
                         ValorMaximo = item.ValorMaximoPreguntaAbierta,
                         ValorMinimo = item.ValorMinimoPreguntaAbierta,
                         Estado = item.EstadoPreguntaAbierta,
+                        Utilizado = item.UtilizadoPreguntaAbierta,
                         TipoDato =  new TipoDato()
                         {
                             IdTipoDato = item.IdTipoDato,
@@ -112,6 +113,7 @@ namespace API.Models.Catalogos
                     ValorMaximo = item.ValorMaximoPreguntaAbierta,
                     ValorMinimo = item.ValorMinimoPreguntaAbierta,
                     Estado = item.EstadoPreguntaAbierta,
+                    Utilizado = item.UtilizadoPreguntaAbierta,
                     TipoDato = new TipoDato()
                     {
                         IdTipoDato = item.IdTipoDato,
@@ -180,6 +182,7 @@ namespace API.Models.Catalogos
                     ValorMaximo = item.ValorMaximoPreguntaAbierta,
                     ValorMinimo = item.ValorMinimoPreguntaAbierta,
                     Estado = item.EstadoPreguntaAbierta,
+                    Utilizado = item.UtilizadoPreguntaAbierta,
                     TipoDato = new TipoDato()
                     {
                         IdTipoDato = item.IdTipoDato,

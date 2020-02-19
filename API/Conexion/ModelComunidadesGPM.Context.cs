@@ -1379,11 +1379,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_PreguntaAbiertaEliminar", idPreguntaAbiertaParameter);
         }
     
-        public virtual ObjectResult<Sp_PreguntaAbiertaConsultar_Result> Sp_PreguntaAbiertaConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaAbiertaConsultar_Result>("Sp_PreguntaAbiertaConsultar");
-        }
-    
         public virtual ObjectResult<Sp_TipoDatoConsultar_Result> Sp_TipoDatoConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_TipoDatoConsultar_Result>("Sp_TipoDatoConsultar");
@@ -1502,6 +1497,11 @@ namespace API.Conexion
         public virtual ObjectResult<Sp_PreguntaEncajonadaConsultar_Result> Sp_PreguntaEncajonadaConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaEncajonadaConsultar_Result>("Sp_PreguntaEncajonadaConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_PreguntaAbiertaConsultar_Result1> Sp_PreguntaAbiertaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaAbiertaConsultar_Result1>("Sp_PreguntaAbiertaConsultar");
         }
     }
 }

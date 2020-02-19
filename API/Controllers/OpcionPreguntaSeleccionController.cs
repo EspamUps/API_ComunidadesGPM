@@ -152,7 +152,7 @@ namespace API.Controllers
                     else if(_objOpcionPreguntaSelecccion.Utilizado=="1")
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Esta opción ya tiene encajonada una pregunta, por lo tanto no puede ser eliminada.";
+                        _http.mensaje = "Esta opción ya ha sido utilizada, por lo tanto no puede ser eliminada.";
                     }
                     else
                     {

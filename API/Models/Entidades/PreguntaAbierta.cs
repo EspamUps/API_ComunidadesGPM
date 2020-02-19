@@ -15,5 +15,6 @@ namespace API.Models.Entidades
         public string ValorMinimo { get; set; }
         public string ValorMaximo { get; set; }
         public bool Estado { get; set; }
+        public string  Utilizado { get; set; }
     }
 }

@@ -136,11 +136,16 @@ namespace API.Controllers
                 else
                 {
                     int _idPreguntaAbierta = Convert.ToInt32(_seguridad.DesEncriptar(_idPreguntaAbiertaEncriptado));
-                    var _objPreguntaAbierta = _objCatalogoPreguntaAbierta.ConsultarPreguntaAbiertaPorId(_idPreguntaAbierta).Where(c => c.Estado == true).ToList();
+                    var _objPreguntaAbierta = _objCatalogoPreguntaAbierta.ConsultarPreguntaAbiertaPorId(_idPreguntaAbierta).Where(c => c.Estado == true).FirstOrDefault();
                     if (_objPreguntaAbierta == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No se encontró la pregunta abierta en el sistema";
+                    }
+                    else if(_objPreguntaAbierta.Utilizado == "1")
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje ="La pregunta ya ha sido utilizada, por lo tanto no puede ser eliminada";
                     }
                     else
                     {
