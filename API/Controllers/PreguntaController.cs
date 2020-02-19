@@ -17,6 +17,11 @@ namespace API.Controllers
         CatalogoPregunta _objCatalogoPregunta = new CatalogoPregunta();
         CatalogoTipoPregunta _objCatalogoTipoPregunta = new CatalogoTipoPregunta();
         CatalogoSeccion _objCatalogoSeccion = new CatalogoSeccion();
+        CatalogoPreguntaAbierta _objCatalogoPreguntaAbierta = new CatalogoPreguntaAbierta();
+        CatalogoOpcionPreguntaSeleccion _objCatalogoOpcionPreguntaSeleccion = new CatalogoOpcionPreguntaSeleccion();
+        CatalogoOpcionUnoMatriz _objCatalogoOpcionUnoMatriz = new CatalogoOpcionUnoMatriz();
+        CatalogoConfigurarMatriz _objCatalogoConfigurarMatriz = new CatalogoConfigurarMatriz();
+        CatalogoOpcionDosMatriz _objCatalogoOpcionDosMatriz = new CatalogoOpcionDosMatriz();
         [HttpPost]
         [Route("api/pregunta_insertar")]
         public object pregunta_insertar(Pregunta _objPregunta)
@@ -232,6 +237,11 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No se encontró la pregunta que intenta eliminar";
                     }
+                    else if (_objPregunta.Encajonamiento == "1")
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "No se puede eliminar preguntas que han sido encajonadas";
+                    }
                     else if (_objPregunta.Utilizado == "1")
                     {
                         bool _nuevoEstado = false;
@@ -253,6 +263,55 @@ namespace API.Controllers
                     }
                     else
                     {
+                        if(_objPregunta.TipoPregunta.Identificador==1)
+                        {
+                            var _objPreguntaAbierta = _objCatalogoPreguntaAbierta.ConsultarPreguntaAbiertaPorIdPregunta(_idPregunta).FirstOrDefault();
+                            if (_objPreguntaAbierta != null)
+                            {
+                                _objCatalogoPreguntaAbierta.EliminarPreguntaAbierta(_objPreguntaAbierta.IdPreguntaAbierta);
+                            }
+                        }
+                        else if(_objPregunta.TipoPregunta.Identificador==2)
+                        {
+                            var _listaOpcionPreguntaSeleccion = _objCatalogoOpcionPreguntaSeleccion.ConsultarOpcionPreguntaSeleccionPorIdPregunta(_idPregunta).ToList();
+                            foreach (var item in _listaOpcionPreguntaSeleccion)
+                            {
+                                _objCatalogoOpcionPreguntaSeleccion.EliminarOpcionPreguntaSeleccion(item.IdOpcionPreguntaSeleccion);
+                            }
+                        }
+                        else if (_objPregunta.TipoPregunta.Identificador == 3)
+                        {
+                            var _listaOpcionPreguntaSeleccionMultiple = _objCatalogoOpcionPreguntaSeleccion.ConsultarOpcionPreguntaSeleccionPorIdPregunta(_idPregunta).ToList();
+                            foreach (var item in _listaOpcionPreguntaSeleccionMultiple)
+                            {
+                                _objCatalogoOpcionPreguntaSeleccion.EliminarOpcionPreguntaSeleccion(item.IdOpcionPreguntaSeleccion);
+                            }
+                        }
+                        else if (_objPregunta.TipoPregunta.Identificador == 4)
+                        {
+                            var _listaConfigurarMatriz = _objCatalogoConfigurarMatriz.ConsultarConfigurarMatrizPorIdPregunta(_idPregunta).ToList();
+                            if (_listaConfigurarMatriz.Count > 0)
+                            {
+                                var _listaOpcionDosAgrupada = _listaConfigurarMatriz.GroupBy(c => c.OpcionDosMatriz.IdOpcionDosMatriz).ToList();
+                                var _listaOpcionUnoMatriz = _objCatalogoOpcionUnoMatriz.ConsultarOpcionUnoMatrizPorIdPregunta(_idPregunta).ToList();
+                                foreach (var itemOpcionUno in _listaOpcionUnoMatriz)
+                                {
+                                    var _listaConfigurarMatrizPorOpcionUno = _listaConfigurarMatriz.Where(c => c.OpcionUnoMatriz.IdOpcionUnoMatriz == itemOpcionUno.IdOpcionUnoMatriz).ToList();
+                                    foreach (var itemConfMatriz in _listaConfigurarMatrizPorOpcionUno)
+                                    {
+                                        _objCatalogoConfigurarMatriz.EliminarConfigurarMatriz(itemConfMatriz.IdConfigurarMatriz);
+                                    }
+                                }
+                                foreach (var item in _listaOpcionDosAgrupada)
+                                {
+                                    _objCatalogoOpcionDosMatriz.EliminarOpcionDosMatriz(item.Key);
+                                }
+                                foreach (var itemOpcionUno in _listaOpcionUnoMatriz)
+                                {
+                                    _objCatalogoOpcionUnoMatriz.EliminarOpcionUnoMatriz(itemOpcionUno.IdOpcionUnoMatriz);
+                                }
+                            }
+                        }
                         _objCatalogoPregunta.EliminarPregunta(_idPregunta);
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
@@ -315,6 +374,50 @@ namespace API.Controllers
                     else
                     {
                         var _lista = _objCatalogoPregunta.ConsultarPreguntaPorIdSeccion(_idSeccion).Where(c => c.Estado == true).OrderBy(c => c.Orden).ToList();
+                        foreach (var _objPregunta in _lista)
+                        {
+                            _objPregunta.IdPregunta = 0;
+                            _objPregunta.TipoPregunta.IdTipoPregunta = 0;
+                            _objPregunta.Seccion.IdSeccion = 0;
+                            _objPregunta.Seccion.Componente.IdComponente = 0;
+                            _objPregunta.Seccion.Componente.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                        }
+                        _respuesta = _lista;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/pregunta_consultarpornoencajonadasporopcionpreguntaseleccion")]
+        public object pregunta_consultarpornoencajonadasporopcionpreguntaseleccion(string _idOpcionPreguntaSeleccionEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idOpcionPreguntaSeleccionEncriptado == null || string.IsNullOrEmpty(_idOpcionPreguntaSeleccionEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la opción pregunta selección";
+                }
+                else
+                {
+                    int _idOpcionPreguntaSeleccion = Convert.ToInt32(_seguridad.DesEncriptar(_idOpcionPreguntaSeleccionEncriptado));
+                    var _objOpcionPreguntaSeleccion = _objCatalogoOpcionPreguntaSeleccion.ConsultarOpcionPreguntaSeleccionPorId(_idOpcionPreguntaSeleccion).Where(c => c.Estado == true).FirstOrDefault();
+                    if (_objOpcionPreguntaSeleccion == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el objeto opción pregunta selección";
+                    }
+                    else
+                    {
+                        var _lista = _objCatalogoPregunta.ConsultarPreguntaNoEncajonadasPorOpcionPreguntaSeleccion(_objOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion,_objOpcionPreguntaSeleccion.Pregunta.Seccion.IdSeccion,_objOpcionPreguntaSeleccion.Pregunta.IdPregunta).Where(c=>c.Estado == true).ToList();
                         foreach (var _objPregunta in _lista)
                         {
                             _objPregunta.IdPregunta = 0;

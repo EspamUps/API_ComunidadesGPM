@@ -149,14 +149,13 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No se encontró la opción en el sistema";
                     }
-                    else if(_objOpcionPreguntaSelecccion.Utilizado=="1")
+                    else if(_objOpcionPreguntaSelecccion.Utilizado=="1" || _objOpcionPreguntaSelecccion.Encajonamiento=="1")
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                         _http.mensaje = "Esta opción ya ha sido utilizada, por lo tanto no puede ser eliminada.";
                     }
-                    else
-                    {
-                        
+                    else if (_objOpcionPreguntaSelecccion.Utilizado == "0" && _objOpcionPreguntaSelecccion.Encajonamiento == "0")
+                    {                        
                         _objCatalogoOpcionPreguntaSeleccion.EliminarOpcionPreguntaSeleccion(_idOpcionPreguntaSeleccion);
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }

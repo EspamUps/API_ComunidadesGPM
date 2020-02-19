@@ -52,6 +52,8 @@ namespace API.Models.Catalogos
                         IdOpcionUnoMatrizEncriptado = _seguridad.Encriptar(item.IdOpcionUnoMatriz.ToString()),
                         Descripcion = item.DescripcionOpcionUnoMatriz,
                         Estado = item.EstadoOpcionOpcionUnoMatriz,
+                        Utilizado=item.UtilizadoOpcionUnoMatriz,
+                        Encajonamiento=item.EncajonamientoOpcionUnoMatriz,
                         Pregunta = new Pregunta()
                         {
                             IdPregunta = item.IdPregunta,
@@ -122,6 +124,8 @@ namespace API.Models.Catalogos
                         IdOpcionUnoMatrizEncriptado = _seguridad.Encriptar(item.IdOpcionUnoMatriz.ToString()),
                         Descripcion = item.DescripcionOpcionUnoMatriz,
                         Estado = item.EstadoOpcionOpcionUnoMatriz,
+                        Utilizado = item.UtilizadoOpcionUnoMatriz,
+                        Encajonamiento = item.EncajonamientoOpcionUnoMatriz,
                         Pregunta = new Pregunta()
                         {
                             IdPregunta = item.IdPregunta,

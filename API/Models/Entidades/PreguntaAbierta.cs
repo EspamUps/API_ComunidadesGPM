@@ -16,5 +16,6 @@ namespace API.Models.Entidades
         public string ValorMaximo { get; set; }
         public bool Estado { get; set; }
         public string  Utilizado { get; set; }
+        public string  Encajonamiento { get; set; }
     }
 }

@@ -148,12 +148,12 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No se encontró la opción uno matriz en el sistema";
                     }
-                    else if(_objOpcionUnoMatriz.Utilizado=="1")
+                    else if(_objOpcionUnoMatriz.Utilizado=="1" || _objOpcionUnoMatriz.Encajonamiento=="1")
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No es posible eliminar la opción uno matriz porque está siendo utilizada";
                     }
-                    else
+                    else if(_objOpcionUnoMatriz.Utilizado == "0" || _objOpcionUnoMatriz.Encajonamiento == "0")
                     {
                         _objCatalogoOpcionUnoMatriz.EliminarOpcionUnoMatriz(_idOpcionUnoMatriz);
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();

@@ -36,64 +36,65 @@ namespace API.Models.Catalogos
             foreach (var item in db.Sp_PreguntaAbiertaConsultar())
             {
                 _lista.Add(new PreguntaAbierta()
+                {
+                    IdPreguntaAbierta = item.IdPreguntaAbierta,
+                    IdPreguntaAbiertaEncriptado = _seguridad.Encriptar(item.IdPreguntaAbierta.ToString()),
+                    EspecificaRango = item.EspecificaRangoPreguntaAbierta,
+                    ValorMaximo = item.ValorMaximoPreguntaAbierta,
+                    ValorMinimo = item.ValorMinimoPreguntaAbierta,
+                    Estado = item.EstadoPreguntaAbierta,
+                    Utilizado = item.UtilizadoPreguntaAbierta,
+                    Encajonamiento = item.EncajonamientoPreguntaAbierta,
+                    TipoDato = new TipoDato()
                     {
-                        IdPreguntaAbierta = item.IdPreguntaAbierta,
-                        IdPreguntaAbiertaEncriptado = _seguridad.Encriptar(item.IdPreguntaAbierta.ToString()),
-                        EspecificaRango = item.EspecificaRangoPreguntaAbierta,
-                        ValorMaximo = item.ValorMaximoPreguntaAbierta,
-                        ValorMinimo = item.ValorMinimoPreguntaAbierta,
-                        Estado = item.EstadoPreguntaAbierta,
-                        Utilizado = item.UtilizadoPreguntaAbierta,
-                        TipoDato =  new TipoDato()
+                        IdTipoDato = item.IdTipoDato,
+                        IdTipoDatoEncriptado = _seguridad.Encriptar(item.IdTipoDato.ToString()),
+                        Identificador = item.IdentificadorTipoDato,
+                        Descripcion = item.DescripcionTipoDato,
+                        Estado = item.EstadoTipoDato,
+                        TipoHTML = item.TipoHTMLTipoDato
+                    },
+                    Pregunta = new Pregunta()
+                    {
+                        IdPregunta = item.IdPregunta,
+                        IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                        Descripcion = item.DescripcionPregunta,
+                        Estado = item.EstadoPregunta,
+                        Obligatorio = item.ObligatorioPregunta,
+                        Orden = item.OrdenPregunta,
+                        TipoPregunta = new TipoPregunta()
                         {
-                            IdTipoDato = item.IdTipoDato,
-                            IdTipoDatoEncriptado = _seguridad.Encriptar(item.IdTipoDato.ToString()),
-                            Identificador = item.IdentificadorTipoDato,
-                            Descripcion = item.DescripcionTipoDato,
-                            Estado = item.EstadoTipoDato,
-                            TipoHTML = item.TipoHTMLTipoDato
+                            IdTipoPregunta = item.IdTipoPregunta,
+                            IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
+                            Descripcion = item.DescripcionTipoPregunta,
+                            Estado = item.EstadoTipoPregunta,
+                            Identificador = item.IdentificadorTipoPregunta
                         },
-                        Pregunta = new Pregunta()
+                        Seccion = new Seccion()
                         {
-                            IdPregunta = item.IdPregunta,
-                            IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
-                            Descripcion = item.DescripcionPregunta,
-                            Estado = item.EstadoPregunta,
-                            Obligatorio = item.ObligatorioPregunta,
-                            Orden = item.OrdenPregunta,
-                            TipoPregunta = new TipoPregunta()
+                            IdSeccion = item.IdSeccion,
+                            IdSeccionEncriptado = _seguridad.Encriptar(item.IdSeccion.ToString()),
+                            Descripcion = item.DescripcionSeccion,
+                            Estado = item.EstadoSeccion,
+                            Orden = item.OrdenSeccion,
+                            Componente = new Componente()
                             {
-                                IdTipoPregunta = item.IdTipoPregunta,
-                                IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
-                                Descripcion = item.DescripcionTipoPregunta,
-                                Estado = item.EstadoTipoPregunta,
-                                Identificador = item.IdentificadorTipoPregunta
-                            },
-                            Seccion = new Seccion()
-                            {
-                                IdSeccion = item.IdSeccion,
-                                IdSeccionEncriptado = _seguridad.Encriptar(item.IdSeccion.ToString()),
-                                Descripcion = item.DescripcionSeccion,
-                                Estado = item.EstadoSeccion,
-                                Orden = item.OrdenSeccion,
-                                Componente = new Componente()
+                                IdComponente = item.IdComponente,
+                                IdComponenteEncriptado = _seguridad.Encriptar(item.IdComponente.ToString()),
+                                Descripcion = item.DescripcionComponente,
+                                Estado = item.EstadoComponente,
+                                Orden = item.OrdenComponente,
+                                CuestionarioGenerico = new CuestionarioGenerico()
                                 {
-                                    IdComponente = item.IdComponente,
-                                    IdComponenteEncriptado = _seguridad.Encriptar(item.IdComponente.ToString()),
-                                    Descripcion = item.DescripcionComponente,
-                                    Estado = item.EstadoComponente,
-                                    Orden = item.OrdenComponente,
-                                    CuestionarioGenerico = new CuestionarioGenerico()
-                                    {
-                                        IdCuestionarioGenerico = item.IdCuestionarioGenerico,
-                                        IdCuestionarioGenericoEncriptado = _seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
-                                        Descripcion = item.DescripcionCuestionarioGenerico,
-                                        Estado = item.EstadoCuestionarioGenerico,
-                                        Nombre = item.NombreCuestionarioGenerico
-                                    }
+                                    IdCuestionarioGenerico = item.IdCuestionarioGenerico,
+                                    IdCuestionarioGenericoEncriptado = _seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
+                                    Descripcion = item.DescripcionCuestionarioGenerico,
+                                    Estado = item.EstadoCuestionarioGenerico,
+                                    Nombre = item.NombreCuestionarioGenerico
                                 }
                             }
                         }
+                    }
                 });
             }
             return _lista;
@@ -114,6 +115,7 @@ namespace API.Models.Catalogos
                     ValorMinimo = item.ValorMinimoPreguntaAbierta,
                     Estado = item.EstadoPreguntaAbierta,
                     Utilizado = item.UtilizadoPreguntaAbierta,
+                    Encajonamiento = item.EncajonamientoPreguntaAbierta,
                     TipoDato = new TipoDato()
                     {
                         IdTipoDato = item.IdTipoDato,
@@ -183,6 +185,7 @@ namespace API.Models.Catalogos
                     ValorMinimo = item.ValorMinimoPreguntaAbierta,
                     Estado = item.EstadoPreguntaAbierta,
                     Utilizado = item.UtilizadoPreguntaAbierta,
+                    Encajonamiento = item.EncajonamientoPreguntaAbierta,
                     TipoDato = new TipoDato()
                     {
                         IdTipoDato = item.IdTipoDato,
