@@ -197,7 +197,7 @@ namespace API.Models.Catalogos
         public List<Pregunta> ConsultarPreguntaNoEncajonadasPorOpcionPreguntaSeleccion(int _idOpcionPreguntaSeleccion, int _idSeccion, int _idPregunta)
         {
             List<Pregunta> _lista = new List<Pregunta>();
-            foreach (var item in db.Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion(_idOpcionPreguntaSeleccion,_idSeccion,_idOpcionPreguntaSeleccion).ToList())
+            foreach (var item in db.Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion(_idOpcionPreguntaSeleccion,_idSeccion, _idPregunta).ToList())
             {
                 _lista.Add(new Pregunta()
                 {
