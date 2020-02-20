@@ -36,19 +36,28 @@ namespace API.Controllers
                 {
                     int _idOpcionDosMatriz = Convert.ToInt32(_seguridad.DesEncriptar(_idOpcionDosMatrizEncriptado));
                     var _listaConfigurarMatriz = _objCatalogoConfigurarMatriz.ConsultarConfigurarMatrizPorIdOpcionDosMatriz(_idOpcionDosMatriz).Where(c => c.Estado == true).ToList();
-                    if (_listaConfigurarMatriz.Count==0)
+                    var _opcionUno = _listaConfigurarMatriz.Where(c => c.OpcionUnoMatriz.Utilizado == "1" || c.OpcionUnoMatriz.Encajonamiento == "1").FirstOrDefault();
+                    if (_opcionUno != null)
                     {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
-                        _http.mensaje = "No se encontró el objeto opción dos matriz";
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "No se puede eliminar porque la pregunta ya ha sido versionada o encajonada.";
                     }
                     else
                     {
-                        foreach (var itemConfMatriz in _listaConfigurarMatriz)
+                        if (_listaConfigurarMatriz.Count == 0)
                         {
-                            _objCatalogoConfigurarMatriz.EliminarConfigurarMatriz(itemConfMatriz.IdConfigurarMatriz);
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                            _http.mensaje = "No se encontró el objeto opción dos matriz";
                         }
-                        _objCatalogoOpcionDosMatriz.EliminarOpcionDosMatriz(_idOpcionDosMatriz);
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        else
+                        {
+                            foreach (var itemConfMatriz in _listaConfigurarMatriz)
+                            {
+                                _objCatalogoConfigurarMatriz.EliminarConfigurarMatriz(itemConfMatriz.IdConfigurarMatriz);
+                            }
+                            _objCatalogoOpcionDosMatriz.EliminarOpcionDosMatriz(_idOpcionDosMatriz);
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        }
                     }
                 }
             }

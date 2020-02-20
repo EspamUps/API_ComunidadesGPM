@@ -40,6 +40,7 @@ namespace API.Models.Catalogos
                     Descripcion=item.DescripcionOpcionPreguntaSeleccion,
                     Estado=item.EstadoOpcionPreguntaSeleccion,
                     Utilizado=item.UtilizadoOpcionPreguntaSeleccion,
+                    Encajonamiento = item.EncajonamientoOpcionPreguntaSeleccion,
                     Pregunta = new Pregunta()
                     {
                         IdPregunta = item.IdPregunta,
@@ -97,6 +98,7 @@ namespace API.Models.Catalogos
                     Descripcion = item.DescripcionOpcionPreguntaSeleccion,
                     Estado = item.EstadoOpcionPreguntaSeleccion,
                     Utilizado = item.UtilizadoOpcionPreguntaSeleccion,
+                    Encajonamiento = item.EncajonamientoOpcionPreguntaSeleccion,
                     Pregunta = new Pregunta()
                     {
                         IdPregunta = item.IdPregunta,
@@ -154,6 +156,7 @@ namespace API.Models.Catalogos
                     Descripcion = item.DescripcionOpcionPreguntaSeleccion,
                     Estado = item.EstadoOpcionPreguntaSeleccion,
                     Utilizado = item.UtilizadoOpcionPreguntaSeleccion,
+                    Encajonamiento = item.EncajonamientoOpcionPreguntaSeleccion,
                     Pregunta = new Pregunta()
                     {
                         IdPregunta = item.IdPregunta,

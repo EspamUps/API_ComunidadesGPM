@@ -13,5 +13,6 @@ namespace API.Models.Entidades
         public bool Estado { get; set; }
         public Pregunta Pregunta { get; set; }
         public string Utilizado { get; set; }
+        public string Encajonamiento { get; set; }
     }
 }

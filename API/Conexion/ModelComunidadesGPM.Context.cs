@@ -1229,11 +1229,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_SeccionModificar", idSeccionParameter, idComponenteParameter, descripcionParameter, ordenParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Sp_PreguntaConsultar_Result> Sp_PreguntaConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultar_Result>("Sp_PreguntaConsultar");
-        }
-    
         public virtual int Sp_PreguntaEliminar(Nullable<int> idPregunta)
         {
             var idPreguntaParameter = idPregunta.HasValue ?
@@ -1356,11 +1351,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_PreguntaAbiertaInsertar", idPreguntaParameter, idTipoDatoParameter, especificaRangoParameter, valorMinimoParameter, valorMaximoParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Sp_OpcionPreguntaSeleccionConsultar_Result1> Sp_OpcionPreguntaSeleccionConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionPreguntaSeleccionConsultar_Result1>("Sp_OpcionPreguntaSeleccionConsultar");
-        }
-    
         public virtual int Sp_OpcionPreguntaSeleccionEliminar(Nullable<int> idOpcionPreguntaSeleccion)
         {
             var idOpcionPreguntaSeleccionParameter = idOpcionPreguntaSeleccion.HasValue ?
@@ -1432,11 +1422,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_OpcionDosMatrizInsertar", descripcionParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Sp_OpcionUnoMatrizConsultar_Result> Sp_OpcionUnoMatrizConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionUnoMatrizConsultar_Result>("Sp_OpcionUnoMatrizConsultar");
-        }
-    
         public virtual int Sp_OpcionUnoMatrizEliminar(Nullable<int> idOpcionUnoMatriz)
         {
             var idOpcionUnoMatrizParameter = idOpcionUnoMatriz.HasValue ?
@@ -1461,11 +1446,6 @@ namespace API.Conexion
                 new ObjectParameter("Estado", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_OpcionUnoMatrizInsertar", idPreguntaParameter, descripcionParameter, estadoParameter);
-        }
-    
-        public virtual ObjectResult<Sp_ConfigurarMatrizConsultar_Result> Sp_ConfigurarMatrizConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ConfigurarMatrizConsultar_Result>("Sp_ConfigurarMatrizConsultar");
         }
     
         public virtual int Sp_PreguntaEncajonadaEliminar(Nullable<int> idPreguntaEncajonada)
@@ -1499,9 +1479,46 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaEncajonadaConsultar_Result>("Sp_PreguntaEncajonadaConsultar");
         }
     
-        public virtual ObjectResult<Sp_PreguntaAbiertaConsultar_Result1> Sp_PreguntaAbiertaConsultar()
+        public virtual ObjectResult<Sp_OpcionPreguntaSeleccionConsultar_Result2> Sp_OpcionPreguntaSeleccionConsultar()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaAbiertaConsultar_Result1>("Sp_PreguntaAbiertaConsultar");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionPreguntaSeleccionConsultar_Result2>("Sp_OpcionPreguntaSeleccionConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_OpcionUnoMatrizConsultar_Result1> Sp_OpcionUnoMatrizConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionUnoMatrizConsultar_Result1>("Sp_OpcionUnoMatrizConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_PreguntaAbiertaConsultar_Result2> Sp_PreguntaAbiertaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaAbiertaConsultar_Result2>("Sp_PreguntaAbiertaConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_PreguntaConsultar_Result1> Sp_PreguntaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultar_Result1>("Sp_PreguntaConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_ConfigurarMatrizConsultar_Result1> Sp_ConfigurarMatrizConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ConfigurarMatrizConsultar_Result1>("Sp_ConfigurarMatrizConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion_Result> Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion(Nullable<int> idOpcionPreguntaSeleccion, Nullable<int> idSeccion, Nullable<int> idPregunta)
+        {
+            var idOpcionPreguntaSeleccionParameter = idOpcionPreguntaSeleccion.HasValue ?
+                new ObjectParameter("idOpcionPreguntaSeleccion", idOpcionPreguntaSeleccion) :
+                new ObjectParameter("idOpcionPreguntaSeleccion", typeof(int));
+    
+            var idSeccionParameter = idSeccion.HasValue ?
+                new ObjectParameter("idSeccion", idSeccion) :
+                new ObjectParameter("idSeccion", typeof(int));
+    
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("idPregunta", idPregunta) :
+                new ObjectParameter("idPregunta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion_Result>("Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion", idOpcionPreguntaSeleccionParameter, idSeccionParameter, idPreguntaParameter);
         }
     }
 }

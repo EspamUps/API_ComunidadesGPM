@@ -195,5 +195,16 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+
+       
+        [HttpGet]
+        [Route("api/cuestionariogenerico_consultarconcomponenteconseccionconpreguntas")]
+        public object cuestionario_generico_consultar()
+        {
+            object _respuesta = new object();
+            var _http = "g";
+            return new { respuesta = _respuesta, http = _http };
+        }
+
     }
 }
