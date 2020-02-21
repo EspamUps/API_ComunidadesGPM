@@ -1520,5 +1520,10 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion_Result>("Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion", idOpcionPreguntaSeleccionParameter, idSeccionParameter, idPreguntaParameter);
         }
+    
+        public virtual ObjectResult<Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result> Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result>("Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar");
+        }
     }
 }

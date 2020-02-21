@@ -14,5 +14,8 @@ namespace API.Models.Entidades
         public bool Estado { get; set; }
         public string Utilizado { get; set; }
         public Componente Componente { get; set; }
+
+        public List<Pregunta> listaPregunta { get; set; }
+        public Pregunta Pregunta { get; set; }
     }
 }
