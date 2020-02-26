@@ -85,11 +85,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignadosResponsablePorCuestionarioGenericoPorIdentificadorTipoUsuario_Result>("Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignadosResponsablePorCuestionarioGenericoPorIdentificadorTipoUsuario", idCuestionarioGenericoParameter, identificadorTipoUsuarioParameter);
         }
     
-        public virtual ObjectResult<Sp_CabeceraVersionCuestionarioConsultar_Result> Sp_CabeceraVersionCuestionarioConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CabeceraVersionCuestionarioConsultar_Result>("Sp_CabeceraVersionCuestionarioConsultar");
-        }
-    
         public virtual int Sp_CabeceraVersionCuestionarioEliminar(Nullable<int> idCabeceraVersionCuestionario)
         {
             var idCabeceraVersionCuestionarioParameter = idCabeceraVersionCuestionario.HasValue ?
@@ -1605,6 +1600,16 @@ namespace API.Conexion
                 new ObjectParameter("Correo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioValidar_Result>("Sp_UsuarioValidar", correoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_VersionamientoPreguntaConsultar_Result> Sp_VersionamientoPreguntaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_VersionamientoPreguntaConsultar_Result>("Sp_VersionamientoPreguntaConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_CabeceraVersionCuestionarioConsultar_Result1> Sp_CabeceraVersionCuestionarioConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CabeceraVersionCuestionarioConsultar_Result1>("Sp_CabeceraVersionCuestionarioConsultar");
         }
     }
 }
