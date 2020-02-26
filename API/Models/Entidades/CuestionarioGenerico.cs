@@ -13,5 +13,8 @@ namespace API.Models.Entidades
         public string Descripcion { get; set; }
         public bool Estado { get; set; }
         public string Utilizado { get; set; }
+
+        public List <Componente> listaComponente { get; set; }
+        public Componente Componente { get; set; }
     }
 }

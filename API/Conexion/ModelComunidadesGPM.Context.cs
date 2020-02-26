@@ -1521,6 +1521,14 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion_Result>("Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion", idOpcionPreguntaSeleccionParameter, idSeccionParameter, idPreguntaParameter);
         }
     
+<<<<<<< HEAD
+=======
+        public virtual ObjectResult<Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result> Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result>("Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar");
+        }
+    
+>>>>>>> e314f927490b922e118465d94097e88e7a3d1b23
         public virtual int Sp_CabeceraVersionCuestionarioEliminar(Nullable<int> idCabeceraVersionCuestionario)
         {
             var idCabeceraVersionCuestionarioParameter = idCabeceraVersionCuestionario.HasValue ?
@@ -1584,11 +1592,14 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CabeceraVersionCuestionarioModificar", idCabeceraVersionCuestionarioParameter, idAsignarResponsableParameter, caracteristicaParameter, versionParameter, fechaCreacionParameter, estadoParameter);
         }
     
+<<<<<<< HEAD
         public virtual ObjectResult<Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result> Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result>("Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar");
         }
     
+=======
+>>>>>>> e314f927490b922e118465d94097e88e7a3d1b23
         public virtual int Sp_VersionamientoPreguntaEliminar(Nullable<int> idVersionamientoPregunta)
         {
             var idVersionamientoPreguntaParameter = idVersionamientoPregunta.HasValue ?
@@ -1614,10 +1625,13 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_VersionamientoPreguntaInsertar", idCabeceraVersionCuestionarioParameter, idPreguntaParameter, estadoParameter);
         }
+<<<<<<< HEAD
     
         public virtual ObjectResult<Sp_CabeceraVersionCuestionarioConsultar_Result> Sp_CabeceraVersionCuestionarioConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CabeceraVersionCuestionarioConsultar_Result>("Sp_CabeceraVersionCuestionarioConsultar");
         }
+=======
+>>>>>>> e314f927490b922e118465d94097e88e7a3d1b23
     }
 }

@@ -296,5 +296,36 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+
+        public List<Pregunta> ConsultarPreguntaPorIdSeccionConTipoPregunta(int _idSeccion)
+        {
+            List<Pregunta> _lista = new List<Pregunta>();
+            foreach (var item in db.Sp_PreguntaConsultar().Where(c => c.IdSeccion == _idSeccion).ToList())
+            {
+                _lista.Add(new Pregunta()
+                {
+                    IdPregunta = item.IdPregunta,
+                    IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                    Descripcion = item.DescripcionPregunta,
+                    Estado = item.EstadoPregunta,
+                    Obligatorio = item.ObligatorioPregunta,
+                    Orden = item.OrdenPregunta,
+                    Utilizado = item.UtilizadoPregunta,
+                    Encajonamiento = item.EncajonamientoPregunta,
+                    TipoPregunta = new TipoPregunta()
+                    {
+                        IdTipoPregunta = item.IdTipoPregunta,
+                        IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
+                        Descripcion = item.DescripcionTipoPregunta,
+                        Estado = item.EstadoTipoPregunta,
+                        Identificador = item.IdentificadorTipoPregunta
+                    },
+                   
+                });
+            }
+            return _lista;
+        }
+
+
     }
 }

@@ -114,5 +114,23 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+        public List<Componente> ConsultarComponentePorIdCuestionarioGenericoConSeccionPregunta(int _idCuestionarioGenerico)
+        {
+            List<Componente> _lista = new List<Componente>();
+            foreach (var item in db.Sp_ComponenteConsultar().Where(c => c.IdCuestionarioGenerico == _idCuestionarioGenerico).ToList())
+            {
+                _lista.Add(new Componente()
+                {
+                    IdComponente = item.IdComponente,
+                    IdComponenteEncriptado = _seguridad.Encriptar(item.IdComponente.ToString()),
+                    Descripcion = item.DescripcionComponente,
+                    Estado = item.EstadoComponente,
+                    Orden = item.OrdenComponente,
+                    Utilizado = item.UtilizadoComponente
+                    ,listaSeccion = new CatalogoSeccion().ConsultarSeccionPorIdComponenteConPregunta(item.IdComponente)
+                });
+            }
+            return _lista;
+        }
     }
 }

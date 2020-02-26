@@ -22,7 +22,10 @@
           <Parameter Name="IdCuestionarioGenerico" Type="int" Mode="In" />
           <Parameter Name="identificadorTipoUsuario" Type="int" Mode="In" />
         </Function>
+<<<<<<< HEAD
         <Function Name="Sp_CabeceraVersionCuestionarioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
+=======
+>>>>>>> e314f927490b922e118465d94097e88e7a3d1b23
         <Function Name="Sp_CabeceraVersionCuestionarioEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdCabeceraVersionCuestionario" Type="int" Mode="In" />
         </Function>
@@ -873,8 +876,14 @@
             <Parameter Name="idSeccion" Mode="In" Type="Int32" />
             <Parameter Name="idPregunta" Mode="In" Type="Int32" />
           </FunctionImport>
+<<<<<<< HEAD
           <FunctionImport Name="Sp_CabeceraVersionCuestionarioEliminar">
           <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
+=======
+          <FunctionImport Name="Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result)" />
+          <FunctionImport Name="Sp_CabeceraVersionCuestionarioEliminar">
+            <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
+>>>>>>> e314f927490b922e118465d94097e88e7a3d1b23
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraVersionCuestionarioInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdAsignarResponsable" Mode="In" Type="Int32" />
@@ -891,16 +900,24 @@
             <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
             <Parameter Name="estado" Mode="In" Type="Boolean" />
           </FunctionImport>
+<<<<<<< HEAD
           <FunctionImport Name="Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result)" />
           <FunctionImport Name="Sp_VersionamientoPreguntaEliminar">
           <Parameter Name="IdVersionamientoPregunta" Mode="In" Type="Int32" />
+=======
+          <FunctionImport Name="Sp_VersionamientoPreguntaEliminar">
+            <Parameter Name="IdVersionamientoPregunta" Mode="In" Type="Int32" />
+>>>>>>> e314f927490b922e118465d94097e88e7a3d1b23
           </FunctionImport>
           <FunctionImport Name="Sp_VersionamientoPreguntaInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
             <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
+<<<<<<< HEAD
           <FunctionImport Name="Sp_CabeceraVersionCuestionarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraVersionCuestionarioConsultar_Result)" />
+=======
+>>>>>>> e314f927490b922e118465d94097e88e7a3d1b23
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -2278,6 +2295,7 @@
           <Property Type="String" Name="tipopregunta_Descripcion" Nullable="false" MaxLength="500" />
           <Property Type="Boolean" Name="tipopregunta_Estado" Nullable="false" />
         </ComplexType>
+<<<<<<< HEAD
         <ComplexType Name="Sp_CabeceraVersionCuestionarioConsultar_Result">
           <Property Type="Int32" Name="IdCabeceraVersionCuestionario" Nullable="false" />
           <Property Type="Int32" Name="IdAsignarResponsable" Nullable="false" />
@@ -2287,6 +2305,8 @@
           <Property Type="Boolean" Name="Estado" Nullable="false" />
           <Property Type="String" Name="UtilizadoCabeceraVersionCuestionario" Nullable="false" MaxLength="1" />
         </ComplexType>
+=======
+>>>>>>> e314f927490b922e118465d94097e88e7a3d1b23
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3329,9 +3349,12 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+<<<<<<< HEAD
           <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioModificar" />
+=======
+>>>>>>> e314f927490b922e118465d94097e88e7a3d1b23
           <FunctionImportMapping FunctionImportName="Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result">
@@ -3364,6 +3387,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+<<<<<<< HEAD
           <FunctionImportMapping FunctionImportName="Sp_VersionamientoPreguntaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_VersionamientoPreguntaEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_VersionamientoPreguntaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_VersionamientoPreguntaInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioConsultar">
@@ -3379,6 +3403,13 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+=======
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_VersionamientoPreguntaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_VersionamientoPreguntaEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_VersionamientoPreguntaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_VersionamientoPreguntaInsertar" />
+>>>>>>> e314f927490b922e118465d94097e88e7a3d1b23
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
