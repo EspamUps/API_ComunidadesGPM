@@ -212,19 +212,10 @@
     <Compile Include="Conexion\Sp_AsignarModuloPrivilegioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_AsignarModuloPrivilegioConsultar_Result1.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_AsignarResponsableConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result1.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result2.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignadosResponsablePorCuestionarioGenericoPorIdentificadorTipoUsuario_Result.cs">
@@ -251,9 +242,6 @@
     <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar_Result1.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -266,22 +254,10 @@
     <Compile Include="Conexion\Sp_ModuloConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_OpcionDosMatrizConsultar_Result.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar_Result1.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar_Result2.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_OpcionUnoMatrizConsultar_Result.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_OpcionUnoMatrizConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ParroquiaConsultar_Result.cs">
@@ -293,28 +269,10 @@
     <Compile Include="Conexion\Sp_PersonaConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_PersonaConsultar_Result1.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_PersonaConsultar_Result2.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_PersonaConsultar_Result3.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_PersonaConsultar_Result4.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_PrefectoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PreguntaAbiertaConsultar_Result.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_PreguntaAbiertaConsultar_Result1.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_PreguntaAbiertaConsultar_Result2.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion_Result.cs">
@@ -323,16 +281,10 @@
     <Compile Include="Conexion\Sp_PreguntaConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_PreguntaConsultar_Result1.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_PreguntaEncajonadaConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PresidenteJuntaParroquialConsultar_Result.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_PresidenteJuntaParroquialConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PrivilegioConsultar_Result.cs">
@@ -365,37 +317,16 @@
     <Compile Include="Conexion\Sp_TokenConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_TokenConsultar_Result1.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_TokenConsultar_Result2.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_UsuarioBuscar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_UsuarioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_UsuarioConsultar_Result1.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_UsuarioConsultar_Result2.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_UsuarioConsultar_Result3.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_UsuarioConsultar_Result4.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_UsuarioInformacionGeneral_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_UsuarioValidar_Result.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_UsuarioValidar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AlcaldeController.cs" />
@@ -513,8 +444,8 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Conexion\ModelComunidadesGPM.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelComunidadesGPM.Context.cs</LastGenOutput>
       <DependentUpon>ModelComunidadesGPM.edmx</DependentUpon>
+      <LastGenOutput>ModelComunidadesGPM.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Conexion\ModelComunidadesGPM.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
