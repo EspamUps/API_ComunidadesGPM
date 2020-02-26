@@ -236,6 +236,9 @@
     <Compile Include="Conexion\Sp_AsignarUsuarioTipoUsuarioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_CabeceraVersionCuestionarioConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_CantonConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -399,6 +402,7 @@
     <Compile Include="Controllers\AsignarResponsableController.cs" />
     <Compile Include="Controllers\AsignarTipoUsuarioModuloPrivilegioController.cs" />
     <Compile Include="Controllers\AsignarUsuarioTipoUsuarioController.cs" />
+    <Compile Include="Controllers\CabeceraVersionCuestionarioController.cs" />
     <Compile Include="Controllers\CantonController.cs" />
     <Compile Include="Controllers\ComponenteController.cs" />
     <Compile Include="Controllers\ComunidadController.cs" />
@@ -429,6 +433,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Catalogos\CatalogoCabeceraVersionCuestionario.cs" />
     <Compile Include="Models\Catalogos\CatalogoConfigurarMatriz.cs" />
     <Compile Include="Models\Catalogos\CatalogoAlcalde.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarModuloPrivilegio.cs" />
@@ -462,17 +467,21 @@
     <Compile Include="Models\Catalogos\CatalogoTipoUsuarios.cs" />
     <Compile Include="Models\Catalogos\CatalogoTokens.cs" />
     <Compile Include="Models\Catalogos\CatalogoUsuario.cs" />
+    <Compile Include="Models\Catalogos\CatalogoVersionamientoPregunta.cs" />
     <Compile Include="Models\Entidades\Alcalde.cs" />
+    <Compile Include="Models\Entidades\AsignarEncuestado.cs" />
     <Compile Include="Models\Entidades\AsignarModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarResponsable.cs" />
     <Compile Include="Models\Entidades\AsignarTipoUsuarioModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarUsuarioTipoUsuario.cs" />
+    <Compile Include="Models\Entidades\CabeceraVersionCuestionario.cs" />
     <Compile Include="Models\Entidades\Canton.cs" />
     <Compile Include="Models\Entidades\Clave.cs" />
     <Compile Include="Models\Entidades\Componente.cs" />
     <Compile Include="Models\Entidades\Comunidad.cs" />
     <Compile Include="Models\Entidades\ConfigurarMatriz.cs" />
     <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
+    <Compile Include="Models\Entidades\CuestionarioPublicado.cs" />
     <Compile Include="Models\Entidades\LiderComunitario.cs" />
     <Compile Include="Models\Entidades\OpcionDosMatriz.cs" />
     <Compile Include="Models\Entidades\OpcionPreguntaSeleccion.cs" />
@@ -485,6 +494,7 @@
     <Compile Include="Models\Entidades\Seccion.cs" />
     <Compile Include="Models\Entidades\TipoDato.cs" />
     <Compile Include="Models\Entidades\TipoPregunta.cs" />
+    <Compile Include="Models\Entidades\VersionamientoPregunta.cs" />
     <Compile Include="Models\Metodos\RespuestaHTTP.cs" />
     <Compile Include="Models\Entidades\Modulo.cs" />
     <Compile Include="Models\Entidades\Parroquia.cs" />
