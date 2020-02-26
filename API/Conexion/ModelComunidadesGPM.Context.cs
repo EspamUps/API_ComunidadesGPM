@@ -1520,5 +1520,104 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion_Result>("Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion", idOpcionPreguntaSeleccionParameter, idSeccionParameter, idPreguntaParameter);
         }
+    
+        public virtual int Sp_CabeceraVersionCuestionarioEliminar(Nullable<int> idCabeceraVersionCuestionario)
+        {
+            var idCabeceraVersionCuestionarioParameter = idCabeceraVersionCuestionario.HasValue ?
+                new ObjectParameter("IdCabeceraVersionCuestionario", idCabeceraVersionCuestionario) :
+                new ObjectParameter("IdCabeceraVersionCuestionario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CabeceraVersionCuestionarioEliminar", idCabeceraVersionCuestionarioParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_CabeceraVersionCuestionarioInsertar(Nullable<int> idAsignarResponsable, string caracteristica, Nullable<int> version, Nullable<System.DateTime> fechaCreacion, Nullable<bool> estado)
+        {
+            var idAsignarResponsableParameter = idAsignarResponsable.HasValue ?
+                new ObjectParameter("IdAsignarResponsable", idAsignarResponsable) :
+                new ObjectParameter("IdAsignarResponsable", typeof(int));
+    
+            var caracteristicaParameter = caracteristica != null ?
+                new ObjectParameter("Caracteristica", caracteristica) :
+                new ObjectParameter("Caracteristica", typeof(string));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("Version", version) :
+                new ObjectParameter("Version", typeof(int));
+    
+            var fechaCreacionParameter = fechaCreacion.HasValue ?
+                new ObjectParameter("FechaCreacion", fechaCreacion) :
+                new ObjectParameter("FechaCreacion", typeof(System.DateTime));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CabeceraVersionCuestionarioInsertar", idAsignarResponsableParameter, caracteristicaParameter, versionParameter, fechaCreacionParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_CabeceraVersionCuestionarioModificar(Nullable<int> idCabeceraVersionCuestionario, Nullable<int> idAsignarResponsable, string caracteristica, Nullable<int> version, Nullable<System.DateTime> fechaCreacion, Nullable<bool> estado)
+        {
+            var idCabeceraVersionCuestionarioParameter = idCabeceraVersionCuestionario.HasValue ?
+                new ObjectParameter("IdCabeceraVersionCuestionario", idCabeceraVersionCuestionario) :
+                new ObjectParameter("IdCabeceraVersionCuestionario", typeof(int));
+    
+            var idAsignarResponsableParameter = idAsignarResponsable.HasValue ?
+                new ObjectParameter("IdAsignarResponsable", idAsignarResponsable) :
+                new ObjectParameter("IdAsignarResponsable", typeof(int));
+    
+            var caracteristicaParameter = caracteristica != null ?
+                new ObjectParameter("Caracteristica", caracteristica) :
+                new ObjectParameter("Caracteristica", typeof(string));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("Version", version) :
+                new ObjectParameter("Version", typeof(int));
+    
+            var fechaCreacionParameter = fechaCreacion.HasValue ?
+                new ObjectParameter("FechaCreacion", fechaCreacion) :
+                new ObjectParameter("FechaCreacion", typeof(System.DateTime));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CabeceraVersionCuestionarioModificar", idCabeceraVersionCuestionarioParameter, idAsignarResponsableParameter, caracteristicaParameter, versionParameter, fechaCreacionParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result> Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result>("Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar");
+        }
+    
+        public virtual int Sp_VersionamientoPreguntaEliminar(Nullable<int> idVersionamientoPregunta)
+        {
+            var idVersionamientoPreguntaParameter = idVersionamientoPregunta.HasValue ?
+                new ObjectParameter("IdVersionamientoPregunta", idVersionamientoPregunta) :
+                new ObjectParameter("IdVersionamientoPregunta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_VersionamientoPreguntaEliminar", idVersionamientoPreguntaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_VersionamientoPreguntaInsertar(Nullable<int> idCabeceraVersionCuestionario, Nullable<int> idPregunta, Nullable<bool> estado)
+        {
+            var idCabeceraVersionCuestionarioParameter = idCabeceraVersionCuestionario.HasValue ?
+                new ObjectParameter("IdCabeceraVersionCuestionario", idCabeceraVersionCuestionario) :
+                new ObjectParameter("IdCabeceraVersionCuestionario", typeof(int));
+    
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_VersionamientoPreguntaInsertar", idCabeceraVersionCuestionarioParameter, idPreguntaParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_CabeceraVersionCuestionarioConsultar_Result> Sp_CabeceraVersionCuestionarioConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CabeceraVersionCuestionarioConsultar_Result>("Sp_CabeceraVersionCuestionarioConsultar");
+        }
     }
 }

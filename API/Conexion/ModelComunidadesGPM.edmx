@@ -22,6 +22,25 @@
           <Parameter Name="IdCuestionarioGenerico" Type="int" Mode="In" />
           <Parameter Name="identificadorTipoUsuario" Type="int" Mode="In" />
         </Function>
+        <Function Name="Sp_CabeceraVersionCuestionarioConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
+        <Function Name="Sp_CabeceraVersionCuestionarioEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdCabeceraVersionCuestionario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_CabeceraVersionCuestionarioInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdAsignarResponsable" Type="int" Mode="In" />
+          <Parameter Name="Caracteristica" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Version" Type="int" Mode="In" />
+          <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+          <Parameter Name="estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_CabeceraVersionCuestionarioModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdCabeceraVersionCuestionario" Type="int" Mode="In" />
+          <Parameter Name="IdAsignarResponsable" Type="int" Mode="In" />
+          <Parameter Name="Caracteristica" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Version" Type="int" Mode="In" />
+          <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+          <Parameter Name="estado" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_ComponenteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
         <Function Name="Sp_ComponenteEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdComponente" Type="int" Mode="In" />
@@ -48,6 +67,7 @@
           <Parameter Name="IdOpcionDosMatriz" Type="int" Mode="In" />
           <Parameter Name="Estado" Type="bit" Mode="In" />
         </Function>
+        <Function Name="Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
         <Function Name="Sp_CuestionarioGenericoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
         <Function Name="Sp_CuestionarioGenericoEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdCuestionarioGenerico" Type="int" Mode="In" />
@@ -154,6 +174,14 @@
         </Function>
         <Function Name="Sp_TipoDatoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
         <Function Name="Sp_TipoPreguntaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
+        <Function Name="Sp_VersionamientoPreguntaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdVersionamientoPregunta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_VersionamientoPreguntaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdCabeceraVersionCuestionario" Type="int" Mode="In" />
+          <Parameter Name="IdPregunta" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_AlcaldeConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
         <Function Name="Sp_AlcaldeEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
           <Parameter Name="IdAlcalde" Type="int" Mode="In" />
@@ -845,6 +873,34 @@
             <Parameter Name="idSeccion" Mode="In" Type="Int32" />
             <Parameter Name="idPregunta" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="Sp_CabeceraVersionCuestionarioEliminar">
+          <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CabeceraVersionCuestionarioInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdAsignarResponsable" Mode="In" Type="Int32" />
+            <Parameter Name="Caracteristica" Mode="In" Type="String" />
+            <Parameter Name="Version" Mode="In" Type="Int32" />
+            <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
+            <Parameter Name="estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CabeceraVersionCuestionarioModificar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
+            <Parameter Name="IdAsignarResponsable" Mode="In" Type="Int32" />
+            <Parameter Name="Caracteristica" Mode="In" Type="String" />
+            <Parameter Name="Version" Mode="In" Type="Int32" />
+            <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
+            <Parameter Name="estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result)" />
+          <FunctionImport Name="Sp_VersionamientoPreguntaEliminar">
+          <Parameter Name="IdVersionamientoPregunta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_VersionamientoPreguntaInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
+            <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CabeceraVersionCuestionarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraVersionCuestionarioConsultar_Result)" />
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -2194,6 +2250,43 @@
           <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
           <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result">
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="UtilizadoCuestionarioGenerico" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="componente_IdComponente" Nullable="false" />
+          <Property Type="Int32" Name="componente_IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="componente_Descripcion" Nullable="false" />
+          <Property Type="Int32" Name="componente_Orden" Nullable="false" />
+          <Property Type="Boolean" Name="componente_Estado" Nullable="false" />
+          <Property Type="Int32" Name="seccion_IdSeccion" Nullable="false" />
+          <Property Type="Int32" Name="seccion_IdComponente" Nullable="false" />
+          <Property Type="String" Name="seccion_Descripcion" Nullable="false" MaxLength="500" />
+          <Property Type="Int32" Name="seccion_Orden" Nullable="false" />
+          <Property Type="Boolean" Name="seccion_Estado" Nullable="false" />
+          <Property Type="Int32" Name="pregunta_IdPregunta" Nullable="false" />
+          <Property Type="Int32" Name="pregunta_IdSeccion" Nullable="false" />
+          <Property Type="Int32" Name="pregunta_IdTipoPregunta" Nullable="false" />
+          <Property Type="String" Name="pregunta_Descripcion" Nullable="false" />
+          <Property Type="Boolean" Name="pregunta_Obligatorio" Nullable="false" />
+          <Property Type="Int32" Name="pregunta_Orden" Nullable="false" />
+          <Property Type="Boolean" Name="pregunta_Estado" Nullable="false" />
+          <Property Type="Int32" Name="tipopregunta_IdTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="tipopregunta_Identificador" Nullable="false" />
+          <Property Type="String" Name="tipopregunta_Descripcion" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="tipopregunta_Estado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_CabeceraVersionCuestionarioConsultar_Result">
+          <Property Type="Int32" Name="IdCabeceraVersionCuestionario" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarResponsable" Nullable="false" />
+          <Property Type="String" Name="Caracteristica" Nullable="false" />
+          <Property Type="Int32" Name="Version" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="UtilizadoCabeceraVersionCuestionario" Nullable="false" MaxLength="1" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3233,6 +3326,56 @@
                 <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
                 <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
                 <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result">
+                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="UtilizadoCuestionarioGenerico" ColumnName="UtilizadoCuestionarioGenerico" />
+                <ScalarProperty Name="componente_IdComponente" ColumnName="componente_IdComponente" />
+                <ScalarProperty Name="componente_IdCuestionarioGenerico" ColumnName="componente_IdCuestionarioGenerico" />
+                <ScalarProperty Name="componente_Descripcion" ColumnName="componente_Descripcion" />
+                <ScalarProperty Name="componente_Orden" ColumnName="componente_Orden" />
+                <ScalarProperty Name="componente_Estado" ColumnName="componente_Estado" />
+                <ScalarProperty Name="seccion_IdSeccion" ColumnName="seccion_IdSeccion" />
+                <ScalarProperty Name="seccion_IdComponente" ColumnName="seccion_IdComponente" />
+                <ScalarProperty Name="seccion_Descripcion" ColumnName="seccion_Descripcion" />
+                <ScalarProperty Name="seccion_Orden" ColumnName="seccion_Orden" />
+                <ScalarProperty Name="seccion_Estado" ColumnName="seccion_Estado" />
+                <ScalarProperty Name="pregunta_IdPregunta" ColumnName="pregunta_IdPregunta" />
+                <ScalarProperty Name="pregunta_IdSeccion" ColumnName="pregunta_IdSeccion" />
+                <ScalarProperty Name="pregunta_IdTipoPregunta" ColumnName="pregunta_IdTipoPregunta" />
+                <ScalarProperty Name="pregunta_Descripcion" ColumnName="pregunta_Descripcion" />
+                <ScalarProperty Name="pregunta_Obligatorio" ColumnName="pregunta_Obligatorio" />
+                <ScalarProperty Name="pregunta_Orden" ColumnName="pregunta_Orden" />
+                <ScalarProperty Name="pregunta_Estado" ColumnName="pregunta_Estado" />
+                <ScalarProperty Name="tipopregunta_IdTipoPregunta" ColumnName="tipopregunta_IdTipoPregunta" />
+                <ScalarProperty Name="tipopregunta_Identificador" ColumnName="tipopregunta_Identificador" />
+                <ScalarProperty Name="tipopregunta_Descripcion" ColumnName="tipopregunta_Descripcion" />
+                <ScalarProperty Name="tipopregunta_Estado" ColumnName="tipopregunta_Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_VersionamientoPreguntaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_VersionamientoPreguntaEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_VersionamientoPreguntaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_VersionamientoPreguntaInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CabeceraVersionCuestionarioConsultar_Result">
+                <ScalarProperty Name="IdCabeceraVersionCuestionario" ColumnName="IdCabeceraVersionCuestionario" />
+                <ScalarProperty Name="IdAsignarResponsable" ColumnName="IdAsignarResponsable" />
+                <ScalarProperty Name="Caracteristica" ColumnName="Caracteristica" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="UtilizadoCabeceraVersionCuestionario" ColumnName="UtilizadoCabeceraVersionCuestionario" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
