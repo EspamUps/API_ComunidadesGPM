@@ -22,6 +22,24 @@
           <Parameter Name="IdCuestionarioGenerico" Type="int" Mode="In" />
           <Parameter Name="identificadorTipoUsuario" Type="int" Mode="In" />
         </Function>
+        <Function Name="Sp_CabeceraVersionCuestionarioEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdCabeceraVersionCuestionario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_CabeceraVersionCuestionarioInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdAsignarResponsable" Type="int" Mode="In" />
+          <Parameter Name="Caracteristica" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Version" Type="int" Mode="In" />
+          <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+          <Parameter Name="estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_CabeceraVersionCuestionarioModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdCabeceraVersionCuestionario" Type="int" Mode="In" />
+          <Parameter Name="IdAsignarResponsable" Type="int" Mode="In" />
+          <Parameter Name="Caracteristica" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Version" Type="int" Mode="In" />
+          <Parameter Name="FechaCreacion" Type="datetime" Mode="In" />
+          <Parameter Name="estado" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_ComponenteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
         <Function Name="Sp_ComponenteEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdComponente" Type="int" Mode="In" />
@@ -155,6 +173,14 @@
         </Function>
         <Function Name="Sp_TipoDatoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
         <Function Name="Sp_TipoPreguntaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
+        <Function Name="Sp_VersionamientoPreguntaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdVersionamientoPregunta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_VersionamientoPreguntaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdCabeceraVersionCuestionario" Type="int" Mode="In" />
+          <Parameter Name="IdPregunta" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_AlcaldeConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares" />
         <Function Name="Sp_AlcaldeEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="lugares">
           <Parameter Name="IdAlcalde" Type="int" Mode="In" />
@@ -847,6 +873,32 @@
             <Parameter Name="idPregunta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result)" />
+          <FunctionImport Name="Sp_CabeceraVersionCuestionarioEliminar">
+            <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CabeceraVersionCuestionarioInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdAsignarResponsable" Mode="In" Type="Int32" />
+            <Parameter Name="Caracteristica" Mode="In" Type="String" />
+            <Parameter Name="Version" Mode="In" Type="Int32" />
+            <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
+            <Parameter Name="estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CabeceraVersionCuestionarioModificar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
+            <Parameter Name="IdAsignarResponsable" Mode="In" Type="Int32" />
+            <Parameter Name="Caracteristica" Mode="In" Type="String" />
+            <Parameter Name="Version" Mode="In" Type="Int32" />
+            <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
+            <Parameter Name="estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_VersionamientoPreguntaEliminar">
+            <Parameter Name="IdVersionamientoPregunta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_VersionamientoPreguntaInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
+            <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_TokenConsultar_Result">
           <Property Type="Int32" Name="TOKEN_IdToken" Nullable="false" />
@@ -3298,6 +3350,11 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_VersionamientoPreguntaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_VersionamientoPreguntaEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_VersionamientoPreguntaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_VersionamientoPreguntaInsertar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
