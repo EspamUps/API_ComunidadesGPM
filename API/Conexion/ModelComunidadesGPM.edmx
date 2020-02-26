@@ -922,7 +922,7 @@
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_PeriodoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PeriodoConsultar_Result)" />
-          <FunctionImport Name="Sp_CuestionarioPublicadoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CuestionarioPublicadoConsultar_Result)" />
+          <FunctionImport Name="Sp_CuestionarioPublicadoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CuestionarioPublicadoConsultar_Result1)" />
         </EntityContainer>
         <ComplexType Name="Sp_AsignarResponsableConsultar_Result">
           <Property Type="Int32" Name="ASIGNARRESPONSABLE_IdAsignarResponsable" Nullable="false" />
@@ -1838,6 +1838,88 @@
           <Property Type="Int32" Name="IdCuestionarioPublicado" Nullable="false" />
           <Property Type="Boolean" Name="EstadoCuestionarioPublicado" Nullable="false" />
           <Property Type="DateTime" Name="FechaPublicacionCuestionarioPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="USUARIOPUBLICADO_IdUsuario" Nullable="false" />
+          <Property Type="Int32" Name="USUARIOPUBLICADO_IdPersona" Nullable="false" />
+          <Property Type="String" Name="USUARIOPUBLICADO_Correo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="USUARIOPUBLICADO_Clave" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="USUARIOPUBLICADO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PERSONAPUBLICADO_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONAPUBLICADO_PrimerNombre" Nullable="false" />
+          <Property Type="String" Name="PERSONAPUBLICADO_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONAPUBLICADO_PrimerApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONAPUBLICADO_SegundoApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONAPUBLICADO_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="PERSONAPUBLICADO_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONAPUBLICADO_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONAPUBLICADO_Direccion" Nullable="false" />
+          <Property Type="Boolean" Name="PERSONAPUBLICADO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="SEXOPUBLICADO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXOPUBLICADO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXOPUBLICADO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXOPUBLICADO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACIONPUBLICADO_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACIONPUBLICADO_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACIOPUBLICADON_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACIONPUBLICADO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIOPUBLICADO_IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIOPUBLICADO_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOUSUARIOPUBLICADO_Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="TIPOUSUARIOPUBLICADO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="IdPeriodo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicioPeriodo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinPeriodo" Nullable="false" />
+          <Property Type="String" Name="DescripcionPeriodo" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPeriodo" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraVersionCuestionario" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionCuestionario" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionCuestionario" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionCuestionario" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionCuestionario" Nullable="false" />
+          <Property Type="String" Name="UtilizadoCabeceraVersionCuestionario" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="ASIGNARRESPONSABLE_IdAsignarResponsable" Nullable="false" />
+          <Property Type="DateTime" Name="ASIGNARRESPONSABLE_FechaAsignacion" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="ASIGNARRESPONSABLE_Estado" Nullable="false" />
+          <Property Type="Int32" Name="CUESTIONARIOGENERICO_IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="CUESTIONARIOGENERICO_Descripcion" Nullable="false" />
+          <Property Type="String" Name="CUESTIONARIOGENERICO_Nombre" Nullable="false" />
+          <Property Type="Boolean" Name="CUESTIONARIOGENERICO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+          <Property Type="Int32" Name="USUARIO_IdPersona" Nullable="false" />
+          <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOUSUARIO_Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="TIPOUSUARIO_Estado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_CuestionarioPublicadoConsultar_Result1">
+          <Property Type="Int32" Name="IdCuestionarioPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCuestionarioPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionCuestionarioPublicado" Nullable="false" Precision="23" />
+          <Property Type="String" Name="UtilizadoCuestionarioPublicado" Nullable="false" MaxLength="1" />
           <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_IdAsignarUsuarioTipoUsuario" Nullable="false" />
           <Property Type="Boolean" Name="ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_Estado" Nullable="false" />
           <Property Type="Int32" Name="USUARIOPUBLICADO_IdUsuario" Nullable="false" />
@@ -3068,10 +3150,11 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_CuestionarioPublicadoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioPublicadoConsultar">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CuestionarioPublicadoConsultar_Result">
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CuestionarioPublicadoConsultar_Result1">
                 <ScalarProperty Name="IdCuestionarioPublicado" ColumnName="IdCuestionarioPublicado" />
                 <ScalarProperty Name="EstadoCuestionarioPublicado" ColumnName="EstadoCuestionarioPublicado" />
                 <ScalarProperty Name="FechaPublicacionCuestionarioPublicado" ColumnName="FechaPublicacionCuestionarioPublicado" />
+                <ScalarProperty Name="UtilizadoCuestionarioPublicado" ColumnName="UtilizadoCuestionarioPublicado" />
                 <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_IdAsignarUsuarioTipoUsuario" />
                 <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_Estado" />
                 <ScalarProperty Name="USUARIOPUBLICADO_IdUsuario" ColumnName="USUARIOPUBLICADO_IdUsuario" />

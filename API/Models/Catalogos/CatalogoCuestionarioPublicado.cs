@@ -39,7 +39,59 @@ namespace API.Models.Catalogos
                     IdCuestionarioPublicado=item.IdCuestionarioPublicado,
                     IdCuestionarioPublicadoEncriptado=_seguridad.Encriptar(item.IdCuestionarioPublicado.ToString()),
                     Estado=item.EstadoCuestionarioPublicado,
-                    FechaPublicacion=item.FechaPublicacionCuestionarioPublicado,                     
+                    FechaPublicacion=item.FechaPublicacionCuestionarioPublicado, 
+                    Utilizado=item.UtilizadoCuestionarioPublicado,
+                    AsignarUsuarioTipoUsuario = new AsignarUsuarioTipoUsuario()
+                    {
+                        IdAsignarUsuarioTipoUsuario = item.ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_IdAsignarUsuarioTipoUsuario,
+                        IdAsignarUsuarioTipoUsuarioEncriptado = _seguridad.Encriptar(item.ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_IdAsignarUsuarioTipoUsuario.ToString()),
+                        Estado = item.ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_Estado,
+                        Usuario = new Usuario()
+                        {
+                            IdUsuarioEncriptado = _seguridad.Encriptar(item.USUARIOPUBLICADO_IdUsuario.ToString()),
+                            IdUsuario = item.USUARIOPUBLICADO_IdUsuario,
+                            Correo = item.USUARIOPUBLICADO_Correo,
+                            ClaveEncriptada = _seguridad.Encriptar(item.USUARIOPUBLICADO_Clave.ToString()),
+                            Estado = item.USUARIOPUBLICADO_Estado,
+                            Persona = new Persona()
+                            {
+                                IdPersonaEncriptado = _seguridad.Encriptar(item.PERSONAPUBLICADO_IdPersona.ToString()),
+                                IdPersona = item.PERSONAPUBLICADO_IdPersona,
+                                PrimerNombre = item.PERSONAPUBLICADO_PrimerNombre,
+                                SegundoNombre = item.PERSONAPUBLICADO_SegundoNombre,
+                                PrimerApellido = item.PERSONAPUBLICADO_PrimerApellido,
+                                SegundoApellido = item.PERSONAPUBLICADO_SegundoApellido,
+                                NumeroIdentificacion = item.PERSONAPUBLICADO_NumeroIdentificacion,
+                                Telefono = item.PERSONAPUBLICADO_Telefono,
+                                Direccion = item.PERSONA_Direccion,
+                                Estado = item.PERSONAPUBLICADO_Estado,
+                                Sexo = new Sexo()
+                                {
+                                    IdSexoEncriptado = _seguridad.Encriptar(item.SEXOPUBLICADO_IdSexo.ToString()),
+                                    IdSexo = item.SEXOPUBLICADO_IdSexo,
+                                    Identificador = item.SEXOPUBLICADO_Identificador,
+                                    Descripcion = item.SEXOPUBLICADO_Descripcion,
+                                    Estado = item.SEXOPUBLICADO_Estado,
+                                },
+                                TipoIdentificacion = new TipoIdentificacion()
+                                {
+                                    IdTipoIdentificacionEncriptado = _seguridad.Encriptar(item.TIPOIDENTIFICACIONPUBLICADO_IdTipoIdentificacion.ToString()),
+                                    IdTipoIdentificacion = item.TIPOIDENTIFICACIONPUBLICADO_IdTipoIdentificacion,
+                                    Identificador = item.TIPOIDENTIFICACIONPUBLICADO_Identificador,
+                                    Descripcion = item.TIPOIDENTIFICACIOPUBLICADON_Descripcion,
+                                    Estado = item.TIPOIDENTIFICACIONPUBLICADO_Estado,
+                                }
+                            }
+                        },
+                        TipoUsuario = new TipoUsuario()
+                        {
+                            IdTipoUsuario = item.TIPOUSUARIOPUBLICADO_IdTipoUsuario,
+                            IdTipoUsuarioEncriptado = _seguridad.Encriptar(item.TIPOUSUARIOPUBLICADO_IdTipoUsuario.ToString()),
+                            Descripcion = item.TIPOUSUARIOPUBLICADO_Descripcion,
+                            Estado = item.TIPOUSUARIOPUBLICADO_Estado,
+                            Identificador = item.TIPOUSUARIOPUBLICADO_Identificador
+                        }
+                    },
                     Periodo = new Periodo() {
                         IdPeriodo=item.IdPeriodo,
                         IdPeriodoEncriptado=_seguridad.Encriptar(item.IdPeriodo.ToString()),

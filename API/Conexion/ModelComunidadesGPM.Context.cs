@@ -1651,9 +1651,9 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PeriodoConsultar_Result>("Sp_PeriodoConsultar");
         }
     
-        public virtual ObjectResult<Sp_CuestionarioPublicadoConsultar_Result> Sp_CuestionarioPublicadoConsultar()
+        public virtual ObjectResult<Sp_CuestionarioPublicadoConsultar_Result1> Sp_CuestionarioPublicadoConsultar()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CuestionarioPublicadoConsultar_Result>("Sp_CuestionarioPublicadoConsultar");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CuestionarioPublicadoConsultar_Result1>("Sp_CuestionarioPublicadoConsultar");
         }
     }
 }
