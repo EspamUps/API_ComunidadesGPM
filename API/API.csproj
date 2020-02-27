@@ -251,6 +251,9 @@
     <Compile Include="Conexion\Sp_CuestionarioGenericoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_CuestionarioPublicadoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_LiderComunitarioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -264,6 +267,9 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ParroquiaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PeriodoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PersonaConsultarSinUsuario_Result.cs">
@@ -381,12 +387,14 @@
     <Compile Include="Models\Catalogos\CatalogoComponente.cs" />
     <Compile Include="Models\Catalogos\CatalogoComunidad.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioGenerico.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCuestionarioPublicado.cs" />
     <Compile Include="Models\Catalogos\CatalogoLiderComunitario.cs" />
     <Compile Include="Models\Catalogos\CatalogoModulo.cs" />
     <Compile Include="Models\Catalogos\CatalogoOpcionDosMatriz.cs" />
     <Compile Include="Models\Catalogos\CatalogoOpcionPreguntaSeleccion.cs" />
     <Compile Include="Models\Catalogos\CatalogoOpcionUnoMatriz.cs" />
     <Compile Include="Models\Catalogos\CatalogoParroquia.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPeriodo.cs" />
     <Compile Include="Models\Catalogos\CatalogoPersona.cs" />
     <Compile Include="Models\Catalogos\CatalogoPrefecto.cs" />
     <Compile Include="Models\Catalogos\CatalogoPregunta.cs" />
@@ -423,6 +431,7 @@
     <Compile Include="Models\Entidades\OpcionDosMatriz.cs" />
     <Compile Include="Models\Entidades\OpcionPreguntaSeleccion.cs" />
     <Compile Include="Models\Entidades\OpcionUnoMatriz.cs" />
+    <Compile Include="Models\Entidades\Periodo.cs" />
     <Compile Include="Models\Entidades\Prefecto.cs" />
     <Compile Include="Models\Entidades\Pregunta.cs" />
     <Compile Include="Models\Entidades\PreguntaAbierta.cs" />

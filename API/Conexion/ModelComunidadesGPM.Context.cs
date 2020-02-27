@@ -1611,5 +1611,49 @@ namespace API.Conexion
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CabeceraVersionCuestionarioConsultar_Result1>("Sp_CabeceraVersionCuestionarioConsultar");
         }
+    
+        public virtual int Sp_CuestionarioPublicadoEliminar(Nullable<int> idCuestionarioPublicado)
+        {
+            var idCuestionarioPublicadoParameter = idCuestionarioPublicado.HasValue ?
+                new ObjectParameter("IdCuestionarioPublicado", idCuestionarioPublicado) :
+                new ObjectParameter("IdCuestionarioPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CuestionarioPublicadoEliminar", idCuestionarioPublicadoParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_CuestionarioPublicadoInsertar(Nullable<int> idCabeceraVersionCuestionario, Nullable<int> idPeriodo, Nullable<System.DateTime> fechaPublicacion, Nullable<int> idAsignarUsuarioTipoUsuario, Nullable<bool> estado)
+        {
+            var idCabeceraVersionCuestionarioParameter = idCabeceraVersionCuestionario.HasValue ?
+                new ObjectParameter("IdCabeceraVersionCuestionario", idCabeceraVersionCuestionario) :
+                new ObjectParameter("IdCabeceraVersionCuestionario", typeof(int));
+    
+            var idPeriodoParameter = idPeriodo.HasValue ?
+                new ObjectParameter("IdPeriodo", idPeriodo) :
+                new ObjectParameter("IdPeriodo", typeof(int));
+    
+            var fechaPublicacionParameter = fechaPublicacion.HasValue ?
+                new ObjectParameter("FechaPublicacion", fechaPublicacion) :
+                new ObjectParameter("FechaPublicacion", typeof(System.DateTime));
+    
+            var idAsignarUsuarioTipoUsuarioParameter = idAsignarUsuarioTipoUsuario.HasValue ?
+                new ObjectParameter("IdAsignarUsuarioTipoUsuario", idAsignarUsuarioTipoUsuario) :
+                new ObjectParameter("IdAsignarUsuarioTipoUsuario", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CuestionarioPublicadoInsertar", idCabeceraVersionCuestionarioParameter, idPeriodoParameter, fechaPublicacionParameter, idAsignarUsuarioTipoUsuarioParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_PeriodoConsultar_Result> Sp_PeriodoConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PeriodoConsultar_Result>("Sp_PeriodoConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_CuestionarioPublicadoConsultar_Result> Sp_CuestionarioPublicadoConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CuestionarioPublicadoConsultar_Result>("Sp_CuestionarioPublicadoConsultar");
+        }
     }
 }

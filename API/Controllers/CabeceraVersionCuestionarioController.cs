@@ -17,6 +17,7 @@ namespace API.Controllers
         CatalogoAsignarResponsable _objCatalogoAsignarResponsable = new CatalogoAsignarResponsable();
         CatalogoCabeceraVersionCuestionario _objCatalogoCabeceraVersionCuestionario = new CatalogoCabeceraVersionCuestionario();
         CatalogoVersionamientoPregunta _objCatalogoVersionamientoPregunta = new CatalogoVersionamientoPregunta();
+        CatalogoCuestionarioGenerico _objCatalogoCuestionarioGenerico = new CatalogoCuestionarioGenerico();
         CatalogoPregunta _objCatalogoPregunta = new CatalogoPregunta();
 
         [HttpPost]
@@ -177,6 +178,55 @@ namespace API.Controllers
                 }
                 _respuesta = _listaCabeceraVersionCuestionario;
                 _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/cabeceraversioncuestionario_consultarporidcuestionariogenerico")]
+        public object cabeceraversioncuestionario_consultarporidcuestionariogenerico(string _idCuestionarioGenericoEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idCuestionarioGenericoEncriptado == null || string.IsNullOrEmpty(_idCuestionarioGenericoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cuestionario genérico";
+                }
+                else
+                {
+                    int _idCuestionarioGenerico = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioGenericoEncriptado));
+                    var _objCuestionarioGenerico = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenericoPorId(_idCuestionarioGenerico).Where(c => c.Estado == true).FirstOrDefault();
+                    if (_objCuestionarioGenerico == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el cuestionario genérico";
+                    }
+                    else
+                    {
+                        var _listaCabeceraVersionCuestionario = _objCatalogoCabeceraVersionCuestionario.ConsultarCabeceraVersionCuestionarioPorIdCuestionarioGenerico(_idCuestionarioGenerico).Where(c => c.Estado == true).ToList();
+                        foreach (var item in _listaCabeceraVersionCuestionario)
+                        {
+                            item.IdCabeceraVersionCuestionario = 0;
+                            item.AsignarResponsable.IdAsignarResponsable = 0;
+                            item.AsignarResponsable.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                            item.AsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
+                            item.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
+                            item.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
+                            item.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
+                            item.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                            item.AsignarResponsable.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
+                        }
+                        _respuesta = _listaCabeceraVersionCuestionario;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
             }
             catch (Exception ex)
             {
