@@ -254,6 +254,9 @@
     <Compile Include="Conexion\Sp_CuestionarioPublicadoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_CuestionarioPublicadoConsultar_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_LiderComunitarioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -350,6 +353,7 @@
     <Compile Include="Controllers\ComponenteController.cs" />
     <Compile Include="Controllers\ComunidadController.cs" />
     <Compile Include="Controllers\CuestionarioGenericoController.cs" />
+    <Compile Include="Controllers\CuestionarioPublicadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiderComunitarioController.cs" />
     <Compile Include="Controllers\ConfigurarMatrizController.cs" />
@@ -357,6 +361,7 @@
     <Compile Include="Controllers\OpcionPreguntaSeleccionController.cs" />
     <Compile Include="Controllers\OpcionUnoMatrizController.cs" />
     <Compile Include="Controllers\ParroquiaController.cs" />
+    <Compile Include="Controllers\PeriodoController.cs" />
     <Compile Include="Controllers\PersonaController.cs" />
     <Compile Include="Controllers\PrefectoController.cs" />
     <Compile Include="Controllers\PreguntaAbiertaController.cs" />
@@ -503,6 +508,8 @@
     <Content Include="Conexion\ModelComunidadesGPM.edmx.diagram">
       <DependentUpon>ModelComunidadesGPM.edmx</DependentUpon>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

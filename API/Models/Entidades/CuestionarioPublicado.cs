@@ -14,5 +14,6 @@ namespace API.Models.Entidades
         public CabeceraVersionCuestionario CabeceraVersionCuestionario { get; set; }
         public Periodo Periodo { get; set; }
         public bool Estado { get; set; }
+        public string Utilizado { get; set; }
     }
 }
