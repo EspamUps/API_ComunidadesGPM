@@ -16,6 +16,7 @@ namespace API.Controllers
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoAsignarUsuarioTipoUsuario _objCatalogoAsignarUsuarioTipoUsuario = new CatalogoAsignarUsuarioTipoUsuario();
         CatalogoUsuario _objCatalogoUsuario = new CatalogoUsuario();
+        CatalogoTipoUsuarios _objCatalogoTipoUsuario = new CatalogoTipoUsuarios();
         Seguridad _seguridad = new Seguridad();
 
         [HttpPost]
@@ -78,6 +79,51 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                 }
 
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/asignarusuariotipousuario_consultarporidentificadortipousuario")]
+        public object asignarusuariotipousuario_consultarporidentificadortipousuario (int _identificadorTipoUsuario)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_identificadorTipoUsuario == 0)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del tipo usuario que intenta consultar";
+                }
+                else
+                {
+                    var _tipoUsuario = _objCatalogoTipoUsuario.ConsultarTipoUsuarios().Where(c => c.Identificador == _identificadorTipoUsuario && c.Estado == true).FirstOrDefault();
+                    if (_tipoUsuario == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "El identificador ingresado no fue encontrado para un tipo usuario";
+                    }
+                    else
+                    {
+                        var lista = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuarioPorIdentificadorTipoUsuario(_identificadorTipoUsuario).Where(c => c.Estado == true).ToList();
+                        foreach (var item in lista)
+                        {
+                            item.IdAsignarUsuarioTipoUsuario = 0;
+                            item.Usuario.IdUsuario = 0;
+                            item.TipoUsuario.IdTipoUsuario = 0;
+                            item.Usuario.Persona.IdPersona = 0;
+                            item.Usuario.Persona.Sexo.IdSexo = 0;
+                            item.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                        }
+                        _respuesta = lista;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
             }
             catch (Exception ex)
             {
