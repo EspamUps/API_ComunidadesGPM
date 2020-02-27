@@ -94,6 +94,13 @@ namespace API.Controllers
                                     _objCabeceraVersionCuestionario = _objCatalogoCabeceraVersionCuestionario.ConsultarCabeceraVersionCuestionarioPorId(_idCabeceraVersionCuestionario).Where(c => c.Estado == true).FirstOrDefault();
                                     _objCabeceraVersionCuestionario.IdCabeceraVersionCuestionario = 0;
                                     _objCabeceraVersionCuestionario.AsignarResponsable.IdAsignarResponsable = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
                                     _respuesta = _objCabeceraVersionCuestionario;
                                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                                 }
