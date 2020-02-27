@@ -129,7 +129,7 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
-          public List<CabeceraVersionCuestionario> ConsultarCabeceraVersionCuestionarioPorId(int _idCabeceraVersionCuestionario)
+        public List<CabeceraVersionCuestionario> ConsultarCabeceraVersionCuestionarioPorId(int _idCabeceraVersionCuestionario)
         {
             List<CabeceraVersionCuestionario> _lista = new List<CabeceraVersionCuestionario>();
             foreach (var item in db.Sp_CabeceraVersionCuestionarioConsultar().Where(c=>c.IdCabeceraVersionCuestionario==_idCabeceraVersionCuestionario).ToList())
