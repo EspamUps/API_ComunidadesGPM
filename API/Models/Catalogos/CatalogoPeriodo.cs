@@ -20,6 +20,7 @@ namespace API.Models.Catalogos
                 {
                     IdPeriodo = item.IdPeriodo,
                     IdPeriodoEncriptado = _seguridad.Encriptar(item.IdPeriodo.ToString()),
+                    Descripcion = item.Descripcion,//
                     Estado = item.Estado,
                     FechaInicio = item.FechaInicio,
                     FechaFin = item.FechaFin,
