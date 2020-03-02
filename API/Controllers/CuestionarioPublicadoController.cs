@@ -170,8 +170,8 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        [Route("api/cuestionariopublicado_consultarporidasignarusuariotipousuario")]
-        public object cuestionariopublicado_consultar(string _idAsignarUsuarioTipoUsuarioEncriptado)
+        [Route("api/cuestionariopublicado_consultarporidasingarusuariotipousuario")]
+        public object cuestionariopublicado_consultarporidasingarusuariotipousuario(string _idAsignarUsuarioTipoUsuarioEncriptado)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
@@ -191,7 +191,7 @@ namespace API.Controllers
                         _http.mensaje = "El identificador ingresado no fue encontrado para un usuario";
                     }
                     else {
-                        var _listaCuestionarioPublicado = _objCatalogoCuestionarioPublicado.ConsultarCuestionarioPublicado().Where(c => c.Estado == true && c.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario== _objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario).ToList();
+                        var _listaCuestionarioPublicado = _objCatalogoCuestionarioPublicado.ConsultarCuestionarioPublicado().Where(c => c.Estado == true && c.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario== _objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario).ToList();
                         foreach (var _objCuestionarioPublicado in _listaCuestionarioPublicado)
                         {
                             _objCuestionarioPublicado.IdCuestionarioPublicado = 0;

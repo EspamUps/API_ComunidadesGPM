@@ -49,12 +49,12 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador del cuestionario publicado.";
                 }
-                else if (_objAsignarEncuestado.FechaInicio == null)
+                else if (_objAsignarEncuestado.FechaInicio == null || _objAsignarEncuestado.FechaInicio.ToShortDateString()=="01/01/0001")
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese la fecha de inicio.";
                 }
-                else if (_objAsignarEncuestado.FechaFin == null)
+                else if (_objAsignarEncuestado.FechaFin == null || _objAsignarEncuestado.FechaFin.ToShortDateString() == "01/01/0001") 
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese la fecha de finalización.";
