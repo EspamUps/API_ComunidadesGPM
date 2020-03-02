@@ -53,6 +53,7 @@ namespace API.Models.Catalogos
                     FechaFin=item.FechaFinAsignarEncuestado,
                     Estado=item.EstadoAsignarEncuestado,
                     Obligatorio=item.ObligatorioAsignarEncuestado,
+                    Utilizado=item.UtilizadoAsignarEncuestado,
                     AsignarUsuarioTipoUsuario = new AsignarUsuarioTipoUsuario()
                     {
                         IdAsignarUsuarioTipoUsuario = item.ASIGNARUSUARIOTIPOUSUARIORESPONSABLE_IdAsignarUsuarioTipoUsuario,
@@ -355,6 +356,7 @@ namespace API.Models.Catalogos
                     FechaFin = item.FechaFinAsignarEncuestado,
                     Estado = item.EstadoAsignarEncuestado,
                     Obligatorio = item.ObligatorioAsignarEncuestado,
+                    Utilizado = item.UtilizadoAsignarEncuestado,
                     AsignarUsuarioTipoUsuario = new AsignarUsuarioTipoUsuario()
                     {
                         IdAsignarUsuarioTipoUsuario = item.ASIGNARUSUARIOTIPOUSUARIORESPONSABLE_IdAsignarUsuarioTipoUsuario,
@@ -657,6 +659,7 @@ namespace API.Models.Catalogos
                     FechaFin = item.FechaFinAsignarEncuestado,
                     Estado = item.EstadoAsignarEncuestado,
                     Obligatorio = item.ObligatorioAsignarEncuestado,
+                    Utilizado = item.UtilizadoAsignarEncuestado,
                     AsignarUsuarioTipoUsuario = new AsignarUsuarioTipoUsuario()
                     {
                         IdAsignarUsuarioTipoUsuario = item.ASIGNARUSUARIOTIPOUSUARIORESPONSABLE_IdAsignarUsuarioTipoUsuario,
