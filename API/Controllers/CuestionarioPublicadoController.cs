@@ -168,5 +168,63 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+
+        [HttpPost]
+        [Route("api/cuestionariopublicado_consultarporidasignarusuariotipousuario")]
+        public object cuestionariopublicado_consultar(string _idAsignarUsuarioTipoUsuarioEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idAsignarUsuarioTipoUsuarioEncriptado == null || string.IsNullOrEmpty(_idAsignarUsuarioTipoUsuarioEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del usuario que intenta consultar";
+                }
+                else {
+                    int _idAsignarUsuarioTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_idAsignarUsuarioTipoUsuarioEncriptado));
+                    var _objAsignarUsuarioTipoUsuario = new CatalogoAsignarUsuarioTipoUsuario().ConsultarAsignarUsuarioTipoUsuarioPorId(_idAsignarUsuarioTipoUsuario).FirstOrDefault();
+                    if (_objAsignarUsuarioTipoUsuario == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "El identificador ingresado no fue encontrado para un usuario";
+                    }
+                    else {
+                        var _listaCuestionarioPublicado = _objCatalogoCuestionarioPublicado.ConsultarCuestionarioPublicado().Where(c => c.Estado == true && c.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario== _objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario).ToList();
+                        foreach (var _objCuestionarioPublicado in _listaCuestionarioPublicado)
+                        {
+                            _objCuestionarioPublicado.IdCuestionarioPublicado = 0;
+                            _objCuestionarioPublicado.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
+                            _objCuestionarioPublicado.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
+                            _objCuestionarioPublicado.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
+                            _objCuestionarioPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
+                            _objCuestionarioPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
+                            _objCuestionarioPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                            _objCuestionarioPublicado.CabeceraVersionCuestionario.IdCabeceraVersionCuestionario = 0;
+                            _objCuestionarioPublicado.CabeceraVersionCuestionario.AsignarResponsable.IdAsignarResponsable = 0;
+                            _objCuestionarioPublicado.CabeceraVersionCuestionario.AsignarResponsable.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                            _objCuestionarioPublicado.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
+                            _objCuestionarioPublicado.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
+                            _objCuestionarioPublicado.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
+                            _objCuestionarioPublicado.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
+                            _objCuestionarioPublicado.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
+                            _objCuestionarioPublicado.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                            _objCuestionarioPublicado.Periodo.IdPeriodo = 0;
+                        }
+                        _respuesta = _listaCuestionarioPublicado;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
     }
 }
