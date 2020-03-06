@@ -18,5 +18,6 @@ namespace API.Models.Entidades
         public DateTime FechaFin { get; set; }
         public bool Estado { get; set; }
         public string Utilizado { get; set; }
+        public string FinalizadaCabeceraRespuestas { get; set; }
     }
 }

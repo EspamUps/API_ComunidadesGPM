@@ -949,5 +949,180 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
+        public List<AsignarEncuestado> ConsultarAsignarEncuestadoPorIdAsignarUsuarioTipoUsuario(int _idAsignarUsuarioTipoUsuario)
+        {
+            List<AsignarEncuestado> _lista = new List<AsignarEncuestado>();
+            foreach (var item in db.Sp_AsignarEncuestadoConsultarPorTecnico(_idAsignarUsuarioTipoUsuario))
+            {
+                _lista.Add(new AsignarEncuestado()
+                {
+                    IdAsignarEncuestado = item.IdAsignarEncuestado,
+                    IdAsignarEncuestadoEncriptado = _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()),
+                    FechaInicio = item.FechaInicioAsignarEncuestado,
+                    FechaFin = item.FechaFinAsignarEncuestado,
+                    Estado = item.EstadoAsignarEncuestado,
+                    Obligatorio = item.ObligatorioAsignarEncuestado,
+                    Utilizado = item.UtilizadoAsignarEncuestado,
+                    FinalizadaCabeceraRespuestas=item.CabeceraRespuestaFinalizada,
+                    AsignarUsuarioTipoUsuario = new AsignarUsuarioTipoUsuario()
+                    {
+                        IdAsignarUsuarioTipoUsuario = item.ASIGNARUSUARIOTIPOUSUARIORESPONSABLE_IdAsignarUsuarioTipoUsuario,
+                        IdAsignarUsuarioTipoUsuarioEncriptado = _seguridad.Encriptar(item.ASIGNARUSUARIOTIPOUSUARIORESPONSABLE_IdAsignarUsuarioTipoUsuario.ToString()),
+                        Estado = item.ASIGNARUSUARIOTIPOUSUARIORESPONSABLE_Estado,
+                        Usuario = new Usuario()
+                        {
+                            IdUsuarioEncriptado = _seguridad.Encriptar(item.USUARIORESPONSABLE_IdUsuario.ToString()),
+                            IdUsuario = item.USUARIORESPONSABLE_IdUsuario,
+                            Correo = item.USUARIORESPONSABLE_Correo,
+                            ClaveEncriptada = _seguridad.Encriptar(item.USUARIORESPONSABLE_Clave.ToString()),
+                            Estado = item.USUARIORESPONSABLE_Estado,
+                            Persona = new Persona()
+                            {
+                                IdPersonaEncriptado = _seguridad.Encriptar(item.PERSONARESPONSABLE_IdPersona.ToString()),
+                                IdPersona = item.PERSONARESPONSABLE_IdPersona,
+                                PrimerNombre = item.PERSONARESPONSABLE_PrimerNombre,
+                                SegundoNombre = item.PERSONARESPONSABLE_SegundoNombre,
+                                PrimerApellido = item.PERSONARESPONSABLE_PrimerApellido,
+                                SegundoApellido = item.PERSONARESPONSABLE_SegundoApellido,
+                                NumeroIdentificacion = item.PERSONARESPONSABLE_NumeroIdentificacion,
+                                Telefono = item.PERSONARESPONSABLE_Telefono,
+                                Estado = item.PERSONARESPONSABLE_Estado,
+                                Sexo = new Sexo()
+                                {
+                                    IdSexoEncriptado = _seguridad.Encriptar(item.SEXORESPONSABLE_IdSexo.ToString()),
+                                    IdSexo = item.SEXORESPONSABLE_IdSexo,
+                                    Identificador = item.SEXORESPONSABLE_Identificador,
+                                    Descripcion = item.SEXORESPONSABLE_Descripcion,
+                                    Estado = item.SEXORESPONSABLE_Estado,
+                                },
+                                TipoIdentificacion = new TipoIdentificacion()
+                                {
+                                    IdTipoIdentificacionEncriptado = _seguridad.Encriptar(item.TIPOIDENTIFICACIONRESPONSABLE_IdTipoIdentificacion.ToString()),
+                                    IdTipoIdentificacion = item.TIPOIDENTIFICACIONRESPONSABLE_IdTipoIdentificacion,
+                                    Identificador = item.TIPOIDENTIFICACIONRESPONSABLE_Identificador,
+                                    Descripcion = item.TIPOIDENTIFICACIORESPONSABLEN_Descripcion,
+                                    Estado = item.TIPOIDENTIFICACIONRESPONSABLE_Estado,
+                                }
+                            }
+                        },
+                        TipoUsuario = new TipoUsuario()
+                        {
+                            IdTipoUsuario = item.TIPOUSUARIORESPONSABLE_IdTipoUsuario,
+                            IdTipoUsuarioEncriptado = _seguridad.Encriptar(item.TIPOUSUARIORESPONSABLE_IdTipoUsuario.ToString()),
+                            Descripcion = item.TIPOUSUARIORESPONSABLE_Descripcion,
+                            Estado = item.TIPOUSUARIORESPONSABLE_Estado,
+                            Identificador = item.TIPOUSUARIORESPONSABLE_Identificador
+                        }
+                    },
+                    AsignarUsuarioTipoUsuarioTecnico = new AsignarUsuarioTipoUsuario()
+                    {
+                        IdAsignarUsuarioTipoUsuario = item.ASIGNARUSUARIOTIPOUSUARIOTECNICO_IdAsignarUsuarioTipoUsuario,
+                        IdAsignarUsuarioTipoUsuarioEncriptado = _seguridad.Encriptar(item.ASIGNARUSUARIOTIPOUSUARIOTECNICO_IdAsignarUsuarioTipoUsuario.ToString()),
+                        Estado = item.ASIGNARUSUARIOTIPOUSUARIOTECNICO_Estado,
+                        Usuario = new Usuario()
+                        {
+                            IdUsuarioEncriptado = _seguridad.Encriptar(item.USUARIOTECNICO_IdUsuario.ToString()),
+                            IdUsuario = item.USUARIOTECNICO_IdUsuario,
+                            Correo = item.USUARIOTECNICO_Correo,
+                            ClaveEncriptada = _seguridad.Encriptar(item.USUARIOTECNICO_Clave.ToString()),
+                            Estado = item.USUARIOTECNICO_Estado,
+                            Persona = new Persona()
+                            {
+                                IdPersonaEncriptado = _seguridad.Encriptar(item.PERSONATECNICO_IdPersona.ToString()),
+                                IdPersona = item.PERSONATECNICO_IdPersona,
+                                PrimerNombre = item.PERSONATECNICO_PrimerNombre,
+                                SegundoNombre = item.PERSONATECNICO_SegundoNombre,
+                                PrimerApellido = item.PERSONATECNICO_PrimerApellido,
+                                SegundoApellido = item.PERSONATECNICO_SegundoApellido,
+                                NumeroIdentificacion = item.PERSONATECNICO_NumeroIdentificacion,
+                                Telefono = item.PERSONATECNICO_Telefono,
+                                Estado = item.PERSONATECNICO_Estado,
+                                Sexo = new Sexo()
+                                {
+                                    IdSexoEncriptado = _seguridad.Encriptar(item.SEXOTECNICO_IdSexo.ToString()),
+                                    IdSexo = item.SEXOTECNICO_IdSexo,
+                                    Identificador = item.SEXOTECNICO_Identificador,
+                                    Descripcion = item.SEXOTECNICO_Descripcion,
+                                    Estado = item.SEXOTECNICO_Estado,
+                                },
+                                TipoIdentificacion = new TipoIdentificacion()
+                                {
+                                    IdTipoIdentificacionEncriptado = _seguridad.Encriptar(item.TIPOIDENTIFICACIONTECNICO_IdTipoIdentificacion.ToString()),
+                                    IdTipoIdentificacion = item.TIPOIDENTIFICACIONTECNICO_IdTipoIdentificacion,
+                                    Identificador = item.TIPOIDENTIFICACIONTECNICO_Identificador,
+                                    Descripcion = item.TIPOIDENTIFICACIOTECNICON_Descripcion,
+                                    Estado = item.TIPOIDENTIFICACIONTECNICO_Estado,
+                                }
+                            }
+                        },
+                        TipoUsuario = new TipoUsuario()
+                        {
+                            IdTipoUsuario = item.TIPOUSUARIOTECNICO_IdTipoUsuario,
+                            IdTipoUsuarioEncriptado = _seguridad.Encriptar(item.TIPOUSUARIOTECNICO_IdTipoUsuario.ToString()),
+                            Descripcion = item.TIPOUSUARIOTECNICO_Descripcion,
+                            Estado = item.TIPOUSUARIOTECNICO_Estado,
+                            Identificador = item.TIPOUSUARIOTECNICO_Identificador
+                        }
+                    },
+                    Comunidad = new Comunidad()
+                    {
+                        IdComunidad = item.IdComunidad,
+                        IdComunidadEncriptado = _seguridad.Encriptar(item.IdComunidad.ToString()),
+                        CodigoComunidad = item.CodigoComunidad,
+                        DescripcionComunidad = item.DescripcionComunidad,
+                        EstadoComunidad = item.EstadoComunidad,
+                        NombreComunidad = item.NombreComunidad,
+                        RutaLogoComunidad = item.RutaLogoComunidad,
+                        Parroquia = new Parroquia()
+                        {
+                            IdParroquia = item.IdParroquia,
+                            IdParroquiaEncriptado = _seguridad.Encriptar(item.IdParroquia.ToString()),
+                            DescripcionParroquia = item.DescripcionParroquia,
+                            CodigoParroquia = item.CodigoParroquia,
+                            EstadoParroquia = item.EstadoParroquia,
+                            NombreParroquia = item.NombreParroquia,
+                            RutaLogoParroquia = item.RutaLogoParroquia,
+                            Canton = new Canton()
+                            {
+                                IdCanton = item.IdCanton,
+                                IdCantonEncriptado = _seguridad.Encriptar(item.IdCanton.ToString()),
+                                CodigoCanton = item.CodigoCanton,
+                                DescripcionCanton = item.DescripcionCanton,
+                                NombreCanton = item.NombreCanton,
+                                RutaLogoCanton = item.RutaLogoCanton,
+                                EstadoCanton = item.EstadoCanton,
+                                Provincia = new Provincia()
+                                {
+                                    IdProvincia = item.IdProvincia,
+                                    IdProvinciaEncriptado = _seguridad.Encriptar(item.IdProvincia.ToString()),
+                                    CodigoProvincia = item.CodigoProvincia,
+                                    DescripcionProvincia = item.DescripcionProvincia,
+                                    NombreProvincia = item.NombreProvincia,
+                                    RutaLogoProvincia = item.RutaLogoProvincia,
+                                    EstadoProvincia = item.EstadoProvincia
+                                }
+                            }
+                        }
+                    },
+                    CuestionarioPublicado = new CuestionarioPublicado()
+                    {
+                        IdCuestionarioPublicado = item.IdCuestionarioPublicado,
+                        IdCuestionarioPublicadoEncriptado = _seguridad.Encriptar(item.IdCuestionarioPublicado.ToString()),
+                        Estado = item.EstadoCuestionarioPublicado,
+                        FechaPublicacion = item.FechaPublicacionCuestionarioPublicado,                      
+                        Periodo = new Periodo()
+                        {
+                            IdPeriodo = item.IdPeriodo,
+                            IdPeriodoEncriptado = _seguridad.Encriptar(item.IdPeriodo.ToString()),
+                            Estado = item.EstadoPeriodo,
+                            FechaInicio = item.FechaInicioPeriodo,
+                            FechaFin = item.FechaFinPeriodo
+                        }
+                    }
+                });
+            }
+            return _lista;
+        }
+
     }
 }

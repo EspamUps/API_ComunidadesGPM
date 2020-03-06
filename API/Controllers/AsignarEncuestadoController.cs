@@ -15,6 +15,7 @@ namespace API.Controllers
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoAsignarEncuestado _objCatalogoAsignarEncuestado = new CatalogoAsignarEncuestado();
         CatalogoCuestionarioPublicado _objCatalogoCuestionarioPublicado = new CatalogoCuestionarioPublicado();
+        CatalogoAsignarUsuarioTipoUsuario _objCatalogoAsignarUsuarioTipoUsuario = new CatalogoAsignarUsuarioTipoUsuario();
         Seguridad _seguridad = new Seguridad();
         [HttpPost]
         [Route("api/asignarencuestado_insertar")]
@@ -325,6 +326,79 @@ namespace API.Controllers
                             _objAsignarEncuestado.CuestionarioPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
                             _objAsignarEncuestado.CuestionarioPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
                             _objAsignarEncuestado.CuestionarioPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                        }
+                        _respuesta = _listaAsignarEncuestado;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+
+        [HttpPost]
+        [Route("api/asignarencuestado_consultarporidasignarusuariotipousuariotecnico")]
+        public object asignarencuestado_consultarporidasignarusuariotipousuariotecnico(string _idAsignarUsuarioTipoUsuarioTecnicoEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idAsignarUsuarioTipoUsuarioTecnicoEncriptado == null || string.IsNullOrEmpty(_idAsignarUsuarioTipoUsuarioTecnicoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del técnico.";
+                }
+                else
+                {
+                    int _idAsignarUsuarioTipoUsuarioTecnico = Convert.ToInt32(_seguridad.DesEncriptar(_idAsignarUsuarioTipoUsuarioTecnicoEncriptado));
+                    var _objAsignarUsuarioTipoUsuario = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuarioPorId(_idAsignarUsuarioTipoUsuarioTecnico).Where(c => c.Estado == true).FirstOrDefault();
+                    if (_objAsignarUsuarioTipoUsuario == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el objeto asignar usuario tipo usuario";
+                    }
+                    else if (_objAsignarUsuarioTipoUsuario.TipoUsuario.Identificador != 2)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "El usuario no está registrado como técnico, por lo tanto no puede realizarse la consulta";
+                    }
+                    else
+                    {
+                        var _listaAsignarEncuestado = _objCatalogoAsignarEncuestado.ConsultarAsignarEncuestadoPorIdAsignarUsuarioTipoUsuario(_idAsignarUsuarioTipoUsuarioTecnico).Where(c => c.Estado == true).ToList();
+                        foreach (var _objAsignarEncuestado in _listaAsignarEncuestado)
+                        {
+
+
+                            _objAsignarEncuestado.IdAsignarEncuestado = 0;
+
+                            _objAsignarEncuestado.Comunidad.IdComunidad = 0;
+                            _objAsignarEncuestado.Comunidad.Parroquia.IdParroquia = 0;
+                            _objAsignarEncuestado.Comunidad.Parroquia.Canton.IdCanton = 0;
+                            _objAsignarEncuestado.Comunidad.Parroquia.Canton.Provincia.IdProvincia = 0;
+
+                            _objAsignarEncuestado.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
+                            _objAsignarEncuestado.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
+                            _objAsignarEncuestado.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
+                            _objAsignarEncuestado.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
+                            _objAsignarEncuestado.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
+                            _objAsignarEncuestado.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+
+                            _objAsignarEncuestado.AsignarUsuarioTipoUsuarioTecnico.IdAsignarUsuarioTipoUsuario = 0;
+                            _objAsignarEncuestado.AsignarUsuarioTipoUsuarioTecnico.Usuario.IdUsuario = 0;
+                            _objAsignarEncuestado.AsignarUsuarioTipoUsuarioTecnico.TipoUsuario.IdTipoUsuario = 0;
+                            _objAsignarEncuestado.AsignarUsuarioTipoUsuarioTecnico.Usuario.Persona.IdPersona = 0;
+                            _objAsignarEncuestado.AsignarUsuarioTipoUsuarioTecnico.Usuario.Persona.Sexo.IdSexo = 0;
+                            _objAsignarEncuestado.AsignarUsuarioTipoUsuarioTecnico.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+
+                            _objAsignarEncuestado.CuestionarioPublicado.IdCuestionarioPublicado = 0;
+
+
+                            _objAsignarEncuestado.CuestionarioPublicado.Periodo.IdPeriodo = 0;
                         }
                         _respuesta = _listaAsignarEncuestado;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
