@@ -12,6 +12,7 @@ namespace API.Models.Entidades
         public CabeceraRespuesta CabeceraRespuesta { get; set; }
         public Pregunta Pregunta { get; set; }
         public int IdRespuestaLogica { get; set; }
+        public string IdRespuestaLogicaEncriptado { get; set; }
         public string DescripcionRespuestaAbierta { get; set; }
         public DateTime FechaRegistro { get; set; }
         public bool Estado { get; set; }

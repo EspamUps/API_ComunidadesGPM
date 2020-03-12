@@ -25,6 +25,24 @@ namespace API.Models.Catalogos
             }
         }
 
+        public int ModificarRespuesta(Respuesta _objRespuesta)
+        {
+            try
+            {
+                db.Sp_RespuestaModificar(_objRespuesta.IdRespuesta,_objRespuesta.CabeceraRespuesta.IdCabeceraRespuesta, _objRespuesta.FechaRegistro, _objRespuesta.Pregunta.IdPregunta, _objRespuesta.IdRespuestaLogica, _objRespuesta.DescripcionRespuestaAbierta, _objRespuesta.Estado);
+                return _objRespuesta.IdRespuesta;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public void EliminarRespuesta (int _idRespuesta)
+        {
+            db.Sp_RespuestaEliminar(_idRespuesta);
+        }
+
         public List<Respuesta> ConsultarRespuestaPorId(int _idRespuesta)
         {
             List<Respuesta> _lista = new List<Respuesta>();

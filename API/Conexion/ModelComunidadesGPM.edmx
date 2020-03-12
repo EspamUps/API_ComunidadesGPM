@@ -226,7 +226,19 @@
         <Function Name="Sp_RespuestaConsultarPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdRespuesta" Type="int" Mode="In" />
         </Function>
+        <Function Name="Sp_RespuestaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdRespuesta" Type="int" Mode="In" />
+        </Function>
         <Function Name="Sp_RespuestaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdCabeceraRespuesta" Type="int" Mode="In" />
+          <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
+          <Parameter Name="IdPregunta" Type="int" Mode="In" />
+          <Parameter Name="IdRespuestaLogica" Type="int" Mode="In" />
+          <Parameter Name="DescripcionRespuestaAbierta" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_RespuestaModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdRespuesta" Type="int" Mode="In" />
           <Parameter Name="IdCabeceraRespuesta" Type="int" Mode="In" />
           <Parameter Name="FechaRegistro" Type="datetime" Mode="In" />
           <Parameter Name="IdPregunta" Type="int" Mode="In" />
@@ -1064,10 +1076,22 @@
           <Parameter Name="IdRespuesta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraRespuestaConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraRespuestaConsultarPorId_Result)">
-            <Parameter Name="IdCabeceraRespuesta" Mode="In" Type="Int32" />
+          <Parameter Name="IdCabeceraRespuesta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_RespuestaConsultarPorCabeceraRespuesta" ReturnType="Collection(ComunidadesGPMModel.Sp_RespuestaConsultarPorCabeceraRespuesta_Result)">
-            <Parameter Name="idCabeceraRespuesta" Mode="In" Type="Int32" />
+          <Parameter Name="idCabeceraRespuesta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_RespuestaModificar">
+            <Parameter Name="IdRespuesta" Mode="In" Type="Int32" />
+            <Parameter Name="IdCabeceraRespuesta" Mode="In" Type="Int32" />
+            <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
+            <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
+            <Parameter Name="IdRespuestaLogica" Mode="In" Type="Int32" />
+            <Parameter Name="DescripcionRespuestaAbierta" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_RespuestaEliminar">
+            <Parameter Name="IdRespuesta" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_AsignarResponsableConsultar_Result">
@@ -6241,6 +6265,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_RespuestaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_RespuestaModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_RespuestaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_RespuestaEliminar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

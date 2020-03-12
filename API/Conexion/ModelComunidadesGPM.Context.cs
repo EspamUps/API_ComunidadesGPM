@@ -1904,5 +1904,47 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_RespuestaConsultarPorCabeceraRespuesta_Result>("Sp_RespuestaConsultarPorCabeceraRespuesta", idCabeceraRespuestaParameter);
         }
+    
+        public virtual int Sp_RespuestaModificar(Nullable<int> idRespuesta, Nullable<int> idCabeceraRespuesta, Nullable<System.DateTime> fechaRegistro, Nullable<int> idPregunta, Nullable<int> idRespuestaLogica, string descripcionRespuestaAbierta, Nullable<bool> estado)
+        {
+            var idRespuestaParameter = idRespuesta.HasValue ?
+                new ObjectParameter("IdRespuesta", idRespuesta) :
+                new ObjectParameter("IdRespuesta", typeof(int));
+    
+            var idCabeceraRespuestaParameter = idCabeceraRespuesta.HasValue ?
+                new ObjectParameter("IdCabeceraRespuesta", idCabeceraRespuesta) :
+                new ObjectParameter("IdCabeceraRespuesta", typeof(int));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            var idRespuestaLogicaParameter = idRespuestaLogica.HasValue ?
+                new ObjectParameter("IdRespuestaLogica", idRespuestaLogica) :
+                new ObjectParameter("IdRespuestaLogica", typeof(int));
+    
+            var descripcionRespuestaAbiertaParameter = descripcionRespuestaAbierta != null ?
+                new ObjectParameter("DescripcionRespuestaAbierta", descripcionRespuestaAbierta) :
+                new ObjectParameter("DescripcionRespuestaAbierta", typeof(string));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_RespuestaModificar", idRespuestaParameter, idCabeceraRespuestaParameter, fechaRegistroParameter, idPreguntaParameter, idRespuestaLogicaParameter, descripcionRespuestaAbiertaParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_RespuestaEliminar(Nullable<int> idRespuesta)
+        {
+            var idRespuestaParameter = idRespuesta.HasValue ?
+                new ObjectParameter("IdRespuesta", idRespuesta) :
+                new ObjectParameter("IdRespuesta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_RespuestaEliminar", idRespuestaParameter);
+        }
     }
 }

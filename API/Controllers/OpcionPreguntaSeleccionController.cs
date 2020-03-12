@@ -102,6 +102,11 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No se encontró la pregunta en el sistema";
                     }
+                    else if(_objPregunta.TipoPregunta.Identificador!=2 && _objPregunta.TipoPregunta.Identificador != 3)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "La pregunta no es de selección única ni de selección múltiple";
+                    }
                     else
                     {
                         var _listaOpcionPreguntaSeleccion = _objCatalogoOpcionPreguntaSeleccion.ConsultarOpcionPreguntaSeleccionPorIdPregunta(_idPregunta).Where(c => c.Estado == true).ToList();
