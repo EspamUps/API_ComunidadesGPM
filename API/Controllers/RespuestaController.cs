@@ -22,7 +22,60 @@ namespace API.Controllers
         CatalogoPreguntaAbierta _objCatalogoPreguntaAbierta = new CatalogoPreguntaAbierta();
         CatalogoConfigurarMatriz _objCatalogoConfigurarMatriz = new CatalogoConfigurarMatriz();
         Seguridad _seguridad = new Seguridad();
-
+        [HttpPost]
+        [Route("api/respuesta_consultarporidcabecerarespuesta")]
+        public object respuesta_consultarporidcabecerarespuesta(string _idCabeceraRespuestaEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if(string.IsNullOrEmpty(_idCabeceraRespuestaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la cabecera respuesta";
+                }
+                else
+                {
+                    int _idCabeceraRespuesta= int.Parse(_seguridad.DesEncriptar(_idCabeceraRespuestaEncriptado));
+                    var _objCabeceraRespuesta = _objCatalogoCabeceraRespuesta.ConsultarCabeceraRespuestaPorId(_idCabeceraRespuesta).Where(c => c.Estado == true).FirstOrDefault();
+                    if(_objCabeceraRespuesta==null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el objeto cabecera respuesta";
+                    }
+                    else
+                    {
+                        var _listaRespuestas = _objCatalogoRespuestas.ConsultarRespuestaPorIdCabeceraRespuesta(_idCabeceraRespuesta).Where(c => c.Estado == true).ToList();
+                        foreach (var _objRespuesta in _listaRespuestas)
+                        {
+                            _objRespuesta.IdRespuesta = 0;
+                            _objRespuesta.IdRespuestaLogica = 0;
+                            _objRespuesta.Pregunta.IdPregunta = 0;
+                            _objRespuesta.CabeceraRespuesta.IdCabeceraRespuesta = 0;
+                            _objRespuesta.CabeceraRespuesta.AsignarEncuestado.IdAsignarEncuestado = 0;
+                            _objRespuesta.CabeceraRespuesta.AsignarEncuestado.Comunidad.IdComunidad = 0;
+                            _objRespuesta.CabeceraRespuesta.AsignarEncuestado.Comunidad.Parroquia.IdParroquia = 0;
+                            _objRespuesta.CabeceraRespuesta.AsignarEncuestado.Comunidad.Parroquia.Canton.IdCanton = 0;
+                            _objRespuesta.CabeceraRespuesta.AsignarEncuestado.Comunidad.Parroquia.Canton.Provincia.IdProvincia = 0;
+                            _objRespuesta.CabeceraRespuesta.AsignarEncuestado.CuestionarioPublicado.IdCuestionarioPublicado = 0;
+                            _objRespuesta.CabeceraRespuesta.AsignarEncuestado.CuestionarioPublicado.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
+                            _objRespuesta.CabeceraRespuesta.AsignarEncuestado.CuestionarioPublicado.Periodo.IdPeriodo = 0;
+                            _objRespuesta.CabeceraRespuesta.AsignarEncuestado.CuestionarioPublicado.CabeceraVersionCuestionario.IdCabeceraVersionCuestionario = 0;
+                            _objRespuesta.CabeceraRespuesta.AsignarEncuestado.CuestionarioPublicado.CabeceraVersionCuestionario.AsignarResponsable.IdAsignarResponsable = 0;
+                            _objRespuesta.CabeceraRespuesta.AsignarEncuestado.CuestionarioPublicado.CabeceraVersionCuestionario.AsignarResponsable.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                        }
+                        _respuesta = _listaRespuestas;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
 
         [HttpPost]
         [Route("api/respuesta_insertarconfigurarmatriz")]

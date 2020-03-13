@@ -52,6 +52,7 @@ namespace API.Models.Catalogos
                 {
                     IdRespuesta = item.IdRespuesta,
                     IdRespuestaEncriptado = _seguridad.Encriptar(item.IdRespuesta.ToString()),
+                    IdRespuestaLogicaEncriptado = _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
                     Estado = item.Estado,
                     CabeceraRespuesta = new CabeceraRespuesta()
                     {
@@ -76,6 +77,7 @@ namespace API.Models.Catalogos
                 {
                     IdRespuesta = item.IdRespuesta,
                     IdRespuestaEncriptado = _seguridad.Encriptar(item.IdRespuesta.ToString()),
+                    IdRespuestaLogicaEncriptado= _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
                     Estado = item.EstadoRespuesta,
                     CabeceraRespuesta = new CabeceraRespuesta()
                     {
