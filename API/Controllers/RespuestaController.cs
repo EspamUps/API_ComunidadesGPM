@@ -22,6 +22,8 @@ namespace API.Controllers
         CatalogoPreguntaAbierta _objCatalogoPreguntaAbierta = new CatalogoPreguntaAbierta();
         CatalogoConfigurarMatriz _objCatalogoConfigurarMatriz = new CatalogoConfigurarMatriz();
         Seguridad _seguridad = new Seguridad();
+
+
         [HttpPost]
         [Route("api/respuesta_consultarporidcabecerarespuesta")]
         public object respuesta_consultarporidcabecerarespuesta(string _idCabeceraRespuestaEncriptado)
