@@ -187,7 +187,16 @@ namespace API.Models.Catalogos
                     Pregunta = new Pregunta()
                     {
                         IdPregunta = item.IdPregunta,
-                        IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString())
+                        IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                        Obligatorio=item.ObligatorioPregunta,
+                        TipoPregunta=new TipoPregunta()
+                        {
+                            Identificador=item.IdentificadorTipoPregunta,
+                            IdTipoPregunta=item.IdTipoPregunta,
+                            IdTipoPreguntaEncriptado=_seguridad.Encriptar(item.IdTipoPregunta.ToString()),
+                            Descripcion = item.DescripcionTipoPregunta,
+                            Estado=item.EstadoTipoPregunta
+                        }
                     },
                     IdRespuestaLogica = item.IdRespuestaLogica
                 });

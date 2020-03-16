@@ -22,6 +22,9 @@ namespace API.Controllers
         CatalogoPreguntaAbierta _objCatalogoPreguntaAbierta = new CatalogoPreguntaAbierta();
         CatalogoConfigurarMatriz _objCatalogoConfigurarMatriz = new CatalogoConfigurarMatriz();
         Seguridad _seguridad = new Seguridad();        
+
+
+
         [HttpPost]
         [Route("api/respuesta_consultarporidcabecerarespuesta")]
         public object respuesta_consultarporidcabecerarespuesta(string _idCabeceraRespuestaEncriptado)
@@ -52,6 +55,7 @@ namespace API.Controllers
                             _objRespuesta.IdRespuesta = 0;
                             _objRespuesta.IdRespuestaLogica = 0;
                             _objRespuesta.Pregunta.IdPregunta = 0;
+                            _objRespuesta.Pregunta.TipoPregunta.IdTipoPregunta = 0;
                             _objRespuesta.CabeceraRespuesta.IdCabeceraRespuesta = 0;
                             _objRespuesta.CabeceraRespuesta.AsignarEncuestado.IdAsignarEncuestado = 0;
                             _objRespuesta.CabeceraRespuesta.AsignarEncuestado.Comunidad.IdComunidad = 0;

@@ -7,14 +7,137 @@ using System.Web.Http;
 using API.Models.Catalogos;
 using API.Models.Metodos;
 using API.Models.Entidades;
+using Newtonsoft.Json.Linq;
+
 namespace API.Controllers
 {
     public class CabeceraRespuestaController : ApiController
     {
         Seguridad _seguridad = new Seguridad();
         CatalogoCabeceraRespuesta _objCatalogoCabeceraRespuesta = new CatalogoCabeceraRespuesta();
+        CatalogoRespuesta _objCatalogoRespuestas = new CatalogoRespuesta();
+        CatalogoPregunta _objCatalogoPregunta = new CatalogoPregunta();
+        CatalogoVersionamientoPregunta _objCatalogoVersionamientoPregunta = new CatalogoVersionamientoPregunta();
         CatalogoAsignarEncuestado _objCatalogoAsignarEncuestado = new CatalogoAsignarEncuestado();
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
+        CatalogoOpcionPreguntaSeleccion _objCatalogoOpcionPreguntaSeleccion = new CatalogoOpcionPreguntaSeleccion();
+
+
+        [HttpPost]
+        [Route("api/cabecerarespuesta_validarfinalizar")]
+        public object cabecerarespuesta_validarfinalizar(string _idCabeceraRespuestaEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (string.IsNullOrEmpty(_idCabeceraRespuestaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la cabecera respuesta";
+                }
+                else
+                {
+
+                    int _idCabeceraRespuesta = int.Parse(_seguridad.DesEncriptar(_idCabeceraRespuestaEncriptado));
+                    var _objCabeceraRespuesta = _objCatalogoCabeceraRespuesta.ConsultarCabeceraRespuestaPorId(_idCabeceraRespuesta).Where(c => c.Estado == true).FirstOrDefault();
+                    if (_objCabeceraRespuesta == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el objeto cabecera respuesta";
+                    }
+                    else
+                    {
+                        int _idCabeceraVersionCuestionario = _objCabeceraRespuesta.AsignarEncuestado.CuestionarioPublicado.CabeceraVersionCuestionario.IdCabeceraVersionCuestionario;
+                        var _listaTodasPreguntasVersionamiento = _objCatalogoVersionamientoPregunta.ConsultarVersionamientoPreguntaCompletoPorIdCabeceraVersion(_idCabeceraVersionCuestionario).ToList();
+                        var _listaPreguntasObligatorias = _listaTodasPreguntasVersionamiento.Where(c => c.Pregunta.Obligatorio == true).ToList();
+                        var _listaRespuestas = _objCatalogoRespuestas.ConsultarRespuestaPorIdCabeceraRespuesta(_idCabeceraRespuesta).Where(c => c.Estado == true).ToList();
+
+                        if (_listaPreguntasObligatorias.Count == 0)
+                        {
+                            if (_listaRespuestas.Count == 0)
+                            {
+                                _respuesta = QuitarIdentificadoresListaVersionamiento(_listaTodasPreguntasVersionamiento);
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "202").FirstOrDefault();
+                                _http.mensaje = "Todas las preguntas NO obligatorias de la ficha están sin responder. ¿Está seguro que desea finalizar el cuestionario?";
+                            }
+                        }
+                        else
+                        {
+                            string _idAsignarEncuestadoEncriptado = _objCabeceraRespuesta.AsignarEncuestado.IdAsignarEncuestadoEncriptado;
+                            string _idCabeceraVersionCuestionarioEncriptado = _objCabeceraRespuesta.IdCabeceraRespuestaEncriptado;
+                            var _listaOpcionPreguntaSeleccion = _objCatalogoOpcionPreguntaSeleccion.ConsultarOpcionPreguntaSeleccion().Where(c => c.Pregunta.Seccion.Componente.CuestionarioGenerico.IdCuestionarioGenerico == _objCabeceraRespuesta.AsignarEncuestado.CuestionarioPublicado.CabeceraVersionCuestionario.AsignarResponsable.CuestionarioGenerico.IdCuestionarioGenerico).ToList();
+                            var _listaRespuestasPreguntasAbiertas = _listaRespuestas.Where(c => c.Pregunta.TipoPregunta.Identificador == 1).ToList();
+                            var _listaRespuestasSeleccion = _listaRespuestas.Where(c => c.Pregunta.TipoPregunta.Identificador == 2 || c.Pregunta.TipoPregunta.Identificador == 3).ToList();
+                            var _listaRespuestasMatrizSeleccion = _listaRespuestas.Where(c => c.Pregunta.TipoPregunta.Identificador == 4).ToList();
+                            List<VersionamientoPregunta> _listaPreguntasNoRespondidas = new List<VersionamientoPregunta>();
+                            foreach (var itemPregunta in _listaTodasPreguntasVersionamiento)
+                            {
+                                if (itemPregunta.Pregunta.TipoPregunta.Identificador == 1)
+                                {
+                                    var _preguntaRespondida = _listaRespuestasPreguntasAbiertas.Where(c => c.Pregunta.IdPregunta == itemPregunta.Pregunta.IdPregunta).FirstOrDefault();
+                                    if (_preguntaRespondida == null)
+                                    {
+                                        _listaPreguntasNoRespondidas.Add(itemPregunta);
+                                    }
+                                }
+                                else if (itemPregunta.Pregunta.TipoPregunta.Identificador == 2 || itemPregunta.Pregunta.TipoPregunta.Identificador == 3)
+                                {
+                                    var _preguntaRespondida = _listaRespuestasSeleccion.Where(c => c.Pregunta.IdPregunta == itemPregunta.Pregunta.IdPregunta).ToList();
+                                    if (_preguntaRespondida.Count == 0)
+                                    {
+                                        _listaPreguntasNoRespondidas.Add(itemPregunta);
+                                    }
+                                    if (itemPregunta.Pregunta.TipoPregunta.Identificador == 2)
+                                    {
+                                        var _listaOpcionPreguntaSeleccionPorPregunta = _listaOpcionPreguntaSeleccion.Where(c => c.Pregunta.IdPregunta == itemPregunta.Pregunta.IdPregunta).ToList();
+                                        foreach (var itemOpcionPreguntaSeleccion in _listaOpcionPreguntaSeleccionPorPregunta)
+                                        {
+                                            var _listaRespuestaPorOpcionPreguntaSeleccion = _listaRespuestasSeleccion.Where(c => c.IdRespuestaLogica == itemOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion).ToList();
+                                            string _idOpcionPreguntaSeleccionEncriptado2 = _seguridad.Encriptar(itemOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion.ToString());
+                                            if (_listaRespuestaPorOpcionPreguntaSeleccion.Count > 0)
+                                            {
+                                            
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        public List<VersionamientoPregunta> QuitarIdentificadoresListaVersionamiento(List<VersionamientoPregunta> _lista)
+        {
+            foreach (var _objVersionamiento in _lista)
+            {
+                _objVersionamiento.IdVersionamientoPregunta = 0;
+                _objVersionamiento.CabeceraVersionCuestionario.IdCabeceraVersionCuestionario = 0;
+                _objVersionamiento.CabeceraVersionCuestionario.AsignarResponsable.IdAsignarResponsable = 0;
+                _objVersionamiento.CabeceraVersionCuestionario.AsignarResponsable.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                _objVersionamiento.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
+                _objVersionamiento.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
+                _objVersionamiento.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
+                _objVersionamiento.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
+                _objVersionamiento.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
+                _objVersionamiento.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                _objVersionamiento.Pregunta.IdPregunta = 0;
+                _objVersionamiento.Pregunta.TipoPregunta.IdTipoPregunta = 0;
+                _objVersionamiento.Pregunta.Seccion.IdSeccion = 0;
+                _objVersionamiento.Pregunta.Seccion.Componente.IdComponente = 0;
+            }
+            return _lista;
+        }
+
+
 
         [HttpPost]
         [Route("api/cabecerarespuesta_insertar")]
