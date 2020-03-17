@@ -1,0 +1,101 @@
+﻿using API.Models.Catalogos;
+using API.Models.Metodos;
+using API.Models.Entidades;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+
+namespace API.Controllers
+{
+    public class ModeloGenericoController : ApiController
+    {
+        CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
+        CatalogoModeloGenerico _objCatalogoModeloGenerico = new CatalogoModeloGenerico();
+        Seguridad _seguridad = new Seguridad();
+
+
+        [HttpPost]
+        [Route("api/ModeloGenerico_insertar")]
+        public object ModeloGenerico_insertar(ModeloGenerico _objModeloGenerico)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objModeloGenerico == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el objeto modelo genérico";
+                }
+                else if (_objModeloGenerico.Nombre == null || string.IsNullOrEmpty(_objModeloGenerico.Nombre.Trim()))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el nombre del modelo genérico";
+                }
+                else if (_objModeloGenerico.Descripcion == null || string.IsNullOrEmpty(_objModeloGenerico.Descripcion.Trim()))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la descripción del modelo genérico";
+                }
+                else if (_objCatalogoModeloGenerico.ConsultarModeloGenerico().Where(c => c.Estado == true && c.Nombre == _objModeloGenerico.Nombre.Trim()).ToList().Count > 0)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                    _http.mensaje = "Ya existe un modelo con el mismo nombre, verifique en la lista.";
+                }
+                else
+                {
+                    _objModeloGenerico.Nombre = _objModeloGenerico.Nombre.Trim();
+                    _objModeloGenerico.Estado = true;
+                    int _idModeloGenerico = _objCatalogoModeloGenerico.InsertarModeloGenerico(_objModeloGenerico);
+                    if (_idModeloGenerico == 0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Ocurrió un error al tratar de ingresar el modelo generico.";
+                    }
+                    else
+                    {
+                        //var _objCuestionarioGenericoIngresado = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenericoPorId(_idCuestionarioGenerico).Where(C => C.Estado == true).FirstOrDefault();
+                        var _objModeloGenericoIngresado = _objCatalogoModeloGenerico.ConsultarModeloGenericoPorId(_idModeloGenerico).Where(C => C.Estado == true).FirstOrDefault();
+
+                        _objModeloGenericoIngresado.IdModeloGenerico = 0;
+                        _respuesta = _objModeloGenericoIngresado;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/ModeloGenerico_consultar")]
+        public object ModeloGenerico_consultar()
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                var _listaModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenerico().Where(c => c.Estado == true).ToList();
+                foreach (var item in _listaModeloGenerico)
+                {
+                    item.IdModeloGenerico = 0;
+                }
+                _respuesta = _listaModeloGenerico;
+                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+
+    }
+}

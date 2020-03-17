@@ -21,6 +21,7 @@ namespace API.Controllers
         CatalogoAsignarEncuestado _objCatalogoAsignarEncuestado = new CatalogoAsignarEncuestado();
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoOpcionPreguntaSeleccion _objCatalogoOpcionPreguntaSeleccion = new CatalogoOpcionPreguntaSeleccion();
+        CatalogoPreguntaEncajonada _objCatalogoPreguntaEncajonada = new CatalogoPreguntaEncajonada();
 
 
         [HttpPost]
@@ -97,7 +98,7 @@ namespace API.Controllers
                                             string _idOpcionPreguntaSeleccionEncriptado2 = _seguridad.Encriptar(itemOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion.ToString());
                                             if (_listaRespuestaPorOpcionPreguntaSeleccion.Count > 0)
                                             {
-                                            
+                                                var _listaPreguntasEncajonadas = _objCatalogoPreguntaEncajonada.ConsultarPreguntaEncajonadaPorIdOpcionSeleccionUnica(itemOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion).ToList();
                                             }
                                         }
                                     }
