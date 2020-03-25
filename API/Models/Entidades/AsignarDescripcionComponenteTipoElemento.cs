@@ -14,5 +14,7 @@ namespace API.Models.Entidades
         public int Orden { get; set; }
         public bool Obligatorio { get; set; }
         public TipoElemento TipoElemento { get; set; }
+        public VersionamientoModelo VersionamientoModelo { get; set; }
+        public string Utilizado { get; set; }
     }
 }

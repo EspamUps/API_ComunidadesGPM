@@ -14,11 +14,46 @@ namespace API.Conexion
     public partial class Sp_CabeceraVersionCuestionarioConsultar_Result
     {
         public int IdCabeceraVersionCuestionario { get; set; }
-        public int IdAsignarResponsable { get; set; }
-        public string Caracteristica { get; set; }
-        public int Version { get; set; }
-        public System.DateTime FechaCreacion { get; set; }
-        public bool Estado { get; set; }
+        public string CaracteristicaCabeceraVersionCuestionario { get; set; }
+        public bool EstadoCabeceraVersionCuestionario { get; set; }
+        public System.DateTime FechaCreacionCabeceraVersionCuestionario { get; set; }
+        public int VersionCabeceraVersionCuestionario { get; set; }
         public string UtilizadoCabeceraVersionCuestionario { get; set; }
+        public int ASIGNARRESPONSABLE_IdAsignarResponsable { get; set; }
+        public System.DateTime ASIGNARRESPONSABLE_FechaAsignacion { get; set; }
+        public bool ASIGNARRESPONSABLE_Estado { get; set; }
+        public int CUESTIONARIOGENERICO_IdCuestionarioGenerico { get; set; }
+        public string CUESTIONARIOGENERICO_Descripcion { get; set; }
+        public string CUESTIONARIOGENERICO_Nombre { get; set; }
+        public bool CUESTIONARIOGENERICO_Estado { get; set; }
+        public int ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario { get; set; }
+        public bool ASIGNARUSUARIOTIPOUSUARIO_Estado { get; set; }
+        public int USUARIO_IdUsuario { get; set; }
+        public int USUARIO_IdPersona { get; set; }
+        public string USUARIO_Correo { get; set; }
+        public string USUARIO_Clave { get; set; }
+        public bool USUARIO_Estado { get; set; }
+        public int PERSONA_IdPersona { get; set; }
+        public string PERSONA_PrimerNombre { get; set; }
+        public string PERSONA_SegundoNombre { get; set; }
+        public string PERSONA_PrimerApellido { get; set; }
+        public string PERSONA_SegundoApellido { get; set; }
+        public string PERSONA_NumeroIdentificacion { get; set; }
+        public string PERSONA_Telefono { get; set; }
+        public int PERSONA_IdParroquia { get; set; }
+        public string PERSONA_Direccion { get; set; }
+        public bool PERSONA_Estado { get; set; }
+        public int SEXO_IdSexo { get; set; }
+        public int SEXO_Identificador { get; set; }
+        public string SEXO_Descripcion { get; set; }
+        public bool SEXO_Estado { get; set; }
+        public int TIPOIDENTIFICACION_IdTipoIdentificacion { get; set; }
+        public int TIPOIDENTIFICACION_Identificador { get; set; }
+        public string TIPOIDENTIFICACION_Descripcion { get; set; }
+        public bool TIPOIDENTIFICACION_Estado { get; set; }
+        public int TIPOUSUARIO_IdTipoUsuario { get; set; }
+        public int TIPOUSUARIO_Identificador { get; set; }
+        public string TIPOUSUARIO_Descripcion { get; set; }
+        public bool TIPOUSUARIO_Estado { get; set; }
     }
 }
