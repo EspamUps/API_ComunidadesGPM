@@ -13,6 +13,7 @@ namespace API.Models.Catalogos
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
         CatalogoTipoElemento _objTipoElemento = new CatalogoTipoElemento();
+        CatalogoVersionamientoModelo _objVersionamientoModelo = new CatalogoVersionamientoModelo();
 
         public int InsertarAsignarDescripcionComponenteTipoElemento(AsignarDescripcionComponenteTipoElemento _objAsignarDescripcionComponenteTipoElemento)
         {
@@ -33,6 +34,7 @@ namespace API.Models.Catalogos
         public List<AsignarDescripcionComponenteTipoElemento> ConsultarAsignarDescripcionComponenteTipoElemento()
         {
             var ListaTipoElemento = _objTipoElemento.ConsultarTipoElemento();
+            var ListaVersionamientoModelo = _objVersionamientoModelo.ConsultarVersionamientoModelo();
             List<AsignarDescripcionComponenteTipoElemento> _lista = new List<AsignarDescripcionComponenteTipoElemento>();
             foreach (var item in db.Sp_AsignarDescripcionComponenteTipoElementoConsultar())
             {
@@ -44,7 +46,9 @@ namespace API.Models.Catalogos
                     IdTipoElemento = _seguridad.Encriptar(item.IdTipoElemento.ToString()),
                     Orden = item.Orden,
                     Obligatorio = item.Obligatorio,
-                    TipoElemento = ListaTipoElemento.Where(p=>p.IdTipoElemento == item.IdTipoElemento).FirstOrDefault()
+                    Utilizado = item.AsignarDescripcionComponenteTipoElementoUtilizado,
+                    TipoElemento = ListaTipoElemento.Where(p=>p.IdTipoElemento == item.IdTipoElemento).FirstOrDefault(),
+                    VersionamientoModelo = ListaVersionamientoModelo.Where(p=> _seguridad.DesEncriptar(p.IdDescripcionComponenteTipoElemento) == item.IdAsignarDescripcionComponenteTipoElemento.ToString()).FirstOrDefault()
                 });
             }
             return _lista;
@@ -63,6 +67,7 @@ namespace API.Models.Catalogos
                     IdTipoElemento = _seguridad.Encriptar(item.IdTipoElemento.ToString()),
                     Orden = item.Orden,
                     Obligatorio = item.Obligatorio,
+                    Utilizado = item.AsignarDescripcionComponenteTipoElementoUtilizado,
                 });
             }
             return _lista;

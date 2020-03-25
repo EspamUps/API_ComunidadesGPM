@@ -12,11 +12,12 @@ namespace API.Models.Catalogos
     {
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
+        CatalogoParroquia _objParroquia = new CatalogoParroquia();
         public int InsertarAsignarModeloGenericoParroquia(AsignarModeloGenericoParroquia _objAsignarModeloGenericoParroquia)
         {
             try
             {
-                foreach (var item in db.Sp_AsignarModeloGenericoParroquiaInsertar(int.Parse(_objAsignarModeloGenericoParroquia.IdModeloGenerico),int.Parse(_objAsignarModeloGenericoParroquia.IdParroquia)))
+                foreach (var item in db.Sp_AsignarModeloPublicadoParroquiaInsertar(int.Parse(_objAsignarModeloGenericoParroquia.IdModeloPublicado),int.Parse(_objAsignarModeloGenericoParroquia.IdParroquia)))
                 {
                     _objAsignarModeloGenericoParroquia.IdAsignarModeloGenericoParroquia = item.IdAsignarModeloGenericoParroquia;
                 }
@@ -29,37 +30,45 @@ namespace API.Models.Catalogos
         }
         public List<AsignarModeloGenericoParroquia> ConsultarAsignarModeloGenericoParroquia()
         {
+            var _listaParroquia = _objParroquia.ConsultarParroquia();
             List<AsignarModeloGenericoParroquia> _lista = new List<AsignarModeloGenericoParroquia>();
-            foreach (var item in db.SpAsignarModeloGenericoParroquiaConsultar())
+            foreach (var item in db.Sp_AsignarModeloPublicadoParroquiaConsultar())
             {
                 _lista.Add(new AsignarModeloGenericoParroquia()
                 {
                     IdAsignarModeloGenericoParroquia = item.IdAsignarModeloGenericoParroquia,
                     IdAsignarModeloGenericoParroquiaEncriptado = _seguridad.Encriptar(item.IdAsignarModeloGenericoParroquia.ToString()),
-                    IdModeloGenerico = _seguridad.Encriptar(item.IdModeloGenerico.ToString()),
+                    IdModeloPublicado = _seguridad.Encriptar(item.IdModeloPublicado.ToString()),
                     IdParroquia = _seguridad.Encriptar(item.IdParroquia.ToString()),
                     Estado = item.Estado,
                     FechaAsignacion = item.FechaAsignacion,
+                    Parroquia = _listaParroquia.Where(p=> p.IdParroquia == item.IdParroquia).FirstOrDefault()
                 });
             }
             return _lista;
         }
         public List<AsignarModeloGenericoParroquia> ConsultarAsignarModeloGenericoParroquiaPorId(int _idAsignarModeloGenericoParroquia)
         {
+            var _listaParroquia = _objParroquia.ConsultarParroquia();
             List<AsignarModeloGenericoParroquia> _lista = new List<AsignarModeloGenericoParroquia>();
-            foreach (var item in db.SpAsignarModeloGenericoParroquiaConsultar().Where(p=>p.IdAsignarModeloGenericoParroquia == _idAsignarModeloGenericoParroquia).ToList())
+            foreach (var item in db.Sp_AsignarModeloPublicadoParroquiaConsultar().Where(p=>p.IdAsignarModeloGenericoParroquia == _idAsignarModeloGenericoParroquia).ToList())
             {
                 _lista.Add(new AsignarModeloGenericoParroquia()
                 {
                     IdAsignarModeloGenericoParroquia = item.IdAsignarModeloGenericoParroquia,
                     IdAsignarModeloGenericoParroquiaEncriptado = _seguridad.Encriptar(item.IdAsignarModeloGenericoParroquia.ToString()),
-                    IdModeloGenerico = _seguridad.Encriptar(item.IdModeloGenerico.ToString()),
+                    IdModeloPublicado = _seguridad.Encriptar(item.IdModeloPublicado.ToString()),
                     IdParroquia = _seguridad.Encriptar(item.IdParroquia.ToString()),
                     Estado = item.Estado,
                     FechaAsignacion = item.FechaAsignacion,
+                    Parroquia = _listaParroquia.Where(p => p.IdParroquia == item.IdParroquia).FirstOrDefault()
                 });
             }
             return _lista;
+        }
+        public void EliminarModeloGenericoParroquia(int _idModeloGenericoParroquia)
+        {
+            db.Sp_AsignarModeloPublicadoParroquiaEliminar(_idModeloGenericoParroquia);
         }
     }
 }

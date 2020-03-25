@@ -16,6 +16,7 @@ namespace API.Models.Catalogos
         CatalogoVersionamientoModelo _objVersionamientoModelo = new CatalogoVersionamientoModelo();
         CatalogoCuestionarioGenerico _objCuestionarioGenerico = new CatalogoCuestionarioGenerico();
         CatalogoDescripcionComponente _objDescripcionComponente = new CatalogoDescripcionComponente();
+        CatalogoModeloPublicado _objModeloPublicado = new CatalogoModeloPublicado();
         public int InsertarCabeceraVersionModelo(CabeceraVersionModelo _obCabeceraVersionModelo)
         {
             try
@@ -96,6 +97,7 @@ namespace API.Models.Catalogos
             var ListaCuestionarioGenerico = _objCuestionarioGenerico.ConsultarCuestionarioGenerico();
             var ListaDescripcionCompoennte = _objDescripcionComponente.ConsultarDescripcionComponente();
             var ListaModeloGenerico = ConsultarModeloGenerico().ToList();
+            var ListaModeloPublicado = _objModeloPublicado.ConsultarModeloPublicado();
             List<CabeceraVersionModelo> _lista = new List<CabeceraVersionModelo>();
             foreach (var item in db.Sp_CabeceraVersionModeloConsultar())
             {
@@ -120,7 +122,6 @@ namespace API.Models.Catalogos
                         DescripcionComponente = DataDescripcionComponente,
                     });
                 }
-
                 _lista.Add(new CabeceraVersionModelo()
                 {
                     IdCabeceraVersionModelo = item.IdCabeceraVersionModelo,
@@ -134,9 +135,19 @@ namespace API.Models.Catalogos
                     Utilizado = item.UtilizadoCabeceraVersionModelo,
                     AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
                     AsignarComponenteGenerico = ListaAsignarComponenteGenerico,
+                    ModeloPublicado = ListaModeloPublicado.Where(p=> _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString()).FirstOrDefault()
                 });
             }
             return _lista;
+        }
+
+        public void EliminarCabeceraVersionModelo(int _idCabeceraVersionModelo)
+        {
+            foreach (var item in db.Sp_VersionamientoModeloConsultar().Where(p=>p.IdCabeceraVersionamientoModelo == _idCabeceraVersionModelo).ToList())
+            {
+                db.Sp_VersionamientoModeloEliminar(item.IdVersionamientoModelo);
+            }
+            db.Sp_CabeceraVersionModeloEliminar(_idCabeceraVersionModelo);
         }
 
     }

@@ -16,6 +16,7 @@ namespace API.Conexion
         public int IdCuestionarioPublicado { get; set; }
         public bool EstadoCuestionarioPublicado { get; set; }
         public System.DateTime FechaPublicacionCuestionarioPublicado { get; set; }
+        public string UtilizadoCuestionarioPublicado { get; set; }
         public int ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_IdAsignarUsuarioTipoUsuario { get; set; }
         public bool ASIGNARUSUARIOTIPOUSUARIOPUBLICADO_Estado { get; set; }
         public int USUARIOPUBLICADO_IdUsuario { get; set; }
