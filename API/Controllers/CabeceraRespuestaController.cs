@@ -89,16 +89,21 @@ namespace API.Controllers
                                     {
                                         _listaPreguntasNoRespondidas.Add(itemPregunta);
                                     }
-                                    if (itemPregunta.Pregunta.TipoPregunta.Identificador == 2)
+                                    else
                                     {
-                                        var _listaOpcionPreguntaSeleccionPorPregunta = _listaOpcionPreguntaSeleccion.Where(c => c.Pregunta.IdPregunta == itemPregunta.Pregunta.IdPregunta).ToList();
-                                        foreach (var itemOpcionPreguntaSeleccion in _listaOpcionPreguntaSeleccionPorPregunta)
+                                        if (itemPregunta.Pregunta.TipoPregunta.Identificador == 2)
                                         {
-                                            var _listaRespuestaPorOpcionPreguntaSeleccion = _listaRespuestasSeleccion.Where(c => c.IdRespuestaLogica == itemOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion).ToList();
-                                            string _idOpcionPreguntaSeleccionEncriptado2 = _seguridad.Encriptar(itemOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion.ToString());
-                                            if (_listaRespuestaPorOpcionPreguntaSeleccion.Count > 0)
+                                            var _listaOpcionPreguntaSeleccionPorPregunta = _listaOpcionPreguntaSeleccion.Where(c => c.Pregunta.IdPregunta == itemPregunta.Pregunta.IdPregunta).ToList();
+                                            foreach (var itemOpcionPreguntaSeleccion in _listaOpcionPreguntaSeleccionPorPregunta)
                                             {
-                                                var _listaPreguntasEncajonadas = _objCatalogoPreguntaEncajonada.ConsultarPreguntaEncajonadaPorIdOpcionSeleccionUnica(itemOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion).ToList();
+                                                var _listaRespuestaPorOpcionPreguntaSeleccion = _listaRespuestasSeleccion.Where(c => c.IdRespuestaLogica == itemOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion).ToList();
+                                                string _idOpcionPreguntaSeleccionEncriptado2 = _seguridad.Encriptar(itemOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion.ToString());
+                                                if (_listaRespuestaPorOpcionPreguntaSeleccion.Count > 0)
+                                                {
+                                                    var _listaPreguntasEncajonadas = _objCatalogoPreguntaEncajonada.ConsultarPreguntaEncajonadaPorIdOpcionSeleccionUnica(itemOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion).ToList();
+                                                    List<Pregunta> _listaPreguntas = new List<Pregunta>();
+                                                    var _listaPreguntasNoRespondidasPorOpcion = PreguntasEncajonadas(_listaPreguntas, _listaPreguntasEncajonadas, _listaOpcionPreguntaSeleccion, _listaRespuestas);
+                                                }
                                             }
                                         }
                                     }
@@ -114,6 +119,29 @@ namespace API.Controllers
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
             }
             return new { respuesta = _respuesta, http = _http };
+        }
+
+        public List<Pregunta> PreguntasEncajonadas(List<Pregunta> _listaPreguntasSinResponder, List<PreguntaEncajonada> _listaPreguntasEncajonadas, List<OpcionPreguntaSeleccion> _listaOpcionesCuestionario, List<Respuesta> _listaRespuestasEncuestado)
+        {
+            foreach (var itemPreguntasEncajonadas in _listaPreguntasEncajonadas)
+            {
+                bool _validarPreguntaRespondida = false;
+                var _opcionesPreguntaActual = _listaOpcionesCuestionario.Where(c => c.Pregunta.IdPregunta == itemPreguntasEncajonadas.Pregunta.IdPregunta).ToList();
+                foreach (var itemOpcion in _opcionesPreguntaActual)
+                {
+                    var _opcionSeleccionadaPorUsuario = _listaRespuestasEncuestado.Where(c => c.IdRespuestaLogica == itemOpcion.IdOpcionPreguntaSeleccion).FirstOrDefault();
+                    if (_opcionSeleccionadaPorUsuario != null)
+                    {
+                        _validarPreguntaRespondida = true;
+                        var _listaPreguntasEncajonadasPorOpcionSeleccionada = _objCatalogoPreguntaEncajonada.ConsultarPreguntaEncajonadaPorIdOpcionSeleccionUnica(itemOpcion.IdOpcionPreguntaSeleccion).ToList();
+                        if (_listaPreguntasEncajonadasPorOpcionSeleccionada.Count > 0)
+                           PreguntasEncajonadas(_listaPreguntasSinResponder,_listaPreguntasEncajonadasPorOpcionSeleccionada, _listaOpcionesCuestionario, _listaRespuestasEncuestado);
+                    }
+                }
+                if (_validarPreguntaRespondida == false)
+                    _listaPreguntasSinResponder.Add(itemPreguntasEncajonadas.Pregunta);
+            }
+            return _listaPreguntasSinResponder;
         }
 
         public List<VersionamientoPregunta> QuitarIdentificadoresListaVersionamiento(List<VersionamientoPregunta> _lista)
