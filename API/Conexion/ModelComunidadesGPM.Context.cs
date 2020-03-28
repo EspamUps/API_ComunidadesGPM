@@ -2316,5 +2316,166 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CabeceraVersionModeloInsertar", idAsignarUsuarioTipoUsuarioParameter, idModeloGenericoParameter, caracteristicaParameter, versionParameter);
         }
+    
+        public virtual ObjectResult<Sp_AsignarResponsableModeloPublicadoConsultar_Result> Sp_AsignarResponsableModeloPublicadoConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarResponsableModeloPublicadoConsultar_Result>("Sp_AsignarResponsableModeloPublicadoConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result> Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado(Nullable<int> idModeloPublicado)
+        {
+            var idModeloPublicadoParameter = idModeloPublicado.HasValue ?
+                new ObjectParameter("IdModeloPublicado", idModeloPublicado) :
+                new ObjectParameter("IdModeloPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result>("Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado", idModeloPublicadoParameter);
+        }
+    
+        public virtual int Sp_AsignarResponsableModeloPublicadoEliminar(Nullable<int> idAsignarResponsableModeloPublicado)
+        {
+            var idAsignarResponsableModeloPublicadoParameter = idAsignarResponsableModeloPublicado.HasValue ?
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", idAsignarResponsableModeloPublicado) :
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_AsignarResponsableModeloPublicadoEliminar", idAsignarResponsableModeloPublicadoParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_AsignarResponsableModeloPublicadoInsertar(Nullable<int> idPresidenteJuntaParroquial, Nullable<System.DateTime> fechaAsignacion, Nullable<int> idAsignarUsuarioTipoUsuario, Nullable<int> idModeloPublicado, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<bool> estado)
+        {
+            var idPresidenteJuntaParroquialParameter = idPresidenteJuntaParroquial.HasValue ?
+                new ObjectParameter("IdPresidenteJuntaParroquial", idPresidenteJuntaParroquial) :
+                new ObjectParameter("IdPresidenteJuntaParroquial", typeof(int));
+    
+            var fechaAsignacionParameter = fechaAsignacion.HasValue ?
+                new ObjectParameter("FechaAsignacion", fechaAsignacion) :
+                new ObjectParameter("FechaAsignacion", typeof(System.DateTime));
+    
+            var idAsignarUsuarioTipoUsuarioParameter = idAsignarUsuarioTipoUsuario.HasValue ?
+                new ObjectParameter("IdAsignarUsuarioTipoUsuario", idAsignarUsuarioTipoUsuario) :
+                new ObjectParameter("IdAsignarUsuarioTipoUsuario", typeof(int));
+    
+            var idModeloPublicadoParameter = idModeloPublicado.HasValue ?
+                new ObjectParameter("IdModeloPublicado", idModeloPublicado) :
+                new ObjectParameter("IdModeloPublicado", typeof(int));
+    
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_AsignarResponsableModeloPublicadoInsertar", idPresidenteJuntaParroquialParameter, fechaAsignacionParameter, idAsignarUsuarioTipoUsuarioParameter, idModeloPublicadoParameter, fechaInicioParameter, fechaFinParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_AsignarResponsableModeloPublicadoModificar(Nullable<int> idAsignarResponsableModeloPublicado, Nullable<int> idPresidenteJuntaParroquial, Nullable<System.DateTime> fechaAsignacion, Nullable<int> idAsignarUsuarioTipoUsuario, Nullable<int> idModeloPublicado, Nullable<System.DateTime> fechaInicio, Nullable<System.DateTime> fechaFin, Nullable<bool> estado)
+        {
+            var idAsignarResponsableModeloPublicadoParameter = idAsignarResponsableModeloPublicado.HasValue ?
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", idAsignarResponsableModeloPublicado) :
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", typeof(int));
+    
+            var idPresidenteJuntaParroquialParameter = idPresidenteJuntaParroquial.HasValue ?
+                new ObjectParameter("IdPresidenteJuntaParroquial", idPresidenteJuntaParroquial) :
+                new ObjectParameter("IdPresidenteJuntaParroquial", typeof(int));
+    
+            var fechaAsignacionParameter = fechaAsignacion.HasValue ?
+                new ObjectParameter("FechaAsignacion", fechaAsignacion) :
+                new ObjectParameter("FechaAsignacion", typeof(System.DateTime));
+    
+            var idAsignarUsuarioTipoUsuarioParameter = idAsignarUsuarioTipoUsuario.HasValue ?
+                new ObjectParameter("IdAsignarUsuarioTipoUsuario", idAsignarUsuarioTipoUsuario) :
+                new ObjectParameter("IdAsignarUsuarioTipoUsuario", typeof(int));
+    
+            var idModeloPublicadoParameter = idModeloPublicado.HasValue ?
+                new ObjectParameter("IdModeloPublicado", idModeloPublicado) :
+                new ObjectParameter("IdModeloPublicado", typeof(int));
+    
+            var fechaInicioParameter = fechaInicio.HasValue ?
+                new ObjectParameter("FechaInicio", fechaInicio) :
+                new ObjectParameter("FechaInicio", typeof(System.DateTime));
+    
+            var fechaFinParameter = fechaFin.HasValue ?
+                new ObjectParameter("FechaFin", fechaFin) :
+                new ObjectParameter("FechaFin", typeof(System.DateTime));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_AsignarResponsableModeloPublicadoModificar", idAsignarResponsableModeloPublicadoParameter, idPresidenteJuntaParroquialParameter, fechaAsignacionParameter, idAsignarUsuarioTipoUsuarioParameter, idModeloPublicadoParameter, fechaInicioParameter, fechaFinParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_CabeceraCaracterizacionInsertar(Nullable<System.DateTime> fechaRegistro, Nullable<int> idAsignarResponsableModeloPublicado, Nullable<System.DateTime> fechaFinalizado, Nullable<bool> finalizado, Nullable<bool> estado)
+        {
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var idAsignarResponsableModeloPublicadoParameter = idAsignarResponsableModeloPublicado.HasValue ?
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", idAsignarResponsableModeloPublicado) :
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", typeof(int));
+    
+            var fechaFinalizadoParameter = fechaFinalizado.HasValue ?
+                new ObjectParameter("FechaFinalizado", fechaFinalizado) :
+                new ObjectParameter("FechaFinalizado", typeof(System.DateTime));
+    
+            var finalizadoParameter = finalizado.HasValue ?
+                new ObjectParameter("Finalizado", finalizado) :
+                new ObjectParameter("Finalizado", typeof(bool));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CabeceraCaracterizacionInsertar", fechaRegistroParameter, idAsignarResponsableModeloPublicadoParameter, fechaFinalizadoParameter, finalizadoParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_CabeceraCaracterizacionModificar(Nullable<int> idCabeceraCaracterizacion, Nullable<System.DateTime> fechaRegistro, Nullable<int> idAsignarResponsableModeloPublicado, Nullable<System.DateTime> fechaFinalizado, Nullable<bool> finalizado, Nullable<bool> estado)
+        {
+            var idCabeceraCaracterizacionParameter = idCabeceraCaracterizacion.HasValue ?
+                new ObjectParameter("IdCabeceraCaracterizacion", idCabeceraCaracterizacion) :
+                new ObjectParameter("IdCabeceraCaracterizacion", typeof(int));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("FechaRegistro", fechaRegistro) :
+                new ObjectParameter("FechaRegistro", typeof(System.DateTime));
+    
+            var idAsignarResponsableModeloPublicadoParameter = idAsignarResponsableModeloPublicado.HasValue ?
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", idAsignarResponsableModeloPublicado) :
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", typeof(int));
+    
+            var fechaFinalizadoParameter = fechaFinalizado.HasValue ?
+                new ObjectParameter("FechaFinalizado", fechaFinalizado) :
+                new ObjectParameter("FechaFinalizado", typeof(System.DateTime));
+    
+            var finalizadoParameter = finalizado.HasValue ?
+                new ObjectParameter("Finalizado", finalizado) :
+                new ObjectParameter("Finalizado", typeof(bool));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CabeceraCaracterizacionModificar", idCabeceraCaracterizacionParameter, fechaRegistroParameter, idAsignarResponsableModeloPublicadoParameter, fechaFinalizadoParameter, finalizadoParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_CabeceraCaracterizacionConsultar_Result> Sp_CabeceraCaracterizacionConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CabeceraCaracterizacionConsultar_Result>("Sp_CabeceraCaracterizacionConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result> Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado(Nullable<int> idAsignarResponsableModeloPublicado)
+        {
+            var idAsignarResponsableModeloPublicadoParameter = idAsignarResponsableModeloPublicado.HasValue ?
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", idAsignarResponsableModeloPublicado) :
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result>("Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado", idAsignarResponsableModeloPublicadoParameter);
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace API.Models.Entidades
         public DateTime FechaPublicacion{ get; set; }
         public AsignarUsuarioTipoUsuario AsignarUsuarioTipoUsuario { get; set; }
         public string IdAsignarUsuarioTipoUsuario { get; set; }
-        //public CabeceraVersionModelo CabeceraVersionModelo { get; set; }
+        public CabeceraVersionModelo CabeceraVersionModelo { get; set; }
         public string IdCabeceraVersionModelo { get; set; }
         public Periodo Periodo { get; set; }
         public string IdPeriodo { get; set; }

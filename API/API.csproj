@@ -269,6 +269,12 @@
     <Compile Include="Conexion\Sp_AsignarResponsableConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -282,6 +288,12 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarUsuarioTipoUsuarioConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraCaracterizacionConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_CabeceraModeloPublicadoConsultar_Result.cs">
@@ -532,6 +544,8 @@
     <Compile Include="Models\Catalogos\CatalogoAsignarDescripcionComponenteTipoElemento.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarEncuestado.cs" />
     <Compile Include="Models\Catalogos\CatalogoAsignarModeloGenericoParroquia.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarResponsableModeloPublicado.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCabeceraCaracterizacion.cs" />
     <Compile Include="Models\Catalogos\CatalogoCabeceraRespuesta.cs" />
     <Compile Include="Models\Catalogos\CatalogoCabeceraVersionCuestionario.cs" />
     <Compile Include="Models\Catalogos\CatalogoCabeceraVersionModelo.cs" />
@@ -585,8 +599,10 @@
     <Compile Include="Models\Entidades\AsignarModeloGenericoParroquia.cs" />
     <Compile Include="Models\Entidades\AsignarModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarResponsable.cs" />
+    <Compile Include="Models\Entidades\AsignarResponsableModeloPublicado.cs" />
     <Compile Include="Models\Entidades\AsignarTipoUsuarioModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarUsuarioTipoUsuario.cs" />
+    <Compile Include="Models\Entidades\CabeceraCaracterizacion.cs" />
     <Compile Include="Models\Entidades\CabeceraRespuesta.cs" />
     <Compile Include="Models\Entidades\CabeceraVersionCuestionario.cs" />
     <Compile Include="Models\Entidades\CabeceraVersionModelo.cs" />
