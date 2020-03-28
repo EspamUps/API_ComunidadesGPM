@@ -33,6 +33,10 @@
           <Parameter Name="Obligatorio" Type="bit" Mode="In" />
           <Parameter Name="Orden" Type="int" Mode="In" />
         </Function>
+        <Function Name="Sp_AsignarModeloGenericoParroquiaInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdModeloGenerico" Type="int" Mode="In" />
+          <Parameter Name="IdParroquia" Type="int" Mode="In" />
+        </Function>
         <Function Name="Sp_AsignarModeloPublicadoParroquiaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion" />
         <Function Name="Sp_AsignarModeloPublicadoParroquiaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
           <Parameter Name="IdAsignarModeloGenericoParroquia" Type="int" Mode="In" />
@@ -41,7 +45,6 @@
           <Parameter Name="IdModeloPublicado" Type="int" Mode="In" />
           <Parameter Name="IdParroquia" Type="int" Mode="In" />
         </Function>
-        <Function Name="Sp_CabeceraModeloPublicadoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion" />
         <Function Name="Sp_CabeceraModeloPublicadoEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
           <Parameter Name="IdModeloPublicado" Type="int" Mode="In" />
         </Function>
@@ -75,14 +78,6 @@
           <Parameter Name="IdCuestionarioGenerico" Type="int" Mode="In" />
           <Parameter Name="IdModeloGenerico" Type="int" Mode="In" />
         </Function>
-        <Function Name="Sp_DataConsultarDeUnaVersion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
-          <Parameter Name="IdCabeceraVersionamientoModelo" Type="int" Mode="In" />
-          <Parameter Name="IdComponente" Type="int" Mode="In" />
-        </Function>
-        <Function Name="Sp_DataConsultarDeUnaVersion1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
-          <Parameter Name="IdCabeceraVersionamientoModelo" Type="int" Mode="In" />
-          <Parameter Name="IdComponente" Type="int" Mode="In" />
-        </Function>
         <Function Name="Sp_DescripcionComponenteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion" />
         <Function Name="Sp_DescripcionComponenteEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
           <Parameter Name="idDescripcionComponente" Type="int" Mode="In" />
@@ -93,9 +88,6 @@
           <Parameter Name="Orden" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_ModeloGenericoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion" />
-        <Function Name="Sp_ModeloGenericoEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
-          <Parameter Name="idModeloGenerico" Type="int" Mode="In" />
-        </Function>
         <Function Name="Sp_ModeloGenericoInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
           <Parameter Name="Nombre" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
@@ -110,6 +102,7 @@
           <Parameter Name="IdAsignarDescripcionComponenteTipoElemento" Type="int" Mode="In" />
           <Parameter Name="Estado" Type="bit" Mode="In" />
         </Function>
+        <Function Name="SpAsignarModeloGenericoParroquiaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion" />
         <Function Name="Sp_AsignarEncuestadoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
         <Function Name="Sp_AsignarEncuestadoConsultarPorCuestionarioPublicado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdCuestionarioPublicado" Type="int" Mode="In" />
@@ -709,6 +702,7 @@
             <Parameter Name="Obligatorio" Mode="In" Type="Boolean" />
             <Parameter Name="Orden" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="Sp_ModeloGenericoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ModeloGenericoConsultar_Result)" />
           <FunctionImport Name="Sp_ModeloGenericoInsertar" ReturnType="Collection(ComunidadesGPMModel.Sp_ModeloGenericoInsertar_Result)">
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
@@ -1260,12 +1254,6 @@
           <FunctionImport Name="Sp_UsuarioValidar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioValidar_Result)">
           <Parameter Name="Correo" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Sp_CabeceraVersionModeloInsertar" ReturnType="Collection(Decimal)">
-            <Parameter Name="IdAsignarUsuarioTipoUsuario" Mode="In" Type="Int32" />
-            <Parameter Name="IdModeloGenerico" Mode="In" Type="Int32" />
-            <Parameter Name="Caracteristica" Mode="In" Type="String" />
-            <Parameter Name="Version" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="Sp_VersionamientoModeloConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_VersionamientoModeloConsultar_Result3)" />
           <FunctionImport Name="Sp_ComponenteConsultarDeUnaVersion" ReturnType="Collection(ComunidadesGPMModel.Sp_ComponenteConsultarDeUnaVersion_Result)">
           <Parameter Name="IdCabeceraVersionamientoModelo" Mode="In" Type="Int32" />
@@ -1298,10 +1286,17 @@
           <FunctionImport Name="Sp_AsignarModeloPublicadoParroquiaEliminar">
           <Parameter Name="IdAsignarModeloGenericoParroquia" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Sp_AsignarDescripcionComponenteTipoElementoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result2)" />
-          <FunctionImport Name="Sp_ModeloGenericoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ModeloGenericoConsultar_Result1)" />
-          <FunctionImport Name="Sp_ModeloGenericoEliminar">
-            <Parameter Name="idModeloGenerico" Mode="In" Type="Int32" />
+          <FunctionImport Name="Sp_AsignarDescripcionComponenteTipoElementoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result1)" />
+          <FunctionImport Name="Sp_AsignarModeloGenericoParroquiaInsertar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarModeloGenericoParroquiaInsertar_Result1)">
+            <Parameter Name="IdModeloGenerico" Mode="In" Type="Int32" />
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SpAsignarModeloGenericoParroquiaConsultar" ReturnType="Collection(ComunidadesGPMModel.SpAsignarModeloGenericoParroquiaConsultar_Result1)" />
+          <FunctionImport Name="Sp_CabeceraVersionModeloInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdAsignarUsuarioTipoUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="IdModeloGenerico" Mode="In" Type="Int32" />
+            <Parameter Name="Caracteristica" Mode="In" Type="String" />
+            <Parameter Name="Version" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_AsignarComponenteGenericoConsultar_Result">
@@ -3845,23 +3840,19 @@
           <Property Type="Boolean" Name="Estado" Nullable="false" />
           <Property Type="String" Name="AsignarDescripcionComponenteTipoElementoUtilizado" Nullable="false" MaxLength="1" />
         </ComplexType>
-        <ComplexType Name="Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result2">
-          <Property Type="Int32" Name="IdAsignarDescripcionComponenteTipoElemento" Nullable="false" />
-          <Property Type="Int32" Name="IdDescripcionComponente" Nullable="false" />
-          <Property Type="Int32" Name="IdTipoElemento" Nullable="false" />
-          <Property Type="Boolean" Name="Obligatorio" Nullable="false" />
-          <Property Type="Int32" Name="Orden" Nullable="false" />
-          <Property Type="Boolean" Name="Estado" Nullable="false" />
-          <Property Type="String" Name="AsignarDescripcionComponenteTipoElementoUtilizado" Nullable="false" MaxLength="1" />
+        <ComplexType Name="Sp_AsignarModeloGenericoParroquiaInsertar_Result1">
+          <Property Type="Int32" Name="IdAsignarModeloGenericoParroquia" Nullable="false" />
           <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquia" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacion" Nullable="false" Precision="16" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="Sp_ModeloGenericoConsultar_Result1">
+        <ComplexType Name="SpAsignarModeloGenericoParroquiaConsultar_Result1">
+          <Property Type="Int32" Name="IdAsignarModeloGenericoParroquia" Nullable="false" />
           <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="false" />
-          <Property Type="String" Name="Descripcion" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquia" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacion" Nullable="false" Precision="16" />
           <Property Type="Boolean" Name="Estado" Nullable="false" />
-          <Property Type="String" Name="ModeloGenericoUtilizado" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="ModeloGenericoVersionamientoUtilizado" Nullable="false" MaxLength="1" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4015,6 +4006,17 @@
                 <ScalarProperty Name="Obligatorio" ColumnName="Obligatorio" />
                 <ScalarProperty Name="Orden" ColumnName="Orden" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ModeloGenericoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ModeloGenericoConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ModeloGenericoConsultar_Result">
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ModeloGenericoUtilizado" ColumnName="ModeloGenericoUtilizado" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -6476,7 +6478,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionModeloInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionModeloInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_VersionamientoModeloConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_VersionamientoModeloConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_VersionamientoModeloConsultar_Result3">
@@ -6495,50 +6496,6 @@
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="Orden" ColumnName="Orden" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_DataConsultarDeUnaVersion" FunctionName="ComunidadesGPMModel.Store.Sp_DataConsultarDeUnaVersion">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_DataConsultarDeUnaVersion_Result3">
-                <ScalarProperty Name="IdVersionamientoModelo" ColumnName="IdVersionamientoModelo" />
-                <ScalarProperty Name="IdCabeceraVersionamientoModelo" ColumnName="IdCabeceraVersionamientoModelo" />
-                <ScalarProperty Name="IdAsignarDescripcionComponenteTipoElemento" ColumnName="IdAsignarDescripcionComponenteTipoElemento" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="AsignarDescripcionComponenteTipoElementoIdAsignarDescripcionComponenteTipoElemento" ColumnName="AsignarDescripcionComponenteTipoElementoIdAsignarDescripcionComponenteTipoElemento" />
-                <ScalarProperty Name="AsignarDescripcionComponenteTipoElementoIdDescripcionComponente" ColumnName="AsignarDescripcionComponenteTipoElementoIdDescripcionComponente" />
-                <ScalarProperty Name="AsignarDescripcionComponenteTipoElementoIdTipoElemento" ColumnName="AsignarDescripcionComponenteTipoElementoIdTipoElemento" />
-                <ScalarProperty Name="AsignarDescripcionComponenteTipoElementoObligatorio" ColumnName="AsignarDescripcionComponenteTipoElementoObligatorio" />
-                <ScalarProperty Name="AsignarDescripcionComponenteTipoElementoOrden" ColumnName="AsignarDescripcionComponenteTipoElementoOrden" />
-                <ScalarProperty Name="AsignarDescripcionComponenteTipoElementoEstado" ColumnName="AsignarDescripcionComponenteTipoElementoEstado" />
-                <ScalarProperty Name="TipoElementoIdTipoElemento" ColumnName="TipoElementoIdTipoElemento" />
-                <ScalarProperty Name="TipoElementoIdentificador" ColumnName="TipoElementoIdentificador" />
-                <ScalarProperty Name="TipoElementoIdentificador1" ColumnName="TipoElementoIdentificador1" />
-                <ScalarProperty Name="DescripcionComponenteIdDescripcionComponente" ColumnName="DescripcionComponenteIdDescripcionComponente" />
-                <ScalarProperty Name="DescripcionComponenteIdAsignarComponenteGenerico" ColumnName="DescripcionComponenteIdAsignarComponenteGenerico" />
-                <ScalarProperty Name="DescripcionComponenteEstado" ColumnName="DescripcionComponenteEstado" />
-                <ScalarProperty Name="DescripcionComponenteObligatorio" ColumnName="DescripcionComponenteObligatorio" />
-                <ScalarProperty Name="DescripcionComponente_Orden" ColumnName="DescripcionComponente.Orden" />
-                <ScalarProperty Name="AsignarComponenteGenericoIdAsignarComponenteGenerico" ColumnName="AsignarComponenteGenericoIdAsignarComponenteGenerico" />
-                <ScalarProperty Name="AsignarComponenteGenericoIdAsignarCuestionarioModelo" ColumnName="AsignarComponenteGenericoIdAsignarCuestionarioModelo" />
-                <ScalarProperty Name="AsignarComponenteGenericoIdComponente" ColumnName="AsignarComponenteGenericoIdComponente" />
-                <ScalarProperty Name="AsignarComponenteGenericoEstado" ColumnName="AsignarComponenteGenericoEstado" />
-                <ScalarProperty Name="AsignarComponenteGenericoOrden" ColumnName="AsignarComponenteGenericoOrden" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_DataConsultarDeUnaVersion1" FunctionName="ComunidadesGPMModel.Store.Sp_DataConsultarDeUnaVersion1">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_DataConsultarDeUnaVersion1_Result1">
-                <ScalarProperty Name="IdVersionamientoModelo" ColumnName="IdVersionamientoModelo" />
-                <ScalarProperty Name="IdCabeceraVersionamientoModelo" ColumnName="IdCabeceraVersionamientoModelo" />
-                <ScalarProperty Name="IdAsignarDescripcionComponenteTipoElemento" ColumnName="IdAsignarDescripcionComponenteTipoElemento" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="DescripcionComponenteIdDescripcionComponente" ColumnName="DescripcionComponenteIdDescripcionComponente" />
-                <ScalarProperty Name="DescripcionComponenteIdAsignarComponenteGenerico" ColumnName="DescripcionComponenteIdAsignarComponenteGenerico" />
-                <ScalarProperty Name="DescripcionComponenteEstado" ColumnName="DescripcionComponenteEstado" />
-                <ScalarProperty Name="DescripcionComponenteObligatorio" ColumnName="DescripcionComponenteObligatorio" />
-                <ScalarProperty Name="DescripcionComponente_Orden" ColumnName="DescripcionComponente.Orden" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -6577,24 +6534,11 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_CabeceraModeloPublicadoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraModeloPublicadoConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CabeceraModeloPublicadoConsultar_Result1">
-                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
-                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
-                <ScalarProperty Name="IdPeriodo" ColumnName="IdPeriodo" />
-                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
-                <ScalarProperty Name="IdAsignarUsuarioTipoUsuario" ColumnName="IdAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="ModeloPublicadoUtilizado" ColumnName="ModeloPublicadoUtilizado" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_CabeceraModeloPublicadoEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraModeloPublicadoEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_AsignarModeloPublicadoParroquiaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarModeloPublicadoParroquiaEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_AsignarDescripcionComponenteTipoElementoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarDescripcionComponenteTipoElementoConsultar">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result2">
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result1">
                 <ScalarProperty Name="IdAsignarDescripcionComponenteTipoElemento" ColumnName="IdAsignarDescripcionComponenteTipoElemento" />
                 <ScalarProperty Name="IdDescripcionComponente" ColumnName="IdDescripcionComponente" />
                 <ScalarProperty Name="IdTipoElemento" ColumnName="IdTipoElemento" />
@@ -6602,23 +6546,32 @@
                 <ScalarProperty Name="Orden" ColumnName="Orden" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="AsignarDescripcionComponenteTipoElementoUtilizado" ColumnName="AsignarDescripcionComponenteTipoElementoUtilizado" />
-                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_ModeloGenericoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ModeloGenericoConsultar">
+          <FunctionImportMapping FunctionImportName="Sp_AsignarModeloGenericoParroquiaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarModeloGenericoParroquiaInsertar">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ModeloGenericoConsultar_Result1">
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarModeloGenericoParroquiaInsertar_Result1">
+                <ScalarProperty Name="IdAsignarModeloGenericoParroquia" ColumnName="IdAsignarModeloGenericoParroquia" />
                 <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+                <ScalarProperty Name="FechaAsignacion" ColumnName="FechaAsignacion" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="ModeloGenericoUtilizado" ColumnName="ModeloGenericoUtilizado" />
-                <ScalarProperty Name="ModeloGenericoVersionamientoUtilizado" ColumnName="ModeloGenericoVersionamientoUtilizado" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_ModeloGenericoEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ModeloGenericoEliminar" />
+          <FunctionImportMapping FunctionImportName="SpAsignarModeloGenericoParroquiaConsultar" FunctionName="ComunidadesGPMModel.Store.SpAsignarModeloGenericoParroquiaConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.SpAsignarModeloGenericoParroquiaConsultar_Result1">
+                <ScalarProperty Name="IdAsignarModeloGenericoParroquia" ColumnName="IdAsignarModeloGenericoParroquia" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+                <ScalarProperty Name="FechaAsignacion" ColumnName="FechaAsignacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionModeloInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionModeloInsertar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

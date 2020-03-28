@@ -2161,27 +2161,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioValidar_Result>("Sp_UsuarioValidar", correoParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> Sp_CabeceraVersionModeloInsertar(Nullable<int> idAsignarUsuarioTipoUsuario, Nullable<int> idModeloGenerico, string caracteristica, Nullable<int> version)
-        {
-            var idAsignarUsuarioTipoUsuarioParameter = idAsignarUsuarioTipoUsuario.HasValue ?
-                new ObjectParameter("IdAsignarUsuarioTipoUsuario", idAsignarUsuarioTipoUsuario) :
-                new ObjectParameter("IdAsignarUsuarioTipoUsuario", typeof(int));
-    
-            var idModeloGenericoParameter = idModeloGenerico.HasValue ?
-                new ObjectParameter("IdModeloGenerico", idModeloGenerico) :
-                new ObjectParameter("IdModeloGenerico", typeof(int));
-    
-            var caracteristicaParameter = caracteristica != null ?
-                new ObjectParameter("Caracteristica", caracteristica) :
-                new ObjectParameter("Caracteristica", typeof(string));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("Version", version) :
-                new ObjectParameter("Version", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CabeceraVersionModeloInsertar", idAsignarUsuarioTipoUsuarioParameter, idModeloGenericoParameter, caracteristicaParameter, versionParameter);
-        }
-    
         public virtual ObjectResult<Sp_VersionamientoModeloConsultar_Result3> Sp_VersionamientoModeloConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_VersionamientoModeloConsultar_Result3>("Sp_VersionamientoModeloConsultar");
@@ -2306,6 +2285,45 @@ namespace API.Conexion
                 new ObjectParameter("idModeloGenerico", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ModeloGenericoEliminar", idModeloGenericoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_AsignarModeloGenericoParroquiaInsertar_Result1> Sp_AsignarModeloGenericoParroquiaInsertar(Nullable<int> idModeloGenerico, Nullable<int> idParroquia)
+        {
+            var idModeloGenericoParameter = idModeloGenerico.HasValue ?
+                new ObjectParameter("IdModeloGenerico", idModeloGenerico) :
+                new ObjectParameter("IdModeloGenerico", typeof(int));
+    
+            var idParroquiaParameter = idParroquia.HasValue ?
+                new ObjectParameter("IdParroquia", idParroquia) :
+                new ObjectParameter("IdParroquia", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarModeloGenericoParroquiaInsertar_Result1>("Sp_AsignarModeloGenericoParroquiaInsertar", idModeloGenericoParameter, idParroquiaParameter);
+        }
+    
+        public virtual ObjectResult<SpAsignarModeloGenericoParroquiaConsultar_Result1> SpAsignarModeloGenericoParroquiaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SpAsignarModeloGenericoParroquiaConsultar_Result1>("SpAsignarModeloGenericoParroquiaConsultar");
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_CabeceraVersionModeloInsertar(Nullable<int> idAsignarUsuarioTipoUsuario, Nullable<int> idModeloGenerico, string caracteristica, Nullable<int> version)
+        {
+            var idAsignarUsuarioTipoUsuarioParameter = idAsignarUsuarioTipoUsuario.HasValue ?
+                new ObjectParameter("IdAsignarUsuarioTipoUsuario", idAsignarUsuarioTipoUsuario) :
+                new ObjectParameter("IdAsignarUsuarioTipoUsuario", typeof(int));
+    
+            var idModeloGenericoParameter = idModeloGenerico.HasValue ?
+                new ObjectParameter("IdModeloGenerico", idModeloGenerico) :
+                new ObjectParameter("IdModeloGenerico", typeof(int));
+    
+            var caracteristicaParameter = caracteristica != null ?
+                new ObjectParameter("Caracteristica", caracteristica) :
+                new ObjectParameter("Caracteristica", typeof(string));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("Version", version) :
+                new ObjectParameter("Version", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CabeceraVersionModeloInsertar", idAsignarUsuarioTipoUsuarioParameter, idModeloGenericoParameter, caracteristicaParameter, versionParameter);
         }
     }
 }
