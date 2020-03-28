@@ -48,7 +48,7 @@ namespace API.Models.Catalogos
                     Obligatorio = item.Obligatorio,
                     Utilizado = item.AsignarDescripcionComponenteTipoElementoUtilizado,
                     TipoElemento = ListaTipoElemento.Where(p=>p.IdTipoElemento == item.IdTipoElemento).FirstOrDefault(),
-                    VersionamientoModelo = ListaVersionamientoModelo.Where(p=> _seguridad.DesEncriptar(p.IdDescripcionComponenteTipoElemento) == item.IdAsignarDescripcionComponenteTipoElemento.ToString()).FirstOrDefault()
+                    //VersionamientoModelo = ListaVersionamientoModelo.Where(p=> _seguridad.DesEncriptar(p.IdDescripcionComponenteTipoElemento) == item.IdAsignarDescripcionComponenteTipoElemento.ToString()).FirstOrDefault()
                 });
             }
             return _lista;

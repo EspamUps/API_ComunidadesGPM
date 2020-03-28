@@ -93,6 +93,9 @@
           <Parameter Name="Orden" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_ModeloGenericoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion" />
+        <Function Name="Sp_ModeloGenericoEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="idModeloGenerico" Type="int" Mode="In" />
+        </Function>
         <Function Name="Sp_ModeloGenericoInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
           <Parameter Name="Nombre" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
@@ -706,7 +709,6 @@
             <Parameter Name="Obligatorio" Mode="In" Type="Boolean" />
             <Parameter Name="Orden" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Sp_ModeloGenericoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ModeloGenericoConsultar_Result)" />
           <FunctionImport Name="Sp_ModeloGenericoInsertar" ReturnType="Collection(ComunidadesGPMModel.Sp_ModeloGenericoInsertar_Result)">
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
@@ -1296,7 +1298,11 @@
           <FunctionImport Name="Sp_AsignarModeloPublicadoParroquiaEliminar">
           <Parameter Name="IdAsignarModeloGenericoParroquia" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="Sp_AsignarDescripcionComponenteTipoElementoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result1)" />
+          <FunctionImport Name="Sp_AsignarDescripcionComponenteTipoElementoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result2)" />
+          <FunctionImport Name="Sp_ModeloGenericoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ModeloGenericoConsultar_Result1)" />
+          <FunctionImport Name="Sp_ModeloGenericoEliminar">
+            <Parameter Name="idModeloGenerico" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_AsignarComponenteGenericoConsultar_Result">
           <Property Type="Int32" Name="IdAsignarComponenteGenerico" Nullable="false" />
@@ -3839,6 +3845,24 @@
           <Property Type="Boolean" Name="Estado" Nullable="false" />
           <Property Type="String" Name="AsignarDescripcionComponenteTipoElementoUtilizado" Nullable="false" MaxLength="1" />
         </ComplexType>
+        <ComplexType Name="Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result2">
+          <Property Type="Int32" Name="IdAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoElemento" Nullable="false" />
+          <Property Type="Boolean" Name="Obligatorio" Nullable="false" />
+          <Property Type="Int32" Name="Orden" Nullable="false" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="AsignarDescripcionComponenteTipoElementoUtilizado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_ModeloGenericoConsultar_Result1">
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="String" Name="ModeloGenericoUtilizado" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ModeloGenericoVersionamientoUtilizado" Nullable="false" MaxLength="1" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3991,17 +4015,6 @@
                 <ScalarProperty Name="Obligatorio" ColumnName="Obligatorio" />
                 <ScalarProperty Name="Orden" ColumnName="Orden" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_ModeloGenericoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ModeloGenericoConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ModeloGenericoConsultar_Result">
-                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="ModeloGenericoUtilizado" ColumnName="ModeloGenericoUtilizado" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -6581,7 +6594,7 @@
           <FunctionImportMapping FunctionImportName="Sp_AsignarModeloPublicadoParroquiaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarModeloPublicadoParroquiaEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_AsignarDescripcionComponenteTipoElementoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarDescripcionComponenteTipoElementoConsultar">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result1">
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result2">
                 <ScalarProperty Name="IdAsignarDescripcionComponenteTipoElemento" ColumnName="IdAsignarDescripcionComponenteTipoElemento" />
                 <ScalarProperty Name="IdDescripcionComponente" ColumnName="IdDescripcionComponente" />
                 <ScalarProperty Name="IdTipoElemento" ColumnName="IdTipoElemento" />
@@ -6589,9 +6602,23 @@
                 <ScalarProperty Name="Orden" ColumnName="Orden" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="AsignarDescripcionComponenteTipoElementoUtilizado" ColumnName="AsignarDescripcionComponenteTipoElementoUtilizado" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ModeloGenericoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ModeloGenericoConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ModeloGenericoConsultar_Result1">
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="ModeloGenericoUtilizado" ColumnName="ModeloGenericoUtilizado" />
+                <ScalarProperty Name="ModeloGenericoVersionamientoUtilizado" ColumnName="ModeloGenericoVersionamientoUtilizado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ModeloGenericoEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ModeloGenericoEliminar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

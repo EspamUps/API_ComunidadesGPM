@@ -96,6 +96,47 @@ namespace API.Controllers
             return new { respuesta = _respuesta, http = _http };
         }
 
+        [HttpPost]
+        [Route("api/ModeloGenerico_eliminar")]
+        public object ModeloGenerico_eliminar(ModeloGenerico _objModeloGenerico)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objModeloGenerico.IdModeloGenericoEncriptado == null || string.IsNullOrEmpty(_objModeloGenerico.IdModeloGenericoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del modelo generico que va a eliminar.";
+                }
+                else
+                {
+                    _objModeloGenerico.IdModeloGenericoEncriptado = _seguridad.DesEncriptar(_objModeloGenerico.IdModeloGenericoEncriptado);
+                    var _objBuscadoModeloGenerico= _objCatalogoModeloGenerico.ConsultarModeloGenericoPorId(int.Parse(_objModeloGenerico.IdModeloGenericoEncriptado)).FirstOrDefault();
+                    if (_objBuscadoModeloGenerico == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "El modelo que intenta eliminar no existe.";
+                    }
+                    else if (_objBuscadoModeloGenerico.ModeloGenericoVersionadoUtilizado == "1")
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "El modelo generico ya esta utilizado, por la tanto no puede ser eliminado.";
+                    }
+                    else
+                    {
+                        _objCatalogoModeloGenerico.EliminarModeloGenerico(int.Parse(_objModeloGenerico.IdModeloGenericoEncriptado));
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
 
     }
 }

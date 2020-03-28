@@ -13,6 +13,8 @@ namespace API.Models.Entidades
         public string Descripcion { get; set; }
         public bool Estado { get; set; }
         public string Utilizado { get; set; }
+        public string ModeloGenericoVersionadoUtilizado { get; set; }
+        public int NumeroVersionesSinPublicar { get; set; }
         public List<AsignarCuestionarioModelo> AsignarCuestionarioModelo { get; set; }
     }
 }
