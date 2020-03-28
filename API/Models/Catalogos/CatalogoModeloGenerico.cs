@@ -46,7 +46,7 @@ namespace API.Models.Catalogos
                     Descripcion = item.Descripcion,
                     Estado = item.Estado,
                     Utilizado = item.ModeloGenericoUtilizado,
-                    ModeloGenericoVersionadoUtilizado = item.ModeloGenericoVersionamientoUtilizado,
+                    //ModeloGenericoVersionadoUtilizado = item.ModeloGenericoVersionamientoUtilizado,
                     NumeroVersionesSinPublicar = _ListaVersionamientoModelo.Where(p=> _seguridad.DesEncriptar(p.IdModeloGenerico) == item.IdModeloGenerico.ToString() && p.Utilizado == "0").ToList().Count,
                     AsignarCuestionarioModelo = _listaAsignarCuestionarioModelo.Where(p=> _seguridad.DesEncriptar(p.IdModeloGenerico) == item.IdModeloGenerico.ToString()).ToList()
                 });
@@ -66,7 +66,7 @@ namespace API.Models.Catalogos
                     Descripcion = item.Descripcion,
                     Estado = item.Estado,
                     Utilizado = item.ModeloGenericoUtilizado,
-                    ModeloGenericoVersionadoUtilizado = item.ModeloGenericoVersionamientoUtilizado,
+                    //ModeloGenericoVersionadoUtilizado = item.ModeloGenericoVersionamientoUtilizado,
                 });
             }
             return _lista;
@@ -89,7 +89,7 @@ namespace API.Models.Catalogos
                 }
                 db.Sp_AsignarCuestionarioModeloEliminar(item.IdAsignarCuestionarioModelo);
             }
-            db.Sp_ModeloGenericoEliminar(_idModeloGenerico);
+            //db.Sp_ModeloGenericoEliminar(_idModeloGenerico);
         }
     }
 }

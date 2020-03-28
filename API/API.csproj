@@ -233,9 +233,6 @@
     <Compile Include="Conexion\Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result2.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_AsignarDescripcionComponenteTipoElementoInsertar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -378,9 +375,6 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ModeloGenericoConsultar_Result.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_ModeloGenericoConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ModeloGenericoInsertar_Result.cs">

@@ -207,6 +207,11 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_DescripcionComponenteInsertar_Result>("Sp_DescripcionComponenteInsertar", idAsignarComponenteGenericoParameter, obligatorioParameter, ordenParameter);
         }
     
+        public virtual ObjectResult<Sp_ModeloGenericoConsultar_Result> Sp_ModeloGenericoConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ModeloGenericoConsultar_Result>("Sp_ModeloGenericoConsultar");
+        }
+    
         public virtual ObjectResult<Sp_ModeloGenericoInsertar_Result> Sp_ModeloGenericoInsertar(string nombre, string descripcion)
         {
             var nombreParameter = nombre != null ?
@@ -2268,23 +2273,9 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_AsignarModeloPublicadoParroquiaEliminar", idAsignarModeloGenericoParroquiaParameter);
         }
     
-        public virtual ObjectResult<Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result2> Sp_AsignarDescripcionComponenteTipoElementoConsultar()
+        public virtual ObjectResult<Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result1> Sp_AsignarDescripcionComponenteTipoElementoConsultar()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result2>("Sp_AsignarDescripcionComponenteTipoElementoConsultar");
-        }
-    
-        public virtual ObjectResult<Sp_ModeloGenericoConsultar_Result1> Sp_ModeloGenericoConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ModeloGenericoConsultar_Result1>("Sp_ModeloGenericoConsultar");
-        }
-    
-        public virtual int Sp_ModeloGenericoEliminar(Nullable<int> idModeloGenerico)
-        {
-            var idModeloGenericoParameter = idModeloGenerico.HasValue ?
-                new ObjectParameter("idModeloGenerico", idModeloGenerico) :
-                new ObjectParameter("idModeloGenerico", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ModeloGenericoEliminar", idModeloGenericoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result1>("Sp_AsignarDescripcionComponenteTipoElementoConsultar");
         }
     
         public virtual ObjectResult<Sp_AsignarModeloGenericoParroquiaInsertar_Result1> Sp_AsignarModeloGenericoParroquiaInsertar(Nullable<int> idModeloGenerico, Nullable<int> idParroquia)

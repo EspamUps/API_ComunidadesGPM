@@ -23,18 +23,18 @@ namespace API.Models.Catalogos
             try
             {
                 int idCabeceraVersion = int.Parse(db.Sp_CabeceraVersionModeloInsertar(int.Parse(_obCabeceraVersionModelo.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuarioEncriptado), int.Parse(_obCabeceraVersionModelo.IdModeloGenerico), _obCabeceraVersionModelo.Caracteristica, _obCabeceraVersionModelo.Version).Select(x => x.Value.ToString()).FirstOrDefault());
-                foreach (var item in db.Sp_AsignarDescripcionComponenteTipoElementoConsultar().Where(p=>p.IdModeloGenerico == int.Parse(_obCabeceraVersionModelo.IdModeloGenerico)).ToList())
-                {
-                    try
-                    {
-                        int idVersionamientoModelo = int.Parse(db.Sp_VersionamientoModeloInsertar(idCabeceraVersion, item.IdAsignarDescripcionComponenteTipoElemento, true).Select(x => x.Value.ToString()).FirstOrDefault());
-                    }
-                    catch (Exception)
-                    {
-                        EliminarCabeceraVersionModelo(idCabeceraVersion);
-                        return 0;
-                    }
-                }
+                //foreach (var item in db.Sp_AsignarDescripcionComponenteTipoElementoConsultar().Where(p=>p.IdModeloGenerico == int.Parse(_obCabeceraVersionModelo.IdModeloGenerico)).ToList())
+                //{
+                //    try
+                //    {
+                //        int idVersionamientoModelo = int.Parse(db.Sp_VersionamientoModeloInsertar(idCabeceraVersion, item.IdAsignarDescripcionComponenteTipoElemento, true).Select(x => x.Value.ToString()).FirstOrDefault());
+                //    }
+                //    catch (Exception)
+                //    {
+                //        EliminarCabeceraVersionModelo(idCabeceraVersion);
+                //        return 0;
+                //    }
+                //}
                 return idCabeceraVersion;
             }
             catch (Exception)
