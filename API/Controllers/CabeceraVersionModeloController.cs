@@ -67,7 +67,7 @@ namespace API.Controllers
                     else
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ocurrió un error al tratar de ingresar al AsignarDescripcionComponenteTipoElemento";
+                        _http.mensaje = "Ya existe esta version";
                     }
                 }
             }
