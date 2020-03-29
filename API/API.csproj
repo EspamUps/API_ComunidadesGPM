@@ -269,10 +269,22 @@
     <Compile Include="Conexion\Sp_AsignarResponsableConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result.cs">
@@ -378,6 +390,9 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ModeloGenericoInsertar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ModeloPublicadoConsultarPorId_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ModuloConsultar_Result.cs">
@@ -495,6 +510,7 @@
     <Compile Include="Controllers\AsignarEncuestadoController.cs" />
     <Compile Include="Controllers\AsignarModeloGenericoParroquiaController.cs" />
     <Compile Include="Controllers\AsignarResponsableController.cs" />
+    <Compile Include="Controllers\AsignarResponsableModeloPublicadoController.cs" />
     <Compile Include="Controllers\AsignarTipoUsuarioModuloPrivilegioController.cs" />
     <Compile Include="Controllers\AsignarUsuarioTipoUsuarioController.cs" />
     <Compile Include="Controllers\CabeceraRespuestaController.cs" />

@@ -2317,20 +2317,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CabeceraVersionModeloInsertar", idAsignarUsuarioTipoUsuarioParameter, idModeloGenericoParameter, caracteristicaParameter, versionParameter);
         }
     
-        public virtual ObjectResult<Sp_AsignarResponsableModeloPublicadoConsultar_Result> Sp_AsignarResponsableModeloPublicadoConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarResponsableModeloPublicadoConsultar_Result>("Sp_AsignarResponsableModeloPublicadoConsultar");
-        }
-    
-        public virtual ObjectResult<Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result> Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado(Nullable<int> idModeloPublicado)
-        {
-            var idModeloPublicadoParameter = idModeloPublicado.HasValue ?
-                new ObjectParameter("IdModeloPublicado", idModeloPublicado) :
-                new ObjectParameter("IdModeloPublicado", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result>("Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado", idModeloPublicadoParameter);
-        }
-    
         public virtual int Sp_AsignarResponsableModeloPublicadoEliminar(Nullable<int> idAsignarResponsableModeloPublicado)
         {
             var idAsignarResponsableModeloPublicadoParameter = idAsignarResponsableModeloPublicado.HasValue ?
@@ -2476,6 +2462,38 @@ namespace API.Conexion
                 new ObjectParameter("IdAsignarResponsableModeloPublicado", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result>("Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado", idAsignarResponsableModeloPublicadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_AsignarResponsableModeloPublicadoConsultar_Result1> Sp_AsignarResponsableModeloPublicadoConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarResponsableModeloPublicadoConsultar_Result1>("Sp_AsignarResponsableModeloPublicadoConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result1> Sp_AsignarResponsableModeloPublicadoConsultarPorId(Nullable<int> idAsignarResponsableModeloPublicado)
+        {
+            var idAsignarResponsableModeloPublicadoParameter = idAsignarResponsableModeloPublicado.HasValue ?
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", idAsignarResponsableModeloPublicado) :
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result1>("Sp_AsignarResponsableModeloPublicadoConsultarPorId", idAsignarResponsableModeloPublicadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result1> Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado(Nullable<int> idModeloPublicado)
+        {
+            var idModeloPublicadoParameter = idModeloPublicado.HasValue ?
+                new ObjectParameter("IdModeloPublicado", idModeloPublicado) :
+                new ObjectParameter("IdModeloPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result1>("Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado", idModeloPublicadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ModeloPublicadoConsultarPorId_Result> Sp_ModeloPublicadoConsultarPorId(Nullable<int> idModeloPublicado)
+        {
+            var idModeloPublicadoParameter = idModeloPublicado.HasValue ?
+                new ObjectParameter("IdModeloPublicado", idModeloPublicado) :
+                new ObjectParameter("IdModeloPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ModeloPublicadoConsultarPorId_Result>("Sp_ModeloPublicadoConsultarPorId", idModeloPublicadoParameter);
         }
     }
 }

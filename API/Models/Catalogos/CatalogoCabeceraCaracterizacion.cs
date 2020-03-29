@@ -55,7 +55,7 @@ namespace API.Models.Catalogos
                         IdAsignarResponsableModeloPublicadoEncriptado = _seguridad.Encriptar(item.IdAsignarResponsableModeloPublicado.ToString()),
                         Estado = item.EstadoAsignarResponsableModeloPublicado,
                         FechaAsignacion = item.FechaAsignacionAsignarResponsableModeloPublicado,
-                        FechaIncio = item.FechaInicioAsignarResponsableModeloPublicado,
+                        FechaInicio = item.FechaInicioAsignarResponsableModeloPublicado,
                         FechaFin = item.FechaFinAsignarResponsableModeloPublicado,
                         PresidenteJuntaParroquial = new PresidenteJuntaParroquial()
                         {
@@ -197,7 +197,7 @@ namespace API.Models.Catalogos
                         IdAsignarResponsableModeloPublicadoEncriptado = _seguridad.Encriptar(item.IdAsignarResponsableModeloPublicado.ToString()),
                         Estado = item.EstadoAsignarResponsableModeloPublicado,
                         FechaAsignacion = item.FechaAsignacionAsignarResponsableModeloPublicado,
-                        FechaIncio = item.FechaInicioAsignarResponsableModeloPublicado,
+                        FechaInicio = item.FechaInicioAsignarResponsableModeloPublicado,
                         FechaFin = item.FechaFinAsignarResponsableModeloPublicado,
                         PresidenteJuntaParroquial = new PresidenteJuntaParroquial()
                         {
