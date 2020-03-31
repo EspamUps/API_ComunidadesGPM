@@ -16,7 +16,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                return int.Parse(db.Sp_AsignarResponsableModeloPublicadoInsertar(_objAsignar.PresidenteJuntaParroquial.IdPresidenteJuntaParroquial,_objAsignar.FechaAsignacion,_objAsignar.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario,_objAsignar.ModeloPublicado.IdModeloPublicado,_objAsignar.FechaInicio,_objAsignar.FechaFin,_objAsignar.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
+                return int.Parse(db.Sp_AsignarResponsableModeloPublicadoInsertar(_objAsignar.Parroquia.IdParroquia,_objAsignar.FechaAsignacion,_objAsignar.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario,_objAsignar.ModeloPublicado.IdModeloPublicado,_objAsignar.FechaInicio,_objAsignar.FechaFin,_objAsignar.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
             }
             catch (Exception)
             {
@@ -28,7 +28,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-               db.Sp_AsignarResponsableModeloPublicadoModificar(_objAsignar.IdAsignarResponsableModeloPublicado,_objAsignar.PresidenteJuntaParroquial.IdPresidenteJuntaParroquial, _objAsignar.FechaAsignacion, _objAsignar.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario, _objAsignar.ModeloPublicado.IdModeloPublicado, _objAsignar.FechaInicio, _objAsignar.FechaFin, _objAsignar.Estado);
+               db.Sp_AsignarResponsableModeloPublicadoModificar(_objAsignar.IdAsignarResponsableModeloPublicado,_objAsignar.Parroquia.IdParroquia, _objAsignar.FechaAsignacion, _objAsignar.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario, _objAsignar.ModeloPublicado.IdModeloPublicado, _objAsignar.FechaInicio, _objAsignar.FechaFin, _objAsignar.Estado);
                 return _objAsignar.IdAsignarResponsableModeloPublicado;
             }
             catch (Exception)
@@ -56,14 +56,6 @@ namespace API.Models.Catalogos
                     FechaInicio = item.FechaInicioAsignarResponsableModeloPublicado,
                     FechaFin = item.FechaFinAsignarResponsableModeloPublicado,
                     Utilizado = item.UtilizadoAsignarResponsableModeloPublicado,
-                    PresidenteJuntaParroquial = new PresidenteJuntaParroquial()
-                    {
-                        IdPresidenteJuntaParroquial = item.IdPresidenteJuntaParroquial,
-                        IdPresidenteJuntaParroquialEncriptado = _seguridad.Encriptar(item.IdPresidenteJuntaParroquial.ToString()),
-                        Representante = item.RepresentantePresidenteJuntaParroquial,
-                        FechaIngreso = item.FechaIngresoPresidenteJuntaParroquial,
-                        FechaSalida = Convert.ToDateTime(item.FechaSalidaPresidenteJuntaParroquial),
-                        Estado = item.EstadoPresidenteJuntaParroquial,
                         Parroquia = new Parroquia()
                         {
                             IdParroquia = item.IdParroquia,
@@ -93,8 +85,7 @@ namespace API.Models.Catalogos
                                     EstadoProvincia = item.EstadoProvincia
                                 }
                             }
-                        }
-                    },
+                        },
                     AsignarUsuarioTipoUsuario=new AsignarUsuarioTipoUsuario()
                     {
                         IdAsignarUsuarioTipoUsuario = item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario,
@@ -190,14 +181,6 @@ namespace API.Models.Catalogos
                     FechaInicio = item.FechaInicioAsignarResponsableModeloPublicado,
                     FechaFin = item.FechaFinAsignarResponsableModeloPublicado,
                     Utilizado = item.UtilizadoAsignarResponsableModeloPublicado,
-                    PresidenteJuntaParroquial = new PresidenteJuntaParroquial()
-                    {
-                        IdPresidenteJuntaParroquial = item.IdPresidenteJuntaParroquial,
-                        IdPresidenteJuntaParroquialEncriptado = _seguridad.Encriptar(item.IdPresidenteJuntaParroquial.ToString()),
-                        Representante = item.RepresentantePresidenteJuntaParroquial,
-                        FechaIngreso = item.FechaIngresoPresidenteJuntaParroquial,
-                        FechaSalida = Convert.ToDateTime(item.FechaSalidaPresidenteJuntaParroquial),
-                        Estado = item.EstadoPresidenteJuntaParroquial,
                         Parroquia = new Parroquia()
                         {
                             IdParroquia = item.IdParroquia,
@@ -227,8 +210,7 @@ namespace API.Models.Catalogos
                                     EstadoProvincia = item.EstadoProvincia
                                 }
                             }
-                        }
-                    },
+                        },
                     AsignarUsuarioTipoUsuario = new AsignarUsuarioTipoUsuario()
                     {
                         IdAsignarUsuarioTipoUsuario = item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario,
@@ -323,14 +305,6 @@ namespace API.Models.Catalogos
                     FechaInicio = item.FechaInicioAsignarResponsableModeloPublicado,
                     FechaFin = item.FechaFinAsignarResponsableModeloPublicado,
                     Utilizado = item.UtilizadoAsignarResponsableModeloPublicado,
-                    PresidenteJuntaParroquial = new PresidenteJuntaParroquial()
-                    {
-                        IdPresidenteJuntaParroquial = item.IdPresidenteJuntaParroquial,
-                        IdPresidenteJuntaParroquialEncriptado = _seguridad.Encriptar(item.IdPresidenteJuntaParroquial.ToString()),
-                        Representante = item.RepresentantePresidenteJuntaParroquial,
-                        FechaIngreso = item.FechaIngresoPresidenteJuntaParroquial,
-                        FechaSalida = Convert.ToDateTime(item.FechaSalidaPresidenteJuntaParroquial),
-                        Estado = item.EstadoPresidenteJuntaParroquial,
                         Parroquia = new Parroquia()
                         {
                             IdParroquia = item.IdParroquia,
@@ -360,8 +334,7 @@ namespace API.Models.Catalogos
                                     EstadoProvincia = item.EstadoProvincia
                                 }
                             }
-                        }
-                    },
+                        },
                     AsignarUsuarioTipoUsuario = new AsignarUsuarioTipoUsuario()
                     {
                         IdAsignarUsuarioTipoUsuario = item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario,

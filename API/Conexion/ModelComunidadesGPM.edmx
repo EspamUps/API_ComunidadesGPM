@@ -56,7 +56,7 @@
           <Parameter Name="IdAsignarResponsableModeloPublicado" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_AsignarResponsableModeloPublicadoInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
-          <Parameter Name="IdPresidenteJuntaParroquial" Type="int" Mode="In" />
+          <Parameter Name="IdParroquia" Type="int" Mode="In" />
           <Parameter Name="FechaAsignacion" Type="smalldatetime" Mode="In" />
           <Parameter Name="IdAsignarUsuarioTipoUsuario" Type="int" Mode="In" />
           <Parameter Name="IdModeloPublicado" Type="int" Mode="In" />
@@ -66,7 +66,7 @@
         </Function>
         <Function Name="Sp_AsignarResponsableModeloPublicadoModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
           <Parameter Name="IdAsignarResponsableModeloPublicado" Type="int" Mode="In" />
-          <Parameter Name="IdPresidenteJuntaParroquial" Type="int" Mode="In" />
+          <Parameter Name="IdParroquia" Type="int" Mode="In" />
           <Parameter Name="FechaAsignacion" Type="smalldatetime" Mode="In" />
           <Parameter Name="IdAsignarUsuarioTipoUsuario" Type="int" Mode="In" />
           <Parameter Name="IdModeloPublicado" Type="int" Mode="In" />
@@ -1349,11 +1349,21 @@
             <Parameter Name="Caracteristica" Mode="In" Type="String" />
             <Parameter Name="Version" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="Sp_ModeloPublicadoConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_ModeloPublicadoConsultarPorId_Result)">
+          <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultar_Result2)" />
+          <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result2)">
+            <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result2)">
+            <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoEliminar">
-          <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
+            <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoInsertar" ReturnType="Collection(Decimal)">
-            <Parameter Name="IdPresidenteJuntaParroquial" Mode="In" Type="Int32" />
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
             <Parameter Name="FechaAsignacion" Mode="In" Type="DateTime" />
             <Parameter Name="IdAsignarUsuarioTipoUsuario" Mode="In" Type="Int32" />
             <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
@@ -1363,13 +1373,17 @@
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoModificar">
             <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
-            <Parameter Name="IdPresidenteJuntaParroquial" Mode="In" Type="Int32" />
+            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
             <Parameter Name="FechaAsignacion" Mode="In" Type="DateTime" />
             <Parameter Name="IdAsignarUsuarioTipoUsuario" Mode="In" Type="Int32" />
             <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
             <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CabeceraCaracterizacionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraCaracterizacionConsultar_Result1)" />
+          <FunctionImport Name="Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result1)">
+            <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraCaracterizacionInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
@@ -1385,20 +1399,6 @@
             <Parameter Name="FechaFinalizado" Mode="In" Type="DateTime" />
             <Parameter Name="Finalizado" Mode="In" Type="Boolean" />
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_CabeceraCaracterizacionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraCaracterizacionConsultar_Result)" />
-          <FunctionImport Name="Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result)">
-          <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultar_Result1)" />
-          <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result1)">
-          <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result1)">
-          <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="Sp_ModeloPublicadoConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_ModeloPublicadoConsultarPorId_Result)">
-            <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_AsignarComponenteGenericoConsultar_Result">
@@ -4590,6 +4590,354 @@
           <Property Type="String" Name="TIPOUSUARIO_Descripcion" Nullable="false" MaxLength="200" />
           <Property Type="Boolean" Name="TIPOUSUARIO_Estado" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_AsignarResponsableModeloPublicadoConsultar_Result2">
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="String" Name="UtilizadoAsignarResponsableModeloPublicado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+          <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOUSUARIO_Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="TIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquia" Nullable="false" />
+          <Property Type="String" Name="CodigoParroquia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreParroquia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionParroquia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoParroquia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoParroquia" Nullable="false" />
+          <Property Type="Int32" Name="IdCanton" Nullable="false" />
+          <Property Type="String" Name="CodigoCanton" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreCanton" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionCanton" Nullable="true" />
+          <Property Type="String" Name="RutaLogoCanton" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoCanton" Nullable="false" />
+          <Property Type="Int32" Name="IdProvincia" Nullable="false" />
+          <Property Type="String" Name="CodigoProvincia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionProvincia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result2">
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="String" Name="UtilizadoAsignarResponsableModeloPublicado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+          <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOUSUARIO_Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="TIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquia" Nullable="false" />
+          <Property Type="String" Name="CodigoParroquia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreParroquia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionParroquia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoParroquia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoParroquia" Nullable="false" />
+          <Property Type="Int32" Name="IdCanton" Nullable="false" />
+          <Property Type="String" Name="CodigoCanton" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreCanton" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionCanton" Nullable="true" />
+          <Property Type="String" Name="RutaLogoCanton" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoCanton" Nullable="false" />
+          <Property Type="Int32" Name="IdProvincia" Nullable="false" />
+          <Property Type="String" Name="CodigoProvincia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionProvincia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result2">
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="String" Name="UtilizadoAsignarResponsableModeloPublicado" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+          <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOUSUARIO_Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="TIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquia" Nullable="false" />
+          <Property Type="String" Name="CodigoParroquia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreParroquia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionParroquia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoParroquia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoParroquia" Nullable="false" />
+          <Property Type="Int32" Name="IdCanton" Nullable="false" />
+          <Property Type="String" Name="CodigoCanton" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreCanton" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionCanton" Nullable="true" />
+          <Property Type="String" Name="RutaLogoCanton" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoCanton" Nullable="false" />
+          <Property Type="Int32" Name="IdProvincia" Nullable="false" />
+          <Property Type="String" Name="CodigoProvincia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionProvincia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_CabeceraCaracterizacionConsultar_Result1">
+          <Property Type="Int32" Name="IdCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinalizadoCabeceraCaracterizacion" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroCabeceraCaracterizacion" Nullable="false" Precision="16" />
+          <Property Type="Boolean" Name="FinalizadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+          <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOUSUARIO_Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="TIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquia" Nullable="false" />
+          <Property Type="String" Name="CodigoParroquia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreParroquia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionParroquia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoParroquia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoParroquia" Nullable="false" />
+          <Property Type="Int32" Name="IdCanton" Nullable="false" />
+          <Property Type="String" Name="CodigoCanton" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreCanton" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionCanton" Nullable="true" />
+          <Property Type="String" Name="RutaLogoCanton" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoCanton" Nullable="false" />
+          <Property Type="Int32" Name="IdProvincia" Nullable="false" />
+          <Property Type="String" Name="CodigoProvincia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionProvincia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result1">
+          <Property Type="Int32" Name="IdCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinalizadoCabeceraCaracterizacion" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroCabeceraCaracterizacion" Nullable="false" Precision="16" />
+          <Property Type="Boolean" Name="FinalizadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="USUARIO_IdUsuario" Nullable="false" />
+          <Property Type="String" Name="USUARIO_Correo" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="USUARIO_Clave" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="USUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="PERSONA_IdPersona" Nullable="false" />
+          <Property Type="String" Name="PERSONA_PrimerNombre" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoNombre" Nullable="true" />
+          <Property Type="String" Name="PERSONA_PrimerApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_SegundoApellido" Nullable="false" />
+          <Property Type="String" Name="PERSONA_NumeroIdentificacion" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="PERSONA_Telefono" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="PERSONA_IdParroquia" Nullable="false" />
+          <Property Type="String" Name="PERSONA_Direccion" Nullable="false" />
+          <Property Type="Boolean" Name="PERSONA_Estado" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_IdSexo" Nullable="false" />
+          <Property Type="Int32" Name="SEXO_Identificador" Nullable="false" />
+          <Property Type="String" Name="SEXO_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="SEXO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_IdTipoIdentificacion" Nullable="false" />
+          <Property Type="Int32" Name="TIPOIDENTIFICACION_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
+          <Property Type="Int32" Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_IdTipoUsuario" Nullable="false" />
+          <Property Type="Int32" Name="TIPOUSUARIO_Identificador" Nullable="false" />
+          <Property Type="String" Name="TIPOUSUARIO_Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="TIPOUSUARIO_Estado" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquia" Nullable="false" />
+          <Property Type="String" Name="CodigoParroquia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreParroquia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionParroquia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoParroquia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoParroquia" Nullable="false" />
+          <Property Type="Int32" Name="IdCanton" Nullable="false" />
+          <Property Type="String" Name="CodigoCanton" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreCanton" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionCanton" Nullable="true" />
+          <Property Type="String" Name="RutaLogoCanton" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoCanton" Nullable="false" />
+          <Property Type="Int32" Name="IdProvincia" Nullable="false" />
+          <Property Type="String" Name="CodigoProvincia" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="DescripcionProvincia" Nullable="true" />
+          <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7308,404 +7656,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionModeloInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionModeloInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableModeloPublicadoEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableModeloPublicadoEliminar" />
-          <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableModeloPublicadoInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableModeloPublicadoInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableModeloPublicadoModificar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableModeloPublicadoModificar" />
-          <FunctionImportMapping FunctionImportName="Sp_CabeceraCaracterizacionInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraCaracterizacionInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_CabeceraCaracterizacionModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraCaracterizacionModificar" />
-          <FunctionImportMapping FunctionImportName="Sp_CabeceraCaracterizacionConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraCaracterizacionConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CabeceraCaracterizacionConsultar_Result">
-                <ScalarProperty Name="IdCabeceraCaracterizacion" ColumnName="IdCabeceraCaracterizacion" />
-                <ScalarProperty Name="FechaFinalizadoCabeceraCaracterizacion" ColumnName="FechaFinalizadoCabeceraCaracterizacion" />
-                <ScalarProperty Name="FechaRegistroCabeceraCaracterizacion" ColumnName="FechaRegistroCabeceraCaracterizacion" />
-                <ScalarProperty Name="FinalizadoCabeceraCaracterizacion" ColumnName="FinalizadoCabeceraCaracterizacion" />
-                <ScalarProperty Name="EstadoCabeceraCaracterizacion" ColumnName="EstadoCabeceraCaracterizacion" />
-                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
-                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
-                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
-                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
-                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
-                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
-                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
-                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
-                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
-                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
-                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
-                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
-                <ScalarProperty Name="IdAsignarUsuarioTipoUsuario" ColumnName="IdAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuario" ColumnName="EstadoAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
-                <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
-                <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
-                <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
-                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
-                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
-                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
-                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
-                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
-                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
-                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
-                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
-                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
-                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
-                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
-                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
-                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
-                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
-                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
-                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
-                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
-                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
-                <ScalarProperty Name="IdPresidenteJuntaParroquial" ColumnName="IdPresidenteJuntaParroquial" />
-                <ScalarProperty Name="EstadoPresidenteJuntaParroquial" ColumnName="EstadoPresidenteJuntaParroquial" />
-                <ScalarProperty Name="FechaIngresoPresidenteJuntaParroquial" ColumnName="FechaIngresoPresidenteJuntaParroquial" />
-                <ScalarProperty Name="FechaSalidaPresidenteJuntaParroquial" ColumnName="FechaSalidaPresidenteJuntaParroquial" />
-                <ScalarProperty Name="RepresentantePresidenteJuntaParroquial" ColumnName="RepresentantePresidenteJuntaParroquial" />
-                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
-                <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
-                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
-                <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
-                <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
-                <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
-                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
-                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
-                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
-                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
-                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
-                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
-                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
-                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
-                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
-                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
-                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result">
-                <ScalarProperty Name="IdCabeceraCaracterizacion" ColumnName="IdCabeceraCaracterizacion" />
-                <ScalarProperty Name="FechaFinalizadoCabeceraCaracterizacion" ColumnName="FechaFinalizadoCabeceraCaracterizacion" />
-                <ScalarProperty Name="FechaRegistroCabeceraCaracterizacion" ColumnName="FechaRegistroCabeceraCaracterizacion" />
-                <ScalarProperty Name="FinalizadoCabeceraCaracterizacion" ColumnName="FinalizadoCabeceraCaracterizacion" />
-                <ScalarProperty Name="EstadoCabeceraCaracterizacion" ColumnName="EstadoCabeceraCaracterizacion" />
-                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
-                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
-                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
-                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
-                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
-                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
-                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
-                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
-                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
-                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
-                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
-                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
-                <ScalarProperty Name="IdAsignarUsuarioTipoUsuario" ColumnName="IdAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuario" ColumnName="EstadoAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
-                <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
-                <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
-                <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
-                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
-                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
-                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
-                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
-                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
-                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
-                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
-                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
-                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
-                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
-                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
-                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
-                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
-                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
-                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
-                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
-                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
-                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
-                <ScalarProperty Name="IdPresidenteJuntaParroquial" ColumnName="IdPresidenteJuntaParroquial" />
-                <ScalarProperty Name="EstadoPresidenteJuntaParroquial" ColumnName="EstadoPresidenteJuntaParroquial" />
-                <ScalarProperty Name="FechaIngresoPresidenteJuntaParroquial" ColumnName="FechaIngresoPresidenteJuntaParroquial" />
-                <ScalarProperty Name="FechaSalidaPresidenteJuntaParroquial" ColumnName="FechaSalidaPresidenteJuntaParroquial" />
-                <ScalarProperty Name="RepresentantePresidenteJuntaParroquial" ColumnName="RepresentantePresidenteJuntaParroquial" />
-                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
-                <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
-                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
-                <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
-                <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
-                <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
-                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
-                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
-                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
-                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
-                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
-                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
-                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
-                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
-                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
-                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
-                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableModeloPublicadoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableModeloPublicadoConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultar_Result1">
-                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="UtilizadoAsignarResponsableModeloPublicado" ColumnName="UtilizadoAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
-                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
-                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
-                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
-                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
-                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
-                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
-                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
-                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
-                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
-                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
-                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
-                <ScalarProperty Name="IdAsignarUsuarioTipoUsuario" ColumnName="IdAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuario" ColumnName="EstadoAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
-                <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
-                <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
-                <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
-                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
-                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
-                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
-                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
-                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
-                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
-                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
-                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
-                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
-                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
-                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
-                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
-                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
-                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
-                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
-                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
-                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
-                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
-                <ScalarProperty Name="IdPresidenteJuntaParroquial" ColumnName="IdPresidenteJuntaParroquial" />
-                <ScalarProperty Name="EstadoPresidenteJuntaParroquial" ColumnName="EstadoPresidenteJuntaParroquial" />
-                <ScalarProperty Name="FechaIngresoPresidenteJuntaParroquial" ColumnName="FechaIngresoPresidenteJuntaParroquial" />
-                <ScalarProperty Name="FechaSalidaPresidenteJuntaParroquial" ColumnName="FechaSalidaPresidenteJuntaParroquial" />
-                <ScalarProperty Name="RepresentantePresidenteJuntaParroquial" ColumnName="RepresentantePresidenteJuntaParroquial" />
-                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
-                <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
-                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
-                <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
-                <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
-                <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
-                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
-                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
-                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
-                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
-                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
-                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
-                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
-                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
-                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
-                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
-                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableModeloPublicadoConsultarPorId" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableModeloPublicadoConsultarPorId">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result1">
-                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="UtilizadoAsignarResponsableModeloPublicado" ColumnName="UtilizadoAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
-                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
-                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
-                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
-                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
-                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
-                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
-                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
-                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
-                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
-                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
-                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
-                <ScalarProperty Name="IdAsignarUsuarioTipoUsuario" ColumnName="IdAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuario" ColumnName="EstadoAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
-                <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
-                <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
-                <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
-                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
-                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
-                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
-                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
-                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
-                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
-                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
-                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
-                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
-                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
-                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
-                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
-                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
-                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
-                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
-                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
-                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
-                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
-                <ScalarProperty Name="IdPresidenteJuntaParroquial" ColumnName="IdPresidenteJuntaParroquial" />
-                <ScalarProperty Name="EstadoPresidenteJuntaParroquial" ColumnName="EstadoPresidenteJuntaParroquial" />
-                <ScalarProperty Name="FechaIngresoPresidenteJuntaParroquial" ColumnName="FechaIngresoPresidenteJuntaParroquial" />
-                <ScalarProperty Name="FechaSalidaPresidenteJuntaParroquial" ColumnName="FechaSalidaPresidenteJuntaParroquial" />
-                <ScalarProperty Name="RepresentantePresidenteJuntaParroquial" ColumnName="RepresentantePresidenteJuntaParroquial" />
-                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
-                <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
-                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
-                <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
-                <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
-                <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
-                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
-                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
-                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
-                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
-                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
-                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
-                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
-                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
-                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
-                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
-                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result1">
-                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="UtilizadoAsignarResponsableModeloPublicado" ColumnName="UtilizadoAsignarResponsableModeloPublicado" />
-                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
-                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
-                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
-                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
-                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
-                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
-                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
-                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
-                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
-                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
-                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
-                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
-                <ScalarProperty Name="IdAsignarUsuarioTipoUsuario" ColumnName="IdAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuario" ColumnName="EstadoAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
-                <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
-                <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
-                <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
-                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
-                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
-                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
-                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
-                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
-                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
-                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
-                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
-                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
-                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
-                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
-                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
-                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
-                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
-                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
-                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
-                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
-                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
-                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
-                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
-                <ScalarProperty Name="IdPresidenteJuntaParroquial" ColumnName="IdPresidenteJuntaParroquial" />
-                <ScalarProperty Name="EstadoPresidenteJuntaParroquial" ColumnName="EstadoPresidenteJuntaParroquial" />
-                <ScalarProperty Name="FechaIngresoPresidenteJuntaParroquial" ColumnName="FechaIngresoPresidenteJuntaParroquial" />
-                <ScalarProperty Name="FechaSalidaPresidenteJuntaParroquial" ColumnName="FechaSalidaPresidenteJuntaParroquial" />
-                <ScalarProperty Name="RepresentantePresidenteJuntaParroquial" ColumnName="RepresentantePresidenteJuntaParroquial" />
-                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
-                <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
-                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
-                <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
-                <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
-                <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
-                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
-                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
-                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
-                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
-                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
-                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
-                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
-                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
-                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
-                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
-                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_ModeloPublicadoConsultarPorId" FunctionName="ComunidadesGPMModel.Store.Sp_ModeloPublicadoConsultarPorId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ModeloPublicadoConsultarPorId_Result">
@@ -7755,6 +7705,379 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableModeloPublicadoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableModeloPublicadoConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultar_Result2">
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="UtilizadoAsignarResponsableModeloPublicado" ColumnName="UtilizadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuario" ColumnName="IdAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuario" ColumnName="EstadoAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
+                <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
+                <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
+                <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
+                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
+                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
+                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
+                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
+                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+                <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
+                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
+                <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
+                <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
+                <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
+                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
+                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
+                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
+                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableModeloPublicadoConsultarPorId" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableModeloPublicadoConsultarPorId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result2">
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="UtilizadoAsignarResponsableModeloPublicado" ColumnName="UtilizadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuario" ColumnName="IdAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuario" ColumnName="EstadoAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
+                <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
+                <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
+                <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
+                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
+                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
+                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
+                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
+                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+                <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
+                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
+                <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
+                <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
+                <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
+                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
+                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
+                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
+                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result2">
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="UtilizadoAsignarResponsableModeloPublicado" ColumnName="UtilizadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuario" ColumnName="IdAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuario" ColumnName="EstadoAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
+                <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
+                <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
+                <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
+                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
+                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
+                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
+                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
+                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+                <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
+                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
+                <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
+                <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
+                <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
+                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
+                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
+                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
+                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableModeloPublicadoEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableModeloPublicadoEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableModeloPublicadoInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableModeloPublicadoInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableModeloPublicadoModificar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableModeloPublicadoModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraCaracterizacionConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraCaracterizacionConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CabeceraCaracterizacionConsultar_Result1">
+                <ScalarProperty Name="IdCabeceraCaracterizacion" ColumnName="IdCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaFinalizadoCabeceraCaracterizacion" ColumnName="FechaFinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaRegistroCabeceraCaracterizacion" ColumnName="FechaRegistroCabeceraCaracterizacion" />
+                <ScalarProperty Name="FinalizadoCabeceraCaracterizacion" ColumnName="FinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="EstadoCabeceraCaracterizacion" ColumnName="EstadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuario" ColumnName="IdAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuario" ColumnName="EstadoAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
+                <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
+                <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
+                <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
+                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
+                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
+                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
+                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
+                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+                <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
+                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
+                <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
+                <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
+                <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
+                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
+                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
+                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
+                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result1">
+                <ScalarProperty Name="IdCabeceraCaracterizacion" ColumnName="IdCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaFinalizadoCabeceraCaracterizacion" ColumnName="FechaFinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaRegistroCabeceraCaracterizacion" ColumnName="FechaRegistroCabeceraCaracterizacion" />
+                <ScalarProperty Name="FinalizadoCabeceraCaracterizacion" ColumnName="FinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="EstadoCabeceraCaracterizacion" ColumnName="EstadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuario" ColumnName="IdAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuario" ColumnName="EstadoAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="USUARIO_IdUsuario" ColumnName="USUARIO_IdUsuario" />
+                <ScalarProperty Name="USUARIO_Correo" ColumnName="USUARIO_Correo" />
+                <ScalarProperty Name="USUARIO_Clave" ColumnName="USUARIO_Clave" />
+                <ScalarProperty Name="USUARIO_Estado" ColumnName="USUARIO_Estado" />
+                <ScalarProperty Name="PERSONA_IdPersona" ColumnName="PERSONA_IdPersona" />
+                <ScalarProperty Name="PERSONA_PrimerNombre" ColumnName="PERSONA_PrimerNombre" />
+                <ScalarProperty Name="PERSONA_SegundoNombre" ColumnName="PERSONA_SegundoNombre" />
+                <ScalarProperty Name="PERSONA_PrimerApellido" ColumnName="PERSONA_PrimerApellido" />
+                <ScalarProperty Name="PERSONA_SegundoApellido" ColumnName="PERSONA_SegundoApellido" />
+                <ScalarProperty Name="PERSONA_NumeroIdentificacion" ColumnName="PERSONA_NumeroIdentificacion" />
+                <ScalarProperty Name="PERSONA_Telefono" ColumnName="PERSONA_Telefono" />
+                <ScalarProperty Name="PERSONA_IdParroquia" ColumnName="PERSONA_IdParroquia" />
+                <ScalarProperty Name="PERSONA_Direccion" ColumnName="PERSONA_Direccion" />
+                <ScalarProperty Name="PERSONA_Estado" ColumnName="PERSONA_Estado" />
+                <ScalarProperty Name="SEXO_IdSexo" ColumnName="SEXO_IdSexo" />
+                <ScalarProperty Name="SEXO_Identificador" ColumnName="SEXO_Identificador" />
+                <ScalarProperty Name="SEXO_Descripcion" ColumnName="SEXO_Descripcion" />
+                <ScalarProperty Name="SEXO_Estado" ColumnName="SEXO_Estado" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_IdTipoIdentificacion" ColumnName="TIPOIDENTIFICACION_IdTipoIdentificacion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Identificador" ColumnName="TIPOIDENTIFICACION_Identificador" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Descripcion" ColumnName="TIPOIDENTIFICACION_Descripcion" />
+                <ScalarProperty Name="TIPOIDENTIFICACION_Estado" ColumnName="TIPOIDENTIFICACION_Estado" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="ASIGNARUSUARIOTIPOUSUARIO_Estado" ColumnName="ASIGNARUSUARIOTIPOUSUARIO_Estado" />
+                <ScalarProperty Name="TIPOUSUARIO_IdTipoUsuario" ColumnName="TIPOUSUARIO_IdTipoUsuario" />
+                <ScalarProperty Name="TIPOUSUARIO_Identificador" ColumnName="TIPOUSUARIO_Identificador" />
+                <ScalarProperty Name="TIPOUSUARIO_Descripcion" ColumnName="TIPOUSUARIO_Descripcion" />
+                <ScalarProperty Name="TIPOUSUARIO_Estado" ColumnName="TIPOUSUARIO_Estado" />
+                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
+                <ScalarProperty Name="CodigoParroquia" ColumnName="CodigoParroquia" />
+                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
+                <ScalarProperty Name="DescripcionParroquia" ColumnName="DescripcionParroquia" />
+                <ScalarProperty Name="RutaLogoParroquia" ColumnName="RutaLogoParroquia" />
+                <ScalarProperty Name="EstadoParroquia" ColumnName="EstadoParroquia" />
+                <ScalarProperty Name="IdCanton" ColumnName="IdCanton" />
+                <ScalarProperty Name="CodigoCanton" ColumnName="CodigoCanton" />
+                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+                <ScalarProperty Name="RutaLogoCanton" ColumnName="RutaLogoCanton" />
+                <ScalarProperty Name="EstadoCanton" ColumnName="EstadoCanton" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+                <ScalarProperty Name="CodigoProvincia" ColumnName="CodigoProvincia" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+                <ScalarProperty Name="RutaLogoProvincia" ColumnName="RutaLogoProvincia" />
+                <ScalarProperty Name="EstadoProvincia" ColumnName="EstadoProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraCaracterizacionInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraCaracterizacionInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_CabeceraCaracterizacionModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraCaracterizacionModificar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

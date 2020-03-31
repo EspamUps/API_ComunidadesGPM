@@ -9,7 +9,7 @@ namespace API.Models.Entidades
     {
         public int IdAsignarResponsableModeloPublicado { get; set; }
         public string IdAsignarResponsableModeloPublicadoEncriptado { get; set; }
-        public PresidenteJuntaParroquial PresidenteJuntaParroquial { get; set; }
+        public Parroquia Parroquia { get; set; }
         public DateTime FechaAsignacion { get; set; }
         public AsignarUsuarioTipoUsuario AsignarUsuarioTipoUsuario { get; set; }
         public ModeloPublicado ModeloPublicado { get; set; }

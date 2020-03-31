@@ -41,10 +41,10 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador del modelo publicado que va a asignar";
                 }
-                else if (_objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial == null || string.IsNullOrEmpty(_objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.IdPresidenteJuntaParroquialEncriptado))
+                else if (_objAsignarResponsableModeloPublicado.Parroquia == null || string.IsNullOrEmpty(_objAsignarResponsableModeloPublicado.Parroquia.IdParroquiaEncriptado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "Ingrese el identificador del presidente de la junta parroquial";
+                    _http.mensaje = "Ingrese el identificador de la parroquial";
                 }
                 else if (_objAsignarResponsableModeloPublicado.FechaInicio == null || _objAsignarResponsableModeloPublicado.FechaInicio.ToShortDateString() == "01/01/0001" || _objAsignarResponsableModeloPublicado.FechaInicio.ToShortDateString() == "1/1/0001")
                 {
@@ -63,7 +63,7 @@ namespace API.Controllers
                 }
                 else
                 {
-                    _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.IdPresidenteJuntaParroquial = Convert.ToInt32(_seguridad.DesEncriptar(_objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.IdPresidenteJuntaParroquialEncriptado));
+                    _objAsignarResponsableModeloPublicado.Parroquia.IdParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_objAsignarResponsableModeloPublicado.Parroquia.IdParroquiaEncriptado));
                     _objAsignarResponsableModeloPublicado.ModeloPublicado.IdModeloPublicado = Convert.ToInt32(_seguridad.DesEncriptar(_objAsignarResponsableModeloPublicado.ModeloPublicado.IdModeloPublicadoEncriptado));
                     _objAsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_objAsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuarioEncriptado));
                     _objAsignarResponsableModeloPublicado.FechaAsignacion = DateTime.Now;
@@ -87,10 +87,9 @@ namespace API.Controllers
                         _objAsignarResponsableModeloPublicado.ModeloPublicado.IdModeloPublicado=0;
                         _objAsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.IdCabeceraVersionModelo = 0;
                         _objAsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.ModeloGenerico.IdModeloGenerico = 0;
-                        _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.IdPresidenteJuntaParroquial = 0;
-                        _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.Parroquia.IdParroquia = 0;
-                        _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.Parroquia.Canton.IdCanton = 0;
-                        _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.Parroquia.Canton.Provincia.IdProvincia = 0;
+                        _objAsignarResponsableModeloPublicado.Parroquia.IdParroquia = 0;
+                        _objAsignarResponsableModeloPublicado.Parroquia.Canton.IdCanton = 0;
+                        _objAsignarResponsableModeloPublicado.Parroquia.Canton.Provincia.IdProvincia = 0;
                         _respuesta = _objAsignarResponsableModeloPublicado;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
@@ -188,10 +187,9 @@ namespace API.Controllers
                                 _objAsignarResponsableModeloPublicado.ModeloPublicado.IdModeloPublicado = 0;
                                 _objAsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.IdCabeceraVersionModelo = 0;
                                 _objAsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.ModeloGenerico.IdModeloGenerico = 0;
-                                _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.IdPresidenteJuntaParroquial = 0;
-                                _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.Parroquia.IdParroquia = 0;
-                                _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.Parroquia.Canton.IdCanton = 0;
-                                _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.Parroquia.Canton.Provincia.IdProvincia = 0;
+                                _objAsignarResponsableModeloPublicado.Parroquia.IdParroquia = 0;
+                                _objAsignarResponsableModeloPublicado.Parroquia.Canton.IdCanton = 0;
+                                _objAsignarResponsableModeloPublicado.Parroquia.Canton.Provincia.IdProvincia = 0;
                                 _respuesta = _objAsignarResponsableModeloPublicado;
                                 _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                             }
@@ -278,10 +276,9 @@ namespace API.Controllers
                         _objAsignarResponsableModeloPublicado.ModeloPublicado.IdModeloPublicado = 0;
                         _objAsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.IdCabeceraVersionModelo = 0;
                         _objAsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.ModeloGenerico.IdModeloGenerico = 0;
-                        _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.IdPresidenteJuntaParroquial = 0;
-                        _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.Parroquia.IdParroquia = 0;
-                        _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.Parroquia.Canton.IdCanton = 0;
-                        _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.Parroquia.Canton.Provincia.IdProvincia = 0;
+                        _objAsignarResponsableModeloPublicado.Parroquia.IdParroquia = 0;
+                        _objAsignarResponsableModeloPublicado.Parroquia.Canton.IdCanton = 0;
+                        _objAsignarResponsableModeloPublicado.Parroquia.Canton.Provincia.IdProvincia = 0;
                         _respuesta = _objAsignarResponsableModeloPublicado;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
@@ -331,10 +328,9 @@ namespace API.Controllers
                             _objAsignarResponsableModeloPublicado.ModeloPublicado.IdModeloPublicado = 0;
                             _objAsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.IdCabeceraVersionModelo = 0;
                             _objAsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.ModeloGenerico.IdModeloGenerico = 0;
-                            _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.IdPresidenteJuntaParroquial = 0;
-                            _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.Parroquia.IdParroquia = 0;
-                            _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.Parroquia.Canton.IdCanton = 0;
-                            _objAsignarResponsableModeloPublicado.PresidenteJuntaParroquial.Parroquia.Canton.Provincia.IdProvincia = 0;
+                            _objAsignarResponsableModeloPublicado.Parroquia.IdParroquia = 0;
+                            _objAsignarResponsableModeloPublicado.Parroquia.Canton.IdCanton = 0;
+                            _objAsignarResponsableModeloPublicado.Parroquia.Canton.Provincia.IdProvincia = 0;
                         }
                         _respuesta = _listaAsignarResponsable;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();

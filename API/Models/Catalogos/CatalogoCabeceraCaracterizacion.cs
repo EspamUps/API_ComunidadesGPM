@@ -57,14 +57,6 @@ namespace API.Models.Catalogos
                         FechaAsignacion = item.FechaAsignacionAsignarResponsableModeloPublicado,
                         FechaInicio = item.FechaInicioAsignarResponsableModeloPublicado,
                         FechaFin = item.FechaFinAsignarResponsableModeloPublicado,
-                        PresidenteJuntaParroquial = new PresidenteJuntaParroquial()
-                        {
-                            IdPresidenteJuntaParroquial = item.IdPresidenteJuntaParroquial,
-                            IdPresidenteJuntaParroquialEncriptado = _seguridad.Encriptar(item.IdPresidenteJuntaParroquial.ToString()),
-                            Representante = item.RepresentantePresidenteJuntaParroquial,
-                            FechaIngreso = item.FechaIngresoPresidenteJuntaParroquial,
-                            FechaSalida = Convert.ToDateTime(item.FechaSalidaPresidenteJuntaParroquial),
-                            Estado = item.EstadoPresidenteJuntaParroquial,
                             Parroquia = new Parroquia()
                             {
                                 IdParroquia = item.IdParroquia,
@@ -94,8 +86,7 @@ namespace API.Models.Catalogos
                                         EstadoProvincia = item.EstadoProvincia
                                     }
                                 }
-                            }
-                        },
+                            },
                         AsignarUsuarioTipoUsuario = new AsignarUsuarioTipoUsuario()
                         {
                             IdAsignarUsuarioTipoUsuario = item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario,
@@ -199,42 +190,33 @@ namespace API.Models.Catalogos
                         FechaAsignacion = item.FechaAsignacionAsignarResponsableModeloPublicado,
                         FechaInicio = item.FechaInicioAsignarResponsableModeloPublicado,
                         FechaFin = item.FechaFinAsignarResponsableModeloPublicado,
-                        PresidenteJuntaParroquial = new PresidenteJuntaParroquial()
+                        Parroquia = new Parroquia()
                         {
-                            IdPresidenteJuntaParroquial = item.IdPresidenteJuntaParroquial,
-                            IdPresidenteJuntaParroquialEncriptado = _seguridad.Encriptar(item.IdPresidenteJuntaParroquial.ToString()),
-                            Representante = item.RepresentantePresidenteJuntaParroquial,
-                            FechaIngreso = item.FechaIngresoPresidenteJuntaParroquial,
-                            FechaSalida = Convert.ToDateTime(item.FechaSalidaPresidenteJuntaParroquial),
-                            Estado = item.EstadoPresidenteJuntaParroquial,
-                            Parroquia = new Parroquia()
+                            IdParroquia = item.IdParroquia,
+                            IdParroquiaEncriptado = _seguridad.Encriptar(item.IdParroquia.ToString()),
+                            DescripcionParroquia = item.DescripcionParroquia,
+                            CodigoParroquia = item.CodigoParroquia,
+                            EstadoParroquia = item.EstadoParroquia,
+                            NombreParroquia = item.NombreParroquia,
+                            RutaLogoParroquia = item.RutaLogoParroquia,
+                            Canton = new Canton()
                             {
-                                IdParroquia = item.IdParroquia,
-                                IdParroquiaEncriptado = _seguridad.Encriptar(item.IdParroquia.ToString()),
-                                DescripcionParroquia = item.DescripcionParroquia,
-                                CodigoParroquia = item.CodigoParroquia,
-                                EstadoParroquia = item.EstadoParroquia,
-                                NombreParroquia = item.NombreParroquia,
-                                RutaLogoParroquia = item.RutaLogoParroquia,
-                                Canton = new Canton()
+                                IdCanton = item.IdCanton,
+                                IdCantonEncriptado = _seguridad.Encriptar(item.IdCanton.ToString()),
+                                CodigoCanton = item.CodigoCanton,
+                                DescripcionCanton = item.DescripcionCanton,
+                                NombreCanton = item.NombreCanton,
+                                RutaLogoCanton = item.RutaLogoCanton,
+                                EstadoCanton = item.EstadoCanton,
+                                Provincia = new Provincia()
                                 {
-                                    IdCanton = item.IdCanton,
-                                    IdCantonEncriptado = _seguridad.Encriptar(item.IdCanton.ToString()),
-                                    CodigoCanton = item.CodigoCanton,
-                                    DescripcionCanton = item.DescripcionCanton,
-                                    NombreCanton = item.NombreCanton,
-                                    RutaLogoCanton = item.RutaLogoCanton,
-                                    EstadoCanton = item.EstadoCanton,
-                                    Provincia = new Provincia()
-                                    {
-                                        IdProvincia = item.IdProvincia,
-                                        IdProvinciaEncriptado = _seguridad.Encriptar(item.IdProvincia.ToString()),
-                                        CodigoProvincia = item.CodigoProvincia,
-                                        DescripcionProvincia = item.DescripcionProvincia,
-                                        NombreProvincia = item.NombreProvincia,
-                                        RutaLogoProvincia = item.RutaLogoProvincia,
-                                        EstadoProvincia = item.EstadoProvincia
-                                    }
+                                    IdProvincia = item.IdProvincia,
+                                    IdProvinciaEncriptado = _seguridad.Encriptar(item.IdProvincia.ToString()),
+                                    CodigoProvincia = item.CodigoProvincia,
+                                    DescripcionProvincia = item.DescripcionProvincia,
+                                    NombreProvincia = item.NombreProvincia,
+                                    RutaLogoProvincia = item.RutaLogoProvincia,
+                                    EstadoProvincia = item.EstadoProvincia
                                 }
                             }
                         },

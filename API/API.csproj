@@ -275,16 +275,25 @@
     <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultar_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultar_Result2.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result.cs">
@@ -305,7 +314,13 @@
     <Compile Include="Conexion\Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_CabeceraCaracterizacionConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraCaracterizacionConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_CabeceraModeloPublicadoConsultar_Result.cs">
