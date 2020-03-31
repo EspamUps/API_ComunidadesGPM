@@ -11,7 +11,7 @@ namespace API.Models.Entidades
         public string IdCabeceraCaracterizacionEncriptar { get; set; }
         public DateTime FechaRegistro { get; set; }
         public AsignarResponsableModeloPublicado AsignarResponsableModeloPublicado { get; set; }
-        public DateTime FechaFinalizado { get; set; }
+        public DateTime? FechaFinalizado { get; set; }
         public bool Finalizado { get; set; }
         public bool Estado { get; set; }
     }

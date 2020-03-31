@@ -2495,5 +2495,14 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CabeceraCaracterizacionModificar", idCabeceraCaracterizacionParameter, fechaRegistroParameter, idAsignarResponsableModeloPublicadoParameter, fechaFinalizadoParameter, finalizadoParameter, estadoParameter);
         }
+    
+        public virtual ObjectResult<Sp_CabeceraCaracterizacionConsultarPorId_Result> Sp_CabeceraCaracterizacionConsultarPorId(Nullable<int> idCabeceraCaracterizacion)
+        {
+            var idCabeceraCaracterizacionParameter = idCabeceraCaracterizacion.HasValue ?
+                new ObjectParameter("IdCabeceraCaracterizacion", idCabeceraCaracterizacion) :
+                new ObjectParameter("IdCabeceraCaracterizacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CabeceraCaracterizacionConsultarPorId_Result>("Sp_CabeceraCaracterizacionConsultarPorId", idCabeceraCaracterizacionParameter);
+        }
     }
 }

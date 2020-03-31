@@ -317,6 +317,9 @@
     <Compile Include="Conexion\Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_CabeceraCaracterizacionConsultarPorId_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_CabeceraCaracterizacionConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -528,6 +531,7 @@
     <Compile Include="Controllers\AsignarResponsableModeloPublicadoController.cs" />
     <Compile Include="Controllers\AsignarTipoUsuarioModuloPrivilegioController.cs" />
     <Compile Include="Controllers\AsignarUsuarioTipoUsuarioController.cs" />
+    <Compile Include="Controllers\CabeceraCaracterizacionController.cs" />
     <Compile Include="Controllers\CabeceraRespuestaController.cs" />
     <Compile Include="Controllers\CabeceraVersionCuestionarioController.cs" />
     <Compile Include="Controllers\CabeceraVersionModeloController.cs" />
