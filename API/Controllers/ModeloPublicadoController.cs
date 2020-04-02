@@ -113,6 +113,76 @@ namespace API.Controllers
             return new { respuesta = _respuesta, http = _http };
         }
 
+        [HttpPost]
+        [Route("api/HabilitarModeloPublicado")]
+        public object HabilitarModeloPublicado(ModeloPublicado _objModeloPublicado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objModeloPublicado.IdModeloPublicadoEncriptado == null || string.IsNullOrEmpty(_objModeloPublicado.IdModeloPublicadoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del modelo publicado de la version que va habilitar";
+                }
+                else
+                {
+                    var _dataModeloPublicado = _objModeloPublicados.ConsultarModeloPublicadoPorId(int.Parse(_seguridad.DesEncriptar(_objModeloPublicado.IdModeloPublicadoEncriptado))).FirstOrDefault();
+                    if (_dataModeloPublicado == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "El modelo publicado que intenta habilitar no existe.";
+                    }
+                    else
+                    {
+                        _objModeloPublicados.HabilitarModeloPublicado(int.Parse(_seguridad.DesEncriptar(_objModeloPublicado.IdModeloPublicadoEncriptado)));
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/DesHabilitarModeloPublicad")]
+        public object DesHabilitarModeloPublicad(ModeloPublicado _objModeloPublicado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objModeloPublicado.IdModeloPublicadoEncriptado == null || string.IsNullOrEmpty(_objModeloPublicado.IdModeloPublicadoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del modelo publicado de la version que va deshabilitar";
+                }
+                else
+                {
+                    var _dataModeloPublicado = _objModeloPublicados.ConsultarModeloPublicadoPorId(int.Parse(_seguridad.DesEncriptar(_objModeloPublicado.IdModeloPublicadoEncriptado))).FirstOrDefault();
+                    if (_dataModeloPublicado == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "El modelo publicado que intenta deshabilitar no existe.";
+                    }
+                    else
+                    {
+                        _objModeloPublicados.DesHabilitarModeloPublicad(int.Parse(_seguridad.DesEncriptar(_objModeloPublicado.IdModeloPublicadoEncriptado)));
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
 
     }
 }

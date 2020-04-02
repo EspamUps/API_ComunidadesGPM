@@ -70,5 +70,13 @@ namespace API.Models.Catalogos
         {
             db.Sp_AsignarModeloPublicadoParroquiaEliminar(_idModeloGenericoParroquia);
         }
+        public void HabilitarModeloGenericoParroquia(int _idModeloGenericoParroquia)
+        {
+            db.Sp_HabilitarAsignarModeloGenericoParroquia(_idModeloGenericoParroquia);
+        }
+        public void DesHabilitarModeloGenericoParroquia(int _idModeloGenericoParroquia)
+        {
+            db.Sp_DesHabilitarAsignarModeloGenericoParroquia(_idModeloGenericoParroquia);
+        }
     }
 }

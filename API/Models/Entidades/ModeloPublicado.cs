@@ -18,6 +18,7 @@ namespace API.Models.Entidades
         public string IdPeriodo { get; set; }
         public bool Estado { get; set; }
         public string Utilizado { get; set; }
+        public int CantidadAsignarParroquiaActivos { get; set; }
         public List<AsignarModeloGenericoParroquia> AsignarModeloGenericoParroquia { get; set; }
     }
 }

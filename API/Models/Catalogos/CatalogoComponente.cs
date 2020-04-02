@@ -52,7 +52,7 @@ namespace API.Models.Catalogos
                     Estado=item.EstadoComponente,
                     Orden=item.OrdenComponente,
                     Utilizado=item.UtilizadoComponente,
-                    CuestionarioGenerico=new CuestionarioGenerico()
+                    CuestionarioGenerico =new CuestionarioGenerico()
                     {
                         IdCuestionarioGenerico=item.IdCuestionarioGenerico,
                         IdCuestionarioGenericoEncriptado=_seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),

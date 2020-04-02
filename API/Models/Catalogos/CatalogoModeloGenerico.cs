@@ -91,5 +91,7 @@ namespace API.Models.Catalogos
             }
             //db.Sp_ModeloGenericoEliminar(_idModeloGenerico);
         }
+
+        
     }
 }

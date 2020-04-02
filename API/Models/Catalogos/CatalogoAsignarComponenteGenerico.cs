@@ -14,6 +14,7 @@ namespace API.Models.Catalogos
         Seguridad _seguridad = new Seguridad();
         CatalogoDescripcionComponente _objDescripcionComponente = new CatalogoDescripcionComponente();
         //CatalogoAsignarCuestionarioModelo _objAsignarCuestionarioModelo = new CatalogoAsignarCuestionarioModelo();
+        CatalogoComponente _objComponentes = new CatalogoComponente();
         public int InsertarAsignarComponenteGenerico(AsignarComponenteGenerico _objAsignarComponenteGenerico)
         {
             try
@@ -32,9 +33,13 @@ namespace API.Models.Catalogos
         public List<AsignarComponenteGenerico> ConsultarAsignarComponenteGenerico()
         {
             var ListaDescripcionComponente = _objDescripcionComponente.ConsultarDescripcionComponente();
+            var listaComponentes = _objComponentes.ConsultarComponente();
             List<AsignarComponenteGenerico> _lista = new List<AsignarComponenteGenerico>();
             foreach (var item in db.Sp_AsignarComponenteGenericoConsultar())
             {
+                Componente DataComponente = new Componente();
+                DataComponente = listaComponentes.Where(p => p.IdComponente == item.IdComponente).FirstOrDefault();
+                DataComponente.DescripcionComponente = ListaDescripcionComponente.Where(p => _seguridad.DesEncriptar(p.IdAsignarComponenteGenerico) == item.IdAsignarComponenteGenerico.ToString()).ToList();
                 _lista.Add(new AsignarComponenteGenerico()
                 {
                     IdAsignarComponenteGenerico = item.IdAsignarComponenteGenerico,
@@ -43,7 +48,8 @@ namespace API.Models.Catalogos
                     IdComponente = _seguridad.Encriptar(item.IdComponente.ToString()),
                     Orden = item.Orden,
                     Utilizado = item.AsignarComponenteGenericoUtilizado,
-                    DescripcionComponente = ListaDescripcionComponente.Where(p=> _seguridad.DesEncriptar(p.IdAsignarComponenteGenerico) == item.IdAsignarComponenteGenerico.ToString()).ToList()
+                    //DescripcionComponente = ListaDescripcionComponente.Where(p=> _seguridad.DesEncriptar(p.IdAsignarComponenteGenerico) == item.IdAsignarComponenteGenerico.ToString()).ToList(),
+                    Componente = DataComponente
                 });
             }
             return _lista;

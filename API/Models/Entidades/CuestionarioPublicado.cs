@@ -15,5 +15,6 @@ namespace API.Models.Entidades
         public Periodo Periodo { get; set; }
         public bool Estado { get; set; }
         public string Utilizado { get; set; }
+        public CuestionarioGenerico CuestionarioGenerico { get; set; }
     }
 }

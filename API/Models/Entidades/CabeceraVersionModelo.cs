@@ -18,6 +18,7 @@ namespace API.Models.Entidades
         public string Utilizado { get; set; }
         public List<AsignarComponenteGenerico> AsignarComponenteGenerico { get; set; }
         public ModeloGenerico ModeloGenerico { get; set; }
+        //public List<ModeloGenerico> ModeloGenericoLista { get; set; 
         public ModeloPublicado ModeloPublicado { get; set; }
     }
 }

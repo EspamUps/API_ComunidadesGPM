@@ -79,15 +79,20 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                if (VersionamientoModelo.IdVersionamientoModeloEncriptado == null || string.IsNullOrEmpty(VersionamientoModelo.IdVersionamientoModeloEncriptado))
+                if (VersionamientoModelo.IdCabeceraVersionModelo == null || string.IsNullOrEmpty(VersionamientoModelo.IdCabeceraVersionModelo))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "Ingrese el identificador del versionamiento que va a eliminar.";
+                    _http.mensaje = "Ingrese el identificador de la cabecera versionamiento que va a eliminar.";
+                }else if (VersionamientoModelo.IdDescripcionComponenteTipoElemento == null || string.IsNullOrEmpty(VersionamientoModelo.IdDescripcionComponenteTipoElemento))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la descripcion componente tipo elemento que va a eliminar.";
                 }
                 else
                 {
-                    VersionamientoModelo.IdVersionamientoModeloEncriptado = _seguridad.DesEncriptar(VersionamientoModelo.IdVersionamientoModeloEncriptado);
-                    var DataVersionamientoModelo = _objVersionamientoModelo.ConsultarVersionamientoModeloPorId(int.Parse(VersionamientoModelo.IdVersionamientoModeloEncriptado)).FirstOrDefault();
+                    VersionamientoModelo.IdCabeceraVersionModelo = _seguridad.DesEncriptar(VersionamientoModelo.IdCabeceraVersionModelo);
+                    VersionamientoModelo.IdDescripcionComponenteTipoElemento = _seguridad.DesEncriptar(VersionamientoModelo.IdDescripcionComponenteTipoElemento);
+                    var DataVersionamientoModelo = _objVersionamientoModelo.ConsultarVersionamientoModelo().Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == VersionamientoModelo.IdCabeceraVersionModelo && _seguridad.DesEncriptar(p.IdDescripcionComponenteTipoElemento) == VersionamientoModelo.IdDescripcionComponenteTipoElemento).FirstOrDefault();
                     if (DataVersionamientoModelo == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
@@ -100,7 +105,7 @@ namespace API.Controllers
                     }*/
                     else
                     {
-                        _objVersionamientoModelo.EliminarVersionamientoModelo(int.Parse(VersionamientoModelo.IdVersionamientoModeloEncriptado));
+                        _respuesta = _objVersionamientoModelo.EliminarVersionamientoModelo(DataVersionamientoModelo.IdVersionamientoModelo);
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
                 }
