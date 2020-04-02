@@ -17,5 +17,7 @@ namespace API.Models.Entidades
 
         public List<Seccion> listaSeccion { get; set; }
         public Seccion Seccion { get; set; }
+
+        public List<DescripcionComponente> DescripcionComponente { get; set; }
     }
 }

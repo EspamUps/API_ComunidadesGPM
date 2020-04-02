@@ -77,9 +77,19 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
-        public void EliminarVersionamientoModelo(int _idVersionamientoModelo)
+        public object EliminarVersionamientoModelo(int _idVersionamientoModelo)
         {
+            var ListaVersionamientoModelo = ConsultarVersionamientoModelo();
+            var Data = ListaVersionamientoModelo.Where(p => p.IdVersionamientoModelo == _idVersionamientoModelo).FirstOrDefault();
             db.Sp_VersionamientoModeloEliminar(_idVersionamientoModelo);
+            ListaVersionamientoModelo = ConsultarVersionamientoModelo();
+            int cantidad = ListaVersionamientoModelo.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == _seguridad.DesEncriptar(Data.IdCabeceraVersionModelo)).ToList().Count;
+            if (cantidad == 0)
+            {
+                db.Sp_CabeceraVersionModeloEliminar(int.Parse(_seguridad.DesEncriptar(Data.IdCabeceraVersionModelo)));
+                return "true";
+            }
+            return "false";
         }
     }
 }

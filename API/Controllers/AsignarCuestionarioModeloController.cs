@@ -35,7 +35,7 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el nombre del modelo genérico";
                 }
-                else if (_objAsignarCuestionarioModelo.IdCuestionarioGenerico == null || string.IsNullOrEmpty(_objAsignarCuestionarioModelo.IdCuestionarioGenerico))
+                else if (_objAsignarCuestionarioModelo.IdCuestionarioPublicado == null || string.IsNullOrEmpty(_objAsignarCuestionarioModelo.IdCuestionarioPublicado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese la descripción del cuestionario genérico";
@@ -47,11 +47,11 @@ namespace API.Controllers
                 }
                 else
                 {
-                    var _objAsignarCuestionarioModeloData = _objCatalogoAsignarCuestionarioModelo.ConsultarAsignarCuestionarioModelo().Where(p => _seguridad.DesEncriptar(p.IdModeloGenerico) == _seguridad.DesEncriptar(_objAsignarCuestionarioModelo.IdModeloGenerico) &&  _seguridad.DesEncriptar(p.IdCuestionarioGenerico) == _seguridad.DesEncriptar(_objAsignarCuestionarioModelo.IdCuestionarioGenerico)).FirstOrDefault();
+                    var _objAsignarCuestionarioModeloData = _objCatalogoAsignarCuestionarioModelo.ConsultarAsignarCuestionarioModelo().Where(p => _seguridad.DesEncriptar(p.IdModeloGenerico) == _seguridad.DesEncriptar(_objAsignarCuestionarioModelo.IdModeloGenerico) &&  _seguridad.DesEncriptar(p.IdCuestionarioPublicado) == _seguridad.DesEncriptar(_objAsignarCuestionarioModelo.IdCuestionarioPublicado)).FirstOrDefault();
                     if (_objAsignarCuestionarioModeloData == null)
                     {
                         _objAsignarCuestionarioModelo.IdModeloGenerico = _seguridad.DesEncriptar(_objAsignarCuestionarioModelo.IdModeloGenerico);
-                        _objAsignarCuestionarioModelo.IdCuestionarioGenerico = _seguridad.DesEncriptar(_objAsignarCuestionarioModelo.IdCuestionarioGenerico);
+                        _objAsignarCuestionarioModelo.IdCuestionarioPublicado = _seguridad.DesEncriptar(_objAsignarCuestionarioModelo.IdCuestionarioPublicado);
                         _objAsignarCuestionarioModelo.IdAsignarUsuarioTipoUsuario = _seguridad.DesEncriptar(_objAsignarCuestionarioModelo.IdAsignarUsuarioTipoUsuario);
                         int _idAsignarCuestionarioModelo = _objCatalogoAsignarCuestionarioModelo.InsertarAsignarCuestionarioModelo(_objAsignarCuestionarioModelo);
                         if (_idAsignarCuestionarioModelo == 0)

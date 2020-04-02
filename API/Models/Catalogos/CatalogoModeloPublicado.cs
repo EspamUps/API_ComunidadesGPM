@@ -33,7 +33,6 @@ namespace API.Models.Catalogos
         {
             db.Sp_CabeceraModeloPublicadoEliminar(_idModeloPublicado);
         }
-
         public List<ModeloPublicado> ConsultarModeloPublicado()
         {
             var ListaPeriodos = _objPeriodo.ConsultarPeriodo();
@@ -59,7 +58,6 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
-
         public List<ModeloPublicado> ConsultarModeloPublicadoPorId(int _idModeloPublicado)
         {
             var ListaPeriodos = _objPeriodo.ConsultarPeriodo();
@@ -85,6 +83,13 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
-
+        public void HabilitarModeloPublicado(int _idModeloPublicado)
+        {
+            db.Sp_HabilitarModeloPublicado(_idModeloPublicado);
+        }
+        public void DesHabilitarModeloPublicad(int _idModeloPublicado)
+        {
+            db.Sp_DesHabilitarModeloPublicado(_idModeloPublicado);
+        }
     }
 }

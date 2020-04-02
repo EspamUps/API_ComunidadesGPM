@@ -86,7 +86,7 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador del ModeloGenerico";
                 }
-                else if (_AsignarCuestionarioModelo.IdCuestionarioGenerico == null || string.IsNullOrEmpty(_AsignarCuestionarioModelo.IdCuestionarioGenerico))
+                else if (_AsignarCuestionarioModelo.IdCuestionarioPublicado == null || string.IsNullOrEmpty(_AsignarCuestionarioModelo.IdCuestionarioPublicado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador del CuestionarioGenerico";
@@ -94,7 +94,7 @@ namespace API.Controllers
                 else
                 {
                     _AsignarCuestionarioModelo.IdModeloGenerico = _seguridad.DesEncriptar(_AsignarCuestionarioModelo.IdModeloGenerico);
-                    _AsignarCuestionarioModelo.IdCuestionarioGenerico = _seguridad.DesEncriptar(_AsignarCuestionarioModelo.IdCuestionarioGenerico);
+                    _AsignarCuestionarioModelo.IdCuestionarioPublicado = _seguridad.DesEncriptar(_AsignarCuestionarioModelo.IdCuestionarioPublicado);
                     var _objListaComponentes = _objAsignarCuestionarioModelo.ConsultarComponenteDeUnModeloGenerico(_AsignarCuestionarioModelo).ToList();
                     if (_objListaComponentes.Count  == 0)
                     {

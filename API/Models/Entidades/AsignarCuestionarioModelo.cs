@@ -9,11 +9,13 @@ namespace API.Models.Entidades
     {
         public int IdAsignarCuestionarioModelo { get; set; }
         public string IdAsignarCuestionarioModeloEncriptado { get; set; }
-        public string IdCuestionarioGenerico { get; set; }
+        public string IdCuestionarioPublicado { get; set; }
         public string IdModeloGenerico { get; set; }
         public string IdAsignarUsuarioTipoUsuario { get; set; }
         public DateTime FechaAsignacion { get; set; }
         public string Utilizado { get; set; }
-        public List<CuestionarioGenerico> CuestionarioGenerico { get; set; }
+        //public List<CuestionarioGenerico> CuestionarioGenerico { get; set; }
+        public CuestionarioPublicado CuestionarioPublicado { get; set; }
+        public List<AsignarComponenteGenerico> AsignarComponenteGenerico { get; set; }
     }
 }
