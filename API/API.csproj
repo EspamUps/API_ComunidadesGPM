@@ -368,6 +368,30 @@
     <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoDetalleComponenteConsultarPorIdDescripcionComponente_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoDetalleComponenteConsultarPorId_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoDetalleComponenteConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoTipoElementoConsultarPorIdAsignarDescripcionComponenteTipoElemento_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoTipoElementoConsultarPorIdCabeceraCaracterizacion_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoTipoElementoConsultarPorId_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoTipoElementoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -593,6 +617,7 @@
     <Compile Include="Models\Catalogos\CatalogoCanton.cs" />
     <Compile Include="Models\Catalogos\CatalogoComponente.cs" />
     <Compile Include="Models\Catalogos\CatalogoComunidad.cs" />
+    <Compile Include="Models\Catalogos\CatalogoContenidoTipoElemento.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioPublicado.cs" />
     <Compile Include="Models\Catalogos\CatalogoDescripcionComponente.cs" />
@@ -646,6 +671,8 @@
     <Compile Include="Models\Entidades\Componente.cs" />
     <Compile Include="Models\Entidades\Comunidad.cs" />
     <Compile Include="Models\Entidades\ConfigurarMatriz.cs" />
+    <Compile Include="Models\Entidades\ContenidoDetalleComponente.cs" />
+    <Compile Include="Models\Entidades\ContenidoTipoElemento.cs" />
     <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
     <Compile Include="Models\Entidades\ModeloPublicado.cs" />
     <Compile Include="Models\Entidades\CuestionarioPublicado.cs" />

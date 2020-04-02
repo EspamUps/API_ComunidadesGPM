@@ -129,6 +129,76 @@
           <Parameter Name="IdCuestionarioGenerico" Type="int" Mode="In" />
           <Parameter Name="IdModeloGenerico" Type="int" Mode="In" />
         </Function>
+        <Function Name="Sp_ContenidoDetalleComponenteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion" />
+        <Function Name="Sp_ContenidoDetalleComponenteConsultarPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdContenidoDetalleComponente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdCabeceraCaracterizacion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_ContenidoDetalleComponenteConsultarPorIdDescripcionComponente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdDescripcionComponente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_ContenidoDetalleComponenteEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdContenidoDetalleComponente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_ContenidoDetalleComponenteInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdCabeceraCaracterizacion" Type="int" Mode="In" />
+          <Parameter Name="Contenido" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FechaRegistro" Type="smalldatetime" Mode="In" />
+          <Parameter Name="IdDescripcionComponente" Type="int" Mode="In" />
+          <Parameter Name="IdAsignarUsuarioTipoUsuarioAutor" Type="int" Mode="In" />
+          <Parameter Name="EstadoDecision" Type="bit" Mode="In" />
+          <Parameter Name="IdAsignarUsuarioTipoUsuarioDecision" Type="int" Mode="In" />
+          <Parameter Name="FechaDecision" Type="smalldatetime" Mode="In" />
+          <Parameter Name="ObservacionDecision" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_ContenidoDetalleComponenteModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdContenidoDetalleComponente" Type="int" Mode="In" />
+          <Parameter Name="IdCabeceraCaracterizacion" Type="int" Mode="In" />
+          <Parameter Name="Contenido" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FechaRegistro" Type="smalldatetime" Mode="In" />
+          <Parameter Name="IdDescripcionComponente" Type="int" Mode="In" />
+          <Parameter Name="IdAsignarUsuarioTipoUsuarioAutor" Type="int" Mode="In" />
+          <Parameter Name="EstadoDecision" Type="bit" Mode="In" />
+          <Parameter Name="IdAsignarUsuarioTipoUsuarioDecision" Type="int" Mode="In" />
+          <Parameter Name="FechaDecision" Type="smalldatetime" Mode="In" />
+          <Parameter Name="ObservacionDecision" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_ContenidoTipoElementoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion" />
+        <Function Name="Sp_ContenidoTipoElementoConsultarPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdContenidoTipoElemento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_ContenidoTipoElementoConsultarPorIdAsignarDescripcionComponenteTipoElemento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdAsignarDescripcionComponenteTipoElemento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_ContenidoTipoElementoConsultarPorIdCabeceraCaracterizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdCabeceraCaracterizacion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_ContenidoTipoElementoEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdContenidoTipoElemento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_ContenidoTipoElementoInsertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdCabeceraCaracterizacion" Type="int" Mode="In" />
+          <Parameter Name="IdAsignarDescripcionComponenteTipoElemento" Type="int" Mode="In" />
+          <Parameter Name="Contenido" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UrlRutaContenido" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FechaRegistro" Type="smalldatetime" Mode="In" />
+          <Parameter Name="IdAsignarUsuarioTipoUsuario" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_ContenidoTipoElementoModificar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
+          <Parameter Name="IdContenidoTipoElemento" Type="int" Mode="In" />
+          <Parameter Name="IdCabeceraCaracterizacion" Type="int" Mode="In" />
+          <Parameter Name="IdAsignarDescripcionComponenteTipoElemento" Type="int" Mode="In" />
+          <Parameter Name="Contenido" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UrlRutaContenido" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FechaRegistro" Type="smalldatetime" Mode="In" />
+          <Parameter Name="IdAsignarUsuarioTipoUsuario" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_DescripcionComponenteConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion" />
         <Function Name="Sp_DescripcionComponenteEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
           <Parameter Name="idDescripcionComponente" Type="int" Mode="In" />
@@ -1404,7 +1474,77 @@
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraCaracterizacionConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraCaracterizacionConsultarPorId_Result)">
+          <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ContenidoDetalleComponenteConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoDetalleComponenteConsultar_Result)" />
+          <FunctionImport Name="Sp_ContenidoDetalleComponenteConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoDetalleComponenteConsultarPorId_Result)">
+            <Parameter Name="IdContenidoDetalleComponente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion_Result)">
             <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ContenidoDetalleComponenteConsultarPorIdDescripcionComponente" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoDetalleComponenteConsultarPorIdDescripcionComponente_Result)">
+            <Parameter Name="IdDescripcionComponente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ContenidoDetalleComponenteEliminar">
+            <Parameter Name="IdContenidoDetalleComponente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ContenidoDetalleComponenteInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
+            <Parameter Name="Contenido" Mode="In" Type="String" />
+            <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
+            <Parameter Name="IdDescripcionComponente" Mode="In" Type="Int32" />
+            <Parameter Name="IdAsignarUsuarioTipoUsuarioAutor" Mode="In" Type="Int32" />
+            <Parameter Name="EstadoDecision" Mode="In" Type="Boolean" />
+            <Parameter Name="IdAsignarUsuarioTipoUsuarioDecision" Mode="In" Type="Int32" />
+            <Parameter Name="FechaDecision" Mode="In" Type="DateTime" />
+            <Parameter Name="ObservacionDecision" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ContenidoDetalleComponenteModificar">
+            <Parameter Name="IdContenidoDetalleComponente" Mode="In" Type="Int32" />
+            <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
+            <Parameter Name="Contenido" Mode="In" Type="String" />
+            <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
+            <Parameter Name="IdDescripcionComponente" Mode="In" Type="Int32" />
+            <Parameter Name="IdAsignarUsuarioTipoUsuarioAutor" Mode="In" Type="Int32" />
+            <Parameter Name="EstadoDecision" Mode="In" Type="Boolean" />
+            <Parameter Name="IdAsignarUsuarioTipoUsuarioDecision" Mode="In" Type="Int32" />
+            <Parameter Name="FechaDecision" Mode="In" Type="DateTime" />
+            <Parameter Name="ObservacionDecision" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ContenidoTipoElementoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoTipoElementoConsultar_Result)" />
+          <FunctionImport Name="Sp_ContenidoTipoElementoConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoTipoElementoConsultarPorId_Result)">
+            <Parameter Name="IdContenidoTipoElemento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ContenidoTipoElementoConsultarPorIdAsignarDescripcionComponenteTipoElemento" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoTipoElementoConsultarPorIdAsignarDescripcionComponenteTipoElemento_Result)">
+            <Parameter Name="IdAsignarDescripcionComponenteTipoElemento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ContenidoTipoElementoConsultarPorIdCabeceraCaracterizacion" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoTipoElementoConsultarPorIdCabeceraCaracterizacion_Result)">
+            <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ContenidoTipoElementoEliminar">
+            <Parameter Name="IdContenidoTipoElemento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ContenidoTipoElementoInsertar" ReturnType="Collection(Decimal)">
+            <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
+            <Parameter Name="IdAsignarDescripcionComponenteTipoElemento" Mode="In" Type="Int32" />
+            <Parameter Name="Contenido" Mode="In" Type="String" />
+            <Parameter Name="UrlRutaContenido" Mode="In" Type="String" />
+            <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
+            <Parameter Name="IdAsignarUsuarioTipoUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ContenidoTipoElementoModificar">
+            <Parameter Name="IdContenidoTipoElemento" Mode="In" Type="Int32" />
+            <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
+            <Parameter Name="IdAsignarDescripcionComponenteTipoElemento" Mode="In" Type="Int32" />
+            <Parameter Name="Contenido" Mode="In" Type="String" />
+            <Parameter Name="UrlRutaContenido" Mode="In" Type="String" />
+            <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
+            <Parameter Name="IdAsignarUsuarioTipoUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_AsignarComponenteGenericoConsultar_Result">
@@ -5016,6 +5156,490 @@
           <Property Type="String" Name="RutaLogoProvincia" Nullable="true" />
           <Property Type="Boolean" Name="EstadoProvincia" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_ContenidoDetalleComponenteConsultar_Result">
+          <Property Type="Int32" Name="IdContentidoDetalleComponeteCaracterizacion" Nullable="false" />
+          <Property Type="String" Name="ContenidoContentidoDetalleComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoContentidoDetalleComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoDecisionContentidoDetalleComponente" Nullable="false" />
+          <Property Type="DateTime" Name="FechaDesicionContentidoDetalleComponente" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroContentidoDetalleComponente" Nullable="false" Precision="16" />
+          <Property Type="String" Name="ObservacionDecisionContentidoDetalleComponente" Nullable="true" />
+          <Property Type="Int32" Name="IdDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarComponenteGenericoDescripcionComponente" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinalizadoCabeceraCaracterizacion" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroCabeceraCaracterizacion" Nullable="false" Precision="16" />
+          <Property Type="Boolean" Name="FinalizadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdPeriodoModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuarioUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquiaPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacionPersonaAutor" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DireccionPersonaAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdSexoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoIdentificacionPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerApellidPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoApellidoPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerNombrePersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoNombrePesonaAutor" Nullable="true" />
+          <Property Type="String" Name="TelefonoPersonaAutor" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioDecision" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuarioDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuarioUsuarioDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdPersonaDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquiaPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacionPersonaDecision" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DireccionPersonaDecision" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPersonaDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdSexoPersonaDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoIdentificacionPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="PrimerApellidPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="SegundoApellidoPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="PrimerNombrePersonaDecision" Nullable="false" />
+          <Property Type="String" Name="SegundoNombrePesonaDecision" Nullable="true" />
+          <Property Type="String" Name="TelefonoPersonaDecision" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="Sp_ContenidoDetalleComponenteConsultarPorId_Result">
+          <Property Type="Int32" Name="IdContentidoDetalleComponeteCaracterizacion" Nullable="false" />
+          <Property Type="String" Name="ContenidoContentidoDetalleComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoContentidoDetalleComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoDecisionContentidoDetalleComponente" Nullable="false" />
+          <Property Type="DateTime" Name="FechaDesicionContentidoDetalleComponente" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroContentidoDetalleComponente" Nullable="false" Precision="16" />
+          <Property Type="String" Name="ObservacionDecisionContentidoDetalleComponente" Nullable="true" />
+          <Property Type="Int32" Name="IdDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarComponenteGenericoDescripcionComponente" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinalizadoCabeceraCaracterizacion" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroCabeceraCaracterizacion" Nullable="false" Precision="16" />
+          <Property Type="Boolean" Name="FinalizadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdPeriodoModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuarioUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquiaPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacionPersonaAutor" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DireccionPersonaAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdSexoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoIdentificacionPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerApellidPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoApellidoPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerNombrePersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoNombrePesonaAutor" Nullable="true" />
+          <Property Type="String" Name="TelefonoPersonaAutor" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioDecision" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuarioDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuarioUsuarioDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdPersonaDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquiaPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacionPersonaDecision" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DireccionPersonaDecision" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPersonaDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdSexoPersonaDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoIdentificacionPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="PrimerApellidPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="SegundoApellidoPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="PrimerNombrePersonaDecision" Nullable="false" />
+          <Property Type="String" Name="SegundoNombrePesonaDecision" Nullable="true" />
+          <Property Type="String" Name="TelefonoPersonaDecision" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion_Result">
+          <Property Type="Int32" Name="IdContentidoDetalleComponeteCaracterizacion" Nullable="false" />
+          <Property Type="String" Name="ContenidoContentidoDetalleComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoContentidoDetalleComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoDecisionContentidoDetalleComponente" Nullable="false" />
+          <Property Type="DateTime" Name="FechaDesicionContentidoDetalleComponente" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroContentidoDetalleComponente" Nullable="false" Precision="16" />
+          <Property Type="String" Name="ObservacionDecisionContentidoDetalleComponente" Nullable="true" />
+          <Property Type="Int32" Name="IdDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarComponenteGenericoDescripcionComponente" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinalizadoCabeceraCaracterizacion" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroCabeceraCaracterizacion" Nullable="false" Precision="16" />
+          <Property Type="Boolean" Name="FinalizadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdPeriodoModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuarioUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquiaPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacionPersonaAutor" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DireccionPersonaAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdSexoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoIdentificacionPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerApellidPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoApellidoPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerNombrePersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoNombrePesonaAutor" Nullable="true" />
+          <Property Type="String" Name="TelefonoPersonaAutor" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioDecision" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuarioDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuarioUsuarioDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdPersonaDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquiaPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacionPersonaDecision" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DireccionPersonaDecision" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPersonaDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdSexoPersonaDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoIdentificacionPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="PrimerApellidPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="SegundoApellidoPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="PrimerNombrePersonaDecision" Nullable="false" />
+          <Property Type="String" Name="SegundoNombrePesonaDecision" Nullable="true" />
+          <Property Type="String" Name="TelefonoPersonaDecision" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="Sp_ContenidoDetalleComponenteConsultarPorIdDescripcionComponente_Result">
+          <Property Type="Int32" Name="IdContentidoDetalleComponeteCaracterizacion" Nullable="false" />
+          <Property Type="String" Name="ContenidoContentidoDetalleComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoContentidoDetalleComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoDecisionContentidoDetalleComponente" Nullable="false" />
+          <Property Type="DateTime" Name="FechaDesicionContentidoDetalleComponente" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroContentidoDetalleComponente" Nullable="false" Precision="16" />
+          <Property Type="String" Name="ObservacionDecisionContentidoDetalleComponente" Nullable="true" />
+          <Property Type="Int32" Name="IdDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarComponenteGenericoDescripcionComponente" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenDescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinalizadoCabeceraCaracterizacion" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroCabeceraCaracterizacion" Nullable="false" Precision="16" />
+          <Property Type="Boolean" Name="FinalizadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdPeriodoModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuarioUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquiaPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacionPersonaAutor" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DireccionPersonaAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdSexoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoIdentificacionPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerApellidPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoApellidoPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerNombrePersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoNombrePesonaAutor" Nullable="true" />
+          <Property Type="String" Name="TelefonoPersonaAutor" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioDecision" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuarioDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuarioUsuarioDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdPersonaDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquiaPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacionPersonaDecision" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DireccionPersonaDecision" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPersonaDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdSexoPersonaDecision" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoIdentificacionPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="PrimerApellidPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="SegundoApellidoPersonaDecision" Nullable="false" />
+          <Property Type="String" Name="PrimerNombrePersonaDecision" Nullable="false" />
+          <Property Type="String" Name="SegundoNombrePesonaDecision" Nullable="true" />
+          <Property Type="String" Name="TelefonoPersonaDecision" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="Sp_ContenidoTipoElementoConsultar_Result">
+          <Property Type="Int32" Name="IdContenidoTipoElemento" Nullable="false" />
+          <Property Type="String" Name="ContenidoContenidoTipoElemento" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoContenidoTipoElemento" Nullable="false" />
+          <Property Type="DateTime" Name="FechaRegistroContenidoTipoElemento" Nullable="false" Precision="16" />
+          <Property Type="String" Name="UrlRutaContenidoContenidoTipoElemento" Nullable="true" />
+          <Property Type="Int32" Name="IdAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdDescripcionComponenteAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="OrdenAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoElementoAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinalizadoCabeceraCaracterizacion" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroCabeceraCaracterizacion" Nullable="false" Precision="16" />
+          <Property Type="Boolean" Name="FinalizadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdPeriodoModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuarioUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquiaPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacionPersonaAutor" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DireccionPersonaAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdSexoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoIdentificacionPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerApellidPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoApellidoPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerNombrePersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoNombrePesonaAutor" Nullable="true" />
+          <Property Type="String" Name="TelefonoPersonaAutor" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="Sp_ContenidoTipoElementoConsultarPorId_Result">
+          <Property Type="Int32" Name="IdContenidoTipoElemento" Nullable="false" />
+          <Property Type="String" Name="ContenidoContenidoTipoElemento" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoContenidoTipoElemento" Nullable="false" />
+          <Property Type="DateTime" Name="FechaRegistroContenidoTipoElemento" Nullable="false" Precision="16" />
+          <Property Type="String" Name="UrlRutaContenidoContenidoTipoElemento" Nullable="true" />
+          <Property Type="Int32" Name="IdAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdDescripcionComponenteAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="OrdenAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoElementoAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinalizadoCabeceraCaracterizacion" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroCabeceraCaracterizacion" Nullable="false" Precision="16" />
+          <Property Type="Boolean" Name="FinalizadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdPeriodoModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuarioUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquiaPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacionPersonaAutor" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DireccionPersonaAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdSexoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoIdentificacionPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerApellidPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoApellidoPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerNombrePersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoNombrePesonaAutor" Nullable="true" />
+          <Property Type="String" Name="TelefonoPersonaAutor" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="Sp_ContenidoTipoElementoConsultarPorIdAsignarDescripcionComponenteTipoElemento_Result">
+          <Property Type="Int32" Name="IdContenidoTipoElemento" Nullable="false" />
+          <Property Type="String" Name="ContenidoContenidoTipoElemento" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoContenidoTipoElemento" Nullable="false" />
+          <Property Type="DateTime" Name="FechaRegistroContenidoTipoElemento" Nullable="false" Precision="16" />
+          <Property Type="String" Name="UrlRutaContenidoContenidoTipoElemento" Nullable="true" />
+          <Property Type="Int32" Name="IdAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdDescripcionComponenteAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="OrdenAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoElementoAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinalizadoCabeceraCaracterizacion" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroCabeceraCaracterizacion" Nullable="false" Precision="16" />
+          <Property Type="Boolean" Name="FinalizadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdPeriodoModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuarioUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquiaPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacionPersonaAutor" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DireccionPersonaAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdSexoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoIdentificacionPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerApellidPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoApellidoPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerNombrePersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoNombrePesonaAutor" Nullable="true" />
+          <Property Type="String" Name="TelefonoPersonaAutor" Nullable="false" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="Sp_ContenidoTipoElementoConsultarPorIdCabeceraCaracterizacion_Result">
+          <Property Type="Int32" Name="IdContenidoTipoElemento" Nullable="false" />
+          <Property Type="String" Name="ContenidoContenidoTipoElemento" Nullable="true" />
+          <Property Type="Boolean" Name="EstadoContenidoTipoElemento" Nullable="false" />
+          <Property Type="DateTime" Name="FechaRegistroContenidoTipoElemento" Nullable="false" Precision="16" />
+          <Property Type="String" Name="UrlRutaContenidoContenidoTipoElemento" Nullable="true" />
+          <Property Type="Int32" Name="IdAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdDescripcionComponenteAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="OrdenAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoElementoAsignarDescripcionComponenteTipoElemento" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinalizadoCabeceraCaracterizacion" Nullable="true" Precision="16" />
+          <Property Type="DateTime" Name="FechaRegistroCabeceraCaracterizacion" Nullable="false" Precision="16" />
+          <Property Type="Boolean" Name="FinalizadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCabeceraCaracterizacion" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaAsignacionAsignarResponsableModeloPublicado" Nullable="false" Precision="16" />
+          <Property Type="DateTime" Name="FechaInicioAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaFinAsignarResponsableModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloPublicado" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloPublicado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionModeloPublicado" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdPeriodoModeloPublicado" Nullable="false" />
+          <Property Type="Int32" Name="IdCabeceraVersionModelo" Nullable="false" />
+          <Property Type="String" Name="CaracteristicaCabeceraVersionModelo" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="EstadoCabeceraVersionModelo" Nullable="false" />
+          <Property Type="DateTime" Name="FechaCreacionCabeceraVersionModelo" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="VersionCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" Nullable="false" />
+          <Property Type="Int32" Name="IdModeloGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionModeloGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreModeloGenerico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuarioUsuarioAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdParroquiaPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacionPersonaAutor" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="DireccionPersonaAutor" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdSexoPersonaAutor" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoIdentificacionPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerApellidPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoApellidoPersonaAutor" Nullable="false" />
+          <Property Type="String" Name="PrimerNombrePersonaAutor" Nullable="false" />
+          <Property Type="String" Name="SegundoNombrePesonaAutor" Nullable="true" />
+          <Property Type="String" Name="TelefonoPersonaAutor" Nullable="false" MaxLength="20" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8232,6 +8856,528 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoDetalleComponenteConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoDetalleComponenteConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ContenidoDetalleComponenteConsultar_Result">
+                <ScalarProperty Name="IdContentidoDetalleComponeteCaracterizacion" ColumnName="IdContentidoDetalleComponeteCaracterizacion" />
+                <ScalarProperty Name="ContenidoContentidoDetalleComponente" ColumnName="ContenidoContentidoDetalleComponente" />
+                <ScalarProperty Name="EstadoContentidoDetalleComponente" ColumnName="EstadoContentidoDetalleComponente" />
+                <ScalarProperty Name="EstadoDecisionContentidoDetalleComponente" ColumnName="EstadoDecisionContentidoDetalleComponente" />
+                <ScalarProperty Name="FechaDesicionContentidoDetalleComponente" ColumnName="FechaDesicionContentidoDetalleComponente" />
+                <ScalarProperty Name="FechaRegistroContentidoDetalleComponente" ColumnName="FechaRegistroContentidoDetalleComponente" />
+                <ScalarProperty Name="ObservacionDecisionContentidoDetalleComponente" ColumnName="ObservacionDecisionContentidoDetalleComponente" />
+                <ScalarProperty Name="IdDescripcionComponente" ColumnName="IdDescripcionComponente" />
+                <ScalarProperty Name="IdAsignarComponenteGenericoDescripcionComponente" ColumnName="IdAsignarComponenteGenericoDescripcionComponente" />
+                <ScalarProperty Name="ObligatorioDescripcionComponente" ColumnName="ObligatorioDescripcionComponente" />
+                <ScalarProperty Name="OrdenDescripcionComponente" ColumnName="OrdenDescripcionComponente" />
+                <ScalarProperty Name="IdCabeceraCaracterizacion" ColumnName="IdCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaFinalizadoCabeceraCaracterizacion" ColumnName="FechaFinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaRegistroCabeceraCaracterizacion" ColumnName="FechaRegistroCabeceraCaracterizacion" />
+                <ScalarProperty Name="FinalizadoCabeceraCaracterizacion" ColumnName="FinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="EstadoCabeceraCaracterizacion" ColumnName="EstadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdPeriodoModeloPublicado" ColumnName="IdPeriodoModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" ColumnName="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioAutor" ColumnName="IdAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuarioAutor" ColumnName="EstadoAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" ColumnName="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdUsuarioUsuarioAutor" ColumnName="IdUsuarioUsuarioAutor" />
+                <ScalarProperty Name="IdPersonaAutor" ColumnName="IdPersonaAutor" />
+                <ScalarProperty Name="IdParroquiaPersonaAutor" ColumnName="IdParroquiaPersonaAutor" />
+                <ScalarProperty Name="NumeroIdentificacionPersonaAutor" ColumnName="NumeroIdentificacionPersonaAutor" />
+                <ScalarProperty Name="DireccionPersonaAutor" ColumnName="DireccionPersonaAutor" />
+                <ScalarProperty Name="EstadoPersonaAutor" ColumnName="EstadoPersonaAutor" />
+                <ScalarProperty Name="IdSexoPersonaAutor" ColumnName="IdSexoPersonaAutor" />
+                <ScalarProperty Name="IdTipoIdentificacionPersonaAutor" ColumnName="IdTipoIdentificacionPersonaAutor" />
+                <ScalarProperty Name="PrimerApellidPersonaAutor" ColumnName="PrimerApellidPersonaAutor" />
+                <ScalarProperty Name="SegundoApellidoPersonaAutor" ColumnName="SegundoApellidoPersonaAutor" />
+                <ScalarProperty Name="PrimerNombrePersonaAutor" ColumnName="PrimerNombrePersonaAutor" />
+                <ScalarProperty Name="SegundoNombrePesonaAutor" ColumnName="SegundoNombrePesonaAutor" />
+                <ScalarProperty Name="TelefonoPersonaAutor" ColumnName="TelefonoPersonaAutor" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioDecision" ColumnName="IdAsignarUsuarioTipoUsuarioDecision" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuarioDecision" ColumnName="EstadoAsignarUsuarioTipoUsuarioDecision" />
+                <ScalarProperty Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision" ColumnName="IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision" />
+                <ScalarProperty Name="IdUsuarioUsuarioDecision" ColumnName="IdUsuarioUsuarioDecision" />
+                <ScalarProperty Name="IdPersonaDecision" ColumnName="IdPersonaDecision" />
+                <ScalarProperty Name="IdParroquiaPersonaDecision" ColumnName="IdParroquiaPersonaDecision" />
+                <ScalarProperty Name="NumeroIdentificacionPersonaDecision" ColumnName="NumeroIdentificacionPersonaDecision" />
+                <ScalarProperty Name="DireccionPersonaDecision" ColumnName="DireccionPersonaDecision" />
+                <ScalarProperty Name="EstadoPersonaDecision" ColumnName="EstadoPersonaDecision" />
+                <ScalarProperty Name="IdSexoPersonaDecision" ColumnName="IdSexoPersonaDecision" />
+                <ScalarProperty Name="IdTipoIdentificacionPersonaDecision" ColumnName="IdTipoIdentificacionPersonaDecision" />
+                <ScalarProperty Name="PrimerApellidPersonaDecision" ColumnName="PrimerApellidPersonaDecision" />
+                <ScalarProperty Name="SegundoApellidoPersonaDecision" ColumnName="SegundoApellidoPersonaDecision" />
+                <ScalarProperty Name="PrimerNombrePersonaDecision" ColumnName="PrimerNombrePersonaDecision" />
+                <ScalarProperty Name="SegundoNombrePesonaDecision" ColumnName="SegundoNombrePesonaDecision" />
+                <ScalarProperty Name="TelefonoPersonaDecision" ColumnName="TelefonoPersonaDecision" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoDetalleComponenteConsultarPorId" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoDetalleComponenteConsultarPorId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ContenidoDetalleComponenteConsultarPorId_Result">
+                <ScalarProperty Name="IdContentidoDetalleComponeteCaracterizacion" ColumnName="IdContentidoDetalleComponeteCaracterizacion" />
+                <ScalarProperty Name="ContenidoContentidoDetalleComponente" ColumnName="ContenidoContentidoDetalleComponente" />
+                <ScalarProperty Name="EstadoContentidoDetalleComponente" ColumnName="EstadoContentidoDetalleComponente" />
+                <ScalarProperty Name="EstadoDecisionContentidoDetalleComponente" ColumnName="EstadoDecisionContentidoDetalleComponente" />
+                <ScalarProperty Name="FechaDesicionContentidoDetalleComponente" ColumnName="FechaDesicionContentidoDetalleComponente" />
+                <ScalarProperty Name="FechaRegistroContentidoDetalleComponente" ColumnName="FechaRegistroContentidoDetalleComponente" />
+                <ScalarProperty Name="ObservacionDecisionContentidoDetalleComponente" ColumnName="ObservacionDecisionContentidoDetalleComponente" />
+                <ScalarProperty Name="IdDescripcionComponente" ColumnName="IdDescripcionComponente" />
+                <ScalarProperty Name="IdAsignarComponenteGenericoDescripcionComponente" ColumnName="IdAsignarComponenteGenericoDescripcionComponente" />
+                <ScalarProperty Name="ObligatorioDescripcionComponente" ColumnName="ObligatorioDescripcionComponente" />
+                <ScalarProperty Name="OrdenDescripcionComponente" ColumnName="OrdenDescripcionComponente" />
+                <ScalarProperty Name="IdCabeceraCaracterizacion" ColumnName="IdCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaFinalizadoCabeceraCaracterizacion" ColumnName="FechaFinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaRegistroCabeceraCaracterizacion" ColumnName="FechaRegistroCabeceraCaracterizacion" />
+                <ScalarProperty Name="FinalizadoCabeceraCaracterizacion" ColumnName="FinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="EstadoCabeceraCaracterizacion" ColumnName="EstadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdPeriodoModeloPublicado" ColumnName="IdPeriodoModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" ColumnName="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioAutor" ColumnName="IdAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuarioAutor" ColumnName="EstadoAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" ColumnName="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdUsuarioUsuarioAutor" ColumnName="IdUsuarioUsuarioAutor" />
+                <ScalarProperty Name="IdPersonaAutor" ColumnName="IdPersonaAutor" />
+                <ScalarProperty Name="IdParroquiaPersonaAutor" ColumnName="IdParroquiaPersonaAutor" />
+                <ScalarProperty Name="NumeroIdentificacionPersonaAutor" ColumnName="NumeroIdentificacionPersonaAutor" />
+                <ScalarProperty Name="DireccionPersonaAutor" ColumnName="DireccionPersonaAutor" />
+                <ScalarProperty Name="EstadoPersonaAutor" ColumnName="EstadoPersonaAutor" />
+                <ScalarProperty Name="IdSexoPersonaAutor" ColumnName="IdSexoPersonaAutor" />
+                <ScalarProperty Name="IdTipoIdentificacionPersonaAutor" ColumnName="IdTipoIdentificacionPersonaAutor" />
+                <ScalarProperty Name="PrimerApellidPersonaAutor" ColumnName="PrimerApellidPersonaAutor" />
+                <ScalarProperty Name="SegundoApellidoPersonaAutor" ColumnName="SegundoApellidoPersonaAutor" />
+                <ScalarProperty Name="PrimerNombrePersonaAutor" ColumnName="PrimerNombrePersonaAutor" />
+                <ScalarProperty Name="SegundoNombrePesonaAutor" ColumnName="SegundoNombrePesonaAutor" />
+                <ScalarProperty Name="TelefonoPersonaAutor" ColumnName="TelefonoPersonaAutor" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioDecision" ColumnName="IdAsignarUsuarioTipoUsuarioDecision" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuarioDecision" ColumnName="EstadoAsignarUsuarioTipoUsuarioDecision" />
+                <ScalarProperty Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision" ColumnName="IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision" />
+                <ScalarProperty Name="IdUsuarioUsuarioDecision" ColumnName="IdUsuarioUsuarioDecision" />
+                <ScalarProperty Name="IdPersonaDecision" ColumnName="IdPersonaDecision" />
+                <ScalarProperty Name="IdParroquiaPersonaDecision" ColumnName="IdParroquiaPersonaDecision" />
+                <ScalarProperty Name="NumeroIdentificacionPersonaDecision" ColumnName="NumeroIdentificacionPersonaDecision" />
+                <ScalarProperty Name="DireccionPersonaDecision" ColumnName="DireccionPersonaDecision" />
+                <ScalarProperty Name="EstadoPersonaDecision" ColumnName="EstadoPersonaDecision" />
+                <ScalarProperty Name="IdSexoPersonaDecision" ColumnName="IdSexoPersonaDecision" />
+                <ScalarProperty Name="IdTipoIdentificacionPersonaDecision" ColumnName="IdTipoIdentificacionPersonaDecision" />
+                <ScalarProperty Name="PrimerApellidPersonaDecision" ColumnName="PrimerApellidPersonaDecision" />
+                <ScalarProperty Name="SegundoApellidoPersonaDecision" ColumnName="SegundoApellidoPersonaDecision" />
+                <ScalarProperty Name="PrimerNombrePersonaDecision" ColumnName="PrimerNombrePersonaDecision" />
+                <ScalarProperty Name="SegundoNombrePesonaDecision" ColumnName="SegundoNombrePesonaDecision" />
+                <ScalarProperty Name="TelefonoPersonaDecision" ColumnName="TelefonoPersonaDecision" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion_Result">
+                <ScalarProperty Name="IdContentidoDetalleComponeteCaracterizacion" ColumnName="IdContentidoDetalleComponeteCaracterizacion" />
+                <ScalarProperty Name="ContenidoContentidoDetalleComponente" ColumnName="ContenidoContentidoDetalleComponente" />
+                <ScalarProperty Name="EstadoContentidoDetalleComponente" ColumnName="EstadoContentidoDetalleComponente" />
+                <ScalarProperty Name="EstadoDecisionContentidoDetalleComponente" ColumnName="EstadoDecisionContentidoDetalleComponente" />
+                <ScalarProperty Name="FechaDesicionContentidoDetalleComponente" ColumnName="FechaDesicionContentidoDetalleComponente" />
+                <ScalarProperty Name="FechaRegistroContentidoDetalleComponente" ColumnName="FechaRegistroContentidoDetalleComponente" />
+                <ScalarProperty Name="ObservacionDecisionContentidoDetalleComponente" ColumnName="ObservacionDecisionContentidoDetalleComponente" />
+                <ScalarProperty Name="IdDescripcionComponente" ColumnName="IdDescripcionComponente" />
+                <ScalarProperty Name="IdAsignarComponenteGenericoDescripcionComponente" ColumnName="IdAsignarComponenteGenericoDescripcionComponente" />
+                <ScalarProperty Name="ObligatorioDescripcionComponente" ColumnName="ObligatorioDescripcionComponente" />
+                <ScalarProperty Name="OrdenDescripcionComponente" ColumnName="OrdenDescripcionComponente" />
+                <ScalarProperty Name="IdCabeceraCaracterizacion" ColumnName="IdCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaFinalizadoCabeceraCaracterizacion" ColumnName="FechaFinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaRegistroCabeceraCaracterizacion" ColumnName="FechaRegistroCabeceraCaracterizacion" />
+                <ScalarProperty Name="FinalizadoCabeceraCaracterizacion" ColumnName="FinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="EstadoCabeceraCaracterizacion" ColumnName="EstadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdPeriodoModeloPublicado" ColumnName="IdPeriodoModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" ColumnName="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioAutor" ColumnName="IdAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuarioAutor" ColumnName="EstadoAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" ColumnName="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdUsuarioUsuarioAutor" ColumnName="IdUsuarioUsuarioAutor" />
+                <ScalarProperty Name="IdPersonaAutor" ColumnName="IdPersonaAutor" />
+                <ScalarProperty Name="IdParroquiaPersonaAutor" ColumnName="IdParroquiaPersonaAutor" />
+                <ScalarProperty Name="NumeroIdentificacionPersonaAutor" ColumnName="NumeroIdentificacionPersonaAutor" />
+                <ScalarProperty Name="DireccionPersonaAutor" ColumnName="DireccionPersonaAutor" />
+                <ScalarProperty Name="EstadoPersonaAutor" ColumnName="EstadoPersonaAutor" />
+                <ScalarProperty Name="IdSexoPersonaAutor" ColumnName="IdSexoPersonaAutor" />
+                <ScalarProperty Name="IdTipoIdentificacionPersonaAutor" ColumnName="IdTipoIdentificacionPersonaAutor" />
+                <ScalarProperty Name="PrimerApellidPersonaAutor" ColumnName="PrimerApellidPersonaAutor" />
+                <ScalarProperty Name="SegundoApellidoPersonaAutor" ColumnName="SegundoApellidoPersonaAutor" />
+                <ScalarProperty Name="PrimerNombrePersonaAutor" ColumnName="PrimerNombrePersonaAutor" />
+                <ScalarProperty Name="SegundoNombrePesonaAutor" ColumnName="SegundoNombrePesonaAutor" />
+                <ScalarProperty Name="TelefonoPersonaAutor" ColumnName="TelefonoPersonaAutor" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioDecision" ColumnName="IdAsignarUsuarioTipoUsuarioDecision" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuarioDecision" ColumnName="EstadoAsignarUsuarioTipoUsuarioDecision" />
+                <ScalarProperty Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision" ColumnName="IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision" />
+                <ScalarProperty Name="IdUsuarioUsuarioDecision" ColumnName="IdUsuarioUsuarioDecision" />
+                <ScalarProperty Name="IdPersonaDecision" ColumnName="IdPersonaDecision" />
+                <ScalarProperty Name="IdParroquiaPersonaDecision" ColumnName="IdParroquiaPersonaDecision" />
+                <ScalarProperty Name="NumeroIdentificacionPersonaDecision" ColumnName="NumeroIdentificacionPersonaDecision" />
+                <ScalarProperty Name="DireccionPersonaDecision" ColumnName="DireccionPersonaDecision" />
+                <ScalarProperty Name="EstadoPersonaDecision" ColumnName="EstadoPersonaDecision" />
+                <ScalarProperty Name="IdSexoPersonaDecision" ColumnName="IdSexoPersonaDecision" />
+                <ScalarProperty Name="IdTipoIdentificacionPersonaDecision" ColumnName="IdTipoIdentificacionPersonaDecision" />
+                <ScalarProperty Name="PrimerApellidPersonaDecision" ColumnName="PrimerApellidPersonaDecision" />
+                <ScalarProperty Name="SegundoApellidoPersonaDecision" ColumnName="SegundoApellidoPersonaDecision" />
+                <ScalarProperty Name="PrimerNombrePersonaDecision" ColumnName="PrimerNombrePersonaDecision" />
+                <ScalarProperty Name="SegundoNombrePesonaDecision" ColumnName="SegundoNombrePesonaDecision" />
+                <ScalarProperty Name="TelefonoPersonaDecision" ColumnName="TelefonoPersonaDecision" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoDetalleComponenteConsultarPorIdDescripcionComponente" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoDetalleComponenteConsultarPorIdDescripcionComponente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ContenidoDetalleComponenteConsultarPorIdDescripcionComponente_Result">
+                <ScalarProperty Name="IdContentidoDetalleComponeteCaracterizacion" ColumnName="IdContentidoDetalleComponeteCaracterizacion" />
+                <ScalarProperty Name="ContenidoContentidoDetalleComponente" ColumnName="ContenidoContentidoDetalleComponente" />
+                <ScalarProperty Name="EstadoContentidoDetalleComponente" ColumnName="EstadoContentidoDetalleComponente" />
+                <ScalarProperty Name="EstadoDecisionContentidoDetalleComponente" ColumnName="EstadoDecisionContentidoDetalleComponente" />
+                <ScalarProperty Name="FechaDesicionContentidoDetalleComponente" ColumnName="FechaDesicionContentidoDetalleComponente" />
+                <ScalarProperty Name="FechaRegistroContentidoDetalleComponente" ColumnName="FechaRegistroContentidoDetalleComponente" />
+                <ScalarProperty Name="ObservacionDecisionContentidoDetalleComponente" ColumnName="ObservacionDecisionContentidoDetalleComponente" />
+                <ScalarProperty Name="IdDescripcionComponente" ColumnName="IdDescripcionComponente" />
+                <ScalarProperty Name="IdAsignarComponenteGenericoDescripcionComponente" ColumnName="IdAsignarComponenteGenericoDescripcionComponente" />
+                <ScalarProperty Name="ObligatorioDescripcionComponente" ColumnName="ObligatorioDescripcionComponente" />
+                <ScalarProperty Name="OrdenDescripcionComponente" ColumnName="OrdenDescripcionComponente" />
+                <ScalarProperty Name="IdCabeceraCaracterizacion" ColumnName="IdCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaFinalizadoCabeceraCaracterizacion" ColumnName="FechaFinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaRegistroCabeceraCaracterizacion" ColumnName="FechaRegistroCabeceraCaracterizacion" />
+                <ScalarProperty Name="FinalizadoCabeceraCaracterizacion" ColumnName="FinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="EstadoCabeceraCaracterizacion" ColumnName="EstadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdPeriodoModeloPublicado" ColumnName="IdPeriodoModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" ColumnName="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioAutor" ColumnName="IdAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuarioAutor" ColumnName="EstadoAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" ColumnName="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdUsuarioUsuarioAutor" ColumnName="IdUsuarioUsuarioAutor" />
+                <ScalarProperty Name="IdPersonaAutor" ColumnName="IdPersonaAutor" />
+                <ScalarProperty Name="IdParroquiaPersonaAutor" ColumnName="IdParroquiaPersonaAutor" />
+                <ScalarProperty Name="NumeroIdentificacionPersonaAutor" ColumnName="NumeroIdentificacionPersonaAutor" />
+                <ScalarProperty Name="DireccionPersonaAutor" ColumnName="DireccionPersonaAutor" />
+                <ScalarProperty Name="EstadoPersonaAutor" ColumnName="EstadoPersonaAutor" />
+                <ScalarProperty Name="IdSexoPersonaAutor" ColumnName="IdSexoPersonaAutor" />
+                <ScalarProperty Name="IdTipoIdentificacionPersonaAutor" ColumnName="IdTipoIdentificacionPersonaAutor" />
+                <ScalarProperty Name="PrimerApellidPersonaAutor" ColumnName="PrimerApellidPersonaAutor" />
+                <ScalarProperty Name="SegundoApellidoPersonaAutor" ColumnName="SegundoApellidoPersonaAutor" />
+                <ScalarProperty Name="PrimerNombrePersonaAutor" ColumnName="PrimerNombrePersonaAutor" />
+                <ScalarProperty Name="SegundoNombrePesonaAutor" ColumnName="SegundoNombrePesonaAutor" />
+                <ScalarProperty Name="TelefonoPersonaAutor" ColumnName="TelefonoPersonaAutor" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioDecision" ColumnName="IdAsignarUsuarioTipoUsuarioDecision" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuarioDecision" ColumnName="EstadoAsignarUsuarioTipoUsuarioDecision" />
+                <ScalarProperty Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision" ColumnName="IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision" />
+                <ScalarProperty Name="IdUsuarioUsuarioDecision" ColumnName="IdUsuarioUsuarioDecision" />
+                <ScalarProperty Name="IdPersonaDecision" ColumnName="IdPersonaDecision" />
+                <ScalarProperty Name="IdParroquiaPersonaDecision" ColumnName="IdParroquiaPersonaDecision" />
+                <ScalarProperty Name="NumeroIdentificacionPersonaDecision" ColumnName="NumeroIdentificacionPersonaDecision" />
+                <ScalarProperty Name="DireccionPersonaDecision" ColumnName="DireccionPersonaDecision" />
+                <ScalarProperty Name="EstadoPersonaDecision" ColumnName="EstadoPersonaDecision" />
+                <ScalarProperty Name="IdSexoPersonaDecision" ColumnName="IdSexoPersonaDecision" />
+                <ScalarProperty Name="IdTipoIdentificacionPersonaDecision" ColumnName="IdTipoIdentificacionPersonaDecision" />
+                <ScalarProperty Name="PrimerApellidPersonaDecision" ColumnName="PrimerApellidPersonaDecision" />
+                <ScalarProperty Name="SegundoApellidoPersonaDecision" ColumnName="SegundoApellidoPersonaDecision" />
+                <ScalarProperty Name="PrimerNombrePersonaDecision" ColumnName="PrimerNombrePersonaDecision" />
+                <ScalarProperty Name="SegundoNombrePesonaDecision" ColumnName="SegundoNombrePesonaDecision" />
+                <ScalarProperty Name="TelefonoPersonaDecision" ColumnName="TelefonoPersonaDecision" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoDetalleComponenteEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoDetalleComponenteEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoDetalleComponenteInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoDetalleComponenteInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoDetalleComponenteModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoDetalleComponenteModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoTipoElementoConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoTipoElementoConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ContenidoTipoElementoConsultar_Result">
+                <ScalarProperty Name="IdContenidoTipoElemento" ColumnName="IdContenidoTipoElemento" />
+                <ScalarProperty Name="ContenidoContenidoTipoElemento" ColumnName="ContenidoContenidoTipoElemento" />
+                <ScalarProperty Name="EstadoContenidoTipoElemento" ColumnName="EstadoContenidoTipoElemento" />
+                <ScalarProperty Name="FechaRegistroContenidoTipoElemento" ColumnName="FechaRegistroContenidoTipoElemento" />
+                <ScalarProperty Name="UrlRutaContenidoContenidoTipoElemento" ColumnName="UrlRutaContenidoContenidoTipoElemento" />
+                <ScalarProperty Name="IdAsignarDescripcionComponenteTipoElemento" ColumnName="IdAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="IdDescripcionComponenteAsignarDescripcionComponenteTipoElemento" ColumnName="IdDescripcionComponenteAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="ObligatorioAsignarDescripcionComponenteTipoElemento" ColumnName="ObligatorioAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="OrdenAsignarDescripcionComponenteTipoElemento" ColumnName="OrdenAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="IdTipoElementoAsignarDescripcionComponenteTipoElemento" ColumnName="IdTipoElementoAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="IdCabeceraCaracterizacion" ColumnName="IdCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaFinalizadoCabeceraCaracterizacion" ColumnName="FechaFinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaRegistroCabeceraCaracterizacion" ColumnName="FechaRegistroCabeceraCaracterizacion" />
+                <ScalarProperty Name="FinalizadoCabeceraCaracterizacion" ColumnName="FinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="EstadoCabeceraCaracterizacion" ColumnName="EstadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdPeriodoModeloPublicado" ColumnName="IdPeriodoModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" ColumnName="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioAutor" ColumnName="IdAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuarioAutor" ColumnName="EstadoAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" ColumnName="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdUsuarioUsuarioAutor" ColumnName="IdUsuarioUsuarioAutor" />
+                <ScalarProperty Name="IdPersonaAutor" ColumnName="IdPersonaAutor" />
+                <ScalarProperty Name="IdParroquiaPersonaAutor" ColumnName="IdParroquiaPersonaAutor" />
+                <ScalarProperty Name="NumeroIdentificacionPersonaAutor" ColumnName="NumeroIdentificacionPersonaAutor" />
+                <ScalarProperty Name="DireccionPersonaAutor" ColumnName="DireccionPersonaAutor" />
+                <ScalarProperty Name="EstadoPersonaAutor" ColumnName="EstadoPersonaAutor" />
+                <ScalarProperty Name="IdSexoPersonaAutor" ColumnName="IdSexoPersonaAutor" />
+                <ScalarProperty Name="IdTipoIdentificacionPersonaAutor" ColumnName="IdTipoIdentificacionPersonaAutor" />
+                <ScalarProperty Name="PrimerApellidPersonaAutor" ColumnName="PrimerApellidPersonaAutor" />
+                <ScalarProperty Name="SegundoApellidoPersonaAutor" ColumnName="SegundoApellidoPersonaAutor" />
+                <ScalarProperty Name="PrimerNombrePersonaAutor" ColumnName="PrimerNombrePersonaAutor" />
+                <ScalarProperty Name="SegundoNombrePesonaAutor" ColumnName="SegundoNombrePesonaAutor" />
+                <ScalarProperty Name="TelefonoPersonaAutor" ColumnName="TelefonoPersonaAutor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoTipoElementoConsultarPorId" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoTipoElementoConsultarPorId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ContenidoTipoElementoConsultarPorId_Result">
+                <ScalarProperty Name="IdContenidoTipoElemento" ColumnName="IdContenidoTipoElemento" />
+                <ScalarProperty Name="ContenidoContenidoTipoElemento" ColumnName="ContenidoContenidoTipoElemento" />
+                <ScalarProperty Name="EstadoContenidoTipoElemento" ColumnName="EstadoContenidoTipoElemento" />
+                <ScalarProperty Name="FechaRegistroContenidoTipoElemento" ColumnName="FechaRegistroContenidoTipoElemento" />
+                <ScalarProperty Name="UrlRutaContenidoContenidoTipoElemento" ColumnName="UrlRutaContenidoContenidoTipoElemento" />
+                <ScalarProperty Name="IdAsignarDescripcionComponenteTipoElemento" ColumnName="IdAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="IdDescripcionComponenteAsignarDescripcionComponenteTipoElemento" ColumnName="IdDescripcionComponenteAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="ObligatorioAsignarDescripcionComponenteTipoElemento" ColumnName="ObligatorioAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="OrdenAsignarDescripcionComponenteTipoElemento" ColumnName="OrdenAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="IdTipoElementoAsignarDescripcionComponenteTipoElemento" ColumnName="IdTipoElementoAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="IdCabeceraCaracterizacion" ColumnName="IdCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaFinalizadoCabeceraCaracterizacion" ColumnName="FechaFinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaRegistroCabeceraCaracterizacion" ColumnName="FechaRegistroCabeceraCaracterizacion" />
+                <ScalarProperty Name="FinalizadoCabeceraCaracterizacion" ColumnName="FinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="EstadoCabeceraCaracterizacion" ColumnName="EstadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdPeriodoModeloPublicado" ColumnName="IdPeriodoModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" ColumnName="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioAutor" ColumnName="IdAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuarioAutor" ColumnName="EstadoAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" ColumnName="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdUsuarioUsuarioAutor" ColumnName="IdUsuarioUsuarioAutor" />
+                <ScalarProperty Name="IdPersonaAutor" ColumnName="IdPersonaAutor" />
+                <ScalarProperty Name="IdParroquiaPersonaAutor" ColumnName="IdParroquiaPersonaAutor" />
+                <ScalarProperty Name="NumeroIdentificacionPersonaAutor" ColumnName="NumeroIdentificacionPersonaAutor" />
+                <ScalarProperty Name="DireccionPersonaAutor" ColumnName="DireccionPersonaAutor" />
+                <ScalarProperty Name="EstadoPersonaAutor" ColumnName="EstadoPersonaAutor" />
+                <ScalarProperty Name="IdSexoPersonaAutor" ColumnName="IdSexoPersonaAutor" />
+                <ScalarProperty Name="IdTipoIdentificacionPersonaAutor" ColumnName="IdTipoIdentificacionPersonaAutor" />
+                <ScalarProperty Name="PrimerApellidPersonaAutor" ColumnName="PrimerApellidPersonaAutor" />
+                <ScalarProperty Name="SegundoApellidoPersonaAutor" ColumnName="SegundoApellidoPersonaAutor" />
+                <ScalarProperty Name="PrimerNombrePersonaAutor" ColumnName="PrimerNombrePersonaAutor" />
+                <ScalarProperty Name="SegundoNombrePesonaAutor" ColumnName="SegundoNombrePesonaAutor" />
+                <ScalarProperty Name="TelefonoPersonaAutor" ColumnName="TelefonoPersonaAutor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoTipoElementoConsultarPorIdAsignarDescripcionComponenteTipoElemento" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoTipoElementoConsultarPorIdAsignarDescripcionComponenteTipoElemento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ContenidoTipoElementoConsultarPorIdAsignarDescripcionComponenteTipoElemento_Result">
+                <ScalarProperty Name="IdContenidoTipoElemento" ColumnName="IdContenidoTipoElemento" />
+                <ScalarProperty Name="ContenidoContenidoTipoElemento" ColumnName="ContenidoContenidoTipoElemento" />
+                <ScalarProperty Name="EstadoContenidoTipoElemento" ColumnName="EstadoContenidoTipoElemento" />
+                <ScalarProperty Name="FechaRegistroContenidoTipoElemento" ColumnName="FechaRegistroContenidoTipoElemento" />
+                <ScalarProperty Name="UrlRutaContenidoContenidoTipoElemento" ColumnName="UrlRutaContenidoContenidoTipoElemento" />
+                <ScalarProperty Name="IdAsignarDescripcionComponenteTipoElemento" ColumnName="IdAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="IdDescripcionComponenteAsignarDescripcionComponenteTipoElemento" ColumnName="IdDescripcionComponenteAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="ObligatorioAsignarDescripcionComponenteTipoElemento" ColumnName="ObligatorioAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="OrdenAsignarDescripcionComponenteTipoElemento" ColumnName="OrdenAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="IdTipoElementoAsignarDescripcionComponenteTipoElemento" ColumnName="IdTipoElementoAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="IdCabeceraCaracterizacion" ColumnName="IdCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaFinalizadoCabeceraCaracterizacion" ColumnName="FechaFinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaRegistroCabeceraCaracterizacion" ColumnName="FechaRegistroCabeceraCaracterizacion" />
+                <ScalarProperty Name="FinalizadoCabeceraCaracterizacion" ColumnName="FinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="EstadoCabeceraCaracterizacion" ColumnName="EstadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdPeriodoModeloPublicado" ColumnName="IdPeriodoModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" ColumnName="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioAutor" ColumnName="IdAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuarioAutor" ColumnName="EstadoAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" ColumnName="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdUsuarioUsuarioAutor" ColumnName="IdUsuarioUsuarioAutor" />
+                <ScalarProperty Name="IdPersonaAutor" ColumnName="IdPersonaAutor" />
+                <ScalarProperty Name="IdParroquiaPersonaAutor" ColumnName="IdParroquiaPersonaAutor" />
+                <ScalarProperty Name="NumeroIdentificacionPersonaAutor" ColumnName="NumeroIdentificacionPersonaAutor" />
+                <ScalarProperty Name="DireccionPersonaAutor" ColumnName="DireccionPersonaAutor" />
+                <ScalarProperty Name="EstadoPersonaAutor" ColumnName="EstadoPersonaAutor" />
+                <ScalarProperty Name="IdSexoPersonaAutor" ColumnName="IdSexoPersonaAutor" />
+                <ScalarProperty Name="IdTipoIdentificacionPersonaAutor" ColumnName="IdTipoIdentificacionPersonaAutor" />
+                <ScalarProperty Name="PrimerApellidPersonaAutor" ColumnName="PrimerApellidPersonaAutor" />
+                <ScalarProperty Name="SegundoApellidoPersonaAutor" ColumnName="SegundoApellidoPersonaAutor" />
+                <ScalarProperty Name="PrimerNombrePersonaAutor" ColumnName="PrimerNombrePersonaAutor" />
+                <ScalarProperty Name="SegundoNombrePesonaAutor" ColumnName="SegundoNombrePesonaAutor" />
+                <ScalarProperty Name="TelefonoPersonaAutor" ColumnName="TelefonoPersonaAutor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoTipoElementoConsultarPorIdCabeceraCaracterizacion" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoTipoElementoConsultarPorIdCabeceraCaracterizacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ContenidoTipoElementoConsultarPorIdCabeceraCaracterizacion_Result">
+                <ScalarProperty Name="IdContenidoTipoElemento" ColumnName="IdContenidoTipoElemento" />
+                <ScalarProperty Name="ContenidoContenidoTipoElemento" ColumnName="ContenidoContenidoTipoElemento" />
+                <ScalarProperty Name="EstadoContenidoTipoElemento" ColumnName="EstadoContenidoTipoElemento" />
+                <ScalarProperty Name="FechaRegistroContenidoTipoElemento" ColumnName="FechaRegistroContenidoTipoElemento" />
+                <ScalarProperty Name="UrlRutaContenidoContenidoTipoElemento" ColumnName="UrlRutaContenidoContenidoTipoElemento" />
+                <ScalarProperty Name="IdAsignarDescripcionComponenteTipoElemento" ColumnName="IdAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="IdDescripcionComponenteAsignarDescripcionComponenteTipoElemento" ColumnName="IdDescripcionComponenteAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="ObligatorioAsignarDescripcionComponenteTipoElemento" ColumnName="ObligatorioAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="OrdenAsignarDescripcionComponenteTipoElemento" ColumnName="OrdenAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="IdTipoElementoAsignarDescripcionComponenteTipoElemento" ColumnName="IdTipoElementoAsignarDescripcionComponenteTipoElemento" />
+                <ScalarProperty Name="IdCabeceraCaracterizacion" ColumnName="IdCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaFinalizadoCabeceraCaracterizacion" ColumnName="FechaFinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="FechaRegistroCabeceraCaracterizacion" ColumnName="FechaRegistroCabeceraCaracterizacion" />
+                <ScalarProperty Name="FinalizadoCabeceraCaracterizacion" ColumnName="FinalizadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="EstadoCabeceraCaracterizacion" ColumnName="EstadoCabeceraCaracterizacion" />
+                <ScalarProperty Name="IdAsignarResponsableModeloPublicado" ColumnName="IdAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="EstadoAsignarResponsableModeloPublicado" ColumnName="EstadoAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaAsignacionAsignarResponsableModeloPublicado" ColumnName="FechaAsignacionAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaInicioAsignarResponsableModeloPublicado" ColumnName="FechaInicioAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="FechaFinAsignarResponsableModeloPublicado" ColumnName="FechaFinAsignarResponsableModeloPublicado" />
+                <ScalarProperty Name="IdModeloPublicado" ColumnName="IdModeloPublicado" />
+                <ScalarProperty Name="EstadoModeloPublicado" ColumnName="EstadoModeloPublicado" />
+                <ScalarProperty Name="FechaPublicacionModeloPublicado" ColumnName="FechaPublicacionModeloPublicado" />
+                <ScalarProperty Name="IdPeriodoModeloPublicado" ColumnName="IdPeriodoModeloPublicado" />
+                <ScalarProperty Name="IdCabeceraVersionModelo" ColumnName="IdCabeceraVersionModelo" />
+                <ScalarProperty Name="CaracteristicaCabeceraVersionModelo" ColumnName="CaracteristicaCabeceraVersionModelo" />
+                <ScalarProperty Name="EstadoCabeceraVersionModelo" ColumnName="EstadoCabeceraVersionModelo" />
+                <ScalarProperty Name="FechaCreacionCabeceraVersionModelo" ColumnName="FechaCreacionCabeceraVersionModelo" />
+                <ScalarProperty Name="VersionCabeceraVersionModelo" ColumnName="VersionCabeceraVersionModelo" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" ColumnName="IdAsignarUsuarioTipoUsuarioCabeceraVersionModelo" />
+                <ScalarProperty Name="IdModeloGenerico" ColumnName="IdModeloGenerico" />
+                <ScalarProperty Name="EstadoModeloGenerico" ColumnName="EstadoModeloGenerico" />
+                <ScalarProperty Name="DescripcionModeloGenerico" ColumnName="DescripcionModeloGenerico" />
+                <ScalarProperty Name="NombreModeloGenerico" ColumnName="NombreModeloGenerico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioAutor" ColumnName="IdAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="EstadoAsignarUsuarioTipoUsuarioAutor" ColumnName="EstadoAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" ColumnName="IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor" />
+                <ScalarProperty Name="IdUsuarioUsuarioAutor" ColumnName="IdUsuarioUsuarioAutor" />
+                <ScalarProperty Name="IdPersonaAutor" ColumnName="IdPersonaAutor" />
+                <ScalarProperty Name="IdParroquiaPersonaAutor" ColumnName="IdParroquiaPersonaAutor" />
+                <ScalarProperty Name="NumeroIdentificacionPersonaAutor" ColumnName="NumeroIdentificacionPersonaAutor" />
+                <ScalarProperty Name="DireccionPersonaAutor" ColumnName="DireccionPersonaAutor" />
+                <ScalarProperty Name="EstadoPersonaAutor" ColumnName="EstadoPersonaAutor" />
+                <ScalarProperty Name="IdSexoPersonaAutor" ColumnName="IdSexoPersonaAutor" />
+                <ScalarProperty Name="IdTipoIdentificacionPersonaAutor" ColumnName="IdTipoIdentificacionPersonaAutor" />
+                <ScalarProperty Name="PrimerApellidPersonaAutor" ColumnName="PrimerApellidPersonaAutor" />
+                <ScalarProperty Name="SegundoApellidoPersonaAutor" ColumnName="SegundoApellidoPersonaAutor" />
+                <ScalarProperty Name="PrimerNombrePersonaAutor" ColumnName="PrimerNombrePersonaAutor" />
+                <ScalarProperty Name="SegundoNombrePesonaAutor" ColumnName="SegundoNombrePesonaAutor" />
+                <ScalarProperty Name="TelefonoPersonaAutor" ColumnName="TelefonoPersonaAutor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoTipoElementoEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoTipoElementoEliminar" />
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoTipoElementoInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoTipoElementoInsertar" />
+          <FunctionImportMapping FunctionImportName="Sp_ContenidoTipoElementoModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ContenidoTipoElementoModificar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
