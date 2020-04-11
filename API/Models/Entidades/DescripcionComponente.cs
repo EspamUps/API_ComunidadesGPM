@@ -14,6 +14,6 @@ namespace API.Models.Entidades
         public int Orden { get; set; }
         public string Utilizado { get; set; }
         public AsignarDescripcionComponenteTipoElemento AsignarDescripcionComponenteTipoElemento { get; set; }
-
+        public AsignarComponenteGenerico AsignarComponenteGenerico { get; set; }
     }
 }

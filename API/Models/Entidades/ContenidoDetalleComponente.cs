@@ -10,7 +10,7 @@ namespace API.Models.Entidades
         public int IdContenidoDetalleComponenteCaracterizacion { get; set; }
         public string IdContenidoDetalleComponenteCaracterizacionEncriptado { get; set; }
         public CabeceraCaracterizacion CabeceraCaracterizacion { get; set; }
-        public string Componente { get; set; }
+        public string Contenido { get; set; }
         public DateTime FechaRegistro { get; set; }
         public DescripcionComponente DescripcionComponente { get; set; }
         public AsignarUsuarioTipoUsuario AsignarUsuarioTipoUsuarioAutor { get; set; }

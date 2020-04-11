@@ -10,7 +10,7 @@ namespace API.Models.Entidades
         public int IdContenidoTipoElemento { get; set; }
         public string IdContenidoTipoElementoEncriptado { get; set; }
         public CabeceraCaracterizacion CabeceraCaracterizacion { get; set; }
-        public AsignarDescripcionComponenteTipoElemento asignarDescripcionComponenteTipoElemento { get; set; }
+        public AsignarDescripcionComponenteTipoElemento AsignarDescripcionComponenteTipoElemento { get; set; }
         public string Contenido { get; set; }
         public string UrlRutaContenido { get; set; }
         public DateTime FechaRegistro { get; set; }

@@ -9399,6 +9399,8 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams>
+      <Diagram DiagramId="76a0d74dc05a4da1bbd574612d239afe" Name="Diagram1" />
+    </Diagrams>
   </Designer>
 </edmx:Edmx>

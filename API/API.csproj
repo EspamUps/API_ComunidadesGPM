@@ -562,6 +562,7 @@
     <Compile Include="Controllers\CantonController.cs" />
     <Compile Include="Controllers\ComponenteController.cs" />
     <Compile Include="Controllers\ComunidadController.cs" />
+    <Compile Include="Controllers\ContenidoDetalleComponenteController.cs" />
     <Compile Include="Controllers\CuestionarioGenericoController.cs" />
     <Compile Include="Controllers\CuestionarioPublicadoController.cs" />
     <Compile Include="Controllers\DescripcionComponenteController.cs" />
@@ -617,6 +618,7 @@
     <Compile Include="Models\Catalogos\CatalogoCanton.cs" />
     <Compile Include="Models\Catalogos\CatalogoComponente.cs" />
     <Compile Include="Models\Catalogos\CatalogoComunidad.cs" />
+    <Compile Include="Models\Catalogos\CatalogoContenidoDetalleComponente.cs" />
     <Compile Include="Models\Catalogos\CatalogoContenidoTipoElemento.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioPublicado.cs" />
