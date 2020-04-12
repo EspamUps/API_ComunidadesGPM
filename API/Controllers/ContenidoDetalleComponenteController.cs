@@ -58,7 +58,8 @@ namespace API.Controllers
                     _objContenidoDetalleComponente.DescripcionComponente.IdDescripcionComponente = Convert.ToInt32(_seguridad.DesEncriptar(_objContenidoDetalleComponente.DescripcionComponente.IdDescripcionComponenteEncriptado));
                     _objContenidoDetalleComponente.EstadoDecision = true;
                     _objContenidoDetalleComponente.FechaDecision = DateTime.Now;
-                    _objContenidoDetalleComponente.AsignarUsuarioTipoUsuarioDecision.IdAsignarUsuarioTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_objContenidoDetalleComponente.AsignarUsuarioTipoUsuarioAutor.IdAsignarUsuarioTipoUsuarioEncriptado));
+                    _objContenidoDetalleComponente.FechaRegistro = DateTime.Now;
+                    _objContenidoDetalleComponente.AsignarUsuarioTipoUsuarioDecision.IdAsignarUsuarioTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_objContenidoDetalleComponente.AsignarUsuarioTipoUsuarioDecision.IdAsignarUsuarioTipoUsuarioEncriptado));
                     _objContenidoDetalleComponente.Estado = true;
 
                     int _idContenidoDetalleComponente = _objCatalogoContenidoDetalleComponente.InsertarContenidoDetalleComponente(_objContenidoDetalleComponente);
@@ -137,8 +138,8 @@ namespace API.Controllers
                     }
                     else
                     {
-                        _objContenidoDetalleComponenteConsultado.Contenido = _objContenidoDetalleComponenteConsultado.Contenido;
-                        if (_objCatalogoContenidoDetalleComponente.InsertarContenidoDetalleComponente(_objContenidoDetalleComponenteConsultado) == 0)
+                        _objContenidoDetalleComponenteConsultado.Contenido = _objContenidoDetalleComponente.Contenido;
+                        if (_objCatalogoContenidoDetalleComponente.ModificarContenidoDetalleComponente(_objContenidoDetalleComponenteConsultado) == 0)
                         {
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                             _http.mensaje = "Ocurrió un error al tratar de modificar el contenido detalle componente.";

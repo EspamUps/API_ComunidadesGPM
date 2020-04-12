@@ -364,7 +364,7 @@ namespace API.Models.Catalogos
         public List<ContenidoDetalleComponente> ConsultarContenidoDetalleComponentePorIdDescripcionComponente(int _idDescripcionComponente)
         {
             List<ContenidoDetalleComponente> _lista = new List<ContenidoDetalleComponente>();
-            foreach (var item in db.Sp_ContenidoDetalleComponenteConsultarPorId(_idDescripcionComponente))
+            foreach (var item in db.Sp_ContenidoDetalleComponenteConsultarPorIdDescripcionComponente(_idDescripcionComponente))
             {
                 _lista.Add(new ContenidoDetalleComponente()
                 {

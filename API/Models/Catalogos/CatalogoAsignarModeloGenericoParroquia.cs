@@ -32,38 +32,38 @@ namespace API.Models.Catalogos
         {
             var _listaParroquia = _objParroquia.ConsultarParroquia();
             List<AsignarModeloGenericoParroquia> _lista = new List<AsignarModeloGenericoParroquia>();
-            foreach (var item in db.Sp_AsignarModeloPublicadoParroquiaConsultar())
-            {
-                _lista.Add(new AsignarModeloGenericoParroquia()
-                {
-                    IdAsignarModeloGenericoParroquia = item.IdAsignarModeloGenericoParroquia,
-                    IdAsignarModeloGenericoParroquiaEncriptado = _seguridad.Encriptar(item.IdAsignarModeloGenericoParroquia.ToString()),
-                    IdModeloPublicado = _seguridad.Encriptar(item.IdModeloPublicado.ToString()),
-                    IdParroquia = _seguridad.Encriptar(item.IdParroquia.ToString()),
-                    Estado = item.Estado,
-                    FechaAsignacion = item.FechaAsignacion,
-                    Parroquia = _listaParroquia.Where(p=> p.IdParroquia == item.IdParroquia).FirstOrDefault()
-                });
-            }
+            //foreach (var item in db.Sp_AsignarModeloPublicadoParroquiaConsultar())
+            //{
+            //    _lista.Add(new AsignarModeloGenericoParroquia()
+            //    {
+            //        IdAsignarModeloGenericoParroquia = item.IdAsignarModeloGenericoParroquia,
+            //        IdAsignarModeloGenericoParroquiaEncriptado = _seguridad.Encriptar(item.IdAsignarModeloGenericoParroquia.ToString()),
+            //        IdModeloPublicado = _seguridad.Encriptar(item.IdModeloPublicado.ToString()),
+            //        IdParroquia = _seguridad.Encriptar(item.IdParroquia.ToString()),
+            //        Estado = item.Estado,
+            //        FechaAsignacion = item.FechaAsignacion,
+            //        Parroquia = _listaParroquia.Where(p=> p.IdParroquia == item.IdParroquia).FirstOrDefault()
+            //    });
+            //}
             return _lista;
         }
         public List<AsignarModeloGenericoParroquia> ConsultarAsignarModeloGenericoParroquiaPorId(int _idAsignarModeloGenericoParroquia)
         {
             var _listaParroquia = _objParroquia.ConsultarParroquia();
             List<AsignarModeloGenericoParroquia> _lista = new List<AsignarModeloGenericoParroquia>();
-            foreach (var item in db.Sp_AsignarModeloPublicadoParroquiaConsultar().Where(p=>p.IdAsignarModeloGenericoParroquia == _idAsignarModeloGenericoParroquia).ToList())
-            {
-                _lista.Add(new AsignarModeloGenericoParroquia()
-                {
-                    IdAsignarModeloGenericoParroquia = item.IdAsignarModeloGenericoParroquia,
-                    IdAsignarModeloGenericoParroquiaEncriptado = _seguridad.Encriptar(item.IdAsignarModeloGenericoParroquia.ToString()),
-                    IdModeloPublicado = _seguridad.Encriptar(item.IdModeloPublicado.ToString()),
-                    IdParroquia = _seguridad.Encriptar(item.IdParroquia.ToString()),
-                    Estado = item.Estado,
-                    FechaAsignacion = item.FechaAsignacion,
-                    Parroquia = _listaParroquia.Where(p => p.IdParroquia == item.IdParroquia).FirstOrDefault()
-                });
-            }
+            //foreach (var item in db.Sp_AsignarModeloPublicadoParroquiaConsultar().Where(p=>p.IdAsignarModeloGenericoParroquia == _idAsignarModeloGenericoParroquia).ToList())
+            //{
+            //    _lista.Add(new AsignarModeloGenericoParroquia()
+            //    {
+            //        IdAsignarModeloGenericoParroquia = item.IdAsignarModeloGenericoParroquia,
+            //        IdAsignarModeloGenericoParroquiaEncriptado = _seguridad.Encriptar(item.IdAsignarModeloGenericoParroquia.ToString()),
+            //        IdModeloPublicado = _seguridad.Encriptar(item.IdModeloPublicado.ToString()),
+            //        IdParroquia = _seguridad.Encriptar(item.IdParroquia.ToString()),
+            //        Estado = item.Estado,
+            //        FechaAsignacion = item.FechaAsignacion,
+            //        Parroquia = _listaParroquia.Where(p => p.IdParroquia == item.IdParroquia).FirstOrDefault()
+            //    });
+            //}
             return _lista;
         }
         public void EliminarModeloGenericoParroquia(int _idModeloGenericoParroquia)
