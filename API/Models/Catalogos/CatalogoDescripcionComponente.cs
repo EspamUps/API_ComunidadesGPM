@@ -65,7 +65,6 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
-
         public void eliminarDescripcionComponente(int _idDescripcionComponente)
         {
             db.Sp_DescripcionComponenteEliminar(_idDescripcionComponente);

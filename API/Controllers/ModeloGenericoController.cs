@@ -75,16 +75,20 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/ModeloGenerico_consultar")]
-        public object ModeloGenerico_consultar()
+        public object ModeloGenerico_consultar(string _idModeloGenerico)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                var _listaModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenerico().Where(c => c.Estado == true).ToList();
-                foreach (var item in _listaModeloGenerico)
+                var _listaModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenerico().Where(c => c.IdModeloGenerico.ToString() == _seguridad.DesEncriptar(_idModeloGenerico) && c.Estado == true).FirstOrDefault();
+                //foreach (var item in _listaModeloGenerico)
+                //{
+                //    item.IdModeloGenerico = 0;
+                //}
+                if(_listaModeloGenerico != null)
                 {
-                    item.IdModeloGenerico = 0;
+                    _listaModeloGenerico.IdModeloGenerico = 0;
                 }
                 _respuesta = _listaModeloGenerico;
                 _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
@@ -137,6 +141,27 @@ namespace API.Controllers
             return new { respuesta = _respuesta, http = _http };
         }
 
-
+        [HttpPost]
+        [Route("api/ModeloGenerico_consultarTodos")]
+        public object ModeloGenerico_consultarTodos()
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                var _listaModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenericoTodos().Where(c => c.Estado == true).ToList();
+                foreach (var item in _listaModeloGenerico)
+                {
+                    item.IdModeloGenerico = 0;
+                }
+                _respuesta = _listaModeloGenerico;
+                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
     }
 }

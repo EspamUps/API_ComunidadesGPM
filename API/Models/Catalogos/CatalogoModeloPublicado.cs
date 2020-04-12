@@ -37,7 +37,7 @@ namespace API.Models.Catalogos
         {
             var ListaPeriodos = _objPeriodo.ConsultarPeriodo();
             var ListaUsuarioTipoUsuario = _objUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
-            var ListaModeloGenericoParroquia = _objModeloGenericoParroquia.ConsultarAsignarModeloGenericoParroquia();
+            //var ListaModeloGenericoParroquia = _objModeloGenericoParroquia.ConsultarAsignarModeloGenericoParroquia();
             List<ModeloPublicado> _lista = new List<ModeloPublicado>();
             foreach (var item in db.Sp_CabeceraModeloPublicadoConsultar())
             {
@@ -53,7 +53,7 @@ namespace API.Models.Catalogos
                     Utilizado = item.ModeloPublicadoUtilizado,
                     Periodo = ListaPeriodos.Where(p=>p.IdPeriodo == item.IdPeriodo).FirstOrDefault(),
                     AsignarUsuarioTipoUsuario = ListaUsuarioTipoUsuario.Where(p=>p.IdAsignarUsuarioTipoUsuario == item.IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
-                    AsignarModeloGenericoParroquia = ListaModeloGenericoParroquia.Where(p=>_seguridad.DesEncriptar(p.IdModeloPublicado) == item.IdModeloPublicado.ToString()).ToList()
+                    //AsignarModeloGenericoParroquia = ListaModeloGenericoParroquia.Where(p=>_seguridad.DesEncriptar(p.IdModeloPublicado) == item.IdModeloPublicado.ToString()).ToList()
                 });
             }
             return _lista;
@@ -62,7 +62,7 @@ namespace API.Models.Catalogos
         {
             var ListaPeriodos = _objPeriodo.ConsultarPeriodo();
             var ListaUsuarioTipoUsuario = _objUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
-            var ListaModeloGenericoParroquia = _objModeloGenericoParroquia.ConsultarAsignarModeloGenericoParroquia();
+            //var ListaModeloGenericoParroquia = _objModeloGenericoParroquia.ConsultarAsignarModeloGenericoParroquia();
             List<ModeloPublicado> _lista = new List<ModeloPublicado>();
             foreach (var item in db.Sp_CabeceraModeloPublicadoConsultar().Where(p=>p.IdModeloPublicado == _idModeloPublicado).ToList())
             {
@@ -78,7 +78,7 @@ namespace API.Models.Catalogos
                     Utilizado = item.ModeloPublicadoUtilizado,
                     Periodo = ListaPeriodos.Where(p => p.IdPeriodo == item.IdPeriodo).FirstOrDefault(),
                     AsignarUsuarioTipoUsuario = ListaUsuarioTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
-                    AsignarModeloGenericoParroquia = ListaModeloGenericoParroquia.Where(p => _seguridad.DesEncriptar(p.IdModeloPublicado) == item.IdModeloPublicado.ToString()).ToList()
+                    //AsignarModeloGenericoParroquia = ListaModeloGenericoParroquia.Where(p => _seguridad.DesEncriptar(p.IdModeloPublicado) == item.IdModeloPublicado.ToString()).ToList()
                 });
             }
             return _lista;

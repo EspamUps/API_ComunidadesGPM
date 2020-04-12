@@ -82,6 +82,20 @@ namespace API.Controllers
                 else
                 {
                     _objDescripcionComponente.IdDescripcionComponenteEncriptado = _seguridad.DesEncriptar(_objDescripcionComponente.IdDescripcionComponenteEncriptado);
+                    var _objAsignarDescripcionComponenteTE = DescripcionComponente.ConsultarDescripcionComponentePorId(int.Parse(_objDescripcionComponente.IdDescripcionComponenteEncriptado)).FirstOrDefault();
+                    if (_objAsignarDescripcionComponenteTE == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "la descripcion componente qe intenta eliminar no exite";
+                    }
+                    else
+                    {
+                        DescripcionComponente.eliminarDescripcionComponente(int.Parse(_objDescripcionComponente.IdDescripcionComponenteEncriptado));
+                        var ListaTodosDescripcionComponente = DescripcionComponente.ConsultarDescripcionComponente();
+                        var ListaDescripcionComponente1 = ListaTodosDescripcionComponente.Where(p => _seguridad.DesEncriptar(p.IdAsignarComponenteGenerico) == _seguridad.DesEncriptar(_objAsignarDescripcionComponenteTE.IdAsignarComponenteGenerico)).ToList();
+                        _respuesta = ListaDescripcionComponente1;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
                     /*var _objAsignarDescripcionComponenteTE = AsignarDescripcionComponenteTipoElemento.ConsultarAsignarDescripcionComponenteTipoElementoPorId(int.Parse(_objAsignarDescripcionComponenteTipoElemento.IdAsignarDescripcionComponenteTipoElementoEncriptado)).FirstOrDefault();
                     if (_objPrefecto.Utilizado == "1")
                     {
@@ -90,8 +104,6 @@ namespace API.Controllers
                     }
                     else
                     {*/
-                    DescripcionComponente.eliminarDescripcionComponente(int.Parse(_objDescripcionComponente.IdDescripcionComponenteEncriptado));
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     //}
                 }
             }

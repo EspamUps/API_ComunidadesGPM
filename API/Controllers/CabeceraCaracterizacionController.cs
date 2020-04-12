@@ -135,7 +135,7 @@ namespace API.Controllers
                 else
                 {
                     int _idAsignarResponsableModeloPublicado = Convert.ToInt32(_seguridad.DesEncriptar(_idAsignarResponsableModeloPublicadoEncriptado));
-                    var _objAsignarResponsableModeloPublicado = _objCatalogoAsignarResponsableModeloPublicado.ConsultarAsignarResponsableModeloPublicadoPorId(_idAsignarResponsableModeloPublicado);
+                    var _objAsignarResponsableModeloPublicado = _objCatalogoAsignarResponsableModeloPublicado.ConsultarAsignarResponsableModeloPublicadoPorId(_idAsignarResponsableModeloPublicado).FirstOrDefault();
                     if (_objAsignarResponsableModeloPublicado == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
@@ -144,20 +144,23 @@ namespace API.Controllers
                     else
                     {
                         var _objCabeceraCaracterizacion = _objCatalogoCabeceraCaracterizacion.ConsultarCabeceraCaracterizacionPorIdAsignarResponsableModeloPublicado(_idAsignarResponsableModeloPublicado).FirstOrDefault();
-                        _objCabeceraCaracterizacion.IdCabeceraCaracterizacion = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicado = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.IdModeloPublicado = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.IdCabeceraVersionModelo = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.ModeloGenerico.IdModeloGenerico = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.IdParroquia = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.Canton.IdCanton = 0;
-                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.Canton.Provincia.IdProvincia = 0;
+                        if(_objCabeceraCaracterizacion != null)
+                        {
+                            _objCabeceraCaracterizacion.IdCabeceraCaracterizacion = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicado = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.IdModeloPublicado = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.IdCabeceraVersionModelo = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.ModeloGenerico.IdModeloGenerico = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.IdParroquia = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.Canton.IdCanton = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.Canton.Provincia.IdProvincia = 0;
+                        }
                         _respuesta = _objCabeceraCaracterizacion;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }

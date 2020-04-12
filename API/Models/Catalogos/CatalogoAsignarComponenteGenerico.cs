@@ -39,7 +39,7 @@ namespace API.Models.Catalogos
             {
                 Componente DataComponente = new Componente();
                 DataComponente = listaComponentes.Where(p => p.IdComponente == item.IdComponente).FirstOrDefault();
-                DataComponente.DescripcionComponente = ListaDescripcionComponente.Where(p => _seguridad.DesEncriptar(p.IdAsignarComponenteGenerico) == item.IdAsignarComponenteGenerico.ToString()).ToList();
+                //DataComponente.DescripcionComponente = ListaDescripcionComponente.Where(p => _seguridad.DesEncriptar(p.IdAsignarComponenteGenerico) == item.IdAsignarComponenteGenerico.ToString()).ToList();
                 _lista.Add(new AsignarComponenteGenerico()
                 {
                     IdAsignarComponenteGenerico = item.IdAsignarComponenteGenerico,
@@ -48,7 +48,7 @@ namespace API.Models.Catalogos
                     IdComponente = _seguridad.Encriptar(item.IdComponente.ToString()),
                     Orden = item.Orden,
                     Utilizado = item.AsignarComponenteGenericoUtilizado,
-                    //DescripcionComponente = ListaDescripcionComponente.Where(p=> _seguridad.DesEncriptar(p.IdAsignarComponenteGenerico) == item.IdAsignarComponenteGenerico.ToString()).ToList(),
+                    DescripcionComponente = ListaDescripcionComponente.Where(p=> _seguridad.DesEncriptar(p.IdAsignarComponenteGenerico) == item.IdAsignarComponenteGenerico.ToString()).ToList(),
                     Componente = DataComponente
                 });
             }
@@ -73,6 +73,11 @@ namespace API.Models.Catalogos
         public void EliminarAsignarComponenteGenerico(int _idAsignarComponenteGenerico)
         {
             var DataAsignarComponenteGenerico = ConsultarAsignarComponenteGenericoPorId(_idAsignarComponenteGenerico).FirstOrDefault();
+            //var ListaDescripcionComponente = _objDescripcionComponente.ConsultarDescripcionComponente();
+            //foreach (var item in ListaDescripcionComponente.Where(p => _seguridad.DesEncriptar(p.IdAsignarComponenteGenerico) == DataAsignarComponenteGenerico.IdAsignarComponenteGenerico.ToString()).ToList())
+            //{
+
+            //}
             db.Sp_AsignarComponenteGenericoEliminar(_idAsignarComponenteGenerico);
             var cantidadAsignarCuestionarioModelo = db.Sp_AsignarCuestionarioModeloConsultar().Where(p => p.IdAsignarCuestionarioModelo.ToString() == _seguridad.DesEncriptar(DataAsignarComponenteGenerico.IdAsignarCuestionarioModelo)).FirstOrDefault();
             if (cantidadAsignarCuestionarioModelo.AsignarCuestionarioModeloUtilizado == "0")
