@@ -17,5 +17,7 @@ namespace API.Models.Entidades
         public DateTime FechaFin { get; set; }
         public string Utilizado { get; set; }
         public bool Estado { get; set; }
+        public string Representante { get; set; }
+        public CabeceraCaracterizacion CabeceraCaracterizacion { get; set; }
     }
 }

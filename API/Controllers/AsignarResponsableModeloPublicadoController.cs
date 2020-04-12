@@ -307,7 +307,8 @@ namespace API.Controllers
                 else
                 {
                     int _idModeloPublicado = Convert.ToInt32(_seguridad.DesEncriptar(_idModeloPublicadoEncriptado));
-                    var _objModeloPublicado = _objCatalogoModeloPublicado.ConsultarModeloPublicadoPorIdDHBD(_idModeloPublicado).FirstOrDefault();
+                    //var _objModeloPublicado = _objCatalogoModeloPublicado.ConsultarModeloPublicadoPorIdDHBD(_idModeloPublicado).FirstOrDefault();
+                    var _objModeloPublicado = _objCatalogoModeloPublicado.ConsultarModeloPublicadoPorId(_idModeloPublicado).FirstOrDefault();
                     if (_objModeloPublicado == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
@@ -333,6 +334,120 @@ namespace API.Controllers
                             _objAsignarResponsableModeloPublicado.Parroquia.Canton.Provincia.IdProvincia = 0;
                         }
                         _respuesta = _listaAsignarResponsable;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/asignarresponsablemodelopublicado_consultarporparroquia")]
+        public object asignarresponsablemodelopublicado_consultarporparroquia(string _idParroquia)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idParroquia == null || string.IsNullOrEmpty(_idParroquia))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del objeto modelo publicado";
+                }
+                else
+                {
+                    int _idParroquias = Convert.ToInt32(_seguridad.DesEncriptar(_idParroquia));
+                    var _listaAsignarResponsable = _objCatalogoAsignarResponsableModeloPublicado.ConsultarAsignarResponsableModeloPublicadoPorParroquia(_idParroquias).ToList();
+                    foreach (var _objAsignarResponsableModeloPublicado in _listaAsignarResponsable)
+                    {
+                        _objAsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicado = 0;
+                        _objAsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
+                        _objAsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
+                        _objAsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
+                        _objAsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
+                        _objAsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                        _objAsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
+                        _objAsignarResponsableModeloPublicado.ModeloPublicado.IdModeloPublicado = 0;
+                        _objAsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.IdCabeceraVersionModelo = 0;
+                        _objAsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.ModeloGenerico.IdModeloGenerico = 0;
+                        _objAsignarResponsableModeloPublicado.Parroquia.IdParroquia = 0;
+                        _objAsignarResponsableModeloPublicado.Parroquia.Canton.IdCanton = 0;
+                        _objAsignarResponsableModeloPublicado.Parroquia.Canton.Provincia.IdProvincia = 0;
+                    }
+                    _respuesta = _listaAsignarResponsable;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/HabilitarAsignarResponsableModeloPublicado")]
+        public object HabilitarAsignarResponsableModeloPublicado(AsignarResponsableModeloPublicado _AsignarResponsableModeloPublicado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicadoEncriptado == null || string.IsNullOrEmpty(_AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicadoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la asignacion parroquia que va a habilitar.";
+                }
+                else
+                {
+                    var _dataModeloGenericoParroquia = _objCatalogoAsignarResponsableModeloPublicado.ConsultarAsignarResponsableModeloPublicadoPorId(int.Parse(_seguridad.DesEncriptar(_AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicadoEncriptado))).FirstOrDefault();
+                    if (_dataModeloGenericoParroquia == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "La asignacion parroquia que intenta deshabilitar no existe.";
+                    }
+                    else
+                    {
+                        _objCatalogoAsignarResponsableModeloPublicado.HabilitarAsignarResponsableModeloPublicado(int.Parse(_seguridad.DesEncriptar(_AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicadoEncriptado)));
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/DesHabilitarAsignarResponsableModeloPublicado")]
+        public object DesHabilitarAsignarResponsableModeloPublicado(AsignarResponsableModeloPublicado _AsignarResponsableModeloPublicado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicadoEncriptado == null || string.IsNullOrEmpty(_AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicadoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la parroquia de la version que va a eliminar.";
+                }
+                else
+                {
+                    var _dataModeloGenericoParroquia = _objCatalogoAsignarResponsableModeloPublicado.ConsultarAsignarResponsableModeloPublicadoPorId(int.Parse(_seguridad.DesEncriptar(_AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicadoEncriptado))).FirstOrDefault();
+                    if (_dataModeloGenericoParroquia == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "La asignacion que intenta eliminar no existe.";
+                    }
+                    else
+                    {
+                        _objCatalogoAsignarResponsableModeloPublicado.DesHabilitarAsignarResponsableModeloPublicado(int.Parse(_seguridad.DesEncriptar(_AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicadoEncriptado)));
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
                 }

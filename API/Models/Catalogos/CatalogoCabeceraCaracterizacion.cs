@@ -16,14 +16,13 @@ namespace API.Models.Catalogos
         {
             try
             {
-                return int.Parse(db.Sp_CabeceraCaracterizacionInsertar(_objCabeceraCaracterizacion.FechaRegistro,_objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicado,_objCabeceraCaracterizacion.FechaFinalizado,_objCabeceraCaracterizacion.Finalizado,_objCabeceraCaracterizacion.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
+                return int.Parse(db.Sp_CabeceraCaracterizacionInsertar(_objCabeceraCaracterizacion.FechaRegistro,_objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicado, _objCabeceraCaracterizacion.FechaFinalizado, _objCabeceraCaracterizacion.Finalizado,_objCabeceraCaracterizacion.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
             }
             catch (Exception)
             {
                 return 0;
             }
         }
-
         public int ModificarCabeceraCaracterizacion(CabeceraCaracterizacion _objCabeceraCaracterizacion)
         {
             try
@@ -45,7 +44,7 @@ namespace API.Models.Catalogos
                 {
                     IdCabeceraCaracterizacion = item.IdCabeceraCaracterizacion,
                     IdCabeceraCaracterizacionEncriptar = _seguridad.Encriptar(item.IdCabeceraCaracterizacion.ToString()),
-                    Estado = item.EstadoCabeceraCaracterizacion,
+                    //Estado = item.EstadoCabeceraCaracterizacion,
                     FechaFinalizado = Convert.ToDateTime(item.FechaFinalizadoCabeceraCaracterizacion),
                     FechaRegistro = item.FechaRegistroCabeceraCaracterizacion,
                     Finalizado = item.FinalizadoCabeceraCaracterizacion,
@@ -168,17 +167,17 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
-
         public List<CabeceraCaracterizacion> ConsultarCabeceraCaracterizacionPorId(int _idCabeceraCaracterizacion)
         {
             List<CabeceraCaracterizacion> _lista = new List<CabeceraCaracterizacion>();
-            foreach (var item in db.Sp_CabeceraCaracterizacionConsultarPorId(_idCabeceraCaracterizacion))
+            //foreach (var item in db.Sp_CabeceraCaracterizacionConsultarPorId(_idCabeceraCaracterizacion))
+            foreach (var item in db.Sp_CabeceraCaracterizacionConsultar().Where(p=>p.IdCabeceraCaracterizacion == _idCabeceraCaracterizacion).ToList())
             {
                 _lista.Add(new CabeceraCaracterizacion()
                 {
                     IdCabeceraCaracterizacion = item.IdCabeceraCaracterizacion,
                     IdCabeceraCaracterizacionEncriptar = _seguridad.Encriptar(item.IdCabeceraCaracterizacion.ToString()),
-                    Estado = item.EstadoCabeceraCaracterizacion,
+                    //Estado = item.EstadoCabeceraCaracterizacion,
                     FechaFinalizado = Convert.ToDateTime(item.FechaFinalizadoCabeceraCaracterizacion),
                     FechaRegistro = item.FechaRegistroCabeceraCaracterizacion,
                     Finalizado = item.FinalizadoCabeceraCaracterizacion,
@@ -310,7 +309,7 @@ namespace API.Models.Catalogos
                 {
                     IdCabeceraCaracterizacion = item.IdCabeceraCaracterizacion,
                     IdCabeceraCaracterizacionEncriptar = _seguridad.Encriptar(item.IdCabeceraCaracterizacion.ToString()),
-                    Estado = item.EstadoCabeceraCaracterizacion,
+                    //Estado = item.EstadoCabeceraCaracterizacion,
                     FechaFinalizado = Convert.ToDateTime(item.FechaFinalizadoCabeceraCaracterizacion),
                     FechaRegistro = item.FechaRegistroCabeceraCaracterizacion,
                     Finalizado = item.FinalizadoCabeceraCaracterizacion,
