@@ -70,6 +70,50 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+
+        public List<AsignarComponenteGenerico> ConsultarAsignarComponenteGenericoPorIdDHBD(int _idAsignarComponenteGenerico)
+        {
+            List<AsignarComponenteGenerico> _lista = new List<AsignarComponenteGenerico>();
+            foreach (var item in db.Sp_AsignarComponenteGenericoConsultarPorId(_idAsignarComponenteGenerico))
+            {
+                _lista.Add(new AsignarComponenteGenerico()
+                {
+                    IdAsignarComponenteGenerico = item.IdAsignarComponenteGenerico,
+                    Orden = item.Orden,
+                    Utilizado = item.AsignarComponenteGenericoUtilizado,
+                    Estado = item.EstadoAsignarComponenteGenerico,
+                    Componente = new Componente()
+                    {
+                        IdComponente = item.IdComponente,
+                        IdComponenteEncriptado = _seguridad.Encriptar(item.IdComponente.ToString())
+                    },
+                    AsignarCuestionarioModelo = new AsignarCuestionarioModelo()
+                    {
+                        IdAsignarCuestionarioModelo = item.IdAsignarCuestionarioModelo,
+                        IdAsignarCuestionarioModeloEncriptado = _seguridad.Encriptar(item.IdAsignarCuestionarioModelo.ToString()),
+                        CuestionarioPublicado = new CuestionarioPublicado()
+                        {
+                            IdCuestionarioPublicado = item.IdCuestionarioPublicado,
+                            IdCuestionarioPublicadoEncriptado = _seguridad.Encriptar(item.IdCuestionarioPublicado.ToString()),
+                            Estado = item.EstadoCuestionarioPublicado,
+                            FechaPublicacion = item.FechaPublicacionCuestionarioPublicado,
+                            Periodo = new Periodo()
+                            {
+                                IdPeriodo = item.IdPeriodoCuestionarioPublicado,
+                                IdPeriodoEncriptado = _seguridad.Encriptar(item.IdPeriodoCuestionarioPublicado.ToString()),
+                            },
+                            CabeceraVersionCuestionario = new CabeceraVersionCuestionario()
+                            {
+                                IdCabeceraVersionCuestionario = item.IdCabeceraVersionCuestionarioCuestionarioPublicado,
+                                IdCabeceraVersionCuestionarioEncriptado = _seguridad.Encriptar(item.IdCabeceraVersionCuestionarioCuestionarioPublicado.ToString())
+                            }
+                        }
+                    },
+                });
+            }
+            return _lista;
+        }
+
         public void EliminarAsignarComponenteGenerico(int _idAsignarComponenteGenerico)
         {
             var DataAsignarComponenteGenerico = ConsultarAsignarComponenteGenericoPorId(_idAsignarComponenteGenerico).FirstOrDefault();

@@ -15,6 +15,7 @@ namespace API.Controllers
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoVersionamientoPregunta _objCatalogoVersionamientoPregunta = new CatalogoVersionamientoPregunta();
         CatalogoCabeceraVersionCuestionario _objCatalogoCabeceraVersionCuestionario = new CatalogoCabeceraVersionCuestionario();
+        CatalogoAsignarComponenteGenerico _objCatalogoAsignarComponenteGenerico = new CatalogoAsignarComponenteGenerico();
         Seguridad _seguridad = new Seguridad();
 
         [HttpPost]
@@ -54,6 +55,53 @@ namespace API.Controllers
                             _objVersionamiento.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
                             _objVersionamiento.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
                             _objVersionamiento.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                            _objVersionamiento.Pregunta.IdPregunta = 0;
+                            _objVersionamiento.Pregunta.TipoPregunta.IdTipoPregunta = 0;
+                            _objVersionamiento.Pregunta.Seccion.IdSeccion = 0;
+                            _objVersionamiento.Pregunta.Seccion.Componente.IdComponente = 0;
+                        }
+                        _respuesta = _listaVersionamiento;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/versionamientopregunta_consultarporidasignarcomponentegenerico")]
+        public object versionamientopregunta_consultarporidasignarcomponentegenerico(string _idAsignarComponenteGenericoEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idAsignarComponenteGenericoEncriptado == null ||string.IsNullOrEmpty(_idAsignarComponenteGenericoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del asignar componente generico";
+                }
+                else
+                {
+                    int _idAsignarComponenteGenerico = Convert.ToInt32(_seguridad.DesEncriptar(_idAsignarComponenteGenericoEncriptado));
+                    var _objAsignarComponenteGenerico = _objCatalogoAsignarComponenteGenerico.ConsultarAsignarComponenteGenericoPorIdDHBD(_idAsignarComponenteGenerico).FirstOrDefault();
+                    if (_objAsignarComponenteGenerico == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el objeto asignar componente genérico";
+                    }
+                    else
+                    {
+
+                        var _listaVersionamiento = _objCatalogoVersionamientoPregunta.ConsultarVersionamientoPreguntaCompletoPorIdCabeceraVersionPorIdComponente(_objAsignarComponenteGenerico.AsignarCuestionarioModelo.CuestionarioPublicado.CabeceraVersionCuestionario.IdCabeceraVersionCuestionario,_objAsignarComponenteGenerico.Componente.IdComponente).ToList();
+                        foreach (var _objVersionamiento in _listaVersionamiento)
+                        {
+                            _objVersionamiento.IdVersionamientoPregunta = 0;
+                            _objVersionamiento.CabeceraVersionCuestionario.IdCabeceraVersionCuestionario = 0;
                             _objVersionamiento.Pregunta.IdPregunta = 0;
                             _objVersionamiento.Pregunta.TipoPregunta.IdTipoPregunta = 0;
                             _objVersionamiento.Pregunta.Seccion.IdSeccion = 0;

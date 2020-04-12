@@ -13,7 +13,9 @@ namespace API.Models.Entidades
         public string IdComponente { get; set; }
         public int Orden { get; set; }
         public string Utilizado { get; set; }
+        public bool Estado { get; set; }
         public Componente Componente { get; set; }
+        public AsignarCuestionarioModelo AsignarCuestionarioModelo { get; set; }
         public List<DescripcionComponente> DescripcionComponente { get; set; }
     }
 }
