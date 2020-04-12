@@ -51,6 +51,11 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Por favor, ingrese el identificador del objeto asignar usuario tipo usuario autor";
                 }
+                else if (_objContenidoDetalleComponente.AsignarUsuarioTipoUsuarioDecision == null || string.IsNullOrEmpty(_objContenidoDetalleComponente.AsignarUsuarioTipoUsuarioDecision.IdAsignarUsuarioTipoUsuarioEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Por favor, ingrese el identificador del objeto asignar usuario tipo usuario decisión";
+                }
                 else
                 {
                     _objContenidoDetalleComponente.AsignarUsuarioTipoUsuarioAutor.IdAsignarUsuarioTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_objContenidoDetalleComponente.AsignarUsuarioTipoUsuarioAutor.IdAsignarUsuarioTipoUsuarioEncriptado));
