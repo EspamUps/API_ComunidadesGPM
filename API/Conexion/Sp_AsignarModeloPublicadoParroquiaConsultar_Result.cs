@@ -14,7 +14,7 @@ namespace API.Conexion
     public partial class Sp_AsignarModeloPublicadoParroquiaConsultar_Result
     {
         public int IdAsignarModeloGenericoParroquia { get; set; }
-        public int IdModeloGenerico { get; set; }
+        public int IdModeloPublicado { get; set; }
         public int IdParroquia { get; set; }
         public System.DateTime FechaAsignacion { get; set; }
         public bool Estado { get; set; }
