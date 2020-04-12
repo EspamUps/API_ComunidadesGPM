@@ -2750,5 +2750,143 @@ namespace API.Conexion
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ContenidoTipoElementoModificar", idContenidoTipoElementoParameter, idCabeceraCaracterizacionParameter, idAsignarDescripcionComponenteTipoElementoParameter, contenidoParameter, urlRutaContenidoParameter, fechaRegistroParameter, idAsignarUsuarioTipoUsuarioParameter, estadoParameter);
         }
+    
+        public virtual ObjectResult<Sp_AsignarResponsableModeloPublicadoConsultarPorParroquia_Result> Sp_AsignarResponsableModeloPublicadoConsultarPorParroquia(Nullable<int> idParroquia)
+        {
+            var idParroquiaParameter = idParroquia.HasValue ?
+                new ObjectParameter("IdParroquia", idParroquia) :
+                new ObjectParameter("IdParroquia", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarResponsableModeloPublicadoConsultarPorParroquia_Result>("Sp_AsignarResponsableModeloPublicadoConsultarPorParroquia", idParroquiaParameter);
+        }
+    
+        public virtual ObjectResult<Sp_CabeceraModeloPublicadoConsultar1_Result> Sp_CabeceraModeloPublicadoConsultar1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CabeceraModeloPublicadoConsultar1_Result>("Sp_CabeceraModeloPublicadoConsultar1");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Sp_ConsultarAsignarComponenteGenericoDeUnAsignarCuestionarioModelo(Nullable<int> idCabeceraVersionModelo, Nullable<int> idAsignarCuestionarioModelo)
+        {
+            var idCabeceraVersionModeloParameter = idCabeceraVersionModelo.HasValue ?
+                new ObjectParameter("IdCabeceraVersionModelo", idCabeceraVersionModelo) :
+                new ObjectParameter("IdCabeceraVersionModelo", typeof(int));
+    
+            var idAsignarCuestionarioModeloParameter = idAsignarCuestionarioModelo.HasValue ?
+                new ObjectParameter("IdAsignarCuestionarioModelo", idAsignarCuestionarioModelo) :
+                new ObjectParameter("IdAsignarCuestionarioModelo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_ConsultarAsignarComponenteGenericoDeUnAsignarCuestionarioModelo", idCabeceraVersionModeloParameter, idAsignarCuestionarioModeloParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Sp_ConsultarAsignarComponenteGenericoDeUnaVersion(Nullable<int> idCabeceraVersionModelo)
+        {
+            var idCabeceraVersionModeloParameter = idCabeceraVersionModelo.HasValue ?
+                new ObjectParameter("idCabeceraVersionModelo", idCabeceraVersionModelo) :
+                new ObjectParameter("idCabeceraVersionModelo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_ConsultarAsignarComponenteGenericoDeUnaVersion", idCabeceraVersionModeloParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Sp_ConsultarAsignarCuestionarioModeloDeUnaVersion(Nullable<int> idCabeceraVersionModelo)
+        {
+            var idCabeceraVersionModeloParameter = idCabeceraVersionModelo.HasValue ?
+                new ObjectParameter("idCabeceraVersionModelo", idCabeceraVersionModelo) :
+                new ObjectParameter("idCabeceraVersionModelo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_ConsultarAsignarCuestionarioModeloDeUnaVersion", idCabeceraVersionModeloParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Sp_ConsultarDescripcionComponenteDeUnAsignarComponenteGenerico(Nullable<int> idCabeceraVersionModelo, Nullable<int> idAsignarComponenteGenerico)
+        {
+            var idCabeceraVersionModeloParameter = idCabeceraVersionModelo.HasValue ?
+                new ObjectParameter("IdCabeceraVersionModelo", idCabeceraVersionModelo) :
+                new ObjectParameter("IdCabeceraVersionModelo", typeof(int));
+    
+            var idAsignarComponenteGenericoParameter = idAsignarComponenteGenerico.HasValue ?
+                new ObjectParameter("IdAsignarComponenteGenerico", idAsignarComponenteGenerico) :
+                new ObjectParameter("IdAsignarComponenteGenerico", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_ConsultarDescripcionComponenteDeUnAsignarComponenteGenerico", idCabeceraVersionModeloParameter, idAsignarComponenteGenericoParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Sp_CuestionarioGenericoDeUnCuestionarioPublicado(Nullable<int> idCuestionarioPublicado)
+        {
+            var idCuestionarioPublicadoParameter = idCuestionarioPublicado.HasValue ?
+                new ObjectParameter("idCuestionarioPublicado", idCuestionarioPublicado) :
+                new ObjectParameter("idCuestionarioPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_CuestionarioGenericoDeUnCuestionarioPublicado", idCuestionarioPublicadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_DataConsultarDeUnaVersion2_Result> Sp_DataConsultarDeUnaVersion2(Nullable<int> idCabeceraVersionamientoModelo, Nullable<int> idComponente)
+        {
+            var idCabeceraVersionamientoModeloParameter = idCabeceraVersionamientoModelo.HasValue ?
+                new ObjectParameter("IdCabeceraVersionamientoModelo", idCabeceraVersionamientoModelo) :
+                new ObjectParameter("IdCabeceraVersionamientoModelo", typeof(int));
+    
+            var idComponenteParameter = idComponente.HasValue ?
+                new ObjectParameter("IdComponente", idComponente) :
+                new ObjectParameter("IdComponente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_DataConsultarDeUnaVersion2_Result>("Sp_DataConsultarDeUnaVersion2", idCabeceraVersionamientoModeloParameter, idComponenteParameter);
+        }
+    
+        public virtual ObjectResult<Sp_DataConsultarDeUnaVersion11_Result> Sp_DataConsultarDeUnaVersion11(Nullable<int> idCabeceraVersionamientoModelo, Nullable<int> idComponente)
+        {
+            var idCabeceraVersionamientoModeloParameter = idCabeceraVersionamientoModelo.HasValue ?
+                new ObjectParameter("IdCabeceraVersionamientoModelo", idCabeceraVersionamientoModelo) :
+                new ObjectParameter("IdCabeceraVersionamientoModelo", typeof(int));
+    
+            var idComponenteParameter = idComponente.HasValue ?
+                new ObjectParameter("IdComponente", idComponente) :
+                new ObjectParameter("IdComponente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_DataConsultarDeUnaVersion11_Result>("Sp_DataConsultarDeUnaVersion11", idCabeceraVersionamientoModeloParameter, idComponenteParameter);
+        }
+    
+        public virtual int Sp_DesHabilitarAsignarResponsableModeloPublicado(Nullable<int> idAsignarResponsableModeloPublicado)
+        {
+            var idAsignarResponsableModeloPublicadoParameter = idAsignarResponsableModeloPublicado.HasValue ?
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", idAsignarResponsableModeloPublicado) :
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_DesHabilitarAsignarResponsableModeloPublicado", idAsignarResponsableModeloPublicadoParameter);
+        }
+    
+        public virtual int Sp_DesHabilitarModeloPublicado(Nullable<int> idModeloPublicado)
+        {
+            var idModeloPublicadoParameter = idModeloPublicado.HasValue ?
+                new ObjectParameter("idModeloPublicado", idModeloPublicado) :
+                new ObjectParameter("idModeloPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_DesHabilitarModeloPublicado", idModeloPublicadoParameter);
+        }
+    
+        public virtual int Sp_HabilitarAsignarResponsableModeloPublicado(Nullable<int> idAsignarResponsableModeloPublicado)
+        {
+            var idAsignarResponsableModeloPublicadoParameter = idAsignarResponsableModeloPublicado.HasValue ?
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", idAsignarResponsableModeloPublicado) :
+                new ObjectParameter("IdAsignarResponsableModeloPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_HabilitarAsignarResponsableModeloPublicado", idAsignarResponsableModeloPublicadoParameter);
+        }
+    
+        public virtual int Sp_HabilitarModeloPublicado(Nullable<int> idModeloPublicado)
+        {
+            var idModeloPublicadoParameter = idModeloPublicado.HasValue ?
+                new ObjectParameter("idModeloPublicado", idModeloPublicado) :
+                new ObjectParameter("idModeloPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_HabilitarModeloPublicado", idModeloPublicadoParameter);
+        }
+    
+        public virtual int Sp_ModeloGenericoEliminar(Nullable<int> idModeloGenerico)
+        {
+            var idModeloGenericoParameter = idModeloGenerico.HasValue ?
+                new ObjectParameter("idModeloGenerico", idModeloGenerico) :
+                new ObjectParameter("idModeloGenerico", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ModeloGenericoEliminar", idModeloGenericoParameter);
+        }
     }
 }
