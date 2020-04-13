@@ -635,6 +635,7 @@
     <Compile Include="Models\Entidades\PreguntaEncajonada.cs" />
     <Compile Include="Models\Entidades\PresidenteJuntaParroquial.cs" />
     <Compile Include="Models\Entidades\Respuesta.cs" />
+    <Compile Include="Models\Entidades\RespuestasCaracterizacion.cs" />
     <Compile Include="Models\Entidades\Seccion.cs" />
     <Compile Include="Models\Entidades\TipoDato.cs" />
     <Compile Include="Models\Entidades\TipoElemento.cs" />
