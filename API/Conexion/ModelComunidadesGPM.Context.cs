@@ -33,6 +33,15 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarComponenteGenericoConsultar_Result>("Sp_AsignarComponenteGenericoConsultar");
         }
     
+        public virtual ObjectResult<Sp_AsignarComponenteGenericoConsultarPorId_Result> Sp_AsignarComponenteGenericoConsultarPorId(Nullable<int> idAsignarComponenteGenerico)
+        {
+            var idAsignarComponenteGenericoParameter = idAsignarComponenteGenerico.HasValue ?
+                new ObjectParameter("IdAsignarComponenteGenerico", idAsignarComponenteGenerico) :
+                new ObjectParameter("IdAsignarComponenteGenerico", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarComponenteGenericoConsultarPorId_Result>("Sp_AsignarComponenteGenericoConsultarPorId", idAsignarComponenteGenericoParameter);
+        }
+    
         public virtual int Sp_AsignarComponenteGenericoEliminar(Nullable<int> idAsignarComponenteGenerico)
         {
             var idAsignarComponenteGenericoParameter = idAsignarComponenteGenerico.HasValue ?
@@ -2856,15 +2865,6 @@ namespace API.Conexion
                 new ObjectParameter("Correo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioValidar_Result>("Sp_UsuarioValidar", correoParameter);
-        }
-    
-        public virtual ObjectResult<Sp_AsignarComponenteGenericoConsultarPorId_Result> Sp_AsignarComponenteGenericoConsultarPorId(Nullable<int> idAsignarComponenteGenerico)
-        {
-            var idAsignarComponenteGenericoParameter = idAsignarComponenteGenerico.HasValue ?
-                new ObjectParameter("IdAsignarComponenteGenerico", idAsignarComponenteGenerico) :
-                new ObjectParameter("IdAsignarComponenteGenerico", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarComponenteGenericoConsultarPorId_Result>("Sp_AsignarComponenteGenericoConsultarPorId", idAsignarComponenteGenericoParameter);
         }
     }
 }
