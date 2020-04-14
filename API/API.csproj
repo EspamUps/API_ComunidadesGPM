@@ -212,9 +212,6 @@
     <Compile Include="Conexion\Sp_AlcaldeConsultar_Result.cs">
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_AsignarComponenteGenericoConsultarPorId_Result.cs">
-      <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_AsignarComponenteGenericoConsultar_Result.cs">
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
@@ -261,9 +258,6 @@
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result.cs">
-      <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result1.cs">
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorParroquia_Result.cs">
@@ -368,9 +362,6 @@
     <Compile Include="Conexion\Sp_DescripcionComponenteConsultar_Result.cs">
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_DescripcionComponenteInsertar_Result.cs">
-      <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
@@ -378,9 +369,6 @@
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_LiderComunitarioConsultar_Result.cs">
-      <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_ModeloGenericoConsultar_Result.cs">
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ModeloGenericoInsertar_Result.cs">
