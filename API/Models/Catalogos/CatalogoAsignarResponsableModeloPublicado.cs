@@ -5,6 +5,7 @@ using System.Web;
 using API.Conexion;
 using API.Models.Entidades;
 using API.Models.Metodos;
+using System.IO;
 
 namespace API.Models.Catalogos
 {
@@ -180,7 +181,7 @@ namespace API.Models.Catalogos
                     FechaInicio = item.FechaInicioAsignarResponsableModeloPublicado,
                     FechaFin = item.FechaFinAsignarResponsableModeloPublicado,
                     Representante = item.RepresentantePresidenteJuntaParroquial,
-                    //Utilizado = item.UtilizadoAsignarResponsableModeloPublicado,
+                    Utilizado = item.UtilizadoAsignarResponsableModeloPublicado,
                     Parroquia = new Parroquia()
                         {
                             IdParroquia = item.IdParroquia,
@@ -548,6 +549,18 @@ namespace API.Models.Catalogos
         public void DesHabilitarAsignarResponsableModeloPublicado(int _idAsignarResponsableModeloPublicado)
         {
             db.Sp_DesHabilitarAsignarResponsableModeloPublicado(_idAsignarResponsableModeloPublicado);
+        }
+        public string[] obtenerCarpeta()
+        {
+            string GetDirectory = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
+            string[] dirs = Directory.GetFiles(GetDirectory + @"\Imagenes");
+            for (int i = 0; i < dirs.Length; i++)
+            {
+                var bytes = File.ReadAllBytes(dirs[i]);
+                var b64String = Convert.ToBase64String(bytes);
+                dirs[i] = "data:image/"+ System.IO.Path.GetExtension(dirs[i]).Replace(".","") + ";base64," + b64String;
+            }
+            return dirs;
         }
     }
 }

@@ -15,5 +15,6 @@ namespace API.Models.Entidades
         public string Utilizado { get; set; }
         public AsignarDescripcionComponenteTipoElemento AsignarDescripcionComponenteTipoElemento { get; set; }
         public AsignarComponenteGenerico AsignarComponenteGenerico { get; set; }
+        public List<ContenidoDetalleComponente> ContenidoDetalleComponente { get; set; }
     }
 }
