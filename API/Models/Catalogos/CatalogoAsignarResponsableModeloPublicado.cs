@@ -13,6 +13,7 @@ namespace API.Models.Catalogos
     {
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
+        CatalogoPresidenteJuntaParroquial _objPresidenteJuntaParroquia = new CatalogoPresidenteJuntaParroquial();
         public int InsertarAsignarResponsableModeloPublicado(AsignarResponsableModeloPublicado _objAsignar)
         {
             try
@@ -170,8 +171,16 @@ namespace API.Models.Catalogos
         public List<AsignarResponsableModeloPublicado> ConsultarAsignarResponsableModeloPublicadoPorIdModeloPublicado(int _idModeloPublicado)
         {
             List<AsignarResponsableModeloPublicado> _lista = new List<AsignarResponsableModeloPublicado>();
+            var listaJuntaParroquia = _objPresidenteJuntaParroquia.ConsultarPresidenteJuntaParroquial();
             foreach (var item in db.Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado(_idModeloPublicado))
             {
+                PresidenteJuntaParroquial Presidente = new PresidenteJuntaParroquial();
+                Presidente = listaJuntaParroquia.Where(p => p.Parroquia.IdParroquia == item.IdParroquia && Convert.ToDateTime(p.FechaSalida).ToShortDateString() == "01/01/0001").FirstOrDefault();
+                string NombrePresidente = "";
+                if(Presidente != null)
+                {
+                    NombrePresidente = Presidente.Representante;
+                }
                 _lista.Add(new AsignarResponsableModeloPublicado()
                 {
                     IdAsignarResponsableModeloPublicado = item.IdAsignarResponsableModeloPublicado,
@@ -180,7 +189,7 @@ namespace API.Models.Catalogos
                     FechaAsignacion = item.FechaAsignacionAsignarResponsableModeloPublicado,
                     FechaInicio = item.FechaInicioAsignarResponsableModeloPublicado,
                     FechaFin = item.FechaFinAsignarResponsableModeloPublicado,
-                    Representante = item.RepresentantePresidenteJuntaParroquial,
+                    Representante = NombrePresidente,
                     Utilizado = item.UtilizadoAsignarResponsableModeloPublicado,
                     Parroquia = new Parroquia()
                         {

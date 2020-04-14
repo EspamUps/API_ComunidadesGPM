@@ -441,9 +441,16 @@ namespace API.Models.Catalogos
             var ListaDescripcionComponente = _objDescripcionComponente.ConsultarDescripcionComponente();
             var ListaVersionamientoModelo = _objVersionamientoModelo.ConsultarVersionamientoModelo();
             var ListaContenidoDetalleComponente = _objContenidoDetalleComponente.ConsultarContenidoDetalleComponente();
+            var ListaAsignarResponsableModeloPublicado = _objResponsableModeloPublicado.ConsultarAsignarResponsableModeloPublicado();
             List<CabeceraVersionModelo> _lista = new List<CabeceraVersionModelo>();
             foreach (var item in db.Sp_CabeceraVersionModeloConsultar().Where(p => p.IdCabeceraVersionModelo == _idCabeceraVersion).ToList())
             {
+                ModeloPublicado _objModeloPublicado = new ModeloPublicado();
+                _objModeloPublicado = ListaModeloPublicado.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString()).FirstOrDefault();
+                if (_objModeloPublicado != null)
+                {
+                    _objModeloPublicado.AsignarResponsableModeloPublicado = ListaAsignarResponsableModeloPublicado.Where(p => p.ModeloPublicado.IdModeloPublicado == _objModeloPublicado.IdModeloPublicado).FirstOrDefault();
+                }
                 ModeloGenerico DataModeloGenericoConsulta = new ModeloGenerico();
                 DataModeloGenericoConsulta = ListaModeloGenerico.Where(p => p.IdModeloGenerico == item.MODELOGENERICO_IdModeloGenerico).FirstOrDefault();
                 DataModeloGenericoConsulta.AsignarCuestionarioModelo = null;
@@ -460,7 +467,10 @@ namespace API.Models.Catalogos
                         DescripcionComponente dataDescripcionComponente = new DescripcionComponente();
                         dataDescripcionComponente = ListaDescripcionComponente.Where(p => p.IdDescripcionComponente == item2.Value).FirstOrDefault();
                         dataDescripcionComponente.AsignarDescripcionComponenteTipoElemento.VersionamientoModelo = ListaVersionamientoModelo.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString() && _seguridad.DesEncriptar(p.IdDescripcionComponenteTipoElemento) == dataDescripcionComponente.AsignarDescripcionComponenteTipoElemento.IdAsignarDescripcionComponenteTipoElemento.ToString()).FirstOrDefault();
-                        dataDescripcionComponente.ContenidoDetalleComponente = ListaContenidoDetalleComponente.Where(p => p.DescripcionComponente.IdDescripcionComponente == dataDescripcionComponente.IdDescripcionComponente).ToList();
+                        if(_objModeloPublicado.AsignarResponsableModeloPublicado != null)
+                        {
+                            dataDescripcionComponente.ContenidoDetalleComponente = ListaContenidoDetalleComponente.Where(p => p.DescripcionComponente.IdDescripcionComponente == dataDescripcionComponente.IdDescripcionComponente && p.CabeceraCaracterizacion.AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicado == _objModeloPublicado.AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicado).ToList();
+                        }
                         dataListaDescripcionComponente.Add(dataDescripcionComponente);
                     }
                     dataAsignarComponenteGenerico.DescripcionComponente = dataListaDescripcionComponente;
@@ -478,7 +488,7 @@ namespace API.Models.Catalogos
                     Estado = item.EstadoCabeceraVersionModelo,
                     Utilizado = item.UtilizadoCabeceraVersionModelo,
                     AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
-                    ModeloPublicado = ListaModeloPublicado.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString()).FirstOrDefault(),
+                    ModeloPublicado = _objModeloPublicado,
                     AsignarComponenteGenerico = dataListaAsignarComponenteGenerico1,
                     ModeloGenerico = DataModeloGenericoConsulta,
                 });

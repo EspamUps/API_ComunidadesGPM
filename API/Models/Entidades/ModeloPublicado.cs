@@ -20,5 +20,6 @@ namespace API.Models.Entidades
         public string Utilizado { get; set; }
         public int CantidadAsignarParroquiaActivos { get; set; }
         public List<AsignarModeloGenericoParroquia> AsignarModeloGenericoParroquia { get; set; }
+        public AsignarResponsableModeloPublicado AsignarResponsableModeloPublicado { get; set; }
     }
 }
