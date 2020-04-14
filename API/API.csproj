@@ -213,7 +213,7 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarComponenteGenericoConsultarPorId_Result.cs">
-      <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarComponenteGenericoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
@@ -267,7 +267,10 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result1.cs">
-      <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorParroquia_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>

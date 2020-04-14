@@ -188,15 +188,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result>("Sp_AsignarResponsableModeloPublicadoConsultarPorId", idAsignarResponsableModeloPublicadoParameter);
         }
     
-        public virtual ObjectResult<Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result> Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado(Nullable<int> idModeloPublicado)
-        {
-            var idModeloPublicadoParameter = idModeloPublicado.HasValue ?
-                new ObjectParameter("IdModeloPublicado", idModeloPublicado) :
-                new ObjectParameter("IdModeloPublicado", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result>("Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado", idModeloPublicadoParameter);
-        }
-    
         public virtual ObjectResult<Sp_AsignarResponsableModeloPublicadoConsultarPorParroquia_Result> Sp_AsignarResponsableModeloPublicadoConsultarPorParroquia(Nullable<int> idParroquia)
         {
             var idParroquiaParameter = idParroquia.HasValue ?
@@ -2865,6 +2856,15 @@ namespace API.Conexion
                 new ObjectParameter("Correo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioValidar_Result>("Sp_UsuarioValidar", correoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result2> Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado(Nullable<int> idModeloPublicado)
+        {
+            var idModeloPublicadoParameter = idModeloPublicado.HasValue ?
+                new ObjectParameter("IdModeloPublicado", idModeloPublicado) :
+                new ObjectParameter("IdModeloPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result2>("Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado", idModeloPublicadoParameter);
         }
     }
 }
