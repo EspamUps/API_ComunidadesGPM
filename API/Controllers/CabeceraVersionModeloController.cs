@@ -140,6 +140,37 @@ namespace API.Controllers
             return new { respuesta = _respuesta, http = _http };
         }
 
+        [HttpPost]
+        [Route("api/cabeceraVersionModeloBodyConInformacion_consultar")]
+        public object cabeceraVersionModeloBodyConInformacion_consultar(CabeceraVersionModelo CabeceraVersionModelo)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (CabeceraVersionModelo.IdCabeceraVersionModeloEncriptado == null || string.IsNullOrEmpty(CabeceraVersionModelo.IdCabeceraVersionModeloEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el modelo generico";
+                }
+                else
+                {
+                    var _listaCabeceraVersion = _objCabeceraVersionModelo.ConsultarVersionCaracterizacionConInformacion(int.Parse(_seguridad.DesEncriptar(CabeceraVersionModelo.IdCabeceraVersionModeloEncriptado))).ToList();
+                    //foreach (var item in _listaCabeceraVersion)
+                    //{
+                    //    item.IdCabeceraVersionModelo = 0;
+                    //}
+                    _respuesta = _listaCabeceraVersion;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
 
         [HttpPost]
         [Route("api/cabeceraVersionModelo_eliminar")]

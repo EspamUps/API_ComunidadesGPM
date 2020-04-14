@@ -458,5 +458,30 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+
+
+
+
+
+
+        [HttpPost]
+        [Route("api/obtenerCarpeta")]
+        public object obtenerCarpeta()
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                
+                _respuesta = _objCatalogoAsignarResponsableModeloPublicado.obtenerCarpeta();
+                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
     }
 }
