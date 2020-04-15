@@ -24,7 +24,7 @@ namespace API.Models.Catalogos
                     IdPrefectoEncriptado = _seguridad.Encriptar(item.IdPrefecto.ToString()),
                     Representante = item.Representante,
                     FechaIngreso = item.FechaIngreso,
-                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    FechaSalida = item.FechaSalida,
                     Estado = item.EstadoPrefecto,
                     Utilizado = item.UtilizadoPrefecto,
                     Provincia = new Provincia()
@@ -53,7 +53,7 @@ namespace API.Models.Catalogos
                     IdPrefectoEncriptado = _seguridad.Encriptar(item.IdPrefecto.ToString()),
                     Representante = item.Representante,
                     FechaIngreso = item.FechaIngreso,
-                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    FechaSalida = item.FechaSalida,
                     Estado = item.EstadoPrefecto,
                     Utilizado = item.UtilizadoPrefecto,
                     Provincia = new Provincia()
@@ -82,7 +82,7 @@ namespace API.Models.Catalogos
                     IdPrefectoEncriptado = _seguridad.Encriptar(item.IdPrefecto.ToString()),
                     Representante = item.Representante,
                     FechaIngreso = item.FechaIngreso,
-                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    FechaSalida = item.FechaSalida,
                     Estado = item.EstadoPrefecto,
                     Utilizado = item.UtilizadoPrefecto,
                     Provincia = new Provincia()

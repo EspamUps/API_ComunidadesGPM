@@ -157,7 +157,7 @@ namespace API.Controllers
                 else
                 {
                     int _idProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_objPrefecto.Provincia.IdProvinciaEncriptado));
-                    var _objUltimoPrefectoSinSalida = _objCatalogoPrefecto.ConsultarPrefectoPorIdProvincia(_idProvincia).Where(c => c.Estado == true && c.FechaSalida.ToString() == "01/01/0001 0:00:00").FirstOrDefault();
+                    var _objUltimoPrefectoSinSalida = _objCatalogoPrefecto.ConsultarPrefectoPorIdProvincia(_idProvincia).Where(c => c.Estado == true && c.FechaSalida==null).FirstOrDefault();
                     if (_objUltimoPrefectoSinSalida != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
@@ -241,7 +241,7 @@ namespace API.Controllers
                 {
                     int _idProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_objPrefecto.Provincia.IdProvinciaEncriptado));
                     int _idPrefecto = Convert.ToInt32(_seguridad.DesEncriptar(_objPrefecto.IdPrefectoEncriptado));
-                    var _objUltimoPrefectoSinSalida = _objCatalogoPrefecto.ConsultarPrefectoPorIdProvincia(_idProvincia).Where(c => c.Estado == true && c.FechaSalida.ToString() == "01/01/0001 0:00:00" && c.IdPrefecto!=_idPrefecto).FirstOrDefault();
+                    var _objUltimoPrefectoSinSalida = _objCatalogoPrefecto.ConsultarPrefectoPorIdProvincia(_idProvincia).Where(c => c.Estado == true && c.FechaSalida == null && c.IdPrefecto!=_idPrefecto).FirstOrDefault();
                     if (_objUltimoPrefectoSinSalida != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();

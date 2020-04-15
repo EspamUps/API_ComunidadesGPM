@@ -24,7 +24,7 @@ namespace API.Models.Catalogos
                     IdLiderComunitarioEncriptado = _seguridad.Encriptar(item.IdLiderComunitario.ToString()),
                     Representante = item.Representante,
                     FechaIngreso = item.FechaIngreso,
-                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    FechaSalida = item.FechaSalida,
                     Estado = item.EstadoLiderComunitario,
                     Utilizado=item.UtilizadoLiderComunitario,
                     Comunidad= new Comunidad()
@@ -84,7 +84,7 @@ namespace API.Models.Catalogos
                     IdLiderComunitarioEncriptado = _seguridad.Encriptar(item.IdLiderComunitario.ToString()),
                     Representante = item.Representante,
                     FechaIngreso = item.FechaIngreso,
-                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    FechaSalida = item.FechaSalida,
                     Estado = item.EstadoLiderComunitario,
                     Utilizado = item.UtilizadoLiderComunitario,
                     Comunidad = new Comunidad()
@@ -142,7 +142,7 @@ namespace API.Models.Catalogos
                     IdLiderComunitarioEncriptado = _seguridad.Encriptar(item.IdLiderComunitario.ToString()),
                     Representante = item.Representante,
                     FechaIngreso = item.FechaIngreso,
-                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    FechaSalida = item.FechaSalida,
                     Estado = item.EstadoLiderComunitario,
                     Utilizado = item.UtilizadoLiderComunitario,
                     Comunidad = new Comunidad()
@@ -195,7 +195,7 @@ namespace API.Models.Catalogos
             {
                 return int.Parse(db.Sp_LiderComunitarioInsertar(_objLiderComunitario.Comunidad.IdComunidad, _objLiderComunitario.Representante, _objLiderComunitario.FechaIngreso, _objLiderComunitario.FechaSalida, _objLiderComunitario.Estado).Select(x => x.Value.ToString()).FirstOrDefault());
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return 0;
             }

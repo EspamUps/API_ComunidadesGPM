@@ -52,6 +52,7 @@ namespace API.Controllers
                     else
                     {
                         var ListaTodosDescripcionComponente = DescripcionComponente_obj.ConsultarDescripcionComponente();
+                        ListaTodosDescripcionComponente = ListaTodosDescripcionComponente.Where(c => c.AsignarDescripcionComponenteTipoElemento != null).ToList();
                         var ListaDescripcionComponente = ListaTodosDescripcionComponente.Where(p => p.AsignarDescripcionComponenteTipoElemento.IdAsignarDescripcionComponenteTipoElemento == _idAsignarDescripcionComponenteTipoElemento).FirstOrDefault();
                         var ListaDescripcionComponente1 = ListaTodosDescripcionComponente.Where(p => _seguridad.DesEncriptar(p.IdAsignarComponenteGenerico) == _seguridad.DesEncriptar(ListaDescripcionComponente.IdAsignarComponenteGenerico)).ToList();
                         //var dataAsignarDescripcionComponenteTipoElemento = AsignarDescripcionComponenteTipoElemento.ConsultarAsignarDescripcionComponenteTipoElementoPorId(_idAsignarDescripcionComponenteTipoElemento).FirstOrDefault();

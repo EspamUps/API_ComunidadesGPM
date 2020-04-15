@@ -12,7 +12,7 @@ namespace API.Models.Entidades
         public Comunidad Comunidad { get; set; }
         public string Representante { get; set; }
         public DateTime FechaIngreso { get; set; }
-        public DateTime FechaSalida { get; set; }
+        public DateTime? FechaSalida { get; set; }
         public bool Estado { get; set; }
         public string Utilizado { get; set; }
     }

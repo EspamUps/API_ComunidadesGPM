@@ -24,7 +24,7 @@ namespace API.Models.Catalogos
                     IdAlcaldeEncriptado = _seguridad.Encriptar(item.IdAlcalde.ToString()),
                     Representante = item.Representante,
                     FechaIngreso = item.FechaIngreso,
-                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    FechaSalida = item.FechaSalida,
                     Estado = item.EstadoAlcalde,
                     Utilizado = item.UtilizadoAlcalde,
                     Canton =new Canton()
@@ -64,7 +64,7 @@ namespace API.Models.Catalogos
                     IdAlcaldeEncriptado = _seguridad.Encriptar(item.IdAlcalde.ToString()),
                     Representante = item.Representante,
                     FechaIngreso = item.FechaIngreso,
-                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    FechaSalida = item.FechaSalida,
                     Estado = item.EstadoAlcalde,
                     Utilizado = item.UtilizadoAlcalde,
                     Canton = new Canton()
@@ -102,7 +102,7 @@ namespace API.Models.Catalogos
                     IdAlcaldeEncriptado = _seguridad.Encriptar(item.IdAlcalde.ToString()),
                     Representante = item.Representante,
                     FechaIngreso = item.FechaIngreso,
-                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    FechaSalida = item.FechaSalida,
                     Estado = item.EstadoAlcalde,
                     Utilizado = item.UtilizadoAlcalde,
                     Canton = new Canton()

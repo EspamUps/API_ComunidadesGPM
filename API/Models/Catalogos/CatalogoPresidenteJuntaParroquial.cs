@@ -24,7 +24,7 @@ namespace API.Models.Catalogos
                     IdPresidenteJuntaParroquialEncriptado = _seguridad.Encriptar(item.IdPresidenteJuntaParroquial.ToString()),
                     Representante = item.Representante,
                     FechaIngreso = item.FechaIngreso,
-                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    FechaSalida = item.FechaSalida,
                     Estado = item.EstadoPresidenteJuntaParroquial,
                     Utilizado = item.UtilizadoPresidenteJuntaParroquial,
                     Parroquia = new Parroquia()
@@ -73,7 +73,7 @@ namespace API.Models.Catalogos
                     IdPresidenteJuntaParroquialEncriptado = _seguridad.Encriptar(item.IdPresidenteJuntaParroquial.ToString()),
                     Representante = item.Representante,
                     FechaIngreso = item.FechaIngreso,
-                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    FechaSalida = item.FechaSalida,
                     Estado = item.EstadoPresidenteJuntaParroquial,
                     Utilizado = item.UtilizadoPresidenteJuntaParroquial,
                     Parroquia = new Parroquia()
@@ -122,7 +122,7 @@ namespace API.Models.Catalogos
                     IdPresidenteJuntaParroquialEncriptado = _seguridad.Encriptar(item.IdPresidenteJuntaParroquial.ToString()),
                     Representante = item.Representante,
                     FechaIngreso = item.FechaIngreso,
-                    FechaSalida = Convert.ToDateTime(item.FechaSalida),
+                    FechaSalida = item.FechaSalida,
                     Estado = item.EstadoPresidenteJuntaParroquial,
                     Utilizado = item.UtilizadoPresidenteJuntaParroquial,
                     Parroquia = new Parroquia()

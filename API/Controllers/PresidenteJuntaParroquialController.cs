@@ -160,7 +160,7 @@ namespace API.Controllers
                 else
                 {
                     int _idParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado));
-                    var _objUltimoPresidenteSinSalida = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorIdParroquia(_idParroquia).Where(c => c.Estado == true && c.FechaSalida.ToString() == "01/01/0001 0:00:00").FirstOrDefault();
+                    var _objUltimoPresidenteSinSalida = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorIdParroquia(_idParroquia).Where(c => c.Estado == true && c.FechaSalida==null).FirstOrDefault();
                     if (_objUltimoPresidenteSinSalida != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
@@ -246,7 +246,7 @@ namespace API.Controllers
                 {
                     int _idParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_objPresidenteJuntaParroquial.Parroquia.IdParroquiaEncriptado));
                     int _idPresidenteJuntaParroquial = Convert.ToInt32(_seguridad.DesEncriptar(_objPresidenteJuntaParroquial.IdPresidenteJuntaParroquialEncriptado));
-                    var _objUltimoPresidenteSinSalida = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorIdParroquia(_idParroquia).Where(c => c.Estado == true && c.FechaSalida.ToString() == "01/01/0001 0:00:00" && c.IdPresidenteJuntaParroquial!=_idPresidenteJuntaParroquial).FirstOrDefault();
+                    var _objUltimoPresidenteSinSalida = _objCatalogoPresidenteJuntaParroquial.ConsultarPresidenteJuntaParroquialPorIdParroquia(_idParroquia).Where(c => c.Estado == true && c.FechaSalida == null && c.IdPresidenteJuntaParroquial!=_idPresidenteJuntaParroquial).FirstOrDefault();
                     if (_objUltimoPresidenteSinSalida != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();

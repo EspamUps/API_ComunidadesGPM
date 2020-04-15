@@ -156,7 +156,7 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese la fecha de ingreso";
                 }
-                else if (_objLiderComunitario.FechaSalida != null && (DateTime.Compare(_objLiderComunitario.FechaIngreso, Convert.ToDateTime(_objLiderComunitario.FechaSalida)) == 1 || DateTime.Compare(_objLiderComunitario.FechaIngreso, Convert.ToDateTime(_objLiderComunitario.FechaSalida)) == 0))
+                else if (_objLiderComunitario.FechaSalida !=null && (DateTime.Compare(_objLiderComunitario.FechaIngreso, Convert.ToDateTime(_objLiderComunitario.FechaSalida)) == 1 || DateTime.Compare(_objLiderComunitario.FechaIngreso, Convert.ToDateTime(_objLiderComunitario.FechaSalida)) == 0))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "La fecha de ingreso debe ser menor a la fecha de salida";
@@ -164,7 +164,7 @@ namespace API.Controllers
                 else
                 {
                     int _idComunidad = Convert.ToInt32(_seguridad.DesEncriptar(_objLiderComunitario.Comunidad.IdComunidadEncriptado));
-                    var _objUltimoLiderComunitarioSinSalida = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorIdComunidad(_idComunidad).Where(c => c.Estado == true && c.FechaSalida.ToString() == "01/01/0001 0:00:00").FirstOrDefault();
+                    var _objUltimoLiderComunitarioSinSalida = _objCatalogoLiderComunitario.ConsultarLiderComunitarioPorIdComunidad(_idComunidad).Where(c => c.Estado == true).FirstOrDefault();
                     if (_objUltimoLiderComunitarioSinSalida != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
@@ -186,7 +186,7 @@ namespace API.Controllers
                             if (_idLiderComunitario == 0)
                             {
                                 _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                                _http.mensaje = "Ocurrió un error al tratar de ingresar al presidente de la junta parroquial";
+                                _http.mensaje = "Ocurrió un error al tratar de ingresar al líder comunitario";
                             }
                             else
                             {

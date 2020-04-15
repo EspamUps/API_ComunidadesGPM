@@ -160,7 +160,7 @@ namespace API.Controllers
                 else
                 {
                     int _idCanton = Convert.ToInt32(_seguridad.DesEncriptar(_objAlcalde.Canton.IdCantonEncriptado));
-                    var _objUltimoAlcaldeSinSalida = _objCatalogoAlcalde.ConsultarAlcaldePorIdCanton(_idCanton).Where(c => c.Estado == true && c.FechaSalida.ToString() == "01/01/0001 0:00:00").FirstOrDefault();
+                    var _objUltimoAlcaldeSinSalida = _objCatalogoAlcalde.ConsultarAlcaldePorIdCanton(_idCanton).Where(c => c.Estado == true && c.FechaSalida==null).FirstOrDefault();
                     if (_objUltimoAlcaldeSinSalida != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
@@ -245,7 +245,7 @@ namespace API.Controllers
                 {
                     int _idCanton = Convert.ToInt32(_seguridad.DesEncriptar(_objAlcalde.Canton.IdCantonEncriptado));
                     int _idAlcalde = Convert.ToInt32(_seguridad.DesEncriptar(_objAlcalde.IdAlcaldeEncriptado));
-                    var _objUltimoAlcaldeSinSalida = _objCatalogoAlcalde.ConsultarAlcaldePorIdCanton(_idCanton).Where(c => c.Estado == true && c.FechaSalida.ToString() == "01/01/0001 0:00:00" && c.IdAlcalde!=_idAlcalde).FirstOrDefault();
+                    var _objUltimoAlcaldeSinSalida = _objCatalogoAlcalde.ConsultarAlcaldePorIdCanton(_idCanton).Where(c => c.Estado == true && c.FechaSalida==null && c.IdAlcalde!=_idAlcalde).FirstOrDefault();
                     if (_objUltimoAlcaldeSinSalida != null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
