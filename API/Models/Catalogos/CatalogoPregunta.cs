@@ -193,6 +193,59 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+
+        public List<Pregunta> ConsultarPreguntaPorIdSeccionPorIdentificadorTipoPregunta(int _idSeccion, int _identificadorTipoPregunta)
+        {
+            List<Pregunta> _lista = new List<Pregunta>();
+            foreach (var item in db.Sp_PreguntaConsultar().Where(c => c.IdSeccion == _idSeccion && c.IdentificadorTipoPregunta== _identificadorTipoPregunta).ToList())
+            {
+                _lista.Add(new Pregunta()
+                {
+                    IdPregunta = item.IdPregunta,
+                    IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                    Descripcion = item.DescripcionPregunta,
+                    Estado = item.EstadoPregunta,
+                    Obligatorio = item.ObligatorioPregunta,
+                    Orden = item.OrdenPregunta,
+                    Utilizado = item.UtilizadoPregunta,
+                    Encajonamiento = item.EncajonamientoPregunta,
+                    TipoPregunta = new TipoPregunta()
+                    {
+                        IdTipoPregunta = item.IdTipoPregunta,
+                        IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
+                        Descripcion = item.DescripcionTipoPregunta,
+                        Estado = item.EstadoTipoPregunta,
+                        Identificador = item.IdentificadorTipoPregunta
+                    },
+                    Seccion = new Seccion()
+                    {
+                        IdSeccion = item.IdSeccion,
+                        IdSeccionEncriptado = _seguridad.Encriptar(item.IdSeccion.ToString()),
+                        Descripcion = item.DescripcionSeccion,
+                        Estado = item.EstadoSeccion,
+                        Orden = item.OrdenSeccion,
+                        Componente = new Componente()
+                        {
+                            IdComponente = item.IdComponente,
+                            IdComponenteEncriptado = _seguridad.Encriptar(item.IdComponente.ToString()),
+                            Descripcion = item.DescripcionComponente,
+                            Estado = item.EstadoComponente,
+                            Orden = item.OrdenComponente,
+                            CuestionarioGenerico = new CuestionarioGenerico()
+                            {
+                                IdCuestionarioGenerico = item.IdCuestionarioGenerico,
+                                IdCuestionarioGenericoEncriptado = _seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
+                                Descripcion = item.DescripcionCuestionarioGenerico,
+                                Estado = item.EstadoCuestionarioGenerico,
+                                Nombre = item.NombreCuestionarioGenerico
+                            }
+                        }
+                    }
+                });
+            }
+            return _lista;
+        }
+
         public List<Pregunta> ConsultarPreguntaPorIdCuestionarioGenerico(int _idCuestionarioGenerico)
         {
             List<Pregunta> _lista = new List<Pregunta>();

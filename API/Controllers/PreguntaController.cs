@@ -393,6 +393,53 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+
+        [HttpPost]
+        [Route("api/pregunta_consultarseleccionunicaporidseccion")]
+        public object pregunta_consultarseleccionunicaporidseccion(string _idSeccionEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idSeccionEncriptado == null || string.IsNullOrEmpty(_idSeccionEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la sección";
+                }
+                else
+                {
+                    int _idSeccion = Convert.ToInt32(_seguridad.DesEncriptar(_idSeccionEncriptado));
+                    var _objSeccion = _objCatalogoSeccion.ConsultarSeccionPorId(_idSeccion).Where(c => c.Estado == true).FirstOrDefault();
+                    if (_objSeccion == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el objeto sección";
+                    }
+                    else
+                    {
+                        int _identificadorTipoPregunta = 2;
+                        var _lista = _objCatalogoPregunta.ConsultarPreguntaPorIdSeccionPorIdentificadorTipoPregunta(_idSeccion, _identificadorTipoPregunta).Where(c => c.Estado == true).OrderBy(c => c.Orden).ToList();
+                        foreach (var _objPregunta in _lista)
+                        {
+                            _objPregunta.IdPregunta = 0;
+                            _objPregunta.TipoPregunta.IdTipoPregunta = 0;
+                            _objPregunta.Seccion.IdSeccion = 0;
+                            _objPregunta.Seccion.Componente.IdComponente = 0;
+                            _objPregunta.Seccion.Componente.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                        }
+                        _respuesta = _lista;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
         [HttpPost]
         [Route("api/pregunta_consultarpornoencajonadasporopcionpreguntaseleccion")]
         public object pregunta_consultarpornoencajonadasporopcionpreguntaseleccion(string _idOpcionPreguntaSeleccionEncriptado)
