@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ComunidadesGPMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ComunidadesGPMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <Function Name="Sp_AsignarComponenteGenericoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion" />
         <Function Name="Sp_AsignarComponenteGenericoConsultarPorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="caracterizacion">
           <Parameter Name="IdAsignarComponenteGenerico" Type="int" Mode="In" />
@@ -460,6 +460,9 @@
           <Parameter Name="idSeccion" Type="int" Mode="In" />
           <Parameter Name="idPregunta" Type="int" Mode="In" />
         </Function>
+        <Function Name="Sp_PreguntaConsultarNoEncajonadasPorSeccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdSeccion" Type="int" Mode="In" />
+        </Function>
         <Function Name="Sp_PreguntaEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdPregunta" Type="int" Mode="In" />
         </Function>
@@ -816,18 +819,17 @@
           <Parameter Name="Correo" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="ComunidadesGPMModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ComunidadesGPMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="ComunidadesGPMEntities" annotation:LazyLoadingEnabled="true" >
           <FunctionImport Name="Sp_AsignarComponenteGenericoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarComponenteGenericoConsultar_Result)" />
           <FunctionImport Name="Sp_AsignarComponenteGenericoConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarComponenteGenericoConsultarPorId_Result)">
-            <Parameter Name="IdAsignarComponenteGenerico" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarComponenteGenerico" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarComponenteGenericoEliminar">
-            <Parameter Name="IdAsignarComponenteGenerico" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarComponenteGenerico" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarComponenteGenericoInsertar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarComponenteGenericoInsertar_Result)">
             <Parameter Name="IdAsignarCuestionarioModelo" Mode="In" Type="Int32" />
@@ -836,7 +838,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarCuestionarioModeloConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarCuestionarioModeloConsultar_Result)" />
           <FunctionImport Name="Sp_AsignarCuestionarioModeloEliminar">
-            <Parameter Name="IdAsignarCuestionarioModelo" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarCuestionarioModelo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarCuestionarioModeloInsertar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarCuestionarioModeloInsertar_Result)">
             <Parameter Name="IdModeloGenerico" Mode="In" Type="Int32" />
@@ -845,7 +847,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarDescripcionComponenteTipoElementoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result)" />
           <FunctionImport Name="Sp_AsignarDescripcionComponenteTipoElementoEliminar">
-            <Parameter Name="idAsignarDescripcionComponenteTipoElemento" Mode="In" Type="Int32" />
+          <Parameter Name="idAsignarDescripcionComponenteTipoElemento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarDescripcionComponenteTipoElementoInsertar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarDescripcionComponenteTipoElementoInsertar_Result)">
             <Parameter Name="IdDescripcionComponente" Mode="In" Type="Int32" />
@@ -859,7 +861,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarModeloPublicadoParroquiaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarModeloPublicadoParroquiaConsultar_Result)" />
           <FunctionImport Name="Sp_AsignarModeloPublicadoParroquiaEliminar">
-            <Parameter Name="IdAsignarModeloGenericoParroquia" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarModeloGenericoParroquia" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarModeloPublicadoParroquiaInsertar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarModeloPublicadoParroquiaInsertar_Result)">
             <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
@@ -867,16 +869,16 @@
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultar_Result)" />
           <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result)">
-            <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result)">
-            <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoConsultarPorParroquia" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarResponsableModeloPublicadoConsultarPorParroquia_Result)">
-            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+          <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoEliminar">
-            <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarResponsableModeloPublicadoInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
@@ -899,10 +901,10 @@
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraCaracterizacionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraCaracterizacionConsultar_Result)" />
           <FunctionImport Name="Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result)">
-            <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraCaracterizacionConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraCaracterizacionConsultarPorId_Result)">
-            <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
+          <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraCaracterizacionInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
@@ -921,7 +923,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraModeloPublicadoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraModeloPublicadoConsultar_Result)" />
           <FunctionImport Name="Sp_CabeceraModeloPublicadoEliminar">
-            <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraModeloPublicadoInsertar" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraModeloPublicadoInsertar_Result)">
             <Parameter Name="IdCabeceraVersionModelo" Mode="In" Type="Int32" />
@@ -930,7 +932,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraVersionModeloConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraVersionModeloConsultar_Result)" />
           <FunctionImport Name="Sp_CabeceraVersionModeloEliminar">
-            <Parameter Name="IdCabeceraVersionModelo" Mode="In" Type="Int32" />
+          <Parameter Name="IdCabeceraVersionModelo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraVersionModeloInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdAsignarUsuarioTipoUsuario" Mode="In" Type="Int32" />
@@ -947,7 +949,7 @@
             <Parameter Name="estado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_ComponenteConsultarDeUnaVersion" ReturnType="Collection(ComunidadesGPMModel.Sp_ComponenteConsultarDeUnaVersion_Result)">
-            <Parameter Name="IdCabeceraVersionamientoModelo" Mode="In" Type="Int32" />
+          <Parameter Name="IdCabeceraVersionamientoModelo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ComponentesDeUnModeloGenerico" ReturnType="Collection(Int32)">
             <Parameter Name="IdCuestionarioPublicado" Mode="In" Type="Int32" />
@@ -958,10 +960,10 @@
             <Parameter Name="IdAsignarCuestionarioModelo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ConsultarAsignarComponenteGenericoDeUnaVersion" ReturnType="Collection(Int32)">
-            <Parameter Name="idCabeceraVersionModelo" Mode="In" Type="Int32" />
+          <Parameter Name="idCabeceraVersionModelo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ConsultarAsignarCuestionarioModeloDeUnaVersion" ReturnType="Collection(Int32)">
-            <Parameter Name="idCabeceraVersionModelo" Mode="In" Type="Int32" />
+          <Parameter Name="idCabeceraVersionModelo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ConsultarDescripcionComponenteDeUnAsignarComponenteGenerico" ReturnType="Collection(Int32)">
             <Parameter Name="IdCabeceraVersionModelo" Mode="In" Type="Int32" />
@@ -969,16 +971,16 @@
           </FunctionImport>
           <FunctionImport Name="Sp_ContenidoDetalleComponenteConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoDetalleComponenteConsultar_Result)" />
           <FunctionImport Name="Sp_ContenidoDetalleComponenteConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoDetalleComponenteConsultarPorId_Result)">
-            <Parameter Name="IdContenidoDetalleComponente" Mode="In" Type="Int32" />
+          <Parameter Name="IdContenidoDetalleComponente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion_Result)">
-            <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
+          <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ContenidoDetalleComponenteConsultarPorIdDescripcionComponente" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoDetalleComponenteConsultarPorIdDescripcionComponente_Result)">
-            <Parameter Name="IdDescripcionComponente" Mode="In" Type="Int32" />
+          <Parameter Name="IdDescripcionComponente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ContenidoDetalleComponenteEliminar">
-            <Parameter Name="IdContenidoDetalleComponente" Mode="In" Type="Int32" />
+          <Parameter Name="IdContenidoDetalleComponente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ContenidoDetalleComponenteInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
@@ -1007,16 +1009,16 @@
           </FunctionImport>
           <FunctionImport Name="Sp_ContenidoTipoElementoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoTipoElementoConsultar_Result)" />
           <FunctionImport Name="Sp_ContenidoTipoElementoConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoTipoElementoConsultarPorId_Result)">
-            <Parameter Name="IdContenidoTipoElemento" Mode="In" Type="Int32" />
+          <Parameter Name="IdContenidoTipoElemento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ContenidoTipoElementoConsultarPorIdAsignarDescripcionComponenteTipoElemento" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoTipoElementoConsultarPorIdAsignarDescripcionComponenteTipoElemento_Result)">
-            <Parameter Name="IdAsignarDescripcionComponenteTipoElemento" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarDescripcionComponenteTipoElemento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ContenidoTipoElementoConsultarPorIdCabeceraCaracterizacion" ReturnType="Collection(ComunidadesGPMModel.Sp_ContenidoTipoElementoConsultarPorIdCabeceraCaracterizacion_Result)">
-            <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
+          <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ContenidoTipoElementoEliminar">
-            <Parameter Name="IdContenidoTipoElemento" Mode="In" Type="Int32" />
+          <Parameter Name="IdContenidoTipoElemento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ContenidoTipoElementoInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCabeceraCaracterizacion" Mode="In" Type="Int32" />
@@ -1038,7 +1040,7 @@
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_CuestionarioGenericoDeUnCuestionarioPublicado" ReturnType="Collection(Int32)">
-            <Parameter Name="idCuestionarioPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="idCuestionarioPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_DataConsultarDeUnaVersion" ReturnType="Collection(ComunidadesGPMModel.Sp_DataConsultarDeUnaVersion_Result)">
             <Parameter Name="IdCabeceraVersionamientoModelo" Mode="In" Type="Int32" />
@@ -1050,7 +1052,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_DescripcionComponenteConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_DescripcionComponenteConsultar_Result)" />
           <FunctionImport Name="Sp_DescripcionComponenteEliminar">
-            <Parameter Name="idDescripcionComponente" Mode="In" Type="Int32" />
+          <Parameter Name="idDescripcionComponente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_DescripcionComponenteInsertar" ReturnType="Collection(ComunidadesGPMModel.Sp_DescripcionComponenteInsertar_Result)">
             <Parameter Name="IdAsignarComponenteGenerico" Mode="In" Type="Int32" />
@@ -1058,32 +1060,32 @@
             <Parameter Name="Orden" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_DesHabilitarAsignarResponsableModeloPublicado">
-            <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_DesHabilitarModeloPublicado">
-            <Parameter Name="idModeloPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="idModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_HabilitarAsignarResponsableModeloPublicado">
-            <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarResponsableModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_HabilitarModeloPublicado">
-            <Parameter Name="idModeloPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="idModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ModeloGenericoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ModeloGenericoConsultar_Result)" />
           <FunctionImport Name="Sp_ModeloGenericoEliminar">
-            <Parameter Name="idModeloGenerico" Mode="In" Type="Int32" />
+          <Parameter Name="idModeloGenerico" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ModeloGenericoInsertar" ReturnType="Collection(ComunidadesGPMModel.Sp_ModeloGenericoInsertar_Result)">
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Sp_ModeloPublicadoConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_ModeloPublicadoConsultarPorId_Result)">
-            <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="IdModeloPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_TipoElementoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_TipoElementoConsultar_Result)" />
           <FunctionImport Name="Sp_VersionamientoModeloConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_VersionamientoModeloConsultar_Result)" />
           <FunctionImport Name="Sp_VersionamientoModeloEliminar">
-            <Parameter Name="IdVersionamientoModelo" Mode="In" Type="Int32" />
+          <Parameter Name="IdVersionamientoModelo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_VersionamientoModeloInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCabeceraVersionamientoModelo" Mode="In" Type="Int32" />
@@ -1093,16 +1095,16 @@
           <FunctionImport Name="SpAsignarModeloGenericoParroquiaConsultar" ReturnType="Collection(ComunidadesGPMModel.SpAsignarModeloGenericoParroquiaConsultar_Result)" />
           <FunctionImport Name="Sp_AsignarEncuestadoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarEncuestadoConsultar_Result)" />
           <FunctionImport Name="Sp_AsignarEncuestadoConsultarPorCuestionarioPublicado" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarEncuestadoConsultarPorCuestionarioPublicado_Result)">
-            <Parameter Name="IdCuestionarioPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="IdCuestionarioPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarEncuestadoConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarEncuestadoConsultarPorId_Result)">
-            <Parameter Name="IdAsignarEncuestado" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarEncuestado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarEncuestadoConsultarPorTecnico" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarEncuestadoConsultarPorTecnico_Result)">
-            <Parameter Name="IdAsignarUsuarioTipoUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarUsuarioTipoUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarEncuestadoEliminar">
-            <Parameter Name="IdAsignarEncuestado" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarEncuestado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarEncuestadoInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCuestionarioPublicado" Mode="In" Type="Int32" />
@@ -1131,7 +1133,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarResponsableConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarResponsableConsultar_Result)" />
           <FunctionImport Name="Sp_AsignarResponsableEliminar">
-            <Parameter Name="IdAsignarResponsable" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarResponsable" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarResponsableInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdAsignarUsuarioTipoUsuario" Mode="In" Type="Int32" />
@@ -1144,10 +1146,10 @@
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraRespuestaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraRespuestaConsultar_Result)" />
           <FunctionImport Name="Sp_CabeceraRespuestaConsultarPorAsignarEncuestado" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraRespuestaConsultarPorAsignarEncuestado_Result)">
-            <Parameter Name="IdAsignarEncuestado" Mode="In" Type="Int32" />
+          <Parameter Name="IdAsignarEncuestado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraRespuestaConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraRespuestaConsultarPorId_Result)">
-            <Parameter Name="IdCabeceraRespuesta" Mode="In" Type="Int32" />
+          <Parameter Name="IdCabeceraRespuesta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraRespuestaFinalizar">
             <Parameter Name="IdCabeceraRespuesta" Mode="In" Type="Int32" />
@@ -1163,7 +1165,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraVersionCuestionarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CabeceraVersionCuestionarioConsultar_Result)" />
           <FunctionImport Name="Sp_CabeceraVersionCuestionarioEliminar">
-            <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
+          <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CabeceraVersionCuestionarioInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdAsignarResponsable" Mode="In" Type="Int32" />
@@ -1182,7 +1184,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_ComponenteConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ComponenteConsultar_Result)" />
           <FunctionImport Name="Sp_ComponenteEliminar">
-            <Parameter Name="IdComponente" Mode="In" Type="Int32" />
+          <Parameter Name="IdComponente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ComponenteInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCuestionarioGenerico" Mode="In" Type="Int32" />
@@ -1199,7 +1201,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_ConfigurarMatrizConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ConfigurarMatrizConsultar_Result)" />
           <FunctionImport Name="Sp_ConfigurarMatrizEliminar">
-            <Parameter Name="IdConfigurarMatriz" Mode="In" Type="Int32" />
+          <Parameter Name="IdConfigurarMatriz" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ConfigurarMatrizInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdOpcionUnoMatriz" Mode="In" Type="Int32" />
@@ -1209,7 +1211,7 @@
           <FunctionImport Name="Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result)" />
           <FunctionImport Name="Sp_CuestionarioGenericoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CuestionarioGenericoConsultar_Result)" />
           <FunctionImport Name="Sp_CuestionarioGenericoEliminar">
-            <Parameter Name="IdCuestionarioGenerico" Mode="In" Type="Int32" />
+          <Parameter Name="IdCuestionarioGenerico" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CuestionarioGenericoInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -1224,7 +1226,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_CuestionarioPublicadoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CuestionarioPublicadoConsultar_Result)" />
           <FunctionImport Name="Sp_CuestionarioPublicadoEliminar">
-            <Parameter Name="IdCuestionarioPublicado" Mode="In" Type="Int32" />
+          <Parameter Name="IdCuestionarioPublicado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CuestionarioPublicadoInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
@@ -1234,7 +1236,7 @@
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_OpcionDosMatrizEliminar">
-            <Parameter Name="IdOpcionDosMatriz" Mode="In" Type="Int32" />
+          <Parameter Name="IdOpcionDosMatriz" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_OpcionDosMatrizInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="Descripcion" Mode="In" Type="String" />
@@ -1242,7 +1244,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_OpcionPreguntaSeleccionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_OpcionPreguntaSeleccionConsultar_Result)" />
           <FunctionImport Name="Sp_OpcionPreguntaSeleccionEliminar">
-            <Parameter Name="IdOpcionPreguntaSeleccion" Mode="In" Type="Int32" />
+          <Parameter Name="IdOpcionPreguntaSeleccion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_OpcionPreguntaSeleccionInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
@@ -1251,7 +1253,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_OpcionUnoMatrizConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_OpcionUnoMatrizConsultar_Result)" />
           <FunctionImport Name="Sp_OpcionUnoMatrizEliminar">
-            <Parameter Name="IdOpcionUnoMatriz" Mode="In" Type="Int32" />
+          <Parameter Name="IdOpcionUnoMatriz" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_OpcionUnoMatrizInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
@@ -1261,7 +1263,7 @@
           <FunctionImport Name="Sp_PeriodoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PeriodoConsultar_Result)" />
           <FunctionImport Name="Sp_PreguntaAbiertaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PreguntaAbiertaConsultar_Result)" />
           <FunctionImport Name="Sp_PreguntaAbiertaEliminar">
-            <Parameter Name="IdPreguntaAbierta" Mode="In" Type="Int32" />
+          <Parameter Name="IdPreguntaAbierta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_PreguntaAbiertaInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
@@ -1278,11 +1280,11 @@
             <Parameter Name="idPregunta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_PreguntaEliminar">
-            <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
+          <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_PreguntaEncajonadaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PreguntaEncajonadaConsultar_Result)" />
           <FunctionImport Name="Sp_PreguntaEncajonadaEliminar">
-            <Parameter Name="IdPreguntaEncajonada" Mode="In" Type="Int32" />
+          <Parameter Name="IdPreguntaEncajonada" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_PreguntaEncajonadaInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
@@ -1307,13 +1309,13 @@
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_RespuestaConsultarPorCabeceraRespuesta" ReturnType="Collection(ComunidadesGPMModel.Sp_RespuestaConsultarPorCabeceraRespuesta_Result)">
-            <Parameter Name="idCabeceraRespuesta" Mode="In" Type="Int32" />
+          <Parameter Name="idCabeceraRespuesta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_RespuestaConsultarPorId" ReturnType="Collection(ComunidadesGPMModel.Sp_RespuestaConsultarPorId_Result)">
-            <Parameter Name="IdRespuesta" Mode="In" Type="Int32" />
+          <Parameter Name="IdRespuesta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_RespuestaEliminar">
-            <Parameter Name="IdRespuesta" Mode="In" Type="Int32" />
+          <Parameter Name="IdRespuesta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_RespuestaInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCabeceraRespuesta" Mode="In" Type="Int32" />
@@ -1334,7 +1336,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_SeccionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_SeccionConsultar_Result)" />
           <FunctionImport Name="Sp_SeccionEliminar">
-            <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
+          <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_SeccionInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdComponente" Mode="In" Type="Int32" />
@@ -1352,11 +1354,11 @@
           <FunctionImport Name="Sp_TipoDatoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_TipoDatoConsultar_Result)" />
           <FunctionImport Name="Sp_TipoPreguntaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_TipoPreguntaConsultar_Result)" />
           <FunctionImport Name="Sp_VersionamientoPreguntaCompletoConsultarPorCabeceraVersion" ReturnType="Collection(ComunidadesGPMModel.Sp_VersionamientoPreguntaCompletoConsultarPorCabeceraVersion_Result)">
-            <Parameter Name="IdCabeceraVersion" Mode="In" Type="Int32" />
+          <Parameter Name="IdCabeceraVersion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_VersionamientoPreguntaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_VersionamientoPreguntaConsultar_Result)" />
           <FunctionImport Name="Sp_VersionamientoPreguntaEliminar">
-            <Parameter Name="IdVersionamientoPregunta" Mode="In" Type="Int32" />
+          <Parameter Name="IdVersionamientoPregunta" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_VersionamientoPreguntaInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCabeceraVersionCuestionario" Mode="In" Type="Int32" />
@@ -1365,7 +1367,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_AlcaldeConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AlcaldeConsultar_Result)" />
           <FunctionImport Name="Sp_AlcaldeEliminar">
-            <Parameter Name="IdAlcalde" Mode="In" Type="Int32" />
+          <Parameter Name="IdAlcalde" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AlcaldeInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCanton" Mode="In" Type="Int32" />
@@ -1384,7 +1386,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_CantonConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_CantonConsultar_Result)" />
           <FunctionImport Name="Sp_CantonEliminar">
-            <Parameter Name="idCanton" Mode="In" Type="Int32" />
+          <Parameter Name="idCanton" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CantonInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdProvincia" Mode="In" Type="Int32" />
@@ -1405,7 +1407,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_ComunidadConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ComunidadConsultar_Result)" />
           <FunctionImport Name="Sp_ComunidadEliminar">
-            <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
+          <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ComunidadInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
@@ -1426,7 +1428,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_LiderComunitarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_LiderComunitarioConsultar_Result)" />
           <FunctionImport Name="Sp_LiderComunitarioEliminar">
-            <Parameter Name="IdLiderComunitario" Mode="In" Type="Int32" />
+          <Parameter Name="IdLiderComunitario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_LiderComunitarioInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
@@ -1445,7 +1447,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_ParroquiaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ParroquiaConsultar_Result)" />
           <FunctionImport Name="Sp_ParroquiaEliminar">
-            <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
+          <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ParroquiaInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdCanton" Mode="In" Type="Int32" />
@@ -1466,7 +1468,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_PrefectoConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PrefectoConsultar_Result)" />
           <FunctionImport Name="Sp_PrefectoEliminar">
-            <Parameter Name="IdPrefecto" Mode="In" Type="Int32" />
+          <Parameter Name="IdPrefecto" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_PrefectoInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdProvincia" Mode="In" Type="Int32" />
@@ -1485,7 +1487,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_PresidenteJuntaParroquialConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PresidenteJuntaParroquialConsultar_Result)" />
           <FunctionImport Name="Sp_PresidenteJuntaParroquialEliminar">
-            <Parameter Name="IdPresidenteJuntaParroquial" Mode="In" Type="Int32" />
+          <Parameter Name="IdPresidenteJuntaParroquial" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_PresidenteJuntaParroquialInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdParroquia" Mode="In" Type="Int32" />
@@ -1504,7 +1506,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_ProvinciaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ProvinciaConsultar_Result)" />
           <FunctionImport Name="Sp_ProvinciaEliminar">
-            <Parameter Name="IdProvincia" Mode="In" Type="Int32" />
+          <Parameter Name="IdProvincia" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ProvinciaInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="CodigoProvincia" Mode="In" Type="String" />
@@ -1544,10 +1546,10 @@
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarUsuarioTipoUsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarUsuarioTipoUsuarioConsultar_Result)" />
           <FunctionImport Name="Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados_Result)">
-            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="idUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarUsuarioTipoUsuarioConsultarPorIdentificadorTipoUsuario" ReturnType="Collection(ComunidadesGPMModel.Sp_AsignarUsuarioTipoUsuarioConsultarPorIdentificadorTipoUsuario_Result)">
-            <Parameter Name="IdentificadorTipoUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="IdentificadorTipoUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_AsignarUsuarioTipoUsuarioInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
@@ -1558,7 +1560,7 @@
           <FunctionImport Name="Sp_PersonaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultar_Result)" />
           <FunctionImport Name="Sp_PersonaConsultarSinUsuario" ReturnType="Collection(ComunidadesGPMModel.Sp_PersonaConsultarSinUsuario_Result)" />
           <FunctionImport Name="Sp_PersonaEliminar">
-            <Parameter Name="IdPersona" Mode="In" Type="Int32" />
+          <Parameter Name="IdPersona" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_PersonaInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="PrimerNombre" Mode="In" Type="String" />
@@ -1596,7 +1598,7 @@
           </FunctionImport>
           <FunctionImport Name="Sp_TipoUsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_TipoUsuarioConsultar_Result)" />
           <FunctionImport Name="Sp_TipoUsuarioConsultarNoAsignadosPorUsuario" ReturnType="Collection(ComunidadesGPMModel.Sp_TipoUsuarioConsultarNoAsignadosPorUsuario_Result)">
-            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="idUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_TipoUsuarioInsertar" ReturnType="Collection(Decimal)">
             <Parameter Name="Identificador" Mode="In" Type="Int32" />
@@ -1609,11 +1611,11 @@
             <Parameter Name="Descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Sp_UsuarioBuscar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioBuscar_Result)">
-            <Parameter Name="Correo" Mode="In" Type="String" />
+          <Parameter Name="Correo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Sp_UsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioConsultar_Result)" />
           <FunctionImport Name="Sp_UsuarioEliminar">
-            <Parameter Name="idUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="idUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_UsuarioInformacionGeneral" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioInformacionGeneral_Result)" />
           <FunctionImport Name="Sp_UsuarioInsertar" ReturnType="Collection(Decimal)">
@@ -1630,7 +1632,10 @@
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="Sp_UsuarioValidar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioValidar_Result)">
-            <Parameter Name="Correo" Mode="In" Type="String" />
+          <Parameter Name="Correo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_PreguntaConsultarNoEncajonadasPorSeccion" ReturnType="Collection(ComunidadesGPMModel.Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result)">
+            <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_AsignarComponenteGenericoConsultar_Result">
@@ -5047,6 +5052,31 @@
           <Property Type="String" Name="Correo" Nullable="false" MaxLength="500" />
           <Property Type="String" Name="Clave" Nullable="false" MaxLength="500" />
           <Property Type="Boolean" Name="Estado" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result">
+          <Property Type="Int32" Name="IdPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionPregunta" Nullable="false" />
+          <Property Type="Int32" Name="OrdenPregunta" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioPregunta" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPregunta" Nullable="false" />
+          <Property Type="String" Name="EncajonamientoPregunta" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UtilizadoPregunta" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdentificadorTipoPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionTipoPregunta" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdSeccion" Nullable="false" />
+          <Property Type="String" Name="DescripcionSeccion" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoSeccion" Nullable="false" />
+          <Property Type="Int32" Name="OrdenSeccion" Nullable="false" />
+          <Property Type="Int32" Name="IdComponente" Nullable="false" />
+          <Property Type="String" Name="DescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -8955,6 +8985,35 @@
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Clave" ColumnName="Clave" />
                 <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_PreguntaConsultarNoEncajonadasPorSeccion" FunctionName="ComunidadesGPMModel.Store.Sp_PreguntaConsultarNoEncajonadasPorSeccion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result">
+                <ScalarProperty Name="IdPregunta" ColumnName="IdPregunta" />
+                <ScalarProperty Name="DescripcionPregunta" ColumnName="DescripcionPregunta" />
+                <ScalarProperty Name="OrdenPregunta" ColumnName="OrdenPregunta" />
+                <ScalarProperty Name="ObligatorioPregunta" ColumnName="ObligatorioPregunta" />
+                <ScalarProperty Name="EstadoPregunta" ColumnName="EstadoPregunta" />
+                <ScalarProperty Name="EncajonamientoPregunta" ColumnName="EncajonamientoPregunta" />
+                <ScalarProperty Name="UtilizadoPregunta" ColumnName="UtilizadoPregunta" />
+                <ScalarProperty Name="IdTipoPregunta" ColumnName="IdTipoPregunta" />
+                <ScalarProperty Name="IdentificadorTipoPregunta" ColumnName="IdentificadorTipoPregunta" />
+                <ScalarProperty Name="DescripcionTipoPregunta" ColumnName="DescripcionTipoPregunta" />
+                <ScalarProperty Name="EstadoTipoPregunta" ColumnName="EstadoTipoPregunta" />
+                <ScalarProperty Name="IdSeccion" ColumnName="IdSeccion" />
+                <ScalarProperty Name="DescripcionSeccion" ColumnName="DescripcionSeccion" />
+                <ScalarProperty Name="EstadoSeccion" ColumnName="EstadoSeccion" />
+                <ScalarProperty Name="OrdenSeccion" ColumnName="OrdenSeccion" />
+                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
+                <ScalarProperty Name="DescripcionComponente" ColumnName="DescripcionComponente" />
+                <ScalarProperty Name="OrdenComponente" ColumnName="OrdenComponente" />
+                <ScalarProperty Name="EstadoComponente" ColumnName="EstadoComponente" />
+                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
+                <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
+                <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
+                <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

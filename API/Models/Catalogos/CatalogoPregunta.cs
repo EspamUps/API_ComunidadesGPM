@@ -353,7 +353,7 @@ namespace API.Models.Catalogos
         public List<Pregunta> ConsultarPreguntaPorIdSeccionConTipoPregunta(int _idSeccion)
         {
             List<Pregunta> _lista = new List<Pregunta>();
-            foreach (var item in db.Sp_PreguntaConsultar().Where(c => c.IdSeccion == _idSeccion).ToList())
+            foreach (var item in db.Sp_PreguntaConsultarNoEncajonadasPorSeccion(_idSeccion))
             {
                 _lista.Add(new Pregunta()
                 {
