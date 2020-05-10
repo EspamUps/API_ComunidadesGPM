@@ -2867,13 +2867,13 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioValidar_Result>("Sp_UsuarioValidar", correoParameter);
         }
     
-        public virtual ObjectResult<Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result> Sp_PreguntaConsultarNoEncajonadasPorSeccion(Nullable<int> idSeccion)
+        public virtual ObjectResult<Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result1> Sp_PreguntaConsultarNoEncajonadasPorSeccion(Nullable<int> idSeccion)
         {
             var idSeccionParameter = idSeccion.HasValue ?
                 new ObjectParameter("IdSeccion", idSeccion) :
                 new ObjectParameter("IdSeccion", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result>("Sp_PreguntaConsultarNoEncajonadasPorSeccion", idSeccionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result1>("Sp_PreguntaConsultarNoEncajonadasPorSeccion", idSeccionParameter);
         }
     }
 }

@@ -1634,7 +1634,7 @@
           <FunctionImport Name="Sp_UsuarioValidar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioValidar_Result)">
           <Parameter Name="Correo" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="Sp_PreguntaConsultarNoEncajonadasPorSeccion" ReturnType="Collection(ComunidadesGPMModel.Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result)">
+          <FunctionImport Name="Sp_PreguntaConsultarNoEncajonadasPorSeccion" ReturnType="Collection(ComunidadesGPMModel.Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result1)">
             <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -5054,6 +5054,31 @@
           <Property Type="Boolean" Name="Estado" Nullable="false" />
         </ComplexType>
         <ComplexType Name="Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result">
+          <Property Type="Int32" Name="IdPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionPregunta" Nullable="false" />
+          <Property Type="Int32" Name="OrdenPregunta" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioPregunta" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPregunta" Nullable="false" />
+          <Property Type="String" Name="EncajonamientoPregunta" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="UtilizadoPregunta" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdentificadorTipoPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionTipoPregunta" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdSeccion" Nullable="false" />
+          <Property Type="String" Name="DescripcionSeccion" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoSeccion" Nullable="false" />
+          <Property Type="Int32" Name="OrdenSeccion" Nullable="false" />
+          <Property Type="Int32" Name="IdComponente" Nullable="false" />
+          <Property Type="String" Name="DescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result1">
           <Property Type="Int32" Name="IdPregunta" Nullable="false" />
           <Property Type="String" Name="DescripcionPregunta" Nullable="false" />
           <Property Type="Int32" Name="OrdenPregunta" Nullable="false" />
@@ -8990,7 +9015,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_PreguntaConsultarNoEncajonadasPorSeccion" FunctionName="ComunidadesGPMModel.Store.Sp_PreguntaConsultarNoEncajonadasPorSeccion">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result">
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result1">
                 <ScalarProperty Name="IdPregunta" ColumnName="IdPregunta" />
                 <ScalarProperty Name="DescripcionPregunta" ColumnName="DescripcionPregunta" />
                 <ScalarProperty Name="OrdenPregunta" ColumnName="OrdenPregunta" />
