@@ -73,11 +73,6 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                     _http.mensaje = "El número de Identificacion ya ha sido utilizado por otra persona.";
                 }
-                else if (_objPersona.Telefono==null || string.IsNullOrEmpty(_objPersona.Telefono.Trim()))
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "Ingrese el teléfono de la persona.";
-                }
                 else if (_objPersona.Direccion == null || string.IsNullOrEmpty(_objPersona.Direccion.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
@@ -188,11 +183,6 @@ namespace API.Controllers
                     { _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                         _http.mensaje = "El número de identificación ya ha sido utilizado por otra persona.";
                     }
-                    else if (_objPersona.Telefono==null || string.IsNullOrEmpty(_objPersona.Telefono.Trim()))
-                    {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ingrese el teléfono de la persona.";
-                    }
                     else if (_objPersona.Direccion==null || string.IsNullOrEmpty(_objPersona.Direccion.Trim()))
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
@@ -294,7 +284,7 @@ namespace API.Controllers
 
             try
             {
-                var listaPersona = _objCatalogoPersona.ConsultarPersona().Where(x => x.Estado == true).ToList();
+                var listaPersona = _objCatalogoPersona.ConsultarPersona().Where(x => x.Estado == true).OrderByDescending(n => n.IdPersona).ToList();  
                 foreach (var item in listaPersona)
                 {
                     item.IdPersona                                  = 0;
