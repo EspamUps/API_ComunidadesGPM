@@ -2793,11 +2793,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioBuscar_Result>("Sp_UsuarioBuscar", correoParameter);
         }
     
-        public virtual ObjectResult<Sp_UsuarioConsultar_Result> Sp_UsuarioConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioConsultar_Result>("Sp_UsuarioConsultar");
-        }
-    
         public virtual int Sp_UsuarioEliminar(Nullable<int> idUsuario)
         {
             var idUsuarioParameter = idUsuario.HasValue ?
@@ -2874,6 +2869,11 @@ namespace API.Conexion
                 new ObjectParameter("IdSeccion", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result1>("Sp_PreguntaConsultarNoEncajonadasPorSeccion", idSeccionParameter);
+        }
+    
+        public virtual ObjectResult<Sp_UsuarioConsultar_Result2> Sp_UsuarioConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioConsultar_Result2>("Sp_UsuarioConsultar");
         }
     }
 }
