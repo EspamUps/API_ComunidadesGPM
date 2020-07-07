@@ -34,6 +34,33 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
+
+        public int SubirSeccion(Seccion _objSeccion)
+        {
+            try
+            {
+                db.Sp_SubirSeccion(_objSeccion.IdSeccion, _objSeccion.Estado);
+                return _objSeccion.IdSeccion;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public int BajarSeccion(Seccion _objSeccion)
+        {
+            try
+            {
+                db.Sp_BajarSeccion(_objSeccion.IdSeccion, _objSeccion.Estado);
+                return _objSeccion.IdSeccion;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         public void EliminarSeccion(int _idSeccion)
         {
             db.Sp_SeccionEliminar(_idSeccion);

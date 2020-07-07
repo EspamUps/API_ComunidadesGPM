@@ -1257,11 +1257,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_CabeceraVersionCuestionarioModificar", idCabeceraVersionCuestionarioParameter, idAsignarResponsableParameter, caracteristicaParameter, versionParameter, fechaCreacionParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Sp_ComponenteConsultar_Result> Sp_ComponenteConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponenteConsultar_Result>("Sp_ComponenteConsultar");
-        }
-    
         public virtual int Sp_ComponenteEliminar(Nullable<int> idComponente)
         {
             var idComponenteParameter = idComponente.HasValue ?
@@ -1787,11 +1782,6 @@ namespace API.Conexion
                 new ObjectParameter("Estado", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_RespuestaModificar", idRespuestaParameter, idCabeceraRespuestaParameter, fechaRegistroParameter, idPreguntaParameter, idRespuestaLogicaParameter, descripcionRespuestaAbiertaParameter, estadoParameter);
-        }
-    
-        public virtual ObjectResult<Sp_SeccionConsultar_Result> Sp_SeccionConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_SeccionConsultar_Result>("Sp_SeccionConsultar");
         }
     
         public virtual int Sp_SeccionEliminar(Nullable<int> idSeccion)
@@ -2874,6 +2864,94 @@ namespace API.Conexion
         public virtual ObjectResult<Sp_UsuarioConsultar_Result2> Sp_UsuarioConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioConsultar_Result2>("Sp_UsuarioConsultar");
+        }
+    
+        public virtual int Sp_BajarPregunta(Nullable<int> idPregunta, Nullable<bool> estado)
+        {
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_BajarPregunta", idPreguntaParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_SubirPregunta(Nullable<int> idPregunta, Nullable<bool> estado)
+        {
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_SubirPregunta", idPreguntaParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_SubirComponente(Nullable<int> idComponente, Nullable<bool> estado)
+        {
+            var idComponenteParameter = idComponente.HasValue ?
+                new ObjectParameter("IdComponente", idComponente) :
+                new ObjectParameter("IdComponente", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_SubirComponente", idComponenteParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ComponenteConsultar_Result1> Sp_ComponenteConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponenteConsultar_Result1>("Sp_ComponenteConsultar");
+        }
+    
+        public virtual int Sp_BajarComponente(Nullable<int> idComponente, Nullable<bool> estado)
+        {
+            var idComponenteParameter = idComponente.HasValue ?
+                new ObjectParameter("IdComponente", idComponente) :
+                new ObjectParameter("IdComponente", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_BajarComponente", idComponenteParameter, estadoParameter);
+        }
+    
+        public virtual int Sp_SubirSeccion(Nullable<int> idSeccion, Nullable<bool> estado)
+        {
+            var idSeccionParameter = idSeccion.HasValue ?
+                new ObjectParameter("IdSeccion", idSeccion) :
+                new ObjectParameter("IdSeccion", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_SubirSeccion", idSeccionParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_SeccionConsultar_Result1> Sp_SeccionConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_SeccionConsultar_Result1>("Sp_SeccionConsultar");
+        }
+    
+        public virtual int Sp_BajarSeccion(Nullable<int> idSeccion, Nullable<bool> estado)
+        {
+            var idSeccionParameter = idSeccion.HasValue ?
+                new ObjectParameter("IdSeccion", idSeccion) :
+                new ObjectParameter("IdSeccion", typeof(int));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_BajarSeccion", idSeccionParameter, estadoParameter);
         }
     }
 }

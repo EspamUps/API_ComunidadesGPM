@@ -36,6 +36,34 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
+
+        public int SubirPregunta(Pregunta _objPregunta)
+        {
+            try
+            {
+                db.Sp_SubirPregunta(_objPregunta.IdPregunta, _objPregunta.Estado);
+                return _objPregunta.IdPregunta;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public int BajarPregunta(Pregunta _objPregunta)
+        {
+            try
+            {
+                db.Sp_BajarPregunta(_objPregunta.IdPregunta, _objPregunta.Estado);
+                return _objPregunta.IdPregunta;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+
         public void EliminarPregunta(int _idPregunta)
         {
             db.Sp_PreguntaEliminar(_idPregunta);

@@ -35,6 +35,31 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
+        public int SubirComponente(Componente _objComponente)
+        {
+            try
+            {
+                db.Sp_SubirComponente(_objComponente.IdComponente, _objComponente.Estado);
+                return _objComponente.IdComponente;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public int BajarComponente(Componente _objComponente)
+        {
+            try
+            {
+                db.Sp_BajarComponente(_objComponente.IdComponente, _objComponente.Estado);
+                return _objComponente.IdComponente;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
         public void EliminarComponente(int _idComponente)
         {
             db.Sp_ComponenteEliminar(_idComponente);

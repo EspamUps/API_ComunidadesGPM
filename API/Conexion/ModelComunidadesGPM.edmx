@@ -325,6 +325,18 @@
           <Parameter Name="IdCuestionarioGenerico" Type="int" Mode="In" />
           <Parameter Name="identificadorTipoUsuario" Type="int" Mode="In" />
         </Function>
+        <Function Name="Sp_BajarComponente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdComponente" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_BajarPregunta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdPregunta" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_BajarSeccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdSeccion" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
         <Function Name="Sp_CabeceraRespuestaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
         <Function Name="Sp_CabeceraRespuestaConsultarPorAsignarEncuestado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdAsignarEncuestado" Type="int" Mode="In" />
@@ -533,6 +545,18 @@
           <Parameter Name="IdComponente" Type="int" Mode="In" />
           <Parameter Name="Descripcion" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="Orden" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_SubirComponente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdComponente" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_SubirPregunta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdPregunta" Type="int" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="Sp_SubirSeccion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdSeccion" Type="int" Mode="In" />
           <Parameter Name="Estado" Type="bit" Mode="In" />
         </Function>
         <Function Name="Sp_TipoDatoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
@@ -1182,7 +1206,6 @@
             <Parameter Name="FechaCreacion" Mode="In" Type="DateTime" />
             <Parameter Name="estado" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Sp_ComponenteConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ComponenteConsultar_Result)" />
           <FunctionImport Name="Sp_ComponenteEliminar">
           <Parameter Name="IdComponente" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1334,7 +1357,6 @@
             <Parameter Name="DescripcionRespuestaAbierta" Mode="In" Type="String" />
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Sp_SeccionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_SeccionConsultar_Result)" />
           <FunctionImport Name="Sp_SeccionEliminar">
           <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1637,6 +1659,32 @@
           <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_UsuarioConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_UsuarioConsultar_Result2)" />
+          <FunctionImport Name="Sp_BajarPregunta">
+            <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_SubirPregunta">
+            <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_SubirComponente">
+            <Parameter Name="IdComponente" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ComponenteConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ComponenteConsultar_Result1)" />
+          <FunctionImport Name="Sp_BajarComponente">
+            <Parameter Name="IdComponente" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_SubirSeccion">
+            <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_SeccionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_SeccionConsultar_Result1)" />
+          <FunctionImport Name="Sp_BajarSeccion">
+            <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_AsignarComponenteGenericoConsultar_Result">
           <Property Type="Int32" Name="IdAsignarComponenteGenerico" Nullable="false" />
@@ -5159,6 +5207,32 @@
           <Property Type="String" Name="TIPOIDENTIFICACION_Descripcion" Nullable="false" MaxLength="50" />
           <Property Type="Boolean" Name="TIPOIDENTIFICACION_Estado" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="Sp_ComponenteConsultar_Result1">
+          <Property Type="Int32" Name="IdComponente" Nullable="false" />
+          <Property Type="String" Name="DescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoComponente" Nullable="false" />
+          <Property Type="String" Name="UtilizadoComponente" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_SeccionConsultar_Result1">
+          <Property Type="Int32" Name="IdSeccion" Nullable="false" />
+          <Property Type="String" Name="DescripcionSeccion" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoSeccion" Nullable="false" />
+          <Property Type="Int32" Name="OrdenSeccion" Nullable="false" />
+          <Property Type="String" Name="UtilizadoSeccion" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdComponente" Nullable="false" />
+          <Property Type="String" Name="DescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -7760,21 +7834,6 @@
           <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_CabeceraVersionCuestionarioModificar" FunctionName="ComunidadesGPMModel.Store.Sp_CabeceraVersionCuestionarioModificar" />
-          <FunctionImportMapping FunctionImportName="Sp_ComponenteConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ComponenteConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ComponenteConsultar_Result">
-                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
-                <ScalarProperty Name="DescripcionComponente" ColumnName="DescripcionComponente" />
-                <ScalarProperty Name="OrdenComponente" ColumnName="OrdenComponente" />
-                <ScalarProperty Name="EstadoComponente" ColumnName="EstadoComponente" />
-                <ScalarProperty Name="UtilizadoComponente" ColumnName="UtilizadoComponente" />
-                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
-                <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
-                <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
-                <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_ComponenteEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_ComponenteEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_ComponenteInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_ComponenteInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_ComponenteModificar" FunctionName="ComunidadesGPMModel.Store.Sp_ComponenteModificar" />
@@ -8272,25 +8331,6 @@
           <FunctionImportMapping FunctionImportName="Sp_RespuestaEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_RespuestaEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_RespuestaInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_RespuestaInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_RespuestaModificar" FunctionName="ComunidadesGPMModel.Store.Sp_RespuestaModificar" />
-          <FunctionImportMapping FunctionImportName="Sp_SeccionConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_SeccionConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_SeccionConsultar_Result">
-                <ScalarProperty Name="IdSeccion" ColumnName="IdSeccion" />
-                <ScalarProperty Name="DescripcionSeccion" ColumnName="DescripcionSeccion" />
-                <ScalarProperty Name="EstadoSeccion" ColumnName="EstadoSeccion" />
-                <ScalarProperty Name="OrdenSeccion" ColumnName="OrdenSeccion" />
-                <ScalarProperty Name="UtilizadoSeccion" ColumnName="UtilizadoSeccion" />
-                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
-                <ScalarProperty Name="DescripcionComponente" ColumnName="DescripcionComponente" />
-                <ScalarProperty Name="OrdenComponente" ColumnName="OrdenComponente" />
-                <ScalarProperty Name="EstadoComponente" ColumnName="EstadoComponente" />
-                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
-                <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
-                <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
-                <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_SeccionEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_SeccionEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_SeccionInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_SeccionInsertar" />
           <FunctionImportMapping FunctionImportName="Sp_SeccionModificar" FunctionName="ComunidadesGPMModel.Store.Sp_SeccionModificar" />
@@ -9098,6 +9138,46 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_BajarPregunta" FunctionName="ComunidadesGPMModel.Store.Sp_BajarPregunta" />
+          <FunctionImportMapping FunctionImportName="Sp_SubirPregunta" FunctionName="ComunidadesGPMModel.Store.Sp_SubirPregunta" />
+          <FunctionImportMapping FunctionImportName="Sp_SubirComponente" FunctionName="ComunidadesGPMModel.Store.Sp_SubirComponente" />
+          <FunctionImportMapping FunctionImportName="Sp_ComponenteConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ComponenteConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ComponenteConsultar_Result1">
+                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
+                <ScalarProperty Name="DescripcionComponente" ColumnName="DescripcionComponente" />
+                <ScalarProperty Name="OrdenComponente" ColumnName="OrdenComponente" />
+                <ScalarProperty Name="EstadoComponente" ColumnName="EstadoComponente" />
+                <ScalarProperty Name="UtilizadoComponente" ColumnName="UtilizadoComponente" />
+                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
+                <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
+                <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
+                <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_BajarComponente" FunctionName="ComunidadesGPMModel.Store.Sp_BajarComponente" />
+          <FunctionImportMapping FunctionImportName="Sp_SubirSeccion" FunctionName="ComunidadesGPMModel.Store.Sp_SubirSeccion" />
+          <FunctionImportMapping FunctionImportName="Sp_SeccionConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_SeccionConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_SeccionConsultar_Result1">
+                <ScalarProperty Name="IdSeccion" ColumnName="IdSeccion" />
+                <ScalarProperty Name="DescripcionSeccion" ColumnName="DescripcionSeccion" />
+                <ScalarProperty Name="EstadoSeccion" ColumnName="EstadoSeccion" />
+                <ScalarProperty Name="OrdenSeccion" ColumnName="OrdenSeccion" />
+                <ScalarProperty Name="UtilizadoSeccion" ColumnName="UtilizadoSeccion" />
+                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
+                <ScalarProperty Name="DescripcionComponente" ColumnName="DescripcionComponente" />
+                <ScalarProperty Name="OrdenComponente" ColumnName="OrdenComponente" />
+                <ScalarProperty Name="EstadoComponente" ColumnName="EstadoComponente" />
+                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
+                <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
+                <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
+                <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_BajarSeccion" FunctionName="ComunidadesGPMModel.Store.Sp_BajarSeccion" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
