@@ -1571,11 +1571,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_PreguntaAbiertaInsertar", idPreguntaParameter, idTipoDatoParameter, especificaRangoParameter, valorMinimoParameter, valorMaximoParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Sp_PreguntaConsultar_Result> Sp_PreguntaConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultar_Result>("Sp_PreguntaConsultar");
-        }
-    
         public virtual ObjectResult<Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion_Result> Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion(Nullable<int> idOpcionPreguntaSeleccion, Nullable<int> idSeccion, Nullable<int> idPregunta)
         {
             var idOpcionPreguntaSeleccionParameter = idOpcionPreguntaSeleccion.HasValue ?
@@ -2852,15 +2847,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioValidar_Result>("Sp_UsuarioValidar", correoParameter);
         }
     
-        public virtual ObjectResult<Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result1> Sp_PreguntaConsultarNoEncajonadasPorSeccion(Nullable<int> idSeccion)
-        {
-            var idSeccionParameter = idSeccion.HasValue ?
-                new ObjectParameter("IdSeccion", idSeccion) :
-                new ObjectParameter("IdSeccion", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result1>("Sp_PreguntaConsultarNoEncajonadasPorSeccion", idSeccionParameter);
-        }
-    
         public virtual ObjectResult<Sp_UsuarioConsultar_Result2> Sp_UsuarioConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_UsuarioConsultar_Result2>("Sp_UsuarioConsultar");
@@ -2905,11 +2891,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_SubirComponente", idComponenteParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Sp_ComponenteConsultar_Result1> Sp_ComponenteConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponenteConsultar_Result1>("Sp_ComponenteConsultar");
-        }
-    
         public virtual int Sp_BajarComponente(Nullable<int> idComponente, Nullable<bool> estado)
         {
             var idComponenteParameter = idComponente.HasValue ?
@@ -2952,6 +2933,34 @@ namespace API.Conexion
                 new ObjectParameter("Estado", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_BajarSeccion", idSeccionParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ComponenteConsultar_Result2> Sp_ComponenteConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponenteConsultar_Result2>("Sp_ComponenteConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_PreguntaConsultar_Result2> Sp_PreguntaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultar_Result2>("Sp_PreguntaConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result2> Sp_PreguntaConsultarNoEncajonadasPorSeccion(Nullable<int> idSeccion)
+        {
+            var idSeccionParameter = idSeccion.HasValue ?
+                new ObjectParameter("IdSeccion", idSeccion) :
+                new ObjectParameter("IdSeccion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result2>("Sp_PreguntaConsultarNoEncajonadasPorSeccion", idSeccionParameter);
+        }
+    
+        public virtual int Sp_CuestionarioPublicadoDeshabilitar(Nullable<int> idCuestionarioPublicado)
+        {
+            var idCuestionarioPublicadoParameter = idCuestionarioPublicado.HasValue ?
+                new ObjectParameter("IdCuestionarioPublicado", idCuestionarioPublicado) :
+                new ObjectParameter("IdCuestionarioPublicado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CuestionarioPublicadoDeshabilitar", idCuestionarioPublicadoParameter);
         }
     }
 }

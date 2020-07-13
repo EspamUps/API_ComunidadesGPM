@@ -29,6 +29,12 @@ namespace API.Models.Catalogos
         {
             db.Sp_CuestionarioPublicadoEliminar(_idCuestionarioPublicado);
         }
+
+        public void DeshabilitarCuestionarioPublicado(int _idCuestionarioPublicado)
+        {
+            db.Sp_CuestionarioPublicadoDeshabilitar(_idCuestionarioPublicado);
+        }
+
         public List<CuestionarioPublicado> ConsultarCuestionarioPublicado()
         {
             List<CuestionarioPublicado> _lista = new List<CuestionarioPublicado>();
@@ -180,6 +186,8 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+
+
 
         public List<CuestionarioPublicado> ConsultarCuestionarioPublicadoPorId(int _idCuestionarioPublicado)
         {
