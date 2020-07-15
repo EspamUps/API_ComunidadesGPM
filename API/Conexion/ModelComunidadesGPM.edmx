@@ -1143,17 +1143,6 @@
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Sp_AsignarEncuestadoModificar">
-            <Parameter Name="IdAsignarEncuestado" Mode="In" Type="Int32" />
-            <Parameter Name="IdCuestionarioPublicado" Mode="In" Type="Int32" />
-            <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
-            <Parameter Name="IdAsignarUsuarioTipoUsuarioTecnico" Mode="In" Type="Int32" />
-            <Parameter Name="IdAsignarUsuarioTipoUsuario" Mode="In" Type="Int32" />
-            <Parameter Name="Obligatorio" Mode="In" Type="Boolean" />
-            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
-            <Parameter Name="Estado" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="Sp_AsignarResponsableCambiarEstado">
             <Parameter Name="IdAsignarResponsable" Mode="In" Type="Int32" />
             <Parameter Name="NuevoEstado" Mode="In" Type="Boolean" />
@@ -1689,7 +1678,18 @@
           <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_CuestionarioPublicadoDeshabilitar">
+          <Parameter Name="IdCuestionarioPublicado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_AsignarEncuestadoModificar" ReturnType="Collection(Int32)">
+            <Parameter Name="IdAsignarEncuestado" Mode="In" Type="Int32" />
             <Parameter Name="IdCuestionarioPublicado" Mode="In" Type="Int32" />
+            <Parameter Name="IdComunidad" Mode="In" Type="Int32" />
+            <Parameter Name="IdAsignarUsuarioTipoUsuarioTecnico" Mode="In" Type="Int32" />
+            <Parameter Name="IdAsignarUsuarioTipoUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="Obligatorio" Mode="In" Type="Boolean" />
+            <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_AsignarComponenteGenericoConsultar_Result">
@@ -7418,7 +7418,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_AsignarEncuestadoEliminar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarEncuestadoEliminar" />
           <FunctionImportMapping FunctionImportName="Sp_AsignarEncuestadoInsertar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarEncuestadoInsertar" />
-          <FunctionImportMapping FunctionImportName="Sp_AsignarEncuestadoModificar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarEncuestadoModificar" />
           <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableCambiarEstado" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableCambiarEstado" />
           <FunctionImportMapping FunctionImportName="Sp_AsignarResponsableConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarResponsableConsultar">
             <ResultMapping>
@@ -9271,6 +9270,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_CuestionarioPublicadoDeshabilitar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioPublicadoDeshabilitar" />
+          <FunctionImportMapping FunctionImportName="Sp_AsignarEncuestadoModificar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarEncuestadoModificar" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
