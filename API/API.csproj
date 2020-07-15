@@ -26,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,12 +63,24 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -81,17 +94,11 @@
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
@@ -199,22 +206,283 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelComunidadesGPM.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\SpAsignarModeloGenericoParroquiaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AlcaldeConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarComponenteGenericoConsultarPorId_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarComponenteGenericoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarComponenteGenericoInsertar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarCuestionarioModeloConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarCuestionarioModeloInsertar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarDescripcionComponenteTipoElementoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarDescripcionComponenteTipoElementoInsertar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarEncuestadoConsultarPorCuestionarioPublicado_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarEncuestadoConsultarPorId_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarEncuestadoConsultarPorTecnico_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarEncuestadoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarModeloGenericoParroquiaInsertar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarModeloPublicadoParroquiaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarModeloPublicadoParroquiaInsertar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_AsignarModuloPrivilegioConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorId_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorModeloPublicado_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultarPorParroquia_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarResponsableModeloPublicadoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarTipoUsuarioModuloPrivilegioConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignadosResponsablePorCuestionarioGenericoPorIdentificadorTipoUsuario_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarUsuarioTipoUsuarioConsultarNoAsignados_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarUsuarioTipoUsuarioConsultarPorIdentificadorTipoUsuario_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_AsignarUsuarioTipoUsuarioConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraCaracterizacionConsultarPorAsignarResponsableModeloPublicado_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraCaracterizacionConsultarPorId_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraCaracterizacionConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraModeloPublicadoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraModeloPublicadoInsertar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraRespuestaConsultarPorAsignarEncuestado_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraRespuestaConsultarPorId_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraRespuestaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraVersionCuestionarioConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CabeceraVersionModeloConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CantonConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ComponenteConsultarDeUnaVersion_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ComponenteConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ComponenteConsultar_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ComponenteConsultar_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ComunidadConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoDetalleComponenteConsultarPorIdDescripcionComponente_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoDetalleComponenteConsultarPorId_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoDetalleComponenteConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoTipoElementoConsultarPorIdAsignarDescripcionComponenteTipoElemento_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoTipoElementoConsultarPorIdCabeceraCaracterizacion_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoTipoElementoConsultarPorId_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ContenidoTipoElementoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CuestionarioGenericoConComponenteSeccionPreguntaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CuestionarioGenericoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_CuestionarioPublicadoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_DataConsultarDeUnaVersion1_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_DataConsultarDeUnaVersion_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_DescripcionComponenteConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_DescripcionComponenteInsertar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_LiderComunitarioConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ModeloGenericoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ModeloGenericoInsertar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ModeloPublicadoConsultarPorId_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ModuloConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_OpcionUnoMatrizConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ParroquiaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PeriodoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PersonaConsultarSinUsuario_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_PersonaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PrefectoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaAbiertaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultar_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultar_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaEncajonadaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PresidenteJuntaParroquialConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PrivilegioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ProvinciaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_RespuestaConsultarPorCabeceraRespuesta_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_RespuestaConsultarPorId_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_SeccionConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_SeccionConsultar_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_SexoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_TipoDatoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_TipoElementoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_TipoIdentificacionConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_TipoPreguntaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_TipoUsuarioConsultarNoAsignadosPorUsuario_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_TipoUsuarioConsultar_Result.cs">
@@ -223,29 +491,194 @@
     <Compile Include="Conexion\Sp_TokenConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_TokenConsultar_Result1.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_UsuarioBuscar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_UsuarioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_UsuarioConsultar_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_UsuarioConsultar_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_UsuarioInformacionGeneral_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_UsuarioValidar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_VersionamientoModeloConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_VersionamientoPreguntaCompletoConsultarPorCabeceraVersion_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_VersionamientoPreguntaConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\AlcaldeController.cs" />
+    <Compile Include="Controllers\AsignarComponenteGenericoController.cs" />
+    <Compile Include="Controllers\AsignarCuestionarioModeloController.cs" />
+    <Compile Include="Controllers\AsignarDescripcionComponenteTipoElementoController.cs" />
+    <Compile Include="Controllers\AsignarEncuestadoController.cs" />
+    <Compile Include="Controllers\AsignarModeloGenericoParroquiaController.cs" />
+    <Compile Include="Controllers\AsignarResponsableController.cs" />
+    <Compile Include="Controllers\AsignarResponsableModeloPublicadoController.cs" />
+    <Compile Include="Controllers\AsignarTipoUsuarioModuloPrivilegioController.cs" />
+    <Compile Include="Controllers\AsignarUsuarioTipoUsuarioController.cs" />
+    <Compile Include="Controllers\CabeceraCaracterizacionController.cs" />
+    <Compile Include="Controllers\CabeceraRespuestaController.cs" />
+    <Compile Include="Controllers\CabeceraVersionCuestionarioController.cs" />
+    <Compile Include="Controllers\CabeceraVersionModeloController.cs" />
+    <Compile Include="Controllers\CantonController.cs" />
+    <Compile Include="Controllers\ComponenteController.cs" />
+    <Compile Include="Controllers\ComunidadController.cs" />
+    <Compile Include="Controllers\ContenidoTipoElementoController.cs" />
+    <Compile Include="Controllers\ContenidoDetalleComponenteController.cs" />
+    <Compile Include="Controllers\CuestionarioGenericoController.cs" />
+    <Compile Include="Controllers\CuestionarioPublicadoController.cs" />
+    <Compile Include="Controllers\DescripcionComponenteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LiderComunitarioController.cs" />
+    <Compile Include="Controllers\ConfigurarMatrizController.cs" />
+    <Compile Include="Controllers\ModeloGenericoController.cs" />
+    <Compile Include="Controllers\ModeloPublicadoController.cs" />
+    <Compile Include="Controllers\OpcionDosMatrizController.cs" />
+    <Compile Include="Controllers\OpcionPreguntaSeleccionController.cs" />
+    <Compile Include="Controllers\OpcionUnoMatrizController.cs" />
+    <Compile Include="Controllers\ParroquiaController.cs" />
+    <Compile Include="Controllers\PeriodoController.cs" />
+    <Compile Include="Controllers\PersonaController.cs" />
+    <Compile Include="Controllers\PrefectoController.cs" />
+    <Compile Include="Controllers\PreguntaAbiertaController.cs" />
+    <Compile Include="Controllers\PreguntaController.cs" />
+    <Compile Include="Controllers\PreguntaEncajonadaController.cs" />
+    <Compile Include="Controllers\PresidenteJuntaParroquialController.cs" />
+    <Compile Include="Controllers\ProvinciaController.cs" />
+    <Compile Include="Controllers\RespuestaController.cs" />
+    <Compile Include="Controllers\SeccionController.cs" />
+    <Compile Include="Controllers\SexoController.cs" />
+    <Compile Include="Controllers\TipoDatoController.cs" />
+    <Compile Include="Controllers\TipoElementoController.cs" />
+    <Compile Include="Controllers\TipoIdentificacionController.cs" />
+    <Compile Include="Controllers\TipoPreguntaController.cs" />
+    <Compile Include="Controllers\TipoUsuarioController.cs" />
+    <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VersionamientoModeloController.cs" />
+    <Compile Include="Controllers\VersionamientoPreguntaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Catalogos\CatalogoUsuarios.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarComponenteGenerico.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarCuestionarioModelo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarDescripcionComponenteTipoElemento.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarEncuestado.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarModeloGenericoParroquia.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarResponsableModeloPublicado.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCabeceraCaracterizacion.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCabeceraRespuesta.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCabeceraVersionCuestionario.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCabeceraVersionModelo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoConfigurarMatriz.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAlcalde.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarModuloPrivilegio.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarResponsable.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarTipoUsuarioModuloPrivilegio.cs" />
+    <Compile Include="Models\Catalogos\CatalogoAsignarUsuarioTipoUsuario.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCanton.cs" />
+    <Compile Include="Models\Catalogos\CatalogoComponente.cs" />
+    <Compile Include="Models\Catalogos\CatalogoComunidad.cs" />
+    <Compile Include="Models\Catalogos\CatalogoContenidoDetalleComponente.cs" />
+    <Compile Include="Models\Catalogos\CatalogoContenidoTipoElemento.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCuestionarioGenerico.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCuestionarioPublicado.cs" />
+    <Compile Include="Models\Catalogos\CatalogoDescripcionComponente.cs" />
+    <Compile Include="Models\Catalogos\CatalogoLiderComunitario.cs" />
+    <Compile Include="Models\Catalogos\CatalogoModeloGenerico.cs" />
+    <Compile Include="Models\Catalogos\CatalogoModeloPublicado.cs" />
+    <Compile Include="Models\Catalogos\CatalogoModulo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoOpcionDosMatriz.cs" />
+    <Compile Include="Models\Catalogos\CatalogoOpcionPreguntaSeleccion.cs" />
+    <Compile Include="Models\Catalogos\CatalogoOpcionUnoMatriz.cs" />
+    <Compile Include="Models\Catalogos\CatalogoParroquia.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPeriodo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPersona.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPrefecto.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPregunta.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPreguntaAbierta.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPreguntaEncajonada.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPresidenteJuntaParroquial.cs" />
+    <Compile Include="Models\Catalogos\CatalogoPrivilegio.cs" />
+    <Compile Include="Models\Catalogos\CatalogoProvincia.cs" />
+    <Compile Include="Models\Catalogos\CatalogoRespuesta.cs" />
+    <Compile Include="Models\Catalogos\CatalogoRespuestasHTTP.cs" />
+    <Compile Include="Models\Catalogos\CatalogoSeccion.cs" />
+    <Compile Include="Models\Catalogos\CatalogoSexo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoTipoDato.cs" />
+    <Compile Include="Models\Catalogos\CatalogoTipoElemento.cs" />
+    <Compile Include="Models\Catalogos\CatalogoTipoIdentificacion.cs" />
+    <Compile Include="Models\Catalogos\CatalogoTipoPregunta.cs" />
+    <Compile Include="Models\Catalogos\CatalogoTipoUsuarios.cs" />
+    <Compile Include="Models\Catalogos\CatalogoTokens.cs" />
+    <Compile Include="Models\Catalogos\CatalogoUsuario.cs" />
+    <Compile Include="Models\Catalogos\CatalogoVersionamientoModelo.cs" />
+    <Compile Include="Models\Catalogos\CatalogoVersionamientoPregunta.cs" />
+    <Compile Include="Models\Entidades\Alcalde.cs" />
+    <Compile Include="Models\Entidades\AsignarComponenteGenerico.cs" />
+    <Compile Include="Models\Entidades\AsignarCuestionarioModelo.cs" />
+    <Compile Include="Models\Entidades\AsignarDescripcionComponenteTipoElemento.cs" />
+    <Compile Include="Models\Entidades\AsignarEncuestado.cs" />
+    <Compile Include="Models\Entidades\AsignarModeloGenericoParroquia.cs" />
     <Compile Include="Models\Entidades\AsignarModuloPrivilegio.cs" />
+    <Compile Include="Models\Entidades\AsignarResponsable.cs" />
+    <Compile Include="Models\Entidades\AsignarResponsableModeloPublicado.cs" />
     <Compile Include="Models\Entidades\AsignarTipoUsuarioModuloPrivilegio.cs" />
     <Compile Include="Models\Entidades\AsignarUsuarioTipoUsuario.cs" />
+    <Compile Include="Models\Entidades\CabeceraCaracterizacion.cs" />
+    <Compile Include="Models\Entidades\CabeceraRespuesta.cs" />
+    <Compile Include="Models\Entidades\CabeceraVersionCuestionario.cs" />
+    <Compile Include="Models\Entidades\CabeceraVersionModelo.cs" />
+    <Compile Include="Models\Entidades\Canton.cs" />
     <Compile Include="Models\Entidades\Clave.cs" />
+    <Compile Include="Models\Entidades\Componente.cs" />
+    <Compile Include="Models\Entidades\Comunidad.cs" />
+    <Compile Include="Models\Entidades\ConfigurarMatriz.cs" />
+    <Compile Include="Models\Entidades\ContenidoDetalleComponente.cs" />
+    <Compile Include="Models\Entidades\ContenidoTipoElemento.cs" />
+    <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
+    <Compile Include="Models\Entidades\ModeloPublicado.cs" />
+    <Compile Include="Models\Entidades\CuestionarioPublicado.cs" />
+    <Compile Include="Models\Entidades\DescripcionComponente.cs" />
+    <Compile Include="Models\Entidades\LiderComunitario.cs" />
+    <Compile Include="Models\Entidades\ModeloGenerico.cs" />
+    <Compile Include="Models\Entidades\OpcionDosMatriz.cs" />
+    <Compile Include="Models\Entidades\OpcionPreguntaSeleccion.cs" />
+    <Compile Include="Models\Entidades\OpcionUnoMatriz.cs" />
+    <Compile Include="Models\Entidades\Periodo.cs" />
+    <Compile Include="Models\Entidades\Prefecto.cs" />
+    <Compile Include="Models\Entidades\Pregunta.cs" />
+    <Compile Include="Models\Entidades\PreguntaAbierta.cs" />
+    <Compile Include="Models\Entidades\PreguntaEncajonada.cs" />
+    <Compile Include="Models\Entidades\PresidenteJuntaParroquial.cs" />
+    <Compile Include="Models\Entidades\Respuesta.cs" />
+    <Compile Include="Models\Entidades\RespuestasCaracterizacion.cs" />
+    <Compile Include="Models\Entidades\Seccion.cs" />
+    <Compile Include="Models\Entidades\TipoDato.cs" />
+    <Compile Include="Models\Entidades\TipoElemento.cs" />
+    <Compile Include="Models\Entidades\TipoPregunta.cs" />
+    <Compile Include="Models\Entidades\VersionamientoModelo.cs" />
+    <Compile Include="Models\Entidades\VersionamientoPregunta.cs" />
+    <Compile Include="Models\Metodos\RespuestaHTTP.cs" />
     <Compile Include="Models\Entidades\Modulo.cs" />
+    <Compile Include="Models\Entidades\Parroquia.cs" />
     <Compile Include="Models\Entidades\Persona.cs" />
     <Compile Include="Models\Entidades\Privilegio.cs" />
+    <Compile Include="Models\Entidades\Provincia.cs" />
+    <Compile Include="Models\Metodos\Seguridad.cs" />
     <Compile Include="Models\Entidades\Sexo.cs" />
     <Compile Include="Models\Entidades\TipoIdentificacion.cs" />
     <Compile Include="Models\Entidades\TipoUsuario.cs" />
@@ -257,8 +690,8 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Conexion\ModelComunidadesGPM.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelComunidadesGPM.Context.cs</LastGenOutput>
       <DependentUpon>ModelComunidadesGPM.edmx</DependentUpon>
+      <LastGenOutput>ModelComunidadesGPM.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Conexion\ModelComunidadesGPM.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -294,6 +727,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="ClassDiagram2.cd" />
     <EntityDeploy Include="Conexion\ModelComunidadesGPM.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelComunidadesGPM.Designer.cs</LastGenOutput>
@@ -301,6 +736,8 @@
     <Content Include="Conexion\ModelComunidadesGPM.edmx.diagram">
       <DependentUpon>ModelComunidadesGPM.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -324,6 +761,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Imagenes\" />
+    <Folder Include="Views\Token\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

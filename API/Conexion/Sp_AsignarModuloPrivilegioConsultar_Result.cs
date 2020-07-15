@@ -13,17 +13,9 @@ namespace API.Conexion
     
     public partial class Sp_AsignarModuloPrivilegioConsultar_Result
     {
-        public int ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio { get; set; }
-        public int ASIGNARMODULOPRIVILEGIO_IdModulo { get; set; }
-        public int ASIGNARMODULOPRIVILEGIO_IdPrivilegio { get; set; }
-        public bool ASIGNARMODULOPRIVILEGIO_Estado { get; set; }
-        public int MODULO_IdModulo { get; set; }
-        public int MODULO_Identificador { get; set; }
-        public string MODULO_Descripcion { get; set; }
-        public bool MODULO_Estado { get; set; }
-        public int PRIVILEGIO_IdPrivilegio { get; set; }
-        public int PRIVILEGIO_Identificador { get; set; }
-        public string PRIVILEGIO_Descripcion { get; set; }
-        public bool PRIVILEGIO_Estado { get; set; }
+        public int IdAsignarModuloPrivilegio { get; set; }
+        public int IdModulo { get; set; }
+        public int IdPrivilegio { get; set; }
+        public bool Estado { get; set; }
     }
 }

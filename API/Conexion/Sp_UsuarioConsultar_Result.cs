@@ -18,6 +18,7 @@ namespace API.Conexion
         public string USUARIO_Correo { get; set; }
         public string USUARIO_Clave { get; set; }
         public bool USUARIO_Estado { get; set; }
+        public string USUARIO_Utilizado { get; set; }
         public int PERSONA_IdPersona { get; set; }
         public string PERSONA_PrimerNombre { get; set; }
         public string PERSONA_SegundoNombre { get; set; }
@@ -38,29 +39,5 @@ namespace API.Conexion
         public int TIPOIDENTIFICACION_Identificador { get; set; }
         public string TIPOIDENTIFICACION_Descripcion { get; set; }
         public bool TIPOIDENTIFICACION_Estado { get; set; }
-        public int ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario { get; set; }
-        public int ASIGNARUSUARIOTIPOUSUARIO_IdUsuario { get; set; }
-        public int ASIGNARUSUARIOTIPOUSUARIO_IdTipoUsuario { get; set; }
-        public bool ASIGNARUSUARIOTIPOUSUARIO_Estado { get; set; }
-        public int TIPOUSUARIO_IdTipoUsuario { get; set; }
-        public int TIPOUSUARIO_Identificador { get; set; }
-        public string TIPOUSUARIO_Descripcion { get; set; }
-        public bool TIPOUSUARIO_Estado { get; set; }
-        public int ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarTipoUsuarioModuloPrivilegio { get; set; }
-        public int ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdTipoUsuario { get; set; }
-        public int ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_IdAsignarModuloPrivilegio { get; set; }
-        public bool ASIGNARTIPOUSUARIOMODULOPRIVILEGIO_Estado { get; set; }
-        public int ASIGNARMODULOPRIVILEGIO_IdAsignarModuloPrivilegio { get; set; }
-        public int ASIGNARMODULOPRIVILEGIO_IdModulo { get; set; }
-        public int ASIGNARMODULOPRIVILEGIO_IdPrivilegio { get; set; }
-        public bool ASIGNARMODULOPRIVILEGIO_Estado { get; set; }
-        public int MODULO_IdModulo { get; set; }
-        public int MODULO_Identificador { get; set; }
-        public string MODULO_Descripcion { get; set; }
-        public bool MODULO_Estado { get; set; }
-        public int PRIVILEGIO_IdPrivilegio { get; set; }
-        public int PRIVILEGIO_Identificador { get; set; }
-        public string PRIVILEGIO_Descripcion { get; set; }
-        public bool PRIVILEGIO_Estado { get; set; }
     }
 }

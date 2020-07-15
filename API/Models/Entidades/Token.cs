@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace API.Models
+namespace API.Models.Entidades
 {
     public class Token
     {
@@ -12,5 +12,7 @@ namespace API.Models
         public int Identificador { get; set; }
         public string Descripcion { get; set; }
         public bool Estado { get; set; }
+
+        public Clave objClave { get; set; }
     }
 }

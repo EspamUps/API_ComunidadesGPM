@@ -16,8 +16,10 @@ namespace API.Conexion
         public int TOKEN_IdToken { get; set; }
         public int TOKEN_IdClave { get; set; }
         public int TOKEN_Identificador { get; set; }
-        public string TOKEN_Estado { get; set; }
+        public string TOKEN_Descripcion { get; set; }
+        public bool TOKEN_Estado { get; set; }
         public int CLAVE_IdClave { get; set; }
+        public int CLAVE_Identificador { get; set; }
         public string CLAVE_Descripcion { get; set; }
         public bool CLAVE_Estado { get; set; }
     }

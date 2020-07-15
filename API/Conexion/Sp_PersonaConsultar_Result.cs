@@ -25,6 +25,7 @@ namespace API.Conexion
         public int PERSONA_IdParroquia { get; set; }
         public string PERSONA_Direccion { get; set; }
         public bool PERSONA_Estado { get; set; }
+        public string PERSONA_Utilizado { get; set; }
         public int SEXO_IdSexo { get; set; }
         public int SEXO_Identificador { get; set; }
         public string SEXO_Descripcion { get; set; }
@@ -33,5 +34,23 @@ namespace API.Conexion
         public int TIPOIDENTIFICACION_Identificador { get; set; }
         public string TIPOIDENTIFICACION_Descripcion { get; set; }
         public bool TIPOIDENTIFICACION_Estado { get; set; }
+        public int PARROQUIA_IdParroquia { get; set; }
+        public string PARROQUIA_CodigoParroquia { get; set; }
+        public string PARROQUIA_NombreParroquia { get; set; }
+        public string PARROQUIA_DescripcionParroquia { get; set; }
+        public string PARROQUIA_RutaLogoParroquia { get; set; }
+        public bool PARROQUIA_EstadoParroquia { get; set; }
+        public int CANTON_IdCanton { get; set; }
+        public string CANTON_CodigoCanton { get; set; }
+        public string CANTON_NombreCanton { get; set; }
+        public string CANTON_DescripcionCanton { get; set; }
+        public string CANTON_RutaLogoCanton { get; set; }
+        public bool CANTON_EstadoCanton { get; set; }
+        public int PROVINCIA_IdProvincia { get; set; }
+        public string PROVINCIA_CodigoProvincia { get; set; }
+        public string PROVINCIA_NombreProvincia { get; set; }
+        public string PROVINCIA_DescripcionProvincia { get; set; }
+        public string PROVINCIA_RutaLogoProvincia { get; set; }
+        public bool PROVINCIA_EstadoProvincia { get; set; }
     }
 }
