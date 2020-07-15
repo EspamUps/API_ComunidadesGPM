@@ -564,6 +564,9 @@
         </Function>
         <Function Name="Sp_TipoDatoConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
         <Function Name="Sp_TipoPreguntaConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
+        <Function Name="Sp_VerEncuestaAsignadasNueva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
+          <Parameter Name="IdAsignarUsuarioTipoUsuarioTecnico" Type="int" Mode="In" />
+        </Function>
         <Function Name="Sp_VersionamientoPreguntaCompletoConsultarPorCabeceraVersion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdCabeceraVersion" Type="int" Mode="In" />
         </Function>
@@ -1672,7 +1675,6 @@
             <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="Sp_ComponenteConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ComponenteConsultar_Result2)" />
           <FunctionImport Name="Sp_PreguntaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PreguntaConsultar_Result2)" />
           <FunctionImport Name="Sp_PreguntaConsultarNoEncajonadasPorSeccion" ReturnType="Collection(ComunidadesGPMModel.Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result2)">
           <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
@@ -1690,6 +1692,10 @@
             <Parameter Name="FechaInicio" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
             <Parameter Name="Estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ComponenteConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ComponenteConsultar_Result3)" />
+          <FunctionImport Name="Sp_VerEncuestaAsignadasNueva" ReturnType="Collection(ComunidadesGPMModel.Sp_VerEncuestaAsignadasNueva_Result1)">
+            <Parameter Name="IdAsignarUsuarioTipoUsuarioTecnico" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_AsignarComponenteGenericoConsultar_Result">
@@ -5324,6 +5330,57 @@
           <Property Type="String" Name="DescripcionCuestionarioGenerico" Nullable="false" />
           <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
           <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_ComponenteConsultar_Result3">
+          <Property Type="Int32" Name="IdComponente" Nullable="false" />
+          <Property Type="String" Name="DescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoComponente" Nullable="false" />
+          <Property Type="String" Name="UtilizadoComponente" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Sp_VerEncuestaAsignadasNueva_Result">
+          <Property Type="Int32" Name="IdAsignarEncuestado" Nullable="false" />
+          <Property Type="Int32" Name="IdComunidad" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioTecnico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="Obligatorio" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicioEncuesta" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinEncuesta" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionCuestionario" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="PeriodoInicioCuestionario" Nullable="false" />
+          <Property Type="DateTime" Name="PeriodoFinCuestionario" Nullable="false" />
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+          <Property Type="String" Name="NombreComunidad" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="NombreParroquia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="NombreCanton" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="Sp_VerEncuestaAsignadasNueva_Result1">
+          <Property Type="Int32" Name="IdAsignarEncuestado" Nullable="false" />
+          <Property Type="Int32" Name="IdComunidad" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuarioTecnico" Nullable="false" />
+          <Property Type="Int32" Name="IdAsignarUsuarioTipoUsuario" Nullable="false" />
+          <Property Type="Boolean" Name="Obligatorio" Nullable="false" />
+          <Property Type="DateTime" Name="FechaInicioEncuesta" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="FechaFinEncuesta" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Estado" Nullable="false" />
+          <Property Type="DateTime" Name="FechaPublicacionCuestionario" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="PeriodoInicioCuestionario" Nullable="false" />
+          <Property Type="DateTime" Name="PeriodoFinCuestionario" Nullable="false" />
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" />
+          <Property Type="String" Name="Descripcion" Nullable="false" />
+          <Property Type="String" Name="NombreComunidad" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="NombreParroquia" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="NombreCanton" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="NombreProvincia" Nullable="false" MaxLength="500" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -9196,21 +9253,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_BajarSeccion" FunctionName="ComunidadesGPMModel.Store.Sp_BajarSeccion" />
-          <FunctionImportMapping FunctionImportName="Sp_ComponenteConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ComponenteConsultar">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ComponenteConsultar_Result2">
-                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
-                <ScalarProperty Name="DescripcionComponente" ColumnName="DescripcionComponente" />
-                <ScalarProperty Name="OrdenComponente" ColumnName="OrdenComponente" />
-                <ScalarProperty Name="EstadoComponente" ColumnName="EstadoComponente" />
-                <ScalarProperty Name="UtilizadoComponente" ColumnName="UtilizadoComponente" />
-                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
-                <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
-                <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
-                <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_PreguntaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PreguntaConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PreguntaConsultar_Result2">
@@ -9271,6 +9313,45 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_CuestionarioPublicadoDeshabilitar" FunctionName="ComunidadesGPMModel.Store.Sp_CuestionarioPublicadoDeshabilitar" />
           <FunctionImportMapping FunctionImportName="Sp_AsignarEncuestadoModificar" FunctionName="ComunidadesGPMModel.Store.Sp_AsignarEncuestadoModificar" />
+          <FunctionImportMapping FunctionImportName="Sp_ComponenteConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_ComponenteConsultar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ComponenteConsultar_Result3">
+                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
+                <ScalarProperty Name="DescripcionComponente" ColumnName="DescripcionComponente" />
+                <ScalarProperty Name="OrdenComponente" ColumnName="OrdenComponente" />
+                <ScalarProperty Name="EstadoComponente" ColumnName="EstadoComponente" />
+                <ScalarProperty Name="UtilizadoComponente" ColumnName="UtilizadoComponente" />
+                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
+                <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
+                <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
+                <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_VerEncuestaAsignadasNueva" FunctionName="ComunidadesGPMModel.Store.Sp_VerEncuestaAsignadasNueva">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_VerEncuestaAsignadasNueva_Result1">
+                <ScalarProperty Name="IdAsignarEncuestado" ColumnName="IdAsignarEncuestado" />
+                <ScalarProperty Name="IdComunidad" ColumnName="IdComunidad" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuarioTecnico" ColumnName="IdAsignarUsuarioTipoUsuarioTecnico" />
+                <ScalarProperty Name="IdAsignarUsuarioTipoUsuario" ColumnName="IdAsignarUsuarioTipoUsuario" />
+                <ScalarProperty Name="Obligatorio" ColumnName="Obligatorio" />
+                <ScalarProperty Name="FechaInicioEncuesta" ColumnName="FechaInicioEncuesta" />
+                <ScalarProperty Name="FechaFinEncuesta" ColumnName="FechaFinEncuesta" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaPublicacionCuestionario" ColumnName="FechaPublicacionCuestionario" />
+                <ScalarProperty Name="PeriodoInicioCuestionario" ColumnName="PeriodoInicioCuestionario" />
+                <ScalarProperty Name="PeriodoFinCuestionario" ColumnName="PeriodoFinCuestionario" />
+                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="NombreComunidad" ColumnName="NombreComunidad" />
+                <ScalarProperty Name="NombreParroquia" ColumnName="NombreParroquia" />
+                <ScalarProperty Name="NombreCanton" ColumnName="NombreCanton" />
+                <ScalarProperty Name="NombreProvincia" ColumnName="NombreProvincia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

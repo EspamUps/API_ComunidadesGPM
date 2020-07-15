@@ -2894,11 +2894,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_BajarSeccion", idSeccionParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Sp_ComponenteConsultar_Result2> Sp_ComponenteConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponenteConsultar_Result2>("Sp_ComponenteConsultar");
-        }
-    
         public virtual ObjectResult<Sp_PreguntaConsultar_Result2> Sp_PreguntaConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultar_Result2>("Sp_PreguntaConsultar");
@@ -2961,6 +2956,20 @@ namespace API.Conexion
                 new ObjectParameter("Estado", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_AsignarEncuestadoModificar", idAsignarEncuestadoParameter, idCuestionarioPublicadoParameter, idComunidadParameter, idAsignarUsuarioTipoUsuarioTecnicoParameter, idAsignarUsuarioTipoUsuarioParameter, obligatorioParameter, fechaInicioParameter, fechaFinParameter, estadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ComponenteConsultar_Result3> Sp_ComponenteConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponenteConsultar_Result3>("Sp_ComponenteConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_VerEncuestaAsignadasNueva_Result1> Sp_VerEncuestaAsignadasNueva(Nullable<int> idAsignarUsuarioTipoUsuarioTecnico)
+        {
+            var idAsignarUsuarioTipoUsuarioTecnicoParameter = idAsignarUsuarioTipoUsuarioTecnico.HasValue ?
+                new ObjectParameter("IdAsignarUsuarioTipoUsuarioTecnico", idAsignarUsuarioTipoUsuarioTecnico) :
+                new ObjectParameter("IdAsignarUsuarioTipoUsuarioTecnico", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_VerEncuestaAsignadasNueva_Result1>("Sp_VerEncuestaAsignadasNueva", idAsignarUsuarioTipoUsuarioTecnicoParameter);
         }
     }
 }

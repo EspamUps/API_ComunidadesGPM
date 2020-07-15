@@ -22,7 +22,29 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
-
+        public List<CuestionariosAsignadosTecnicos> cuestionariosNuevoPorTecnico(int _idAsignarUsuarioTipoUsuario)
+        {
+            List<CuestionariosAsignadosTecnicos> _lista = new List<CuestionariosAsignadosTecnicos>();
+            foreach (var item in db.Sp_VerEncuestaAsignadasNueva(_idAsignarUsuarioTipoUsuario))
+            {
+                _lista.Add(new CuestionariosAsignadosTecnicos(
+                     _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()),
+                     _seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
+                      item.Nombre,
+                      item.Descripcion,
+                      item.NombreParroquia,
+                      item.NombreCanton,
+                      item.NombreParroquia,
+                      item.NombreComunidad,
+                      item.FechaInicioEncuesta,
+                      item.FechaFinEncuesta,
+                      item.PeriodoInicioCuestionario,
+                      item.PeriodoFinCuestionario,
+                      item.FechaPublicacionCuestionario
+                ));
+            }
+            return _lista;
+        }
         public int EditarAsignarEncuestado(AsignarEncuestado _objAsignarEncuestado)
         {
             try

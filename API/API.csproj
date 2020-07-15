@@ -332,6 +332,9 @@
     <Compile Include="Conexion\Sp_ComponenteConsultar_Result2.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ComponenteConsultar_Result3.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ComunidadConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -509,6 +512,12 @@
     <Compile Include="Conexion\Sp_UsuarioValidar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_VerEncuestaAsignadasNueva_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_VerEncuestaAsignadasNueva_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_VersionamientoModeloConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -650,6 +659,7 @@
     <Compile Include="Models\Entidades\ContenidoDetalleComponente.cs" />
     <Compile Include="Models\Entidades\ContenidoTipoElemento.cs" />
     <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
+    <Compile Include="Models\Entidades\CuestionariosAsignadosTecnicos.cs" />
     <Compile Include="Models\Entidades\ModeloPublicado.cs" />
     <Compile Include="Models\Entidades\CuestionarioPublicado.cs" />
     <Compile Include="Models\Entidades\DescripcionComponente.cs" />

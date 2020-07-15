@@ -137,6 +137,26 @@ namespace API.Controllers
         }
 
 
+        [HttpGet]
+        [Route("api/cuestionarios/nuevos/tecnico")]
+        public object cuestionariosnuevosporusuariotecnico(string idUsuarioTipoUsuarioTecnico)
+        {
+            object _respuesta = new object();
+            try
+            {
+                int _idUsuarioTipoUsuarioTecnico = Convert.ToInt32(_seguridad.DesEncriptar(Convert.ToString(idUsuarioTipoUsuarioTecnico)));
+                if (Convert.ToString(_idUsuarioTipoUsuarioTecnico) == null || string.IsNullOrEmpty(Convert.ToString(_idUsuarioTipoUsuarioTecnico)))
+                {
+                    return new { respuesta = "No se permiten valores vacíos", http = 406 };
+                }
+                _respuesta = _objCatalogoAsignarEncuestado.cuestionariosNuevoPorTecnico(_idUsuarioTipoUsuarioTecnico).ToList();
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = 200 };
+        }
         [HttpPost]
         [Route("api/asignarencuestado_editar")]
         public object asignarencuestado_editar(AsignarEncuestado _objAsignarEncuestado)
