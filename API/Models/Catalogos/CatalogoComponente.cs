@@ -117,7 +117,10 @@ namespace API.Models.Catalogos
         public List<Componente> ConsultarComponentePorIdCuestionarioGenerico(int _idCuestionarioGenerico)
         {
             List<Componente> _lista = new List<Componente>();
-            foreach (var item in db.Sp_ComponenteConsultar().Where(c=>c.IdCuestionarioGenerico==_idCuestionarioGenerico).ToList())
+            foreach (var item in db.Sp_ComponenteConsultar()
+                .Where(c=>c.IdCuestionarioGenerico==_idCuestionarioGenerico)
+                .Where(c => c.EstadoComponente == true)
+                .ToList())
             {
                 _lista.Add(new Componente()
                 {
@@ -153,6 +156,27 @@ namespace API.Models.Catalogos
                     Orden = item.OrdenComponente,
                     Utilizado = item.UtilizadoComponente
                     ,listaSeccion = new CatalogoSeccion().ConsultarSeccionPorIdComponenteConPregunta(item.IdComponente)
+                });
+            }
+            return _lista;
+        }
+
+        public List<Componente> ComponentePorIdCuestionario(int _idCuestionarioGenerico)
+        {
+            List<Componente> _lista = new List<Componente>();
+            foreach (var item in db.Sp_ComponentesConsultarPorCuestionario(_idCuestionarioGenerico).ToList())
+            {
+                _lista.Add(new Componente()
+                {
+                   // IdComponente = item.IdComponente,
+                    IdComponenteEncriptado = _seguridad.Encriptar(item.IdComponente.ToString()),
+                    Descripcion = item.Descripcion,
+                    Estado = item.Estado,
+                    Orden = item.Orden,
+                    CuestionarioGenerico = new CuestionarioGenerico()
+                    {
+                        IdCuestionarioGenericoEncriptado = _seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
+                    }
                 });
             }
             return _lista;

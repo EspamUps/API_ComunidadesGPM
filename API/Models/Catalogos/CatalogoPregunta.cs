@@ -407,6 +407,36 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
+        public List<Pregunta> preguntasPorCompenente(int idcomponente)
+        {
+            List<Pregunta> _lista = new List<Pregunta>();
+            foreach (var item in db.Sp_ListadoPreguntasPorComponente(idcomponente))
+            {
+                _lista.Add(new Pregunta()
+                {
+                    IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                    Descripcion = item.Descripcion,
+                    TipoPregunta = new TipoPregunta()
+                    {
+                        IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
+                        Descripcion = item.TipoPregunta,
+                        Estado = item.EstadoPregunta,
+                        Identificador = item.IdTipoPregunta
+                    },
+                    CabeceraVersionCuestionario = new CabeceraVersionCuestionario() {
+                        IdCabeceraVersionCuestionario = item.IdCabeceraVersionCuestionario
+                    },
+                    Seccion = new Seccion() {
+                        SeccionId = _seguridad.Encriptar(item.IdSeccion.ToString()),
+                        Descripcion = item.Seccion
+                    },
+                    IdPreguntaEncajonada = item.PreguntaEncajonada,
+                    IdComponente = _seguridad.Encriptar(item.IdComponente.ToString()),
+                    IdOpcionPreguntaSeleccion= _seguridad.Encriptar(item.IdOpcionPreguntaSeleccion.ToString())
 
+                });
+            }
+            return _lista;
+        }
     }
 }

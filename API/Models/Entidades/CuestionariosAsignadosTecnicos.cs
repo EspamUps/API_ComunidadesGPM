@@ -9,6 +9,7 @@ namespace API.Models.Entidades
     {
 
         public string IdAsignarEncuestado { get; set; }
+        public string IdVersionCuestionario{ get; set; }
         public string IdCuestionarioGenerico { get; set; }
         public string nombreCuestionario { get; set; }
         public string detalleCuestionario { get; set; }
@@ -34,7 +35,8 @@ namespace API.Models.Entidades
                 DateTime FechaFinCuestionario, 
                 DateTime PeriodoFechaInicioCuestionario, 
                 DateTime PeriodoFechaFinCuestionario, 
-                DateTime FechaPublicacionCuestionario
+                DateTime FechaPublicacionCuestionario,
+                string IdVersionCuestionario
             )
 
         {
@@ -51,6 +53,8 @@ namespace API.Models.Entidades
             this.PeriodoFechaInicioCuestionario = PeriodoFechaInicioCuestionario;
             this.PeriodoFechaFinCuestionario = PeriodoFechaFinCuestionario;
             this.FechaPublicacionCuestionario = FechaPublicacionCuestionario;
+            this.IdVersionCuestionario = IdVersionCuestionario;
         }
+
     }
 }

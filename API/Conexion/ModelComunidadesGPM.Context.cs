@@ -2963,13 +2963,31 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponenteConsultar_Result3>("Sp_ComponenteConsultar");
         }
     
-        public virtual ObjectResult<Sp_VerEncuestaAsignadasNueva_Result1> Sp_VerEncuestaAsignadasNueva(Nullable<int> idAsignarUsuarioTipoUsuarioTecnico)
+        public virtual ObjectResult<Sp_ComponentesConsultarPorCuestionario_Result> Sp_ComponentesConsultarPorCuestionario(Nullable<int> idversioncuestionario)
+        {
+            var idversioncuestionarioParameter = idversioncuestionario.HasValue ?
+                new ObjectParameter("idversioncuestionario", idversioncuestionario) :
+                new ObjectParameter("idversioncuestionario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponentesConsultarPorCuestionario_Result>("Sp_ComponentesConsultarPorCuestionario", idversioncuestionarioParameter);
+        }
+    
+        public virtual ObjectResult<Sp_VerEncuestaAsignadasNueva_Result2> Sp_VerEncuestaAsignadasNueva(Nullable<int> idAsignarUsuarioTipoUsuarioTecnico)
         {
             var idAsignarUsuarioTipoUsuarioTecnicoParameter = idAsignarUsuarioTipoUsuarioTecnico.HasValue ?
                 new ObjectParameter("IdAsignarUsuarioTipoUsuarioTecnico", idAsignarUsuarioTipoUsuarioTecnico) :
                 new ObjectParameter("IdAsignarUsuarioTipoUsuarioTecnico", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_VerEncuestaAsignadasNueva_Result1>("Sp_VerEncuestaAsignadasNueva", idAsignarUsuarioTipoUsuarioTecnicoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_VerEncuestaAsignadasNueva_Result2>("Sp_VerEncuestaAsignadasNueva", idAsignarUsuarioTipoUsuarioTecnicoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ListadoPreguntasPorComponente_Result2> Sp_ListadoPreguntasPorComponente(Nullable<int> idComponente)
+        {
+            var idComponenteParameter = idComponente.HasValue ?
+                new ObjectParameter("idComponente", idComponente) :
+                new ObjectParameter("idComponente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ListadoPreguntasPorComponente_Result2>("Sp_ListadoPreguntasPorComponente", idComponenteParameter);
         }
     }
 }

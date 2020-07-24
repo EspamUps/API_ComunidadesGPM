@@ -22,6 +22,7 @@ namespace API.Controllers
         CatalogoOpcionUnoMatriz _objCatalogoOpcionUnoMatriz = new CatalogoOpcionUnoMatriz();
         CatalogoConfigurarMatriz _objCatalogoConfigurarMatriz = new CatalogoConfigurarMatriz();
         CatalogoOpcionDosMatriz _objCatalogoOpcionDosMatriz = new CatalogoOpcionDosMatriz();
+        CatalogoComponente _objComponente = new CatalogoComponente();
         [HttpPost]
         [Route("api/pregunta_insertar")]
         public object pregunta_insertar(Pregunta _objPregunta)
@@ -590,6 +591,42 @@ namespace API.Controllers
             return new { respuesta = _respuesta, http = _http };
         }
 
-       
+        [HttpGet]
+        [Route("api/pregunta/componente")]
+        public object listadoPreguntasPorComponenten(string idcomponente)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (idcomponente == null || string.IsNullOrEmpty(idcomponente))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la opción pregunta selección";
+                }
+                else
+                {
+                    int _idComponente = Convert.ToInt32(_seguridad.DesEncriptar(idcomponente));
+                    var objComponente= _objComponente.ConsultarComponentePorId(_idComponente).Where(c => c.Estado == true).FirstOrDefault();
+                    if (objComponente == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el componente";
+                    }
+                    else
+                    {
+                        var _lista = _objCatalogoPregunta.preguntasPorCompenente(_idComponente).ToList();
+                        _respuesta = _lista;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
     }
 }

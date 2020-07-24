@@ -9,7 +9,14 @@ namespace API.Models.Entidades
     {
         public int IdPregunta { get; set; }
         public string IdPreguntaEncriptado { get; set; }
+        public string IdPreguntaEncajonada { get; set; }
+        public string IdOpcionPreguntaSeleccion { get; set; }
+        public string IdComponente { get; set; }
+      
         public TipoPregunta TipoPregunta { get; set; }
+        public Componente Componente { get; set; }
+        public PreguntaEncajonada PreguntaEncajonada { get; set; }
+        public CabeceraVersionCuestionario CabeceraVersionCuestionario { get; set; }
         public Seccion Seccion { get; set; }
         public string Descripcion { get; set; }
         public bool Obligatorio { get; set; }

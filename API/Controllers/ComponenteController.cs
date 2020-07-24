@@ -398,5 +398,41 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+        [HttpGet]
+        [Route("api/componente/cuestionario")]
+        public object componente_consultarporidcuestionario(string _idCuestionarioGenerioEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idCuestionarioGenerioEncriptado == null || string.IsNullOrEmpty(_idCuestionarioGenerioEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cuestionario genérico";
+                }
+                else
+                {
+                    int _idCuestionarioGenerico = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioGenerioEncriptado));
+                    //var _objCuestionarioGenerico = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenericoPorId(_idCuestionarioGenerico).Where(c => c.Estado == true).FirstOrDefault();
+                    //if (_objCuestionarioGenerico == null)
+                    //{
+                    //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                    //    _http.mensaje = "No se encontró el cuestionario genérico en el sistema";
+                    //}
+                    //else
+                    //{
+                        var _listaComponentes = _objCatalogoComponente.ComponentePorIdCuestionario(_idCuestionarioGenerico).ToList();
+                        _respuesta = _listaComponentes;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
     }
 }

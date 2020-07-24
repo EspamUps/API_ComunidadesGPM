@@ -40,7 +40,8 @@ namespace API.Models.Catalogos
                       item.FechaFinEncuesta,
                       item.PeriodoInicioCuestionario,
                       item.PeriodoFinCuestionario,
-                      item.FechaPublicacionCuestionario
+                      item.FechaPublicacionCuestionario,
+                      _seguridad.Encriptar(item.IdCabeceraVersionCuestionario.ToString())                    
                 ));
             }
             return _lista;
