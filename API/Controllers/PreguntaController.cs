@@ -62,6 +62,20 @@ namespace API.Controllers
                     _objPregunta.Seccion.IdSeccion = _idSeccion;
                     _objPregunta.TipoPregunta.IdTipoPregunta = _idTipoPregunta;
                     _objPregunta.Estado = true;
+                    if (_objPregunta.leyendaLateral != null)
+                    {
+                        if (_objPregunta.leyendaLateral.Trim().ToUpper() == "NULL")
+                        {
+                            _objPregunta.leyendaLateral = null;
+                        }
+                    }
+                    if (_objPregunta.leyendaSuperior != null)
+                    {
+                        if (_objPregunta.leyendaSuperior.Trim().ToUpper() == "NULL")
+                        {
+                            _objPregunta.leyendaSuperior = null;
+                        }
+                    }
                     int _idPregunta = _objCatalogoPregunta.InsertarPregunta(_objPregunta);
                     if (_idPregunta == 0)
                     {
@@ -134,6 +148,20 @@ namespace API.Controllers
                     _objPregunta.Seccion.IdSeccion = _idSeccion;
                     _objPregunta.TipoPregunta.IdTipoPregunta = _idTipoPregunta;
                     _objPregunta.Estado = true;
+                    if (_objPregunta.leyendaLateral!=null)
+                    {
+                        if (_objPregunta.leyendaLateral.Trim().ToUpper() == "NULL")
+                        {
+                            _objPregunta.leyendaLateral = null;
+                        }
+                    }
+                    if (_objPregunta.leyendaSuperior != null)
+                    {
+                        if (_objPregunta.leyendaSuperior.Trim().ToUpper() == "NULL")
+                        {
+                            _objPregunta.leyendaSuperior = null;
+                        }
+                    }
                     _idPregunta = _objCatalogoPregunta.ModificarPregunta(_objPregunta);
                     if (_idPregunta == 0)
                     {

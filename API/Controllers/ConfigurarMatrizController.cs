@@ -112,6 +112,7 @@ namespace API.Controllers
         public object configurarmatriz_consultarporidpregunta(string _idPreguntaEncriptado)
         {
             object _respuesta = new object();
+            object _respuesta1 = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
@@ -145,6 +146,7 @@ namespace API.Controllers
                         }
 
                         _respuesta = _listaConfigurarMatriz;
+                        _respuesta1 = _objPregunta;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
 
 
@@ -155,7 +157,7 @@ namespace API.Controllers
             {
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
             }
-            return new { respuesta = _respuesta, http = _http };
+            return new { respuesta = _respuesta, http = _http ,respuesta1=_respuesta1};
         }
     }
 }

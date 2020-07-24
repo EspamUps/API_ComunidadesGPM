@@ -16,7 +16,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                return int.Parse(db.Sp_PreguntaInsertar(_objPregunta.TipoPregunta.IdTipoPregunta,_objPregunta.Seccion.IdSeccion,_objPregunta.Descripcion,_objPregunta.Orden,_objPregunta.Obligatorio,_objPregunta.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
+                return int.Parse(db.Sp_PreguntaInsertar(_objPregunta.TipoPregunta.IdTipoPregunta,_objPregunta.Seccion.IdSeccion,_objPregunta.Descripcion,_objPregunta.Orden,_objPregunta.Obligatorio,_objPregunta.Estado, _objPregunta.leyendaSuperior, _objPregunta.leyendaLateral, _objPregunta.Observacion).Select(x=>x.Value.ToString()).FirstOrDefault());
             }
             catch (Exception)
             {
@@ -28,7 +28,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                db.Sp_PreguntaModificar(_objPregunta.IdPregunta, _objPregunta.TipoPregunta.IdTipoPregunta, _objPregunta.Seccion.IdSeccion, _objPregunta.Descripcion, _objPregunta.Orden, _objPregunta.Obligatorio, _objPregunta.Estado);
+                db.Sp_PreguntaModificar(_objPregunta.IdPregunta, _objPregunta.TipoPregunta.IdTipoPregunta, _objPregunta.Seccion.IdSeccion, _objPregunta.Descripcion, _objPregunta.leyendaSuperior, _objPregunta.leyendaLateral, _objPregunta.Orden, _objPregunta.Obligatorio, _objPregunta.Estado, _objPregunta.Observacion);
                 return _objPregunta.IdPregunta;
             }
             catch (Exception)
@@ -134,6 +134,9 @@ namespace API.Models.Catalogos
                     Orden = item.OrdenPregunta,
                     Utilizado = item.UtilizadoPregunta,
                     Encajonamiento = item.EncajonamientoPregunta,
+                    leyendaSuperior= item.leyendaSuperior,
+                    leyendaLateral= item.leyendaLateral,
+                    Observacion= Convert.ToBoolean(item.ObservacionPregunta),
                     TipoPregunta = new TipoPregunta()
                     {
                         IdTipoPregunta = item.IdTipoPregunta,
@@ -180,8 +183,11 @@ namespace API.Models.Catalogos
                     IdPregunta = item.IdPregunta,
                     IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
                     Descripcion = item.DescripcionPregunta,
+                    leyendaSuperior = item.leyendaSuperior,
+                    leyendaLateral = item.leyendaLateral,
                     Estado = item.EstadoPregunta,
                     Obligatorio = item.ObligatorioPregunta,
+                    Observacion = Convert.ToBoolean(item.ObservacionPregunta),
                     Orden = item.OrdenPregunta,
                     Utilizado = item.UtilizadoPregunta,
                     Encajonamiento = item.EncajonamientoPregunta,

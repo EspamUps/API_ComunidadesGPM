@@ -103,7 +103,8 @@ namespace API.Models.Catalogos
                         IdPeriodoEncriptado=_seguridad.Encriptar(item.IdPeriodo.ToString()),
                         Estado=item.EstadoPeriodo,
                         FechaInicio=item.FechaInicioPeriodo,
-                        FechaFin=item.FechaFinPeriodo
+                        FechaFin=item.FechaFinPeriodo,
+                        Descripcion = item.DescripcionPeriodo
                     },
                     CabeceraVersionCuestionario = new CabeceraVersionCuestionario()
                     {
