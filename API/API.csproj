@@ -332,9 +332,6 @@
     <Compile Include="Conexion\Sp_ComponenteConsultar_Result2.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_ComponenteConsultar_Result3.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_ComponentesConsultarPorCuestionario_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -392,16 +389,7 @@
     <Compile Include="Conexion\Sp_LiderComunitarioConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\Sp_ListaComponentePorCuestionario_Result.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_ListadoPreguntasPorComponente_Result.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_ListadoPreguntasPorComponente_Result1.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_ListadoPreguntasPorComponente_Result2.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ModeloGenericoConsultar_Result.cs">
@@ -459,6 +447,18 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PreguntaConsultar_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultar_Result3.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultar_Result4.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultar_Result5.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultar_Result6.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PreguntaEncajonadaConsultar_Result.cs">
@@ -528,12 +528,6 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_VerEncuestaAsignadasNueva_Result.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_VerEncuestaAsignadasNueva_Result1.cs">
-      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_VerEncuestaAsignadasNueva_Result2.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_VersionamientoModeloConsultar_Result.cs">

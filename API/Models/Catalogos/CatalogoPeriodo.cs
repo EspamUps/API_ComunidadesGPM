@@ -29,5 +29,47 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+
+        public int InsertarPeriodo(Periodo objPeriodo)
+        {
+            try
+            {
+                return int.Parse(db.Sp_PeriodoInsertar(
+                        objPeriodo.Descripcion,
+                        objPeriodo.FechaInicio,
+                        objPeriodo.FechaFin,
+                        objPeriodo.Estado
+                    ).Select(x => x.Value.ToString()).FirstOrDefault());
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public int ModificarPeriodo(Periodo objPeriodo)
+        {
+            try
+            {
+                db.Sp_PeriodoModificar(
+                        objPeriodo.IdPeriodo,
+                        objPeriodo.Descripcion,
+                        objPeriodo.FechaInicio,
+                        objPeriodo.FechaFin,
+                        objPeriodo.Estado
+                 );
+                return objPeriodo.IdPeriodo;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+
+        public void EliminarPeriodo(int _idPeriodo)
+        {
+            db.Sp_PeriodoEliminar(_idPeriodo);
+        }
     }
 }
