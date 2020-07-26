@@ -103,7 +103,7 @@ namespace API.Models.Catalogos
         public List<ConfigurarMatriz> ConsultarConfigurarMatrizPorIdPregunta(int _idPregunta)
         {
             List<ConfigurarMatriz> _lista = new List<ConfigurarMatriz>();
-            foreach (var item in db.Sp_ConfigurarMatrizConsultar().Where(c=>c.IdPregunta==_idPregunta).ToList())
+            foreach (var item in db.Sp_ConfigurarMatrizConsultar2(_idPregunta).ToList())
             {
                 _lista.Add( new ConfigurarMatriz()
                 {
@@ -134,6 +134,10 @@ namespace API.Models.Catalogos
                             Estado = item.EstadoPregunta,
                             Obligatorio = item.ObligatorioPregunta,
                             Orden = item.OrdenPregunta,
+                            leyendaLateral= item.leyendaLateral,
+                            leyendaSuperior=item.leyendaSuperior,
+                            Observacion=Convert.ToBoolean(item.observacion),
+
                             TipoPregunta = new TipoPregunta()
                             {
                                 IdTipoPregunta = item.IdTipoPregunta,

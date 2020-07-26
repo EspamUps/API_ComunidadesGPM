@@ -24,7 +24,7 @@ namespace API.Models.Catalogos
         }
         public List<CuestionariosAsignadosTecnicos> cuestionariosNuevoPorTecnico(int _idAsignarUsuarioTipoUsuario)
         {
-            List<CuestionariosAsignadosTecnicos> _lista = new List<CuestionariosAsignadosTecnicos>();
+            ; List<CuestionariosAsignadosTecnicos> _lista = new List<CuestionariosAsignadosTecnicos>();
             foreach (var item in db.Sp_VerEncuestaAsignadasNueva(_idAsignarUsuarioTipoUsuario))
             {
                 _lista.Add(new CuestionariosAsignadosTecnicos(

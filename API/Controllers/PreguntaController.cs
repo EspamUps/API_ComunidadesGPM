@@ -23,6 +23,7 @@ namespace API.Controllers
         CatalogoConfigurarMatriz _objCatalogoConfigurarMatriz = new CatalogoConfigurarMatriz();
         CatalogoOpcionDosMatriz _objCatalogoOpcionDosMatriz = new CatalogoOpcionDosMatriz();
         CatalogoComponente _objComponente = new CatalogoComponente();
+        CatalogoAsignarUsuarioTipoUsuario _objUsuarioTipoUsuario = new CatalogoAsignarUsuarioTipoUsuario();
         [HttpPost]
         [Route("api/pregunta_insertar")]
         public object pregunta_insertar(Pregunta _objPregunta)
@@ -621,7 +622,7 @@ namespace API.Controllers
 
         [HttpGet]
         [Route("api/pregunta/componente")]
-        public object listadoPreguntasPorComponenten(string idcomponente)
+        public object listadoPreguntasPorComponenten(string idcomponente, string idusuariotecnico)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
@@ -631,19 +632,32 @@ namespace API.Controllers
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador de la opción pregunta selección";
+                } else if (idusuariotecnico == null || string.IsNullOrEmpty(idusuariotecnico))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del técnico";
                 }
                 else
                 {
                     int _idComponente = Convert.ToInt32(_seguridad.DesEncriptar(idcomponente));
+                    int _idusuariotecnico = Convert.ToInt32(_seguridad.DesEncriptar(idusuariotecnico));
                     var objComponente= _objComponente.ConsultarComponentePorId(_idComponente).Where(c => c.Estado == true).FirstOrDefault();
+                    var objUsuario= _objUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario()
+                        .Where(c => c.Estado == true)
+                        .Where(c => c.IdAsignarUsuarioTipoUsuario == _idusuariotecnico)
+                        .FirstOrDefault();
                     if (objComponente == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No se encontró el componente";
+                    }else  if (objUsuario == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el usuario";
                     }
                     else
                     {
-                        var _lista = _objCatalogoPregunta.preguntasPorCompenente(_idComponente).ToList();
+                        var _lista = _objCatalogoPregunta.preguntasPorCompenente(_idComponente, _idusuariotecnico).ToList();
                         _respuesta = _lista;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }

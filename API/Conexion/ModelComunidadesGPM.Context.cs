@@ -1271,11 +1271,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_ComponenteModificar", idComponenteParameter, idCuestionarioGenericoParameter, descripcionParameter, ordenParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Sp_ConfigurarMatrizConsultar_Result> Sp_ConfigurarMatrizConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ConfigurarMatrizConsultar_Result>("Sp_ConfigurarMatrizConsultar");
-        }
-    
         public virtual int Sp_ConfigurarMatrizEliminar(Nullable<int> idConfigurarMatriz)
         {
             var idConfigurarMatrizParameter = idConfigurarMatriz.HasValue ?
@@ -3046,15 +3041,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponentesConsultarPorCuestionario_Result>("Sp_ComponentesConsultarPorCuestionario", idversioncuestionarioParameter);
         }
     
-        public virtual ObjectResult<Sp_ListadoPreguntasPorComponente_Result> Sp_ListadoPreguntasPorComponente(Nullable<int> idComponente)
-        {
-            var idComponenteParameter = idComponente.HasValue ?
-                new ObjectParameter("idComponente", idComponente) :
-                new ObjectParameter("idComponente", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ListadoPreguntasPorComponente_Result>("Sp_ListadoPreguntasPorComponente", idComponenteParameter);
-        }
-    
         public virtual ObjectResult<Sp_PreguntaConsultar_Result6> Sp_PreguntaConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultar_Result6>("Sp_PreguntaConsultar");
@@ -3067,6 +3053,33 @@ namespace API.Conexion
                 new ObjectParameter("IdAsignarUsuarioTipoUsuarioTecnico", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_VerEncuestaAsignadasNueva_Result>("Sp_VerEncuestaAsignadasNueva", idAsignarUsuarioTipoUsuarioTecnicoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ConfigurarMatrizConsultar_Result2> Sp_ConfigurarMatrizConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ConfigurarMatrizConsultar_Result2>("Sp_ConfigurarMatrizConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_ConfigurarMatrizConsultar2_Result> Sp_ConfigurarMatrizConsultar2(Nullable<int> idpregunta)
+        {
+            var idpreguntaParameter = idpregunta.HasValue ?
+                new ObjectParameter("idpregunta", idpregunta) :
+                new ObjectParameter("idpregunta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ConfigurarMatrizConsultar2_Result>("Sp_ConfigurarMatrizConsultar2", idpreguntaParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ListadoPreguntasPorComponente_Result2> Sp_ListadoPreguntasPorComponente(Nullable<int> idComponente, Nullable<int> idUsuarioTecnico)
+        {
+            var idComponenteParameter = idComponente.HasValue ?
+                new ObjectParameter("idComponente", idComponente) :
+                new ObjectParameter("idComponente", typeof(int));
+    
+            var idUsuarioTecnicoParameter = idUsuarioTecnico.HasValue ?
+                new ObjectParameter("idUsuarioTecnico", idUsuarioTecnico) :
+                new ObjectParameter("idUsuarioTecnico", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ListadoPreguntasPorComponente_Result2>("Sp_ListadoPreguntasPorComponente", idComponenteParameter, idUsuarioTecnicoParameter);
         }
     }
 }

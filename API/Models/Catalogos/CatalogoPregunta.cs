@@ -413,10 +413,10 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
-        public List<Pregunta> preguntasPorCompenente(int idcomponente)
+        public List<Pregunta> preguntasPorCompenente(int idcomponente, int idusuariotecnico)
         {
             List<Pregunta> _lista = new List<Pregunta>();
-            foreach (var item in db.Sp_ListadoPreguntasPorComponente(idcomponente))
+            foreach (var item in db.Sp_ListadoPreguntasPorComponente(idcomponente, idusuariotecnico))
             {
                 _lista.Add(new Pregunta()
                 {
@@ -427,7 +427,7 @@ namespace API.Models.Catalogos
                         IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
                         Descripcion = item.TipoPregunta,
                         Estado = item.EstadoPregunta,
-                        Identificador = item.IdTipoPregunta
+                        Identificador = item.Identificador
                     },
                     CabeceraVersionCuestionario = new CabeceraVersionCuestionario() {
                         IdCabeceraVersionCuestionario = item.IdCabeceraVersionCuestionario
