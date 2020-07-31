@@ -246,5 +246,60 @@ namespace API.Controllers
             return new { respuesta = _respuesta, http = _http };
         }
 
+        [HttpPost]
+        [Route("api/cuestionariogenerico_consultarporversion")]
+        public object cuestionariogenerico_consultarporversion(string _idCuestionarioGenericoEncriptado, string IdCabeceraVersionCuestionarioEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            //var _objCuestionario = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenericoPorIdConComponenteSeccionPregunta(int.Parse(_idCuestionarioGenerico)).Where(c => c.Estado == true).FirstOrDefault();
+
+            try
+            {
+                if (_idCuestionarioGenericoEncriptado == null || string.IsNullOrEmpty(_idCuestionarioGenericoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cuestionario";
+                }
+                else if (IdCabeceraVersionCuestionarioEncriptado == null || string.IsNullOrEmpty(IdCabeceraVersionCuestionarioEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la version del cuestionario";
+                }
+                else
+                {
+                    int _idCuestionario = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioGenericoEncriptado));
+                    int _idVersionCuestionario = Convert.ToInt32(_seguridad.DesEncriptar(IdCabeceraVersionCuestionarioEncriptado));
+                    var _objCuestionario = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenericoPorVersion(_idCuestionario, _idVersionCuestionario).Where(c => c.Estado == true).FirstOrDefault();
+
+                    _objCuestionario.IdCuestionarioGenerico = 0;
+
+                    foreach (var componente in _objCuestionario.listaComponente)
+                    {
+                        componente.IdComponente = 0;
+                        foreach (var seccion in componente.listaSeccion)
+                        {
+                            seccion.IdSeccion = 0;
+                            foreach (var pregunta in seccion.listaPregunta)
+                            {
+                                pregunta.IdPregunta = 0;
+                                pregunta.TipoPregunta.IdTipoPregunta = 0;
+                            }
+                        }
+                    }
+                    _respuesta = _objCuestionario;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+
+            //var _http = "g";
+            return new { respuesta = _respuesta, http = _http };
+        }
+
     }
 }

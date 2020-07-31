@@ -17,7 +17,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                return int.Parse(db.Sp_VersionamientoPreguntaInsertar(_objVersionamientoPregunta.CabeceraVersionCuestionario.IdCabeceraVersionCuestionario,_objVersionamientoPregunta.Pregunta.IdPregunta,_objVersionamientoPregunta.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
+                return int.Parse(db.Sp_VersionamientoPreguntaInsertar(_objVersionamientoPregunta.CabeceraVersionCuestionario.IdCabeceraVersionCuestionario,_objVersionamientoPregunta.Pregunta.IdPregunta, _objVersionamientoPregunta.Pregunta.Seccion.IdSeccion, _objVersionamientoPregunta.Pregunta.Seccion.Componente.IdComponente, _objVersionamientoPregunta.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
             }
             catch (Exception)
             {

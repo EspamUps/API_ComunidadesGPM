@@ -144,11 +144,11 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No se encontró el objeto pregunta encajonada";
                     }
-                    else if(_objPreguntaEncajonada.Utilizado=="1")
-                    {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
-                        _http.mensaje = "No se puede eliminar porque ya ha sido utilizada";
-                    }
+                    //else if(_objPreguntaEncajonada.Utilizado=="1")
+                    //{
+                    //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                    //    _http.mensaje = "No se puede eliminar porque ya ha sido utilizada";
+                    //}
                     else 
                     {
                         _objCatalogoPreguntaEncajonada.EliminarPreguntaEncajonada(_idPreguntaEncajonada);

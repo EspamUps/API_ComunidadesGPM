@@ -413,6 +413,35 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
+        public List<Pregunta> ConsultarPreguntaPorIdSeccionConTipoPreguntaPorVersion(int _idSeccion, int _idVersionCuestionario)
+        {
+            List<Pregunta> _lista = new List<Pregunta>();
+            foreach (var item in db.Sp_PreguntaConsultarNoEncajonadasPorSeccionPorVersion(_idSeccion, _idVersionCuestionario))
+            {
+                _lista.Add(new Pregunta()
+                {
+                    IdPregunta = item.IdPregunta,
+                    IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                    Descripcion = item.DescripcionPregunta,
+                    Estado = item.EstadoPregunta,
+                    Obligatorio = item.ObligatorioPregunta,
+                    Orden = item.OrdenPregunta,
+                    Utilizado = item.UtilizadoPregunta,
+                    Encajonamiento = item.EncajonamientoPregunta,
+                    TipoPregunta = new TipoPregunta()
+                    {
+                        IdTipoPregunta = item.IdTipoPregunta,
+                        IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
+                        Descripcion = item.DescripcionTipoPregunta,
+                        Estado = item.EstadoTipoPregunta,
+                        Identificador = item.IdentificadorTipoPregunta
+                    },
+
+                });
+            }
+            return _lista;
+        }
+
         public List<Pregunta> preguntasPorCompenente(int idcomponente, int idusuariotecnico)
         {
             List<Pregunta> _lista = new List<Pregunta>();
