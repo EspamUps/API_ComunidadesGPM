@@ -24,6 +24,19 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
+
+        public int EditarOpcionPreguntaSeleccion(OpcionPreguntaSeleccion _objOpcionPreguntaSeleccion)
+        {
+            try
+            {
+                return int.Parse(db.Sp_OpcionPreguntaSeleccionEditar(_objOpcionPreguntaSeleccion.Pregunta.IdPregunta, _objOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion, _objOpcionPreguntaSeleccion.Descripcion, _objOpcionPreguntaSeleccion.Estado).Select(x => x.Value.ToString()).FirstOrDefault());
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         public void EliminarOpcionPreguntaSeleccion(int _idOpcionPreguntaSeleccion)
         {
             db.Sp_OpcionPreguntaSeleccionEliminar(_idOpcionPreguntaSeleccion);

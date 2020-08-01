@@ -19,7 +19,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                foreach (var item in db.Sp_AsignarComponenteGenericoInsertar(int.Parse(_objAsignarComponenteGenerico.IdAsignarCuestionarioModelo), int.Parse(_objAsignarComponenteGenerico.IdComponente), _objAsignarComponenteGenerico.Orden))
+                foreach (var item in db.Sp_AsignarComponenteGenericoInsertar(int.Parse(_objAsignarComponenteGenerico.IdAsignarCuestionarioModelo), int.Parse(_objAsignarComponenteGenerico.IdComponente)))
                 {
                     _objAsignarComponenteGenerico.IdAsignarComponenteGenerico = item.IdAsignarComponenteGenerico;
                 }
