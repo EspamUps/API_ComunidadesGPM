@@ -1411,11 +1411,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_OpcionDosMatrizInsertar", descripcionParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Sp_OpcionPreguntaSeleccionConsultar_Result> Sp_OpcionPreguntaSeleccionConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionPreguntaSeleccionConsultar_Result>("Sp_OpcionPreguntaSeleccionConsultar");
-        }
-    
         public virtual int Sp_OpcionPreguntaSeleccionEliminar(Nullable<int> idOpcionPreguntaSeleccion)
         {
             var idOpcionPreguntaSeleccionParameter = idOpcionPreguntaSeleccion.HasValue ?
@@ -3030,11 +3025,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_VerEncuestaAsignadasNueva_Result>("Sp_VerEncuestaAsignadasNueva", idAsignarUsuarioTipoUsuarioTecnicoParameter);
         }
     
-        public virtual ObjectResult<Sp_ComponenteConsultar_Result3> Sp_ComponenteConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponenteConsultar_Result3>("Sp_ComponenteConsultar");
-        }
-    
         public virtual ObjectResult<Sp_ConfigurarMatrizConsultar_Result3> Sp_ConfigurarMatrizConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ConfigurarMatrizConsultar_Result3>("Sp_ConfigurarMatrizConsultar");
@@ -3086,43 +3076,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ListadoPreguntasPorComponente_Result4>("Sp_ListadoPreguntasPorComponente", idComponenteParameter, idUsuarioTecnicoParameter);
         }
     
-        public virtual int RespuestaPreguntaInsertAndUpdate(Nullable<int> idPregunta, Nullable<int> identificadorTipoPregunta, Nullable<int> idCabeceraRespuest, Nullable<int> idRespuestaLogica, string descripcionRespuesta, Nullable<System.DateTime> fechaRegistro, Nullable<int> idAsignarEncuestado, Nullable<System.DateTime> fechaRegistroCabecera)
-        {
-            var idPreguntaParameter = idPregunta.HasValue ?
-                new ObjectParameter("idPregunta", idPregunta) :
-                new ObjectParameter("idPregunta", typeof(int));
-    
-            var identificadorTipoPreguntaParameter = identificadorTipoPregunta.HasValue ?
-                new ObjectParameter("identificadorTipoPregunta", identificadorTipoPregunta) :
-                new ObjectParameter("identificadorTipoPregunta", typeof(int));
-    
-            var idCabeceraRespuestParameter = idCabeceraRespuest.HasValue ?
-                new ObjectParameter("idCabeceraRespuest", idCabeceraRespuest) :
-                new ObjectParameter("idCabeceraRespuest", typeof(int));
-    
-            var idRespuestaLogicaParameter = idRespuestaLogica.HasValue ?
-                new ObjectParameter("IdRespuestaLogica", idRespuestaLogica) :
-                new ObjectParameter("IdRespuestaLogica", typeof(int));
-    
-            var descripcionRespuestaParameter = descripcionRespuesta != null ?
-                new ObjectParameter("descripcionRespuesta", descripcionRespuesta) :
-                new ObjectParameter("descripcionRespuesta", typeof(string));
-    
-            var fechaRegistroParameter = fechaRegistro.HasValue ?
-                new ObjectParameter("fechaRegistro", fechaRegistro) :
-                new ObjectParameter("fechaRegistro", typeof(System.DateTime));
-    
-            var idAsignarEncuestadoParameter = idAsignarEncuestado.HasValue ?
-                new ObjectParameter("IdAsignarEncuestado", idAsignarEncuestado) :
-                new ObjectParameter("IdAsignarEncuestado", typeof(int));
-    
-            var fechaRegistroCabeceraParameter = fechaRegistroCabecera.HasValue ?
-                new ObjectParameter("FechaRegistroCabecera", fechaRegistroCabecera) :
-                new ObjectParameter("FechaRegistroCabecera", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RespuestaPreguntaInsertAndUpdate", idPreguntaParameter, identificadorTipoPreguntaParameter, idCabeceraRespuestParameter, idRespuestaLogicaParameter, descripcionRespuestaParameter, fechaRegistroParameter, idAsignarEncuestadoParameter, fechaRegistroCabeceraParameter);
-        }
-    
         public virtual ObjectResult<Sp_ShowRespuestaPorPregunta_Result3> Sp_ShowRespuestaPorPregunta(Nullable<int> idAsignarEncuestado, Nullable<int> idPregunta)
         {
             var idAsignarEncuestadoParameter = idAsignarEncuestado.HasValue ?
@@ -3143,19 +3096,6 @@ namespace API.Conexion
                 new ObjectParameter("IdOpcionPreguntaSeleccion", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_VerPreguntaDependiente_Result>("Sp_VerPreguntaDependiente", idOpcionPreguntaSeleccionParameter);
-        }
-    
-        public virtual ObjectResult<Sp_OpcionPreguntaSeleccionConsultar2_Result> Sp_OpcionPreguntaSeleccionConsultar2(Nullable<int> idPregunta, Nullable<int> idAsignarEncuestado)
-        {
-            var idPreguntaParameter = idPregunta.HasValue ?
-                new ObjectParameter("IdPregunta", idPregunta) :
-                new ObjectParameter("IdPregunta", typeof(int));
-    
-            var idAsignarEncuestadoParameter = idAsignarEncuestado.HasValue ?
-                new ObjectParameter("IdAsignarEncuestado", idAsignarEncuestado) :
-                new ObjectParameter("IdAsignarEncuestado", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionPreguntaSeleccionConsultar2_Result>("Sp_OpcionPreguntaSeleccionConsultar2", idPreguntaParameter, idAsignarEncuestadoParameter);
         }
     
         public virtual int sp_AsignarComponenteGenericoSubir(Nullable<int> idAsignarComponenteGenerico, Nullable<int> nuevo)
@@ -3269,6 +3209,88 @@ namespace API.Conexion
                 new ObjectParameter("idVersion", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_SeccionConsultarPorVersion_Result>("Sp_SeccionConsultarPorVersion", idVersionParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ShowRespuestaPorPregunta1_Result> Sp_ShowRespuestaPorPregunta1(Nullable<int> idAsignarEncuestado, Nullable<int> idPregunta)
+        {
+            var idAsignarEncuestadoParameter = idAsignarEncuestado.HasValue ?
+                new ObjectParameter("IdAsignarEncuestado", idAsignarEncuestado) :
+                new ObjectParameter("IdAsignarEncuestado", typeof(int));
+    
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ShowRespuestaPorPregunta1_Result>("Sp_ShowRespuestaPorPregunta1", idAsignarEncuestadoParameter, idPreguntaParameter);
+        }
+    
+        public virtual ObjectResult<Sp_VerPreguntaDependiente1_Result> Sp_VerPreguntaDependiente1(Nullable<int> idOpcionPreguntaSeleccion)
+        {
+            var idOpcionPreguntaSeleccionParameter = idOpcionPreguntaSeleccion.HasValue ?
+                new ObjectParameter("IdOpcionPreguntaSeleccion", idOpcionPreguntaSeleccion) :
+                new ObjectParameter("IdOpcionPreguntaSeleccion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_VerPreguntaDependiente1_Result>("Sp_VerPreguntaDependiente1", idOpcionPreguntaSeleccionParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ComponenteConsultar_Result4> Sp_ComponenteConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponenteConsultar_Result4>("Sp_ComponenteConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_OpcionPreguntaSeleccionConsultar_Result1> Sp_OpcionPreguntaSeleccionConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionPreguntaSeleccionConsultar_Result1>("Sp_OpcionPreguntaSeleccionConsultar");
+        }
+    
+        public virtual ObjectResult<Sp_OpcionPreguntaSeleccionConsultar2_Result2> Sp_OpcionPreguntaSeleccionConsultar2(Nullable<int> idPregunta, Nullable<int> idAsignarEncuestado)
+        {
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            var idAsignarEncuestadoParameter = idAsignarEncuestado.HasValue ?
+                new ObjectParameter("IdAsignarEncuestado", idAsignarEncuestado) :
+                new ObjectParameter("IdAsignarEncuestado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionPreguntaSeleccionConsultar2_Result2>("Sp_OpcionPreguntaSeleccionConsultar2", idPreguntaParameter, idAsignarEncuestadoParameter);
+        }
+    
+        public virtual int RespuestaPreguntaInsertAndUpdate(Nullable<int> idPregunta, Nullable<int> identificadorTipoPregunta, Nullable<int> idCabeceraRespuest, Nullable<int> idRespuestaLogica, string descripcionRespuesta, Nullable<System.DateTime> fechaRegistro, Nullable<int> idAsignarEncuestado, Nullable<System.DateTime> fechaRegistroCabecera)
+        {
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("idPregunta", idPregunta) :
+                new ObjectParameter("idPregunta", typeof(int));
+    
+            var identificadorTipoPreguntaParameter = identificadorTipoPregunta.HasValue ?
+                new ObjectParameter("identificadorTipoPregunta", identificadorTipoPregunta) :
+                new ObjectParameter("identificadorTipoPregunta", typeof(int));
+    
+            var idCabeceraRespuestParameter = idCabeceraRespuest.HasValue ?
+                new ObjectParameter("idCabeceraRespuest", idCabeceraRespuest) :
+                new ObjectParameter("idCabeceraRespuest", typeof(int));
+    
+            var idRespuestaLogicaParameter = idRespuestaLogica.HasValue ?
+                new ObjectParameter("IdRespuestaLogica", idRespuestaLogica) :
+                new ObjectParameter("IdRespuestaLogica", typeof(int));
+    
+            var descripcionRespuestaParameter = descripcionRespuesta != null ?
+                new ObjectParameter("descripcionRespuesta", descripcionRespuesta) :
+                new ObjectParameter("descripcionRespuesta", typeof(string));
+    
+            var fechaRegistroParameter = fechaRegistro.HasValue ?
+                new ObjectParameter("fechaRegistro", fechaRegistro) :
+                new ObjectParameter("fechaRegistro", typeof(System.DateTime));
+    
+            var idAsignarEncuestadoParameter = idAsignarEncuestado.HasValue ?
+                new ObjectParameter("IdAsignarEncuestado", idAsignarEncuestado) :
+                new ObjectParameter("IdAsignarEncuestado", typeof(int));
+    
+            var fechaRegistroCabeceraParameter = fechaRegistroCabecera.HasValue ?
+                new ObjectParameter("FechaRegistroCabecera", fechaRegistroCabecera) :
+                new ObjectParameter("FechaRegistroCabecera", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RespuestaPreguntaInsertAndUpdate", idPreguntaParameter, identificadorTipoPreguntaParameter, idCabeceraRespuestParameter, idRespuestaLogicaParameter, descripcionRespuestaParameter, fechaRegistroParameter, idAsignarEncuestadoParameter, fechaRegistroCabeceraParameter);
         }
     }
 }

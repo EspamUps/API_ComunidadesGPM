@@ -338,6 +338,9 @@
     <Compile Include="Conexion\Sp_ComponenteConsultar_Result3.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ComponenteConsultar_Result4.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ComponentesConsultarPorCuestionario_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -452,10 +455,22 @@
     <Compile Include="Conexion\Sp_ModuloConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar21_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar2_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar2_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar2_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_OpcionUnoMatrizConsultar_Result.cs">
@@ -554,6 +569,9 @@
     <Compile Include="Conexion\Sp_SexoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ShowRespuestaPorPregunta1_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ShowRespuestaPorPregunta_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -609,6 +627,9 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_VerEncuestaAsignadasNueva_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_VerPreguntaDependiente1_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_VerPreguntaDependiente_Result.cs">
