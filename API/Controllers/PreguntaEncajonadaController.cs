@@ -15,6 +15,7 @@ namespace API.Controllers
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         Seguridad _seguridad = new Seguridad();
         CatalogoPregunta _objCatalogoPregunta = new CatalogoPregunta();
+
         CatalogoOpcionPreguntaSeleccion _objCatalogoOpcionPreguntaSeleccion = new CatalogoOpcionPreguntaSeleccion();
         CatalogoPreguntaEncajonada _objCatalogoPreguntaEncajonada = new CatalogoPreguntaEncajonada();
         [HttpPost]
@@ -154,6 +155,34 @@ namespace API.Controllers
                         _objCatalogoPreguntaEncajonada.EliminarPreguntaEncajonada(_idPreguntaEncajonada);
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpGet]
+        [Route("api/pregunta/encajonada")]
+        public object preguntaencajonada_ver(string IdOpcionPreguntaSeleccion)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (IdOpcionPreguntaSeleccion == null || string.IsNullOrEmpty(IdOpcionPreguntaSeleccion))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la opción de la pregunta";
+                    return new { http = _http };
+                }
+                int _IdOpcionPreguntaSeleccion = int.Parse(_seguridad.DesEncriptar(IdOpcionPreguntaSeleccion));
+                var _respuestas = _objCatalogoPreguntaEncajonada.VerPreguntaEncajonada(Convert.ToString(_IdOpcionPreguntaSeleccion));
+                if (_respuestas != null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    return new { respuesta = _respuestas, http = _http };
                 }
             }
             catch (Exception ex)

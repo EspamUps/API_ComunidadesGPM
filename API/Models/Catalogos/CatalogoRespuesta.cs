@@ -13,6 +13,62 @@ namespace API.Models.Catalogos
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
 
+        public List<RespuestasPregunta> mostrarRespuestas(string _IdAsignarEncuestado, string _IdPregunta) {
+            List<RespuestasPregunta> _lista = new List<RespuestasPregunta>();
+            foreach (var item in db.Sp_ShowRespuestaPorPregunta(Convert.ToInt32(_IdAsignarEncuestado), Convert.ToInt32(_IdPregunta)))
+            {
+                _lista.Add(new RespuestasPregunta()
+                {
+                    IdRespuesta = _seguridad.Encriptar(item.IdRespuesta.ToString()),
+                    IdAsignarEncuestado = _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()),
+                    IdPregunta = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                    DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta,                   
+                    IdRespuestaLogica = _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
+                });
+            }
+            return _lista;
+
+        }
+        public List<RespuestaPreguntaSeleccion> mostrarPreguntaRespuestasPorSeleccion(string _IdPregunta, string _IdAsignarEncuestado)
+        {
+            List<RespuestaPreguntaSeleccion> _lista = new List<RespuestaPreguntaSeleccion>();
+            foreach (var item in db.Sp_OpcionPreguntaSeleccionConsultar2(Convert.ToInt32(_IdPregunta),Convert.ToInt32(_IdAsignarEncuestado)))
+            {
+                _lista.Add(new RespuestaPreguntaSeleccion()
+                {
+                   
+
+                IdOpcionPreguntaSeleccion = _seguridad.Encriptar(item.IdOpcionPreguntaSeleccion.ToString()),
+                DescripcionOpcionPreguntaSeleccion = item.DescripcionOpcionPreguntaSeleccion,
+                IdPreguntaHIja = _seguridad.Encriptar(item.IdPreguntaHIja.ToString()),
+                DescripcionPreguntaHIja = item.DescripcionPreguntaHIja,
+                IdPregunta = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                DescripcionPregunta = item.DescripcionPregunta,
+                OrdenPregunta = Convert.ToString(item.OrdenPregunta),
+                EncajonamientoOpcionPreguntaSeleccion = item.EncajonamientoOpcionPreguntaSeleccion,
+                IdRespuesta = _seguridad.Encriptar(item.IdRespuesta.ToString()),
+                IdRespuestaLogica = _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
+                DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta,
+                IdAsignarEncuestado = _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()),
+
+            });
+            }
+            return _lista;
+
+        }
+        public int InsertarRespuesta2(Respuesta _objRespuesta)
+        {
+            try
+            {
+                return db.RespuestaPreguntaInsertAndUpdate(_objRespuesta.Pregunta.IdPregunta,_objRespuesta.Pregunta.TipoPregunta.Identificador,_objRespuesta.CabeceraRespuesta.IdCabeceraRespuesta, _objRespuesta.IdRespuestaLogica, _objRespuesta.DescripcionRespuestaAbierta, _objRespuesta.FechaRegistro, _objRespuesta.CabeceraRespuesta.AsignarEncuestado.IdAsignarEncuestado, _objRespuesta.CabeceraRespuesta.FechaRegistro);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+
         public int InsertarRespuesta(Respuesta _objRespuesta)
         {
             try

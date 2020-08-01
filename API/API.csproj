@@ -332,6 +332,9 @@
     <Compile Include="Conexion\Sp_ComponenteConsultar_Result2.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ComponenteConsultar_Result3.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ComponentesConsultarPorCuestionario_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -341,6 +344,9 @@
     <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar2_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar2_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -348,6 +354,9 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar_Result3.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion_Result.cs">
@@ -407,6 +416,15 @@
     <Compile Include="Conexion\Sp_ListadoPreguntasPorComponente_Result2.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ListadoPreguntasPorComponente_Result3.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ListadoPreguntasPorComponente_Result4.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ModeloGenericoConsultar1_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ModeloGenericoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -417,6 +435,9 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ModuloConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar2_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar_Result.cs">
@@ -455,6 +476,9 @@
     <Compile Include="Conexion\Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result2.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result3.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_PreguntaConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -474,6 +498,9 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PreguntaConsultar_Result6.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultar_Result7.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PreguntaEncajonadaConsultar_Result.cs">
@@ -500,7 +527,22 @@
     <Compile Include="Conexion\Sp_SeccionConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_SeccionConsultar_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_SexoConsultar_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ShowRespuestaPorPregunta_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ShowRespuestaPorPregunta_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ShowRespuestaPorPregunta_Result2.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ShowRespuestaPorPregunta_Result3.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_TipoDatoConsultar_Result.cs">
@@ -536,6 +578,9 @@
     <Compile Include="Conexion\Sp_UsuarioConsultar_Result2.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_UsuarioConsultar_Result3.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_UsuarioInformacionGeneral_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -543,6 +588,9 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_VerEncuestaAsignadasNueva_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_VerPreguntaDependiente_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_VersionamientoModeloConsultar_Result.cs">
@@ -702,11 +750,14 @@
     <Compile Include="Models\Entidades\PreguntaEncajonada.cs" />
     <Compile Include="Models\Entidades\PresidenteJuntaParroquial.cs" />
     <Compile Include="Models\Entidades\Respuesta.cs" />
+    <Compile Include="Models\Entidades\RespuestaPreguntaSeleccion.cs" />
     <Compile Include="Models\Entidades\RespuestasCaracterizacion.cs" />
+    <Compile Include="Models\Entidades\RespuestasPregunta.cs" />
     <Compile Include="Models\Entidades\Seccion.cs" />
     <Compile Include="Models\Entidades\TipoDato.cs" />
     <Compile Include="Models\Entidades\TipoElemento.cs" />
     <Compile Include="Models\Entidades\TipoPregunta.cs" />
+    <Compile Include="Models\Entidades\VerPreguntaEncajonada.cs" />
     <Compile Include="Models\Entidades\VersionamientoModelo.cs" />
     <Compile Include="Models\Entidades\VersionamientoPregunta.cs" />
     <Compile Include="Models\Metodos\RespuestaHTTP.cs" />

@@ -432,6 +432,12 @@ namespace API.Models.Catalogos
                     CabeceraVersionCuestionario = new CabeceraVersionCuestionario() {
                         IdCabeceraVersionCuestionario = item.IdCabeceraVersionCuestionario
                     },
+                    PreguntaAbierta = new PreguntaAbierta() {
+                        IdPreguntaAbiertaEncriptado = _seguridad.Encriptar(item.IdPreguntaAbierta.ToString()),
+                        TipoDato = new TipoDato() {
+                            TipoHTML = _seguridad.Encriptar(item.TipoHTML.ToString())
+                        }
+                    },
                     Seccion = new Seccion() {
                         SeccionId = _seguridad.Encriptar(item.IdSeccion.ToString()),
                         Descripcion = item.Seccion

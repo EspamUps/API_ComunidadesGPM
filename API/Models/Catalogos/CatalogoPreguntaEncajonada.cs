@@ -12,7 +12,27 @@ namespace API.Models.Catalogos
     {
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
-        
+
+
+        public List<VerPreguntaEncajonada> VerPreguntaEncajonada(string IdRespuestaLogica)
+        {
+            List<VerPreguntaEncajonada> _lista = new List<VerPreguntaEncajonada>();
+                foreach (var item in db.Sp_VerPreguntaDependiente(Convert.ToInt32(IdRespuestaLogica)))
+                {
+                    _lista.Add(new VerPreguntaEncajonada()
+                    {
+                        IdPregunta =  _seguridad.Encriptar(item.IdPregunta.ToString()),
+                        Descripcion = item.Descripcion,
+                        TipoHTML = item.TipoHTML,
+                        IdPreguntaPadre = _seguridad.Encriptar(item.IdPreguntaPadre.ToString()),
+                        DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta,
+                        IdRespuesta = _seguridad.Encriptar(item.IdRespuesta.ToString()),
+                        IdRespuestaLogica = _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
+
+                });
+                }
+                return _lista;
+        }
         public int InsertarPreguntaEncajonada(PreguntaEncajonada _objPreguntaEncajonada)
         {
             try

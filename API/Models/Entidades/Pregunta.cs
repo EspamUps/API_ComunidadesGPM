@@ -18,6 +18,7 @@ namespace API.Models.Entidades
         public PreguntaEncajonada PreguntaEncajonada { get; set; }
         public CabeceraVersionCuestionario CabeceraVersionCuestionario { get; set; }
         public Seccion Seccion { get; set; }
+        public PreguntaAbierta PreguntaAbierta { get; set; }
         public string Descripcion { get; set; }
         public bool Obligatorio { get; set; }
         public int Orden { get; set; }
