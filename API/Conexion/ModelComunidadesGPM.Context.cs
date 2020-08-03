@@ -3030,15 +3030,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ConfigurarMatrizConsultar_Result3>("Sp_ConfigurarMatrizConsultar");
         }
     
-        public virtual ObjectResult<Sp_ConfigurarMatrizConsultar2_Result1> Sp_ConfigurarMatrizConsultar2(Nullable<int> idpregunta)
-        {
-            var idpreguntaParameter = idpregunta.HasValue ?
-                new ObjectParameter("idpregunta", idpregunta) :
-                new ObjectParameter("idpregunta", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ConfigurarMatrizConsultar2_Result1>("Sp_ConfigurarMatrizConsultar2", idpreguntaParameter);
-        }
-    
         public virtual ObjectResult<Sp_PreguntaConsultar_Result7> Sp_PreguntaConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultar_Result7>("Sp_PreguntaConsultar");
@@ -3243,19 +3234,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionPreguntaSeleccionConsultar_Result1>("Sp_OpcionPreguntaSeleccionConsultar");
         }
     
-        public virtual ObjectResult<Sp_OpcionPreguntaSeleccionConsultar2_Result2> Sp_OpcionPreguntaSeleccionConsultar2(Nullable<int> idPregunta, Nullable<int> idAsignarEncuestado)
-        {
-            var idPreguntaParameter = idPregunta.HasValue ?
-                new ObjectParameter("IdPregunta", idPregunta) :
-                new ObjectParameter("IdPregunta", typeof(int));
-    
-            var idAsignarEncuestadoParameter = idAsignarEncuestado.HasValue ?
-                new ObjectParameter("IdAsignarEncuestado", idAsignarEncuestado) :
-                new ObjectParameter("IdAsignarEncuestado", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionPreguntaSeleccionConsultar2_Result2>("Sp_OpcionPreguntaSeleccionConsultar2", idPreguntaParameter, idAsignarEncuestadoParameter);
-        }
-    
         public virtual int RespuestaPreguntaInsertAndUpdate(Nullable<int> idPregunta, Nullable<int> identificadorTipoPregunta, Nullable<int> idCabeceraRespuest, Nullable<int> idRespuestaLogica, string descripcionRespuesta, Nullable<System.DateTime> fechaRegistro, Nullable<int> idAsignarEncuestado, Nullable<System.DateTime> fechaRegistroCabecera)
         {
             var idPreguntaParameter = idPregunta.HasValue ?
@@ -3291,6 +3269,32 @@ namespace API.Conexion
                 new ObjectParameter("FechaRegistroCabecera", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RespuestaPreguntaInsertAndUpdate", idPreguntaParameter, identificadorTipoPreguntaParameter, idCabeceraRespuestParameter, idRespuestaLogicaParameter, descripcionRespuestaParameter, fechaRegistroParameter, idAsignarEncuestadoParameter, fechaRegistroCabeceraParameter);
+        }
+    
+        public virtual ObjectResult<Sp_OpcionPreguntaSeleccionConsultar2_Result3> Sp_OpcionPreguntaSeleccionConsultar2(Nullable<int> idPregunta, Nullable<int> idAsignarEncuestado)
+        {
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            var idAsignarEncuestadoParameter = idAsignarEncuestado.HasValue ?
+                new ObjectParameter("IdAsignarEncuestado", idAsignarEncuestado) :
+                new ObjectParameter("IdAsignarEncuestado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_OpcionPreguntaSeleccionConsultar2_Result3>("Sp_OpcionPreguntaSeleccionConsultar2", idPreguntaParameter, idAsignarEncuestadoParameter);
+        }
+    
+        public virtual ObjectResult<Sp_ConfigurarMatrizConsultar2_Result2> Sp_ConfigurarMatrizConsultar2(Nullable<int> idpregunta, Nullable<int> idAsignarEncuestado)
+        {
+            var idpreguntaParameter = idpregunta.HasValue ?
+                new ObjectParameter("idpregunta", idpregunta) :
+                new ObjectParameter("idpregunta", typeof(int));
+    
+            var idAsignarEncuestadoParameter = idAsignarEncuestado.HasValue ?
+                new ObjectParameter("IdAsignarEncuestado", idAsignarEncuestado) :
+                new ObjectParameter("IdAsignarEncuestado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ConfigurarMatrizConsultar2_Result2>("Sp_ConfigurarMatrizConsultar2", idpreguntaParameter, idAsignarEncuestadoParameter);
         }
     }
 }

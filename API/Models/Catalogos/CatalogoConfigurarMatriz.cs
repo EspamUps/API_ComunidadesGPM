@@ -103,14 +103,14 @@ namespace API.Models.Catalogos
         public List<ConfigurarMatriz> ConsultarConfigurarMatrizPorIdPregunta(int _idPregunta)
         {
             List<ConfigurarMatriz> _lista = new List<ConfigurarMatriz>();
-            foreach (var item in db.Sp_ConfigurarMatrizConsultar2(_idPregunta).ToList())
+            foreach (var item in db.Sp_ConfigurarMatrizConsultar2(_idPregunta, null).ToList())
             {
                 _lista.Add( new ConfigurarMatriz()
                 {
                     IdConfigurarMatriz=item.IdConfigurarMatriz,
                     IdConfigurarMatrizEncriptado = _seguridad.Encriptar(item.IdConfigurarMatriz.ToString()),
                     Estado =item.EstadoConfigurarMatriz,
-                    OpcionDosMatriz=new OpcionDosMatriz()
+                    OpcionDosMatriz =new OpcionDosMatriz()
                     {
                         IdOpcionDosMatriz=item.IdOpcionDosMatriz,
                         IdOpcionDosMatrizEncriptado = _seguridad.Encriptar(item.IdOpcionDosMatriz.ToString()),
@@ -137,6 +137,85 @@ namespace API.Models.Catalogos
                             leyendaLateral= item.leyendaLateral,
                             leyendaSuperior=item.leyendaSuperior,
                             Observacion=Convert.ToBoolean(item.observacion),
+
+                            TipoPregunta = new TipoPregunta()
+                            {
+                                IdTipoPregunta = item.IdTipoPregunta,
+                                IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
+                                Descripcion = item.DescripcionTipoPregunta,
+                                Estado = item.EstadoTipoPregunta,
+                                Identificador = item.IdentificadorTipoPregunta
+                            },
+                            Seccion = new Seccion()
+                            {
+                                IdSeccion = item.IdSeccion,
+                                IdSeccionEncriptado = _seguridad.Encriptar(item.IdSeccion.ToString()),
+                                Descripcion = item.DescripcionSeccion,
+                                Estado = item.EstadoSeccion,
+                                Orden = item.OrdenSeccion,
+                                Componente = new Componente()
+                                {
+                                    IdComponente = item.IdComponente,
+                                    IdComponenteEncriptado = _seguridad.Encriptar(item.IdComponente.ToString()),
+                                    Descripcion = item.DescripcionComponente,
+                                    Estado = item.EstadoComponente,
+                                    Orden = item.OrdenComponente,
+                                    CuestionarioGenerico = new CuestionarioGenerico()
+                                    {
+                                        IdCuestionarioGenerico = item.IdCuestionarioGenerico,
+                                        IdCuestionarioGenericoEncriptado = _seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
+                                        Descripcion = item.DescripcionCuestionarioGenerico,
+                                        Estado = item.EstadoCuestionarioGenerico,
+                                        Nombre = item.NombreCuestionarioGenerico
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            return _lista;
+        }
+        public List<ConfigurarMatriz> ConsultarConfigurarMatrizPorIdPregunta2(int _idPregunta, int _idAsignarEncuestado)
+        {
+            List<ConfigurarMatriz> _lista = new List<ConfigurarMatriz>();
+            foreach (var item in db.Sp_ConfigurarMatrizConsultar2(_idPregunta, _idAsignarEncuestado).ToList())
+            {
+                _lista.Add(new ConfigurarMatriz()
+                {
+                    IdConfigurarMatriz = item.IdConfigurarMatriz,
+                    IdConfigurarMatrizEncriptado = _seguridad.Encriptar(item.IdConfigurarMatriz.ToString()),
+                    Estado = item.EstadoConfigurarMatriz,
+                    IdRespuestaLogica = _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
+                    DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta,
+                    IdAsignarEncuestado = _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()),
+                    OpcionDosMatriz = new OpcionDosMatriz()
+                    {
+                        IdOpcionDosMatriz = item.IdOpcionDosMatriz,
+                        IdOpcionDosMatrizEncriptado = _seguridad.Encriptar(item.IdOpcionDosMatriz.ToString()),
+                        Descripcion = item.DescripcionOpcionDosMatriz,
+                        Estado = item.EstadoOpcionOpcionDosMatriz
+                    },
+                    OpcionUnoMatriz =
+                    new OpcionUnoMatriz()
+                    {
+                        IdOpcionUnoMatriz = item.IdOpcionUnoMatriz,
+                        IdOpcionUnoMatrizEncriptado = _seguridad.Encriptar(item.IdOpcionUnoMatriz.ToString()),
+                        Descripcion = item.DescripcionOpcionUnoMatriz,
+                        Estado = item.EstadoOpcionOpcionUnoMatriz,
+                        Utilizado = item.UtilizadoOpcionUnoMatriz,
+                        Encajonamiento = item.EncajonamientoOpcionUnoMatriz,
+                        Pregunta = new Pregunta()
+                        {
+                            IdPregunta = item.IdPregunta,
+                            IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                            Descripcion = item.DescripcionPregunta,
+                            Estado = item.EstadoPregunta,
+                            Obligatorio = item.ObligatorioPregunta,
+                            Orden = item.OrdenPregunta,
+                            leyendaLateral = item.leyendaLateral,
+                            leyendaSuperior = item.leyendaSuperior,
+                            Observacion = Convert.ToBoolean(item.observacion),
 
                             TipoPregunta = new TipoPregunta()
                             {

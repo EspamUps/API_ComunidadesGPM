@@ -20,9 +20,9 @@ namespace API.Models.Entidades
         public string IdRespuestaLogica { get; set; }
         public string DescripcionRespuestaAbierta { get; set; }
         public string IdAsignarEncuestado { get; set; }
-      
-      
-       
+        public int TotalOpciones { get; set; }
+        
+
 
     }
 }

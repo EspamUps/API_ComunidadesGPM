@@ -429,6 +429,7 @@
         <Function Name="Sp_ConfigurarMatrizConsultar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario" />
         <Function Name="Sp_ConfigurarMatrizConsultar2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="idpregunta" Type="int" Mode="In" />
+          <Parameter Name="IdAsignarEncuestado" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_ConfigurarMatrizEliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="cuestionario">
           <Parameter Name="IdConfigurarMatriz" Type="int" Mode="In" />
@@ -1804,9 +1805,6 @@
           <Parameter Name="IdAsignarUsuarioTipoUsuarioTecnico" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_ConfigurarMatrizConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ConfigurarMatrizConsultar_Result3)" />
-          <FunctionImport Name="Sp_ConfigurarMatrizConsultar2" ReturnType="Collection(ComunidadesGPMModel.Sp_ConfigurarMatrizConsultar2_Result1)">
-          <Parameter Name="idpregunta" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="Sp_PreguntaConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_PreguntaConsultar_Result7)" />
           <FunctionImport Name="Sp_PreguntaConsultarNoEncajonadasPorSeccion" ReturnType="Collection(ComunidadesGPMModel.Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result3)">
           <Parameter Name="IdSeccion" Mode="In" Type="Int32" />
@@ -1868,10 +1866,6 @@
           </FunctionImport>
           <FunctionImport Name="Sp_ComponenteConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_ComponenteConsultar_Result4)" />
           <FunctionImport Name="Sp_OpcionPreguntaSeleccionConsultar" ReturnType="Collection(ComunidadesGPMModel.Sp_OpcionPreguntaSeleccionConsultar_Result1)" />
-          <FunctionImport Name="Sp_OpcionPreguntaSeleccionConsultar2" ReturnType="Collection(ComunidadesGPMModel.Sp_OpcionPreguntaSeleccionConsultar2_Result2)">
-            <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
-            <Parameter Name="IdAsignarEncuestado" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="RespuestaPreguntaInsertAndUpdate">
             <Parameter Name="idPregunta" Mode="In" Type="Int32" />
             <Parameter Name="identificadorTipoPregunta" Mode="In" Type="Int32" />
@@ -1881,6 +1875,14 @@
             <Parameter Name="fechaRegistro" Mode="In" Type="DateTime" />
             <Parameter Name="IdAsignarEncuestado" Mode="In" Type="Int32" />
             <Parameter Name="FechaRegistroCabecera" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_OpcionPreguntaSeleccionConsultar2" ReturnType="Collection(ComunidadesGPMModel.Sp_OpcionPreguntaSeleccionConsultar2_Result3)">
+            <Parameter Name="IdPregunta" Mode="In" Type="Int32" />
+            <Parameter Name="IdAsignarEncuestado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_ConfigurarMatrizConsultar2" ReturnType="Collection(ComunidadesGPMModel.Sp_ConfigurarMatrizConsultar2_Result2)">
+            <Parameter Name="idpregunta" Mode="In" Type="Int32" />
+            <Parameter Name="IdAsignarEncuestado" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Sp_AsignarComponenteGenericoConsultar_Result">
@@ -6301,6 +6303,60 @@
           <Property Type="String" Name="DescripcionRespuestaAbierta" Nullable="true" />
           <Property Type="Int32" Name="IdAsignarEncuestado" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="Sp_OpcionPreguntaSeleccionConsultar2_Result3">
+          <Property Type="Int32" Name="IdOpcionPreguntaSeleccion" Nullable="false" />
+          <Property Type="String" Name="DescripcionOpcionPreguntaSeleccion" Nullable="false" />
+          <Property Type="Int32" Name="IdPreguntaHIja" Nullable="true" />
+          <Property Type="String" Name="DescripcionPreguntaHIja" Nullable="true" />
+          <Property Type="Int32" Name="IdPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionPregunta" Nullable="false" />
+          <Property Type="Int32" Name="OrdenPregunta" Nullable="false" />
+          <Property Type="String" Name="EncajonamientoOpcionPreguntaSeleccion" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdRespuesta" Nullable="true" />
+          <Property Type="Int32" Name="IdRespuestaLogica" Nullable="true" />
+          <Property Type="String" Name="DescripcionRespuestaAbierta" Nullable="true" />
+          <Property Type="Int32" Name="IdAsignarEncuestado" Nullable="true" />
+          <Property Type="Int32" Name="TotalOpciones" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Sp_ConfigurarMatrizConsultar2_Result2">
+          <Property Type="Int32" Name="IdOpcionDosMatriz" Nullable="false" />
+          <Property Type="String" Name="DescripcionOpcionDosMatriz" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoOpcionOpcionDosMatriz" Nullable="false" />
+          <Property Type="Int32" Name="IdConfigurarMatriz" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoConfigurarMatriz" Nullable="false" />
+          <Property Type="Int32" Name="IdOpcionUnoMatriz" Nullable="false" />
+          <Property Type="String" Name="DescripcionOpcionUnoMatriz" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoOpcionOpcionUnoMatriz" Nullable="false" />
+          <Property Type="String" Name="UtilizadoOpcionUnoMatriz" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="EncajonamientoOpcionUnoMatriz" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="IdPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionPregunta" Nullable="false" />
+          <Property Type="Int32" Name="OrdenPregunta" Nullable="false" />
+          <Property Type="Boolean" Name="ObligatorioPregunta" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdentificadorTipoPregunta" Nullable="false" />
+          <Property Type="String" Name="DescripcionTipoPregunta" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoTipoPregunta" Nullable="false" />
+          <Property Type="Int32" Name="IdSeccion" Nullable="false" />
+          <Property Type="String" Name="DescripcionSeccion" Nullable="false" MaxLength="500" />
+          <Property Type="Boolean" Name="EstadoSeccion" Nullable="false" />
+          <Property Type="Int32" Name="OrdenSeccion" Nullable="false" />
+          <Property Type="Int32" Name="IdComponente" Nullable="false" />
+          <Property Type="String" Name="DescripcionComponente" Nullable="false" />
+          <Property Type="Int32" Name="OrdenComponente" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoComponente" Nullable="false" />
+          <Property Type="Int32" Name="IdCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="DescripcionCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="NombreCuestionarioGenerico" Nullable="false" />
+          <Property Type="Boolean" Name="EstadoCuestionarioGenerico" Nullable="false" />
+          <Property Type="String" Name="leyendaSuperior" Nullable="true" />
+          <Property Type="String" Name="leyendaLateral" Nullable="true" />
+          <Property Type="Boolean" Name="observacion" Nullable="true" />
+          <Property Type="Int32" Name="IdRespuestaLogica" Nullable="true" />
+          <Property Type="String" Name="DescripcionRespuestaAbierta" Nullable="true" />
+          <Property Type="Int32" Name="IdAsignarEncuestado" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10131,46 +10187,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="Sp_ConfigurarMatrizConsultar2" FunctionName="ComunidadesGPMModel.Store.Sp_ConfigurarMatrizConsultar2">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ConfigurarMatrizConsultar2_Result1">
-                <ScalarProperty Name="IdOpcionDosMatriz" ColumnName="IdOpcionDosMatriz" />
-                <ScalarProperty Name="DescripcionOpcionDosMatriz" ColumnName="DescripcionOpcionDosMatriz" />
-                <ScalarProperty Name="EstadoOpcionOpcionDosMatriz" ColumnName="EstadoOpcionOpcionDosMatriz" />
-                <ScalarProperty Name="IdConfigurarMatriz" ColumnName="IdConfigurarMatriz" />
-                <ScalarProperty Name="EstadoConfigurarMatriz" ColumnName="EstadoConfigurarMatriz" />
-                <ScalarProperty Name="IdOpcionUnoMatriz" ColumnName="IdOpcionUnoMatriz" />
-                <ScalarProperty Name="DescripcionOpcionUnoMatriz" ColumnName="DescripcionOpcionUnoMatriz" />
-                <ScalarProperty Name="EstadoOpcionOpcionUnoMatriz" ColumnName="EstadoOpcionOpcionUnoMatriz" />
-                <ScalarProperty Name="UtilizadoOpcionUnoMatriz" ColumnName="UtilizadoOpcionUnoMatriz" />
-                <ScalarProperty Name="EncajonamientoOpcionUnoMatriz" ColumnName="EncajonamientoOpcionUnoMatriz" />
-                <ScalarProperty Name="IdPregunta" ColumnName="IdPregunta" />
-                <ScalarProperty Name="DescripcionPregunta" ColumnName="DescripcionPregunta" />
-                <ScalarProperty Name="OrdenPregunta" ColumnName="OrdenPregunta" />
-                <ScalarProperty Name="ObligatorioPregunta" ColumnName="ObligatorioPregunta" />
-                <ScalarProperty Name="EstadoPregunta" ColumnName="EstadoPregunta" />
-                <ScalarProperty Name="IdTipoPregunta" ColumnName="IdTipoPregunta" />
-                <ScalarProperty Name="IdentificadorTipoPregunta" ColumnName="IdentificadorTipoPregunta" />
-                <ScalarProperty Name="DescripcionTipoPregunta" ColumnName="DescripcionTipoPregunta" />
-                <ScalarProperty Name="EstadoTipoPregunta" ColumnName="EstadoTipoPregunta" />
-                <ScalarProperty Name="IdSeccion" ColumnName="IdSeccion" />
-                <ScalarProperty Name="DescripcionSeccion" ColumnName="DescripcionSeccion" />
-                <ScalarProperty Name="EstadoSeccion" ColumnName="EstadoSeccion" />
-                <ScalarProperty Name="OrdenSeccion" ColumnName="OrdenSeccion" />
-                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
-                <ScalarProperty Name="DescripcionComponente" ColumnName="DescripcionComponente" />
-                <ScalarProperty Name="OrdenComponente" ColumnName="OrdenComponente" />
-                <ScalarProperty Name="EstadoComponente" ColumnName="EstadoComponente" />
-                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
-                <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
-                <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
-                <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
-                <ScalarProperty Name="leyendaSuperior" ColumnName="leyendaSuperior" />
-                <ScalarProperty Name="leyendaLateral" ColumnName="leyendaLateral" />
-                <ScalarProperty Name="observacion" ColumnName="observacion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="Sp_PreguntaConsultar" FunctionName="ComunidadesGPMModel.Store.Sp_PreguntaConsultar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_PreguntaConsultar_Result7">
@@ -10540,9 +10556,10 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RespuestaPreguntaInsertAndUpdate" FunctionName="ComunidadesGPMModel.Store.RespuestaPreguntaInsertAndUpdate" />
           <FunctionImportMapping FunctionImportName="Sp_OpcionPreguntaSeleccionConsultar2" FunctionName="ComunidadesGPMModel.Store.Sp_OpcionPreguntaSeleccionConsultar2">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_OpcionPreguntaSeleccionConsultar2_Result2">
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_OpcionPreguntaSeleccionConsultar2_Result3">
                 <ScalarProperty Name="IdOpcionPreguntaSeleccion" ColumnName="IdOpcionPreguntaSeleccion" />
                 <ScalarProperty Name="DescripcionOpcionPreguntaSeleccion" ColumnName="DescripcionOpcionPreguntaSeleccion" />
                 <ScalarProperty Name="IdPreguntaHIja" ColumnName="IdPreguntaHIja" />
@@ -10555,10 +10572,53 @@
                 <ScalarProperty Name="IdRespuestaLogica" ColumnName="IdRespuestaLogica" />
                 <ScalarProperty Name="DescripcionRespuestaAbierta" ColumnName="DescripcionRespuestaAbierta" />
                 <ScalarProperty Name="IdAsignarEncuestado" ColumnName="IdAsignarEncuestado" />
+                <ScalarProperty Name="TotalOpciones" ColumnName="TotalOpciones" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="RespuestaPreguntaInsertAndUpdate" FunctionName="ComunidadesGPMModel.Store.RespuestaPreguntaInsertAndUpdate" />
+          <FunctionImportMapping FunctionImportName="Sp_ConfigurarMatrizConsultar2" FunctionName="ComunidadesGPMModel.Store.Sp_ConfigurarMatrizConsultar2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ComunidadesGPMModel.Sp_ConfigurarMatrizConsultar2_Result2">
+                <ScalarProperty Name="IdOpcionDosMatriz" ColumnName="IdOpcionDosMatriz" />
+                <ScalarProperty Name="DescripcionOpcionDosMatriz" ColumnName="DescripcionOpcionDosMatriz" />
+                <ScalarProperty Name="EstadoOpcionOpcionDosMatriz" ColumnName="EstadoOpcionOpcionDosMatriz" />
+                <ScalarProperty Name="IdConfigurarMatriz" ColumnName="IdConfigurarMatriz" />
+                <ScalarProperty Name="EstadoConfigurarMatriz" ColumnName="EstadoConfigurarMatriz" />
+                <ScalarProperty Name="IdOpcionUnoMatriz" ColumnName="IdOpcionUnoMatriz" />
+                <ScalarProperty Name="DescripcionOpcionUnoMatriz" ColumnName="DescripcionOpcionUnoMatriz" />
+                <ScalarProperty Name="EstadoOpcionOpcionUnoMatriz" ColumnName="EstadoOpcionOpcionUnoMatriz" />
+                <ScalarProperty Name="UtilizadoOpcionUnoMatriz" ColumnName="UtilizadoOpcionUnoMatriz" />
+                <ScalarProperty Name="EncajonamientoOpcionUnoMatriz" ColumnName="EncajonamientoOpcionUnoMatriz" />
+                <ScalarProperty Name="IdPregunta" ColumnName="IdPregunta" />
+                <ScalarProperty Name="DescripcionPregunta" ColumnName="DescripcionPregunta" />
+                <ScalarProperty Name="OrdenPregunta" ColumnName="OrdenPregunta" />
+                <ScalarProperty Name="ObligatorioPregunta" ColumnName="ObligatorioPregunta" />
+                <ScalarProperty Name="EstadoPregunta" ColumnName="EstadoPregunta" />
+                <ScalarProperty Name="IdTipoPregunta" ColumnName="IdTipoPregunta" />
+                <ScalarProperty Name="IdentificadorTipoPregunta" ColumnName="IdentificadorTipoPregunta" />
+                <ScalarProperty Name="DescripcionTipoPregunta" ColumnName="DescripcionTipoPregunta" />
+                <ScalarProperty Name="EstadoTipoPregunta" ColumnName="EstadoTipoPregunta" />
+                <ScalarProperty Name="IdSeccion" ColumnName="IdSeccion" />
+                <ScalarProperty Name="DescripcionSeccion" ColumnName="DescripcionSeccion" />
+                <ScalarProperty Name="EstadoSeccion" ColumnName="EstadoSeccion" />
+                <ScalarProperty Name="OrdenSeccion" ColumnName="OrdenSeccion" />
+                <ScalarProperty Name="IdComponente" ColumnName="IdComponente" />
+                <ScalarProperty Name="DescripcionComponente" ColumnName="DescripcionComponente" />
+                <ScalarProperty Name="OrdenComponente" ColumnName="OrdenComponente" />
+                <ScalarProperty Name="EstadoComponente" ColumnName="EstadoComponente" />
+                <ScalarProperty Name="IdCuestionarioGenerico" ColumnName="IdCuestionarioGenerico" />
+                <ScalarProperty Name="DescripcionCuestionarioGenerico" ColumnName="DescripcionCuestionarioGenerico" />
+                <ScalarProperty Name="NombreCuestionarioGenerico" ColumnName="NombreCuestionarioGenerico" />
+                <ScalarProperty Name="EstadoCuestionarioGenerico" ColumnName="EstadoCuestionarioGenerico" />
+                <ScalarProperty Name="leyendaSuperior" ColumnName="leyendaSuperior" />
+                <ScalarProperty Name="leyendaLateral" ColumnName="leyendaLateral" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="IdRespuestaLogica" ColumnName="IdRespuestaLogica" />
+                <ScalarProperty Name="DescripcionRespuestaAbierta" ColumnName="DescripcionRespuestaAbierta" />
+                <ScalarProperty Name="IdAsignarEncuestado" ColumnName="IdAsignarEncuestado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -50,6 +50,7 @@ namespace API.Models.Catalogos
                 IdRespuestaLogica = _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
                 DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta,
                 IdAsignarEncuestado = _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()),
+                TotalOpciones= Convert.ToInt32(item.TotalOpciones),
 
             });
             }

@@ -16,6 +16,7 @@ namespace API.Controllers
         CatalogoOpcionUnoMatriz _objCatalogoOpcionUnoMatriz = new CatalogoOpcionUnoMatriz();
         CatalogoOpcionDosMatriz _objCatalogoOpcionDosMatriz = new CatalogoOpcionDosMatriz();
         CatalogoConfigurarMatriz _objCatalogoConfigurarMatriz = new CatalogoConfigurarMatriz();
+        CatalogoAsignarEncuestado _objCatalogoAsignarEncuestado = new CatalogoAsignarEncuestado();
         CatalogoPregunta _objCatalogoPregunta = new CatalogoPregunta();
         Seguridad _seguridad = new Seguridad();
 
@@ -107,15 +108,29 @@ namespace API.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         [Route("api/configurarmatriz_consultarporidpregunta")]
-        public object configurarmatriz_consultarporidpregunta(string _idPreguntaEncriptado)
+        public object configurarmatriz_consultarporidpregunta(string _idPreguntaEncriptado, string _IdAsignarEncuestado)
         {
             object _respuesta = new object();
             object _respuesta1 = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
+                if (_IdAsignarEncuestado == null || string.IsNullOrEmpty(_IdAsignarEncuestado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Algunos campos están vacíos";
+                    return new { http = _http };
+                }
+                int IdAsignarEncuestado = int.Parse(_seguridad.DesEncriptar(_IdAsignarEncuestado));
+                var objCatalogoAsignarEncuestado = _objCatalogoAsignarEncuestado.ConsultarAsignarEncuestadoPorId(IdAsignarEncuestado).Where(c => c.Estado == true).FirstOrDefault();
+                if (objCatalogoAsignarEncuestado == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "El asignar encuestado no existe";
+                    return new { http = _http };
+                }
                 if (_idPreguntaEncriptado == null || string.IsNullOrEmpty(_idPreguntaEncriptado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
@@ -132,7 +147,7 @@ namespace API.Controllers
                     }
                     else
                     {
-                        var _listaConfigurarMatriz = _objCatalogoConfigurarMatriz.ConsultarConfigurarMatrizPorIdPregunta(_idPregunta).Where(c => c.Estado == true).ToList();
+                        var _listaConfigurarMatriz = _objCatalogoConfigurarMatriz.ConsultarConfigurarMatrizPorIdPregunta2(_idPregunta, IdAsignarEncuestado).Where(c => c.Estado == true).ToList();
                         foreach (var _objConfMatriz in _listaConfigurarMatriz)
                         {
                             _objConfMatriz.IdConfigurarMatriz = 0;
