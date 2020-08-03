@@ -371,6 +371,9 @@
     <Compile Include="Conexion\Sp_ConsultarPreguntasPorCuestionarioPublicadoComponente_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ConsultarPreguntasPorCuestionarioPublicadoComponente_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -446,6 +449,9 @@
     <Compile Include="Conexion\Sp_ModeloGenericoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ModeloGenericoConsultar_Result1.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ModeloGenericoInsertar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -471,6 +477,9 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar2_Result3.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar2_Result4.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_OpcionPreguntaSeleccionConsultar_Result.cs">
@@ -590,6 +599,9 @@
     <Compile Include="Conexion\Sp_ShowRespuestaPorPregunta_Result3.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ShowRespuestaPorPregunta_Result4.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_TipoDatoConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -639,6 +651,9 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_VerPreguntaDependiente_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_VerPreguntaDependiente_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_VersionamientoModeloConsultar_Result.cs">

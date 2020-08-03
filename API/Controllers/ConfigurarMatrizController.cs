@@ -114,6 +114,7 @@ namespace API.Controllers
         {
             object _respuesta = new object();
             object _respuesta1 = new object();
+            int IdAsignarEncuestado=0;
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
@@ -123,14 +124,23 @@ namespace API.Controllers
                     _http.mensaje = "Algunos campos están vacíos";
                     return new { http = _http };
                 }
-                int IdAsignarEncuestado = int.Parse(_seguridad.DesEncriptar(_IdAsignarEncuestado));
-                var objCatalogoAsignarEncuestado = _objCatalogoAsignarEncuestado.ConsultarAsignarEncuestadoPorId(IdAsignarEncuestado).Where(c => c.Estado == true).FirstOrDefault();
-                if (objCatalogoAsignarEncuestado == null)
+                if (_IdAsignarEncuestado != "null")
                 {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "El asignar encuestado no existe";
-                    return new { http = _http };
+                    IdAsignarEncuestado = int.Parse(_seguridad.DesEncriptar(_IdAsignarEncuestado));
+                    var objCatalogoAsignarEncuestado = _objCatalogoAsignarEncuestado.ConsultarAsignarEncuestadoPorId(IdAsignarEncuestado).Where(c => c.Estado == true).FirstOrDefault();
+                    if (objCatalogoAsignarEncuestado == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "El asignar encuestado no existe";
+                        return new { http = _http };
+                    }
+                    
                 }
+                else {
+                    _IdAsignarEncuestado = null;
+                }
+               
+
                 if (_idPreguntaEncriptado == null || string.IsNullOrEmpty(_idPreguntaEncriptado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
@@ -147,7 +157,16 @@ namespace API.Controllers
                     }
                     else
                     {
-                        var _listaConfigurarMatriz = _objCatalogoConfigurarMatriz.ConsultarConfigurarMatrizPorIdPregunta2(_idPregunta, IdAsignarEncuestado).Where(c => c.Estado == true).ToList();
+                       var _listaConfigurarMatriz = _objCatalogoConfigurarMatriz.ConsultarConfigurarMatrizPorIdPregunta(_idPregunta).Where(c => c.Estado == true).ToList();
+
+                        if (_IdAsignarEncuestado != null) {
+
+                            _listaConfigurarMatriz = null;
+                            _listaConfigurarMatriz = _objCatalogoConfigurarMatriz.ConsultarConfigurarMatrizPorIdPregunta2(_idPregunta, IdAsignarEncuestado).Where(c => c.Estado == true).ToList();
+                        }
+                        
+
+
                         foreach (var _objConfMatriz in _listaConfigurarMatriz)
                         {
                             _objConfMatriz.IdConfigurarMatriz = 0;

@@ -103,7 +103,7 @@ namespace API.Models.Catalogos
         public List<ConfigurarMatriz> ConsultarConfigurarMatrizPorIdPregunta(int _idPregunta)
         {
             List<ConfigurarMatriz> _lista = new List<ConfigurarMatriz>();
-            foreach (var item in db.Sp_ConfigurarMatrizConsultar2(_idPregunta, null).ToList())
+            foreach (var item in db.Sp_ConfigurarMatrizConsultar2(_idPregunta, 0).ToList())
             {
                 _lista.Add( new ConfigurarMatriz()
                 {
