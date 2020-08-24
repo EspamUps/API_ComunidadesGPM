@@ -92,6 +92,7 @@ namespace API.Models.Catalogos
                                         Estado = item.EstadoCuestionarioGenerico,
                                         Nombre = item.NombreCuestionarioGenerico
                                     }
+
                                 }
                             }
                         }
