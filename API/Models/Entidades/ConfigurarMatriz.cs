@@ -12,5 +12,10 @@ namespace API.Models.Entidades
         public OpcionUnoMatriz OpcionUnoMatriz { get; set; }
         public OpcionDosMatriz OpcionDosMatriz { get; set; }
         public bool Estado { get; set; }
+
+        public  string IdRespuestaLogica { get; set; }
+        public string DescripcionRespuestaAbierta { get; set; }
+        public string IdAsignarEncuestado { get; set; }
+        public string datoRespuestaMatriz { get; set; }
     }
 }

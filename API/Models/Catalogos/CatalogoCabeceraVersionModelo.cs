@@ -30,7 +30,7 @@ namespace API.Models.Catalogos
                             imagen = 1;
                         }
                     }
-                    int idVersionamientoModelo = int.Parse(db.Sp_VersionamientoModeloInsertar(idCabeceraVersion, item.IdAsignarComponenteGenerico, true,contenido,imagen).Select(x => x.Value.ToString()).FirstOrDefault());
+                    int idVersionamientoModelo = int.Parse(db.Sp_VersionamientoModeloInsertar(idCabeceraVersion, item.IdAsignarComponenteGenerico, true, contenido, imagen).Select(x => x.Value.ToString()).FirstOrDefault());
                 }
                 return idCabeceraVersion;
             }
@@ -55,7 +55,7 @@ namespace API.Models.Catalogos
                     Version = item.VersionCabeceraVersionModelo,
                     Estado = item.EstadoCabeceraVersionModelo,
                     Utilizado = item.UtilizadoCabeceraVersionModelo,
-                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p=> p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
+                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
                 });
             }
             return _lista;
@@ -142,7 +142,7 @@ namespace API.Models.Catalogos
             foreach (var item in db.Sp_CuestionarioConsultarDeUnaVersion(_idCabeceraVersionModelo))
             {
                 List<AsignarComponenteGenerico> _AsignarComponenteGenerico = new List<AsignarComponenteGenerico>();
-                foreach (var item1 in db.Sp_ComponenteConsultarDeUnaVersion(_idCabeceraVersionModelo,item.CuestionarioGenericoIdCuestionarioGenerico))
+                foreach (var item1 in db.Sp_ComponenteConsultarDeUnaVersion(_idCabeceraVersionModelo, item.CuestionarioGenericoIdCuestionarioGenerico))
                 {
                     _AsignarComponenteGenerico.Add(new AsignarComponenteGenerico()
                     {
@@ -159,7 +159,7 @@ namespace API.Models.Catalogos
                         }
                     });
                 }
-                if (_AsignarComponenteGenerico.Count>0)
+                if (_AsignarComponenteGenerico.Count > 0)
                 {
                     _AsignarComponenteGenerico = _AsignarComponenteGenerico.OrderBy(e => e.Orden).ToList();
                 }
@@ -187,6 +187,5 @@ namespace API.Models.Catalogos
             Version.AsignarCuestionarioModelo = _AsignarCuestionarioModelo;
             return Version;
         }
-
     }
 }

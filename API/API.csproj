@@ -365,6 +365,9 @@
     <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar2_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar2_Result1.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -512,6 +515,9 @@
     <Compile Include="Conexion\Sp_RespuestaConsultarPorId_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_RespuestaPreguntaAbierta_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_SeccionConsultarPorVersion_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -545,6 +551,9 @@
     <Compile Include="Conexion\Sp_TokenConsultar_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_TotalPreguntaRestantes_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_UsuarioBuscar_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -558,6 +567,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_VerEncuestaAsignadasNueva_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_VerEncuestaAsignadasNueva_Result1.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_VerPreguntaDependiente_Result.cs">
@@ -578,6 +590,7 @@
     <Compile Include="Controllers\AsignarEncuestadoController.cs" />
     <Compile Include="Controllers\AsignarModeloGenericoParroquiaController.cs" />
     <Compile Include="Controllers\AsignarResponsableController.cs" />
+    <Compile Include="Controllers\AsignarResponsableModeloPublicadoController.cs" />
     <Compile Include="Controllers\AsignarTipoUsuarioModuloPrivilegioController.cs" />
     <Compile Include="Controllers\AsignarUsuarioTipoUsuarioController.cs" />
     <Compile Include="Controllers\CabeceraCaracterizacionController.cs" />
@@ -590,6 +603,7 @@
     <Compile Include="Controllers\ConfigurarComponenteController.cs" />
     <Compile Include="Controllers\CuestionarioGenericoController.cs" />
     <Compile Include="Controllers\CuestionarioPublicadoController.cs" />
+    <Compile Include="Controllers\DatosRespuestaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiderComunitarioController.cs" />
     <Compile Include="Controllers\ConfigurarMatrizController.cs" />
@@ -645,6 +659,7 @@
     <Compile Include="Models\Catalogos\CatalogoContenidoTipoElemento.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioPublicado.cs" />
+    <Compile Include="Models\Catalogos\CatalogoDatosRespuesta.cs" />
     <Compile Include="Models\Catalogos\CatalogoLiderComunitario.cs" />
     <Compile Include="Models\Catalogos\CatalogoModeloGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoModeloPublicado.cs" />
@@ -698,6 +713,8 @@
     <Compile Include="Models\Entidades\ContenidoDetalleComponente.cs" />
     <Compile Include="Models\Entidades\ContenidoTipoElemento.cs" />
     <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
+    <Compile Include="Models\Entidades\CuestionariosAsignadosTecnicos.cs" />
+    <Compile Include="Models\Entidades\DatosRespuesta.cs" />
     <Compile Include="Models\Entidades\ModeloPublicado.cs" />
     <Compile Include="Models\Entidades\CuestionarioPublicado.cs" />
     <Compile Include="Models\Entidades\DescripcionComponente.cs" />
@@ -711,13 +728,18 @@
     <Compile Include="Models\Entidades\Pregunta.cs" />
     <Compile Include="Models\Entidades\PreguntaAbierta.cs" />
     <Compile Include="Models\Entidades\PreguntaEncajonada.cs" />
+    <Compile Include="Models\Entidades\PreguntaRestante.cs" />
     <Compile Include="Models\Entidades\PresidenteJuntaParroquial.cs" />
     <Compile Include="Models\Entidades\Respuesta.cs" />
+    <Compile Include="Models\Entidades\RespuestaPreguntaAbierta.cs" />
+    <Compile Include="Models\Entidades\RespuestaPreguntaSeleccion.cs" />
     <Compile Include="Models\Entidades\RespuestasCaracterizacion.cs" />
+    <Compile Include="Models\Entidades\RespuestasPregunta.cs" />
     <Compile Include="Models\Entidades\Seccion.cs" />
     <Compile Include="Models\Entidades\TipoDato.cs" />
     <Compile Include="Models\Entidades\TipoElemento.cs" />
     <Compile Include="Models\Entidades\TipoPregunta.cs" />
+    <Compile Include="Models\Entidades\VerPreguntaEncajonada.cs" />
     <Compile Include="Models\Entidades\VersionamientoModelo.cs" />
     <Compile Include="Models\Entidades\VersionamientoPregunta.cs" />
     <Compile Include="Models\Metodos\RespuestaHTTP.cs" />

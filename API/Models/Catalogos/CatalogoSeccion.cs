@@ -34,6 +34,33 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
+
+        public int SubirSeccion(Seccion _objSeccion)
+        {
+            try
+            {
+                db.Sp_SubirSeccion(_objSeccion.IdSeccion, _objSeccion.Estado);
+                return _objSeccion.IdSeccion;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public int BajarSeccion(Seccion _objSeccion)
+        {
+            try
+            {
+                db.Sp_BajarSeccion(_objSeccion.IdSeccion, _objSeccion.Estado);
+                return _objSeccion.IdSeccion;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
         public void EliminarSeccion(int _idSeccion)
         {
             db.Sp_SeccionEliminar(_idSeccion);
@@ -152,6 +179,25 @@ namespace API.Models.Catalogos
                     Orden = item.OrdenSeccion,
                     Utilizado = item.UtilizadoSeccion,
                     listaPregunta = new CatalogoPregunta().ConsultarPreguntaPorIdSeccionConTipoPregunta(item.IdSeccion)
+                });
+            }
+            return _lista;
+        }
+
+        public List<Seccion> ConsultarSeccionPorIdComponenteConPreguntaPorVersion(int _idComponente, int _idVersionCuestionario)
+        {
+            List<Seccion> _lista = new List<Seccion>();
+            foreach (var item in db.Sp_SeccionConsultarPorVersion(_idVersionCuestionario).Where(c => c.IdComponente == _idComponente).ToList())
+            {
+                _lista.Add(new Seccion()
+                {
+                    IdSeccion = item.IdSeccion,
+                    IdSeccionEncriptado = _seguridad.Encriptar(item.IdSeccion.ToString()),
+                    Descripcion = item.DescripcionSeccion,
+                    Estado = item.EstadoSeccion,
+                    Orden = item.OrdenSeccion,
+                    Utilizado = item.UtilizadoSeccion,
+                    listaPregunta = new CatalogoPregunta().ConsultarPreguntaPorIdSeccionConTipoPreguntaPorVersion(item.IdSeccion, _idVersionCuestionario)
                 });
             }
             return _lista;

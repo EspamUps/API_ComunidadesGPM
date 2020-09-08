@@ -64,8 +64,8 @@ namespace API.Models.Catalogos
                     Estado = item.Estado,
                     Utilizado = item.ModeloGenericoUtilizado,
                     ModeloGenericoVersionadoUtilizado = item.ModeloGenericoVersionamientoUtilizado,
-                    NumeroVersionesSinPublicar = _ListaVersionamientoModelo.Where(p=> _seguridad.DesEncriptar(p.IdModeloGenerico) == item.IdModeloGenerico.ToString() && p.Utilizado == "0").ToList().Count,
-                    AsignarCuestionarioModelo = _listaAsignarCuestionarioModelo.Where(p=> _seguridad.DesEncriptar(p.IdModeloGenerico) == item.IdModeloGenerico.ToString()).ToList()
+                    NumeroVersionesSinPublicar = _ListaVersionamientoModelo.Where(p => _seguridad.DesEncriptar(p.IdModeloGenerico) == item.IdModeloGenerico.ToString() && p.Utilizado == "0").ToList().Count,
+                    AsignarCuestionarioModelo = _listaAsignarCuestionarioModelo.Where(p => _seguridad.DesEncriptar(p.IdModeloGenerico) == item.IdModeloGenerico.ToString()).ToList()
                 });
             }
             return _lista;
@@ -110,11 +110,11 @@ namespace API.Models.Catalogos
         }
         public void EliminarModeloGenerico(int _idModeloGenerico)
         {
-            foreach (var item in db.Sp_AsignarCuestionarioModeloConsultar().Where(p=>p.IdModeloGenerico == _idModeloGenerico).ToList())
+            foreach (var item in db.Sp_AsignarCuestionarioModeloConsultar().Where(p => p.IdModeloGenerico == _idModeloGenerico).ToList())
             {
-                foreach (var item1 in db.Sp_AsignarComponenteGenericoConsultar().Where(p=>p.IdAsignarCuestionarioModelo == item.IdAsignarCuestionarioModelo).ToList())
+                foreach (var item1 in db.Sp_AsignarComponenteGenericoConsultar().Where(p => p.IdAsignarCuestionarioModelo == item.IdAsignarCuestionarioModelo).ToList())
                 {
-                    foreach (var item2 in db.Sp_DescripcionComponenteConsultar().Where(p=>p.IdAsignarComponenteGenerico == item1.IdAsignarComponenteGenerico).ToList())
+                    foreach (var item2 in db.Sp_DescripcionComponenteConsultar().Where(p => p.IdAsignarComponenteGenerico == item1.IdAsignarComponenteGenerico).ToList())
                     {
                         db.Sp_DescripcionComponenteEliminar(item2.IdDescripcionComponente);
                     }

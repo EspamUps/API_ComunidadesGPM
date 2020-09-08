@@ -13,6 +13,19 @@ namespace API.Models.Catalogos
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
 
+
+        public int FinalizarEncuesta(int idAsignarEncuestado)
+        {
+            try
+            {
+                int result = Convert.ToInt32(db.Sp_FinalizarEncuesta(idAsignarEncuestado).FirstOrDefault());
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
         public int InsertarCuestionarioGenerico(CuestionarioGenerico _objCuestionarioGenerico)
         {
             try
@@ -91,6 +104,27 @@ namespace API.Models.Catalogos
                     Utilizado = item.UtilizadoCuestionarioGenerico
                     ,listaComponente = new CatalogoComponente().ConsultarComponentePorIdCuestionarioGenericoConSeccionPregunta(item.IdCuestionarioGenerico)
                    
+                });
+            }
+            return _lista;
+        }
+
+        public List<CuestionarioGenerico> ConsultarCuestionarioGenericoPorVersion(int _idCuestionarioGenerico, int _idVersionCuestionario)
+        {
+            List<CuestionarioGenerico> _lista = new List<CuestionarioGenerico>();
+            foreach (var item in db.Sp_CuestionarioGenericoConsultar().Where(c => c.IdCuestionarioGenerico == _idCuestionarioGenerico).ToList())
+            {
+                _lista.Add(new CuestionarioGenerico()
+                {
+                    IdCuestionarioGenerico = item.IdCuestionarioGenerico,
+                    IdCuestionarioGenericoEncriptado = _seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
+                    Nombre = item.Nombre,
+                    Descripcion = item.Descripcion,
+                    Estado = item.Estado,
+                    Utilizado = item.UtilizadoCuestionarioGenerico
+                    ,
+                    listaComponente = new CatalogoComponente().ConsultarComponentePorIdCuestionarioGenericoConSeccionPreguntaPorVersion(item.IdCuestionarioGenerico, _idVersionCuestionario)
+
                 });
             }
             return _lista;

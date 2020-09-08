@@ -8,6 +8,7 @@ namespace API.Models.Entidades
     public class AsignarEncuestado
     {
         public int IdAsignarEncuestado { get; set; }
+        public string IdEncuestadoEncriptado { get; set; }
         public string IdAsignarEncuestadoEncriptado { get; set; }
         public CuestionarioPublicado CuestionarioPublicado { get; set; }
         public Comunidad Comunidad { get; set; }

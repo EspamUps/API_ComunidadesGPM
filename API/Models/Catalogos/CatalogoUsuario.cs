@@ -55,7 +55,12 @@ namespace API.Models.Catalogos
         public int ModificarUsuario(Usuario _objUsuario) {
             try
             {
-                //_objUsuario.Clave = _seguridad.Encriptar(_objUsuario.Clave);
+                var clave = db.Sp_UsuarioConsultar()
+                    .Where(a => a.USUARIO_IdUsuario == _objUsuario.IdUsuario)
+                    .FirstOrDefault();
+                if (_seguridad.Encriptar(clave.USUARIO_Clave)== _objUsuario.Clave) {
+                    _objUsuario.Clave = _seguridad.DesEncriptar(_objUsuario.Clave);
+                }
                 db.Sp_UsuarioModificar(_objUsuario.IdUsuario, _objUsuario.Persona.IdPersona, _objUsuario.Correo, _objUsuario.Clave, _objUsuario.Estado);
                 return _objUsuario.IdUsuario;
             }

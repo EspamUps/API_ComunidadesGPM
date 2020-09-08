@@ -183,6 +183,106 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Route("api/subir_seccion")]
+        public object subir_seccion(Seccion _objSeccion)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objSeccion == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el objeto sección";
+                }
+                else if (_objSeccion.IdSeccionEncriptado == null || string.IsNullOrEmpty(_objSeccion.IdSeccionEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la sección";
+                }
+
+                else
+                {
+                    int _idSeccion = Convert.ToInt32(_seguridad.DesEncriptar(_objSeccion.IdSeccionEncriptado));
+
+
+                    _objSeccion.IdSeccion = _idSeccion;
+                    _objSeccion.Estado = true;
+                    _idSeccion = _objCatalogoSeccion.SubirSeccion(_objSeccion);
+                    if (_idSeccion == 0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Ocurrió un problema al intentar ordenar la sección";
+                    }
+                    else
+                    {
+                        _objSeccion = _objCatalogoSeccion.ConsultarSeccionPorId(_idSeccion).Where(c => c.Estado == true).FirstOrDefault();
+
+
+
+                        _respuesta = _objSeccion;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/bajar_seccion")]
+        public object bajar_seccion(Seccion _objSeccion)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objSeccion == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el objeto sección";
+                }
+                else if (_objSeccion.IdSeccionEncriptado == null || string.IsNullOrEmpty(_objSeccion.IdSeccionEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la sección";
+                }
+
+                else
+                {
+                    int _idSeccion = Convert.ToInt32(_seguridad.DesEncriptar(_objSeccion.IdSeccionEncriptado));
+
+
+                    _objSeccion.IdSeccion = _idSeccion;
+                    _objSeccion.Estado = true;
+                    _idSeccion = _objCatalogoSeccion.BajarSeccion(_objSeccion);
+                    if (_idSeccion == 0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Ocurrió un problema al intentar ordenar la sección";
+                    }
+                    else
+                    {
+                        _objSeccion = _objCatalogoSeccion.ConsultarSeccionPorId(_idSeccion).Where(c => c.Estado == true).FirstOrDefault();
+
+
+
+                        _respuesta = _objSeccion;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
         [Route("api/seccion_consultarporidcomponente")]
         public object seccion_consultarporidcomponente(string _idComponenteEncriptado)
         {

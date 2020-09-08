@@ -22,18 +22,44 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
-        public int ModificarAsignarEncuestado(AsignarEncuestado _objAsignarEncuestado)
+        public List<CuestionariosAsignadosTecnicos> cuestionariosNuevoPorTecnico(int _idAsignarUsuarioTipoUsuario)
+        {
+            ; List<CuestionariosAsignadosTecnicos> _lista = new List<CuestionariosAsignadosTecnicos>();
+            foreach (var item in db.Sp_VerEncuestaAsignadasNueva(_idAsignarUsuarioTipoUsuario))
+            {
+                _lista.Add(new CuestionariosAsignadosTecnicos(
+                     _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()),
+                     _seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
+                      item.Nombre,
+                      item.Descripcion,
+                      item.NombreParroquia,
+                      item.NombreCanton,
+                      item.NombreParroquia,
+                      item.NombreComunidad,
+                      item.FechaInicioEncuesta,
+                      item.FechaFinEncuesta,
+                      item.PeriodoInicioCuestionario,
+                      item.PeriodoFinCuestionario,
+                      item.FechaPublicacionCuestionario,
+                      _seguridad.Encriptar(item.IdCabeceraVersionCuestionario.ToString()),
+                      Convert.ToInt32(item.CuestionarioFinalizado)
+                ));
+            }
+            return _lista;
+        }
+        public int EditarAsignarEncuestado(AsignarEncuestado _objAsignarEncuestado)
         {
             try
             {
-                db.Sp_AsignarEncuestadoModificar(_objAsignarEncuestado.IdAsignarEncuestado,_objAsignarEncuestado.CuestionarioPublicado.IdCuestionarioPublicado, _objAsignarEncuestado.Comunidad.IdComunidad, _objAsignarEncuestado.AsignarUsuarioTipoUsuarioTecnico.IdAsignarUsuarioTipoUsuario, _objAsignarEncuestado.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario, _objAsignarEncuestado.Obligatorio, _objAsignarEncuestado.FechaInicio, _objAsignarEncuestado.FechaFin, _objAsignarEncuestado.Estado);
-                return _objAsignarEncuestado.IdAsignarEncuestado;
+                db.Sp_AsignarEncuestadoModificar(int.Parse(_objAsignarEncuestado.IdEncuestadoEncriptado),_objAsignarEncuestado.CuestionarioPublicado.IdCuestionarioPublicado, _objAsignarEncuestado.Comunidad.IdComunidad, _objAsignarEncuestado.AsignarUsuarioTipoUsuarioTecnico.IdAsignarUsuarioTipoUsuario, _objAsignarEncuestado.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario, _objAsignarEncuestado.Obligatorio, _objAsignarEncuestado.FechaInicio, _objAsignarEncuestado.FechaFin, _objAsignarEncuestado.Estado).Select(x => x.Value.ToString()).FirstOrDefault();
+                return (int.Parse(_objAsignarEncuestado.IdEncuestadoEncriptado));
             }
             catch (Exception)
             {
                 return 0;
             }
         }
+
 
         public void EliminarAsignarEncuestado(int _idAsignarEncuestado)
         {

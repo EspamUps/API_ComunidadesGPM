@@ -13,5 +13,7 @@ namespace API.Models.Entidades
         public OpcionPreguntaSeleccion OpcionPreguntaSeleccion { get; set; }
         public bool Estado { get; set; }
         public string Utilizado { get; set; }
+
+
     }
 }

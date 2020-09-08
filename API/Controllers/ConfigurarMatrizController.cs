@@ -16,6 +16,7 @@ namespace API.Controllers
         CatalogoOpcionUnoMatriz _objCatalogoOpcionUnoMatriz = new CatalogoOpcionUnoMatriz();
         CatalogoOpcionDosMatriz _objCatalogoOpcionDosMatriz = new CatalogoOpcionDosMatriz();
         CatalogoConfigurarMatriz _objCatalogoConfigurarMatriz = new CatalogoConfigurarMatriz();
+        CatalogoAsignarEncuestado _objCatalogoAsignarEncuestado = new CatalogoAsignarEncuestado();
         CatalogoPregunta _objCatalogoPregunta = new CatalogoPregunta();
         Seguridad _seguridad = new Seguridad();
 
@@ -107,14 +108,39 @@ namespace API.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         [Route("api/configurarmatriz_consultarporidpregunta")]
-        public object configurarmatriz_consultarporidpregunta(string _idPreguntaEncriptado)
+        public object configurarmatriz_consultarporidpregunta(string _idPreguntaEncriptado, string _IdAsignarEncuestado)
         {
             object _respuesta = new object();
+            object _respuesta1 = new object();
+            int IdAsignarEncuestado=0;
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
+                if (_IdAsignarEncuestado == null || string.IsNullOrEmpty(_IdAsignarEncuestado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Algunos campos están vacíos";
+                    return new { http = _http };
+                }
+                if (_IdAsignarEncuestado != "null")
+                {
+                    IdAsignarEncuestado = int.Parse(_seguridad.DesEncriptar(_IdAsignarEncuestado));
+                    var objCatalogoAsignarEncuestado = _objCatalogoAsignarEncuestado.ConsultarAsignarEncuestadoPorId(IdAsignarEncuestado).Where(c => c.Estado == true).FirstOrDefault();
+                    if (objCatalogoAsignarEncuestado == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "El asignar encuestado no existe";
+                        return new { http = _http };
+                    }
+                    
+                }
+                else {
+                    _IdAsignarEncuestado = null;
+                }
+               
+
                 if (_idPreguntaEncriptado == null || string.IsNullOrEmpty(_idPreguntaEncriptado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
@@ -131,7 +157,16 @@ namespace API.Controllers
                     }
                     else
                     {
-                        var _listaConfigurarMatriz = _objCatalogoConfigurarMatriz.ConsultarConfigurarMatrizPorIdPregunta(_idPregunta).Where(c => c.Estado == true).ToList();
+                       var _listaConfigurarMatriz = _objCatalogoConfigurarMatriz.ConsultarConfigurarMatrizPorIdPregunta(_idPregunta).Where(c => c.Estado == true).ToList();
+
+                        if (_IdAsignarEncuestado != null) {
+
+                            _listaConfigurarMatriz = null;
+                            _listaConfigurarMatriz = _objCatalogoConfigurarMatriz.ConsultarConfigurarMatrizPorIdPregunta2(_idPregunta, IdAsignarEncuestado).Where(c => c.Estado == true).ToList();
+                        }
+                        
+
+
                         foreach (var _objConfMatriz in _listaConfigurarMatriz)
                         {
                             _objConfMatriz.IdConfigurarMatriz = 0;
@@ -145,6 +180,7 @@ namespace API.Controllers
                         }
 
                         _respuesta = _listaConfigurarMatriz;
+                        _respuesta1 = _objPregunta;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
 
 
@@ -155,7 +191,7 @@ namespace API.Controllers
             {
                 _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
             }
-            return new { respuesta = _respuesta, http = _http };
+            return new { respuesta = _respuesta, http = _http ,respuesta1=_respuesta1};
         }
     }
 }

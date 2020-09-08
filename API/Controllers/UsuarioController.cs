@@ -34,27 +34,27 @@ namespace API.Controllers
                 if (_objUsuario == null || _objUsuario.Persona==null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "No se encontró la personao o usuario para insertar";
+                    _http.mensaje = "No se encontró la persona o usuario para insertar";
                 }
                 else if (_objUsuario.Persona.IdPersonaEncriptado==null || string.IsNullOrEmpty(_objUsuario.Persona.IdPersonaEncriptado.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "Ingrese el identificador de la persona a la que le va a asignar un usuario.";
+                    _http.mensaje = "Ingrese el identificador";
                 }
                 else if(_objUsuario.Correo==null || string.IsNullOrEmpty(_objUsuario.Correo.Trim())) 
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "Ingrese el correo.";
+                    _http.mensaje = "Ingrese un usuario";
                 }
                 else if(_objCatalogoUsuarios.ValidarCorreo(_objUsuario).Count > 0)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                    _http.mensaje = "El correo electrónico ha sido utilizado por otro usuario.";
+                    _http.mensaje = "El usuario existente";
                 }
                 else if (_objUsuario.Clave == null || string.IsNullOrEmpty(_objUsuario.Clave.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                    _http.mensaje = "Ingrese la contraseña";
+                    _http.mensaje = "Ingrese una contraseña";
                 }
                 else
                 {

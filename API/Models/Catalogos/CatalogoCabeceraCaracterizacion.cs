@@ -152,6 +152,14 @@ namespace API.Models.Catalogos
                                 Estado = item.EstadoCabeceraVersionModelo,
                                 FechaCreacion = item.FechaCreacionCabeceraVersionModelo,
                                 Version = item.VersionCabeceraVersionModelo,
+                                ModeloGenerico = new ModeloGenerico()
+                                {
+                                    IdModeloGenerico = item.IdModeloGenerico,
+                                    IdModeloGenericoEncriptado = _seguridad.Encriptar(item.IdModeloGenerico.ToString()),
+                                    Descripcion = item.DescripcionModeloGenerico,
+                                    Estado = item.EstadoModeloGenerico,
+                                    Nombre = item.NombreModeloGenerico
+                                }
                             }
                         }
                     }
@@ -277,6 +285,14 @@ namespace API.Models.Catalogos
                                 Estado = item.EstadoCabeceraVersionModelo,
                                 FechaCreacion = item.FechaCreacionCabeceraVersionModelo,
                                 Version = item.VersionCabeceraVersionModelo,
+                                ModeloGenerico = new ModeloGenerico()
+                                {
+                                    IdModeloGenerico = item.IdModeloGenerico,
+                                    IdModeloGenericoEncriptado = _seguridad.Encriptar(item.IdModeloGenerico.ToString()),
+                                    Descripcion = item.DescripcionModeloGenerico,
+                                    Estado = item.EstadoModeloGenerico,
+                                    Nombre = item.NombreModeloGenerico
+                                }
                             }
                         }
                     }
@@ -401,6 +417,14 @@ namespace API.Models.Catalogos
                                 Estado = item.EstadoCabeceraVersionModelo,
                                 FechaCreacion = item.FechaCreacionCabeceraVersionModelo,
                                 Version = item.VersionCabeceraVersionModelo,
+                                ModeloGenerico = new ModeloGenerico()
+                                {
+                                    IdModeloGenerico = item.IdModeloGenerico,
+                                    IdModeloGenericoEncriptado = _seguridad.Encriptar(item.IdModeloGenerico.ToString()),
+                                    Descripcion = item.DescripcionModeloGenerico,
+                                    Estado = item.EstadoModeloGenerico,
+                                    Nombre = item.NombreModeloGenerico
+                                }
                             }
                         }
                     }

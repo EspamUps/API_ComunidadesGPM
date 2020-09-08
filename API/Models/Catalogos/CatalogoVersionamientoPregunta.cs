@@ -17,14 +17,14 @@ namespace API.Models.Catalogos
         {
             try
             {
-                //return int.Parse(db.Sp_VersionamientoPreguntaInsertar(_objVersionamientoPregunta.CabeceraVersionCuestionario.IdCabeceraVersionCuestionario,_objVersionamientoPregunta.Pregunta.IdPregunta,_objVersionamientoPregunta.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
-                return 0;
+                return int.Parse(db.Sp_VersionamientoPreguntaInsertar(_objVersionamientoPregunta.CabeceraVersionCuestionario.IdCabeceraVersionCuestionario,_objVersionamientoPregunta.Pregunta.IdPregunta, _objVersionamientoPregunta.Pregunta.Seccion.IdSeccion, _objVersionamientoPregunta.Pregunta.Seccion.Componente.IdComponente, _objVersionamientoPregunta.Estado).Select(x=>x.Value.ToString()).FirstOrDefault());
             }
             catch (Exception)
             {
                 return 0;
             }
         }
+
         public void EliminarVersionamientoPregunta(int _idVersionamientoPregunta)
         {
             db.Sp_VersionamientoPreguntaEliminar(_idVersionamientoPregunta);
@@ -56,7 +56,7 @@ namespace API.Models.Catalogos
         public List<VersionamientoPregunta> ConsultarVersionamientoPreguntaPorIdCabeceraVersionCuestionario(int _idCabeceraVersionCuestionario)
         {
             List<VersionamientoPregunta> _lista = new List<VersionamientoPregunta>();
-            foreach (var item in db.Sp_VersionamientoPreguntaConsultar().Where(c=>c.IdCabeceraVersionCuestionario==_idCabeceraVersionCuestionario).ToList())
+            foreach (var item in db.Sp_VersionamientoPreguntaConsultar().Where(c => c.IdCabeceraVersionCuestionario == _idCabeceraVersionCuestionario).ToList())
             {
                 _lista.Add(new VersionamientoPregunta()
                 {
@@ -86,7 +86,7 @@ namespace API.Models.Catalogos
                 {
                     IdVersionamientoPregunta = item.IdVersionamientoPregunta,
                     IdVersionamientoPreguntaEncriptado = _seguridad.Encriptar(item.IdVersionamientoPregunta.ToString()),
-                    Estado =item.EstadoVersionamientoPregunta,
+                    Estado = item.EstadoVersionamientoPregunta,
                     Pregunta = new Pregunta()
                     {
                         IdPregunta = item.IdPregunta,
@@ -255,7 +255,7 @@ namespace API.Models.Catalogos
         public List<VersionamientoPregunta> ConsultarPreguntasPorCuestionarioPublicadoComponente(AsignarCuestionarioModelo _AsignarCuestionarioModelo)
         {
             List<VersionamientoPregunta> _lista = new List<VersionamientoPregunta>();
-            foreach (var item in db.Sp_ConsultarPreguntasPorCuestionarioPublicadoComponente(int.Parse(_AsignarCuestionarioModelo.IdCuestionarioPublicado),int.Parse(_AsignarCuestionarioModelo.AsignarComponenteGenerico[0].IdComponente)))
+            foreach (var item in db.Sp_ConsultarPreguntasPorCuestionarioPublicadoComponente(int.Parse(_AsignarCuestionarioModelo.IdCuestionarioPublicado), int.Parse(_AsignarCuestionarioModelo.AsignarComponenteGenerico[0].IdComponente)))
             {
                 _lista.Add(new VersionamientoPregunta()
                 {

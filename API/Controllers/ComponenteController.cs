@@ -181,6 +181,106 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Route("api/subir_componente")]
+        public object subir_componente(Componente _objComponente)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objComponente == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el objeto componente";
+                }
+                else if (_objComponente.IdComponenteEncriptado == null || string.IsNullOrEmpty(_objComponente.IdComponenteEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del componente";
+                }
+
+                else
+                {
+                    int _idComponente = Convert.ToInt32(_seguridad.DesEncriptar(_objComponente.IdComponenteEncriptado));
+
+
+                    _objComponente.IdComponente = _idComponente;
+                    _objComponente.Estado = true;
+                    _idComponente = _objCatalogoComponente.SubirComponente(_objComponente);
+                    if (_idComponente == 0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Ocurrió un problema al intentar ordenar el componente";
+                    }
+                    else
+                    {
+                        _objComponente = _objCatalogoComponente.ConsultarComponentePorId(_idComponente).Where(c => c.Estado == true).FirstOrDefault();
+                      
+                    
+                      
+                        _respuesta = _objComponente;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/bajar_componente")]
+        public object bajar_componente(Componente _objComponente)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objComponente == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el objeto componente";
+                }
+                else if (_objComponente.IdComponenteEncriptado == null || string.IsNullOrEmpty(_objComponente.IdComponenteEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del componente";
+                }
+
+                else
+                {
+                    int _idComponente = Convert.ToInt32(_seguridad.DesEncriptar(_objComponente.IdComponenteEncriptado));
+
+
+                    _objComponente.IdComponente = _idComponente;
+                    _objComponente.Estado = true;
+                    _idComponente = _objCatalogoComponente.BajarComponente(_objComponente);
+                    if (_idComponente == 0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Ocurrió un problema al intentar ordenar el componente";
+                    }
+                    else
+                    {
+                        _objComponente = _objCatalogoComponente.ConsultarComponentePorId(_idComponente).Where(c => c.Estado == true).FirstOrDefault();
+
+
+
+                        _respuesta = _objComponente;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
         [Route("api/componente_consultarporidcuestionariogenerico")]
         public object componente_consultarporidcuestionariogenerico(string _idCuestionarioGenerioEncriptado)
         {
@@ -290,6 +390,42 @@ namespace API.Controllers
                         _objCatalogoComponente.EliminarComponente(_idComponente);
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpGet]
+        [Route("api/componente/cuestionario")]
+        public object componente_consultarporidcuestionario(string _idCuestionarioGenerioEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idCuestionarioGenerioEncriptado == null || string.IsNullOrEmpty(_idCuestionarioGenerioEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cuestionario genérico";
+                }
+                else
+                {
+                    int _idCuestionarioGenerico = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioGenerioEncriptado));
+                    //var _objCuestionarioGenerico = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenericoPorId(_idCuestionarioGenerico).Where(c => c.Estado == true).FirstOrDefault();
+                    //if (_objCuestionarioGenerico == null)
+                    //{
+                    //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                    //    _http.mensaje = "No se encontró el cuestionario genérico en el sistema";
+                    //}
+                    //else
+                    //{
+                        var _listaComponentes = _objCatalogoComponente.ComponentePorIdCuestionario(_idCuestionarioGenerico).ToList();
+                        _respuesta = _listaComponentes;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    //}
                 }
             }
             catch (Exception ex)

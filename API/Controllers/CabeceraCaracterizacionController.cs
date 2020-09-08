@@ -61,6 +61,7 @@ namespace API.Controllers
                         _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
                         _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.IdModeloPublicado = 0;
                         _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.IdCabeceraVersionModelo = 0;
+                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.ModeloGenerico.IdModeloGenerico = 0;
                         _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.IdParroquia = 0;
                         _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.Canton.IdCanton = 0;
                         _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.Canton.Provincia.IdProvincia = 0;
@@ -103,6 +104,7 @@ namespace API.Controllers
                         _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
                         _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.IdModeloPublicado = 0;
                         _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.IdCabeceraVersionModelo = 0;
+                        _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.ModeloGenerico.IdModeloGenerico = 0;
                         _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.IdParroquia = 0;
                         _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.Canton.IdCanton = 0;
                         _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.Canton.Provincia.IdProvincia = 0;
@@ -154,6 +156,7 @@ namespace API.Controllers
                             _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
                             _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.IdModeloPublicado = 0;
                             _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.IdCabeceraVersionModelo = 0;
+                            _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.ModeloPublicado.CabeceraVersionModelo.ModeloGenerico.IdModeloGenerico = 0;
                             _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.IdParroquia = 0;
                             _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.Canton.IdCanton = 0;
                             _objCabeceraCaracterizacion.AsignarResponsableModeloPublicado.Parroquia.Canton.Provincia.IdProvincia = 0;

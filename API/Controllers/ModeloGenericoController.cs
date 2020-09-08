@@ -85,7 +85,7 @@ namespace API.Controllers
             try
             {
                 var _listaModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenericoPorId(int.Parse(_seguridad.DesEncriptar(_idModeloGenerico))).FirstOrDefault();
-                if(_listaModeloGenerico != null)
+                if (_listaModeloGenerico != null)
                 {
                     _listaModeloGenerico.IdModeloGenerico = 0;
                 }
@@ -115,7 +115,7 @@ namespace API.Controllers
                 else
                 {
                     _objModeloGenerico.IdModeloGenericoEncriptado = _seguridad.DesEncriptar(_objModeloGenerico.IdModeloGenericoEncriptado);
-                    var _objBuscadoModeloGenerico= _objCatalogoModeloGenerico.ConsultarModeloGenericoPorId(int.Parse(_objModeloGenerico.IdModeloGenericoEncriptado)).FirstOrDefault();
+                    var _objBuscadoModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenericoPorId(int.Parse(_objModeloGenerico.IdModeloGenericoEncriptado)).FirstOrDefault();
                     if (_objBuscadoModeloGenerico == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
@@ -193,7 +193,7 @@ namespace API.Controllers
                 else
                 {
                     _objModeloGenerico.IdModeloGenericoEncriptado = _seguridad.DesEncriptar(_objModeloGenerico.IdModeloGenericoEncriptado);
-                    _objModeloGenerico.IdModeloGenerico =int.Parse(_objModeloGenerico.IdModeloGenericoEncriptado);
+                    _objModeloGenerico.IdModeloGenerico = int.Parse(_objModeloGenerico.IdModeloGenericoEncriptado);
                     _objModeloGenerico.Nombre = _objModeloGenerico.Nombre.Trim();
                     _objModeloGenerico.Estado = true;
                     ModeloGenerico _ModeloGenerico = new ModeloGenerico();

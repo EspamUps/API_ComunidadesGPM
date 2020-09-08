@@ -18,7 +18,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                foreach (var item in db.Sp_CabeceraModeloPublicadoInsertar(int.Parse(_objModeloPublicado.IdCabeceraVersionModelo),int.Parse(_objModeloPublicado.IdPeriodo),int.Parse(_objModeloPublicado.IdAsignarUsuarioTipoUsuario)))
+                foreach (var item in db.Sp_CabeceraModeloPublicadoInsertar(int.Parse(_objModeloPublicado.IdCabeceraVersionModelo), int.Parse(_objModeloPublicado.IdPeriodo), int.Parse(_objModeloPublicado.IdAsignarUsuarioTipoUsuario)))
                 {
                     _objModeloPublicado.IdModeloPublicado = item.IdModeloPublicado;
                 }

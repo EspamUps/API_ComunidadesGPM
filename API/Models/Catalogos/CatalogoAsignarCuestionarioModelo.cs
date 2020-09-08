@@ -20,7 +20,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                foreach (var item in db.Sp_AsignarCuestionarioModeloInsertar(int.Parse(_objAsignarCuestionarioModelo.IdModeloGenerico), int.Parse(_objAsignarCuestionarioModelo.IdCuestionarioPublicado),int.Parse(_objAsignarCuestionarioModelo.IdAsignarUsuarioTipoUsuario)))
+                foreach (var item in db.Sp_AsignarCuestionarioModeloInsertar(int.Parse(_objAsignarCuestionarioModelo.IdModeloGenerico), int.Parse(_objAsignarCuestionarioModelo.IdCuestionarioPublicado), int.Parse(_objAsignarCuestionarioModelo.IdAsignarUsuarioTipoUsuario)))
                 {
                     _objAsignarCuestionarioModelo.IdAsignarCuestionarioModelo = item.IdAsignarCuestionarioModelo;
                 }
@@ -53,7 +53,7 @@ namespace API.Models.Catalogos
                     FechaAsignacion = item.FechaAsignacion,
                     Utilizado = item.AsignarCuestionarioModeloUtilizado,
                     CuestionarioPublicado = DataCuestionarioPublicado,
-                    AsignarComponenteGenerico = listaAsignarComponenteGenerico.Where(p=>_seguridad.DesEncriptar(p.IdAsignarCuestionarioModelo) == item.IdAsignarCuestionarioModelo.ToString()).OrderBy(e => e.Orden).ToList()
+                    AsignarComponenteGenerico = listaAsignarComponenteGenerico.Where(p => _seguridad.DesEncriptar(p.IdAsignarCuestionarioModelo) == item.IdAsignarCuestionarioModelo.ToString()).OrderBy(e => e.Orden).ToList()
                 });
             }
             return _lista;
@@ -80,7 +80,7 @@ namespace API.Models.Catalogos
         {
             List<Componente> _lista = new List<Componente>();
             var listaComponentes = _objComponentes.ConsultarComponente();
-            foreach (var item in db.Sp_ComponentesDeUnModeloGenerico(int.Parse(_objAsignarCuestionarioModelo.IdCuestionarioPublicado),int.Parse(_objAsignarCuestionarioModelo.IdModeloGenerico)))
+            foreach (var item in db.Sp_ComponentesDeUnModeloGenerico(int.Parse(_objAsignarCuestionarioModelo.IdCuestionarioPublicado), int.Parse(_objAsignarCuestionarioModelo.IdModeloGenerico)))
             {
                 _lista.Add(listaComponentes.Where(p => p.IdComponente == item.Value).FirstOrDefault());
             }
@@ -93,7 +93,7 @@ namespace API.Models.Catalogos
             var listaComponentes = _objComponentes.ConsultarComponente();
             var listaCuestionarioPublicado = _objCuestionarioPublicado.ConsultarCuestionarioPublicado();
             List<AsignarCuestionarioModelo> _lista = new List<AsignarCuestionarioModelo>();
-            foreach (var item in db.Sp_AsignarCuestionarioModeloConsultar().Where(p=>p.IdModeloGenerico == _idModeloGenerico).ToList())
+            foreach (var item in db.Sp_AsignarCuestionarioModeloConsultar().Where(p => p.IdModeloGenerico == _idModeloGenerico).ToList())
             {
                 CuestionarioPublicado DataCuestionarioPublicado = listaCuestionarioPublicado.Where(p => p.IdCuestionarioPublicado == item.IdCuestionarioPublicado).FirstOrDefault();
                 int idCuestionario = db.Sp_CuestionarioGenericoDeUnCuestionarioPublicado(item.IdCuestionarioPublicado).Select(e => e.Value).FirstOrDefault();

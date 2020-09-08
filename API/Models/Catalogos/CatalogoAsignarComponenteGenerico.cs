@@ -55,7 +55,7 @@ namespace API.Models.Catalogos
         public List<AsignarComponenteGenerico> ConsultarAsignarComponenteGenericoPorId(int _idAsignarComponenteGenerico)
         {
             List<AsignarComponenteGenerico> _lista = new List<AsignarComponenteGenerico>();
-            foreach (var item in db.Sp_AsignarComponenteGenericoConsultar().Where(p=> p.IdAsignarComponenteGenerico == _idAsignarComponenteGenerico).ToList())
+            foreach (var item in db.Sp_AsignarComponenteGenericoConsultar().Where(p => p.IdAsignarComponenteGenerico == _idAsignarComponenteGenerico).ToList())
             {
                 _lista.Add(new AsignarComponenteGenerico()
                 {

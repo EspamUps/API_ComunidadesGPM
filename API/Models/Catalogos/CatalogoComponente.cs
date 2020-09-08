@@ -35,6 +35,31 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
+        public int SubirComponente(Componente _objComponente)
+        {
+            try
+            {
+                db.Sp_SubirComponente(_objComponente.IdComponente, _objComponente.Estado);
+                return _objComponente.IdComponente;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public int BajarComponente(Componente _objComponente)
+        {
+            try
+            {
+                db.Sp_BajarComponente(_objComponente.IdComponente, _objComponente.Estado);
+                return _objComponente.IdComponente;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
         public void EliminarComponente(int _idComponente)
         {
             db.Sp_ComponenteEliminar(_idComponente);
@@ -92,7 +117,10 @@ namespace API.Models.Catalogos
         public List<Componente> ConsultarComponentePorIdCuestionarioGenerico(int _idCuestionarioGenerico)
         {
             List<Componente> _lista = new List<Componente>();
-            foreach (var item in db.Sp_ComponenteConsultar().Where(c=>c.IdCuestionarioGenerico==_idCuestionarioGenerico).ToList())
+            foreach (var item in db.Sp_ComponenteConsultar()
+                .Where(c=>c.IdCuestionarioGenerico==_idCuestionarioGenerico)
+                .Where(c => c.EstadoComponente == true)
+                .ToList())
             {
                 _lista.Add(new Componente()
                 {
@@ -128,6 +156,47 @@ namespace API.Models.Catalogos
                     Orden = item.OrdenComponente,
                     Utilizado = item.UtilizadoComponente
                     ,listaSeccion = new CatalogoSeccion().ConsultarSeccionPorIdComponenteConPregunta(item.IdComponente)
+                });
+            }
+            return _lista;
+        }
+
+        public List<Componente> ConsultarComponentePorIdCuestionarioGenericoConSeccionPreguntaPorVersion(int _idCuestionarioGenerico, int _idVersionCuestionario)
+        {
+            List<Componente> _lista = new List<Componente>();
+            foreach (var item in db.Sp_ComponenteConsultarPorVersion(_idVersionCuestionario).Where(c => c.IdCuestionarioGenerico == _idCuestionarioGenerico).ToList())
+            {
+                _lista.Add(new Componente()
+                {
+                    IdComponente = item.IdComponente,
+                    IdComponenteEncriptado = _seguridad.Encriptar(item.IdComponente.ToString()),
+                    Descripcion = item.DescripcionComponente,
+                    Estado = item.EstadoComponente,
+                    Orden = item.OrdenComponente,
+                    Utilizado = item.UtilizadoComponente
+                    ,
+                    listaSeccion = new CatalogoSeccion().ConsultarSeccionPorIdComponenteConPreguntaPorVersion(item.IdComponente, _idVersionCuestionario)
+                });
+            }
+            return _lista;
+        }
+
+        public List<Componente> ComponentePorIdCuestionario(int _idCuestionarioGenerico)
+        {
+            List<Componente> _lista = new List<Componente>();
+            foreach (var item in db.Sp_ComponentesConsultarPorCuestionario(_idCuestionarioGenerico).ToList())
+            {
+                _lista.Add(new Componente()
+                {
+                   // IdComponente = item.IdComponente,
+                    IdComponenteEncriptado = _seguridad.Encriptar(item.IdComponente.ToString()),
+                    Descripcion = item.Descripcion,
+                    Estado = item.Estado,
+                    Orden = item.Orden,
+                    CuestionarioGenerico = new CuestionarioGenerico()
+                    {
+                        IdCuestionarioGenericoEncriptado = _seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
+                    }
                 });
             }
             return _lista;

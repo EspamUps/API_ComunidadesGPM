@@ -116,12 +116,12 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "No se encontró el objeto canton.";
                 }
-                else if (_objCanton.Provincia.IdProvinciaEncriptado == null || string.IsNullOrEmpty(_objCanton.Provincia.IdProvinciaEncriptado))
+                else if (_objCanton.Provincia.IdProvinciaEncriptado == "null" || string.IsNullOrEmpty(_objCanton.Provincia.IdProvinciaEncriptado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "Ingrese el identificador de la provincia a la que pertenece el cantón.";
+                    _http.mensaje = "Seleccione un cantón.";
                 }
-                else if (_objCanton.NombreCanton == null || string.IsNullOrEmpty(_objCanton.NombreCanton))
+                else if (_objCanton.NombreCanton == "null" || string.IsNullOrEmpty(_objCanton.NombreCanton))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el nombre del cantón.";
@@ -131,7 +131,7 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
                     _http.mensaje = "Ya existe un cantón con el mismo nombre, por favor verifique en la lista.";
                 }
-                else if (_objCanton.CodigoCanton == null || string.IsNullOrEmpty(_objCanton.CodigoCanton))
+                else if (_objCanton.CodigoCanton == "null" || string.IsNullOrEmpty(_objCanton.CodigoCanton))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el codigo del cantón.";
@@ -185,22 +185,22 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "No se encontró el objeto canton.";
                 }
-                else if (_objCanton.IdCantonEncriptado == null || string.IsNullOrEmpty(_objCanton.IdCantonEncriptado))
+                else if (_objCanton.IdCantonEncriptado == "null" || string.IsNullOrEmpty(_objCanton.IdCantonEncriptado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador del cantón.";
                 }
-                else if (_objCanton.Provincia.IdProvinciaEncriptado == null || string.IsNullOrEmpty(_objCanton.Provincia.IdProvinciaEncriptado))
+                else if (_objCanton.Provincia.IdProvinciaEncriptado == "null" || string.IsNullOrEmpty(_objCanton.Provincia.IdProvinciaEncriptado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador de la provincia a la que pertenece el cantón.";
                 }
-                else if (_objCanton.NombreCanton == null || string.IsNullOrEmpty(_objCanton.NombreCanton))
+                else if (_objCanton.NombreCanton == "null" || string.IsNullOrEmpty(_objCanton.NombreCanton))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el nombre del cantón.";
                 }
-                else if (_objCanton.CodigoCanton == null || string.IsNullOrEmpty(_objCanton.CodigoCanton))
+                else if (_objCanton.CodigoCanton == "null" || string.IsNullOrEmpty(_objCanton.CodigoCanton))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el codigo del cantón.";

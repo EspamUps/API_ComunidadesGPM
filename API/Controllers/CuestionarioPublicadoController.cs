@@ -131,6 +131,44 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Route("api/cuestionariopublicado_deshabilitar")]
+        public object cuestionariopublicado_deshabilitar(string _idCuestionarioPublicadoEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idCuestionarioPublicadoEncriptado == null || string.IsNullOrEmpty(_idCuestionarioPublicadoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cuestionario publicado";
+                }
+                else
+                {
+                    int _idCuestionarioPublicado = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioPublicadoEncriptado));
+                    var _objCuestionarioPublicado = _objCatalogoCuestionarioPublicado.ConsultarCuestionarioPublicadoPorId(_idCuestionarioPublicado).FirstOrDefault();
+                    if (_objCuestionarioPublicado == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró la publicación que intenta deshabilitar";
+                    }
+                    
+                    else
+                    {
+                        _objCatalogoCuestionarioPublicado.DeshabilitarCuestionarioPublicado(_idCuestionarioPublicado);
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
         [Route("api/cuestionariopublicado_consultar")]
         public object cuestionariopublicado_consultar()
         {
@@ -138,7 +176,7 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                var _listaCuestionarioPublicado = _objCatalogoCuestionarioPublicado.ConsultarCuestionarioPublicado().Where(c => c.Estado == true).ToList();
+                var _listaCuestionarioPublicado = _objCatalogoCuestionarioPublicado.ConsultarCuestionarioPublicado().ToList();
                 foreach (var _objCuestionarioPublicado in _listaCuestionarioPublicado)
                 {
                     _objCuestionarioPublicado.IdCuestionarioPublicado = 0;
@@ -191,7 +229,7 @@ namespace API.Controllers
                         _http.mensaje = "El identificador ingresado no fue encontrado para un usuario";
                     }
                     else {
-                        var _listaCuestionarioPublicado = _objCatalogoCuestionarioPublicado.ConsultarCuestionarioPublicado().Where(c => c.Estado == true && c.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario== _objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario).ToList();
+                        var _listaCuestionarioPublicado = _objCatalogoCuestionarioPublicado.ConsultarCuestionarioPublicado().Where(c => c.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario== _objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario).ToList();
                         foreach (var _objCuestionarioPublicado in _listaCuestionarioPublicado)
                         {
                             _objCuestionarioPublicado.IdCuestionarioPublicado = 0;
