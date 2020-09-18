@@ -40,29 +40,32 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese la descripción del modelo genérico";
                 }
-                else if (_objCatalogoModeloGenerico.ConsultarModeloGenerico().Where(c => c.Estado == true && c.Nombre == _objModeloGenerico.Nombre.Trim()).ToList().Count > 0)
-                {
-                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                    _http.mensaje = "Ya existe un modelo con el mismo nombre, verifique en la lista.";
-                }
                 else
                 {
                     _objModeloGenerico.Nombre = _objModeloGenerico.Nombre.Trim();
                     _objModeloGenerico.Estado = true;
-                    int _idModeloGenerico = _objCatalogoModeloGenerico.InsertarModeloGenerico(_objModeloGenerico);
-                    if (_idModeloGenerico == 0)
+                    ModeloGenerico _ModeloGenerico = new ModeloGenerico();
+                    _ModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenericoPorNombre(_objModeloGenerico.Nombre).FirstOrDefault();
+                    if (_ModeloGenerico == null)
                     {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                        _http.mensaje = "Ocurrió un error al tratar de ingresar el modelo generico.";
+                        int _idModeloGenerico = _objCatalogoModeloGenerico.InsertarModeloGenerico(_objModeloGenerico);
+                        if (_idModeloGenerico == 0)
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "Ocurrió un error al tratar de ingresar el modelo generico.";
+                        }
+                        else
+                        {
+                            var _objModeloGenericoIngresado = _objCatalogoModeloGenerico.ConsultarModeloGenericoPorId(_idModeloGenerico).Where(C => C.Estado == true).FirstOrDefault();
+                            _objModeloGenericoIngresado.IdModeloGenerico = 0;
+                            _respuesta = _objModeloGenericoIngresado;
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        }
                     }
                     else
                     {
-                        //var _objCuestionarioGenericoIngresado = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenericoPorId(_idCuestionarioGenerico).Where(C => C.Estado == true).FirstOrDefault();
-                        var _objModeloGenericoIngresado = _objCatalogoModeloGenerico.ConsultarModeloGenericoPorId(_idModeloGenerico).Where(C => C.Estado == true).FirstOrDefault();
-
-                        _objModeloGenericoIngresado.IdModeloGenerico = 0;
-                        _respuesta = _objModeloGenericoIngresado;
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                        _http.mensaje = "Ya existe un modelo con el mismo nombre, verifique en la lista.";
                     }
                 }
             }
@@ -81,12 +84,8 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                var _listaModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenerico().Where(c => c.IdModeloGenerico.ToString() == _seguridad.DesEncriptar(_idModeloGenerico) && c.Estado == true).FirstOrDefault();
-                //foreach (var item in _listaModeloGenerico)
-                //{
-                //    item.IdModeloGenerico = 0;
-                //}
-                if(_listaModeloGenerico != null)
+                var _listaModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenericoPorId(int.Parse(_seguridad.DesEncriptar(_idModeloGenerico))).FirstOrDefault();
+                if (_listaModeloGenerico != null)
                 {
                     _listaModeloGenerico.IdModeloGenerico = 0;
                 }
@@ -116,7 +115,7 @@ namespace API.Controllers
                 else
                 {
                     _objModeloGenerico.IdModeloGenericoEncriptado = _seguridad.DesEncriptar(_objModeloGenerico.IdModeloGenericoEncriptado);
-                    var _objBuscadoModeloGenerico= _objCatalogoModeloGenerico.ConsultarModeloGenericoPorId(int.Parse(_objModeloGenerico.IdModeloGenericoEncriptado)).FirstOrDefault();
+                    var _objBuscadoModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenericoPorId(int.Parse(_objModeloGenerico.IdModeloGenericoEncriptado)).FirstOrDefault();
                     if (_objBuscadoModeloGenerico == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
@@ -154,6 +153,101 @@ namespace API.Controllers
                 {
                     item.IdModeloGenerico = 0;
                 }
+                _respuesta = _listaModeloGenerico;
+                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/ModeloGenerico_modificar")]
+        public object ModeloGenerico_modificar(ModeloGenerico _objModeloGenerico)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objModeloGenerico == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el objeto modelo genérico";
+                }
+                else if (_objModeloGenerico.IdModeloGenericoEncriptado == null || string.IsNullOrEmpty(_objModeloGenerico.IdModeloGenericoEncriptado.Trim()))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el id del modelo genérico";
+                }
+                else if (_objModeloGenerico.Nombre == null || string.IsNullOrEmpty(_objModeloGenerico.Nombre.Trim()))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el nombre del modelo genérico";
+                }
+                else if (_objModeloGenerico.Descripcion == null || string.IsNullOrEmpty(_objModeloGenerico.Descripcion.Trim()))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la descripción del modelo genérico";
+                }
+                else
+                {
+                    _objModeloGenerico.IdModeloGenericoEncriptado = _seguridad.DesEncriptar(_objModeloGenerico.IdModeloGenericoEncriptado);
+                    _objModeloGenerico.IdModeloGenerico = int.Parse(_objModeloGenerico.IdModeloGenericoEncriptado);
+                    _objModeloGenerico.Nombre = _objModeloGenerico.Nombre.Trim();
+                    _objModeloGenerico.Estado = true;
+                    ModeloGenerico _ModeloGenerico = new ModeloGenerico();
+                    _ModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenericoPorId(_objModeloGenerico.IdModeloGenerico).FirstOrDefault();
+                    if (_ModeloGenerico == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "La caracterización que intenta modificar no existe.";
+                    }
+                    else
+                    {
+                        _objModeloGenerico.IdModeloGenerico = _ModeloGenerico.IdModeloGenerico;
+                        if (_ModeloGenerico.Nombre.Trim().ToUpper() != _objModeloGenerico.Nombre.Trim().ToUpper())
+                        {
+                            _ModeloGenerico = new ModeloGenerico();
+                            _ModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenericoPorNombre(_objModeloGenerico.Nombre).FirstOrDefault();
+                            if (_ModeloGenerico != null)
+                            {
+                                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                                _http.mensaje = "Ya existe un modelo con el mismo nombre, verifique en la lista.";
+                                return new { respuesta = _respuesta, http = _http };
+                            }
+                        }
+                        int _idModeloGenerico = _objCatalogoModeloGenerico.ModificarModeloGenerico(_objModeloGenerico);
+                        if (_idModeloGenerico == 0)
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "Ocurrió un error al tratar de ingresar el modelo generico.";
+                        }
+                        else
+                        {
+                            var _objModeloGenericoIngresado = _objCatalogoModeloGenerico.ConsultarModeloGenericoPorId(_idModeloGenerico).Where(C => C.Estado == true).FirstOrDefault();
+                            _objModeloGenericoIngresado.IdModeloGenerico = 0;
+                            _respuesta = _objModeloGenericoIngresado;
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/ConsultarModeloGenericoParaPublicar")]
+        public object ConsultarModeloGenericoParaPublicar()
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                var _listaModeloGenerico = _objCatalogoModeloGenerico.ConsultarModeloGenericoParaPublicar();
                 _respuesta = _listaModeloGenerico;
                 _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
             }

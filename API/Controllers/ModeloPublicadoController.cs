@@ -71,7 +71,6 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
-
         [HttpPost]
         [Route("api/modeloPublicado_eliminar")]
         public object modeloPublicado_eliminar(ModeloPublicado _objModeloPublicado)
@@ -112,7 +111,6 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
-
         [HttpPost]
         [Route("api/HabilitarModeloPublicado")]
         public object HabilitarModeloPublicado(ModeloPublicado _objModeloPublicado)
@@ -147,10 +145,9 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
-
         [HttpPost]
-        [Route("api/DesHabilitarModeloPublicad")]
-        public object DesHabilitarModeloPublicad(ModeloPublicado _objModeloPublicado)
+        [Route("api/DesHabilitarModeloPublicado")]
+        public object DesHabilitarModeloPublicado(ModeloPublicado _objModeloPublicado)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
@@ -182,7 +179,94 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
-
-
+        [HttpPost]
+        [Route("api/modeloPublicado_consultar")]
+        public object modeloPublicado_consultar()
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                var _listaCabeceraVersion = _objModeloPublicados.ConsultarModeloPublicado();
+                _respuesta = _listaCabeceraVersion;
+                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/modeloPublicadoActivo_consultar")]
+        public object modeloPublicadoActivo_consultar(ModeloGenerico _objModeloGenerico)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objModeloGenerico.IdModeloGenericoEncriptado == null || string.IsNullOrEmpty(_objModeloGenerico.IdModeloGenericoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Seleccione el modelo generico";
+                }
+                else
+                {
+                    var _listaCabeceraVersion = _objModeloPublicados.ConsultarVersionesPublicadoActivos(int.Parse(_seguridad.DesEncriptar(_objModeloGenerico.IdModeloGenericoEncriptado)));
+                    _respuesta = _listaCabeceraVersion;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/ModeloGenericoConVersionesActivas_Consultar")]
+        public object ModeloGenericoConVersionesActivas_Consultar()
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                var _listaCabeceraVersion = _objModeloPublicados.ModeloGenericoConVersionesActivas();
+                _respuesta = _listaCabeceraVersion;
+                _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+        [HttpPost]
+        [Route("api/CuestionarioFinalizado_consultar")]
+        public object CuestionarioFinalizado_consultar(CuestionarioPublicado _objCuestionarioPublicado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objCuestionarioPublicado.IdCuestionarioPublicadoEncriptado == null || string.IsNullOrEmpty(_objCuestionarioPublicado.IdCuestionarioPublicadoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Seleccione el cuestionario publicado";
+                }
+                else
+                {
+                    _objCuestionarioPublicado.IdCuestionarioPublicado = int.Parse(_seguridad.DesEncriptar(_objCuestionarioPublicado.IdCuestionarioPublicadoEncriptado));
+                    var _listaCuestionarioPublicado = _objModeloPublicados.ConsultarEncuestasFinalizadas(_objCuestionarioPublicado);
+                    _respuesta = _listaCuestionarioPublicado;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
     }
 }

@@ -257,5 +257,57 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+        public List<VersionamientoPregunta> ConsultarPreguntasPorCuestionarioPublicadoComponente(AsignarCuestionarioModelo _AsignarCuestionarioModelo)
+        {
+            List<VersionamientoPregunta> _lista = new List<VersionamientoPregunta>();
+            foreach (var item in db.Sp_ConsultarPreguntasPorCuestionarioPublicadoComponente(int.Parse(_AsignarCuestionarioModelo.IdCuestionarioPublicado), int.Parse(_AsignarCuestionarioModelo.AsignarComponenteGenerico[0].IdComponente)))
+            {
+                _lista.Add(new VersionamientoPregunta()
+                {
+                    IdVersionamientoPregunta = item.IdVersionamientoPregunta,
+                    IdVersionamientoPreguntaEncriptado = _seguridad.Encriptar(item.IdVersionamientoPregunta.ToString()),
+                    Estado = item.EstadoVersionamientoPregunta,
+                    Pregunta = new Pregunta()
+                    {
+                        IdPregunta = item.IdPregunta,
+                        IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                        Descripcion = item.DescripcionPregunta,
+                        Estado = item.EstadoPregunta,
+                        Obligatorio = item.ObligatorioPregunta,
+                        Orden = item.OrdenPregunta,
+                        TipoPregunta = new TipoPregunta()
+                        {
+                            IdTipoPregunta = item.IdTipoPregunta,
+                            IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
+                            Descripcion = item.DescripcionTipoPregunta,
+                            Estado = item.EstadoTipoPregunta,
+                            Identificador = item.IdentificadorTipoPregunta
+                        },
+                        Seccion = new Seccion()
+                        {
+                            IdSeccion = item.IdSeccion,
+                            IdSeccionEncriptado = _seguridad.Encriptar(item.IdSeccion.ToString()),
+                            Descripcion = item.DescripcionSeccion,
+                            Estado = item.EstadoSeccion,
+                            Orden = item.OrdenSeccion,
+                            Componente = new Componente()
+                            {
+                                IdComponente = item.IdComponente,
+                                IdComponenteEncriptado = _seguridad.Encriptar(item.IdComponente.ToString()),
+                                Descripcion = item.DescripcionComponente,
+                                Estado = item.EstadoComponente,
+                                Orden = item.OrdenComponente,
+                            }
+                        }
+                    },
+                    CabeceraVersionCuestionario = new CabeceraVersionCuestionario()
+                    {
+                        IdCabeceraVersionCuestionario = item.IdCabeceraVersionCuestionario,
+                        IdCabeceraVersionCuestionarioEncriptado = _seguridad.Encriptar(item.IdCabeceraVersionCuestionario.ToString()),
+                    }
+                });
+            }
+            return _lista;
+        }
     }
 }

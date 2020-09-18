@@ -12,8 +12,6 @@ namespace API.Models.Catalogos
     {
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
-        CatalogoDescripcionComponente _objDescripcionComponente = new CatalogoDescripcionComponente();
-        //CatalogoAsignarCuestionarioModelo _objAsignarCuestionarioModelo = new CatalogoAsignarCuestionarioModelo();
         CatalogoComponente _objComponentes = new CatalogoComponente();
         public int InsertarAsignarComponenteGenerico(AsignarComponenteGenerico _objAsignarComponenteGenerico)
         {
@@ -32,7 +30,7 @@ namespace API.Models.Catalogos
         }
         public List<AsignarComponenteGenerico> ConsultarAsignarComponenteGenerico()
         {
-            var ListaDescripcionComponente = _objDescripcionComponente.ConsultarDescripcionComponente();
+            //var ListaDescripcionComponente = _objDescripcionComponente.ConsultarDescripcionComponente();
             var listaComponentes = _objComponentes.ConsultarComponente();
             List<AsignarComponenteGenerico> _lista = new List<AsignarComponenteGenerico>();
             foreach (var item in db.Sp_AsignarComponenteGenericoConsultar())
@@ -48,7 +46,7 @@ namespace API.Models.Catalogos
                     IdComponente = _seguridad.Encriptar(item.IdComponente.ToString()),
                     Orden = item.Orden,
                     Utilizado = item.AsignarComponenteGenericoUtilizado,
-                    DescripcionComponente = ListaDescripcionComponente.Where(p=> _seguridad.DesEncriptar(p.IdAsignarComponenteGenerico) == item.IdAsignarComponenteGenerico.ToString()).ToList(),
+                    //DescripcionComponente = ListaDescripcionComponente.Where(p=> _seguridad.DesEncriptar(p.IdAsignarComponenteGenerico) == item.IdAsignarComponenteGenerico.ToString()).ToList(),
                     Componente = DataComponente
                 });
             }
@@ -57,7 +55,7 @@ namespace API.Models.Catalogos
         public List<AsignarComponenteGenerico> ConsultarAsignarComponenteGenericoPorId(int _idAsignarComponenteGenerico)
         {
             List<AsignarComponenteGenerico> _lista = new List<AsignarComponenteGenerico>();
-            foreach (var item in db.Sp_AsignarComponenteGenericoConsultar().Where(p=> p.IdAsignarComponenteGenerico == _idAsignarComponenteGenerico).ToList())
+            foreach (var item in db.Sp_AsignarComponenteGenericoConsultar().Where(p => p.IdAsignarComponenteGenerico == _idAsignarComponenteGenerico).ToList())
             {
                 _lista.Add(new AsignarComponenteGenerico()
                 {
@@ -70,7 +68,6 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
-
         public List<AsignarComponenteGenerico> ConsultarAsignarComponenteGenericoPorIdDHBD(int _idAsignarComponenteGenerico)
         {
             List<AsignarComponenteGenerico> _lista = new List<AsignarComponenteGenerico>();
@@ -113,7 +110,6 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
-
         public void EliminarAsignarComponenteGenerico(int _idAsignarComponenteGenerico)
         {
             var DataAsignarComponenteGenerico = ConsultarAsignarComponenteGenericoPorId(_idAsignarComponenteGenerico).FirstOrDefault();
@@ -127,6 +123,18 @@ namespace API.Models.Catalogos
             if (cantidadAsignarCuestionarioModelo.AsignarCuestionarioModeloUtilizado == "0")
             {
                 db.Sp_AsignarCuestionarioModeloEliminar(int.Parse(_seguridad.DesEncriptar(DataAsignarComponenteGenerico.IdAsignarCuestionarioModelo)));
+            }
+        }
+        public bool SubirAsignarComponenteGenerico(AsignarComponenteGenerico _AsignarComponenteGenerico)
+        {
+            try
+            {
+                db.sp_AsignarComponenteGenericoSubir(_AsignarComponenteGenerico.IdAsignarComponenteGenerico, _AsignarComponenteGenerico.Orden);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
     }

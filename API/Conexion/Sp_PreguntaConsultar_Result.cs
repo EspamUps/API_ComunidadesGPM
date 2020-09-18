@@ -15,9 +15,15 @@ namespace API.Conexion
     {
         public int IdPregunta { get; set; }
         public string DescripcionPregunta { get; set; }
+        public string leyendaSuperior { get; set; }
+        public string leyendaLateral { get; set; }
+        public Nullable<bool> ObservacionPregunta { get; set; }
         public int OrdenPregunta { get; set; }
         public bool ObligatorioPregunta { get; set; }
         public bool EstadoPregunta { get; set; }
+        public bool ReportePregunta { get; set; }
+        public string opcionSeleccion { get; set; }
+        public string opcionMatriz { get; set; }
         public string EncajonamientoPregunta { get; set; }
         public string UtilizadoPregunta { get; set; }
         public int IdTipoPregunta { get; set; }

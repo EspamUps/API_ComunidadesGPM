@@ -96,16 +96,8 @@ namespace API.Controllers
                     _AsignarCuestionarioModelo.IdModeloGenerico = _seguridad.DesEncriptar(_AsignarCuestionarioModelo.IdModeloGenerico);
                     _AsignarCuestionarioModelo.IdCuestionarioPublicado = _seguridad.DesEncriptar(_AsignarCuestionarioModelo.IdCuestionarioPublicado);
                     var _objListaComponentes = _objAsignarCuestionarioModelo.ConsultarComponenteDeUnModeloGenerico(_AsignarCuestionarioModelo).ToList();
-                    if (_objListaComponentes.Count  == 0)
-                    {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
-                        _http.mensaje = "No se encontró el componente en el sistema";
-                    }
-                    else
-                    {
-                        _respuesta = _objListaComponentes;
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                    }
+                    _respuesta = _objListaComponentes;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -155,6 +147,53 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
-
+        [HttpPost]
+        [Route("api/AsignarComponenteGenerico_CambiarPosicion")]
+        public object AsignarComponenteGenerico_CambiarPosicion(AsignarComponenteGenerico _objAsignarComponenteGenerico)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_objAsignarComponenteGenerico.IdAsignarComponenteGenericoEncriptado == null || string.IsNullOrEmpty(_objAsignarComponenteGenerico.IdAsignarComponenteGenericoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del componente que va a cambiar de posicion.";
+                }
+                else if (_objAsignarComponenteGenerico.Orden <= 0)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la nueva posicion correcta";
+                }
+                else
+                {
+                    _objAsignarComponenteGenerico.IdAsignarComponenteGenericoEncriptado = _seguridad.DesEncriptar(_objAsignarComponenteGenerico.IdAsignarComponenteGenericoEncriptado);
+                    var _objAsignarComponenteGenericoConsultado = AsignarComponenteGenerico.ConsultarAsignarComponenteGenericoPorId(int.Parse(_objAsignarComponenteGenerico.IdAsignarComponenteGenericoEncriptado)).FirstOrDefault();
+                    if (_objAsignarComponenteGenericoConsultado == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "El AsignarComponenteGenerico que intenta cambiar de posicion no existe.";
+                    }
+                    else
+                    {
+                        _objAsignarComponenteGenerico.IdAsignarComponenteGenerico = int.Parse(_objAsignarComponenteGenerico.IdAsignarComponenteGenericoEncriptado);
+                        if (AsignarComponenteGenerico.SubirAsignarComponenteGenerico(_objAsignarComponenteGenerico) == true)
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        }
+                        else
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                            _http.mensaje = "Ocurrio un error al cambiar de posicion";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
     }
 }

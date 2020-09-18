@@ -16,6 +16,8 @@ namespace API.Conexion
         public int IdVersionamientoPregunta { get; set; }
         public int IdCabeceraVersionCuestionario { get; set; }
         public int IdPregunta { get; set; }
+        public Nullable<int> IdSeccion { get; set; }
+        public Nullable<int> IdComponente { get; set; }
         public bool Estado { get; set; }
     }
 }

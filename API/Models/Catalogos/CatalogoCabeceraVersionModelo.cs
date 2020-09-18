@@ -1,6 +1,7 @@
 ﻿using API.Conexion;
 using API.Models.Entidades;
 using API.Models.Metodos;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,32 +14,24 @@ namespace API.Models.Catalogos
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
         CatalogoAsignarUsuarioTipoUsuario _objAsignarUsuarioTipoUsuario = new CatalogoAsignarUsuarioTipoUsuario();
-        CatalogoVersionamientoModelo _objVersionamientoModelo = new CatalogoVersionamientoModelo();
-        CatalogoCuestionarioGenerico _objCuestionarioGenerico = new CatalogoCuestionarioGenerico();
-        CatalogoDescripcionComponente _objDescripcionComponente = new CatalogoDescripcionComponente();
-        CatalogoModeloPublicado _objModeloPublicado = new CatalogoModeloPublicado();
-        CatalogoAsignarCuestionarioModelo _objAsignarCuestionarioModelo = new CatalogoAsignarCuestionarioModelo();
-        CatalogoAsignarComponenteGenerico _objAsignarComponenteGenerico = new CatalogoAsignarComponenteGenerico();
-        CatalogoAsignarModeloGenericoParroquia _objAsignarModeloGenericoParroquia = new CatalogoAsignarModeloGenericoParroquia();
-        CatalogoAsignarResponsableModeloPublicado _objResponsableModeloPublicado = new CatalogoAsignarResponsableModeloPublicado();
-        //CatalogoModeloGenerico _objModeloGenerico = new CatalogoModeloGenerico();
-        CatalogoContenidoDetalleComponente _objContenidoDetalleComponente = new CatalogoContenidoDetalleComponente();
         public int InsertarCabeceraVersionModelo(CabeceraVersionModelo _obCabeceraVersionModelo)
         {
             try
             {
                 int idCabeceraVersion = int.Parse(db.Sp_CabeceraVersionModeloInsertar(int.Parse(_obCabeceraVersionModelo.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuarioEncriptado), int.Parse(_obCabeceraVersionModelo.IdModeloGenerico), _obCabeceraVersionModelo.Caracteristica, _obCabeceraVersionModelo.Version).Select(x => x.Value.ToString()).FirstOrDefault());
-                foreach (var item in db.Sp_AsignarDescripcionComponenteTipoElementoConsultar().Where(p => p.IdModeloGenerico == int.Parse(_obCabeceraVersionModelo.IdModeloGenerico)).ToList())
+                foreach (var item in db.Sp_AsignarComponenteGenericoPorModeloGenericoConsultar(int.Parse(_obCabeceraVersionModelo.IdModeloGenerico)))
                 {
-                    try
+                    string contenido = "";
+                    int imagen = 0;
+                    foreach (var item1 in db.Sp_ConfigurarComponentePorIdAsignarComponente(item.IdAsignarComponenteGenerico))
                     {
-                        int idVersionamientoModelo = int.Parse(db.Sp_VersionamientoModeloInsertar(idCabeceraVersion, item.IdAsignarDescripcionComponenteTipoElemento, true, "", idCabeceraVersion).Select(x => x.Value.ToString()).FirstOrDefault());
+                        contenido = item1.Contenido;
+                        if (item1.Imagen)
+                        {
+                            imagen = 1;
+                        }
                     }
-                    catch (Exception)
-                    {
-                        EliminarCabeceraVersionModelo(idCabeceraVersion);
-                        return 0;
-                    }
+                    int idVersionamientoModelo = int.Parse(db.Sp_VersionamientoModeloInsertar(idCabeceraVersion, item.IdAsignarComponenteGenerico, true, contenido, imagen).Select(x => x.Value.ToString()).FirstOrDefault());
                 }
                 return idCabeceraVersion;
             }
@@ -47,7 +40,6 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
-
         public List<CabeceraVersionModelo> ConsultarCabeceraVersionModelo()
         {
             var ListaAsignacionTipoUsuario = _objAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
@@ -64,28 +56,25 @@ namespace API.Models.Catalogos
                     Version = item.VersionCabeceraVersionModelo,
                     Estado = item.EstadoCabeceraVersionModelo,
                     Utilizado = item.UtilizadoCabeceraVersionModelo,
-                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p=> p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
+                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
                 });
             }
             return _lista;
         }
         public List<CabeceraVersionModelo> ConsultarCabeceraVersionModeloPorId(int _idCabeceraVersionModelo)
         {
-            var ListaAsignacionTipoUsuario = _objAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
             List<CabeceraVersionModelo> _lista = new List<CabeceraVersionModelo>();
-            foreach (var item in db.Sp_CabeceraVersionModeloConsultar().Where(p=> p.IdCabeceraVersionModelo == _idCabeceraVersionModelo).ToList())
+            foreach (var item in db.Sp_CabeceraVersionModeloPorIdConsultar(_idCabeceraVersionModelo))
             {
                 _lista.Add(new CabeceraVersionModelo()
                 {
-                    IdCabeceraVersionModelo = item.IdCabeceraVersionModelo,
-                    IdCabeceraVersionModeloEncriptado = _seguridad.Encriptar(item.IdCabeceraVersionModelo.ToString()),
-                    IdModeloGenerico = _seguridad.Encriptar(item.MODELOGENERICO_IdModeloGenerico.ToString()),
-                    Caracteristica = item.CaracteristicaCabeceraVersionModelo,
-                    FechaCreacion = item.FechaCreacionCabeceraVersionModelo,
-                    Version = item.VersionCabeceraVersionModelo,
-                    Estado = item.EstadoCabeceraVersionModelo,
-                    Utilizado = item.UtilizadoCabeceraVersionModelo,
-                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
+                    IdCabeceraVersionModeloEncriptado = _seguridad.Encriptar(item.CabeceraVersionModeloIdCabeceraVersionModelo.ToString()),
+                    IdModeloGenerico = _seguridad.Encriptar(item.CabeceraVersionModeloIdModeloGenerico.ToString()),
+                    Version = item.CabeceraVersionModeloVersion,
+                    Caracteristica = item.CabeceraVersionModeloCaracteristica,
+                    FechaCreacion = item.CabeceraVersionModeloFechaCreacion,
+                    Estado = item.CabeceraVersionModeloEstado,
+                    Publicado = item.Publicado
                 });
             }
             return _lista;
@@ -107,393 +96,176 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
-        public List<CabeceraVersionModelo> ConsultarCabeceraVersionModeloTodasLasVersiones(int _idModeloGenerico)
-        {
-            //body versionamientomodelo
-            var ListaAsignacionTipoUsuario = _objAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
-            var ListaCuestionarioGenerico = _objCuestionarioGenerico.ConsultarCuestionarioGenerico();
-            var ListaDescripcionCompoennte = _objDescripcionComponente.ConsultarDescripcionComponente();
-            var ListaModeloGenerico = ConsultarModeloGenerico().ToList();
-            var ListaModeloPublicado = _objModeloPublicado.ConsultarModeloPublicado();
-            var ListaVersionamientoModelo = _objVersionamientoModelo.ConsultarVersionamientoModelo();
-            var ListaAsignarCuestionarioModelo = _objAsignarCuestionarioModelo.ConsultarAsignarCuestionarioModelo();
-            var listaAsignarComponenteGenerico = _objAsignarComponenteGenerico.ConsultarAsignarComponenteGenerico();
-            List<CabeceraVersionModelo> _lista = new List<CabeceraVersionModelo>();
-            foreach (var item in db.Sp_CabeceraVersionModeloConsultar().Where(p => p.MODELOGENERICO_IdModeloGenerico == _idModeloGenerico).ToList())
-            {
-                ModeloGenerico DataModeloGenerico = new ModeloGenerico();
-                DataModeloGenerico = ListaModeloGenerico.Where(p => p.IdModeloGenerico == item.MODELOGENERICO_IdModeloGenerico).First();
-
-                List<AsignarCuestionarioModelo> DataListaCuestionarioModelo = new List<AsignarCuestionarioModelo>();
-                foreach (var item1 in db.Sp_ConsultarAsignarCuestionarioModeloDeUnaVersion(item.IdCabeceraVersionModelo).ToList())
-                {
-                    AsignarCuestionarioModelo DataAsignarCuestionarioModelo = new AsignarCuestionarioModelo();
-                    DataAsignarCuestionarioModelo = ListaAsignarCuestionarioModelo.Where(p => p.IdAsignarCuestionarioModelo == item1.Value).FirstOrDefault();
-
-                    List<AsignarComponenteGenerico> DataListaComponenteGenerico = new List<AsignarComponenteGenerico>();
-                    foreach (var item2 in db.Sp_ConsultarAsignarComponenteGenericoDeUnAsignarCuestionarioModelo(item.IdCabeceraVersionModelo,item1.Value).ToList())
-                    {
-                        AsignarComponenteGenerico DataAsignarComponenteGenerico = new AsignarComponenteGenerico();
-                        DataAsignarComponenteGenerico = listaAsignarComponenteGenerico.Where(p => p.IdAsignarComponenteGenerico == item2.Value).FirstOrDefault();
-
-                        List<DescripcionComponente> DataListaDescripcionComponente = new List<DescripcionComponente>();
-                        foreach (var item3 in db.Sp_ConsultarDescripcionComponenteDeUnAsignarComponenteGenerico(item.IdCabeceraVersionModelo,item2.Value).ToList())
-                        {
-                            DescripcionComponente DataDescripcionComponente = new DescripcionComponente();
-                            DataDescripcionComponente = ListaDescripcionCompoennte.Where(p => p.IdDescripcionComponente == item3.Value).FirstOrDefault();
-                            DataListaDescripcionComponente.Add(DataDescripcionComponente);
-                        }
-                        DataListaComponenteGenerico.Add(DataAsignarComponenteGenerico);
-                    }
-                    DataAsignarCuestionarioModelo.AsignarComponenteGenerico = DataListaComponenteGenerico;
-                    DataListaCuestionarioModelo.Add(DataAsignarCuestionarioModelo);
-                }
-                DataModeloGenerico.AsignarCuestionarioModelo = DataListaCuestionarioModelo;
-                _lista.Add(new CabeceraVersionModelo() {
-                    IdCabeceraVersionModelo = item.IdCabeceraVersionModelo,
-                    IdCabeceraVersionModeloEncriptado = _seguridad.Encriptar(item.IdCabeceraVersionModelo.ToString()),
-                    IdModeloGenerico = _seguridad.Encriptar(item.MODELOGENERICO_IdModeloGenerico.ToString()),
-                    ModeloGenerico = DataModeloGenerico,
-                    Caracteristica = item.CaracteristicaCabeceraVersionModelo,
-                    FechaCreacion = item.FechaCreacionCabeceraVersionModelo,
-                    Version = item.VersionCabeceraVersionModelo,
-                    Estado = item.EstadoCabeceraVersionModelo,
-                    Utilizado = item.UtilizadoCabeceraVersionModelo,
-                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
-                    ModeloPublicado = ListaModeloPublicado.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString()).FirstOrDefault(),
-                });
-            }
-            return _lista.Where(p=> _seguridad.DesEncriptar(p.IdModeloGenerico) == _idModeloGenerico.ToString()).OrderBy(e=>e.Version).ToList();
-        }
         public void EliminarCabeceraVersionModelo(int _idCabeceraVersionModelo)
         {
-            foreach (var item in db.Sp_VersionamientoModeloConsultar().Where(p=>p.IdCabeceraVersionamientoModelo == _idCabeceraVersionModelo).ToList())
-            {
-                db.Sp_VersionamientoModeloEliminar(item.IdVersionamientoModelo);
-            }
             db.Sp_CabeceraVersionModeloEliminar(_idCabeceraVersionModelo);
         }
-        public List<CabeceraVersionModelo> ConsultarVersionCaracterizacion(int _idCabeceraVersion)
+        public List<CabeceraVersionModelo> ConsultarVersionCaracterizacionPorModeloGenerico(int _idModeloGenerico)
         {
-            var ListaAsignacionTipoUsuario = _objAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
-            var ListaModeloPublicado = _objModeloPublicado.ConsultarModeloPublicado();
-            var ListaModeloGenerico = ConsultarModeloGenerico();
-            var ListaAsignarCuestionarioModelo = _objAsignarCuestionarioModelo.ConsultarAsignarCuestionarioModelo();
-            var ListaAsignarComponenteGenerico = _objAsignarComponenteGenerico.ConsultarAsignarComponenteGenerico();
-            var ListaDescripcionComponente = _objDescripcionComponente.ConsultarDescripcionComponente();
-            var ListaVersionamientoModelo = _objVersionamientoModelo.ConsultarVersionamientoModelo();
             List<CabeceraVersionModelo> _lista = new List<CabeceraVersionModelo>();
-            foreach (var item in db.Sp_CabeceraVersionModeloConsultar().Where(p=>p.IdCabeceraVersionModelo == _idCabeceraVersion).ToList())
+            foreach (var item in db.Sp_CabeceraVersionModeloPorModeloGenericoConsultar(_idModeloGenerico))
             {
-                ModeloGenerico DataModeloGenericoConsulta = new ModeloGenerico();
-                DataModeloGenericoConsulta = ListaModeloGenerico.Where(p => p.IdModeloGenerico == item.MODELOGENERICO_IdModeloGenerico).FirstOrDefault();
-                DataModeloGenericoConsulta.AsignarCuestionarioModelo = null;
-                List<AsignarComponenteGenerico> dataListaAsignarComponenteGenerico = new List<AsignarComponenteGenerico>();
-                List<AsignarComponenteGenerico> dataListaAsignarComponenteGenerico1 = new List<AsignarComponenteGenerico>();
-                foreach (var item1 in db.Sp_ConsultarAsignarComponenteGenericoDeUnaVersion(item.IdCabeceraVersionModelo))
-                {
-                    AsignarComponenteGenerico dataAsignarComponenteGenerico = new AsignarComponenteGenerico();
-                    dataAsignarComponenteGenerico = ListaAsignarComponenteGenerico.Where(p => p.IdAsignarComponenteGenerico == item1.Value).FirstOrDefault();
-                    dataAsignarComponenteGenerico.DescripcionComponente = null;
-                    List<DescripcionComponente> dataListaDescripcionComponente = new List<DescripcionComponente>();
-                    foreach (var item2 in db.Sp_ConsultarDescripcionComponenteDeUnAsignarComponenteGenerico(item.IdCabeceraVersionModelo, dataAsignarComponenteGenerico.IdAsignarComponenteGenerico))
-                    {
-                        DescripcionComponente dataDescripcionComponente = new DescripcionComponente();
-                        dataDescripcionComponente = ListaDescripcionComponente.Where(p => p.IdDescripcionComponente == item2.Value).FirstOrDefault();
-                        dataDescripcionComponente.AsignarDescripcionComponenteTipoElemento.VersionamientoModelo = ListaVersionamientoModelo.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString() && _seguridad.DesEncriptar(p.IdDescripcionComponenteTipoElemento) == dataDescripcionComponente.AsignarDescripcionComponenteTipoElemento.IdAsignarDescripcionComponenteTipoElemento.ToString()).FirstOrDefault();
-                        dataListaDescripcionComponente.Add(dataDescripcionComponente);
-                    }
-                    dataAsignarComponenteGenerico.DescripcionComponente = dataListaDescripcionComponente;
-                    dataListaAsignarComponenteGenerico.Add(dataAsignarComponenteGenerico);
-                }
-                dataListaAsignarComponenteGenerico1 = dataListaAsignarComponenteGenerico;
                 _lista.Add(new CabeceraVersionModelo()
                 {
-                    IdCabeceraVersionModelo = item.IdCabeceraVersionModelo,
-                    IdCabeceraVersionModeloEncriptado = _seguridad.Encriptar(item.IdCabeceraVersionModelo.ToString()),
-                    IdModeloGenerico = _seguridad.Encriptar(item.MODELOGENERICO_IdModeloGenerico.ToString()),
-                    Version = item.VersionCabeceraVersionModelo,
-                    Caracteristica = item.CaracteristicaCabeceraVersionModelo,
-                    FechaCreacion = item.FechaCreacionCabeceraVersionModelo,
-                    Estado = item.EstadoCabeceraVersionModelo,
-                    Utilizado = item.UtilizadoCabeceraVersionModelo,
-                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p=>p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
-                    ModeloPublicado = ListaModeloPublicado.Where(p=>_seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString()).FirstOrDefault(),
-                    AsignarComponenteGenerico = dataListaAsignarComponenteGenerico1,
-                    ModeloGenerico = DataModeloGenericoConsulta,
+                    IdCabeceraVersionModeloEncriptado = _seguridad.Encriptar(item.CabeceraVersionModeloIdCabeceraVersionModelo.ToString()),
+                    IdModeloGenerico = _seguridad.Encriptar(item.CabeceraVersionModeloIdModeloGenerico.ToString()),
+                    Version = item.CabeceraVersionModeloVersion,
+                    Caracteristica = item.CabeceraVersionModeloCaracteristica,
+                    FechaCreacion = item.CabeceraVersionModeloFechaCreacion,
+                    Estado = item.CabeceraVersionModeloEstado,
+                    Publicado = item.Publicado
                 });
             }
             return _lista;
         }
-        public List<CabeceraVersionModelo> ConsultarVersionCaracterizacionSoloVersiones(int _idModeloGenerico)
+        public List<CabeceraVersionModelo> ConsultarVersionCaracterizacionPorPublicar(int _idModeloGenerico)
         {
-            var ListaAsignacionTipoUsuario = _objAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
-            var ListaModeloPublicado = _objModeloPublicado.ConsultarModeloPublicado();
-            var ListaModeloGenerico = ConsultarModeloGenerico();
             List<CabeceraVersionModelo> _lista = new List<CabeceraVersionModelo>();
-            foreach (var item in db.Sp_CabeceraVersionModeloConsultar().Where(p => p.MODELOGENERICO_IdModeloGenerico == _idModeloGenerico).ToList())
+            foreach (var item in db.Sp_CabeceraVersionModeloParaPublicarConsultar(_idModeloGenerico))
             {
-                ModeloGenerico DataModeloGenericoConsulta = new ModeloGenerico();
-                DataModeloGenericoConsulta = ListaModeloGenerico.Where(p => p.IdModeloGenerico == item.MODELOGENERICO_IdModeloGenerico).FirstOrDefault();
-                DataModeloGenericoConsulta.AsignarCuestionarioModelo = null;
                 _lista.Add(new CabeceraVersionModelo()
                 {
-                    IdCabeceraVersionModelo = item.IdCabeceraVersionModelo,
-                    IdCabeceraVersionModeloEncriptado = _seguridad.Encriptar(item.IdCabeceraVersionModelo.ToString()),
-                    IdModeloGenerico = _seguridad.Encriptar(item.MODELOGENERICO_IdModeloGenerico.ToString()),
-                    Version = item.VersionCabeceraVersionModelo,
-                    Caracteristica = item.CaracteristicaCabeceraVersionModelo,
-                    FechaCreacion = item.FechaCreacionCabeceraVersionModelo,
-                    Estado = item.EstadoCabeceraVersionModelo,
-                    Utilizado = item.UtilizadoCabeceraVersionModelo,
-                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
-                    ModeloPublicado = ListaModeloPublicado.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString()).FirstOrDefault(),
-                    ModeloGenerico = DataModeloGenericoConsulta,
+                    IdCabeceraVersionModeloEncriptado = _seguridad.Encriptar(item.CabeceraVersionModeloIdCabeceraVersionModelo.ToString()),
+                    IdModeloGenerico = _seguridad.Encriptar(item.CabeceraVersionModeloIdModeloGenerico.ToString()),
+                    Version = item.CabeceraVersionModeloVersion,
+                    Caracteristica = item.CabeceraVersionModeloCaracteristica,
+                    FechaCreacion = item.CabeceraVersionModeloFechaCreacion,
+                    Estado = item.CabeceraVersionModeloEstado
                 });
             }
             return _lista;
         }
-
-        public List<CabeceraVersionModelo> ConsultarModeloGenericoVersionesSinpPublicar()
+        public CabeceraVersionModelo ConsultarInformacionVersion(int _idCabeceraVersionModelo, int? _asignarEncuestado)
         {
-            var ListaAsignacionTipoUsuario = _objAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
-            var ListaModeloPublicado = _objModeloPublicado.ConsultarModeloPublicado();
-            var ListaModeloGenerico = ConsultarModeloGenerico();
-            List<CabeceraVersionModelo> _lista = new List<CabeceraVersionModelo>();
-            foreach (var item in db.Sp_CabeceraVersionModeloConsultar())
+            CabeceraVersionModelo Version = new CabeceraVersionModelo();
+            Version.IdCabeceraVersionModelo = 0;
+            List<AsignarCuestionarioModelo> _AsignarCuestionarioModelo = new List<AsignarCuestionarioModelo>();
+            foreach (var item in db.Sp_CuestionarioConsultarDeUnaVersion(_idCabeceraVersionModelo))
             {
-                ModeloGenerico DataModeloGenericoConsulta = new ModeloGenerico();
-                DataModeloGenericoConsulta = ListaModeloGenerico.Where(p => p.IdModeloGenerico == item.MODELOGENERICO_IdModeloGenerico).FirstOrDefault();
-                DataModeloGenericoConsulta.AsignarCuestionarioModelo = null;
-                _lista.Add(new CabeceraVersionModelo()
+                List<AsignarComponenteGenerico> _AsignarComponenteGenerico = new List<AsignarComponenteGenerico>();
+                foreach (var item1 in db.Sp_ComponenteConsultarDeUnaVersion(_idCabeceraVersionModelo, item.CuestionarioGenericoIdCuestionarioGenerico))
                 {
-                    IdCabeceraVersionModelo = item.IdCabeceraVersionModelo,
-                    IdCabeceraVersionModeloEncriptado = _seguridad.Encriptar(item.IdCabeceraVersionModelo.ToString()),
-                    IdModeloGenerico = _seguridad.Encriptar(item.MODELOGENERICO_IdModeloGenerico.ToString()),
-                    Version = item.VersionCabeceraVersionModelo,
-                    Caracteristica = item.CaracteristicaCabeceraVersionModelo,
-                    FechaCreacion = item.FechaCreacionCabeceraVersionModelo,
-                    Estado = item.EstadoCabeceraVersionModelo,
-                    Utilizado = item.UtilizadoCabeceraVersionModelo,
-                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
-                    ModeloPublicado = ListaModeloPublicado.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString()).FirstOrDefault(),
-                    ModeloGenerico = DataModeloGenericoConsulta,
-                });
-            }
-            return _lista.Where(p => p.ModeloPublicado == null && p.ModeloGenerico.Estado == true).GroupBy(a => a.IdModeloGenerico).Select(grp => grp.First()).ToList();
-        }
-        public List<CabeceraVersionModelo> ConsultarVersioneSinPublicarDeUnModeloGenerico(int _idModeloGenerico)
-        {
-            var ListaAsignacionTipoUsuario = _objAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
-            var ListaModeloPublicado = _objModeloPublicado.ConsultarModeloPublicado();
-            var ListaModeloGenerico = ConsultarModeloGenerico();
-            List<CabeceraVersionModelo> _lista = new List<CabeceraVersionModelo>();
-            foreach (var item in db.Sp_CabeceraVersionModeloConsultar().Where(p=>p.MODELOGENERICO_IdModeloGenerico == _idModeloGenerico).ToList())
-            {
-                ModeloGenerico DataModeloGenericoConsulta = new ModeloGenerico();
-                DataModeloGenericoConsulta = ListaModeloGenerico.Where(p => p.IdModeloGenerico == item.MODELOGENERICO_IdModeloGenerico).FirstOrDefault();
-                DataModeloGenericoConsulta.AsignarCuestionarioModelo = null;
-                _lista.Add(new CabeceraVersionModelo()
-                {
-                    IdCabeceraVersionModelo = item.IdCabeceraVersionModelo,
-                    IdCabeceraVersionModeloEncriptado = _seguridad.Encriptar(item.IdCabeceraVersionModelo.ToString()),
-                    IdModeloGenerico = _seguridad.Encriptar(item.MODELOGENERICO_IdModeloGenerico.ToString()),
-                    Version = item.VersionCabeceraVersionModelo,
-                    Caracteristica = item.CaracteristicaCabeceraVersionModelo,
-                    FechaCreacion = item.FechaCreacionCabeceraVersionModelo,
-                    Estado = item.EstadoCabeceraVersionModelo,
-                    Utilizado = item.UtilizadoCabeceraVersionModelo,
-                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
-                    ModeloPublicado = ListaModeloPublicado.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString()).FirstOrDefault(),
-                    ModeloGenerico = DataModeloGenericoConsulta,
-                });
-            }
-            return _lista.Where(p => p.ModeloPublicado == null).ToList();
-        }
-        public List<CabeceraVersionModelo> ConsultarVersionesCaracterizacionPublicadas()
-        {
-            var ListaAsignacionTipoUsuario = _objAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
-            var ListaModeloPublicado = _objModeloPublicado.ConsultarModeloPublicado();
-            var ListaModeloGenerico = ConsultarModeloGenerico();
-            //var ListaAsignarCuestionarioModelo = _objAsignarCuestionarioModelo.ConsultarAsignarCuestionarioModelo();
-            //var ListaAsignarComponenteGenerico = _objAsignarComponenteGenerico.ConsultarAsignarComponenteGenerico();
-            //var ListaDescripcionComponente = _objDescripcionComponente.ConsultarDescripcionComponente();
-            //var ListaVersionamientoModelo = _objVersionamientoModelo.ConsultarVersionamientoModelo();
-            //var ListaAsignarModeloGenericoParroquia = _objAsignarModeloGenericoParroquia.ConsultarAsignarModeloGenericoParroquia();
-            var ListaResponsableModeloPublicado = _objResponsableModeloPublicado.ConsultarAsignarResponsableModeloPublicado();
-            List<CabeceraVersionModelo> _lista = new List<CabeceraVersionModelo>();
-            foreach (var item in db.Sp_CabeceraVersionModeloConsultar())
-            {
-                ModeloPublicado DataModeloPublicado = new ModeloPublicado();
-                DataModeloPublicado = ListaModeloPublicado.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString()).FirstOrDefault();
-                if (DataModeloPublicado!=null)
-                {
-                    //DataModeloPublicado.CantidadAsignarParroquiaActivos = ListaAsignarModeloGenericoParroquia.Where(p => _seguridad.DesEncriptar(p.IdModeloPublicado) == DataModeloPublicado.IdModeloPublicado.ToString() && p.Estado == true).ToList().Count;
-                    DataModeloPublicado.CantidadAsignarParroquiaActivos = ListaResponsableModeloPublicado.Where(p => p.ModeloPublicado.IdModeloPublicado == DataModeloPublicado.IdModeloPublicado && p.Estado == true).ToList().Count;
-                }
-
-                ModeloGenerico DataModeloGenericoConsulta = new ModeloGenerico();
-                DataModeloGenericoConsulta = ListaModeloGenerico.Where(p => p.IdModeloGenerico == item.MODELOGENERICO_IdModeloGenerico).FirstOrDefault();
-                DataModeloGenericoConsulta.AsignarCuestionarioModelo = null;
-                //List<AsignarComponenteGenerico> dataListaAsignarComponenteGenerico = new List<AsignarComponenteGenerico>();
-                //foreach (var item1 in db.Sp_ConsultarAsignarComponenteGenericoDeUnaVersion(item.IdCabeceraVersionModelo))
-                //{
-                //    AsignarComponenteGenerico dataAsignarComponenteGenerico = new AsignarComponenteGenerico();
-                //    dataAsignarComponenteGenerico = ListaAsignarComponenteGenerico.Where(p => p.IdAsignarComponenteGenerico == item1.Value).FirstOrDefault();
-                //    List<DescripcionComponente> dataListaDescripcionComponente = new List<DescripcionComponente>();
-                //    foreach (var item2 in db.Sp_ConsultarDescripcionComponenteDeUnAsignarComponenteGenerico(item.IdCabeceraVersionModelo, dataAsignarComponenteGenerico.IdAsignarComponenteGenerico))
-                //    {
-                //        DescripcionComponente dataDescripcionComponente = new DescripcionComponente();
-                //        dataDescripcionComponente = ListaDescripcionComponente.Where(p => p.IdDescripcionComponente == item2.Value).FirstOrDefault();
-                //        dataDescripcionComponente.AsignarDescripcionComponenteTipoElemento.VersionamientoModelo = ListaVersionamientoModelo.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString() && _seguridad.DesEncriptar(p.IdDescripcionComponenteTipoElemento) == dataDescripcionComponente.AsignarDescripcionComponenteTipoElemento.IdAsignarDescripcionComponenteTipoElemento.ToString()).FirstOrDefault();
-                //        dataListaDescripcionComponente.Add(dataDescripcionComponente);
-                //    }
-                //    dataAsignarComponenteGenerico.DescripcionComponente = dataListaDescripcionComponente;
-                //    dataListaAsignarComponenteGenerico.Add(dataAsignarComponenteGenerico);
-                //}
-                _lista.Add(new CabeceraVersionModelo()
-                {
-                    IdCabeceraVersionModelo = item.IdCabeceraVersionModelo,
-                    IdCabeceraVersionModeloEncriptado = _seguridad.Encriptar(item.IdCabeceraVersionModelo.ToString()),
-                    IdModeloGenerico = _seguridad.Encriptar(item.MODELOGENERICO_IdModeloGenerico.ToString()),
-                    Version = item.VersionCabeceraVersionModelo,
-                    Caracteristica = item.CaracteristicaCabeceraVersionModelo,
-                    FechaCreacion = item.FechaCreacionCabeceraVersionModelo,
-                    Estado = item.EstadoCabeceraVersionModelo,
-                    Utilizado = item.UtilizadoCabeceraVersionModelo,
-                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
-                    ModeloPublicado = DataModeloPublicado,
-                    //AsignarComponenteGenerico = dataListaAsignarComponenteGenerico,
-                    ModeloGenerico = DataModeloGenericoConsulta,
-                });
-            }
-            return _lista.Where(p=>p.ModeloPublicado!=null).ToList();
-        }
-        public CabeceraVersionModelo ConsultarParroquiaDeUnaVersionesCaracterizacionPublicadas(int _idModeloPublicado)
-        {
-            var ListaAsignacionTipoUsuario = _objAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
-            var ListaModeloPublicado = _objModeloPublicado.ConsultarModeloPublicado();
-            var ListaModeloGenerico = ConsultarModeloGenerico();
-            var ListaAsignarModeloGenericoParroquia = _objAsignarModeloGenericoParroquia.ConsultarAsignarModeloGenericoParroquia();
-            var ListaDescripcionComponente = _objDescripcionComponente.ConsultarDescripcionComponente();
-            var ListaAsignarComponenteGenerico = _objAsignarComponenteGenerico.ConsultarAsignarComponenteGenerico();
-            List<CabeceraVersionModelo> _lista = new List<CabeceraVersionModelo>();
-            foreach (var item in db.Sp_CabeceraVersionModeloConsultar())
-            {
-                ModeloGenerico DataModeloGenericoConsulta = new ModeloGenerico();
-                DataModeloGenericoConsulta = ListaModeloGenerico.Where(p => p.IdModeloGenerico == item.MODELOGENERICO_IdModeloGenerico).FirstOrDefault();
-                DataModeloGenericoConsulta.AsignarCuestionarioModelo = null;
-                ModeloPublicado DataModeloPublicado = new ModeloPublicado();
-                DataModeloPublicado = ListaModeloPublicado.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString()).FirstOrDefault();
-                if (DataModeloPublicado!=null)
-                {
-                    List<AsignarModeloGenericoParroquia> dataListaAsignarModeloGenericoParroquia = new List<AsignarModeloGenericoParroquia>();
-                    foreach (var item1 in ListaAsignarModeloGenericoParroquia.Where(p => _seguridad.DesEncriptar(p.IdModeloPublicado) == DataModeloPublicado.IdModeloPublicado.ToString()).ToList())
+                    if (_asignarEncuestado != null)
                     {
-                        //AsignarModeloGenericoParroquia dataAsignarModeloGenericoParroquia = new AsignarModeloGenericoParroquia();
-                        dataListaAsignarModeloGenericoParroquia.Add(item1);
-                    }
-                    DataModeloPublicado.AsignarModeloGenericoParroquia = dataListaAsignarModeloGenericoParroquia;
-                }
-
-                List<AsignarComponenteGenerico> dataListaAsignarComponenteGenerico = new List<AsignarComponenteGenerico>();
-                foreach (var item1 in db.Sp_ConsultarAsignarComponenteGenericoDeUnaVersion(item.IdCabeceraVersionModelo))
-                {
-                    AsignarComponenteGenerico dataAsignarComponenteGenerico = new AsignarComponenteGenerico();
-                    dataAsignarComponenteGenerico = ListaAsignarComponenteGenerico.Where(p => p.IdAsignarComponenteGenerico == item1.Value).FirstOrDefault();
-                    List<DescripcionComponente> dataListaDescripcionComponente = new List<DescripcionComponente>();
-                    foreach (var item2 in db.Sp_ConsultarDescripcionComponenteDeUnAsignarComponenteGenerico(item.IdCabeceraVersionModelo, dataAsignarComponenteGenerico.IdAsignarComponenteGenerico))
-                    {
-                        DescripcionComponente dataDescripcionComponente = new DescripcionComponente();
-                        dataDescripcionComponente = ListaDescripcionComponente.Where(p => p.IdDescripcionComponente == item2.Value).FirstOrDefault();
-                        dataListaDescripcionComponente.Add(dataDescripcionComponente);
-                    }
-                    dataAsignarComponenteGenerico.DescripcionComponente = dataListaDescripcionComponente;
-                    dataListaAsignarComponenteGenerico.Add(dataAsignarComponenteGenerico);
-                }
-                _lista.Add(new CabeceraVersionModelo()
-                {
-                    IdCabeceraVersionModelo = item.IdCabeceraVersionModelo,
-                    IdCabeceraVersionModeloEncriptado = _seguridad.Encriptar(item.IdCabeceraVersionModelo.ToString()),
-                    IdModeloGenerico = _seguridad.Encriptar(item.MODELOGENERICO_IdModeloGenerico.ToString()),
-                    Version = item.VersionCabeceraVersionModelo,
-                    Caracteristica = item.CaracteristicaCabeceraVersionModelo,
-                    FechaCreacion = item.FechaCreacionCabeceraVersionModelo,
-                    Estado = item.EstadoCabeceraVersionModelo,
-                    Utilizado = item.UtilizadoCabeceraVersionModelo,
-                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
-                    ModeloPublicado = DataModeloPublicado,
-                    ModeloGenerico = DataModeloGenericoConsulta,
-                });
-            }
-            return _lista.Where(p => p.ModeloPublicado != null && p.ModeloPublicado.IdModeloPublicado == _idModeloPublicado).FirstOrDefault();
-        }
-
-
-
-        public List<CabeceraVersionModelo> ConsultarVersionCaracterizacionConInformacion(int _idCabeceraVersion)
-        {
-            var ListaAsignacionTipoUsuario = _objAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario();
-            var ListaModeloPublicado = _objModeloPublicado.ConsultarModeloPublicado();
-            var ListaModeloGenerico = ConsultarModeloGenerico();
-            var ListaAsignarCuestionarioModelo = _objAsignarCuestionarioModelo.ConsultarAsignarCuestionarioModelo();
-            var ListaAsignarComponenteGenerico = _objAsignarComponenteGenerico.ConsultarAsignarComponenteGenerico();
-            var ListaDescripcionComponente = _objDescripcionComponente.ConsultarDescripcionComponente();
-            var ListaVersionamientoModelo = _objVersionamientoModelo.ConsultarVersionamientoModelo();
-            var ListaContenidoDetalleComponente = _objContenidoDetalleComponente.ConsultarContenidoDetalleComponente();
-            var ListaAsignarResponsableModeloPublicado = _objResponsableModeloPublicado.ConsultarAsignarResponsableModeloPublicado();
-            List<CabeceraVersionModelo> _lista = new List<CabeceraVersionModelo>();
-            foreach (var item in db.Sp_CabeceraVersionModeloConsultar().Where(p => p.IdCabeceraVersionModelo == _idCabeceraVersion).ToList())
-            {
-                ModeloPublicado _objModeloPublicado = new ModeloPublicado();
-                _objModeloPublicado = ListaModeloPublicado.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString()).FirstOrDefault();
-                if (_objModeloPublicado != null)
-                {
-                    _objModeloPublicado.AsignarResponsableModeloPublicado = ListaAsignarResponsableModeloPublicado.Where(p => p.ModeloPublicado.IdModeloPublicado == _objModeloPublicado.IdModeloPublicado).FirstOrDefault();
-                }
-                ModeloGenerico DataModeloGenericoConsulta = new ModeloGenerico();
-                DataModeloGenericoConsulta = ListaModeloGenerico.Where(p => p.IdModeloGenerico == item.MODELOGENERICO_IdModeloGenerico).FirstOrDefault();
-                DataModeloGenericoConsulta.AsignarCuestionarioModelo = null;
-                List<AsignarComponenteGenerico> dataListaAsignarComponenteGenerico = new List<AsignarComponenteGenerico>();
-                List<AsignarComponenteGenerico> dataListaAsignarComponenteGenerico1 = new List<AsignarComponenteGenerico>();
-                foreach (var item1 in db.Sp_ConsultarAsignarComponenteGenericoDeUnaVersion(item.IdCabeceraVersionModelo))
-                {
-                    AsignarComponenteGenerico dataAsignarComponenteGenerico = new AsignarComponenteGenerico();
-                    dataAsignarComponenteGenerico = ListaAsignarComponenteGenerico.Where(p => p.IdAsignarComponenteGenerico == item1.Value).FirstOrDefault();
-                    dataAsignarComponenteGenerico.DescripcionComponente = null;
-                    List<DescripcionComponente> dataListaDescripcionComponente = new List<DescripcionComponente>();
-                    foreach (var item2 in db.Sp_ConsultarDescripcionComponenteDeUnAsignarComponenteGenerico(item.IdCabeceraVersionModelo, dataAsignarComponenteGenerico.IdAsignarComponenteGenerico))
-                    {
-                        DescripcionComponente dataDescripcionComponente = new DescripcionComponente();
-                        dataDescripcionComponente = ListaDescripcionComponente.Where(p => p.IdDescripcionComponente == item2.Value).FirstOrDefault();
-                        dataDescripcionComponente.AsignarDescripcionComponenteTipoElemento.VersionamientoModelo = ListaVersionamientoModelo.Where(p => _seguridad.DesEncriptar(p.IdCabeceraVersionModelo) == item.IdCabeceraVersionModelo.ToString() && _seguridad.DesEncriptar(p.IdDescripcionComponenteTipoElemento) == dataDescripcionComponente.AsignarDescripcionComponenteTipoElemento.IdAsignarDescripcionComponenteTipoElemento.ToString()).FirstOrDefault();
-                        if(_objModeloPublicado.AsignarResponsableModeloPublicado != null)
+                        var doc = new HtmlDocument();
+                        doc.LoadHtml(item1.VersionamientoModeloContenido);
+                        HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//textarea").ToArray();
+                        foreach (HtmlNode node in nodes)
                         {
-                            dataDescripcionComponente.ContenidoDetalleComponente = ListaContenidoDetalleComponente.Where(p => p.DescripcionComponente.IdDescripcionComponente == dataDescripcionComponente.IdDescripcionComponente && p.CabeceraCaracterizacion.AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicado == _objModeloPublicado.AsignarResponsableModeloPublicado.IdAsignarResponsableModeloPublicado).ToList();
+                            List<Pregunta> _Pregunta = new List<Pregunta>();
+                            foreach (var item2 in db.Sp_ConsultarPreguntaPorId(int.Parse(_seguridad.DesEncriptar(node.GetAttributeValue("name", string.Empty)))))
+                            {
+                                if (item2.TipoPreguntaIdentificador == 1)
+                                {
+                                    string RespuestaPabierta = "";
+                                    foreach (var item3 in db.Sp_ConsultarRespuestaPreguntaAbierta(_asignarEncuestado, item2.PreguntaIdPregunta))
+                                    {
+                                        RespuestaPabierta = item3.RespuestaDescripcionRespuestaAbierta;
+                                    }
+                                    if (RespuestaPabierta == "")
+                                    {
+                                        RespuestaPabierta = "N/A";
+                                    }
+                                    RespuestaPabierta = "<strong>" + RespuestaPabierta + "</strong>";
+                                    item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.OuterHtml, RespuestaPabierta);
+                                }
+                                else if (item2.TipoPreguntaIdentificador == 2)
+                                {
+                                    string RespuestaUnica = "";
+                                    foreach (var item3 in db.Sp_ConsultarRespuestaPreguntaUnica(_asignarEncuestado, item2.PreguntaIdPregunta))
+                                    {
+                                        if (item3.PreguntaEncajonadaIdPreguntaEncajonada == null)
+                                        {
+                                            RespuestaUnica = item3.OpcionPreguntaSeleccionDescripcion;
+                                        }
+                                        else
+                                        {
+                                            foreach (var item4 in db.Sp_PreguntaConsultar().Where(p => p.IdPregunta == item3.PreguntaEncajonadaIdPregunta).ToList())
+                                            {
+                                                if (item4.IdentificadorTipoPregunta == 1)
+                                                {
+                                                    RespuestaUnica = item3.RespuestaDescripcionRespuestaAbierta;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (RespuestaUnica == "")
+                                    {
+                                        RespuestaUnica = "N/A";
+                                    }
+                                    RespuestaUnica = "<strong>" + RespuestaUnica + "</strong>";
+                                    item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.OuterHtml, RespuestaUnica);
+                                }
+                                else if (item2.TipoPreguntaIdentificador == 3)
+                                {
+                                    string RespuestaMultiple = "";
+                                    foreach (var item3 in db.Sp_ConsultarRespuestaPreguntaMultiple(_asignarEncuestado, item2.PreguntaIdPregunta))
+                                    {
+                                        RespuestaMultiple += "<li><strong>" + item3.OpcionPreguntaSeleccionDescripcion + "</strong></li>";
+                                    }
+                                    if (RespuestaMultiple != "")
+                                    {
+                                        RespuestaMultiple = "<ul>" + RespuestaMultiple + "</ul>";
+                                    }
+                                    else
+                                    {
+                                        RespuestaMultiple = "<ul><li><strong>N/A</strong></li></ul>";
+                                    }
+                                    item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.ParentNode.ParentNode.OuterHtml, RespuestaMultiple);
+                                }
+                                _Pregunta.Add(new Pregunta()
+                                {
+                                    Descripcion = item2.PreguntaDescripcion,
+                                    TipoPregunta = new TipoPregunta()
+                                    {
+                                        Descripcion = item2.TipoPreguntaDescripcion,
+                                        Identificador = item2.TipoPreguntaIdentificador
+                                    }
+                                });
+                            }
                         }
-                        dataListaDescripcionComponente.Add(dataDescripcionComponente);
                     }
-                    dataAsignarComponenteGenerico.DescripcionComponente = dataListaDescripcionComponente;
-                    dataListaAsignarComponenteGenerico.Add(dataAsignarComponenteGenerico);
+                    _AsignarComponenteGenerico.Add(new AsignarComponenteGenerico()
+                    {
+                        IdComponente = "0",
+                        Orden = item1.ComponenteOrden,
+                        Componente = new Componente()
+                        {
+                            Descripcion = item1.ComponenteDescripcion,
+                        },
+                        VersionamientoModelo = new VersionamientoModelo()
+                        {
+                            Contenido = item1.VersionamientoModeloContenido,
+                            Imagen = Convert.ToInt32(item1.VersionamientoModeloImagen)
+                        }
+                    });
                 }
-                dataListaAsignarComponenteGenerico1 = dataListaAsignarComponenteGenerico;
-                _lista.Add(new CabeceraVersionModelo()
+                if (_AsignarComponenteGenerico.Count > 0)
                 {
-                    IdCabeceraVersionModelo = item.IdCabeceraVersionModelo,
-                    IdCabeceraVersionModeloEncriptado = _seguridad.Encriptar(item.IdCabeceraVersionModelo.ToString()),
-                    IdModeloGenerico = _seguridad.Encriptar(item.MODELOGENERICO_IdModeloGenerico.ToString()),
-                    Version = item.VersionCabeceraVersionModelo,
-                    Caracteristica = item.CaracteristicaCabeceraVersionModelo,
-                    FechaCreacion = item.FechaCreacionCabeceraVersionModelo,
-                    Estado = item.EstadoCabeceraVersionModelo,
-                    Utilizado = item.UtilizadoCabeceraVersionModelo,
-                    AsignarUsuarioTipoUsuario = ListaAsignacionTipoUsuario.Where(p => p.IdAsignarUsuarioTipoUsuario == item.ASIGNARUSUARIOTIPOUSUARIO_IdAsignarUsuarioTipoUsuario).FirstOrDefault(),
-                    ModeloPublicado = _objModeloPublicado,
-                    AsignarComponenteGenerico = dataListaAsignarComponenteGenerico1,
-                    ModeloGenerico = DataModeloGenericoConsulta,
+                    _AsignarComponenteGenerico = _AsignarComponenteGenerico.OrderBy(e => e.Orden).ToList();
+                }
+                _AsignarCuestionarioModelo.Add(new AsignarCuestionarioModelo()
+                {
+                    IdModeloGenerico = "0",
+                    CuestionarioPublicado = new CuestionarioPublicado()
+                    {
+                        IdCuestionarioPublicado = 0,
+                        CabeceraVersionCuestionario = new CabeceraVersionCuestionario()
+                        {
+                            Caracteristica = item.CabeceraVersionCuestionarioCaracteristica,
+                            Version = item.CabeceraVersionCuestionarioVersion,
+                        },
+                        CuestionarioGenerico = new CuestionarioGenerico()
+                        {
+                            Descripcion = item.CuestionarioGenericoDescripcion,
+                            Nombre = item.CuestionarioGenericoNombre,
+                        }
+                    },
+                    AsignarComponenteGenerico = _AsignarComponenteGenerico
                 });
             }
-            return _lista;
+            Version.AsignarCuestionarioModelo = _AsignarCuestionarioModelo;
+            return Version;
         }
     }
 }

@@ -9,11 +9,10 @@ namespace API.Models.Entidades
     {
         public int IdVersionamientoModelo { get; set; }
         public string IdVersionamientoModeloEncriptado { get; set; }
-        public CabeceraVersionModelo CabeceraVersionModelo { get; set; }
         public string IdCabeceraVersionModelo { get; set; }
-        public string IdDescripcionComponenteTipoElemento { get; set; }
-        //public AsignarDescripcionComponenteTipoElemento AsignarDescripcionComponenteTipoElemento { get; set; }
+        public string IdAsignarComponenteGenerico { get; set; }
+        public string Contenido { get; set; }
         public bool Estado { get; set; }
-        //public AsignarComponenteGenerico AsignarComponenteGenerico { get; set; }
+        public int Imagen { get; set; }
     }
 }

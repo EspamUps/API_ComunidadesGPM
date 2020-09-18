@@ -178,5 +178,55 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+        [HttpPost]
+        [Route("api/ConsultarPreguntasPorCuestionarioPublicadoComponente")]
+        public object ConsultarPreguntasPorCuestionarioPublicadoComponente(AsignarCuestionarioModelo _AsignarCuestionarioModelo)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_AsignarCuestionarioModelo.IdCuestionarioPublicado == null || string.IsNullOrEmpty(_AsignarCuestionarioModelo.IdCuestionarioPublicado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cuestionario publicado";
+                }
+                else if (_AsignarCuestionarioModelo.AsignarComponenteGenerico[0].IdComponente == null || string.IsNullOrEmpty(_AsignarCuestionarioModelo.AsignarComponenteGenerico[0].IdComponente))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del componente";
+                }
+                else
+                {
+                    _AsignarCuestionarioModelo.IdCuestionarioPublicado = _seguridad.DesEncriptar(_AsignarCuestionarioModelo.IdCuestionarioPublicado);
+                    _AsignarCuestionarioModelo.AsignarComponenteGenerico[0].IdComponente = _seguridad.DesEncriptar(_AsignarCuestionarioModelo.AsignarComponenteGenerico[0].IdComponente);
+                    var _listaVersionamiento = _objCatalogoVersionamientoPregunta.ConsultarPreguntasPorCuestionarioPublicadoComponente(_AsignarCuestionarioModelo).ToList();
+                    for (int i = 0; i < _listaVersionamiento.Count; i++)
+                    {
+                        _listaVersionamiento[i].IdVersionamientoPregunta = 0;
+                        _listaVersionamiento[i].CabeceraVersionCuestionario.IdCabeceraVersionCuestionario = 0;
+                        //_listaVersionamiento[i].CabeceraVersionCuestionario.AsignarResponsable.IdAsignarResponsable = 0;
+                        //_listaVersionamiento[i].CabeceraVersionCuestionario.AsignarResponsable.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                        //_listaVersionamiento[i].CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
+                        //_listaVersionamiento[i].CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
+                        //_listaVersionamiento[i].CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
+                        //_listaVersionamiento[i].CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
+                        //_listaVersionamiento[i].CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
+                        //_listaVersionamiento[i].CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                        _listaVersionamiento[i].Pregunta.IdPregunta = 0;
+                        _listaVersionamiento[i].Pregunta.TipoPregunta.IdTipoPregunta = 0;
+                        _listaVersionamiento[i].Pregunta.Seccion.IdSeccion = 0;
+                        _listaVersionamiento[i].Pregunta.Seccion.Componente.IdComponente = 0;
+                    }
+                    _respuesta = _listaVersionamiento;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
     }
 }

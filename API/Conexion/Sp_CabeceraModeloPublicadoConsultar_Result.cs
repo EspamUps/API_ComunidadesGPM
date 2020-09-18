@@ -13,12 +13,28 @@ namespace API.Conexion
     
     public partial class Sp_CabeceraModeloPublicadoConsultar_Result
     {
-        public int IdModeloPublicado { get; set; }
-        public int IdCabeceraVersionModelo { get; set; }
-        public int IdPeriodo { get; set; }
-        public System.DateTime FechaPublicacion { get; set; }
-        public int IdAsignarUsuarioTipoUsuario { get; set; }
-        public bool Estado { get; set; }
+        public int ModeloPublicadoIdModeloPublicado { get; set; }
+        public int ModeloPublicadoIdCabeceraVersionModelo { get; set; }
+        public int ModeloPublicadoIdPeriodo { get; set; }
+        public System.DateTime ModeloPublicadoFechaPublicacion { get; set; }
+        public int ModeloPublicadoIdAsignarUsuarioTipoUsuario { get; set; }
+        public bool ModeloPublicadoEstado { get; set; }
         public string ModeloPublicadoUtilizado { get; set; }
+        public int PeriodoIdPeriodo { get; set; }
+        public string PeriodoDescripcion { get; set; }
+        public bool PeriodoEstado { get; set; }
+        public System.DateTime PeriodoFechaFin { get; set; }
+        public System.DateTime PeriodoFechaInicio { get; set; }
+        public string CabeceraVersionModeloCaracteristica { get; set; }
+        public bool CabeceraVersionModeloEstado { get; set; }
+        public System.DateTime CabeceraVersionModeloFechaCreacion { get; set; }
+        public int CabeceraVersionModeloIdAsignarUsuarioTipoUsuario { get; set; }
+        public int CabeceraVersionModeloIdCabeceraVersionModelo { get; set; }
+        public int CabeceraVersionModeloIdModeloGenerico { get; set; }
+        public int CabeceraVersionModeloVersion { get; set; }
+        public string ModeloGenericoDescripcion { get; set; }
+        public bool ModeloGenericoEstado { get; set; }
+        public int ModeloGenericoIdModeloGenerico { get; set; }
+        public string ModeloGenericoNombre { get; set; }
     }
 }

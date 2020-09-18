@@ -16,9 +16,8 @@ namespace API.Models.Entidades
         public DateTime FechaCreacion { get; set; }
         public bool Estado { get; set; }
         public string Utilizado { get; set; }
-        public List<AsignarComponenteGenerico> AsignarComponenteGenerico { get; set; }
         public ModeloGenerico ModeloGenerico { get; set; }
-        //public List<ModeloGenerico> ModeloGenericoLista { get; set; 
-        public ModeloPublicado ModeloPublicado { get; set; }
+        public string Publicado { get; set; }
+        public List<AsignarCuestionarioModelo> AsignarCuestionarioModelo { get; set; }
     }
 }

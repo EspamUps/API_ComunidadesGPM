@@ -13,10 +13,16 @@ namespace API.Conexion
     
     public partial class Sp_ComponenteConsultarDeUnaVersion_Result
     {
-        public int IdComponente { get; set; }
-        public int IdCuestionarioGenerico { get; set; }
-        public string Descripcion { get; set; }
-        public int Orden { get; set; }
-        public bool Estado { get; set; }
+        public int ComponenteIdComponente { get; set; }
+        public string ComponenteDescripcion { get; set; }
+        public bool ComponenteEstado { get; set; }
+        public int ComponenteIdCuestionarioGenerico { get; set; }
+        public int ComponenteOrden { get; set; }
+        public bool VersionamientoModeloEstado { get; set; }
+        public int VersionamientoModeloIdAsignarComponenteGenerico { get; set; }
+        public int VersionamientoModeloIdCabeceraVersionamientoModelo { get; set; }
+        public int VersionamientoModeloIdVersionamientoModelo { get; set; }
+        public string VersionamientoModeloContenido { get; set; }
+        public bool VersionamientoModeloImagen { get; set; }
     }
 }
