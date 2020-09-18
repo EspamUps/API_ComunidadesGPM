@@ -12,11 +12,28 @@ namespace API.Models.Catalogos
     {
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
+
+        public List<PreguntaRestante> totalPreguntasRestantes(int idAsignarEncuestado)
+        {
+            List<PreguntaRestante> _lista = new List<PreguntaRestante>();
+            foreach (var item in db.Sp_TotalPreguntaRestantes(idAsignarEncuestado))
+            {
+                    _lista.Add(new PreguntaRestante(
+                   
+                      _seguridad.Encriptar(Convert.ToString(item.IdPregunta)),
+                       item.Descripcion,
+                       item.Componente,
+                       item.Orden,
+                       item.Obligatorio
+                    ));
+            } 
+            return _lista;
+        }
         public int InsertarPregunta(Pregunta _objPregunta)
         {
             try
             {
-                return int.Parse(db.Sp_PreguntaInsertar(_objPregunta.TipoPregunta.IdTipoPregunta,_objPregunta.Seccion.IdSeccion,_objPregunta.Descripcion,_objPregunta.Orden,_objPregunta.Obligatorio,_objPregunta.Estado, _objPregunta.leyendaSuperior, _objPregunta.leyendaLateral, _objPregunta.Observacion, _objPregunta.Reporte).Select(x=>x.Value.ToString()).FirstOrDefault());
+                return int.Parse(db.Sp_PreguntaInsertar(_objPregunta.TipoPregunta.IdTipoPregunta,_objPregunta.Seccion.IdSeccion,_objPregunta.Descripcion,_objPregunta.Orden,_objPregunta.Obligatorio,_objPregunta.Estado, _objPregunta.leyendaSuperior, _objPregunta.leyendaLateral, _objPregunta.Observacion).Select(x=>x.Value.ToString()).FirstOrDefault());
             }
             catch (Exception)
             {
@@ -228,62 +245,6 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
-        public List<Pregunta> ConsultarPreguntaPorIdSeccionFiltrado(int _idSeccion, int _idTipoPregunta)
-        {
-            List<Pregunta> _lista = new List<Pregunta>();
-            
-            foreach (var item in db.Sp_PreguntaConsultarFiltrado(_idTipoPregunta).Where(c => c.IdSeccion == _idSeccion).ToList())
-            {
-                _lista.Add(new Pregunta()
-                {
-                    IdPregunta = item.IdPregunta,
-                    IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
-                    Descripcion = item.DescripcionPregunta,
-                    leyendaSuperior = item.leyendaSuperior,
-                    leyendaLateral = item.leyendaLateral,
-                    Estado = item.EstadoPregunta,
-                    Obligatorio = item.ObligatorioPregunta,
-                    Observacion = Convert.ToBoolean(item.ObservacionPregunta),
-                    Orden = item.OrdenPregunta,
-                    Utilizado = item.UtilizadoPregunta,
-                    Encajonamiento = item.EncajonamientoPregunta,
-                    TipoPregunta = new TipoPregunta()
-                    {
-                        IdTipoPregunta = item.IdTipoPregunta,
-                        IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
-                        Descripcion = item.DescripcionTipoPregunta,
-                        Estado = item.EstadoTipoPregunta,
-                        Identificador = item.IdentificadorTipoPregunta
-                    },
-                    Seccion = new Seccion()
-                    {
-                        IdSeccion = item.IdSeccion,
-                        IdSeccionEncriptado = _seguridad.Encriptar(item.IdSeccion.ToString()),
-                        Descripcion = item.DescripcionSeccion,
-                        Estado = item.EstadoSeccion,
-                        Orden = item.OrdenSeccion,
-                        Componente = new Componente()
-                        {
-                            IdComponente = item.IdComponente,
-                            IdComponenteEncriptado = _seguridad.Encriptar(item.IdComponente.ToString()),
-                            Descripcion = item.DescripcionComponente,
-                            Estado = item.EstadoComponente,
-                            Orden = item.OrdenComponente,
-                            CuestionarioGenerico = new CuestionarioGenerico()
-                            {
-                                IdCuestionarioGenerico = item.IdCuestionarioGenerico,
-                                IdCuestionarioGenericoEncriptado = _seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
-                                Descripcion = item.DescripcionCuestionarioGenerico,
-                                Estado = item.EstadoCuestionarioGenerico,
-                                Nombre = item.NombreCuestionarioGenerico
-                            }
-                        }
-                    }
-                });
-            }
-            return _lista;
-        }
-
         public List<Pregunta> ConsultarPreguntaPorIdSeccionPorIdentificadorTipoPregunta(int _idSeccion, int _identificadorTipoPregunta)
         {
             List<Pregunta> _lista = new List<Pregunta>();
@@ -350,10 +311,7 @@ namespace API.Models.Catalogos
                     Obligatorio = item.ObligatorioPregunta,
                     Orden = item.OrdenPregunta,
                     Utilizado = item.UtilizadoPregunta,
-                    Reporte= item.ReportePregunta,
                     Encajonamiento = item.EncajonamientoPregunta,
-                    opcionSeleccion = item.opcionSeleccion,
-                    opcionMatriz = item.opcionMatriz,
                     TipoPregunta = new TipoPregunta()
                     {
                         IdTipoPregunta = item.IdTipoPregunta,
@@ -523,7 +481,7 @@ namespace API.Models.Catalogos
                     PreguntaAbierta = new PreguntaAbierta() {
                         IdPreguntaAbiertaEncriptado = _seguridad.Encriptar(item.IdPreguntaAbierta.ToString()),
                         TipoDato = new TipoDato() {
-                            TipoHTML = _seguridad.Encriptar(item.TipoHTML.ToString())
+                            TipoHTML = item.TipoHTML
                         }
                     },
                     Seccion = new Seccion() {

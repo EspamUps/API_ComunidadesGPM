@@ -25,7 +25,6 @@ namespace API.Controllers
         public object cabeceraversioncuestionario_insertar(CabeceraVersionCuestionario _objCabeceraVersionCuestionario)
         {
             object _respuesta = new object();
-            bool estadoE = true;
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
@@ -75,65 +74,35 @@ namespace API.Controllers
                                 _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                                 _http.mensaje = "No se han ingresado preguntas en este cuestionario";
                             }
-                            
                             else
                             {
-                                foreach (var item0 in _listadoPreguntas)
+                                _objCabeceraVersionCuestionario.Estado = true;
+                                _objCabeceraVersionCuestionario.FechaCreacion = DateTime.Now;
+                                int _idCabeceraVersionCuestionario = _objCatalogoCabeceraVersionCuestionario.InsertarCabeceraVersionCuestionario(_objCabeceraVersionCuestionario);
+                                if (_idCabeceraVersionCuestionario == 0)
                                 {
-                                    if(item0.TipoPregunta.IdTipoPregunta==10 && item0.opcionSeleccion == null)
-                                    {
-                                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                                        _http.mensaje = "Opciones de pregunta selección única no ingresadas";
-                                        estadoE = false;
-                                        break;
-                                    }
-
-                                    if(item0.TipoPregunta.IdTipoPregunta == 11 && item0.opcionSeleccion == null)
-                                    {
-                                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                                        _http.mensaje = "Opciones de pregunta selección múltiple no ingresadas";
-                                        estadoE = false;
-                                        break;
-                                    }
-
-                                    if(item0.TipoPregunta.IdTipoPregunta == 12 && item0.opcionMatriz == null)
-                                    {
-                                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                                        _http.mensaje = "Opciones de pregunta matriz no ingresadas";
-                                        estadoE = false;
-                                        break;
-                                    }
-
+                                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                                    _http.mensaje = "Ocurrió un error al tratar de ingresar la cabecera versión cuestionario";
                                 }
-                                if (estadoE == true) { 
-                                    _objCabeceraVersionCuestionario.Estado = true;
-                                    _objCabeceraVersionCuestionario.FechaCreacion = DateTime.Now;
-                                    int _idCabeceraVersionCuestionario = _objCatalogoCabeceraVersionCuestionario.InsertarCabeceraVersionCuestionario(_objCabeceraVersionCuestionario);
-                                    if (_idCabeceraVersionCuestionario == 0)
+                                else
+                                {
+                                    _objCabeceraVersionCuestionario.IdCabeceraVersionCuestionario = _idCabeceraVersionCuestionario;
+                                    foreach (var item in _listadoPreguntas)
                                     {
-                                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                                        _http.mensaje = "Ocurrió un error al tratar de ingresar la cabecera versión cuestionario";
+                                        int _idVersionamientoPregunta = _objCatalogoVersionamientoPregunta.InsertarVersionamientoPregunta(new VersionamientoPregunta() { Estado = true, Pregunta = item, CabeceraVersionCuestionario = _objCabeceraVersionCuestionario });
                                     }
-                                    else
-                                    {
-                                        _objCabeceraVersionCuestionario.IdCabeceraVersionCuestionario = _idCabeceraVersionCuestionario;
-                                        foreach (var item in _listadoPreguntas)
-                                        {
-                                            int _idVersionamientoPregunta = _objCatalogoVersionamientoPregunta.InsertarVersionamientoPregunta(new VersionamientoPregunta() { Estado = true, Pregunta = item, CabeceraVersionCuestionario = _objCabeceraVersionCuestionario });
-                                        }
-                                        _objCabeceraVersionCuestionario = _objCatalogoCabeceraVersionCuestionario.ConsultarCabeceraVersionCuestionarioPorId(_idCabeceraVersionCuestionario).Where(c => c.Estado == true).FirstOrDefault();
-                                        _objCabeceraVersionCuestionario.IdCabeceraVersionCuestionario = 0;
-                                        _objCabeceraVersionCuestionario.AsignarResponsable.IdAsignarResponsable = 0;
-                                        _objCabeceraVersionCuestionario.AsignarResponsable.CuestionarioGenerico.IdCuestionarioGenerico = 0;
-                                        _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
-                                        _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
-                                        _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
-                                        _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
-                                        _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
-                                        _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
-                                        _respuesta = _objCabeceraVersionCuestionario;
-                                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-                                    }
+                                    _objCabeceraVersionCuestionario = _objCatalogoCabeceraVersionCuestionario.ConsultarCabeceraVersionCuestionarioPorId(_idCabeceraVersionCuestionario).Where(c => c.Estado == true).FirstOrDefault();
+                                    _objCabeceraVersionCuestionario.IdCabeceraVersionCuestionario = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.IdAsignarResponsable = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.IdUsuario = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.TipoUsuario.IdTipoUsuario = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.IdPersona = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.Sexo.IdSexo = 0;
+                                    _objCabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                                    _respuesta = _objCabeceraVersionCuestionario;
+                                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                                 }
                             }
                         }

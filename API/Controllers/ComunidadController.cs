@@ -134,7 +134,7 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/comunidad_insertar")]
-        public object comunidad_insertar([FromBody] Comunidad _objComunidad)
+        public object comunidad_insertar(Comunidad _objComunidad)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();

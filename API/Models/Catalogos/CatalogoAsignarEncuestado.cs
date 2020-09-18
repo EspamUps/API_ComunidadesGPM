@@ -41,7 +41,8 @@ namespace API.Models.Catalogos
                       item.PeriodoInicioCuestionario,
                       item.PeriodoFinCuestionario,
                       item.FechaPublicacionCuestionario,
-                      _seguridad.Encriptar(item.IdCabeceraVersionCuestionario.ToString())                    
+                      _seguridad.Encriptar(item.IdCabeceraVersionCuestionario.ToString()),
+                      Convert.ToInt32(item.CuestionarioFinalizado)
                 ));
             }
             return _lista;
@@ -189,7 +190,7 @@ namespace API.Models.Catalogos
                         DescripcionComunidad = item.DescripcionComunidad,
                         EstadoComunidad = item.EstadoComunidad,
                         NombreComunidad = item.NombreComunidad,
-                      //  RutaLogoComunidad = item.RutaLogoComunidad,
+                        RutaLogoComunidad = item.RutaLogoComunidad,
                         Parroquia = new Parroquia()
                         {
                             IdParroquia = item.IdParroquia,
@@ -492,7 +493,7 @@ namespace API.Models.Catalogos
                         DescripcionComunidad = item.DescripcionComunidad,
                         EstadoComunidad = item.EstadoComunidad,
                         NombreComunidad = item.NombreComunidad,
-                      //  RutaLogoComunidad = item.RutaLogoComunidad,
+                        RutaLogoComunidad = item.RutaLogoComunidad,
                         Parroquia = new Parroquia()
                         {
                             IdParroquia = item.IdParroquia,
@@ -795,7 +796,7 @@ namespace API.Models.Catalogos
                         DescripcionComunidad = item.DescripcionComunidad,
                         EstadoComunidad = item.EstadoComunidad,
                         NombreComunidad = item.NombreComunidad,
-                      //  RutaLogoComunidad = item.RutaLogoComunidad,
+                        RutaLogoComunidad = item.RutaLogoComunidad,
                         Parroquia = new Parroquia()
                         {
                             IdParroquia = item.IdParroquia,
@@ -1097,7 +1098,7 @@ namespace API.Models.Catalogos
                         DescripcionComunidad = item.DescripcionComunidad,
                         EstadoComunidad = item.EstadoComunidad,
                         NombreComunidad = item.NombreComunidad,
-                      //  RutaLogoComunidad = item.RutaLogoComunidad,
+                        RutaLogoComunidad = item.RutaLogoComunidad,
                         Parroquia = new Parroquia()
                         {
                             IdParroquia = item.IdParroquia,

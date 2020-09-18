@@ -13,6 +13,19 @@ namespace API.Models.Catalogos
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
 
+
+        public int FinalizarEncuesta(int idAsignarEncuestado)
+        {
+            try
+            {
+                int result = Convert.ToInt32(db.Sp_FinalizarEncuesta(idAsignarEncuestado).FirstOrDefault());
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
         public int InsertarCuestionarioGenerico(CuestionarioGenerico _objCuestionarioGenerico)
         {
             try

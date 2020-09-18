@@ -15,12 +15,51 @@ namespace API.Controllers
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoCuestionarioGenerico _objCatalogoCuestionarioGenerico = new CatalogoCuestionarioGenerico();
         Seguridad _seguridad = new Seguridad();
+        CatalogoAsignarEncuestado _objCatalogoAsignarEncuestado = new CatalogoAsignarEncuestado();
+        [HttpGet]
+        [Route("api/cuestionario/finalizar")]
+        public object cuestionarioFinalizar(string _IdAsignarEncuestado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_IdAsignarEncuestado == null || string.IsNullOrEmpty(_IdAsignarEncuestado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Algunos campos están vacíos";
+                    return new { http = _http };
+                }
+                int IdAsignarEncuestado = int.Parse(_seguridad.DesEncriptar(_IdAsignarEncuestado));
+                var objCatalogoAsignarEncuestado = _objCatalogoAsignarEncuestado.ConsultarAsignarEncuestadoPorId(IdAsignarEncuestado).Where(c => c.Estado == true).FirstOrDefault();
+                if (objCatalogoAsignarEncuestado == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "El asignar encuestado no existe";
+                    return new { http = _http };
+                }else{
+                    var _respuestas = _objCatalogoCuestionarioGenerico.FinalizarEncuesta(IdAsignarEncuestado);
+                    if (_respuestas >=0)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        return new { respuesta = _respuestas, http = _http };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
 
         [HttpPost]
         [Route("api/cuestionariogenerico_insertar")]
         public object cuestionariogenerico_insertar(CuestionarioGenerico _objCuestionarioGenerico)
         {
-            object _respuesta = new object();
+
+            
+object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {

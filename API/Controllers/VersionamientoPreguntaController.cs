@@ -77,7 +77,6 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
-
         [HttpPost]
         [Route("api/versionamientopregunta_consultarporidasignarcomponentegenericoporidasignarresponsablemodelpublicado")]
         public object versionamientopregunta_consultarporidasignarcomponentegenericoporidasignarresponsablemodelpublicado(string _idAsignarComponenteGenericoEncriptado, string _idAsignarResponsableModeloPublicadoEncriptado)
@@ -90,7 +89,8 @@ namespace API.Controllers
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador del asignar componente genérico";
-                } else if (_idAsignarResponsableModeloPublicadoEncriptado == null || string.IsNullOrEmpty(_idAsignarResponsableModeloPublicadoEncriptado))
+                }
+                else if (_idAsignarResponsableModeloPublicadoEncriptado == null || string.IsNullOrEmpty(_idAsignarResponsableModeloPublicadoEncriptado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador del asignar responsable modelo publicado";
@@ -122,10 +122,10 @@ namespace API.Controllers
                             foreach (var itemComunidad in _listaComunidades)
                             {
                                 var _objAsignarEncuestadoPorComunidad = _listaAsignarEncuestadoPorCuestionarioPublicado.Where(c => c.Comunidad.IdComunidad == itemComunidad.IdComunidad).FirstOrDefault();
-                                if(_objAsignarEncuestadoPorComunidad!=null)
+                                if (_objAsignarEncuestadoPorComunidad != null)
                                 {
-                                    var _objCabeceraRespuesta = _objCatalogoCabeceraRespuesta.ConsultarCabeceraRespuestaPorIdAsignarEncuestado(_objAsignarEncuestadoPorComunidad.IdAsignarEncuestado).Where(c=>c.Finalizado==true && c.Estado==true).FirstOrDefault();
-                                    if(_objCabeceraRespuesta!=null)
+                                    var _objCabeceraRespuesta = _objCatalogoCabeceraRespuesta.ConsultarCabeceraRespuestaPorIdAsignarEncuestado(_objAsignarEncuestadoPorComunidad.IdAsignarEncuestado).Where(c => c.Finalizado == true && c.Estado == true).FirstOrDefault();
+                                    if (_objCabeceraRespuesta != null)
                                     {
                                         var _listaRespuestasPorCabeceraPorComunidad = _objCatalogoRespuesta.ConsultarRespuestaPorIdCabeceraRespuesta(_objCabeceraRespuesta.IdCabeceraRespuesta).ToList();
                                         _listaRespuestasTodosCuestionariosComunidades.AddRange(_listaRespuestasPorCabeceraPorComunidad);
@@ -138,7 +138,7 @@ namespace API.Controllers
                             foreach (var itemVersionamiento in _listaVersionamiento)
                             {
                                 List<RespuestasCaracterizacion> _listaRespuestasCaracterizacion = new List<RespuestasCaracterizacion>();
-                                if(itemVersionamiento.Pregunta.TipoPregunta.Identificador==2 || itemVersionamiento.Pregunta.TipoPregunta.Identificador==3)
+                                if (itemVersionamiento.Pregunta.TipoPregunta.Identificador == 2 || itemVersionamiento.Pregunta.TipoPregunta.Identificador == 3)
                                 {
                                     var _listasRespuestasPorPregunta = _listaRespuestasTodosCuestionariosComunidades.Where(c => c.Pregunta.IdPregunta == itemVersionamiento.Pregunta.IdPregunta).ToList();
                                     var _listaOpcionPreguntaSeleccionPorPregunta = _listaOpcionPreguntaSeleccion.Where(c => c.Pregunta.IdPregunta == itemVersionamiento.Pregunta.IdPregunta).ToList();
@@ -149,8 +149,8 @@ namespace API.Controllers
                                         {
                                             IdRespuestasCaracterizacion = itemOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion,
                                             IdRespuestasCaracterizacionEncriptado = _seguridad.Encriptar(itemOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion.ToString()),
-                                            Descripcion =itemOpcionPreguntaSeleccion.Descripcion,
-                                            Total=_totalRespuestasPorOpcion
+                                            Descripcion = itemOpcionPreguntaSeleccion.Descripcion,
+                                            Total = _totalRespuestasPorOpcion
                                         });
                                     }
                                     itemVersionamiento.Pregunta.ListaRespuestasCaracterizacion = _listaRespuestasCaracterizacion;

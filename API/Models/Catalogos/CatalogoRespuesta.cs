@@ -13,6 +13,27 @@ namespace API.Models.Catalogos
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
 
+
+        public List<RespuestaPreguntaAbierta> mostrarRespuestasAbierta(string _IdPregunta, string _IdAsignarEncuestado)
+        {
+            List<RespuestaPreguntaAbierta> _lista = new List<RespuestaPreguntaAbierta>();
+            foreach (var item in db.Sp_RespuestaPreguntaAbierta(Convert.ToInt32(_IdPregunta), Convert.ToInt32(_IdAsignarEncuestado)))
+            {
+                _lista.Add(new RespuestaPreguntaAbierta(
+                    _seguridad.Encriptar(item.IdPregunta.ToString()),
+                     item.DescripcionPregunta,
+                    _seguridad.Encriptar(item.IdPreguntaAbierta.ToString()),
+                    item.TipoHTML,
+                     _seguridad.Encriptar(item.IdRespuesta.ToString()),
+                    _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
+                    item.DescripcionRespuestaAbierta,
+                    _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()) 
+
+                 ));
+            }
+            return _lista;
+
+        }
         public List<RespuestasPregunta> mostrarRespuestas(string _IdAsignarEncuestado, string _IdPregunta) {
             List<RespuestasPregunta> _lista = new List<RespuestasPregunta>();
             foreach (var item in db.Sp_ShowRespuestaPorPregunta(Convert.ToInt32(_IdAsignarEncuestado), Convert.ToInt32(_IdPregunta)))
@@ -160,7 +181,7 @@ namespace API.Models.Catalogos
                                 DescripcionComunidad = item.DescripcionComunidad,
                                 EstadoComunidad = item.EstadoComunidad,
                                 NombreComunidad = item.NombreComunidad,
-                                //RutaLogoComunidad = item.RutaLogoComunidad,
+                                RutaLogoComunidad = item.RutaLogoComunidad,
                                 Parroquia = new Parroquia()
                                 {
                                     IdParroquia = item.IdParroquia,
