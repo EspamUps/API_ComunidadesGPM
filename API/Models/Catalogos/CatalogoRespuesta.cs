@@ -13,28 +13,8 @@ namespace API.Models.Catalogos
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
 
-
-        public List<RespuestaPreguntaAbierta> mostrarRespuestasAbierta(string _IdPregunta, string _IdAsignarEncuestado)
+        public List<RespuestasPregunta> mostrarRespuestas(string _IdAsignarEncuestado, string _IdPregunta)
         {
-            List<RespuestaPreguntaAbierta> _lista = new List<RespuestaPreguntaAbierta>();
-            foreach (var item in db.Sp_RespuestaPreguntaAbierta(Convert.ToInt32(_IdPregunta), Convert.ToInt32(_IdAsignarEncuestado)))
-            {
-                _lista.Add(new RespuestaPreguntaAbierta(
-                    _seguridad.Encriptar(item.IdPregunta.ToString()),
-                     item.DescripcionPregunta,
-                    _seguridad.Encriptar(item.IdPreguntaAbierta.ToString()),
-                    item.TipoHTML,
-                     _seguridad.Encriptar(item.IdRespuesta.ToString()),
-                    _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
-                    item.DescripcionRespuestaAbierta,
-                    _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()) 
-
-                 ));
-            }
-            return _lista;
-
-        }
-        public List<RespuestasPregunta> mostrarRespuestas(string _IdAsignarEncuestado, string _IdPregunta) {
             List<RespuestasPregunta> _lista = new List<RespuestasPregunta>();
             foreach (var item in db.Sp_ShowRespuestaPorPregunta(Convert.ToInt32(_IdAsignarEncuestado), Convert.ToInt32(_IdPregunta)))
             {
@@ -43,7 +23,7 @@ namespace API.Models.Catalogos
                     IdRespuesta = _seguridad.Encriptar(item.IdRespuesta.ToString()),
                     IdAsignarEncuestado = _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()),
                     IdPregunta = _seguridad.Encriptar(item.IdPregunta.ToString()),
-                    DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta,                   
+                    DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta,
                     IdRespuestaLogica = _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
                 });
             }
@@ -53,27 +33,27 @@ namespace API.Models.Catalogos
         public List<RespuestaPreguntaSeleccion> mostrarPreguntaRespuestasPorSeleccion(string _IdPregunta, string _IdAsignarEncuestado)
         {
             List<RespuestaPreguntaSeleccion> _lista = new List<RespuestaPreguntaSeleccion>();
-            foreach (var item in db.Sp_OpcionPreguntaSeleccionConsultar2(Convert.ToInt32(_IdPregunta),Convert.ToInt32(_IdAsignarEncuestado)))
+            foreach (var item in db.Sp_OpcionPreguntaSeleccionConsultar2(Convert.ToInt32(_IdPregunta), Convert.ToInt32(_IdAsignarEncuestado)))
             {
                 _lista.Add(new RespuestaPreguntaSeleccion()
                 {
-                   
 
-                IdOpcionPreguntaSeleccion = _seguridad.Encriptar(item.IdOpcionPreguntaSeleccion.ToString()),
-                DescripcionOpcionPreguntaSeleccion = item.DescripcionOpcionPreguntaSeleccion,
-                IdPreguntaHIja = _seguridad.Encriptar(item.IdPreguntaHIja.ToString()),
-                DescripcionPreguntaHIja = item.DescripcionPreguntaHIja,
-                IdPregunta = _seguridad.Encriptar(item.IdPregunta.ToString()),
-                DescripcionPregunta = item.DescripcionPregunta,
-                OrdenPregunta = Convert.ToString(item.OrdenPregunta),
-                EncajonamientoOpcionPreguntaSeleccion = item.EncajonamientoOpcionPreguntaSeleccion,
-                IdRespuesta = _seguridad.Encriptar(item.IdRespuesta.ToString()),
-                IdRespuestaLogica = _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
-                DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta,
-                IdAsignarEncuestado = _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()),
-                TotalOpciones= Convert.ToInt32(item.TotalOpciones),
 
-            });
+                    IdOpcionPreguntaSeleccion = _seguridad.Encriptar(item.IdOpcionPreguntaSeleccion.ToString()),
+                    DescripcionOpcionPreguntaSeleccion = item.DescripcionOpcionPreguntaSeleccion,
+                    IdPreguntaHIja = _seguridad.Encriptar(item.IdPreguntaHIja.ToString()),
+                    DescripcionPreguntaHIja = item.DescripcionPreguntaHIja,
+                    IdPregunta = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                    DescripcionPregunta = item.DescripcionPregunta,
+                    OrdenPregunta = Convert.ToString(item.OrdenPregunta),
+                    EncajonamientoOpcionPreguntaSeleccion = item.EncajonamientoOpcionPreguntaSeleccion,
+                    IdRespuesta = _seguridad.Encriptar(item.IdRespuesta.ToString()),
+                    IdRespuestaLogica = _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
+                    DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta,
+                    IdAsignarEncuestado = _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()),
+                    TotalOpciones = Convert.ToInt32(item.TotalOpciones),
+
+                });
             }
             return _lista;
 
@@ -82,7 +62,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                return db.RespuestaPreguntaInsertAndUpdate(_objRespuesta.Pregunta.IdPregunta,_objRespuesta.Pregunta.TipoPregunta.Identificador,_objRespuesta.CabeceraRespuesta.IdCabeceraRespuesta, _objRespuesta.IdRespuestaLogica, _objRespuesta.DescripcionRespuestaAbierta, _objRespuesta.FechaRegistro, _objRespuesta.CabeceraRespuesta.AsignarEncuestado.IdAsignarEncuestado, _objRespuesta.CabeceraRespuesta.FechaRegistro);
+                return db.RespuestaPreguntaInsertAndUpdate(_objRespuesta.Pregunta.IdPregunta, _objRespuesta.Pregunta.TipoPregunta.Identificador, _objRespuesta.CabeceraRespuesta.IdCabeceraRespuesta, _objRespuesta.IdRespuestaLogica, _objRespuesta.DescripcionRespuestaAbierta, _objRespuesta.FechaRegistro, _objRespuesta.CabeceraRespuesta.AsignarEncuestado.IdAsignarEncuestado, _objRespuesta.CabeceraRespuesta.FechaRegistro);
             }
             catch (Exception)
             {
@@ -107,7 +87,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                db.Sp_RespuestaModificar(_objRespuesta.IdRespuesta,_objRespuesta.CabeceraRespuesta.IdCabeceraRespuesta, _objRespuesta.FechaRegistro, _objRespuesta.Pregunta.IdPregunta, _objRespuesta.IdRespuestaLogica, _objRespuesta.DescripcionRespuestaAbierta, _objRespuesta.Estado);
+                db.Sp_RespuestaModificar(_objRespuesta.IdRespuesta, _objRespuesta.CabeceraRespuesta.IdCabeceraRespuesta, _objRespuesta.FechaRegistro, _objRespuesta.Pregunta.IdPregunta, _objRespuesta.IdRespuestaLogica, _objRespuesta.DescripcionRespuestaAbierta, _objRespuesta.Estado);
                 return _objRespuesta.IdRespuesta;
             }
             catch (Exception)
@@ -116,7 +96,7 @@ namespace API.Models.Catalogos
             }
         }
 
-        public void EliminarRespuesta (int _idRespuesta)
+        public void EliminarRespuesta(int _idRespuesta)
         {
             db.Sp_RespuestaEliminar(_idRespuesta);
         }
@@ -134,8 +114,9 @@ namespace API.Models.Catalogos
                     Estado = item.Estado,
                     CabeceraRespuesta = new CabeceraRespuesta()
                     {
-                        IdCabeceraRespuesta = item.IdCabeceraRespuesta, IdCabeceraRespuestaEncriptado = _seguridad.Encriptar(item.IdCabeceraRespuesta.ToString())
-                        },
+                        IdCabeceraRespuesta = item.IdCabeceraRespuesta,
+                        IdCabeceraRespuestaEncriptado = _seguridad.Encriptar(item.IdCabeceraRespuesta.ToString())
+                    },
                     DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta,
                     FechaRegistro = item.FechaRegistro,
                     Pregunta = new Pregunta() { IdPregunta = item.IdPregunta, IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()) },
@@ -155,7 +136,7 @@ namespace API.Models.Catalogos
                 {
                     IdRespuesta = item.IdRespuesta,
                     IdRespuestaEncriptado = _seguridad.Encriptar(item.IdRespuesta.ToString()),
-                    IdRespuestaLogicaEncriptado= _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
+                    IdRespuestaLogicaEncriptado = _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
                     Estado = item.EstadoRespuesta,
                     CabeceraRespuesta = new CabeceraRespuesta()
                     {
@@ -181,7 +162,7 @@ namespace API.Models.Catalogos
                                 DescripcionComunidad = item.DescripcionComunidad,
                                 EstadoComunidad = item.EstadoComunidad,
                                 NombreComunidad = item.NombreComunidad,
-                                RutaLogoComunidad = item.RutaLogoComunidad,
+                                //RutaLogoComunidad = item.RutaLogoComunidad,
                                 Parroquia = new Parroquia()
                                 {
                                     IdParroquia = item.IdParroquia,
@@ -266,14 +247,14 @@ namespace API.Models.Catalogos
                     {
                         IdPregunta = item.IdPregunta,
                         IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
-                        Obligatorio=item.ObligatorioPregunta,
-                        TipoPregunta=new TipoPregunta()
+                        Obligatorio = item.ObligatorioPregunta,
+                        TipoPregunta = new TipoPregunta()
                         {
-                            Identificador=item.IdentificadorTipoPregunta,
-                            IdTipoPregunta=item.IdTipoPregunta,
-                            IdTipoPreguntaEncriptado=_seguridad.Encriptar(item.IdTipoPregunta.ToString()),
+                            Identificador = item.IdentificadorTipoPregunta,
+                            IdTipoPregunta = item.IdTipoPregunta,
+                            IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
                             Descripcion = item.DescripcionTipoPregunta,
-                            Estado=item.EstadoTipoPregunta
+                            Estado = item.EstadoTipoPregunta
                         }
                     },
                     IdRespuestaLogica = item.IdRespuestaLogica
