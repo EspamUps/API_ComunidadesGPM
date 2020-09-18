@@ -453,13 +453,17 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CabeceraVersionModeloModificar", idCabeceraVersionModeloParameter, idAsignarUsuarioTipoUsuarioParameter, caracteristicaParameter, versionParameter, fechaCreacionParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Sp_ComponenteConsultarDeUnaVersion_Result> Sp_ComponenteConsultarDeUnaVersion(Nullable<int> idCabeceraVersionamientoModelo)
+        public virtual ObjectResult<Sp_ComponenteConsultarDeUnaVersion_Result> Sp_ComponenteConsultarDeUnaVersion(Nullable<int> idCabeceraVersionamientoModelo, Nullable<int> idCuestionarioGenerico)
         {
             var idCabeceraVersionamientoModeloParameter = idCabeceraVersionamientoModelo.HasValue ?
                 new ObjectParameter("IdCabeceraVersionamientoModelo", idCabeceraVersionamientoModelo) :
                 new ObjectParameter("IdCabeceraVersionamientoModelo", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponenteConsultarDeUnaVersion_Result>("Sp_ComponenteConsultarDeUnaVersion", idCabeceraVersionamientoModeloParameter);
+            var idCuestionarioGenericoParameter = idCuestionarioGenerico.HasValue ?
+                new ObjectParameter("IdCuestionarioGenerico", idCuestionarioGenerico) :
+                new ObjectParameter("IdCuestionarioGenerico", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ComponenteConsultarDeUnaVersion_Result>("Sp_ComponenteConsultarDeUnaVersion", idCabeceraVersionamientoModeloParameter, idCuestionarioGenericoParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> Sp_ComponentesDeUnModeloGenerico(Nullable<int> idCuestionarioPublicado, Nullable<int> idModeloGenerico)
@@ -917,21 +921,29 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_VersionamientoModeloEliminar", idVersionamientoModeloParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> Sp_VersionamientoModeloInsertar(Nullable<int> idCabeceraVersionamientoModelo, Nullable<int> idAsignarDescripcionComponenteTipoElemento, Nullable<bool> estado)
+        public virtual ObjectResult<Nullable<decimal>> Sp_VersionamientoModeloInsertar(Nullable<int> idCabeceraVersionamientoModelo, Nullable<int> idAsignarComponenteGenerico, Nullable<bool> estado, string contenido, Nullable<int> imagen)
         {
             var idCabeceraVersionamientoModeloParameter = idCabeceraVersionamientoModelo.HasValue ?
                 new ObjectParameter("IdCabeceraVersionamientoModelo", idCabeceraVersionamientoModelo) :
                 new ObjectParameter("IdCabeceraVersionamientoModelo", typeof(int));
     
-            var idAsignarDescripcionComponenteTipoElementoParameter = idAsignarDescripcionComponenteTipoElemento.HasValue ?
-                new ObjectParameter("IdAsignarDescripcionComponenteTipoElemento", idAsignarDescripcionComponenteTipoElemento) :
-                new ObjectParameter("IdAsignarDescripcionComponenteTipoElemento", typeof(int));
+            var idAsignarComponenteGenericoParameter = idAsignarComponenteGenerico.HasValue ?
+                new ObjectParameter("IdAsignarComponenteGenerico", idAsignarComponenteGenerico) :
+                new ObjectParameter("IdAsignarComponenteGenerico", typeof(int));
     
             var estadoParameter = estado.HasValue ?
                 new ObjectParameter("Estado", estado) :
                 new ObjectParameter("Estado", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_VersionamientoModeloInsertar", idCabeceraVersionamientoModeloParameter, idAsignarDescripcionComponenteTipoElementoParameter, estadoParameter);
+            var contenidoParameter = contenido != null ?
+                new ObjectParameter("Contenido", contenido) :
+                new ObjectParameter("Contenido", typeof(string));
+    
+            var imagenParameter = imagen.HasValue ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_VersionamientoModeloInsertar", idCabeceraVersionamientoModeloParameter, idAsignarComponenteGenericoParameter, estadoParameter, contenidoParameter, imagenParameter);
         }
     
         public virtual ObjectResult<SpAsignarModeloGenericoParroquiaConsultar_Result> SpAsignarModeloGenericoParroquiaConsultar()
@@ -2916,47 +2928,6 @@ namespace API.Conexion
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_PeriodoModificar", idPeriodoParameter, descripcionParameter, fechaInicioParameter, fechaFinParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<Nullable<decimal>> Sp_PreguntaInsertar(Nullable<int> idTipoPregunta, Nullable<int> idSeccion, string descripcion, Nullable<int> orden, Nullable<bool> obligatorio, Nullable<bool> estado, string leyendaSuperior, string leyendaLateral, Nullable<bool> observacion)
-        {
-            var idTipoPreguntaParameter = idTipoPregunta.HasValue ?
-                new ObjectParameter("IdTipoPregunta", idTipoPregunta) :
-                new ObjectParameter("IdTipoPregunta", typeof(int));
-    
-            var idSeccionParameter = idSeccion.HasValue ?
-                new ObjectParameter("IdSeccion", idSeccion) :
-                new ObjectParameter("IdSeccion", typeof(int));
-    
-            var descripcionParameter = descripcion != null ?
-                new ObjectParameter("Descripcion", descripcion) :
-                new ObjectParameter("Descripcion", typeof(string));
-    
-            var ordenParameter = orden.HasValue ?
-                new ObjectParameter("Orden", orden) :
-                new ObjectParameter("Orden", typeof(int));
-    
-            var obligatorioParameter = obligatorio.HasValue ?
-                new ObjectParameter("Obligatorio", obligatorio) :
-                new ObjectParameter("Obligatorio", typeof(bool));
-    
-            var estadoParameter = estado.HasValue ?
-                new ObjectParameter("Estado", estado) :
-                new ObjectParameter("Estado", typeof(bool));
-    
-            var leyendaSuperiorParameter = leyendaSuperior != null ?
-                new ObjectParameter("leyendaSuperior", leyendaSuperior) :
-                new ObjectParameter("leyendaSuperior", typeof(string));
-    
-            var leyendaLateralParameter = leyendaLateral != null ?
-                new ObjectParameter("leyendaLateral", leyendaLateral) :
-                new ObjectParameter("leyendaLateral", typeof(string));
-    
-            var observacionParameter = observacion.HasValue ?
-                new ObjectParameter("Observacion", observacion) :
-                new ObjectParameter("Observacion", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_PreguntaInsertar", idTipoPreguntaParameter, idSeccionParameter, descripcionParameter, ordenParameter, obligatorioParameter, estadoParameter, leyendaSuperiorParameter, leyendaLateralParameter, observacionParameter);
-        }
-    
         public virtual int Sp_PreguntaModificar(Nullable<int> idPregunta, Nullable<int> idTipoPregunta, Nullable<int> idSeccion, string descripcion, string leyendaSuperior, string leyendaLateral, Nullable<int> orden, Nullable<bool> obligatorio, Nullable<bool> estado, Nullable<bool> observacion)
         {
             var idPreguntaParameter = idPregunta.HasValue ?
@@ -3023,11 +2994,6 @@ namespace API.Conexion
         public virtual ObjectResult<Sp_ConfigurarMatrizConsultar_Result3> Sp_ConfigurarMatrizConsultar()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_ConfigurarMatrizConsultar_Result3>("Sp_ConfigurarMatrizConsultar");
-        }
-    
-        public virtual ObjectResult<Sp_PreguntaConsultar_Result7> Sp_PreguntaConsultar()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultar_Result7>("Sp_PreguntaConsultar");
         }
     
         public virtual ObjectResult<Sp_PreguntaConsultarNoEncajonadasPorSeccion_Result3> Sp_PreguntaConsultarNoEncajonadasPorSeccion(Nullable<int> idSeccion)
@@ -3273,6 +3239,74 @@ namespace API.Conexion
                 new ObjectParameter("IdOpcionPreguntaSeleccion", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_VerPreguntaDependiente_Result1>("Sp_VerPreguntaDependiente", idOpcionPreguntaSeleccionParameter);
+        }
+    
+        public virtual ObjectResult<Sp_PreguntaConsultarFiltrado_Result> Sp_PreguntaConsultarFiltrado(Nullable<int> idTipoPregunta)
+        {
+            var idTipoPreguntaParameter = idTipoPregunta.HasValue ?
+                new ObjectParameter("IdTipoPregunta", idTipoPregunta) :
+                new ObjectParameter("IdTipoPregunta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultarFiltrado_Result>("Sp_PreguntaConsultarFiltrado", idTipoPreguntaParameter);
+        }
+    
+        public virtual int Sp_SeleccionarPregunta(Nullable<int> idPregunta)
+        {
+            var idPreguntaParameter = idPregunta.HasValue ?
+                new ObjectParameter("IdPregunta", idPregunta) :
+                new ObjectParameter("IdPregunta", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_SeleccionarPregunta", idPreguntaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> Sp_PreguntaInsertar(Nullable<int> idTipoPregunta, Nullable<int> idSeccion, string descripcion, Nullable<int> orden, Nullable<bool> obligatorio, Nullable<bool> estado, string leyendaSuperior, string leyendaLateral, Nullable<bool> observacion, Nullable<bool> reporte)
+        {
+            var idTipoPreguntaParameter = idTipoPregunta.HasValue ?
+                new ObjectParameter("IdTipoPregunta", idTipoPregunta) :
+                new ObjectParameter("IdTipoPregunta", typeof(int));
+    
+            var idSeccionParameter = idSeccion.HasValue ?
+                new ObjectParameter("IdSeccion", idSeccion) :
+                new ObjectParameter("IdSeccion", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var ordenParameter = orden.HasValue ?
+                new ObjectParameter("Orden", orden) :
+                new ObjectParameter("Orden", typeof(int));
+    
+            var obligatorioParameter = obligatorio.HasValue ?
+                new ObjectParameter("Obligatorio", obligatorio) :
+                new ObjectParameter("Obligatorio", typeof(bool));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(bool));
+    
+            var leyendaSuperiorParameter = leyendaSuperior != null ?
+                new ObjectParameter("leyendaSuperior", leyendaSuperior) :
+                new ObjectParameter("leyendaSuperior", typeof(string));
+    
+            var leyendaLateralParameter = leyendaLateral != null ?
+                new ObjectParameter("leyendaLateral", leyendaLateral) :
+                new ObjectParameter("leyendaLateral", typeof(string));
+    
+            var observacionParameter = observacion.HasValue ?
+                new ObjectParameter("Observacion", observacion) :
+                new ObjectParameter("Observacion", typeof(bool));
+    
+            var reporteParameter = reporte.HasValue ?
+                new ObjectParameter("Reporte", reporte) :
+                new ObjectParameter("Reporte", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("Sp_PreguntaInsertar", idTipoPreguntaParameter, idSeccionParameter, descripcionParameter, ordenParameter, obligatorioParameter, estadoParameter, leyendaSuperiorParameter, leyendaLateralParameter, observacionParameter, reporteParameter);
+        }
+    
+        public virtual ObjectResult<Sp_PreguntaConsultar_Result10> Sp_PreguntaConsultar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_PreguntaConsultar_Result10>("Sp_PreguntaConsultar");
         }
     }
 }

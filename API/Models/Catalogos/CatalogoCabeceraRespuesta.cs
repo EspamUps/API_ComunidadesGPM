@@ -157,7 +157,7 @@ namespace API.Models.Catalogos
                             DescripcionComunidad = item.DescripcionComunidad,
                             EstadoComunidad = item.EstadoComunidad,
                             NombreComunidad = item.NombreComunidad,
-                            RutaLogoComunidad = item.RutaLogoComunidad,
+                          //  RutaLogoComunidad = item.RutaLogoComunidad,
                             Parroquia = new Parroquia()
                             {
                                 IdParroquia = item.IdParroquia,
@@ -470,7 +470,7 @@ namespace API.Models.Catalogos
                             DescripcionComunidad = item.DescripcionComunidad,
                             EstadoComunidad = item.EstadoComunidad,
                             NombreComunidad = item.NombreComunidad,
-                            RutaLogoComunidad = item.RutaLogoComunidad,
+                           // RutaLogoComunidad = item.RutaLogoComunidad,
                             Parroquia = new Parroquia()
                             {
                                 IdParroquia = item.IdParroquia,

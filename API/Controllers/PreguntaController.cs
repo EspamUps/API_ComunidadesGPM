@@ -17,6 +17,7 @@ namespace API.Controllers
         CatalogoPregunta _objCatalogoPregunta = new CatalogoPregunta();
         CatalogoTipoPregunta _objCatalogoTipoPregunta = new CatalogoTipoPregunta();
         CatalogoSeccion _objCatalogoSeccion = new CatalogoSeccion();
+        CatalogoCuestionarioGenerico _objCatalogoCuestionarioGenerico = new CatalogoCuestionarioGenerico();
         CatalogoPreguntaAbierta _objCatalogoPreguntaAbierta = new CatalogoPreguntaAbierta();
         CatalogoOpcionPreguntaSeleccion _objCatalogoOpcionPreguntaSeleccion = new CatalogoOpcionPreguntaSeleccion();
         CatalogoOpcionUnoMatriz _objCatalogoOpcionUnoMatriz = new CatalogoOpcionUnoMatriz();
@@ -64,6 +65,7 @@ namespace API.Controllers
                     _objPregunta.Seccion.IdSeccion = _idSeccion;
                     _objPregunta.TipoPregunta.IdTipoPregunta = _idTipoPregunta;
                     _objPregunta.Estado = true;
+                    _objPregunta.Reporte = true;
                     if (_objPregunta.leyendaLateral != null)
                     {
                         if (_objPregunta.leyendaLateral.Trim().ToUpper() == "NULL")
@@ -518,6 +520,128 @@ namespace API.Controllers
                             _objPregunta.Seccion.Componente.CuestionarioGenerico.IdCuestionarioGenerico = 0;
                         }
                         _respuesta = _lista;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/pregunta_consultarporidcuestionario")]
+        public object pregunta_consultarporidcuestionario(string _idCuestionarioEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idCuestionarioEncriptado == null || string.IsNullOrEmpty(_idCuestionarioEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cuestionario";
+                }
+                else
+                {
+                    int _idCuestionario = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioEncriptado));
+                    var _objCuestionario = _objCatalogoCuestionarioGenerico.ConsultarCuestionarioGenericoPorId(_idCuestionario).Where(c => c.Estado == true).FirstOrDefault();
+                    if (_objCuestionario == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el objeto cuestionario";
+                    }
+                    else
+                    {
+                        var _lista = _objCatalogoPregunta.ConsultarPreguntaPorIdCuestionarioGenerico(_idCuestionario).Where(c => c.Estado == true).OrderBy(c => c.Orden).ToList();
+                        foreach (var _objPregunta in _lista)
+                        {
+                            _objPregunta.IdPregunta = 0;
+                            _objPregunta.TipoPregunta.IdTipoPregunta = 0;
+                            _objPregunta.Seccion.IdSeccion = 0;
+                            _objPregunta.Seccion.Componente.IdComponente = 0;
+                            _objPregunta.Seccion.Componente.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                        }
+                        _respuesta = _lista;
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/pregunta_consultarporidseccionFiltrado")]
+        public object pregunta_consultarporidseccionFiltrado(string _idSeccionEncriptado, string _idTipoPreguntaEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idSeccionEncriptado == null || string.IsNullOrEmpty(_idSeccionEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la Sección";
+                }
+                else if (_idTipoPreguntaEncriptado == null || string.IsNullOrEmpty(_idTipoPreguntaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del Tipo Pregunta";
+                }
+                else
+                {
+                    int _idTipoPregunta = 0;
+                    int _idSeccion = Convert.ToInt32(_seguridad.DesEncriptar(_idSeccionEncriptado));
+                    if (_idTipoPreguntaEncriptado == "0")
+                    {
+                        _idTipoPregunta = 0;
+                    }
+                    else
+                    {
+                        _idTipoPregunta = Convert.ToInt32(_seguridad.DesEncriptar(_idTipoPreguntaEncriptado));
+                    }
+                    
+                    var _objSeccion = _objCatalogoSeccion.ConsultarSeccionPorId(_idSeccion).Where(c => c.Estado == true).FirstOrDefault();
+                    if (_objSeccion == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el objeto sección";
+                    }
+                    else
+                    {
+                       
+                        if (_idTipoPreguntaEncriptado == "0")
+                        {
+                            var _lista = _objCatalogoPregunta.ConsultarPreguntaPorIdSeccion(_idSeccion).Where(c => c.Estado == true).OrderBy(c => c.Orden).ToList();
+                            foreach (var _objPregunta in _lista)
+                            {
+                                _objPregunta.IdPregunta = 0;
+                                _objPregunta.TipoPregunta.IdTipoPregunta = 0;
+                                _objPregunta.Seccion.IdSeccion = 0;
+                                _objPregunta.Seccion.Componente.IdComponente = 0;
+                                _objPregunta.Seccion.Componente.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                            }
+                            _respuesta = _lista;
+                        }
+                        else{
+                            var _lista = _objCatalogoPregunta.ConsultarPreguntaPorIdSeccionFiltrado(_idSeccion, _idTipoPregunta).Where(c => c.Estado == true).OrderBy(c => c.Orden).ToList();
+                            foreach (var _objPregunta in _lista)
+                            {
+                                _objPregunta.IdPregunta = 0;
+                                _objPregunta.TipoPregunta.IdTipoPregunta = 0;
+                                _objPregunta.Seccion.IdSeccion = 0;
+                                _objPregunta.Seccion.Componente.IdComponente = 0;
+                                _objPregunta.Seccion.Componente.CuestionarioGenerico.IdCuestionarioGenerico = 0;
+                            }
+                            _respuesta = _lista;
+                        }
+                        
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
                 }

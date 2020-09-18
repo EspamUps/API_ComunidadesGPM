@@ -509,6 +509,9 @@
     <Compile Include="Conexion\Sp_PreguntaAbiertaConsultar_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultarFiltrado_Result.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_PreguntaConsultarNoEncajonadasPorOpcionPreguntaSeleccion_Result.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -533,6 +536,9 @@
     <Compile Include="Conexion\Sp_PreguntaConsultar_Result1.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultar_Result10.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_PreguntaConsultar_Result2.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
@@ -549,6 +555,12 @@
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PreguntaConsultar_Result7.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultar_Result8.cs">
+      <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_PreguntaConsultar_Result9.cs">
       <DependentUpon>ModelComunidadesGPM.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PreguntaEncajonadaConsultar_Result.cs">
@@ -912,6 +924,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Uploads\Photo\" />
     <Folder Include="Imagenes\" />
     <Folder Include="Views\Token\" />
   </ItemGroup>

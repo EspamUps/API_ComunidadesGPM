@@ -32,7 +32,7 @@ namespace API.Models.Catalogos
                 {
                     try
                     {
-                        int idVersionamientoModelo = int.Parse(db.Sp_VersionamientoModeloInsertar(idCabeceraVersion, item.IdAsignarDescripcionComponenteTipoElemento, true).Select(x => x.Value.ToString()).FirstOrDefault());
+                        int idVersionamientoModelo = int.Parse(db.Sp_VersionamientoModeloInsertar(idCabeceraVersion, item.IdAsignarDescripcionComponenteTipoElemento, true, "", idCabeceraVersion).Select(x => x.Value.ToString()).FirstOrDefault());
                     }
                     catch (Exception)
                     {

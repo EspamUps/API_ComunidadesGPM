@@ -23,11 +23,14 @@ namespace API.Models.Entidades
         public bool Obligatorio { get; set; }
         public int Orden { get; set; }
         public bool Estado { get; set; }
+        public bool Reporte { get; set; }
         public string leyendaSuperior { get; set; }
         public string leyendaLateral { get; set; }
         public bool Observacion { get; set; }
         public string Utilizado { get; set; }
         public string Encajonamiento { get; set; }
+        public string opcionSeleccion { get; set; }
+        public string opcionMatriz { get; set; }
         public List<RespuestasCaracterizacion> ListaRespuestasCaracterizacion { get; set; }
 
     }

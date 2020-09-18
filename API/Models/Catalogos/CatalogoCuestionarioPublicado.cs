@@ -35,6 +35,11 @@ namespace API.Models.Catalogos
             db.Sp_CuestionarioPublicadoDeshabilitar(_idCuestionarioPublicado);
         }
 
+        public void SeleccionarPregunta(int _idPregunta)
+        {
+            db.Sp_SeleccionarPregunta(_idPregunta);
+        }
+
         public List<CuestionarioPublicado> ConsultarCuestionarioPublicado()
         {
             List<CuestionarioPublicado> _lista = new List<CuestionarioPublicado>();
