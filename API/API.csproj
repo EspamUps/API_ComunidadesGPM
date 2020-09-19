@@ -616,6 +616,7 @@
     <Compile Include="Controllers\ConfigurarComponenteController.cs" />
     <Compile Include="Controllers\CuestionarioGenericoController.cs" />
     <Compile Include="Controllers\CuestionarioPublicadoController.cs" />
+    <Compile Include="Controllers\DatosRespuestaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiderComunitarioController.cs" />
     <Compile Include="Controllers\ConfigurarMatrizController.cs" />
@@ -671,6 +672,7 @@
     <Compile Include="Models\Catalogos\CatalogoContenidoTipoElemento.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioPublicado.cs" />
+    <Compile Include="Models\Catalogos\CatalogoDatosRespuesta.cs" />
     <Compile Include="Models\Catalogos\CatalogoLiderComunitario.cs" />
     <Compile Include="Models\Catalogos\CatalogoModeloGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoModeloPublicado.cs" />
@@ -725,6 +727,7 @@
     <Compile Include="Models\Entidades\ContenidoTipoElemento.cs" />
     <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
     <Compile Include="Models\Entidades\CuestionariosAsignadosTecnicos.cs" />
+    <Compile Include="Models\Entidades\DatosRespuesta.cs" />
     <Compile Include="Models\Entidades\ModeloPublicado.cs" />
     <Compile Include="Models\Entidades\CuestionarioPublicado.cs" />
     <Compile Include="Models\Entidades\DescripcionComponente.cs" />
@@ -738,8 +741,10 @@
     <Compile Include="Models\Entidades\Pregunta.cs" />
     <Compile Include="Models\Entidades\PreguntaAbierta.cs" />
     <Compile Include="Models\Entidades\PreguntaEncajonada.cs" />
+    <Compile Include="Models\Entidades\PreguntaRestante.cs" />
     <Compile Include="Models\Entidades\PresidenteJuntaParroquial.cs" />
     <Compile Include="Models\Entidades\Respuesta.cs" />
+    <Compile Include="Models\Entidades\RespuestaPreguntaAbierta.cs" />
     <Compile Include="Models\Entidades\RespuestaPreguntaSeleccion.cs" />
     <Compile Include="Models\Entidades\RespuestasCaracterizacion.cs" />
     <Compile Include="Models\Entidades\RespuestasPregunta.cs" />
@@ -827,7 +832,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
