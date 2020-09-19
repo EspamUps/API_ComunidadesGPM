@@ -13,6 +13,7 @@ namespace API.Controllers
     {
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoCuestionarioPublicado _objCatalogoCuestionarioPublicado = new CatalogoCuestionarioPublicado();
+        CatalogoPregunta _objCatalogoPregunta = new CatalogoPregunta();
         Seguridad _seguridad = new Seguridad();
 
         [HttpPost]
@@ -156,6 +157,44 @@ namespace API.Controllers
                     else
                     {
                         _objCatalogoCuestionarioPublicado.DeshabilitarCuestionarioPublicado(_idCuestionarioPublicado);
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/seleccionar_preguntas")]
+        public object seleccionar_preguntas(string _IdPreguntaEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_IdPreguntaEncriptado == null || string.IsNullOrEmpty(_IdPreguntaEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la pregunta";
+                }
+                else
+                {
+                    int _idPregunta = Convert.ToInt32(_seguridad.DesEncriptar(_IdPreguntaEncriptado));
+                    var _objPregunta = _objCatalogoPregunta.ConsultarPreguntaPorId(_idPregunta).FirstOrDefault();
+                    if (_objPregunta == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró la pregunta que desea seleccionar";
+                    }
+
+                    else
+                    {
+                        _objCatalogoCuestionarioPublicado.SeleccionarPregunta(_idPregunta);
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
                     }
 
