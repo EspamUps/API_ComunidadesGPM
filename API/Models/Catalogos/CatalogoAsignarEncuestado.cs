@@ -494,6 +494,8 @@ namespace API.Models.Catalogos
                         EstadoComunidad = item.EstadoComunidad,
                         NombreComunidad = item.NombreComunidad,
                         RutaLogoComunidad = item.RutaLogoComunidad,
+                        latitud= item.latitud,
+                        longitud= item.longitud,
                         Parroquia = new Parroquia()
                         {
                             IdParroquia = item.IdParroquia,

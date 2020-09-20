@@ -248,6 +248,9 @@
     <Compile Include="Conexion\Sp_AsignarEncuestadoConsultarPorId_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_AsignarEncuestadoConsultarPorId_Result1.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_AsignarEncuestadoConsultarPorTecnico_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -614,6 +617,7 @@
     <Compile Include="Controllers\ComponenteController.cs" />
     <Compile Include="Controllers\ComunidadController.cs" />
     <Compile Include="Controllers\ConfigurarComponenteController.cs" />
+    <Compile Include="Controllers\CoordenadasController.cs" />
     <Compile Include="Controllers\CuestionarioGenericoController.cs" />
     <Compile Include="Controllers\CuestionarioPublicadoController.cs" />
     <Compile Include="Controllers\DatosRespuestaController.cs" />
@@ -670,6 +674,7 @@
     <Compile Include="Models\Catalogos\CatalogoComunidad.cs" />
     <Compile Include="Models\Catalogos\CatalogoContenidoDetalleComponente.cs" />
     <Compile Include="Models\Catalogos\CatalogoContenidoTipoElemento.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCoordenadas.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioPublicado.cs" />
     <Compile Include="Models\Catalogos\CatalogoDatosRespuesta.cs" />
@@ -725,6 +730,7 @@
     <Compile Include="Models\Entidades\ConfigurarMatriz.cs" />
     <Compile Include="Models\Entidades\ContenidoDetalleComponente.cs" />
     <Compile Include="Models\Entidades\ContenidoTipoElemento.cs" />
+    <Compile Include="Models\Entidades\Coordenadas.cs" />
     <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
     <Compile Include="Models\Entidades\CuestionariosAsignadosTecnicos.cs" />
     <Compile Include="Models\Entidades\DatosRespuesta.cs" />
@@ -854,6 +860,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Uploads\Photo\" />
     <Folder Include="Imagenes\" />
+    <Folder Include="Views\Coordenadas\" />
     <Folder Include="Views\Token\" />
   </ItemGroup>
   <ItemGroup>
