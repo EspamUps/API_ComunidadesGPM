@@ -347,6 +347,9 @@
     <Compile Include="Conexion\Sp_CantonConsultar_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_CargarCoordenadasDeComunidadesPorParroquia_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ComponenteConsultarDeUnaVersion_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

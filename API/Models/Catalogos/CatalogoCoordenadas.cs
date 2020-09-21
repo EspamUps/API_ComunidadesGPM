@@ -2,7 +2,7 @@
 using API.Models.Entidades;
 using API.Models.Metodos;
 using System;
-
+using System.Collections.Generic;
 
 namespace API.Models.Catalogos
 {
@@ -22,6 +22,17 @@ namespace API.Models.Catalogos
             {
                 return 0;
             }
+        }
+
+        public List<Coordenadas> ConsultarCanton(string parroquia)
+        {
+            List<Coordenadas> _lista = new List<Coordenadas>();
+            foreach (var item in db.Sp_CargarCoordenadasDeComunidadesPorParroquia(parroquia))
+            {
+                _lista.Add(new Coordenadas(item.latitud,item.longitud, item.NombreCanton, item.NombreParroquia, item.NombreComunidad));
+               
+            }
+            return _lista;
         }
     }
 }
