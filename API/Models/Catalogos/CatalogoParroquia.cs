@@ -22,6 +22,10 @@ namespace API.Models.Catalogos
                     IdParroquia = item.IdParroquia,
                     IdParroquiaEncriptado = _seguridad.Encriptar(item.IdParroquia.ToString()),
                     DescripcionParroquia = item.DescripcionParroquia,
+                    PoblacionParroquia = item.PoblacionParroquia,
+                    SuperficieParroquia = item.SuperficieParroquia,
+                    TemperaturaParroquia = item.TemperaturaParroquia,
+                    ClimaParroquia = item.ClimaParroquia,
                     CodigoParroquia = item.CodigoParroquia,
                     EstadoParroquia = item.EstadoParroquia,
                     NombreParroquia = item.NombreParroquia,
@@ -63,6 +67,10 @@ namespace API.Models.Catalogos
                     IdParroquia = item.IdParroquia,
                     IdParroquiaEncriptado = _seguridad.Encriptar(item.IdParroquia.ToString()),
                     DescripcionParroquia = item.DescripcionParroquia,
+                    PoblacionParroquia= item.PoblacionParroquia,
+                    SuperficieParroquia = item.SuperficieParroquia,
+                    TemperaturaParroquia = item.TemperaturaParroquia,
+                    ClimaParroquia = item.ClimaParroquia,
                     CodigoParroquia = item.CodigoParroquia,
                     EstadoParroquia = item.EstadoParroquia,
                     NombreParroquia = item.NombreParroquia,
@@ -138,7 +146,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                return int.Parse(db.Sp_ParroquiaInsertar(_objParroquia.Canton.IdCanton, _objParroquia.CodigoParroquia, _objParroquia.NombreParroquia, _objParroquia.DescripcionParroquia, _objParroquia.RutaLogoParroquia, _objParroquia.EstadoParroquia).Select(x => x.Value.ToString()).FirstOrDefault());
+                return int.Parse(db.Sp_ParroquiaInsertar(_objParroquia.Canton.IdCanton, _objParroquia.CodigoParroquia, _objParroquia.NombreParroquia, _objParroquia.DescripcionParroquia, _objParroquia.PoblacionParroquia, _objParroquia.SuperficieParroquia, _objParroquia.TemperaturaParroquia, _objParroquia.ClimaParroquia, _objParroquia.RutaLogoParroquia, _objParroquia.EstadoParroquia).Select(x => x.Value.ToString()).FirstOrDefault());
             }
             catch (Exception)
             {
@@ -150,7 +158,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-               db.Sp_ParroquiaModificar(_objParroquia.IdParroquia, _objParroquia.Canton.IdCanton, _objParroquia.CodigoParroquia, _objParroquia.NombreParroquia, _objParroquia.DescripcionParroquia, _objParroquia.RutaLogoParroquia, _objParroquia.EstadoParroquia);
+               db.Sp_ParroquiaModificar(_objParroquia.IdParroquia, _objParroquia.Canton.IdCanton, _objParroquia.CodigoParroquia, _objParroquia.NombreParroquia, _objParroquia.DescripcionParroquia, _objParroquia.PoblacionParroquia, _objParroquia.SuperficieParroquia, _objParroquia.TemperaturaParroquia, _objParroquia.ClimaParroquia, _objParroquia.RutaLogoParroquia, _objParroquia.EstadoParroquia);
                 return _objParroquia.IdParroquia;
             }
             catch (Exception)
