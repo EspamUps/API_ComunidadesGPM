@@ -344,6 +344,9 @@
     <Compile Include="Conexion\Sp_CantonConsultar_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_CargarCoordenadasDeComunidadesPorParroquia_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ComponenteConsultarDeUnaVersion_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -384,6 +387,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ConsultarPreguntasPorCuestionarioPublicadoComponente_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ConsultarRespuestaMatriz_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ConsultarRespuestaPreguntaAbierta_Result.cs">
@@ -480,9 +486,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ParroquiaConsultar_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\Sp_ParroquiaConsultar_Result1.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_PeriodoConsultar_Result.cs">
@@ -617,8 +620,10 @@
     <Compile Include="Controllers\ComponenteController.cs" />
     <Compile Include="Controllers\ComunidadController.cs" />
     <Compile Include="Controllers\ConfigurarComponenteController.cs" />
+    <Compile Include="Controllers\CoordenadasController.cs" />
     <Compile Include="Controllers\CuestionarioGenericoController.cs" />
     <Compile Include="Controllers\CuestionarioPublicadoController.cs" />
+    <Compile Include="Controllers\DatosRespuestaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiderComunitarioController.cs" />
     <Compile Include="Controllers\ConfigurarMatrizController.cs" />
@@ -672,8 +677,10 @@
     <Compile Include="Models\Catalogos\CatalogoComunidad.cs" />
     <Compile Include="Models\Catalogos\CatalogoContenidoDetalleComponente.cs" />
     <Compile Include="Models\Catalogos\CatalogoContenidoTipoElemento.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCoordenadas.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioPublicado.cs" />
+    <Compile Include="Models\Catalogos\CatalogoDatosRespuesta.cs" />
     <Compile Include="Models\Catalogos\CatalogoLiderComunitario.cs" />
     <Compile Include="Models\Catalogos\CatalogoModeloGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoModeloPublicado.cs" />
@@ -726,8 +733,10 @@
     <Compile Include="Models\Entidades\ConfigurarMatriz.cs" />
     <Compile Include="Models\Entidades\ContenidoDetalleComponente.cs" />
     <Compile Include="Models\Entidades\ContenidoTipoElemento.cs" />
+    <Compile Include="Models\Entidades\Coordenadas.cs" />
     <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
     <Compile Include="Models\Entidades\CuestionariosAsignadosTecnicos.cs" />
+    <Compile Include="Models\Entidades\DatosRespuesta.cs" />
     <Compile Include="Models\Entidades\ModeloPublicado.cs" />
     <Compile Include="Models\Entidades\CuestionarioPublicado.cs" />
     <Compile Include="Models\Entidades\DescripcionComponente.cs" />
@@ -741,8 +750,10 @@
     <Compile Include="Models\Entidades\Pregunta.cs" />
     <Compile Include="Models\Entidades\PreguntaAbierta.cs" />
     <Compile Include="Models\Entidades\PreguntaEncajonada.cs" />
+    <Compile Include="Models\Entidades\PreguntaRestante.cs" />
     <Compile Include="Models\Entidades\PresidenteJuntaParroquial.cs" />
     <Compile Include="Models\Entidades\Respuesta.cs" />
+    <Compile Include="Models\Entidades\RespuestaPreguntaAbierta.cs" />
     <Compile Include="Models\Entidades\RespuestaPreguntaSeleccion.cs" />
     <Compile Include="Models\Entidades\RespuestasCaracterizacion.cs" />
     <Compile Include="Models\Entidades\RespuestasPregunta.cs" />
@@ -830,7 +841,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -850,6 +863,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Uploads\Photo\" />
     <Folder Include="Imagenes\" />
+    <Folder Include="Views\Coordenadas\" />
     <Folder Include="Views\Token\" />
   </ItemGroup>
   <ItemGroup>

@@ -25,6 +25,46 @@ namespace API.Controllers
         CatalogoOpcionDosMatriz _objCatalogoOpcionDosMatriz = new CatalogoOpcionDosMatriz();
         CatalogoComponente _objComponente = new CatalogoComponente();
         CatalogoAsignarUsuarioTipoUsuario _objUsuarioTipoUsuario = new CatalogoAsignarUsuarioTipoUsuario();
+        CatalogoAsignarEncuestado _objCatalogoAsignarEncuestado = new CatalogoAsignarEncuestado();
+
+        [HttpGet]
+        [Route("api/preguntas/restantes")]
+        public object preguntasRestantes(string _IdAsignarEncuestado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_IdAsignarEncuestado == null || string.IsNullOrEmpty(_IdAsignarEncuestado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "El identificador está vacío";
+                    return new { http = _http };
+                }
+                int IdAsignarEncuestado = int.Parse(_seguridad.DesEncriptar(_IdAsignarEncuestado));
+                var objCatalogoAsignarEncuestado = _objCatalogoAsignarEncuestado.ConsultarAsignarEncuestadoPorId(IdAsignarEncuestado).Where(c => c.Estado == true).FirstOrDefault();
+                if (objCatalogoAsignarEncuestado == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "El identificador no existe";
+                    return new { http = _http };
+                }
+                else
+                {
+                    var _respuestas = _objCatalogoPregunta.totalPreguntasRestantes(IdAsignarEncuestado);
+                    if (_respuestas != null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        return new { respuesta = _respuestas, http = _http };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
         [HttpPost]
         [Route("api/pregunta_insertar")]
         public object pregunta_insertar(Pregunta _objPregunta)
@@ -756,34 +796,37 @@ namespace API.Controllers
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador de la opción pregunta selección";
-                } else if (idusuariotecnico == null || string.IsNullOrEmpty(idusuariotecnico))
+                }
+                else if (idusuariotecnico == null || string.IsNullOrEmpty(idusuariotecnico))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador del técnico";
                 }
                 else
                 {
+                    int _idusuariotecnico = int.Parse(_seguridad.DesEncriptar(idusuariotecnico));
+                    var objCatalogoAsignarEncuestado = _objCatalogoAsignarEncuestado.ConsultarAsignarEncuestadoPorId(_idusuariotecnico).Where(c => c.Estado == true).FirstOrDefault();
+                    if (objCatalogoAsignarEncuestado == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "El asignar encuestado no existe";
+                        return new { http = _http };
+                    }
+
                     int _idComponente = Convert.ToInt32(_seguridad.DesEncriptar(idcomponente));
-                    int _idusuariotecnico = Convert.ToInt32(_seguridad.DesEncriptar(idusuariotecnico));
-                    var objComponente= _objComponente.ConsultarComponentePorId(_idComponente).Where(c => c.Estado == true).FirstOrDefault();
-                    var objUsuario= _objUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario()
-                        .Where(c => c.Estado == true)
-                        .Where(c => c.IdAsignarUsuarioTipoUsuario == _idusuariotecnico)
-                        .FirstOrDefault();
+                    var objComponente = _objComponente.ConsultarComponentePorId(_idComponente).Where(c => c.Estado == true).FirstOrDefault();
                     if (objComponente == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
                         _http.mensaje = "No se encontró el componente";
-                    }else  if (objUsuario == null)
-                    {
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
-                        _http.mensaje = "No se encontró el usuario";
+                        return new { http = _http };
                     }
-                    else
+
+                    var _respuestas = _objCatalogoPregunta.preguntasPorCompenente(_idComponente, _idusuariotecnico).ToList();
+                    if (_respuestas != null)
                     {
-                        var _lista = _objCatalogoPregunta.preguntasPorCompenente(_idComponente, _idusuariotecnico).ToList();
-                        _respuesta = _lista;
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        return new { respuesta = _respuestas, http = _http };
                     }
                 }
             }

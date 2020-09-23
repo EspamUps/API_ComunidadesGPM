@@ -25,6 +25,8 @@ namespace API.Conexion
         public string DescripcionComunidad { get; set; }
         public string RutaLogoComunidad { get; set; }
         public bool EstadoComunidad { get; set; }
+        public string latitud { get; set; }
+        public string longitud { get; set; }
         public int IdParroquia { get; set; }
         public string CodigoParroquia { get; set; }
         public string NombreParroquia { get; set; }
