@@ -213,6 +213,22 @@ namespace API.Models.Catalogos
                                     }
                                     item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.ParentNode.ParentNode.OuterHtml, RespuestaMultiple);
                                 }
+                                else if(item2.TipoPreguntaIdentificador == 4)
+                                {
+                                    string RespuestaMatriz = "";
+                                    string base_ = node.InnerHtml;
+                                    foreach (var item3 in db.Sp_ConsultarRespuestaMatriz(_asignarEncuestado, item2.PreguntaIdPregunta))
+                                    {
+                                        string dato = "";
+                                        dato = base_.Replace("F", "<strong>" + item3.OpcionUnoMatrizDescripcion + "</strong>");
+                                        dato = dato.Replace("C", "<strong>" + item3.OpcionDosMatrizDescripcion + "</strong>");                                        
+                                        RespuestaMatriz += "<p>"+ dato + "</p>";
+                                    }
+                                    if (RespuestaMatriz!="")
+                                    {
+                                        item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.OuterHtml, RespuestaMatriz);
+                                    }
+                                }
                                 _Pregunta.Add(new Pregunta()
                                 {
                                     Descripcion = item2.PreguntaDescripcion,
