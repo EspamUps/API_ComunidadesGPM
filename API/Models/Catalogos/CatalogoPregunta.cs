@@ -12,6 +12,24 @@ namespace API.Models.Catalogos
     {
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
+
+        public List<PreguntaRestante> totalPreguntasRestantes(int idAsignarEncuestado)
+        {
+            List<PreguntaRestante> _lista = new List<PreguntaRestante>();
+            foreach (var item in db.Sp_TotalPreguntaRestantes(idAsignarEncuestado))
+            {
+                _lista.Add(new PreguntaRestante(
+
+                  _seguridad.Encriptar(Convert.ToString(item.IdPregunta)),
+                   item.Descripcion,
+                   item.Componente,
+                   item.Orden,
+                   item.Obligatorio
+                ));
+            }
+            return _lista;
+        }
+
         public int InsertarPregunta(Pregunta _objPregunta)
         {
             try

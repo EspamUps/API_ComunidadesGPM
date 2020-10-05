@@ -190,6 +190,7 @@ namespace API.Models.Catalogos
                     IdRespuestaLogica = _seguridad.Encriptar(item.IdRespuestaLogica.ToString()),
                     DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta,
                     IdAsignarEncuestado = _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()),
+                    datoRespuestaMatriz = item.datos,
                     OpcionDosMatriz = new OpcionDosMatriz()
                     {
                         IdOpcionDosMatriz = item.IdOpcionDosMatriz,

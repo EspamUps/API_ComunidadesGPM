@@ -17,5 +17,7 @@ namespace API.Models.Entidades
         public bool EstadoComunidad { get; set; }
         public Parroquia Parroquia { get; set; }
         public string Utilizado { get; set; }
+        public string latitud { get; set; }
+        public string longitud { get; set; }
     }
 }

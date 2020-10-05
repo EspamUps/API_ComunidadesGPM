@@ -200,9 +200,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Conexion\demo_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -446,12 +443,6 @@
     <Compile Include="Conexion\Sp_DescripcionComponenteInsertar_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Conexion\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Conexion\sp_helpdiagrams_Result.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Conexion\Sp_LiderComunitarioConsultar_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -629,8 +620,10 @@
     <Compile Include="Controllers\ComponenteController.cs" />
     <Compile Include="Controllers\ComunidadController.cs" />
     <Compile Include="Controllers\ConfigurarComponenteController.cs" />
+    <Compile Include="Controllers\CoordenadasController.cs" />
     <Compile Include="Controllers\CuestionarioGenericoController.cs" />
     <Compile Include="Controllers\CuestionarioPublicadoController.cs" />
+    <Compile Include="Controllers\DatosRespuestaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LiderComunitarioController.cs" />
     <Compile Include="Controllers\ConfigurarMatrizController.cs" />
@@ -684,8 +677,10 @@
     <Compile Include="Models\Catalogos\CatalogoComunidad.cs" />
     <Compile Include="Models\Catalogos\CatalogoContenidoDetalleComponente.cs" />
     <Compile Include="Models\Catalogos\CatalogoContenidoTipoElemento.cs" />
+    <Compile Include="Models\Catalogos\CatalogoCoordenadas.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoCuestionarioPublicado.cs" />
+    <Compile Include="Models\Catalogos\CatalogoDatosRespuesta.cs" />
     <Compile Include="Models\Catalogos\CatalogoLiderComunitario.cs" />
     <Compile Include="Models\Catalogos\CatalogoModeloGenerico.cs" />
     <Compile Include="Models\Catalogos\CatalogoModeloPublicado.cs" />
@@ -738,8 +733,10 @@
     <Compile Include="Models\Entidades\ConfigurarMatriz.cs" />
     <Compile Include="Models\Entidades\ContenidoDetalleComponente.cs" />
     <Compile Include="Models\Entidades\ContenidoTipoElemento.cs" />
+    <Compile Include="Models\Entidades\Coordenadas.cs" />
     <Compile Include="Models\Entidades\CuestionarioGenerico.cs" />
     <Compile Include="Models\Entidades\CuestionariosAsignadosTecnicos.cs" />
+    <Compile Include="Models\Entidades\DatosRespuesta.cs" />
     <Compile Include="Models\Entidades\ModeloPublicado.cs" />
     <Compile Include="Models\Entidades\CuestionarioPublicado.cs" />
     <Compile Include="Models\Entidades\DescripcionComponente.cs" />
@@ -753,8 +750,10 @@
     <Compile Include="Models\Entidades\Pregunta.cs" />
     <Compile Include="Models\Entidades\PreguntaAbierta.cs" />
     <Compile Include="Models\Entidades\PreguntaEncajonada.cs" />
+    <Compile Include="Models\Entidades\PreguntaRestante.cs" />
     <Compile Include="Models\Entidades\PresidenteJuntaParroquial.cs" />
     <Compile Include="Models\Entidades\Respuesta.cs" />
+    <Compile Include="Models\Entidades\RespuestaPreguntaAbierta.cs" />
     <Compile Include="Models\Entidades\RespuestaPreguntaSeleccion.cs" />
     <Compile Include="Models\Entidades\RespuestasCaracterizacion.cs" />
     <Compile Include="Models\Entidades\RespuestasPregunta.cs" />
@@ -826,6 +825,7 @@
     </Content>
     <Content Include="ClassDiagram1.cd" />
     <Content Include="ClassDiagram2.cd" />
+    <Content Include="App_Browsers\qt.browser" />
     <EntityDeploy Include="Conexion\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -833,7 +833,6 @@
     <Content Include="Conexion\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="App_Browsers\qt.browser" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -842,7 +841,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -862,6 +863,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Uploads\Photo\" />
     <Folder Include="Imagenes\" />
+    <Folder Include="Views\Coordenadas\" />
     <Folder Include="Views\Token\" />
   </ItemGroup>
   <ItemGroup>
