@@ -268,5 +268,49 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+        [HttpPost]
+        [Route("api/ConsultarCaracterizacionComunidad")]
+        public object ConsultarCaracterizacionComunidad(CaracterizacionComunidad _CaracterizacionComunidad)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (string.IsNullOrEmpty(_CaracterizacionComunidad.IdComunidad))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese la comunidad";
+                }
+                else
+                {
+                    _CaracterizacionComunidad.IdComunidad = _seguridad.DesEncriptar(_CaracterizacionComunidad.IdComunidad);
+                    CaracterizacionComunidad _Caracterizacion = new CaracterizacionComunidad();
+                    _Caracterizacion = _objModeloPublicados.getCaracterizacionPorComunidad(int.Parse(_CaracterizacionComunidad.IdComunidad)).FirstOrDefault();
+                    if (_Caracterizacion != null)
+                    {
+                        if (_Caracterizacion.idAsignarEncuestado == "0" || _Caracterizacion.idModeloPublicado =="0")
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                            _http.mensaje = "No existe una encuesta finalizada o ninguna caracterizacion para generar";
+                        }
+                        else
+                        {
+                            _respuesta = _Caracterizacion;
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                        }
+                    }
+                    else
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "No existe una caracterizacion para generar";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
     }
 }

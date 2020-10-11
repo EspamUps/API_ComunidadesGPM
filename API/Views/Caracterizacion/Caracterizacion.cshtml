@@ -8,6 +8,9 @@
         border-color: black;
     }
 </style>
+@{ 
+    string ninguno = "N/A";
+}
 <div class="container">
     <div class="row">
         <div class="col-xs-6">
@@ -53,8 +56,16 @@
                     parroquia:
                 </div>
                 <div class="col-xs-6">
-                    Hab. Censo 2010.
-                    Hab. 2020.
+                    @if (ViewBag.Encuesta.AsignarEncuestado.Comunidad.Parroquia.PoblacionParroquia != null)
+                    {
+                        @ViewBag.Encuesta.AsignarEncuestado.Comunidad.Parroquia.PoblacionParroquia
+                    }
+                    else
+                    {
+                        <font>
+                            @ninguno
+                        </font>
+                    }
                 </div>
             </div>
             <div class="row">
@@ -62,7 +73,16 @@
                     Superficie parroquial:
                 </div>
                 <div class="col-xs-6">
-                    Km2
+                    @if (ViewBag.Encuesta.AsignarEncuestado.Comunidad.Parroquia.SuperficieParroquia != null)
+                    {
+                        @ViewBag.Encuesta.AsignarEncuestado.Comunidad.Parroquia.SuperficieParroquia
+                    }
+                    else
+                    {
+                        <font>
+                            @ninguno
+                        </font>
+                    }
                 </div>
             </div>
             <div class="row">
@@ -70,7 +90,16 @@
                     Temperatura:
                 </div>
                 <div class="col-xs-6">
-                    °C - °C.
+                    @if (ViewBag.Encuesta.AsignarEncuestado.Comunidad.Parroquia.TemperaturaParroquia != null)
+                    {
+                        @ViewBag.Encuesta.AsignarEncuestado.Comunidad.Parroquia.TemperaturaParroquia
+                    }
+                    else
+                    {
+                        <font>
+                            @ninguno
+                        </font>
+                    }
                 </div>
             </div>
             <div class="row">
@@ -78,7 +107,16 @@
                     Clima:
                 </div>
                 <div class="col-xs-6">
-                    ---
+                    @if (ViewBag.Encuesta.AsignarEncuestado.Comunidad.Parroquia.ClimaParroquia != null)
+                    {
+                        @ViewBag.Encuesta.AsignarEncuestado.Comunidad.Parroquia.ClimaParroquia
+                    }
+                    else
+                    {
+                        <font>
+                            @ninguno
+                        </font>
+                    }
                 </div>
             </div>
         </div>
