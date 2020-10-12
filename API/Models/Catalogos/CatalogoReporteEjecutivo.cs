@@ -22,5 +22,15 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+        public List<ReporteEjecutivo> listadoComunidadesAndParroquias() 
+        {
+            List<ReporteEjecutivo> _lista = new List<ReporteEjecutivo>();
+            foreach (var item in db.Sp_ListadoComunidadesAndParroquia())
+            {
+                _lista.Add(new ReporteEjecutivo(item.NombreParroquia, _seguridad.Encriptar(Convert.ToString(item.IdComunidad)), item.NombreComunidad));
+
+            }
+            return _lista;
+        }
     }
 }

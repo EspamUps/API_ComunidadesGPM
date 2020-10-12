@@ -39,5 +39,33 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+        [HttpGet]
+        [Route("api/listado/comunidad/parroquia")]
+        public object ListadoComunidadAndParroquia()
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                var _objComunidad = _objCatalogoReporteEjecutivo.listadoComunidadesAndParroquias();
+
+                if (_objComunidad != null)
+                {
+                    _respuesta = _objComunidad;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
+                else {
+                    _respuesta = "No hay comunidad para mostrar";
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                }
+              
+                
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
     }
 }

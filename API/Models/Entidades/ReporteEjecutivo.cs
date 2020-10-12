@@ -24,6 +24,12 @@ namespace API.Models.Entidades
             NombreComunidad = nombreComunidad;
             identificadoPregunta = IdentificadoPregunta;
         }
+        public ReporteEjecutivo(string descripcion, string idComunidad, string nombreComunidad)
+        {
+            Descripcion = descripcion;
+            IdComunidad = idComunidad;
+            NombreComunidad = nombreComunidad;
+        }
 
     }
 }
