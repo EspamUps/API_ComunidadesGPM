@@ -24,7 +24,7 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                var _listaParroquias = _objCatalogoParroquia.ConsultarParroquia().Where(c => c.EstadoParroquia == true && c.Canton.EstadoCanton == true && c.Canton.Provincia.EstadoProvincia == true).OrderByDescending(n => n.IdParroquia).ToList();
+                var _listaParroquias = _objCatalogoParroquia.ConsultarParroquia().Where(c => c.EstadoParroquia == true && c.Canton.EstadoCanton == true && c.Canton.Provincia.EstadoProvincia == true).OrderBy(n => n.IdParroquia).ToList();
                 foreach (var item in _listaParroquias)
                 {
                     item.IdParroquia = 0;
