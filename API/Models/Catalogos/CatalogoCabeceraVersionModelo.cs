@@ -231,6 +231,40 @@ namespace API.Models.Catalogos
                                         item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.OuterHtml, RespuestaMatriz);
                                     }
                                 }
+                                else if(item2.TipoPreguntaIdentificador == 6)
+                                {
+                                    string RespuestaMatrizAbierta = "";
+                                    string base_ = node.InnerHtml;
+                                    string[] words = base_.Split(' ');
+                                    List<string> datos = words.Where(p => p.ToUpper().Contains("COL-")).ToList();
+                                    foreach (var item3 in db.Sp_ConsultarRespuestaPreguntaMatrizAbierta(_asignarEncuestado, item2.PreguntaIdPregunta))
+                                    {
+                                        string fila = base_;
+                                        string dato = "";
+                                        string[] words_bd = item3.RespuestaDescripcionRespuestaAbierta.Split(',');
+                                        foreach (var _item in datos)
+                                        {
+                                            int columna = int.Parse(_item.ToUpper().Replace("COL-", ""));
+                                            if (columna<=(words_bd.Length - 1)&&columna>0)
+                                            {
+                                                dato = words_bd[columna];
+                                                fila = fila.Replace(_item, "<strong>" + dato + "</strong>");
+                                            }
+                                        }
+                                        if (datos.Count>0)
+                                        {
+                                            RespuestaMatrizAbierta += "<p>" + fila + "</p>";
+                                        }
+                                    }
+                                    if (RespuestaMatrizAbierta != "")
+                                    {
+                                        item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.OuterHtml, RespuestaMatrizAbierta);
+                                    }
+                                    else
+                                    {
+                                        item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.OuterHtml, node.InnerHtml);
+                                    }
+                                }
                                 _Pregunta.Add(new Pregunta()
                                 {
                                     Descripcion = item2.PreguntaDescripcion,

@@ -407,6 +407,9 @@
     <Compile Include="Conexion\Sp_ConsultarRespuestaPreguntaAbierta_Result.cs">
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ConsultarRespuestaPreguntaMatrizAbierta_Result.cs">
+      <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ConsultarRespuestaPreguntaMultiple_Result.cs">
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
@@ -462,6 +465,9 @@
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_LiderComunitarioConsultar_Result.cs">
+      <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ListadoComunidadesAndParroquia_Result.cs">
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ListadoPreguntasPorComponente_Result.cs">
@@ -546,6 +552,9 @@
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ProvinciaConsultar_Result.cs">
+      <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ReporteEjecutivo_Result.cs">
       <DependentUpon>ComunidadesGPMModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_RespuestaConsultarPorCabeceraRespuesta_Result.cs">
