@@ -359,5 +359,35 @@ namespace API.Models.Catalogos
             }
             return _CabeceraRespuesta;
         }
+        public List<CaracterizacionComunidad> getCaracterizacionPorComunidad(int idComunidad)
+        {
+            List<CaracterizacionComunidad> _Caracterizacion = new List<CaracterizacionComunidad>();
+            foreach (var item in db.Sp_ConsultarCaracterizacionPorComunidad(idComunidad))
+            {
+                if (item.IdAsignarEncuestado != 0)
+                {
+                    _Caracterizacion.Add(new CaracterizacionComunidad()
+                    {
+                        idAsignarEncuestado = _seguridad.Encriptar(item.IdAsignarEncuestado.ToString()),
+                        idModeloPublicado = _seguridad.Encriptar(item.IdModeloPublicado.ToString()),
+                    });
+                }
+                else
+                {
+                    _Caracterizacion.Add(new CaracterizacionComunidad()
+                    {
+                        idAsignarEncuestado = "0",
+                        idModeloPublicado = "0",
+                    });
+                }
+            }
+            return _Caracterizacion;
+        }
+    }
+    public class CaracterizacionComunidad
+    {
+        public string IdComunidad { get; set; }
+        public string idAsignarEncuestado { get; set; }
+        public string idModeloPublicado { get; set; }
     }
 }

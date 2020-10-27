@@ -347,6 +347,9 @@
     <Compile Include="Conexion\Sp_CargarCoordenadasDeComunidadesPorParroquia_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_CargarCoordenadasDeComunidadesPorParroquia_Result1.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ComponenteConsultarDeUnaVersion_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -381,6 +384,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ConfigurarMatrizConsultar_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ConsultarCaracterizacionPorComunidad_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ConsultarEncuestasFinalizadasPorId_Result.cs">
@@ -450,6 +456,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_LiderComunitarioConsultar_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ListadoComunidadesAndParroquia_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ListadoComunidadesAndParroquia_Result1.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ListadoPreguntasPorComponente_Result.cs">
@@ -537,6 +549,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ProvinciaConsultar_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ReporteEjecutivo_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ReporteEjecutivo_Result1.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_RespuestaConsultarPorCabeceraRespuesta_Result.cs">
@@ -650,6 +668,7 @@
     <Compile Include="Controllers\PreguntaEncajonadaController.cs" />
     <Compile Include="Controllers\PresidenteJuntaParroquialController.cs" />
     <Compile Include="Controllers\ProvinciaController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\RespuestaController.cs" />
     <Compile Include="Controllers\SeccionController.cs" />
     <Compile Include="Controllers\SexoController.cs" />
@@ -707,6 +726,7 @@
     <Compile Include="Models\Catalogos\CatalogoPresidenteJuntaParroquial.cs" />
     <Compile Include="Models\Catalogos\CatalogoPrivilegio.cs" />
     <Compile Include="Models\Catalogos\CatalogoProvincia.cs" />
+    <Compile Include="Models\Catalogos\CatalogoReporteEjecutivo.cs" />
     <Compile Include="Models\Catalogos\CatalogoRespuesta.cs" />
     <Compile Include="Models\Catalogos\CatalogoRespuestasHTTP.cs" />
     <Compile Include="Models\Catalogos\CatalogoSeccion.cs" />
@@ -761,6 +781,7 @@
     <Compile Include="Models\Entidades\PreguntaEncajonada.cs" />
     <Compile Include="Models\Entidades\PreguntaRestante.cs" />
     <Compile Include="Models\Entidades\PresidenteJuntaParroquial.cs" />
+    <Compile Include="Models\Entidades\ReporteEjecutivo.cs" />
     <Compile Include="Models\Entidades\Respuesta.cs" />
     <Compile Include="Models\Entidades\RespuestaPreguntaAbierta.cs" />
     <Compile Include="Models\Entidades\RespuestaPreguntaSeleccion.cs" />
@@ -873,6 +894,7 @@
     <Folder Include="Content\Uploads\Photo\" />
     <Folder Include="Imagenes\" />
     <Folder Include="Views\Coordenadas\" />
+    <Folder Include="Views\Reporte\" />
     <Folder Include="Views\Token\" />
   </ItemGroup>
   <ItemGroup>

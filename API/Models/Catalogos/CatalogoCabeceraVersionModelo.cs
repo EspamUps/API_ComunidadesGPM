@@ -147,6 +147,8 @@ namespace API.Models.Catalogos
                 {
                     if (_asignarEncuestado != null)
                     {
+                        string ninguno = "N/A";
+
                         var doc = new HtmlDocument();
                         doc.LoadHtml(item1.VersionamientoModeloContenido);
                         HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//textarea").ToArray();
@@ -164,7 +166,7 @@ namespace API.Models.Catalogos
                                     }
                                     if (RespuestaPabierta == "")
                                     {
-                                        RespuestaPabierta = "N/A";
+                                        RespuestaPabierta = ninguno;
                                     }
                                     RespuestaPabierta = "<strong>" + RespuestaPabierta + "</strong>";
                                     item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.OuterHtml, RespuestaPabierta);
@@ -191,7 +193,7 @@ namespace API.Models.Catalogos
                                     }
                                     if (RespuestaUnica == "")
                                     {
-                                        RespuestaUnica = "N/A";
+                                        RespuestaUnica = ninguno;
                                     }
                                     RespuestaUnica = "<strong>" + RespuestaUnica + "</strong>";
                                     item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.OuterHtml, RespuestaUnica);
@@ -209,9 +211,25 @@ namespace API.Models.Catalogos
                                     }
                                     else
                                     {
-                                        RespuestaMultiple = "<ul><li><strong>N/A</strong></li></ul>";
+                                        RespuestaMultiple = "<ul><li><strong>"+ ninguno + "</strong></li></ul>";
                                     }
                                     item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.ParentNode.ParentNode.OuterHtml, RespuestaMultiple);
+                                }
+                                else if(item2.TipoPreguntaIdentificador == 4)
+                                {
+                                    string RespuestaMatriz = "";
+                                    string base_ = node.InnerHtml;
+                                    foreach (var item3 in db.Sp_ConsultarRespuestaMatriz(_asignarEncuestado, item2.PreguntaIdPregunta))
+                                    {
+                                        string dato = "";
+                                        dato = base_.Replace("F", "<strong>" + item3.OpcionUnoMatrizDescripcion + "</strong>");
+                                        dato = dato.Replace("C", "<strong>" + item3.OpcionDosMatrizDescripcion + "</strong>");                                        
+                                        RespuestaMatriz += "<p>"+ dato + "</p>";
+                                    }
+                                    if (RespuestaMatriz!="")
+                                    {
+                                        item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.OuterHtml, RespuestaMatriz);
+                                    }
                                 }
                                 _Pregunta.Add(new Pregunta()
                                 {

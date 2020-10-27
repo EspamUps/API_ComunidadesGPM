@@ -15,14 +15,15 @@ namespace API.Models.Entidades
         public string NombreCanton { get; set; }
         public string NombreParroquia { get; set; }
         public string NombreComunidad { get; set; }
-
-        public Coordenadas(string latitud, string longitud, string nombreCanton, string nombreParroquia, string nombreComunidad)
+        public string idComunidad { get; set; }
+        public Coordenadas(string latitud, string longitud, string nombreCanton, string nombreParroquia, string nombreComunidad, string idComunidad)
         {
             this.latitud = latitud;
             this.longitud = longitud;
-            NombreCanton = nombreCanton;
-            NombreParroquia = nombreParroquia;
-            NombreComunidad = nombreComunidad;
+            this.NombreCanton = nombreCanton;
+            this.NombreParroquia = nombreParroquia;
+            this.NombreComunidad = nombreComunidad;
+            this.idComunidad = idComunidad;
         }
 
     }
