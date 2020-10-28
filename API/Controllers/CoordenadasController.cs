@@ -64,25 +64,26 @@ namespace API.Controllers
         }
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("api/comunidades/coordenadas")]
-        public object comunidadesPorCoordenadas(string parroquia)
+        public object comunidadesPorCoordenadas(float latitud , float longitud )
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                if (parroquia == null || string.IsNullOrEmpty(parroquia))
+                if (latitud == 0 )
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
-                    _http.mensaje = "El campo de la parroquia está vacío";
+                    _http.mensaje = "No existe una latitud";
                     return new { respuesta = _http.mensaje, http = _http.codigo };
                 }
-
-                var _parroquia = _objCatalogoParroquia.ConsultarParroquia().Where(c => c.EstadoParroquia == true && c.NombreParroquia == parroquia).ToList();
-                if (_parroquia == null) {
-                    return new { respuesta = "La parroquia no existe", http = _http.codigo };
+                if (longitud == 0)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "No existe una longitud";
+                    return new { respuesta = _http.mensaje, http = _http.codigo };
                 }
-               
-                var coordenada = _objCatalogoCoordenadas.ConsultarCanton(parroquia);
+                        
+                var coordenada = _objCatalogoCoordenadas.ConsultarCanton(latitud, longitud);
                 if (coordenada != null)
                 {
                     return new { respuesta = coordenada, http = 200 };

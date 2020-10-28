@@ -32,6 +32,12 @@ namespace API.Models.Entidades
             this.NombreComunidad = nombreComunidad;
             this.idComunidad = idComunidad;
         }
-
+        public Coordenadas(string idComunidad, string nombreComunidad, string latitud, string longitud)
+        {
+            this.idComunidad = idComunidad;
+            this.NombreComunidad = nombreComunidad;
+            this.latitud = latitud;
+            this.longitud = longitud;
+        }
     }
 }

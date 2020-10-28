@@ -24,12 +24,12 @@ namespace API.Models.Catalogos
             }
         }
 
-        public List<Coordenadas> ConsultarCanton(string parroquia)
+        public List<Coordenadas> ConsultarCanton(float latitud, float longitud)
         {
             List<Coordenadas> _lista = new List<Coordenadas>();
-            foreach (var item in db.Sp_CargarCoordenadasDeComunidadesPorParroquia(parroquia))
+            foreach (var item in db.Sp_CargarCoordenadasDeComunidadesPorParroquia(latitud, longitud))
             {
-                _lista.Add(new Coordenadas(item.latitud,item.longitud, item.NombreCanton, item.NombreParroquia, item.NombreComunidad,_seguridad.Encriptar(Convert.ToString(item.IdComunidad))));
+                _lista.Add(new Coordenadas(_seguridad.Encriptar(Convert.ToString(item.IdComunidad)),item.NombreComunidad,item.latitud, item.longitud));
                
             }
             return _lista;
