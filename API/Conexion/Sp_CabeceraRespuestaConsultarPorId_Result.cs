@@ -63,7 +63,7 @@ namespace API.Conexion
         public string PERSONATECNICO_SegundoApellido { get; set; }
         public string PERSONATECNICO_NumeroIdentificacion { get; set; }
         public string PERSONATECNICO_Telefono { get; set; }
-        public int PERSONATECNICO_IdParroquia { get; set; }
+        public Nullable<int> PERSONATECNICO_IdParroquia { get; set; }
         public string PERSONATECNICO_Direccion { get; set; }
         public bool PERSONATECNICO_Estado { get; set; }
         public int SEXOTECNICO_IdSexo { get; set; }
@@ -92,7 +92,7 @@ namespace API.Conexion
         public string PERSONARESPONSABLE_SegundoApellido { get; set; }
         public string PERSONARESPONSABLE_NumeroIdentificacion { get; set; }
         public string PERSONARESPONSABLE_Telefono { get; set; }
-        public int PERSONARESPONSABLE_IdParroquia { get; set; }
+        public Nullable<int> PERSONARESPONSABLE_IdParroquia { get; set; }
         public string PERSONARESPONSABLE_Direccion { get; set; }
         public bool PERSONARESPONSABLE_Estado { get; set; }
         public int SEXORESPONSABLE_IdSexo { get; set; }
@@ -124,7 +124,7 @@ namespace API.Conexion
         public string PERSONAPUBLICADO_SegundoApellido { get; set; }
         public string PERSONAPUBLICADO_NumeroIdentificacion { get; set; }
         public string PERSONAPUBLICADO_Telefono { get; set; }
-        public int PERSONAPUBLICADO_IdParroquia { get; set; }
+        public Nullable<int> PERSONAPUBLICADO_IdParroquia { get; set; }
         public string PERSONAPUBLICADO_Direccion { get; set; }
         public bool PERSONAPUBLICADO_Estado { get; set; }
         public int SEXOPUBLICADO_IdSexo { get; set; }
@@ -170,7 +170,7 @@ namespace API.Conexion
         public string PERSONA_SegundoApellido { get; set; }
         public string PERSONA_NumeroIdentificacion { get; set; }
         public string PERSONA_Telefono { get; set; }
-        public int PERSONA_IdParroquia { get; set; }
+        public Nullable<int> PERSONA_IdParroquia { get; set; }
         public string PERSONA_Direccion { get; set; }
         public bool PERSONA_Estado { get; set; }
         public int SEXO_IdSexo { get; set; }

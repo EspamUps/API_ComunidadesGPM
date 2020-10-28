@@ -24,7 +24,7 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                var _listaParroquias = _objCatalogoParroquia.ConsultarParroquia().Where(c => c.EstadoParroquia == true && c.Canton.EstadoCanton == true && c.Canton.Provincia.EstadoProvincia == true).OrderByDescending(n => n.IdParroquia).ToList();
+                var _listaParroquias = _objCatalogoParroquia.ConsultarParroquia().Where(c => c.EstadoParroquia == true && c.Canton.EstadoCanton == true && c.Canton.Provincia.EstadoProvincia == true).OrderBy(n => n.IdParroquia).ToList();
                 foreach (var item in _listaParroquias)
                 {
                     item.IdParroquia = 0;
@@ -259,7 +259,7 @@ namespace API.Controllers
                         _objParroquia.Canton.IdCanton = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.IdCantonEncriptado));
                         _objParroquia.Canton.Provincia.IdProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.Provincia.IdProvinciaEncriptado));
                         _objParroquia.EstadoParroquia = true;
-                        int _idParroquiaModificado = _objCatalogoParroquia.ModificarParroquia(_objParroquia);
+                        int? _idParroquiaModificado = _objCatalogoParroquia.ModificarParroquia(_objParroquia);
                         if (_idParroquiaModificado == 0)
                         {
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();

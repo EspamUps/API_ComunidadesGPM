@@ -11,11 +11,11 @@ namespace API.Models.Catalogos
 
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
-        public int ModificarCoordenadas(Coordenadas coordenadas)
+        public int ModificarCoordenadas(string idComunidad, string latitud, string longitud)
         {
             try
             {
-                var estado = db.Sp_CoordenasComunidadInsert(coordenadas.latitud, coordenadas.longitud, Convert.ToInt32(coordenadas.id));
+                var estado = db.Sp_CoordenasComunidadInsert(latitud, longitud, Convert.ToInt32(idComunidad));
                 return estado = 1; 
             }
             catch (Exception)

@@ -56,7 +56,7 @@
                     parroquia:
                 </div>
                 <div class="col-xs-6">
-                    @if (ViewBag.Encuesta.AsignarEncuestado.Comunidad.Parroquia.PoblacionParroquia != null)
+                    @if (ViewBag.Encuesta.AsignarEncuestado.Comunidad.Parroquia.PoblacionParroquia != null || ViewBag.Encuesta.AsignarEncuestado.Comunidad.Parroquia.PoblacionParroquia !="")
                     {
                         @ViewBag.Encuesta.AsignarEncuestado.Comunidad.Parroquia.PoblacionParroquia
                     }
@@ -147,7 +147,14 @@
                     </div>
                     <div style="margin: auto;" class="col-xs-3">
                         <div style="position: inherit;float: right;display:inline-block;">
-                            <img style="width:200px;height: 200px;" src="~/Imagenes/Escudo-Manabi.png" />
+                            @if (ViewBag.Encuesta.AsignarEncuestado.Comunidad.RutaLogoComunidad != null || ViewBag.Encuesta.AsignarEncuestado.Comunidad.RutaLogoComunidad != "")
+                            {
+                                <img style="width:200px;height: 200px;" src="~/@(ViewBag.Encuesta.AsignarEncuestado.Comunidad.RutaLogoComunidad)"/>
+                            }
+                            else
+                            {
+                                <img style="width:200px;height: 200px;" src="~/Imagenes/Escudo-Manabi.png" />
+                            }
                         </div>
                     </div>
                 </div>
