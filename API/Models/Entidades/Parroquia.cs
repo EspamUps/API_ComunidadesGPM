@@ -7,7 +7,7 @@ namespace API.Models.Entidades
 {
     public class Parroquia
     {
-        public int IdParroquia { get; set; }
+        public int? IdParroquia { get; set; }
         public string IdParroquiaEncriptado { get; set; }
         public string CodigoParroquia { get; set; }
         public string NombreParroquia { get; set; }

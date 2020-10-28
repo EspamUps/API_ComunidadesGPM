@@ -115,7 +115,7 @@ namespace API.Controllers
                         }
                         else
                         {
-                            var _listaComunidades = _objCatalogoComunidad.ConsultarComunidadPorIdParroquia(_objAsignarResponsableModeloPublicado.Parroquia.IdParroquia).Where(c => c.EstadoComunidad == true).ToList();
+                            var _listaComunidades = _objCatalogoComunidad.ConsultarComunidadPorIdParroquia(_objAsignarResponsableModeloPublicado.Parroquia.IdParroquia.Value).Where(c => c.EstadoComunidad == true).ToList();
                             int _idCuestionarioPublicado = _objAsignarComponenteGenerico.AsignarCuestionarioModelo.CuestionarioPublicado.IdCuestionarioPublicado;
                             var _listaAsignarEncuestadoPorCuestionarioPublicado = _objCatalogoAsignarEncuestado.ConsultarAsignarEncuestadPorIdCuestionarioPublicado(_idCuestionarioPublicado).Where(c => c.Estado == true).ToList();
                             List<Respuesta> _listaRespuestasTodosCuestionariosComunidades = new List<Respuesta>();
