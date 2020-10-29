@@ -235,6 +235,7 @@ namespace API.Models.Catalogos
                                 {
                                     string RespuestaMatrizAbierta = "";
                                     string base_ = node.InnerHtml;
+                                    base_ = base_.Replace("&nbsp;"," ");
                                     string[] words = base_.Split(' ');
                                     List<string> datos = words.Where(p => p.ToUpper().Contains("COL-")).ToList();
                                     foreach (var item3 in db.Sp_ConsultarRespuestaPreguntaMatrizAbierta(_asignarEncuestado, item2.PreguntaIdPregunta))
