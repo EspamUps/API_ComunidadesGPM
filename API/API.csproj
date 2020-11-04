@@ -401,6 +401,9 @@
     <Compile Include="Conexion\Sp_ConsultarRespuestaMatriz_Result.cs">
       <DependentUpon>Model1GPM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ConsultarRespuestaMatriz_Result1.cs">
+      <DependentUpon>Model1GPM.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ConsultarRespuestaPreguntaAbierta_Result.cs">
       <DependentUpon>Model1GPM.tt</DependentUpon>
     </Compile>

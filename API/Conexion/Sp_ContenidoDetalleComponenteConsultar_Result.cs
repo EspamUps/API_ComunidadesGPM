@@ -53,7 +53,7 @@ namespace API.Conexion
         public int IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor { get; set; }
         public int IdUsuarioUsuarioAutor { get; set; }
         public int IdPersonaAutor { get; set; }
-        public Nullable<int> IdParroquiaPersonaAutor { get; set; }
+        public int IdParroquiaPersonaAutor { get; set; }
         public string NumeroIdentificacionPersonaAutor { get; set; }
         public string DireccionPersonaAutor { get; set; }
         public bool EstadoPersonaAutor { get; set; }
@@ -69,7 +69,7 @@ namespace API.Conexion
         public int IdTipoUsuarioAsignarUsuarioTipoUsuarioDecision { get; set; }
         public int IdUsuarioUsuarioDecision { get; set; }
         public int IdPersonaDecision { get; set; }
-        public Nullable<int> IdParroquiaPersonaDecision { get; set; }
+        public int IdParroquiaPersonaDecision { get; set; }
         public string NumeroIdentificacionPersonaDecision { get; set; }
         public string DireccionPersonaDecision { get; set; }
         public bool EstadoPersonaDecision { get; set; }

@@ -52,7 +52,7 @@ namespace API.Conexion
         public int IdTipoUsuarioAsignarUsuarioTipoUsuarioAutor { get; set; }
         public int IdUsuarioUsuarioAutor { get; set; }
         public int IdPersonaAutor { get; set; }
-        public Nullable<int> IdParroquiaPersonaAutor { get; set; }
+        public int IdParroquiaPersonaAutor { get; set; }
         public string NumeroIdentificacionPersonaAutor { get; set; }
         public string DireccionPersonaAutor { get; set; }
         public bool EstadoPersonaAutor { get; set; }
