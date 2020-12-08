@@ -332,24 +332,32 @@ namespace API.Models.Catalogos
                             DescripcionComunidad = item.ComunidadDescripcionComunidad,
                             EstadoComunidad = item.ComunidadEstadoComunidad,
                             NombreComunidad = item.ComunidadNombreComunidad,
+                            RutaLogoComunidad = item.ComunidadRutaLogoComunidad,
                             Parroquia = new Parroquia()
                             {
                                 IdParroquiaEncriptado = _seguridad.Encriptar(item.ParroquiaIdParroquia.ToString()),
                                 CodigoParroquia = item.ParroquiaCodigoParroquia,
                                 DescripcionParroquia = item.ParroquiaDescripcionParroquia,
                                 NombreParroquia = item.ParroquiaNombreParroquia,
+                                RutaLogoParroquia = item.ParroquiaRutaLogoParroquia,
+                                TemperaturaParroquia = item.ParroquiaTemperaturaParroquia,
+                                ClimaParroquia = item.ParroquiaClimaParroquia,
+                                SuperficieParroquia = item.ParroquiaSuperficieParroquia,
+                                PoblacionParroquia = item.ParroquiaPoblacionParroquia,
                                 Canton = new Canton()
                                 {
                                     IdCantonEncriptado = _seguridad.Encriptar(item.CantonIdCanton.ToString()),
                                     CodigoCanton = item.CantonCodigoCanton,
                                     DescripcionCanton = item.CantonDescripcionCanton,
                                     NombreCanton = item.CantonNombreCanton,
+                                    RutaLogoCanton = item.CantonRutaLogoCanton,
                                     Provincia = new Provincia()
                                     {
                                         IdProvinciaEncriptado = _seguridad.Encriptar(item.ProvinciaIdProvincia.ToString()),
                                         CodigoProvincia = item.ProvinciaCodigoProvincia,
                                         DescripcionProvincia = item.ProvinciaDescripcionProvincia,
-                                        NombreProvincia = item.ProvinciaNombreProvincia
+                                        NombreProvincia = item.ProvinciaNombreProvincia,
+                                        RutaLogoProvincia = item.ProvinciaRutaLogoProvincia,
                                     }
                                 }
                             }

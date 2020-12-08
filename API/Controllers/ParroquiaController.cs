@@ -259,7 +259,7 @@ namespace API.Controllers
                         _objParroquia.Canton.IdCanton = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.IdCantonEncriptado));
                         _objParroquia.Canton.Provincia.IdProvincia = Convert.ToInt32(_seguridad.DesEncriptar(_objParroquia.Canton.Provincia.IdProvinciaEncriptado));
                         _objParroquia.EstadoParroquia = true;
-                        int _idParroquiaModificado = _objCatalogoParroquia.ModificarParroquia(_objParroquia);
+                        int? _idParroquiaModificado = _objCatalogoParroquia.ModificarParroquia(_objParroquia);
                         if (_idParroquiaModificado == 0)
                         {
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();

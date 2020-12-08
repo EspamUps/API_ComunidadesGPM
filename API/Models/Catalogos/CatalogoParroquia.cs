@@ -154,7 +154,7 @@ namespace API.Models.Catalogos
             }
         }
 
-        public int ModificarParroquia(Parroquia _objParroquia)
+        public int? ModificarParroquia(Parroquia _objParroquia)
         {
             try
             {

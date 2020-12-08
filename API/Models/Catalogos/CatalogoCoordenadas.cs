@@ -11,11 +11,11 @@ namespace API.Models.Catalogos
 
         ComunidadesGPMEntities db = new ComunidadesGPMEntities();
         Seguridad _seguridad = new Seguridad();
-        public int ModificarCoordenadas(Coordenadas coordenadas)
+        public int ModificarCoordenadas(string idComunidad, string latitud, string longitud)
         {
             try
             {
-                var estado = db.Sp_CoordenasComunidadInsert(coordenadas.latitud, coordenadas.longitud, Convert.ToInt32(coordenadas.id));
+                var estado = db.Sp_CoordenasComunidadInsert(latitud, longitud, Convert.ToInt32(idComunidad));
                 return estado = 1; 
             }
             catch (Exception)
@@ -24,12 +24,12 @@ namespace API.Models.Catalogos
             }
         }
 
-        public List<Coordenadas> ConsultarCanton(string parroquia)
+        public List<Coordenadas> ConsultarCanton(float latitud, float longitud)
         {
             List<Coordenadas> _lista = new List<Coordenadas>();
-            foreach (var item in db.Sp_CargarCoordenadasDeComunidadesPorParroquia(05451, 1524564))
+            foreach (var item in db.Sp_CargarCoordenadasDeComunidadesPorParroquia(latitud, longitud))
             {
-                _lista.Add(new Coordenadas(item.latitud,item.longitud, item.NombreCanton, item.NombreParroquia, item.NombreComunidad,_seguridad.Encriptar(Convert.ToString(item.IdComunidad))));
+                _lista.Add(new Coordenadas(_seguridad.Encriptar(Convert.ToString(item.IdComunidad)),item.NombreComunidad,item.latitud, item.longitud));
                
             }
             return _lista;

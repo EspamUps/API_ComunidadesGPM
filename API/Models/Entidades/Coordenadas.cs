@@ -9,13 +9,20 @@ namespace API.Models.Entidades
     {
     
 
-        public  string id{ get; set; }
+        public string id{ get; set; }
         public string latitud { get; set; }
         public string longitud { get; set; }
         public string NombreCanton { get; set; }
         public string NombreParroquia { get; set; }
         public string NombreComunidad { get; set; }
         public string idComunidad { get; set; }
+        public Coordenadas(string idComunidad, string latitud, string longitud)
+        {
+            this.idComunidad = idComunidad;
+            this.latitud = latitud;
+            this.longitud = longitud;
+          
+        }
         public Coordenadas(string latitud, string longitud, string nombreCanton, string nombreParroquia, string nombreComunidad, string idComunidad)
         {
             this.latitud = latitud;
@@ -25,6 +32,12 @@ namespace API.Models.Entidades
             this.NombreComunidad = nombreComunidad;
             this.idComunidad = idComunidad;
         }
-
+        public Coordenadas(string idComunidad, string nombreComunidad, string latitud, string longitud)
+        {
+            this.idComunidad = idComunidad;
+            this.NombreComunidad = nombreComunidad;
+            this.latitud = latitud;
+            this.longitud = longitud;
+        }
     }
 }

@@ -148,7 +148,6 @@ namespace API.Models.Catalogos
                     if (_asignarEncuestado != null)
                     {
                         string ninguno = "N/A";
-
                         var doc = new HtmlDocument();
                         doc.LoadHtml(item1.VersionamientoModeloContenido);
                         HtmlNode[] nodes = doc.DocumentNode.SelectNodes("//textarea").ToArray();
@@ -182,13 +181,22 @@ namespace API.Models.Catalogos
                                         }
                                         else
                                         {
-                                            foreach (var item4 in db.Sp_PreguntaConsultar().Where(p => p.IdPregunta == item3.PreguntaEncajonadaIdPregunta).ToList())
+                                            string[] words = item3.RespuestaDescripcionRespuestaAbierta.Split(',');
+                                            if (words.Length>0)
                                             {
-                                                if (item4.IdentificadorTipoPregunta == 1)
-                                                {
-                                                    RespuestaUnica = item3.RespuestaDescripcionRespuestaAbierta;
-                                                }
+                                                RespuestaUnica = item3.RespuestaDescripcionRespuestaAbierta;
                                             }
+                                            else
+                                            {
+                                                RespuestaUnica = item3.OpcionPreguntaSeleccionDescripcion;
+                                            }
+                                            //foreach (var item4 in db.Sp_PreguntaConsultar().Where(p => p.IdPregunta == item3.PreguntaEncajonadaIdPregunta).ToList())
+                                            //{
+                                            //    if (item4.IdentificadorTipoPregunta == 1)
+                                            //    {
+                                            //        RespuestaUnica = item3.RespuestaDescripcionRespuestaAbierta;
+                                            //    }
+                                            //}
                                         }
                                     }
                                     if (RespuestaUnica == "")
@@ -201,19 +209,34 @@ namespace API.Models.Catalogos
                                 else if (item2.TipoPreguntaIdentificador == 3)
                                 {
                                     string RespuestaMultiple = "";
+                                    string style = ";";
+                                    if (node.ParentNode.Name == "span")
+                                    {
+                                        HtmlNode nodeParent = node.ParentNode;
+                                        int maximo = 0;
+                                        while (nodeParent.Name == "span" && maximo < 3)
+                                        {
+                                            if (nodeParent.Attributes.Where(p => p.Name == "style").FirstOrDefault() != null)
+                                            {
+                                                style = style + ";" + nodeParent.Attributes.Where(p => p.Name == "style").First().Value;
+                                            }
+                                            maximo++;
+                                            nodeParent = nodeParent.ParentNode;
+                                        }
+                                    }
+
                                     foreach (var item3 in db.Sp_ConsultarRespuestaPreguntaMultiple(_asignarEncuestado, item2.PreguntaIdPregunta))
                                     {
-                                        RespuestaMultiple += "<li><strong>" + item3.OpcionPreguntaSeleccionDescripcion + "</strong></li>";
+                                        RespuestaMultiple += "<li style="+style+"><strong>" + item3.OpcionPreguntaSeleccionDescripcion + "</strong></li>";
                                     }
                                     if (RespuestaMultiple != "")
                                     {
-                                        RespuestaMultiple = "<ul>" + RespuestaMultiple + "</ul>";
                                     }
                                     else
                                     {
                                         RespuestaMultiple = "<ul><li><strong>"+ ninguno + "</strong></li></ul>";
                                     }
-                                    item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.ParentNode.ParentNode.OuterHtml, RespuestaMultiple);
+                                    item1.VersionamientoModeloContenido = item1.VersionamientoModeloContenido.Replace(node.ParentNode.ParentNode.ParentNode.OuterHtml, RespuestaMultiple);
                                 }
                                 else if(item2.TipoPreguntaIdentificador == 4)
                                 {
@@ -223,8 +246,31 @@ namespace API.Models.Catalogos
                                     {
                                         string dato = "";
                                         dato = base_.Replace("F", "<strong>" + item3.OpcionUnoMatrizDescripcion + "</strong>");
-                                        dato = dato.Replace("C", "<strong>" + item3.OpcionDosMatrizDescripcion + "</strong>");                                        
-                                        RespuestaMatriz += "<p>"+ dato + "</p>";
+                                        dato = dato.Replace("C", "<strong>" + item3.OpcionDosMatrizDescripcion + "</strong>");
+                                        if (item3.DatosRespuestadatos != null && item3.DatosRespuestadatos.ToUpper()!="NULL")
+                                        {
+                                            dato = dato.Replace("O", "<strong>" + item3.DatosRespuestadatos + "</strong>");
+                                        }
+                                        if (node.ParentNode.Name == "span")
+                                        {
+                                            string style = ";";
+                                            HtmlNode nodeParent = node.ParentNode;
+                                            int maximo = 0;
+                                            while (nodeParent.Name == "span" && maximo < 5)
+                                            {
+                                                if (nodeParent.Attributes.Where(p => p.Name == "style").FirstOrDefault() != null)
+                                                {
+                                                    style = style + ";" + nodeParent.Attributes.Where(p => p.Name == "style").First().Value;
+                                                }
+                                                maximo++;
+                                                nodeParent = nodeParent.ParentNode;
+                                            }
+                                            RespuestaMatriz += "<p style="+style+">" + dato + "</p>";
+                                        }
+                                        else
+                                        {
+                                            RespuestaMatriz += "<p>" + dato + "</p>";
+                                        }
                                     }
                                     if (RespuestaMatriz!="")
                                     {
@@ -235,8 +281,24 @@ namespace API.Models.Catalogos
                                 {
                                     string RespuestaMatrizAbierta = "";
                                     string base_ = node.InnerHtml;
+                                    base_ = base_.Replace("&nbsp;"," ");
                                     string[] words = base_.Split(' ');
                                     List<string> datos = words.Where(p => p.ToUpper().Contains("COL-")).ToList();
+                                    string style = ";";
+                                    if (node.ParentNode.Name == "span")
+                                    {
+                                        HtmlNode nodeParent = node.ParentNode;
+                                        int maximo = 0;
+                                        while (nodeParent.Name == "span" && maximo < 3)
+                                        {
+                                            if (nodeParent.Attributes.Where(p => p.Name == "style").FirstOrDefault() != null)
+                                            {
+                                                style = style + ";" + nodeParent.Attributes.Where(p => p.Name == "style").First().Value;
+                                            }
+                                            maximo++;
+                                            nodeParent = nodeParent.ParentNode;
+                                        }
+                                    }
                                     foreach (var item3 in db.Sp_ConsultarRespuestaPreguntaMatrizAbierta(_asignarEncuestado, item2.PreguntaIdPregunta))
                                     {
                                         string fila = base_;
@@ -253,7 +315,7 @@ namespace API.Models.Catalogos
                                         }
                                         if (datos.Count>0)
                                         {
-                                            RespuestaMatrizAbierta += "<p>" + fila + "</p>";
+                                            RespuestaMatrizAbierta += "<p style=" + style + ">" + fila + "</p>";
                                         }
                                     }
                                     if (RespuestaMatrizAbierta != "")
