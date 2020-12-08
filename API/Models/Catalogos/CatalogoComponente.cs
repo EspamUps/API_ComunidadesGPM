@@ -145,8 +145,12 @@ namespace API.Models.Catalogos
         public List<Componente> ConsultarComponentePorIdCuestionarioGenericoConSeccionPregunta(int _idCuestionarioGenerico)
         {
             List<Componente> _lista = new List<Componente>();
+           
+            
             foreach (var item in db.Sp_ComponenteConsultar().Where(c => c.IdCuestionarioGenerico == _idCuestionarioGenerico).ToList())
             {
+              
+               
                 _lista.Add(new Componente()
                 {
                     IdComponente = item.IdComponente,
@@ -156,6 +160,32 @@ namespace API.Models.Catalogos
                     Orden = item.OrdenComponente,
                     Utilizado = item.UtilizadoComponente
                     ,listaSeccion = new CatalogoSeccion().ConsultarSeccionPorIdComponenteConPregunta(item.IdComponente)
+                });
+            }
+            return _lista;
+        }
+
+        public List<Componente> ConsultarComponentePorIdCuestionarioGenericoConSeccionPreguntaRandom(int _idCuestionarioGenerico)
+        {
+            List<Componente> _lista = new List<Componente>();
+            int x = 0;
+
+            Random r = new Random();
+
+            foreach (var item in db.Sp_ComponenteConsultar().Where(c => c.IdCuestionarioGenerico == _idCuestionarioGenerico).ToList())
+            {
+                x = r.Next(10000, 99999);
+
+                _lista.Add(new Componente()
+                {
+                    IdComponente = item.IdComponente,
+                    IdComponenteEncriptado = _seguridad.Encriptar(item.IdComponente.ToString()),
+                    Descripcion = x + ". " + item.DescripcionComponente,
+                    Estado = item.EstadoComponente,
+                    Orden = item.OrdenComponente,
+                    Utilizado = item.UtilizadoComponente
+                    ,
+                    listaSeccion = new CatalogoSeccion().ConsultarSeccionPorIdComponenteConPreguntaRandom(item.IdComponente)
                 });
             }
             return _lista;

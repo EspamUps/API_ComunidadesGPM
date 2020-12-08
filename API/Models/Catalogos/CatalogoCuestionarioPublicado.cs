@@ -35,6 +35,11 @@ namespace API.Models.Catalogos
             db.Sp_CuestionarioPublicadoDeshabilitar(_idCuestionarioPublicado);
         }
 
+        public void FinalizarCuestionarioPublicado(int _idAsignarEncuestado)
+        {
+            db.Sp_CuestionarioPublicadoFinalizar(_idAsignarEncuestado);
+        }
+
         public void SeleccionarPregunta(int _idPregunta)
         {
             db.Sp_SeleccionarPregunta(_idPregunta);

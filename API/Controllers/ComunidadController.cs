@@ -237,7 +237,7 @@ namespace API.Controllers
                 if (postedFile != null && postedFile.ContentLength > 0)
                 {
 
-                    int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB  
+                    int MaxContentLength = 1024 * 1024 * 5; //Size = 5 MB  
 
                     IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
                     var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
@@ -250,14 +250,14 @@ namespace API.Controllers
                         _http.mensaje = "Tipo de imagen no permitido.";
                         return new { respuesta = _respuesta, http = _http };
                     }
-                    else if (postedFile.ContentLength > MaxContentLength)
-                    {
-                        var message = string.Format("Please Upload a file upto 1 mb.");
-                        dict.Add("error", message);
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                        _http.mensaje = "Tamaño de imagen ha superado el límite permitido.";
-                        return new { respuesta = _respuesta, http = _http };
-                    }
+                    //else if (postedFile.ContentLength > MaxContentLength)
+                    //{
+                    //    var message = string.Format("Please Upload a file upto 1 mb.");
+                    //    dict.Add("error", message);
+                    //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                    //    _http.mensaje = "Tamaño de imagen ha superado el límite permitido.";
+                    //    return new { respuesta = _respuesta, http = _http };
+                    //}
                     else
                     {
                         rutaImagen = "Imagenes/" + CodigoComunidad + ext;
@@ -391,7 +391,7 @@ namespace API.Controllers
                 if (postedFile != null && postedFile.ContentLength > 0)
                 {
 
-                    int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB  
+                    int MaxContentLength = 1024 * 1024 * 5; //Size = 5 MB  
 
                     IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
                     var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
@@ -404,14 +404,14 @@ namespace API.Controllers
                         _http.mensaje = "Tipo de imagen no permitido.";
                         return new { respuesta = _respuesta, http = _http };
                     }
-                    else if (postedFile.ContentLength > MaxContentLength)
-                    {
-                        var message = string.Format("Please Upload a file upto 1 mb.");
-                        dict.Add("error", message);
-                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
-                        _http.mensaje = "Tamaño de imagen ha superado el límite permitido.";
-                        return new { respuesta = _respuesta, http = _http };
-                    }
+                    //else if (postedFile.ContentLength > MaxContentLength)
+                    //{
+                    //    var message = string.Format("Please Upload a file upto 1 mb.");
+                    //    dict.Add("error", message);
+                    //    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                    //    _http.mensaje = "Tamaño de imagen ha superado el límite permitido.";
+                    //    return new { respuesta = _respuesta, http = _http };
+                    //}
                     else
                     {
                         rutaImagen = "Imagenes/" + CodigoComunidad + ext;

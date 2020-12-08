@@ -138,6 +138,7 @@ namespace API.Models.Catalogos
                             leyendaLateral= item.leyendaLateral,
                             leyendaSuperior=item.leyendaSuperior,
                             Observacion=Convert.ToBoolean(item.observacion),
+                           
 
                             TipoPregunta = new TipoPregunta()
                             {

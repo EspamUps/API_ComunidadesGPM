@@ -167,14 +167,40 @@ namespace API.Models.Catalogos
 
         public List<Seccion> ConsultarSeccionPorIdComponenteConPregunta(int _idComponente)
         {
+           
             List<Seccion> _lista = new List<Seccion>();
+           
             foreach (var item in db.Sp_SeccionConsultar().Where(c => c.IdComponente == _idComponente).ToList())
             {
+               
                 _lista.Add(new Seccion()
                 {
                     IdSeccion = item.IdSeccion,
                     IdSeccionEncriptado = _seguridad.Encriptar(item.IdSeccion.ToString()),
                     Descripcion = item.DescripcionSeccion,
+                    Estado = item.EstadoSeccion,
+                    Orden = item.OrdenSeccion,
+                    Utilizado = item.UtilizadoSeccion,
+                    listaPregunta = new CatalogoPregunta().ConsultarPreguntaPorIdSeccionConTipoPregunta(item.IdSeccion)
+                });
+            }
+            return _lista;
+        }
+
+        public List<Seccion> ConsultarSeccionPorIdComponenteConPreguntaRandom(int _idComponente)
+        {
+
+            List<Seccion> _lista = new List<Seccion>();
+            Random _r = new Random();
+            int _x = 0;
+            foreach (var item in db.Sp_SeccionConsultar().Where(c => c.IdComponente == _idComponente).ToList())
+            {
+                _x = _r.Next(10000, 99999);
+                _lista.Add(new Seccion()
+                {
+                    IdSeccion = item.IdSeccion,
+                    IdSeccionEncriptado = _seguridad.Encriptar(item.IdSeccion.ToString()),
+                    Descripcion = _x + ". " + item.DescripcionSeccion,
                     Estado = item.EstadoSeccion,
                     Orden = item.OrdenSeccion,
                     Utilizado = item.UtilizadoSeccion,

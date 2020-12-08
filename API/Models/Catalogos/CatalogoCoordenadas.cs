@@ -27,7 +27,7 @@ namespace API.Models.Catalogos
         public List<Coordenadas> ConsultarCanton(string parroquia)
         {
             List<Coordenadas> _lista = new List<Coordenadas>();
-            foreach (var item in db.Sp_CargarCoordenadasDeComunidadesPorParroquia(parroquia))
+            foreach (var item in db.Sp_CargarCoordenadasDeComunidadesPorParroquia(05451, 1524564))
             {
                 _lista.Add(new Coordenadas(item.latitud,item.longitud, item.NombreCanton, item.NombreParroquia, item.NombreComunidad,_seguridad.Encriptar(Convert.ToString(item.IdComunidad))));
                
