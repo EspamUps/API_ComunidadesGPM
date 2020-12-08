@@ -181,13 +181,22 @@ namespace API.Models.Catalogos
                                         }
                                         else
                                         {
-                                            foreach (var item4 in db.Sp_PreguntaConsultar().Where(p => p.IdPregunta == item3.PreguntaEncajonadaIdPregunta).ToList())
+                                            string[] words = item3.RespuestaDescripcionRespuestaAbierta.Split(',');
+                                            if (words.Length>0)
                                             {
-                                                if (item4.IdentificadorTipoPregunta == 1)
-                                                {
-                                                    RespuestaUnica = item3.RespuestaDescripcionRespuestaAbierta;
-                                                }
+                                                RespuestaUnica = item3.RespuestaDescripcionRespuestaAbierta;
                                             }
+                                            else
+                                            {
+                                                RespuestaUnica = item3.OpcionPreguntaSeleccionDescripcion;
+                                            }
+                                            //foreach (var item4 in db.Sp_PreguntaConsultar().Where(p => p.IdPregunta == item3.PreguntaEncajonadaIdPregunta).ToList())
+                                            //{
+                                            //    if (item4.IdentificadorTipoPregunta == 1)
+                                            //    {
+                                            //        RespuestaUnica = item3.RespuestaDescripcionRespuestaAbierta;
+                                            //    }
+                                            //}
                                         }
                                     }
                                     if (RespuestaUnica == "")
