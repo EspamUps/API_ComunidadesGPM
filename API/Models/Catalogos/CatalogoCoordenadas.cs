@@ -3,6 +3,7 @@ using API.Models.Entidades;
 using API.Models.Metodos;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace API.Models.Catalogos
 {
@@ -26,6 +27,8 @@ namespace API.Models.Catalogos
 
         public List<Coordenadas> ConsultarCanton(float latitud, float longitud)
         {
+
+
             List<Coordenadas> _lista = new List<Coordenadas>();
             foreach (var item in db.Sp_CargarCoordenadasDeComunidadesPorParroquia(latitud, longitud))
             {
