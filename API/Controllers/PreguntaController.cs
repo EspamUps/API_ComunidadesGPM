@@ -595,7 +595,7 @@ namespace API.Controllers
                     }
                     else
                     {
-                        var _lista = _objCatalogoPregunta.ConsultarPreguntaPorIdCuestionarioGenerico(_idCuestionario).Where(c => c.Estado == true).OrderBy(c => c.Orden).ToList();
+                        var _lista = _objCatalogoPregunta.ConsultarPreguntaPorIdCuestionarioGenerico(_idCuestionario).Where(c => c.Estado == true).Where(p => p.Encajonamiento == "0").OrderBy(c => c.Orden).ToList();
                         foreach (var _objPregunta in _lista)
                         {
                             _objPregunta.IdPregunta = 0;
@@ -763,7 +763,7 @@ namespace API.Controllers
                     }
                     else
                     {
-                        var _lista = _objCatalogoPregunta.ConsultarPreguntaNoEncajonadasPorOpcionPreguntaSeleccion(_objOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion,_objOpcionPreguntaSeleccion.Pregunta.Seccion.IdSeccion,_objOpcionPreguntaSeleccion.Pregunta.IdPregunta).Where(c=>c.Estado == true).ToList();
+                        var _lista = _objCatalogoPregunta.ConsultarPreguntaNoEncajonadasPorOpcionPreguntaSeleccion(_objOpcionPreguntaSeleccion.IdOpcionPreguntaSeleccion,_objOpcionPreguntaSeleccion.Pregunta.Seccion.IdSeccion,_objOpcionPreguntaSeleccion.Pregunta.IdPregunta).Where(c=>c.Estado == true).Where(d => d.Encajonamiento=="0").ToList();
                         foreach (var _objPregunta in _lista)
                         {
                             _objPregunta.IdPregunta = 0;

@@ -34,7 +34,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                return int.Parse(db.Sp_PreguntaInsertar(_objPregunta.TipoPregunta.IdTipoPregunta, _objPregunta.Seccion.IdSeccion, _objPregunta.Descripcion, _objPregunta.Orden, _objPregunta.Obligatorio, _objPregunta.Estado, _objPregunta.leyendaSuperior, _objPregunta.leyendaLateral, _objPregunta.Observacion, _objPregunta.Reporte).Select(x => x.Value.ToString()).FirstOrDefault());
+                return int.Parse(db.Sp_PreguntaInsertar(_objPregunta.TipoPregunta.IdTipoPregunta, _objPregunta.Seccion.IdSeccion, _objPregunta.Descripcion, _objPregunta.Orden, _objPregunta.Obligatorio, _objPregunta.Estado, _objPregunta.leyendaSuperior, _objPregunta.leyendaLateral, _objPregunta.Observacion, _objPregunta.campo_observacion, _objPregunta.Reporte).Select(x => x.Value.ToString()).FirstOrDefault());
             }
             catch (Exception)
             {
@@ -46,7 +46,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                db.Sp_PreguntaModificar(_objPregunta.IdPregunta, _objPregunta.TipoPregunta.IdTipoPregunta, _objPregunta.Seccion.IdSeccion, _objPregunta.Descripcion, _objPregunta.leyendaSuperior, _objPregunta.leyendaLateral, _objPregunta.Orden, _objPregunta.Obligatorio, _objPregunta.Estado, _objPregunta.Observacion);
+                db.Sp_PreguntaModificar(_objPregunta.IdPregunta, _objPregunta.TipoPregunta.IdTipoPregunta, _objPregunta.Seccion.IdSeccion, _objPregunta.Descripcion, _objPregunta.leyendaSuperior, _objPregunta.leyendaLateral, _objPregunta.Orden, _objPregunta.Obligatorio, _objPregunta.Estado, _objPregunta.Observacion, _objPregunta.campo_observacion);
                 return _objPregunta.IdPregunta;
             }
             catch (Exception)
@@ -155,6 +155,7 @@ namespace API.Models.Catalogos
                     leyendaSuperior = item.leyendaSuperior,
                     leyendaLateral = item.leyendaLateral,
                     Observacion = Convert.ToBoolean(item.ObservacionPregunta),
+                    campo_observacion = item.campo_observacion,
                     TipoPregunta = new TipoPregunta()
                     {
                         IdTipoPregunta = item.IdTipoPregunta,
@@ -206,6 +207,7 @@ namespace API.Models.Catalogos
                     Estado = item.EstadoPregunta,
                     Obligatorio = item.ObligatorioPregunta,
                     Observacion = Convert.ToBoolean(item.ObservacionPregunta),
+                    campo_observacion = item.campo_observacion,
                     Orden = item.OrdenPregunta,
                     Utilizado = item.UtilizadoPregunta,
                     Encajonamiento = item.EncajonamientoPregunta,
@@ -262,6 +264,7 @@ namespace API.Models.Catalogos
                     Estado = item.EstadoPregunta,
                     Obligatorio = item.ObligatorioPregunta,
                     Observacion = Convert.ToBoolean(item.ObservacionPregunta),
+                    campo_observacion = item.campo_observacion,
                     Orden = item.OrdenPregunta,
                     Utilizado = item.UtilizadoPregunta,
                     Encajonamiento = item.EncajonamientoPregunta,
@@ -463,9 +466,12 @@ namespace API.Models.Catalogos
 
         public List<Pregunta> ConsultarPreguntaPorIdSeccionConTipoPregunta(int _idSeccion)
         {
+
             List<Pregunta> _lista = new List<Pregunta>();
+         
             foreach (var item in db.Sp_PreguntaConsultarNoEncajonadasPorSeccion(_idSeccion))
             {
+                
                 _lista.Add(new Pregunta()
                 {
                     IdPregunta = item.IdPregunta,

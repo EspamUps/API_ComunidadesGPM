@@ -92,8 +92,11 @@ namespace API.Models.Catalogos
         public List<CuestionarioGenerico> ConsultarCuestionarioGenericoPorIdConComponenteSeccionPregunta(int _idCuestionarioGenerico)
         {
             List<CuestionarioGenerico> _lista = new List<CuestionarioGenerico>();
+
             foreach (var item in db.Sp_CuestionarioGenericoConsultar().Where(c => c.IdCuestionarioGenerico == _idCuestionarioGenerico).ToList())
             {
+
+
                 _lista.Add(new CuestionarioGenerico()
                 {
                     IdCuestionarioGenerico = item.IdCuestionarioGenerico,
@@ -102,7 +105,30 @@ namespace API.Models.Catalogos
                     Descripcion = item.Descripcion,
                     Estado = item.Estado,
                     Utilizado = item.UtilizadoCuestionarioGenerico
-                    ,listaComponente = new CatalogoComponente().ConsultarComponentePorIdCuestionarioGenericoConSeccionPregunta(item.IdCuestionarioGenerico)
+                    ,
+                    listaComponente = new CatalogoComponente().ConsultarComponentePorIdCuestionarioGenericoConSeccionPregunta(item.IdCuestionarioGenerico)
+
+                });
+            }
+            return _lista;
+        }
+        public List<CuestionarioGenerico> ConsultarCuestionarioGenericoPorIdConComponenteSeccionPreguntaRandom(int _idCuestionarioGenerico)
+        {
+            List<CuestionarioGenerico> _lista = new List<CuestionarioGenerico>();
+           
+            foreach (var item in db.Sp_CuestionarioGenericoConsultar().Where(c => c.IdCuestionarioGenerico == _idCuestionarioGenerico).ToList())
+            {
+
+               
+                _lista.Add(new CuestionarioGenerico()
+                {
+                    IdCuestionarioGenerico = item.IdCuestionarioGenerico,
+                    IdCuestionarioGenericoEncriptado = _seguridad.Encriptar(item.IdCuestionarioGenerico.ToString()),
+                    Nombre = item.Nombre,
+                    Descripcion = item.Descripcion,
+                    Estado = item.Estado,
+                    Utilizado = item.UtilizadoCuestionarioGenerico
+                    ,listaComponente = new CatalogoComponente().ConsultarComponentePorIdCuestionarioGenericoConSeccionPreguntaRandom(item.IdCuestionarioGenerico)
                    
                 });
             }

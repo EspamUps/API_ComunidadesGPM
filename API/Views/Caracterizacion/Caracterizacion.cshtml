@@ -125,7 +125,7 @@
         </div>
     </div>
     <br />
-    <div style="color:black;border-top:1px solid cadetblue;border-right:1px solid cadetblue;border-left:1px solid cadetblue" class="row">
+    <div style="color:black;border-bottom:1px solid cadetblue;border-top:1px solid cadetblue;border-right:1px solid cadetblue;border-left:1px solid cadetblue" class="row">
         <div class="col-xs-12">
             <strong>Comunidad: </strong> @ViewBag.Encuesta.AsignarEncuestado.Comunidad.NombreComunidad.ToUpper()
         </div>
@@ -134,6 +134,7 @@
     {
         foreach (var item2 in item.AsignarComponenteGenerico)
         {
+            <br />
             <div style="border:1px solid cadetblue;color:black" class="row">
                 <div class="col-xs-12">
                     <strong>@item2.Componente.Descripcion</strong>
@@ -142,18 +143,18 @@
             if (@item2.VersionamientoModelo.Imagen == 1)
             {
                 <div style="border:1px solid cadetblue" class="row">
-                    <div style="word-break:break-word" class="col-xs-9">
+                    <div style="word-break:break-word;" class="col-xs-7">
                         @Html.Raw((String)item2.VersionamientoModelo.Contenido)
                     </div>
-                    <div style="margin: auto;" class="col-xs-3">
-                        <div style="position: inherit;float: right;display:inline-block;">
+                    <div style="padding-top:2px;margin: auto;" class="col-xs-5">
+                        <div style="border-color: gray;border-width: 5px;border-style:groove ;position: inherit;float: right;display:inline-block;">
                             @if (ViewBag.Encuesta.AsignarEncuestado.Comunidad.RutaLogoComunidad != null || ViewBag.Encuesta.AsignarEncuestado.Comunidad.RutaLogoComunidad != "")
                             {
-                                <img style="width:200px;height: 200px;" src="~/@(ViewBag.Encuesta.AsignarEncuestado.Comunidad.RutaLogoComunidad)"/>
+                                <img style="width:300px;height: 300px;" src="~/@(ViewBag.Encuesta.AsignarEncuestado.Comunidad.RutaLogoComunidad)" />
                             }
                             else
                             {
-                                <img style="width:200px;height: 200px;" src="~/Imagenes/Escudo-Manabi.png" />
+                                <img style="width:300px;height: 300px;" src="~/Imagenes/Escudo-Manabi.png" />
                             }
                         </div>
                     </div>

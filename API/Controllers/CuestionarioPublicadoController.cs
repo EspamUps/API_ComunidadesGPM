@@ -13,6 +13,7 @@ namespace API.Controllers
     {
         CatalogoRespuestasHTTP _objCatalogoRespuestasHTTP = new CatalogoRespuestasHTTP();
         CatalogoCuestionarioPublicado _objCatalogoCuestionarioPublicado = new CatalogoCuestionarioPublicado();
+        CatalogoAsignarEncuestado _objCatalogoAsignarEncuestado = new CatalogoAsignarEncuestado();
         CatalogoPregunta _objCatalogoPregunta = new CatalogoPregunta();
         Seguridad _seguridad = new Seguridad();
 
@@ -151,7 +152,7 @@ namespace API.Controllers
                     if (_objCuestionarioPublicado == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
-                        _http.mensaje = "No se encontró la publicación que intenta deshabilitar";
+                        _http.mensaje = "No se encontró la publicación";
                     }
                     
                     else
@@ -168,6 +169,45 @@ namespace API.Controllers
             }
             return new { respuesta = _respuesta, http = _http };
         }
+
+        [HttpPost]
+        [Route("api/cuestionariopublicado_finalizar")]
+        public object cuestionariopublicado_finalizar(string _idAsignarEncuestadoEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (_idAsignarEncuestadoEncriptado == null || string.IsNullOrEmpty(_idAsignarEncuestadoEncriptado))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cuestionario publicado asignado";
+                }
+                else
+                {
+                    int _idAsignarEncuestado = Convert.ToInt32(_seguridad.DesEncriptar(_idAsignarEncuestadoEncriptado));
+                    var _objAsignarEncuestado = _objCatalogoAsignarEncuestado.ConsultarAsignarEncuestadoPorId(_idAsignarEncuestado).FirstOrDefault();
+                    if (_objAsignarEncuestado == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el cuestionario";
+                    }
+
+                    else
+                    {
+                        _objCatalogoCuestionarioPublicado.FinalizarCuestionarioPublicado(_idAsignarEncuestado);
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
 
         [HttpPost]
         [Route("api/seleccionar_preguntas")]

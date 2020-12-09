@@ -27,6 +27,7 @@ namespace API.Models.Entidades
         public string leyendaSuperior { get; set; }
         public string leyendaLateral { get; set; }
         public bool Observacion { get; set; }
+        public string campo_observacion { get; set; }
         public string Utilizado { get; set; }
         public string Encajonamiento { get; set; }
         public string opcionSeleccion { get; set; }
