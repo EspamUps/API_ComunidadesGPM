@@ -187,7 +187,7 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
-        public List<Seccion> ConsultarSeccionPorIdComponenteConPreguntaRandom(int _idComponente)
+        public List<Seccion> ConsultarSeccionPorIdComponenteConPreguntaRandom(int _idComponente, ref List<int> numerosRandom)
         {
 
             List<Seccion> _lista = new List<Seccion>();
@@ -196,6 +196,11 @@ namespace API.Models.Catalogos
             foreach (var item in db.Sp_SeccionConsultar().Where(c => c.IdComponente == _idComponente).ToList())
             {
                 _x = _r.Next(10000, 99999);
+                while (numerosRandom.Contains(_x))
+                {
+                    _x = _r.Next(10000, 99999);
+                }
+                numerosRandom.Add(_x);
                 _lista.Add(new Seccion()
                 {
                     IdSeccion = item.IdSeccion,

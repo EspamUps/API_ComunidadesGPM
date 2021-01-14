@@ -171,11 +171,15 @@ namespace API.Models.Catalogos
             int x = 0;
 
             Random r = new Random();
-
+            List<int> numerosRandom = new List<int>();            
             foreach (var item in db.Sp_ComponenteConsultar().Where(c => c.IdCuestionarioGenerico == _idCuestionarioGenerico).ToList())
             {
                 x = r.Next(10000, 99999);
-
+                while (numerosRandom.Contains(x))
+                {
+                    x = r.Next(10000, 99999);
+                }
+                numerosRandom.Add(x);
                 _lista.Add(new Componente()
                 {
                     IdComponente = item.IdComponente,
@@ -185,7 +189,7 @@ namespace API.Models.Catalogos
                     Orden = item.OrdenComponente,
                     Utilizado = item.UtilizadoComponente
                     ,
-                    listaSeccion = new CatalogoSeccion().ConsultarSeccionPorIdComponenteConPreguntaRandom(item.IdComponente)
+                    listaSeccion = new CatalogoSeccion().ConsultarSeccionPorIdComponenteConPreguntaRandom(item.IdComponente, ref numerosRandom)
                 });
             }
             return _lista;

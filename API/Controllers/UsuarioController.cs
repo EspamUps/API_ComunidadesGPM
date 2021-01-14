@@ -69,7 +69,7 @@ namespace API.Controllers
                     {
                         _objUsuario.Estado = true;
                         _objUsuario.Persona = _objPersona;
-
+                        _objUsuario.Clave = _seguridad.Encriptar(_objUsuario.Clave);
                         int _idUsuarioIngresado = _objCatalogoUsuarios.InsertarUsuario(_objUsuario);
                         if(_idUsuarioIngresado == 0)
                         {
@@ -153,7 +153,7 @@ namespace API.Controllers
                             _objUsuario.Estado = true;
 
                             _objUsuario.Persona = _objPersona;
-
+                            _objUsuario.Clave = _seguridad.Encriptar(_objUsuario.Clave);
                             int _idUsuarioModificado = _objCatalogoUsuarios.ModificarUsuario(_objUsuario);
                             if (_idUsuarioModificado == 0)
                             {
@@ -189,7 +189,6 @@ namespace API.Controllers
 
 
         }
-
         [HttpPost]
         [Route("api/usuario_eliminar")]
         public object usuario_eliminar(string _idUsuarioEncriptado)
@@ -246,7 +245,6 @@ namespace API.Controllers
             };
 
         }
-
         [HttpPost]
         [Route("api/usuario_consultar")]
         public object usuario_consultar()
@@ -286,8 +284,6 @@ namespace API.Controllers
 
 
         }
-
-
         [HttpPost]
         [Route("api/usuario_consultar")]
         public object usuario_consultar(string _idUsuarioEncriptado)
@@ -330,7 +326,6 @@ namespace API.Controllers
 
 
         }
-
         [HttpPost]
         [Route("api/ValidarCorreo")]
         public object ValidarCorreo(Usuario _objUsuario)
@@ -374,7 +369,6 @@ namespace API.Controllers
                 // calida el token de la peticion, este es una ruta para consultar asi que el identificador del token debe ser 4
                 //Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
                 //string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
-
                 if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
@@ -382,6 +376,11 @@ namespace API.Controllers
                 else
                 {
                     var _objUsuarioBuscado = _objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault();
+                    if (_objUsuarioBuscado!=null)
+                    {
+                        _objUsuarioBuscado.Clave = _seguridad.DesEncriptar(_objUsuarioBuscado.Clave);
+                        _objUsuario.Clave = _seguridad.DesEncriptar(_objUsuario.Clave);
+                    }
                     if (_objUsuarioBuscado == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();

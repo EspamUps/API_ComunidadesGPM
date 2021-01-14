@@ -28,7 +28,7 @@ namespace API.Models.Catalogos
                         IdUsuario = item.USUARIO_IdUsuario,
                         Correo = item.USUARIO_Correo,
                         //Clave = item.USUARIO_Clave,
-                        ClaveEncriptada = _seguridad.Encriptar(item.USUARIO_Clave.ToString()),
+                        ClaveEncriptada = item.USUARIO_Clave.ToString(),
                         Estado = item.USUARIO_Estado,
                         Persona = new Persona()
                         {
@@ -90,7 +90,7 @@ namespace API.Models.Catalogos
                         IdUsuario = item.USUARIO_IdUsuario,
                         Correo = item.USUARIO_Correo,
                         //Clave = item.USUARIO_Clave,
-                        ClaveEncriptada = _seguridad.Encriptar(item.USUARIO_Clave.ToString()),
+                        ClaveEncriptada = item.USUARIO_Clave.ToString(),
                         Estado = item.USUARIO_Estado,
                         Persona = new Persona()
                         {
@@ -178,7 +178,7 @@ namespace API.Models.Catalogos
                         IdUsuarioEncriptado = _seguridad.Encriptar(item.USUARIO_IdUsuario.ToString()),
                         IdUsuario = item.USUARIO_IdUsuario,
                         Correo = item.USUARIO_Correo,
-                        ClaveEncriptada = _seguridad.Encriptar(item.USUARIO_Clave.ToString()),
+                        ClaveEncriptada = item.USUARIO_Clave.ToString(),
                         Estado = item.USUARIO_Estado,
                         Persona = new Persona()
                         {
@@ -232,7 +232,7 @@ namespace API.Models.Catalogos
                         IdUsuario = item.USUARIO_IdUsuario,
                         Correo = item.USUARIO_Correo,
                         //Clave = item.USUARIO_Clave,
-                        ClaveEncriptada = _seguridad.Encriptar(item.USUARIO_Clave.ToString()),
+                        ClaveEncriptada = item.USUARIO_Clave.ToString(),
                         Estado = item.USUARIO_Estado,
                         Persona = new Persona()
                         {

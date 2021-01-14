@@ -15,8 +15,6 @@ namespace API.Models.Catalogos
         List<Sp_UsuarioConsultar_Result> consulta = new List<Sp_UsuarioConsultar_Result>();
         Seguridad _seguridad = new Seguridad();
         string _llave = "GobiernoProvincialManabi";
-
-     
         public List<Usuario> ValidarCorreo(Usuario _item)
         {
             List<Usuario> _listaUsuario = new List<Usuario>();
@@ -33,7 +31,6 @@ namespace API.Models.Catalogos
             }
             return _listaUsuario;                   
         }
-
         //ingresar Usuario
         public int InsertarUsuario(Usuario _objUsuario) {
             try
@@ -50,7 +47,6 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
-
         //modificar usuario
         public int ModificarUsuario(Usuario _objUsuario) {
             try
@@ -58,9 +54,9 @@ namespace API.Models.Catalogos
                 var clave = db.Sp_UsuarioConsultar()
                     .Where(a => a.USUARIO_IdUsuario == _objUsuario.IdUsuario)
                     .FirstOrDefault();
-                if (_seguridad.Encriptar(clave.USUARIO_Clave)== _objUsuario.Clave) {
-                    _objUsuario.Clave = _seguridad.DesEncriptar(_objUsuario.Clave);
-                }
+                //if (_seguridad.Encriptar(clave.USUARIO_Clave)== _objUsuario.Clave) {
+                //    _objUsuario.Clave = _seguridad.DesEncriptar(_objUsuario.Clave);
+                //}
                 db.Sp_UsuarioModificar(_objUsuario.IdUsuario, _objUsuario.Persona.IdPersona, _objUsuario.Correo, _objUsuario.Clave, _objUsuario.Estado);
                 return _objUsuario.IdUsuario;
             }
@@ -83,7 +79,6 @@ namespace API.Models.Catalogos
                 return 0;
             }
         }
-
         public List<Usuario> ConsultarUsuario() {
             List<Usuario> lista = new List<Usuario>();
             foreach (var item in db.Sp_UsuarioConsultar())
@@ -92,8 +87,8 @@ namespace API.Models.Catalogos
                     IdUsuarioEncriptado = _seguridad.Encriptar(item.USUARIO_IdUsuario.ToString()),
                     IdUsuario           = item.USUARIO_IdUsuario,
                     Correo              = item.USUARIO_Correo,
-                    Clave               = item.USUARIO_Clave,
-                    ClaveEncriptada     = _seguridad.Encriptar(item.USUARIO_Clave.ToString()),
+                    //Clave               = item.USUARIO_Clave,
+                    ClaveEncriptada     = item.USUARIO_Clave.ToString(),
                     Estado              = item.USUARIO_Estado,
                     Utilizado           = item.USUARIO_Utilizado,
                     Persona = new Persona()
@@ -130,8 +125,6 @@ namespace API.Models.Catalogos
             }
             return lista;
         }
-
-
         public List<Usuario> ConsultarUsuarioPorId(int _idUsuario)
         {
             List<Usuario> lista = new List<Usuario>();
@@ -142,7 +135,7 @@ namespace API.Models.Catalogos
                     IdUsuarioEncriptado = _seguridad.Encriptar(item.USUARIO_IdUsuario.ToString()),
                     IdUsuario = item.USUARIO_IdUsuario,
                     Correo = item.USUARIO_Correo,
-                    ClaveEncriptada = _seguridad.Encriptar(item.USUARIO_Clave.ToString()),
+                    ClaveEncriptada = item.USUARIO_Clave.ToString(),
                     Estado = item.USUARIO_Estado,
                     Utilizado = item.USUARIO_Utilizado,
                     Persona = new Persona()
@@ -178,7 +171,6 @@ namespace API.Models.Catalogos
             }
             return lista;
         }
-
         public string DesenciptarClaveUsuario(string _clave)
         {
             string clave = _seguridad.DecryptStringAES(_clave, _llave);
