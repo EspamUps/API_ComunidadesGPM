@@ -19,6 +19,7 @@ namespace API.Conexion
         public bool EstadoAsignarEncuestado { get; set; }
         public bool ObligatorioAsignarEncuestado { get; set; }
         public string UtilizadoAsignarEncuestado { get; set; }
+        public Nullable<bool> FinalizadaCabeceraRespuestas { get; set; }
         public int IdComunidad { get; set; }
         public string CodigoComunidad { get; set; }
         public string NombreComunidad { get; set; }

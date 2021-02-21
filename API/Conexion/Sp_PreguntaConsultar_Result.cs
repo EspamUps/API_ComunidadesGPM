@@ -18,6 +18,7 @@ namespace API.Conexion
         public string leyendaSuperior { get; set; }
         public string leyendaLateral { get; set; }
         public Nullable<bool> ObservacionPregunta { get; set; }
+        public string campo_observacion { get; set; }
         public int OrdenPregunta { get; set; }
         public bool ObligatorioPregunta { get; set; }
         public bool EstadoPregunta { get; set; }
