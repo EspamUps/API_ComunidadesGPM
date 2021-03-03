@@ -155,6 +155,7 @@ namespace API.Models.Catalogos
                     leyendaSuperior = item.leyendaSuperior,
                     leyendaLateral = item.leyendaLateral,
                     Observacion = Convert.ToBoolean(item.ObservacionPregunta),
+                    campo_observacion = item.campo_observacion,
                     TipoPregunta = new TipoPregunta()
                     {
                         IdTipoPregunta = item.IdTipoPregunta,
@@ -206,6 +207,7 @@ namespace API.Models.Catalogos
                     Estado = item.EstadoPregunta,
                     Obligatorio = item.ObligatorioPregunta,
                     Observacion = Convert.ToBoolean(item.ObservacionPregunta),
+                    campo_observacion = item.campo_observacion,
                     Orden = item.OrdenPregunta,
                     Utilizado = item.UtilizadoPregunta,
                     Encajonamiento = item.EncajonamientoPregunta,
