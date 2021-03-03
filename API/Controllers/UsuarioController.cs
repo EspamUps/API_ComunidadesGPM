@@ -379,7 +379,7 @@ namespace API.Controllers
                     if (_objUsuarioBuscado!=null)
                     {
                         _objUsuarioBuscado.Clave = _seguridad.DesEncriptar(_objUsuarioBuscado.Clave);
-                        _objUsuario.Clave = _seguridad.DesEncriptar(_objUsuario.Clave);
+                       // _objUsuario.Clave = _objUsuario.Clave;
                     }
                     if (_objUsuarioBuscado == null)
                     {
