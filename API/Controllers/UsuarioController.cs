@@ -102,6 +102,7 @@ namespace API.Controllers
             };
         }
 
+
         [Authorize]
         [HttpPost]
         [Route("api/usuario_modificar")]
@@ -188,6 +189,8 @@ namespace API.Controllers
                 respuesta = _respuesta,
                 http = _http
             };
+
+
 
 
         }
@@ -374,12 +377,13 @@ namespace API.Controllers
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
-
+            string _token = "";
             try
             {
                 // calida el token de la peticion, este es una ruta para consultar asi que el identificador del token debe ser 4
                 //Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
                 //string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
+
                 if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
@@ -387,11 +391,6 @@ namespace API.Controllers
                 else
                 {
                     var _objUsuarioBuscado = _objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault();
-                    if (_objUsuarioBuscado != null)
-                    {
-                        _objUsuarioBuscado.Clave = _seguridad.DesEncriptar(_objUsuarioBuscado.Clave);
-                        // _objUsuario.Clave = _objUsuario.Clave;
-                    }
                     if (_objUsuarioBuscado == null)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
@@ -402,7 +401,7 @@ namespace API.Controllers
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                         _http.mensaje = "Este usuario ha sido deshabilitado. Comuníquese con el administrador del sistema.";
                     }
-                    else if (_objUsuarioBuscado.Clave != _objUsuario.Clave)
+                    else if (_seguridad.DesEncriptar(_objUsuarioBuscado.Clave) != _objUsuario.Clave)
                     {
                         _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                         _http.mensaje = "La contraseña es incorrecta";
@@ -428,7 +427,7 @@ namespace API.Controllers
                             }
                             _respuesta = _listaAsignarUsuarioTipoUsuario;
                             _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
-
+                            _token = TokenGenerator.GenerateTokenJwt(_objUsuario.Correo);
                         }
                     }
                 }
@@ -442,11 +441,23 @@ namespace API.Controllers
                     http = _http
                 };
             }
-            return new
+            if (_token != "")
             {
-                respuesta = _respuesta,
-                http = _http
-            };
+                return new
+                {
+                    respuesta = _respuesta,
+                    http = _http,
+                    token = _token
+                };
+            }
+            else
+            {
+                return new
+                {
+                    respuesta = _respuesta,
+                    http = _http,
+                };
+            }
 
         }
 
