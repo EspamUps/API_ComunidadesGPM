@@ -85,22 +85,22 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/21/2021 10:30:35</publishTime>
     </File>
     <File Include="bin/API.dll">
-      <publishTime>03/03/2021 12:25:47</publishTime>
+      <publishTime>03/03/2021 18:37:11</publishTime>
     </File>
     <File Include="bin/API.pdb">
-      <publishTime>03/03/2021 12:25:47</publishTime>
+      <publishTime>03/03/2021 18:37:11</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
       <publishTime>02/21/2021 10:30:34</publishTime>
     </File>
     <File Include="bin/App_Browsers.dll">
-      <publishTime>03/03/2021 12:25:52</publishTime>
+      <publishTime>03/03/2021 18:37:19</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>03/03/2021 12:25:51</publishTime>
+      <publishTime>03/03/2021 18:37:18</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>03/03/2021 12:25:51</publishTime>
+      <publishTime>03/03/2021 18:37:18</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>02/21/2021 10:30:35</publishTime>
@@ -310,7 +310,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/21/2021 10:30:37</publishTime>
     </File>
     <File Include="bin/__browserCapabilitiesCompiler.compiled">
-      <publishTime>03/03/2021 12:25:52</publishTime>
+      <publishTime>03/03/2021 18:37:19</publishTime>
     </File>
     <File Include="ClassDiagram1.cd">
       <publishTime>02/21/2021 10:30:34</publishTime>
@@ -355,7 +355,7 @@ edite el archivo MSBuild. Visite https://go.microsoft.com/fwlink/?LinkID=208121 
       <publishTime>02/21/2021 10:43:28</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>03/03/2021 12:25:47</publishTime>
+      <publishTime>03/03/2021 18:37:12</publishTime>
     </File>
     <File Include="Rotativa/help-wkhtmltoimage.txt">
       <publishTime>02/21/2021 10:30:34</publishTime>
