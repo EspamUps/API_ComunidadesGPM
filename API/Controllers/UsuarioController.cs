@@ -460,8 +460,54 @@ namespace API.Controllers
             }
 
         }
+    
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("api/token/update")]
+        public object updateToken(Usuario _objUsuario)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            string _token = "";
+            try
+            {
+                if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                    _http.mensaje = "Revise su conexión a internet";
+                }
+                else {
+                    _token = TokenGenerator.GenerateTokenJwt(_objUsuario.Correo);
+                }
 
+                if (_token != "")
+                {
+                    return new
+                    {
+                        token = _token
+                    };
+                }
+                else {
+                    return new
+                    {
+                        respuesta = _http.mensaje,
+                        http = _http
+                    };
+                }
 
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+                return new
+                {
+                    respuesta = _http.mensaje,
+                    http = _http
+                };
+            }
 
-    }
+            //return "fff";
+        }
+
+        }
 }
