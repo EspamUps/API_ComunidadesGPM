@@ -427,7 +427,7 @@ namespace API.Controllers
                         {
 
 
-                            _objAsignarEncuestado.IdAsignarEncuestado = 0;
+                           // _objAsignarEncuestado.IdAsignarEncuestado = 0;
 
                             _objAsignarEncuestado.Comunidad.IdComunidad = 0;
                             _objAsignarEncuestado.Comunidad.Parroquia.IdParroquia = 0;
