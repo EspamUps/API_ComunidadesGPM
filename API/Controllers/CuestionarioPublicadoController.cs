@@ -216,7 +216,7 @@ namespace API.Controllers
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
             try
             {
-                var _listaCuestionarioPublicado = _objCatalogoCuestionarioPublicado.ConsultarCuestionarioPublicado().ToList();
+                var _listaCuestionarioPublicado = _objCatalogoCuestionarioPublicado.ConsultarCuestionarioPublicado().OrderByDescending(c => c.IdCuestionarioPublicado).ToList();
                 foreach (var _objCuestionarioPublicado in _listaCuestionarioPublicado)
                 {
                     _objCuestionarioPublicado.IdCuestionarioPublicado = 0;
@@ -269,7 +269,7 @@ namespace API.Controllers
                         _http.mensaje = "El identificador ingresado no fue encontrado para un usuario";
                     }
                     else {
-                        var _listaCuestionarioPublicado = _objCatalogoCuestionarioPublicado.ConsultarCuestionarioPublicado().Where(c => c.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario== _objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario).ToList();
+                        var _listaCuestionarioPublicado = _objCatalogoCuestionarioPublicado.ConsultarCuestionarioPublicado().Where(c => c.CabeceraVersionCuestionario.AsignarResponsable.AsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario== _objAsignarUsuarioTipoUsuario.IdAsignarUsuarioTipoUsuario).OrderByDescending(c => c.IdCuestionarioPublicado).ToList();
                         foreach (var _objCuestionarioPublicado in _listaCuestionarioPublicado)
                         {
                             _objCuestionarioPublicado.IdCuestionarioPublicado = 0;

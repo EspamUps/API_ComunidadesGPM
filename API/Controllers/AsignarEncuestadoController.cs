@@ -422,7 +422,7 @@ namespace API.Controllers
                     }
                     else
                     {
-                        var _listaAsignarEncuestado = _objCatalogoAsignarEncuestado.ConsultarAsignarEncuestadPorIdCuestionarioPublicado(_idCuestionarioPublicado).Where(c => c.Estado == true).ToList();
+                        var _listaAsignarEncuestado = _objCatalogoAsignarEncuestado.ConsultarAsignarEncuestadPorIdCuestionarioPublicado(_idCuestionarioPublicado).Where(c => c.Estado == true).OrderByDescending(c => c.IdAsignarEncuestado).ToList();
                         foreach (var _objAsignarEncuestado in _listaAsignarEncuestado)
                         {
 
