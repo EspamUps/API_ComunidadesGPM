@@ -53,6 +53,8 @@ namespace API.Controllers
             return new { respuesta = _respuesta, http = _http };
         }
 
+        
+
         [HttpPost]
         [Route("api/comunidad_consultar")]
         public object comunidad_consultar(string _idComunidadEncriptado)
@@ -111,6 +113,54 @@ namespace API.Controllers
                 {
                     int _idParroquia = Convert.ToInt32(_seguridad.DesEncriptar(_idParroquiaEncriptado).ToString());
                     var _listaComunidades = _objCatalogoComunidad.ConsultarComunidadPorIdParroquia(_idParroquia).Where(c => c.EstadoComunidad == true && c.Parroquia.EstadoParroquia == true && c.Parroquia.Canton.EstadoCanton == true && c.Parroquia.Canton.Provincia.EstadoProvincia == true).ToList();
+                    foreach (var item in _listaComunidades)
+                    {
+                        item.IdComunidad = 0;
+                        item.Parroquia.IdParroquia = 0;
+                        item.Parroquia.Canton.IdCanton = 0;
+                        item.Parroquia.Canton.Provincia.IdProvincia = 0;
+                    }
+                    _respuesta = _listaComunidades;
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+                return new
+                {
+                    respuesta = _respuesta,
+                    http = _http
+                };
+
+            }
+            return new { respuesta = _respuesta, http = _http };
+        }
+
+        [HttpPost]
+        [Route("api/comunidad_consultarporversion")]
+        public object comunidad_consultarporversion(string _idCuestionarioEncriptado, string _idVersionEncriptado)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            try
+            {
+                if (string.IsNullOrEmpty(_idCuestionarioEncriptado) || _idCuestionarioEncriptado == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador del cuestionario.";
+                }
+                else if(string.IsNullOrEmpty(_idVersionEncriptado) || _idVersionEncriptado == null)
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                    _http.mensaje = "Ingrese el identificador de la versión.";
+                }
+                else
+                {
+                    int _idCuestionario = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioEncriptado).ToString());
+                    int _idVersion = Convert.ToInt32(_seguridad.DesEncriptar(_idVersionEncriptado).ToString());
+                    var _listaComunidades = _objCatalogoComunidad.ConsultarComunidadPorIdVersion(_idCuestionario, _idVersion).Where(c => c.EstadoComunidad == true && c.Parroquia.EstadoParroquia == true && c.Parroquia.Canton.EstadoCanton == true && c.Parroquia.Canton.Provincia.EstadoProvincia == true).ToList();
                     foreach (var item in _listaComunidades)
                     {
                         item.IdComunidad = 0;

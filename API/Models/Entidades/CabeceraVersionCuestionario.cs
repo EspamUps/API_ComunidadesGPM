@@ -12,6 +12,7 @@ namespace API.Models.Entidades
         public AsignarResponsable AsignarResponsable { get; set; }
         public string Caracteristica { get; set; }
         public int Version { get; set; }
+        public string idVersionEncriptado { get; set; }
         public DateTime FechaCreacion { get; set; }
         public bool Estado { get; set; }
         public string Utilizado { get; set; }

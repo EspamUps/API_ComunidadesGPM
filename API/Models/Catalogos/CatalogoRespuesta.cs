@@ -51,6 +51,84 @@ namespace API.Models.Catalogos
             return _lista;
 
         }
+
+        public List<RespuestasPregunta> mostrarRespuestasArbol(int _idCuestionario, int _idVersion, int _idComunidad, int _idPregunta, int _idTipoPregunta)
+        {
+
+            List<RespuestasPregunta> _lista = new List<RespuestasPregunta>();
+
+            if (_idTipoPregunta == 2)
+            {
+
+                foreach (var item2 in db.Sp_ConsultarRespuestasSeleccion(_idCuestionario, _idVersion, _idComunidad, _idPregunta))
+                {
+                    _lista.Add(new RespuestasPregunta()
+                    {
+                        IdPregunta = _seguridad.Encriptar(_idPregunta.ToString()),
+                        DescripcionRespuestaSeleccion = item2.Item.Substring(2),
+                        VecesRepetidas= item2.VecesRepetidas.ToString()
+                    });
+                }
+
+            }
+            else if (_idTipoPregunta == 3)
+            {
+
+                foreach (var item3 in db.Sp_ConsultarRespuestasSeleccion(_idCuestionario, _idVersion, _idComunidad, _idPregunta))
+                {
+                    _lista.Add(new RespuestasPregunta()
+                    {
+                        IdPregunta = _seguridad.Encriptar(_idPregunta.ToString()),
+                        DescripcionRespuestaSeleccion = item3.Item,
+                        VecesRepetidas = item3.VecesRepetidas.ToString()
+                    });
+                }
+
+            }
+            else if (_idTipoPregunta == 4)
+            {
+               
+                foreach (var item4 in db.Sp_ConsultarRespuestasMatrizSeleccion(_idCuestionario, _idVersion, _idComunidad, _idPregunta))
+                {
+                    _lista.Add(new RespuestasPregunta()
+                    {
+                        IdPregunta = _seguridad.Encriptar(_idPregunta.ToString()),
+                        DescripcionRespuestaAbierta = item4.Item,
+                        VecesRepetidas = item4.VecesRepetidas.ToString()
+                    });
+                }
+                
+            }
+            else
+            {
+                foreach (var item in db.Sp_ConsultarRespuestasArbol(_idCuestionario, _idVersion, _idComunidad, _idPregunta))
+                {
+                    if (_idTipoPregunta == 6)
+                    {
+
+                        _lista.Add(new RespuestasPregunta()
+                        {
+                            IdPregunta = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                            DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta.Substring(2)
+                        });
+                    }
+                    else
+                    {
+                        _lista.Add(new RespuestasPregunta()
+                        {
+                            IdPregunta = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                            DescripcionRespuestaAbierta = item.DescripcionRespuestaAbierta
+                        });
+                    }
+                }
+            }
+
+            
+            return _lista;
+
+        }
+
+
         public List<RespuestaPreguntaSeleccion> mostrarPreguntaRespuestasPorSeleccion(string _IdPregunta, string _IdAsignarEncuestado)
         {
             List<RespuestaPreguntaSeleccion> _lista = new List<RespuestaPreguntaSeleccion>();

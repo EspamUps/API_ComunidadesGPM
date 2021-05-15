@@ -688,6 +688,7 @@ namespace API.Models.Catalogos
                     Estado = item.EstadoAsignarEncuestado,
                     Obligatorio = item.ObligatorioAsignarEncuestado,
                     Utilizado = item.UtilizadoAsignarEncuestado,
+                    FinalizadaCabeceraRespuestas= item.FinalizadaCabeceraRespuestas.ToString(),
                     AsignarUsuarioTipoUsuario = new AsignarUsuarioTipoUsuario()
                     {
                         IdAsignarUsuarioTipoUsuario = item.ASIGNARUSUARIOTIPOUSUARIORESPONSABLE_IdAsignarUsuarioTipoUsuario,

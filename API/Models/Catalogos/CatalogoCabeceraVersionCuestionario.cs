@@ -228,6 +228,7 @@ namespace API.Models.Catalogos
                     IdCabeceraVersionCuestionarioEncriptado = _seguridad.Encriptar(item.IdCabeceraVersionCuestionario.ToString()),
                     Caracteristica = item.CaracteristicaCabeceraVersionCuestionario,
                     Version = item.VersionCabeceraVersionCuestionario,
+                    idVersionEncriptado = _seguridad.Encriptar(item.VersionCabeceraVersionCuestionario.ToString()),
                     Estado = item.EstadoCabeceraVersionCuestionario,
                     AsignarResponsable = new AsignarResponsable()
                     {

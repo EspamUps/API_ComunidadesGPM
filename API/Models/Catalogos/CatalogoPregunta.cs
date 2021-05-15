@@ -492,6 +492,48 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
+        public List<Pregunta> ConsultarPreguntaArbol(int _idCuestionario, int _idVersion, int _idComunidad)
+        {
+            List<Pregunta> _lista = new List<Pregunta>();
+           
+            int x = 0;
+
+            Random r = new Random();
+            List<int> numerosRandom = new List<int>();
+            foreach (var item in db.Sp_ConsultarPreguntasArbol(_idCuestionario, _idVersion, _idComunidad))
+            {
+                x = r.Next(10000, 99999);
+                while (numerosRandom.Contains(x))
+                {
+                    x = r.Next(10000, 99999);
+                }
+                numerosRandom.Add(x);
+
+                _lista.Add(new Pregunta()
+                {
+                    IdPregunta = item.IdPregunta,
+                    IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                    Descripcion = x + ". " + item.DescripcionPregunta,
+                    Estado = item.EstadoPregunta,
+                    Obligatorio = item.ObligatorioPregunta,
+                    Orden = item.OrdenPregunta,
+                    Utilizado = item.UtilizadoPregunta,
+                    Encajonamiento = item.EncajonamientoPregunta,
+                    TipoPregunta = new TipoPregunta()
+                    {
+                        IdTipoPregunta = item.IdTipoPregunta,
+                        IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
+                        Descripcion = item.DescripcionTipoPregunta,
+                        Estado = item.EstadoTipoPregunta,
+                        Identificador = item.IdentificadorTipoPregunta
+                    },
+                    ListaRespuestas = new CatalogoRespuesta().mostrarRespuestasArbol(_idCuestionario, _idVersion, _idComunidad, item.IdPregunta, item.IdTipoPregunta)
+
+                });
+            }
+            return _lista;
+        }
+
         public List<Pregunta> ConsultarPreguntaPorIdSeccionConTipoPreguntaPorVersion(int _idSeccion, int _idVersionCuestionario)
         {
             List<Pregunta> _lista = new List<Pregunta>();

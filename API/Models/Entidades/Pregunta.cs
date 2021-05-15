@@ -34,5 +34,7 @@ namespace API.Models.Entidades
         public string opcionMatriz { get; set; }
         public List<RespuestasCaracterizacion> ListaRespuestasCaracterizacion { get; set; }
 
+        public List<RespuestasPregunta> ListaRespuestas { get; set; }
+
     }
 }

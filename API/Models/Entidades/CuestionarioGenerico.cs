@@ -15,6 +15,7 @@ namespace API.Models.Entidades
         public string Utilizado { get; set; }
 
         public List <Componente> listaComponente { get; set; }
+        public List<Pregunta> listaPreguntas { get; set; }
         public Componente Componente { get; set; }
         //public List<AsignarComponenteGenerico> AsignarComponenteGenerico { get; set; }
     }

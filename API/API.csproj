@@ -374,6 +374,9 @@
     <Compile Include="Conexion\Sp_ComponentesConsultarPorCuestionario_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ComunidadConsultarPorVersionCuestionario_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ComunidadConsultar_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -404,6 +407,9 @@
     <Compile Include="Conexion\Sp_ConsultarPreguntaPorId_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Conexion\Sp_ConsultarPreguntasArbol_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Conexion\Sp_ConsultarPreguntasPorCuestionarioPublicadoComponente_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -420,6 +426,15 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ConsultarRespuestaPreguntaUnica_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ConsultarRespuestasArbol_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ConsultarRespuestasMatrizSeleccion_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conexion\Sp_ConsultarRespuestasSeleccion_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Conexion\Sp_ContenidoDetalleComponenteConsultarPorIdCabeceraCaracterizacion_Result.cs">
