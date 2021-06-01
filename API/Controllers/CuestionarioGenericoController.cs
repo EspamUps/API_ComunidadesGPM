@@ -364,7 +364,8 @@ object _respuesta = new object();
                 else
                 {
                     int _idCuestionario = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioGenericoEncriptado));
-                    int _idVersion = Convert.ToInt32(_seguridad.DesEncriptar(_idVersionEncriptado));
+                    //int _idVersion = Convert.ToInt32(_seguridad.DesEncriptar(_idVersionEncriptado));
+                    int _idVersion = Convert.ToInt32(_idVersionEncriptado);
                     int _idComunidad = Convert.ToInt32(_seguridad.DesEncriptar(_idComunidadEncriptado));
                     var _objCuestionario = _objCatalogoCuestionarioGenerico.ConsultarPreguntasRandom(_idCuestionario, _idVersion, _idComunidad).Where(c => c.Estado == true).FirstOrDefault();
 
