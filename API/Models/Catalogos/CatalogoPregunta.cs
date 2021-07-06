@@ -34,7 +34,7 @@ namespace API.Models.Catalogos
         {
             try
             {
-                return int.Parse(db.Sp_PreguntaInsertar(_objPregunta.TipoPregunta.IdTipoPregunta, _objPregunta.Seccion.IdSeccion, _objPregunta.Descripcion, _objPregunta.Orden, _objPregunta.Obligatorio, _objPregunta.Estado, _objPregunta.leyendaSuperior, _objPregunta.leyendaLateral, _objPregunta.Observacion, _objPregunta.campo_observacion,_objPregunta.Reporte).Select(x => x.Value.ToString()).FirstOrDefault());
+                return int.Parse(db.Sp_PreguntaInsertar(_objPregunta.TipoPregunta.IdTipoPregunta, _objPregunta.Seccion.IdSeccion, _objPregunta.Descripcion, _objPregunta.Orden, _objPregunta.Obligatorio, _objPregunta.Estado, _objPregunta.leyendaSuperior, _objPregunta.leyendaLateral, _objPregunta.Observacion, _objPregunta.campo_observacion, _objPregunta.Reporte).Select(x => x.Value.ToString()).FirstOrDefault());
             }
             catch (Exception)
             {
@@ -495,7 +495,7 @@ namespace API.Models.Catalogos
         public List<Pregunta> ConsultarPreguntaArbol(int _idCuestionario, int _idVersion, int _idComunidad)
         {
             List<Pregunta> _lista = new List<Pregunta>();
-           
+
             int x = 0;
 
             Random r = new Random();
@@ -533,7 +533,64 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
-
+        CatalogoConfigurarMatriz CatalogoConfigurarMatriz_ = new CatalogoConfigurarMatriz();
+        CatalogoOpcionPreguntaSeleccion _objCatalogoOpcionPreguntaSeleccion = new CatalogoOpcionPreguntaSeleccion();
+        public List<PreguntaCopia> ConsultarPreguntaArbolCopia(int _idCuestionario, int _idVersion, int _idComunidad)
+        {
+            List<PreguntaCopia> _lista = new List<PreguntaCopia>();
+            int x = 0;
+            Random r = new Random();
+            List<int> numerosRandom = new List<int>();
+            foreach (var item in db.Sp_ConsultarPreguntasArbol(_idCuestionario, _idVersion, _idComunidad))
+            {
+                string LeyendaSuperior = "";
+                string LeyendaLateral = "";
+                x = r.Next(10000, 99999);
+                while (numerosRandom.Contains(x))
+                {
+                    x = r.Next(10000, 99999);
+                }
+                numerosRandom.Add(x);
+                List<ConfigurarMatrizCopia> _configurarMatrizCopias = new List<ConfigurarMatrizCopia>();
+                if (item.IdentificadorTipoPregunta==4)
+                {
+                    var lista = CatalogoConfigurarMatriz_.ConsultarConfigurarMatrizPorIdPreguntaCopia(item.IdPregunta);
+                    _configurarMatrizCopias = lista.Item1;
+                    LeyendaSuperior = lista.Item2;
+                    LeyendaLateral = lista.Item3;
+                }
+                List<OpcionPreguntaSeleccionCopia> _opcionPreguntaSeleccionCopia = new List<OpcionPreguntaSeleccionCopia>();
+                if (item.IdentificadorTipoPregunta == 6)
+                {
+                    _opcionPreguntaSeleccionCopia =_objCatalogoOpcionPreguntaSeleccion.ConsultarOpcionPreguntaSeleccionPorIdPreguntaCopia(item.IdPregunta).Where(c => c.Estado == true).ToList();
+                }
+                _lista.Add(new PreguntaCopia()
+                {
+                    leyendaLateral = LeyendaLateral,
+                    leyendaSuperior = LeyendaSuperior,
+                    IdPregunta = item.IdPregunta,
+                    IdPreguntaEncriptado = _seguridad.Encriptar(item.IdPregunta.ToString()),
+                    Descripcion = x + ". " + item.DescripcionPregunta,
+                    Estado = item.EstadoPregunta,
+                    Obligatorio = item.ObligatorioPregunta,
+                    Orden = item.OrdenPregunta,
+                    Utilizado = item.UtilizadoPregunta,
+                    Encajonamiento = item.EncajonamientoPregunta,
+                    TipoPregunta = new TipoPregunta()
+                    {
+                        IdTipoPregunta = item.IdTipoPregunta,
+                        IdTipoPreguntaEncriptado = _seguridad.Encriptar(item.IdTipoPregunta.ToString()),
+                        Descripcion = item.DescripcionTipoPregunta,
+                        Estado = item.EstadoTipoPregunta,
+                        Identificador = item.IdentificadorTipoPregunta
+                    },
+                    ListaRespuestas = new CatalogoRespuesta().mostrarRespuestasArbol(_idCuestionario, _idVersion, _idComunidad, item.IdPregunta, item.IdTipoPregunta),
+                    ConfiguracionMatrizCopia = _configurarMatrizCopias,
+                    OpcionPreguntaSeleccionCopia = _opcionPreguntaSeleccionCopia
+                });
+            }
+            return _lista;
+        }
         public List<Pregunta> ConsultarPreguntaPorIdSeccionConTipoPreguntaPorVersion(int _idSeccion, int _idVersionCuestionario)
         {
             List<Pregunta> _lista = new List<Pregunta>();

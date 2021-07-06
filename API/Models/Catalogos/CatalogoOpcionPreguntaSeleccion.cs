@@ -215,5 +215,22 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+        public List<OpcionPreguntaSeleccionCopia> ConsultarOpcionPreguntaSeleccionPorIdPreguntaCopia(int _idPregunta)
+        {
+            List<OpcionPreguntaSeleccionCopia> _lista = new List<OpcionPreguntaSeleccionCopia>();
+            foreach (var item in db.Sp_OpcionPreguntaSeleccionConsultar().Where(c => c.IdPregunta == _idPregunta).ToList())
+            {
+                _lista.Add(new OpcionPreguntaSeleccionCopia()
+                {
+                    IdOpcionPreguntaSeleccion = item.IdOpcionPreguntaSeleccion,
+                    IdOpcionPreguntaSeleccionEncriptado = _seguridad.Encriptar(item.IdOpcionPreguntaSeleccion.ToString()),
+                    Descripcion = item.DescripcionOpcionPreguntaSeleccion,
+                    Estado = item.EstadoOpcionPreguntaSeleccion,
+                    Utilizado = item.UtilizadoOpcionPreguntaSeleccion,
+                    Encajonamiento = item.EncajonamientoOpcionPreguntaSeleccion,
+                });
+            }
+            return _lista;
+        }
     }
 }

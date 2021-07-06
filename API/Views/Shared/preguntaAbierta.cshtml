@@ -1,0 +1,17 @@
+﻿@{
+    List<API.Models.Entidades.RespuestasPregunta> respuestas = this.ViewData.ContainsKey("respuestas") ? (List<API.Models.Entidades.RespuestasPregunta>)this.ViewData["respuestas"] : null;
+}
+@foreach (var item in respuestas)
+{
+    <div class="container">
+        <div class="row">
+            <div style="font-size:15px" class="col-xs-12">
+                <ul>
+                    <li>
+                        @item.DescripcionRespuestaAbierta
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}

@@ -56,6 +56,12 @@
     <Reference Include="HtmlAgilityPack, Version=1.11.24.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.11.24\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="IronPdf, Version=2021.3.1.0, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPdf.2021.3.1\lib\net45\IronPdf.dll</HintPath>
+    </Reference>
+    <Reference Include="IronPdf.Assets.Rendering.Windows, Version=22.0.0.0, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPdf.Assets.Rendering.Windows.22.0.0\lib\net40\IronPdf.Assets.Rendering.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -684,6 +690,7 @@
     <Compile Include="Controllers\PresidenteJuntaParroquialController.cs" />
     <Compile Include="Controllers\ProvinciaController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
+    <Compile Include="Controllers\ReporteCuestionarioController.cs" />
     <Compile Include="Controllers\RespuestaController.cs" />
     <Compile Include="Controllers\SeccionController.cs" />
     <Compile Include="Controllers\SexoController.cs" />
@@ -777,6 +784,7 @@
     <Compile Include="Models\Entidades\Comunidad.cs" />
     <Compile Include="Models\Entidades\ConfigurarComponente.cs" />
     <Compile Include="Models\Entidades\ConfigurarMatriz.cs" />
+    <Compile Include="Models\Entidades\ConfigurarMatrizCopia.cs" />
     <Compile Include="Models\Entidades\ContenidoDetalleComponente.cs" />
     <Compile Include="Models\Entidades\ContenidoTipoElemento.cs" />
     <Compile Include="Models\Entidades\Coordenadas.cs" />
@@ -788,13 +796,17 @@
     <Compile Include="Models\Entidades\DescripcionComponente.cs" />
     <Compile Include="Models\Entidades\LiderComunitario.cs" />
     <Compile Include="Models\Entidades\ModeloGenerico.cs" />
+    <Compile Include="Models\Entidades\OpcionDosCopia.cs" />
     <Compile Include="Models\Entidades\OpcionDosMatriz.cs" />
     <Compile Include="Models\Entidades\OpcionPreguntaSeleccion.cs" />
+    <Compile Include="Models\Entidades\OpcionPreguntaSeleccionCopia.cs" />
+    <Compile Include="Models\Entidades\OpcionUnoCopia.cs" />
     <Compile Include="Models\Entidades\OpcionUnoMatriz.cs" />
     <Compile Include="Models\Entidades\Periodo.cs" />
     <Compile Include="Models\Entidades\Prefecto.cs" />
     <Compile Include="Models\Entidades\Pregunta.cs" />
     <Compile Include="Models\Entidades\PreguntaAbierta.cs" />
+    <Compile Include="Models\Entidades\PreguntaCopia.cs" />
     <Compile Include="Models\Entidades\PreguntaEncajonada.cs" />
     <Compile Include="Models\Entidades\PreguntaRestante.cs" />
     <Compile Include="Models\Entidades\PresidenteJuntaParroquial.cs" />
@@ -883,6 +895,7 @@
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap4\bootstrap.min.css" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -905,6 +918,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Caracterizacion\Caracterizacion.cshtml" />
+    <Content Include="Views\ReporteCuestionario\Cuestionario.cshtml" />
+    <Content Include="Views\Shared\preguntaAbierta.cshtml" />
+    <Content Include="Views\Shared\preguntaSeleccionMultiple.cshtml" />
+    <Content Include="Views\Shared\preguntaMatrizAbierta.cshtml" />
+    <Content Include="Views\Shared\preguntaMatrizSeleccion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

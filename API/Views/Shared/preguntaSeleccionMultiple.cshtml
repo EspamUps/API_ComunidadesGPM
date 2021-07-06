@@ -1,0 +1,34 @@
+﻿@{
+    List<API.Models.Entidades.RespuestasPregunta> respuestas = this.ViewData.ContainsKey("respuestas") ? (List<API.Models.Entidades.RespuestasPregunta>)this.ViewData["respuestas"] : null;
+}
+<div  class="container">
+    <div style="width: 80%" class="row">
+        <div style="align-content:center" class="col-xs-12">
+            <table>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Veces Seleccionadas
+                        </th>
+                        <th>
+                            Descripción
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in respuestas)
+                    {
+                        <tr>
+                            <td>
+                                @item.VecesRepetidas
+                            </td>
+                            <td>
+                                @item.DescripcionRespuestaSeleccion
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

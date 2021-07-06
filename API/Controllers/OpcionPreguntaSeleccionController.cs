@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using API.Models.Catalogos;
 using API.Models.Entidades;
 using API.Models.Metodos;
@@ -149,6 +150,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         [Route("api/opcionpreguntaseleccion_consultarporidpregunta")]
         public object opcionpreguntaseleccion_consultarporidpregunta(string _idPreguntaEncriptado)
         {

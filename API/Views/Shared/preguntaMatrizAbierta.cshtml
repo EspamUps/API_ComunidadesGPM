@@ -1,0 +1,31 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+@{
+    API.Models.Entidades.PreguntaCopia respuestas = this.ViewData.ContainsKey("respuestas") ? (API.Models.Entidades.PreguntaCopia)this.ViewData["respuestas"] : null;
+    string idPregunta = this.ViewData.ContainsKey("idPregunta") ? (string)this.ViewData["idPregunta"] : null;
+    string index = this.ViewData.ContainsKey("index") ? (string)this.ViewData["index"] : null;
+}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            @foreach (var item in respuestas.OpcionPreguntaSeleccionCopia)
+            {
+                <th>@item.Descripcion</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in respuestas.ListaRespuestas)
+        {
+            <tr>
+                @{
+                    char[] spearator = { ',' };
+                    string[] columnas = item.DescripcionRespuestaAbierta.Split(spearator);
+                }
+                @foreach (var items in columnas)
+                {
+                    <td>@items</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

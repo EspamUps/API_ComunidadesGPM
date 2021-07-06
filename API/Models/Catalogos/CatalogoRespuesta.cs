@@ -49,7 +49,6 @@ namespace API.Models.Catalogos
                 });
             }
             return _lista;
-
         }
 
         public List<RespuestasPregunta> mostrarRespuestasArbol(int _idCuestionario, int _idVersion, int _idComunidad, int _idPregunta, int _idTipoPregunta)

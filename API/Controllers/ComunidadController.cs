@@ -159,7 +159,8 @@ namespace API.Controllers
                 else
                 {
                     int _idCuestionario = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioEncriptado).ToString());
-                    int _idVersion = Convert.ToInt32(_seguridad.DesEncriptar(_idVersionEncriptado).ToString());
+                    //int _idVersion = Convert.ToInt32(_seguridad.DesEncriptar(_idVersionEncriptado).ToString());
+                    int _idVersion = Convert.ToInt32(_idVersionEncriptado);
                     var _listaComunidades = _objCatalogoComunidad.ConsultarComunidadPorIdVersion(_idCuestionario, _idVersion).Where(c => c.EstadoComunidad == true && c.Parroquia.EstadoParroquia == true && c.Parroquia.Canton.EstadoCanton == true && c.Parroquia.Canton.Provincia.EstadoProvincia == true).ToList();
                     foreach (var item in _listaComunidades)
                     {

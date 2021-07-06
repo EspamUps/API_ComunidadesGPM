@@ -1,0 +1,76 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+@{
+    API.Models.Entidades.PreguntaCopia respuestas = this.ViewData.ContainsKey("respuestas") ? (API.Models.Entidades.PreguntaCopia)this.ViewData["respuestas"] : null;
+    string idPregunta = this.ViewData.ContainsKey("idPregunta") ? (string)this.ViewData["idPregunta"] : null;
+    string index = this.ViewData.ContainsKey("index") ? (string)this.ViewData["index"] : null;
+    string indexBody = index + "body";
+    string indexImage = index + "image";
+}
+@{
+    List<API.Models.Entidades.OpcionDosCopia> listaOpcionDos = new List<API.Models.Entidades.OpcionDosCopia>();
+    List<API.Models.Entidades.OpcionUnoCopia> listaOpcionUno = new List<API.Models.Entidades.OpcionUnoCopia>();
+    foreach (var item in respuestas.ConfiguracionMatrizCopia)
+    {
+        if (listaOpcionUno.Where(p => p.Descripcion == item.OpcionUnoMatriz.Descripcion).FirstOrDefault() == null)
+        {
+            listaOpcionUno.Add(item.OpcionUnoMatriz);
+        }
+        if (listaOpcionDos.Where(p => p.Descripcion == item.OpcionDosMatriz.Descripcion).FirstOrDefault() == null)
+        {
+            listaOpcionDos.Add(item.OpcionDosMatriz);
+        }
+    }
+    int cantidadOpcionDos = listaOpcionDos.Count + 1;
+    int cantidadOpcionUno = listaOpcionUno.Count + 1;
+}
+<table style="page-break-inside:auto;" class="table table-bordered">
+    <tbody id="@indexBody">
+        <tr>
+            <th style="border-bottom-color:transparent" colspan="2" scope="col"></th>
+            <th style="text-align:center!important" colspan=@cantidadOpcionDos scope="col">@respuestas.leyendaSuperior</th>
+        </tr>
+        <tr>
+            <th style="border-bottom-color: transparent" scope="row"></th>
+            <th style="border-bottom-color: transparent;" colspan="1" scope='row'>#</th>
+            @foreach (var item in listaOpcionDos)
+            {
+                <th scope="col">@item.Descripcion</th>
+            }
+        </tr>
+        <tr>
+            <th style="vertical-align: middle;" rowspan=@cantidadOpcionUno scope="row">
+                <div style="width:min-content;min-width:max-content;" class="container">@respuestas.leyendaLateral</div>
+            </th>
+        </tr>
+        @{
+            string[] columnList = null;
+            string[] stringSeparators = new string[] { "," };
+            bool encontrado = false;
+        }
+        @foreach (var item in listaOpcionUno)
+        {
+            <tr>
+                <th scope="row">@item.Descripcion</th>
+                @foreach (var items in listaOpcionDos)
+                {
+                    encontrado = false;
+                    foreach (var itemd in respuestas.ListaRespuestas)
+                    {
+                        {
+                            columnList = itemd.DescripcionRespuestaAbierta.Split(stringSeparators, StringSplitOptions.None);
+                        }
+                        if (columnList[0] == item.Descripcion && columnList[1] == items.Descripcion)
+                        {
+                            encontrado = true;
+                            <td scope="col">@itemd.VecesRepetidas</td>
+                        }
+                    }
+                    if (encontrado == false)
+                    {
+                        <td scope="col">0</td>
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>

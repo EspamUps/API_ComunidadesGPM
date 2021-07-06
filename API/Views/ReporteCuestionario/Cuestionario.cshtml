@@ -1,0 +1,54 @@
+﻿<link rel="stylesheet" href="~/Scripts/bootstrap4/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="container">
+    <div style="text-align:center;font-size:25px" class="col-xs-12">
+        @ViewBag.Cuestionario.Nombre
+    </div>
+</div>
+@{int index = 1; }
+@foreach (var item in ViewBag.Cuestionario._listaPreguntas)
+{
+    {
+        int taman = item.Descripcion.Length;
+        item.Descripcion = item.Descripcion.Remove(0, 7);
+    }
+<div class="container">
+    <div style="text-align:left;font-size:20px" class="col-xs-12">
+        <div style="padding-bottom:10px" class="container">
+            <div style="margin-bottom:10px;width: 100%;border: 1px solid rgb(145, 148, 156)" class="row">
+                <div style="text-align:center;width:50px;border: 1px solid rgb(145, 148, 156);background-color: rgb(145, 148, 156)" class="col-xs-4">
+                    @index
+                </div>
+                <div style="width: 100%;word-wrap: break-word; display: inline-block; margin-left: 5px;" class="col-xs-8">
+                    @item.Descripcion
+                </div>
+            </div>
+        </div>
+        @*abierta*@
+        @if (item.TipoPregunta.Identificador == 1)
+        {
+            Html.RenderPartial("preguntaAbierta", null, new ViewDataDictionary { { "respuestas", item.ListaRespuestas } });
+            @*@Html.Partial("preguntaAbierta", null, new ViewDataDictionary { { "respuestas", item.ListaRespuestas } });*@
+        }
+        @*seleccion*@
+        @if (item.TipoPregunta.Identificador == 2 || item.TipoPregunta.Identificador == 3)
+        {
+            Html.RenderPartial("preguntaSeleccionMultiple", null, new ViewDataDictionary { { "respuestas", item.ListaRespuestas } });
+            @*@Html.Partial("preguntaSeleccionMultiple", null, new ViewDataDictionary { { "respuestas", item.ListaRespuestas } });*@
+        }
+        @*matriz seleccion*@
+        @if (item.TipoPregunta.Identificador == 4)
+        {
+            Html.RenderPartial("preguntaMatrizSeleccion", null, new ViewDataDictionary { { "respuestas", item }, { "idPregunta", item.IdPreguntaEncriptado }, { "index", index.ToString() } });
+            @*@Html.Partial("preguntaMatrizSeleccion", null, new ViewDataDictionary { { "respuestas", item.ListaRespuestas }, { "idPregunta", item.IdPreguntaEncriptado }, { "index", index.ToString() } });*@
+        }
+        @*matriz abierta*@
+        @if (item.TipoPregunta.Identificador == 6)
+        {
+            Html.RenderPartial("preguntaMatrizAbierta", null, new ViewDataDictionary { { "respuestas", item }, { "idPregunta", item.IdPreguntaEncriptado }, { "index", index.ToString() } });
+            @*@Html.Partial("preguntaMatrizAbierta", null, new ViewDataDictionary { { "respuestas", item.ListaRespuestas }, { "idPregunta", item.IdPreguntaEncriptado }, { "index", index.ToString() } });*@
+        }
+    </div>
+</div>
+    { index++; }
+}

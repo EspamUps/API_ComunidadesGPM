@@ -178,6 +178,44 @@ namespace API.Models.Catalogos
             }
             return _lista;
         }
+        public Tuple<List<ConfigurarMatrizCopia>,string,string> ConsultarConfigurarMatrizPorIdPreguntaCopia(int _idPregunta)
+        {
+            string LeyendaSuperior = "";
+            string LeyendaLateral = "";
+            List<ConfigurarMatrizCopia> _lista = new List<ConfigurarMatrizCopia>();
+            foreach (var item in db.Sp_ConfigurarMatrizConsultar2(_idPregunta, 0).ToList())
+            {
+                LeyendaSuperior = item.leyendaSuperior;
+                LeyendaLateral = item.leyendaLateral;
+                if (_lista.Where(p=>p.OpcionUnoMatriz.Descripcion == item.DescripcionOpcionUnoMatriz && p.OpcionDosMatriz.Descripcion == item.DescripcionOpcionDosMatriz).FirstOrDefault()==null)
+                {
+                    _lista.Add(new ConfigurarMatrizCopia()
+                    {
+                        IdConfigurarMatriz = item.IdConfigurarMatriz,
+                        IdConfigurarMatrizEncriptado = _seguridad.Encriptar(item.IdConfigurarMatriz.ToString()),
+                        Estado = item.EstadoConfigurarMatriz,
+                        OpcionDosMatriz = new OpcionDosCopia()
+                        {
+                            IdOpcionDosMatriz = item.IdOpcionDosMatriz,
+                            IdOpcionDosMatrizEncriptado = _seguridad.Encriptar(item.IdOpcionDosMatriz.ToString()),
+                            Descripcion = item.DescripcionOpcionDosMatriz,
+                            Estado = item.EstadoOpcionOpcionDosMatriz
+                        },
+                        OpcionUnoMatriz = new OpcionUnoCopia()
+                        {
+                            IdOpcionUnoMatriz = item.IdOpcionUnoMatriz,
+                            IdOpcionUnoMatrizEncriptado = _seguridad.Encriptar(item.IdOpcionUnoMatriz.ToString()),
+                            Descripcion = item.DescripcionOpcionUnoMatriz,
+                            Estado = item.EstadoOpcionOpcionUnoMatriz,
+                            Utilizado = item.UtilizadoOpcionUnoMatriz,
+                            Encajonamiento = item.EncajonamientoOpcionUnoMatriz,
+                        }
+                    });
+                }
+            }
+            return new Tuple<List<ConfigurarMatrizCopia>, string, string>(_lista, LeyendaSuperior, LeyendaLateral);
+            //return _lista;
+        }
         public List<ConfigurarMatriz> ConsultarConfigurarMatrizPorIdPregunta2(int _idPregunta, int _idAsignarEncuestado)
         {
             List<ConfigurarMatriz> _lista = new List<ConfigurarMatriz>();
