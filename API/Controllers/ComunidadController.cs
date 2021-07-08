@@ -140,7 +140,7 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("api/comunidad_consultarporversion")]
-        public object comunidad_consultarporversion(string _idCuestionarioEncriptado, string _idVersionEncriptado)
+        public object comunidad_consultarporversion(string _idCuestionarioEncriptado, string _idCabeceraVersionCuestionarioEncriptado)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
@@ -151,7 +151,7 @@ namespace API.Controllers
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador del cuestionario.";
                 }
-                else if(string.IsNullOrEmpty(_idVersionEncriptado) || _idVersionEncriptado == null)
+                else if(string.IsNullOrEmpty(_idCabeceraVersionCuestionarioEncriptado) || _idCabeceraVersionCuestionarioEncriptado == null)
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador de la versión.";
@@ -159,8 +159,7 @@ namespace API.Controllers
                 else
                 {
                     int _idCuestionario = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioEncriptado).ToString());
-                    //int _idVersion = Convert.ToInt32(_seguridad.DesEncriptar(_idVersionEncriptado).ToString());
-                    int _idVersion = Convert.ToInt32(_idVersionEncriptado);
+                    int _idVersion = Convert.ToInt32(_seguridad.DesEncriptar(_idCabeceraVersionCuestionarioEncriptado).ToString());
                     var _listaComunidades = _objCatalogoComunidad.ConsultarComunidadPorIdVersion(_idCuestionario, _idVersion).Where(c => c.EstadoComunidad == true && c.Parroquia.EstadoParroquia == true && c.Parroquia.Canton.EstadoCanton == true && c.Parroquia.Canton.Provincia.EstadoProvincia == true).ToList();
                     foreach (var item in _listaComunidades)
                     {

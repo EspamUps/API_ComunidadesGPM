@@ -51,7 +51,7 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
-        public List<RespuestasPregunta> mostrarRespuestasArbol(int _idCuestionario, int _idVersion, int _idComunidad, int _idPregunta, int _idTipoPregunta)
+        public List<RespuestasPregunta> mostrarRespuestasArbol(int _idCuestionario, int _idCabeceraVersionCuestionarioEncriptado, int _idComunidad, int _idPregunta, int _idTipoPregunta)
         {
 
             List<RespuestasPregunta> _lista = new List<RespuestasPregunta>();
@@ -59,7 +59,7 @@ namespace API.Models.Catalogos
             if (_idTipoPregunta == 2)
             {
 
-                foreach (var item2 in db.Sp_ConsultarRespuestasSeleccion(_idCuestionario, _idVersion, _idComunidad, _idPregunta))
+                foreach (var item2 in db.Sp_ConsultarRespuestasSeleccion(_idCuestionario, _idCabeceraVersionCuestionarioEncriptado, _idComunidad, _idPregunta))
                 {
                     _lista.Add(new RespuestasPregunta()
                     {
@@ -73,7 +73,7 @@ namespace API.Models.Catalogos
             else if (_idTipoPregunta == 3)
             {
 
-                foreach (var item3 in db.Sp_ConsultarRespuestasSeleccion(_idCuestionario, _idVersion, _idComunidad, _idPregunta))
+                foreach (var item3 in db.Sp_ConsultarRespuestasSeleccion(_idCuestionario, _idCabeceraVersionCuestionarioEncriptado, _idComunidad, _idPregunta))
                 {
                     _lista.Add(new RespuestasPregunta()
                     {
@@ -87,7 +87,7 @@ namespace API.Models.Catalogos
             else if (_idTipoPregunta == 4)
             {
                
-                foreach (var item4 in db.Sp_ConsultarRespuestasMatrizSeleccion(_idCuestionario, _idVersion, _idComunidad, _idPregunta))
+                foreach (var item4 in db.Sp_ConsultarRespuestasMatrizSeleccion(_idCuestionario, _idCabeceraVersionCuestionarioEncriptado, _idComunidad, _idPregunta))
                 {
                     _lista.Add(new RespuestasPregunta()
                     {
@@ -100,7 +100,7 @@ namespace API.Models.Catalogos
             }
             else
             {
-                foreach (var item in db.Sp_ConsultarRespuestasArbol(_idCuestionario, _idVersion, _idComunidad, _idPregunta))
+                foreach (var item in db.Sp_ConsultarRespuestasArbol(_idCuestionario, _idCabeceraVersionCuestionarioEncriptado, _idComunidad, _idPregunta))
                 {
                     if (_idTipoPregunta == 6)
                     {

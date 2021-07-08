@@ -168,10 +168,10 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
-        public List<Comunidad> ConsultarComunidadPorIdVersion(int _idCuestionario, int _idVersion)
+        public List<Comunidad> ConsultarComunidadPorIdVersion(int _idCuestionario, int _idCabeceraVersionCuestionario)
         {
             List<Comunidad> _lista = new List<Comunidad>();
-            foreach (var item in db.Sp_ComunidadConsultarPorVersionCuestionario().Where(c => c.IdCuestionarioGenerico == _idCuestionario && c.Version== _idVersion).ToList())
+            foreach (var item in db.Sp_ComunidadConsultarPorVersionCuestionario().Where(c => c.IdCuestionarioGenerico == _idCuestionario && c.IdCabeceraVersionCuestionario== _idCabeceraVersionCuestionario).ToList())
             {
                 _lista.Add(new Comunidad()
                 {

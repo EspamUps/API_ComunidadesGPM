@@ -492,7 +492,7 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
-        public List<Pregunta> ConsultarPreguntaArbol(int _idCuestionario, int _idVersion, int _idComunidad)
+        public List<Pregunta> ConsultarPreguntaArbol(int _idCuestionario, int _idCabeceraVersionCuestionarioEncriptado, int _idComunidad)
         {
             List<Pregunta> _lista = new List<Pregunta>();
 
@@ -500,7 +500,7 @@ namespace API.Models.Catalogos
 
             Random r = new Random();
             List<int> numerosRandom = new List<int>();
-            foreach (var item in db.Sp_ConsultarPreguntasArbol(_idCuestionario, _idVersion, _idComunidad))
+            foreach (var item in db.Sp_ConsultarPreguntasArbol(_idCuestionario, _idCabeceraVersionCuestionarioEncriptado, _idComunidad))
             {
                 x = r.Next(10000, 99999);
                 while (numerosRandom.Contains(x))
@@ -527,7 +527,7 @@ namespace API.Models.Catalogos
                         Estado = item.EstadoTipoPregunta,
                         Identificador = item.IdentificadorTipoPregunta
                     },
-                    ListaRespuestas = new CatalogoRespuesta().mostrarRespuestasArbol(_idCuestionario, _idVersion, _idComunidad, item.IdPregunta, item.IdTipoPregunta)
+                    ListaRespuestas = new CatalogoRespuesta().mostrarRespuestasArbol(_idCuestionario, _idCabeceraVersionCuestionarioEncriptado, _idComunidad, item.IdPregunta, item.IdTipoPregunta)
 
                 });
             }

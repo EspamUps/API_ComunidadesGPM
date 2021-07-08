@@ -132,7 +132,7 @@ namespace API.Models.Catalogos
             return _lista;
         }
 
-        public List<CuestionarioGenerico> ConsultarPreguntasRandom(int _idCuestionarioGenerico, int _idVersion, int _idComunidad)
+        public List<CuestionarioGenerico> ConsultarPreguntasRandom(int _idCuestionarioGenerico, int _idCabeceraVersionCuestionarioEncriptado, int _idComunidad)
         {
             List<CuestionarioGenerico> _lista = new List<CuestionarioGenerico>();
 
@@ -147,7 +147,7 @@ namespace API.Models.Catalogos
                     Descripcion = item.Descripcion,
                     Estado = item.Estado,
                     Utilizado = item.UtilizadoCuestionarioGenerico,
-                    listaPreguntas = new CatalogoPregunta().ConsultarPreguntaArbol(_idCuestionarioGenerico, _idVersion, _idComunidad)
+                    listaPreguntas = new CatalogoPregunta().ConsultarPreguntaArbol(_idCuestionarioGenerico, _idCabeceraVersionCuestionarioEncriptado, _idComunidad)
 
                 });
             }

@@ -338,7 +338,7 @@ object _respuesta = new object();
 
         [HttpPost]
         [Route("api/cuestionariogenerico_consultarporpreguntasRandom")]
-        public object cuestionariogenerico_consultarporpreguntasRandom(string _idCuestionarioGenericoEncriptado, string _idVersionEncriptado, string _idComunidadEncriptado)
+        public object cuestionariogenerico_consultarporpreguntasRandom(string _idCuestionarioGenericoEncriptado, string _idCabeceraVersionCuestionarioEncriptado, string _idComunidadEncriptado)
         {
             object _respuesta = new object();
             RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
@@ -351,7 +351,7 @@ object _respuesta = new object();
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese el identificador del cuestionario";
                 }
-                else if (_idVersionEncriptado == null || string.IsNullOrEmpty(_idVersionEncriptado))
+                else if (_idCabeceraVersionCuestionarioEncriptado == null || string.IsNullOrEmpty(_idCabeceraVersionCuestionarioEncriptado))
                 {
                     _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
                     _http.mensaje = "Ingrese la versión del cuestionario";
@@ -364,8 +364,7 @@ object _respuesta = new object();
                 else
                 {
                     int _idCuestionario = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioGenericoEncriptado));
-                    //int _idVersion = Convert.ToInt32(_seguridad.DesEncriptar(_idVersionEncriptado));
-                    int _idVersion = Convert.ToInt32(_idVersionEncriptado);
+                    int _idVersion = Convert.ToInt32(_seguridad.DesEncriptar(_idCuestionarioGenericoEncriptado));
                     int _idComunidad = Convert.ToInt32(_seguridad.DesEncriptar(_idComunidadEncriptado));
                     var _objCuestionario = _objCatalogoCuestionarioGenerico.ConsultarPreguntasRandom(_idCuestionario, _idVersion, _idComunidad).Where(c => c.Estado == true).FirstOrDefault();
 
