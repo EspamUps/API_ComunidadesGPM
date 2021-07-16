@@ -460,7 +460,101 @@ namespace API.Controllers
             }
 
         }
-    
+
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("api/Login2")]
+        public object Login2(Usuario _objUsuario)
+        {
+            object _respuesta = new object();
+            RespuestaHTTP _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "500").FirstOrDefault();
+            string _token = "";
+            try
+            {
+                // calida el token de la peticion, este es una ruta para consultar asi que el identificador del token debe ser 4
+                //Token _token = catTokens.Consultar().Where(x => x.Identificador == 4).FirstOrDefault();
+                //string _clave_desencriptada = _seguridad.DecryptStringAES(_objUsuario.Token, _token.objClave.Descripcion);
+
+                if (string.IsNullOrEmpty(_objUsuario.Correo.Trim()))
+                {
+                    _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "406").FirstOrDefault();
+                }
+                else
+                {
+                    var _objUsuarioBuscado = _objCatalogoUsuarios.ValidarCorreo(_objUsuario).FirstOrDefault();
+                    if (_objUsuarioBuscado == null)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "404").FirstOrDefault();
+                        _http.mensaje = "No se encontró el correo";
+                    }
+                    else if (_objUsuarioBuscado.Estado == false)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "Este usuario ha sido deshabilitado. Comuníquese con el administrador del sistema.";
+                    }
+                    else if (_seguridad.DesEncriptar(_objUsuarioBuscado.Clave) != _objUsuario.Clave)
+                    {
+                        _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "400").FirstOrDefault();
+                        _http.mensaje = "La contraseña es incorrecta";
+                    }
+                    else
+                    {
+                        int idTipoUsuario = Convert.ToInt32(_seguridad.DesEncriptar(_objUsuario.idTipoUsuario));
+                        var _listaAsignarUsuarioTipoUsuario = _objCatalogoAsignarUsuarioTipoUsuario.ConsultarAsignarUsuarioTipoUsuario2(idTipoUsuario).Where(c => c.Usuario.IdUsuario == _objUsuarioBuscado.IdUsuario && c.Estado == true && c.TipoUsuario.Estado == true).ToList();
+                        if (_listaAsignarUsuarioTipoUsuario.Count == 0)
+                        {
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "204").FirstOrDefault();
+                            _http.mensaje = "No se encontraron roles asignados a este usuario";
+                        }
+                        else
+                        {
+                            foreach (var item in _listaAsignarUsuarioTipoUsuario)
+                            {
+                                item.IdAsignarUsuarioTipoUsuario = 0;
+                                item.TipoUsuario.IdTipoUsuario = 0;
+                                item.Usuario.IdUsuario = 0;
+                                item.Usuario.Persona.IdPersona = 0;
+                                item.Usuario.Persona.Sexo.IdSexo = 0;
+                                item.Usuario.Persona.TipoIdentificacion.IdTipoIdentificacion = 0;
+                            }
+                            _respuesta = _listaAsignarUsuarioTipoUsuario;
+                            _http = _objCatalogoRespuestasHTTP.consultar().Where(x => x.codigo == "200").FirstOrDefault();
+                            _token = TokenGenerator.GenerateTokenJwt(_objUsuario.Correo);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _http.mensaje = _http.mensaje + " " + ex.Message.ToString();
+                return new
+                {
+                    respuesta = _respuesta,
+                    http = _http
+                };
+            }
+            if (_token != "")
+            {
+                return new
+                {
+                    respuesta = _respuesta,
+                    http = _http,
+                    token = _token
+                };
+            }
+            else
+            {
+                return new
+                {
+                    respuesta = _respuesta,
+                    http = _http,
+                };
+            }
+
+        }
+
+
         [AllowAnonymous]
         [HttpPost]
         [Route("api/token/update")]

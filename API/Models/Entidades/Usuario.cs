@@ -11,6 +11,7 @@ namespace API.Models.Entidades
         public string IdUsuarioEncriptado { get; set; }
         public string Correo { get; set; }
         public string Clave { get; set; }
+        public string idTipoUsuario { get; set; }
         public string ClaveEncriptada { get; set; }
         public bool Estado { get; set; }
         public Persona Persona { get; set; }

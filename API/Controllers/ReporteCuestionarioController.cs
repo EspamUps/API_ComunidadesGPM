@@ -23,7 +23,7 @@ namespace API.Controllers
         public ActionResult Cuestionario(string CuestionarioGenericoEncriptado, string VersionEncriptado, string ComunidadEncriptado)
         {
             int _idCuestionario = Convert.ToInt32(_seguridad.DesEncriptar(CuestionarioGenericoEncriptado));
-            int _idVersion = Convert.ToInt32(VersionEncriptado);
+            int _idVersion = Convert.ToInt32(_seguridad.DesEncriptar(VersionEncriptado));
             int _idComunidad = Convert.ToInt32(_seguridad.DesEncriptar(ComunidadEncriptado));
             var _objCuestionario = _objCatalogoCuestionarioGenerico.ConsultarPreguntasRandomCopia(_idCuestionario, _idVersion, _idComunidad).Where(c => c.Estado == true).FirstOrDefault();
             ViewBag.Cuestionario = _objCuestionario;
